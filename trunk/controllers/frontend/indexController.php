@@ -13,8 +13,6 @@
 /**
 * Frontend Module Controller
 * Is doing all the job for specific frontend control stuff
-* @category   DotKernel
-* @package    Frontend
 * @author     DotKernel Team <team@dotkernel.com>
 */ 
 

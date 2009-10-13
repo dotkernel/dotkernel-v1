@@ -14,6 +14,8 @@
 * Page Model
 * dummy class, is not doing anything 
 * @author     DotKernel Team <team@dotkernel.com>
+* @category   DotKernel
+* @package    Frontend
 */
 
 class Page

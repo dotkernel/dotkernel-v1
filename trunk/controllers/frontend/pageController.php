@@ -12,8 +12,6 @@
 
 /**
 * Page Controller
-* @category   DotKernel
-* @package    Frontend
 * @author     DotKernel Team <team@dotkernel.com>
 */
 

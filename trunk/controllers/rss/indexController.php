@@ -13,8 +13,6 @@
 /**
 * Rss Module Controller
 * Is doing all the job for specific rss control stuff 
-* @category   DotKernel
-* @package    Rss
 * @author     DotKernel Team <team@dotkernel.com>
 */   
     echo '<h1>RSS Controller here ::</h1>';

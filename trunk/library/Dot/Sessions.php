@@ -4,7 +4,7 @@
 * DotKernel v1.0
 *
 * @category   DotKernel
-* @package    Dot Library
+* @package    DotLibrary
 * @copyright  Copyright (c) 2009 DotBoost  Technologies (http://www.dotboost.com)
 * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 * @version    $Id$
@@ -13,7 +13,7 @@
 /**
 * Session management  
 * @category   DotKernel
-* @package    Dot Library
+* @package    DotLibrary
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
@@ -22,7 +22,7 @@ class Dot_Sessions
 	/**
 	 * Constructor
 	 * @access public
-	 * @return 
+	 * @return Dot_Sessions
 	 */
 	public function __construct ()
 	{
