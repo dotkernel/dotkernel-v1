@@ -4,15 +4,17 @@
 * DotKernel v1.0
 *
 * @category   DotKernel
-* @package    AJAX Module Controller
+* @package    Ajax
 * @copyright  Copyright (c) 2009 DotBoost  Technologies (http://www.dotboost.com)
 * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 * @version    $Id$
 */
 
 /**
-* AJAX Module Controller
+* Ajax Module Controller
 * Is doing all the job for specific ajax control stuff
+* @category   DotKernel
+* @package    Ajax
 * @author     DotKernel Team <team@dotkernel.com>
 */   
     echo '<h1>AJAX Controller here ::</h1>';
