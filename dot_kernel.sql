@@ -75,8 +75,8 @@ INSERT INTO `settings` (`variable`, `title`, `comment`, `value`, `editable`, `ty
 ('smtp_password', '', '', 'p4ssword', 'N', 'textarea', ''),
 ('smtp_email', '', '', '********@gmail.com', 'N', 'textarea', ''),
 ('smtp_server', '', '', 'smtp.gmail.com', 'N', 'textarea', ''),
-('dev_emails', '', '', 'marius@dotboost.com,julian@dotboost.com', 'N', 'textarea', ''),
-('meta_description', '', '', 'Enterprise Level PHP Solutions, based on Zend Framework and DotLite , build by DotBoost Technologies Inc.', 'N', 'textarea', ''),
+('dev_emails', '', '', 'team@dotkernel.com', 'N', 'textarea', ''),
+('meta_description', '', '', 'Enterprise Level PHP Solutions, based on Zend Framework and DotKernel , build by DotBoost Technologies Inc.', 'N', 'textarea', ''),
 ('results_per_page', '', 'How many records will be on every page', '10', 'Y', 'option', '10;20;30;40;50');
 ('recaptcha_public_key', 'Recaptcha Public Key.', 'Use this in the JavaScript code that is served to your users. http://recaptcha.net/', '123XXX', 'Y', 'textarea', ''), 
 ('recaptcha_private_key', 'Recaptcha Private Key.', 'Use this when communicating between your server and our server. Because this key is a global key, it is OK if the private key is distributed to multiple users. http://recaptcha.net/', '123XXX', 'Y', 'textarea', '');
