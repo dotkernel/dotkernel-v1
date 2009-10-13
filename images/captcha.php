@@ -12,8 +12,6 @@
 
 /**
 * Captcha file used for secure image code
-* @category   DotKernel
-* @package    Images
 * @author     DotKernel Team <team@dotkernel.com>
 * @TODO Write captcha file, improve it
 */

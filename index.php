@@ -13,8 +13,6 @@
  /**
  * Main public executable wrapper.
  * Setup environment, setup index controllers , and  load module to run
- * @category   DotKernel
- * @package    DotKernel
  * @author     DotKernel Team <team@dotkernel.com>
  */
 // Start counting the time nedded to display all content, from the very beginning

@@ -1,21 +1,21 @@
 <?php 
 /**
- * DotBoost Technologies Inc.
- * DotKernel v1.0
- *
- * @category   DotKernel
- * @package    Dot Library
- * @copyright  Copyright (c) 2009 DotBoost  Technologies (http://www.dotboost.com)
- * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version    $Id$
- */
- 
- /**
- * Bunch of miscelaneous  functions, used in all DotKernel Applications
+* DotBoost Technologies Inc.
+* DotKernel v1.0
+*
 * @category   DotKernel
-* @package    Dot Library
- * @author     DotKernel Team <team@dotkernel.com>
- */
+* @package    DotLibrary
+* @copyright  Copyright (c) 2009 DotBoost  Technologies (http://www.dotboost.com)
+* @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+* @version    $Id$
+*/
+
+/**
+* Bunch of miscelaneous  functions, used in all DotKernel Applications
+* @category   DotKernel
+* @package    DotLibrary
+* @author     DotKernel Team <team@dotkernel.com>
+*/
  
 class Dot_Kernel
 {

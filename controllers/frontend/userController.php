@@ -12,8 +12,6 @@
 
 /**
 * User Controller
-* @category   DotKernel
-* @package    Frontend
 * @author     DotKernel Team <team@dotkernel.com>
 */
 // All actions MUST return this variable
