@@ -19,7 +19,7 @@ $pageTitle = '';
 
 // instantiate  AuthUser object
 $frontendUser = new Frontend_User(); 
-$userView = new User_View($tpl);
+$userView = new User_View($tpl, $settings);
 // switch based on the action, NO default action here
 switch ($requestAction)
 {
@@ -97,38 +97,52 @@ switch ($requestAction)
 		$error = array();
 		$pageTitle = 'User Register';
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
-		{						
+		{		
 			$values = array('username'=>$_POST['username'],
 						'firstname'=>$_POST['firstname'],
 						'lastname'=>$_POST['lastname']
 						);
 			$valid = $frontendUser->validateUser($values);
 			$data = $valid['data'];
-			$error = $valid['error'];			
+			$error = $valid['error'];
+			if(strlen($_POST['recaptcha_response_field']) == 0)
+			{
+				$error['Secure Image'] = 'Incorrect. Try again.';
+			}			
 			if(empty($error))
 			{
-				//add admin user
-				$frontendUser->add($data);
-				$validate = Dot_AuthorizeUser::validateLogin($data['username'], $data['password'], 'on');
-				if(!empty($validate['login']) && empty($validate['error']))
+				// validate secure image code
+				$recaptcha = new Zend_Service_ReCaptcha($settings->recaptcha_public_key, $settings->recaptcha_private_key);
+				$result = $recaptcha->verify($_POST['recaptcha_challenge_field'],$_POST['recaptcha_response_field']);				
+				if ($result->isValid()) 
 				{
-					// login info are VALID, we can see if is a valid user now 
-					$user = $frontendUser->checkLogin($validate['login']);
-					if(!empty($user))
+				   //add admin user
+					$frontendUser->add($data);
+					$validate = Dot_AuthorizeUser::validateLogin($data['username'], $data['password'], 'on');
+					if(!empty($validate['login']) && empty($validate['error']))
 					{
-						$_SESSION['kernel']['user'] = $user[0];
-						header('location: '.$config->website->params->url.'/user/account');
-						exit;
-					}
-					else
-					{
-						unset($_SESSION['kernel']['user']);
-						$_SESSION['kernel']['login_user'] = 'Wrong Login Credentials';
-						header('Location: '.$config->website->params->url.'/user/login');
-						exit;				
+						// login info are VALID, we can see if is a valid user now 
+						$user = $frontendUser->checkLogin($validate['login']);
+						if(!empty($user))
+						{
+							$_SESSION['kernel']['user'] = $user[0];
+							header('location: '.$config->website->params->url.'/user/account');
+							exit;
+						}
+						else
+						{
+							unset($_SESSION['kernel']['user']);
+							$_SESSION['kernel']['login_user'] = 'Wrong Login Credentials';
+							header('Location: '.$config->website->params->url.'/user/login');
+							exit;				
+						}
 					}
 				}
-				
+				else
+				{
+					// Failed validation recaptcha
+					$error['Secure Image'] = 'Incorrect. Try again. ';
+				}				
 			}
 			elseif(array_key_exists('password', $data))
 			{ 

@@ -26,6 +26,10 @@
 	<tr>
 		<td><span >Last Name:</span></td>
 		<td><input type="text" name="lastname" value="{LASTNAME}" /></td>
+	</tr>			
+	<tr>
+		<td><span >Secure Image:</span></td>
+		<td>{SECUREIMAGE}</td>
 	</tr>
 	<tr>
 		<td colspan="2" align="center"><input type="submit" onclick="" class="btn" value="register"></td>
