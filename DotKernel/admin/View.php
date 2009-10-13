@@ -4,7 +4,7 @@
 * DotKernel v1.0
 *
 * @category   DotKernel
-* @package    Admin View
+* @package    Admin
 * @copyright  Copyright (c) 2009 DotBoost  Technologies (http://www.dotboost.com)
 * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 * @version    $Id$
@@ -13,6 +13,8 @@
 /**
 * Admin View 
 * abstract over the Dot_Template class
+* @category   DotKernel
+* @package    Admin 
 * @author     DotKernel Team <team@dotkernel.com>
 */
 

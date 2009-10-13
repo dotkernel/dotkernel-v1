@@ -13,6 +13,8 @@
 /**
 * Admin User Model
 * Here are all the actions related to the user
+* @category   DotKernel
+* @package    Admin 
 * @author     DotKernel Team <team@dotkernel.com>
 */
 

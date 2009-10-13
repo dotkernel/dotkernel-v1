@@ -4,7 +4,7 @@
 * DotKernel v1.0
 *
 * @category   DotKernel
-* @package    Frontend Module Controller
+* @package    Frontend
 * @copyright  Copyright (c) 2009 DotBoost  Technologies (http://www.dotboost.com)
 * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 * @version    $Id$
@@ -13,6 +13,8 @@
 /**
 * Frontend Module Controller
 * Is doing all the job for specific frontend control stuff
+* @category   DotKernel
+* @package    Frontend
 * @author     DotKernel Team <team@dotkernel.com>
 */ 
 

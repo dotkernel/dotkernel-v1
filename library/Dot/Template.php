@@ -4,7 +4,7 @@
 * DotKernel v1.0
 *
 * @category   DotKernel
-* @package    Dot_Debug
+* @package    Dot Library
 * @copyright  Copyright (c) 2009 DotBoost  Technologies (http://www.dotboost.com)
 * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 * @version    $Id$
@@ -12,6 +12,8 @@
 
 /**
 * Template engine, based on PHPLIB library
+* @category   DotKernel
+* @package    Dot Library
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
@@ -844,9 +846,8 @@ class Dot_Template
 	}
 	/**
 	 * Returns the last error message if any
-	 * @return boolean|string Last error message if any
 	 * @access public
-	 * @return mixed 
+	 * @return boolean|string Last error message if any
 	 */
 	public function getLastError()
 	{

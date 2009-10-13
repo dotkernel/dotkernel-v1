@@ -4,7 +4,7 @@
 * DotKernel v1.0
 *
 * @category   DotKernel
-* @package    Dot_Sessions
+* @package    Dot Library
 * @copyright  Copyright (c) 2009 DotBoost  Technologies (http://www.dotboost.com)
 * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 * @version    $Id$
@@ -12,6 +12,8 @@
 
 /**
 * Session management  
+* @category   DotKernel
+* @package    Dot Library
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
