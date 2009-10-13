@@ -25,9 +25,10 @@ class User_View extends View
 	 * @access public
 	 * @param Dot_Template $tpl
 	 */
-	public function __construct($tpl)
+	public function __construct($tpl, $settings)
 	{
 		$this->tpl = $tpl;
+		$this->settings = $settings;
 	}
 	/**
 	 * Display the login form
@@ -56,6 +57,12 @@ class User_View extends View
 		foreach ($data as $k=>$v)
 		{
 		    $this->tpl->setVar(strtoupper($k), $v);
+		}
+		if('add' == $templateFile)
+		{
+			// add secure image using ReCaptcha
+			$recaptcha = new Zend_Service_ReCaptcha($this->settings->recaptcha_public_key, $this->settings->recaptcha_private_key);
+			$this->tpl->setVar('SECUREIMAGE',$recaptcha->getHTML());			
 		}
 		$errorMessage = '';
 		if(!empty($error))
