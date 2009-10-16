@@ -78,49 +78,25 @@ class Dot_Email extends Zend_Mail
 	 * @access public 
 	 * @param object $config
 	 * @param string $to [optional]
-	 * @param string $from [optional]
+	 * @param string $fromName [optional]
+	 * @param string $fromEmail [optional]
 	 * @param string $subject [optional]
-	 * @param string $headers [optional]
 	 * @return void
 	 */
-	public function __construct($config, $to = null, $from = null, $subject = null, $headers = null)
+	public function __construct($config, $to = null, $fromName = null, $fromEmail = null, $subject = null)
 	{
 		$this->settings = $config;
-		$this->to = $to;
-		$this->to = $to;
+		$this->to = $to;		
 		$this->subject = $subject;
-		$this->fromEmail = $from;
-		//  this one is not used anymore
-		$this->headers = $headers;
-		//  get FromName and FromEmail, crap code for backward compatibility
-		$from = @explode('<', $from);
-		if( is_array($from) )
-		{
-			$this->fromName = $from['0'];
-			$this->fromEmail =  rtrim($from['1'],'>');
-		}
+		$this->fromName = $fromName;
+		$this->fromEmail = $fromEmail;
 		parent::addHeader('X-Mailer', $this->xmailer);
 		parent::addTo($this->to);
 		parent::setSubject($this->subject);
-		//  set the transporter
-		//  check if we can use regular server sendmail
-		$partial = @explode('@', $this->to);
-		if(stristr($this->settings->smtp_addresses, $partial['1']) !== FALSE)
-		{
-			//  SMTP Transporter
-			$mailConfigs = array('auth' => 'login', 'username' => $this->settings->smtp_username, 'password' => $this->settings->smtp_password, 'ssl' => 'tls');
-
-			$tr = new Zend_Mail_Transport_Smtp($this->settings->smtp_server, $mailConfigs);
-			parent::setDefaultTransport($tr);
-			parent::setFrom($this->settings->smtp_username, $this->fromName);
-		}
-		else
-		{
-			//  Sendmail transporter
-			$tr = new Zend_Mail_Transport_Sendmail('-f'.$this->fromEmail);
-			parent::setDefaultTransport($tr);
-			parent::setFrom($this->fromEmail, $this->fromName);
-		}
+		//  Sendmail transporter
+		$transport = new Zend_Mail_Transport_Sendmail('-f'.$this->fromEmail);
+		parent::setDefaultTransport($transport);
+		parent::setFrom($this->fromEmail, $this->fromName);
 	}
 	/**
 	 * Set the text content
@@ -166,11 +142,7 @@ class Dot_Email extends Zend_Mail
 	 * @return void
 	 */
 	public function send()
-	{
-		if(strlen(trim(strval($this->bcc))) > 0)
-		{
-			parent::addBcc($this->bcc);
-		}
+	{		
 		/**
 		 * @TODO is this the proper error trapping system 		 
 		 */
