@@ -1,5 +1,4 @@
 <?php
-
 /**
 * DotBoost Technologies Inc.
 * DotKernel v1.0
