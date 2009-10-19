@@ -27,6 +27,9 @@ class Frontend_User
 	public function __construct()
 	{		
 		$this->db = Zend_Registry::get('database');
+		$this->config = Zend_Registry::get('configuration');
+		$this->settings = Zend_Registry::get('settings');
+		
 	}
 	/**
 	 * Check to see if user can login
@@ -134,10 +137,50 @@ class Frontend_User
 		}
 		return array('data' => $data, 
 					'error' => $error);
+	}	
+	/**
+	 * Validate email user input
+	 * @access public
+	 * @param public 
+	 * @return array
+	 */
+	public function validateEmail($value)
+	{
+		$data = array();
+		$error = array();		
+		//validate email
+		$validatorEmail = new Zend_Validate_EmailAddress();		
+		$validEmail = Dot_Kernel::validate($validatorEmail, array('email'=>$value));
+		return $validEmail;
 	}
 	public function setUserInfo()
 	{}
-	public function forgotPassword()
-	{}
+	public function forgotPassword($email)
+	{
+		
+		$select = $this->db->select()->from('users', array('password'))->where('email = ?',$email);
+		$value = $this->db->fetchRow($select);
+		if(!empty($value))
+		{
+			Zend_Debug::dump($value['password']);
+			$send = new Dot_Email_Transport($email, $this->settings->site_name, $this->settings->contact_recipient,'Forgot Password');
+			$send->setTextContent('Your password is '.$value['password']);
+			$succeed = $send->Send();
+			if($succeed)
+			{
+				$error['Email Sent'] = 'Your password was sent to '.$email;
+			}
+			else
+			{
+				$error['Email Not Sent'] = 'Your password could not be sent to '.$email;
+			}			
+		}
+		else
+		{
+			$error['Not Found'] = 'Email '.$email.' was not found in our records !';
+		}
+		return $error;
+		
+	}
 	// and so on, functions related to USER 
 }
