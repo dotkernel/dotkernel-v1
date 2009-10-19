@@ -11,9 +11,10 @@
 */
 
 /**
-* Alternate SMTP and default server mail() class 
+* Alternate SMTP server mail() class 
 * @category   DotKernel
 * @package    DotLibrary
+* @subpackage DotEmail
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
@@ -29,9 +30,10 @@ class Dot_Email_Transport extends Dot_Email
 	 * @param string $subject [optional]
 	 * @return void
 	 */
-	public function __construct($config, $to = null, $fromName = null, $fromEmail = null, $subject = null)
+	public function __construct($to = null, $fromName = null, $fromEmail = null, $subject = null)
 	{
-		$this->settings = $config;
+		$this->db = Zend_Registry::get('database');
+		$this->settings = Zend_Registry::get('settings');
 		$this->to = $to;		
 		$this->subject = $subject;
 		$this->fromName = $fromName;
@@ -42,15 +44,14 @@ class Dot_Email_Transport extends Dot_Email
 		//  set the transporter
 		//  check if we can use regular server sendmail
 		$partial = @explode('@', $this->to);
-
-		$this->smtp_data = $this->GetSMTP();
-
-		
+		$this->smtp_data = $this->GetSMTP();		
 		if(stristr($this->settings->smtp_addresses, $partial['1']) !== FALSE)
 		{
 			//  SMTP Transporter
-			$mailConfigs = array('auth' => 'login', 'username' => $this->settings->smtp_username, 'password' => $this->settings->smtp_password, 'ssl' => 'tls');
-
+			$mailConfigs = array('auth' => 'login', 
+								 'username' => $this->settings->smtp_username, 
+								 'password' => $this->settings->smtp_password, 
+								 'ssl' => 'tls');
 			$tr = new Zend_Mail_Transport_Smtp($this->settings->smtp_server, $mailConfigs);
 			parent::setDefaultTransport($tr);
 			parent::setFrom($this->settings->smtp_username, $this->fromName);
@@ -70,67 +71,56 @@ class Dot_Email_Transport extends Dot_Email
 	 * @return void
 	 */
 	public function send()
-	{		
-		/**
-		 * @TODO is this the proper error trapping system 		 
-		 */
-		try
-		{
+	{	
+		if(array_key_exists('id', $this->smtp_data))
+		{	
 			$this->UpdateSMTPCounter($this->smtp_data['id']);
-			parent::send();
 		}
-		catch (Zend_Exception $e)
-		{
-			/**
-			 * @TODO definitely we want to create an exception class, Other code to recover from the error
-			 */
-			$dev_emails = @explode(',', $this->settings->dev_emails);
-			$date_now = date('F dS, Y h:i:s A');
-			$mailSubject  = "SMTP Error on ". $this->settings->site_name;
-			$mailContent  = "We were unable to send SMTP email."."\n";
-			$mailContent .= "---------------------------------"."\n";
-			$mailContent .="Caught exception: ". get_class($e)."\n";
-			$mailContent .="Message:  ".$e->getMessage()."\n";
-			$mailContent .= "---------------------------------"."\n\n";
-			$mailContent .="To Email: ".$this->To."\n";
-			$mailContent .="From Email: ".$this->FromEmail."\n";
-			$mailContent .="Date: ".$date_now ."\n";
-			$mailHeader   = "From: ".$this->settings->contact_recipient."\r\n";
-			$mailHeader  .= "Reply-To:".$this->config->contact_recipient."\r\n"."X-Mailer: PHP/".phpversion();
-			foreach($dev_emails as $ky => $mailTo)
-			{
-				mail($mailTo, $mailSubject, $mailContent, $mailHeader);
-			}
-		}
+		parent::send();
 	}
-	function GetSMTP ()
+	/**
+	 * Get the curent SMTP for sending the emails
+	 * @access private
+	 * @return array
+	 */
+	private function GetSMTP ()
 	{
 		$smtp = array();
-		$this->db->query("SELECT id, user, pass FROM newsletter_smtp WHERE `date` = DATE_FORMAT( NOW( ) , '%Y-%m-%d' ) AND counter < '2000' AND active = 'Y' ORDER BY id ASC LIMIT 1");
-		if ($this->db->num_rows() == 1)
-		{
-			$this->db->next_record();
-			$smtp['id'] = $this->db->f('id');
-			$smtp['smtp_username'] = $this->db->f('user');
-			$smtp['smtp_password'] = $this->db->f('pass');
+		$select = $this->db->select()
+		->from('email_transporter',array('id','smtp_username'=>'user','smtp_password'=>'pass'))
+		->where('counter < limit_number')
+		->where('active = ?','Y')
+		->order('id')
+		->limit('1');
+		$result = $this->db->fetchAll($select);	
+		if (count($result) > 0)
+		{			
+			$smtp = $result[0];
+			
 		}else
 		{
-			$this->db->query("UPDATE newsletter_smtp SET counter = 0 WHERE `date` < DATE_FORMAT( NOW( ) , '%Y-%m-%d' ) AND active = 'Y'");
-			$this->db->query("UPDATE newsletter_smtp SET date = NOW() WHERE `date` < DATE_FORMAT( NOW( ) , '%Y-%m-%d' ) AND active = 'Y'");
-			$this->db->query("SELECT id, user, pass FROM newsletter_smtp WHERE `date` = DATE_FORMAT( NOW( ) , '%Y-%m-%d' ) AND counter < '2000' AND active = 'Y' ORDER BY id ASC LIMIT 1");
-			if ($this->db->num_rows() == 1)
-			{
-				$this->db->next_record();
-				$smtp['id'] = $this->db->f('id');
-				$smtp['smtp_username'] = $this->db->f('user');
-				$smtp['smtp_password'] = $this->db->f('pass');
+			
+			$where = array(" `date` < DATE_FORMAT( NOW( ) , '%Y-%m-%d' )","active = 'Y'");
+			$this->db->update('email_transporter', array('counter'=>0), $where);
+			$this->db->update('email_transporter', array('date'=>'NOW()'), $where);
+			$select->where("`date` = DATE_FORMAT( NOW( ) , '%Y-%m-%d' )");
+			$result = $this->db->fetchAll($select);	
+			if (count($result) > 0)
+			{			
+				$smtp = $result[0];
+				
 			}
 		}
 		return $smtp;
 	}
-
-	function UpdateSMTPCounter ($id)
+	/**
+	 * Update the counter of the current transporter.
+	 * @access private
+	 * @param int $id
+	 * @return void
+	 */
+	private function UpdateSMTPCounter ($id)
 	{
-		$this->db->query("UPDATE newsletter_smtp SET counter = counter+1 WHERE id = '".$id."'");
+		$this->db->query("UPDATE email_transporter SET counter = counter+1 WHERE id = '".$id."'");
 	}
 }

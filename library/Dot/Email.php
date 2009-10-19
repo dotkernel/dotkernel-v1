@@ -14,6 +14,7 @@
 * Alternate SMTP and default server mail() class 
 * @category   DotKernel
 * @package    DotLibrary
+* @subpackage DotEmail
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
@@ -30,7 +31,7 @@ class Dot_Email extends Zend_Mail
 	 * @access private 
 	 * @var object
 	 */
-	private $settings = null;
+	protected $settings = null;
 	/**
 	 * To email
 	 * @access protected 
@@ -83,20 +84,16 @@ class Dot_Email extends Zend_Mail
 	 * @param string $subject [optional]
 	 * @return void
 	 */
-	public function __construct($config, $to = null, $fromName = null, $fromEmail = null, $subject = null)
+	public function __construct($to = null, $fromName = null, $fromEmail = null, $subject = null)
 	{
-		$this->settings = $config;
-		$this->to = $to;		
-		$this->subject = $subject;
-		$this->fromName = $fromName;
-		$this->fromEmail = $fromEmail;
-		parent::addHeader('X-Mailer', $this->xmailer);
-		parent::addTo($this->to);
-		parent::setSubject($this->subject);
-		//  Sendmail transporter
-		$transport = new Zend_Mail_Transport_Sendmail('-f'.$this->fromEmail);
-		parent::setDefaultTransport($transport);
-		parent::setFrom($this->fromEmail, $this->fromName);
+		if($this->settings->smtp_use == 'Y')
+		{
+			new Dot_Email_Transport($to, $fromName, $fromEmail, $subject);
+		}
+		else
+		{
+			new Dot_Email_Simple($to, $fromName, $fromEmail, $subject);
+		}
 	}
 	/**
 	 * Set the text content
@@ -163,11 +160,11 @@ class Dot_Email extends Zend_Mail
 			$mailContent .="Caught exception: ". get_class($e)."\n";
 			$mailContent .="Message:  ".$e->getMessage()."\n";
 			$mailContent .= "---------------------------------"."\n\n";
-			$mailContent .="To Email: ".$this->To."\n";
-			$mailContent .="From Email: ".$this->FromEmail."\n";
+			$mailContent .="To Email: ".$this->to."\n";
+			$mailContent .="From Email: ".$this->fromEmail."\n";
 			$mailContent .="Date: ".$date_now ."\n";
 			$mailHeader   = "From: ".$this->settings->contact_recipient."\r\n";
-			$mailHeader  .= "Reply-To:".$this->config->contact_recipient."\r\n"."X-Mailer: PHP/".phpversion();
+			$mailHeader  .= "Reply-To:".$this->settings->contact_recipient."\r\n"."X-Mailer: PHP/".phpversion();
 			foreach($dev_emails as $ky => $mailTo)
 			{
 				mail($mailTo, $mailSubject, $mailContent, $mailHeader);

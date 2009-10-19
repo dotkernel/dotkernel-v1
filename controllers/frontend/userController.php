@@ -152,6 +152,23 @@ switch ($requestAction)
 		}
 		$userView->details('add',$data,$error);			
 	break;
+	case 'forgot-password':
+		$data = array();
+		$error = array();
+		$pageTitle = 'Forgot your password?';
+		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
+		{				
+			$valid = $frontendUser->validateEmail($_POST['email']);
+			$data = $valid['data'];
+			$error = $valid['error'];
+			if(empty($error))
+			{	
+				 // re-send password
+				$error = $frontendUser->forgotPassword($data['email']);						
+			}
+		}
+		$userView->details('forgot-password',$data,$error);		
+	break;
 	case 'logout':
 		$frontendUser->logout();
 		header('location: '.$config->website->params->url);

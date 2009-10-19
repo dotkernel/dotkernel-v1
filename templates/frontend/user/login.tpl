@@ -7,4 +7,5 @@
 			<p>Password</p><input type="password" name="password" />
 			<input type="submit" onclick="" class="btn" value="login">
 		</form>
+		<a href="{SITE_URL}/user/forgot-password">Password Recovery</a>
 	</div>

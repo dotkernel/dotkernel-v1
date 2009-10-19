@@ -34,6 +34,24 @@ CREATE TABLE IF NOT EXISTS `admins` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `email_transporter`
+--
+
+CREATE TABLE IF NOT EXISTS `email_transporter` (
+  `id` int(11) NOT NULL auto_increment,
+  `user` varchar(100) NOT NULL,
+  `pass` varchar(100) NOT NULL,
+  `server` varchar(100) NOT NULL default 'smtp.gmail.com',
+  `limit_number` int(11) NOT NULL default '2000',
+  `date` date NOT NULL default '0000-00-00',
+  `counter` int(11) NOT NULL default '0',
+  `active` enum('Y','N') NOT NULL default 'Y',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `settings`
 --
 
@@ -71,10 +89,7 @@ INSERT INTO `settings` (`variable`, `title`, `comment`, `value`, `editable`, `ty
 ('time_format_long', 'Long Time Format.', 'General time format.', '%b %d, %Y, %H:%M', 'Y', 'option', '%d %b %Y, %H:%M;%d %B %Y, %H:%M;%d %B %y, %H:%M;%d %m %Y, %H:%M;%d %m %y, %H:%M;%B %d, %Y, %H:%M;%b %d, %Y, %H:%M'),
 ('security_image_code_length', 'Security image code lenght', 'The number o characters in the security code.', '4', 'Y', 'option', '3;4;5;6;7;8;9;10'),
 ('smtp_addresses', '', '', 'aol.com;aim.com;comcast.net;hotmail.com;earthlink.net;juno.com;juno.net;bellsouth.net;cox.net;roadrunner.com;sbcglobal.net', 'N', 'textarea', ''),
-('smtp_username', '', '', '********@gmail.com', 'N', 'textarea', ''),
-('smtp_password', '', '', 'p4ssword', 'N', 'textarea', ''),
-('smtp_email', '', '', '********@gmail.com', 'N', 'textarea', ''),
-('smtp_server', '', '', 'smtp.gmail.com', 'N', 'textarea', ''),
+('smtp_use', '', 'Send email through SMTP', 'N', 'Y', 'radio', 'Y;N');
 ('dev_emails', '', '', 'team@dotkernel.com', 'N', 'textarea', ''),
 ('meta_description', '', '', 'Enterprise Level PHP Solutions, based on Zend Framework and DotKernel , build by DotBoost Technologies Inc.', 'N', 'textarea', ''),
 ('results_per_page', '', 'How many records will be on every page', '10', 'Y', 'option', '10;20;30;40;50');
