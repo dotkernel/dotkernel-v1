@@ -162,7 +162,6 @@ class Frontend_User
 		$value = $this->db->fetchRow($select);
 		if(!empty($value))
 		{
-			Zend_Debug::dump($value['password']);
 			$send = new Dot_Email_Transport($email, $this->settings->site_name, $this->settings->contact_recipient,'Forgot Password');
 			$send->setTextContent('Your password is '.$value['password']);
 			$succeed = $send->Send();
