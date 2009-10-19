@@ -86,6 +86,7 @@ class Dot_Email extends Zend_Mail
 	 */
 	public function __construct($to = null, $fromName = null, $fromEmail = null, $subject = null)
 	{
+		$this->settings = Zend_Registry::get('settings');
 		if($this->settings->smtp_use == 'Y')
 		{
 			new Dot_Email_Transport($to, $fromName, $fromEmail, $subject);
