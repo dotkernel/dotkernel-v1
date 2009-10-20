@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `email_transporter` (
   `user` varchar(100) NOT NULL,
   `pass` varchar(100) NOT NULL,
   `server` varchar(100) NOT NULL default 'smtp.gmail.com',
-  `limit_number` int(11) NOT NULL default '2000',
+  `capacity` int(11) NOT NULL default '2000',
   `date` date NOT NULL default '0000-00-00',
   `counter` int(11) NOT NULL default '0',
   `active` enum('Y','N') NOT NULL default 'Y',

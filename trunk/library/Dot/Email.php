@@ -87,14 +87,31 @@ class Dot_Email extends Zend_Mail
 	public function __construct($to = null, $fromName = null, $fromEmail = null, $subject = null)
 	{
 		$this->settings = Zend_Registry::get('settings');
+		$this->db = Zend_Registry::get('database');
+		$this->settings = Zend_Registry::get('settings');
+		$this->to = $to;		
+		$this->subject = $subject;
+		$this->fromName = $fromName;
+		$this->fromEmail = $fromEmail;
+		parent::addHeader('X-Mailer', $this->xmailer);
+		parent::addTo($this->to);
+		parent::setSubject($this->subject);
+		parent::setFrom($this->fromEmail, $this->fromName);
+		//  set the transporter		
 		if($this->settings->smtp_use == 'Y')
 		{
-			new Dot_Email_Transport($to, $fromName, $fromEmail, $subject);
+			$partial = @explode('@', $this->to);
+			if(stristr($this->settings->smtp_addresses, $partial['1']) !== FALSE)
+			{
+				//  SMTP Transporter
+				$tr = new Dot_Email_Transport();
+			}
 		}
 		else
 		{
-			new Dot_Email_Simple($to, $fromName, $fromEmail, $subject);
+			$tr = new Dot_Email_Simple($fromEmail);			
 		}
+		parent::setDefaultTransport($tr->getTransport());
 	}
 	/**
 	 * Set the text content
@@ -147,6 +164,7 @@ class Dot_Email extends Zend_Mail
 		try
 		{
 			parent::send();
+			return TRUE;
 		}
 		catch (Zend_Exception $e)
 		{
@@ -170,6 +188,7 @@ class Dot_Email extends Zend_Mail
 			{
 				mail($mailTo, $mailSubject, $mailContent, $mailHeader);
 			}
+			return FALSE;
 		}
 	}
 }
