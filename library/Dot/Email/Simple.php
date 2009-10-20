@@ -18,41 +18,25 @@
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
-class Dot_Email_Simple extends Dot_Email
+class Dot_Email_Simple
 {
 	/**
 	 * Email constructor
 	 * @access public 
-	 * @param object $config
-	 * @param string $to [optional]
-	 * @param string $fromName [optional]
 	 * @param string $fromEmail [optional]
-	 * @param string $subject [optional]
-	 * @return void
+	 * @return Dot_Email_Simple
 	 */
-	public function __construct($to = null, $fromName = null, $fromEmail = null, $subject = null)
+	public function __construct($fromEmail = null)
 	{
-		$this->settings = Zend_Registry::get('settings');
-		$this->to = $to;		
-		$this->subject = $subject;
-		$this->fromName = $fromName;
-		$this->fromEmail = $fromEmail;
-		parent::addHeader('X-Mailer', $this->xmailer);
-		parent::addTo($this->to);
-		parent::setSubject($this->subject);
-		//  Sendmail transporter
-		$transport = new Zend_Mail_Transport_Sendmail('-f'.$this->fromEmail);
-		parent::setDefaultTransport($transport);
-		parent::setFrom($this->fromEmail, $this->fromName);
-		
+		$this->transport = new Zend_Mail_Transport_Sendmail('-f'.$fromEmail);
 	}
 	/**
-	 * Send email
-	 * @access public 
-	 * @return void
+	 * Return the transporter
+	 * @access public
+	 * @return Zend_Mail_Transport_Sendmail
 	 */
-	public function send()
-	{			
-		parent::send();
+	public function getTransport()
+	{
+		return $this->transport;
 	}
 }
