@@ -18,7 +18,7 @@
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
-class Dot_Email_Simple
+class Dot_Email_Simple extends Dot_Email
 {
 	/**
 	 * Email constructor
