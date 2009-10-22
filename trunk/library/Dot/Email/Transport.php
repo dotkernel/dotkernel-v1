@@ -29,7 +29,7 @@ class Dot_Email_Transport extends Dot_Email
 	public function __construct($to = null, $fromName = null, $fromEmail = null, $subject = null)
 	{
 		$this->db = Zend_Registry::get('database');
-		$this->smtp_data = $this->GetSMTP();		
+		$this->smtp_data = $this->getSMTP();		
 		$mailConfigs = array('auth' => 'login',
                      'username' => $this->smtp_data['smtp_username'],
                      'password' => $this->smtp_data['smtp_password'],
@@ -43,7 +43,7 @@ class Dot_Email_Transport extends Dot_Email
 	 */
 	public function getTransport()
 	{
-		$this->UpdateSMTPCounter($this->smtp_data['id']);
+		$this->updateSMTPCounter($this->smtp_data['id']);
 		return $this->transport;
 	}
 	/**
@@ -51,7 +51,7 @@ class Dot_Email_Transport extends Dot_Email
 	 * @access private
 	 * @return array
 	 */
-	private function GetSMTP ()
+	private function getSMTP ()
 	{
 		$smtp = array();
 		$select = $this->db->select()
@@ -87,7 +87,7 @@ class Dot_Email_Transport extends Dot_Email
 	 * @param int $id
 	 * @return void
 	 */
-	private function UpdateSMTPCounter ($id)
+	private function updateSMTPCounter ($id)
 	{
 		$this->db->query("UPDATE email_transporter SET counter = counter+1 WHERE id = '".$id."'");
 	}
