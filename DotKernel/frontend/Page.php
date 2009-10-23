@@ -12,14 +12,24 @@
 
 /**
 * Page Model
-* dummy class, is not doing anything 
-* @author     DotKernel Team <team@dotkernel.com>
+* Dummy class, is not doing anything
 * @category   DotKernel
-* @package    Frontend
+* @package    Frontend 
+* @author     DotKernel Team <team@dotkernel.com>
 */
 
-class Page
+class Frontend_Page
 {
-	// is only a proof of concept about how to use a Controller
-	// is supposed to MODEL everything related to "Page" controller
+	/**
+	 * Constructor
+	 * @access public
+	 * @return Frontend_Page 
+	 */
+	public function __construct()
+	{		
+		$this->db = Zend_Registry::get('database');
+		$this->config = Zend_Registry::get('configuration');
+		$this->settings = Zend_Registry::get('settings');		
+	}
+	
 }

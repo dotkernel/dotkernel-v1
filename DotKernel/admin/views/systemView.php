@@ -45,7 +45,7 @@ class System_View extends View
 		$this->tpl->setVar('PHP',phpversion());
 		$this->tpl->setVar('PHPAPI',php_sapi_name());
 		$this->tpl->setVar('ZFVERSION', Zend_Version::VERSION);
-		$this->parseRss('http://www.zend.com/en/company/news/press/feed');		
+		#$this->parseRss('http://www.zend.com/en/company/news/press/feed');		
 	}
 	/**
 	 * Get the Rss by using Zend_Feed_Atom and parse it
@@ -55,6 +55,9 @@ class System_View extends View
 	 */
 	private function parseRss($link)
 	{
+		/**
+		 * @todo check if can't connect to the url link
+		 */
 		// Fetch the latest Slashdot headlines
 		try
 		{
