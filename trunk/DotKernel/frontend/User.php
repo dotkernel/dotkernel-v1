@@ -22,7 +22,8 @@ class Frontend_User
 {
 	/**
 	 * Constructor
-	 * @access public
+	 * @access public 
+	 * @return Frontend_User
 	 */
 	public function __construct()
 	{		
