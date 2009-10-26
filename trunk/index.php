@@ -90,12 +90,9 @@ array_shift($request);
 // Start dotKernel object
 $dotKernel = new Dot_Kernel();
 
-// is a valid request ?
-if (!file_exists(CONTROLLERS_PATH.'/'.$requestModule.'/'.'indexController.php'))
-{
-    // Return an 404 error and stop the execution
-    $dotKernel->pageNotFound();
-}
-
-// From this point, we are passing control to the Module specific controllers
-require (CONTROLLERS_PATH.'/'.$requestModule.'/'.'indexController.php');
+/**
+*  From this point , the control is taken by the Front Controller
+*  call the Front Controller specific file, but check first if exists 
+*/
+$frontControllerPath = CONTROLLERS_PATH.'/'.$requestModule.'/'.'indexController.php';
+!file_exists($frontControllerPath) ?  $dotKernel->pageNotFound() :  require($frontControllerPath);

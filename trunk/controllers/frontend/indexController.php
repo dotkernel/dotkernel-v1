@@ -44,10 +44,11 @@ Dot_Settings :: loadControllerFiles($requestModule);
 
 /**
 *  From this point , the control is taken by the Action specific controller
-*  call the Action specific file
+*  call the Action specific file, but check first if exists 
 */
-require(CONTROLLERS_PATH . '/' . $requestModule . '/' . $requestController . 'Controller.php');	 
-
+$actionControllerPath = CONTROLLERS_PATH . '/' . $requestModule . '/' . $requestController . 'Controller.php';
+!file_exists($actionControllerPath) ?  $dotKernel->pageNotFound() :  require($actionControllerPath);
+	
 //Set menus
 $tpl->setViewMenu($config);
 
