@@ -41,7 +41,7 @@ class View extends Dot_Template
 	{
 		if (null === self::$_instance) {
 			self::$_instance = new self($root, $unknowns, $fallback);
-			self::$_instance->config = Zend_Registry::get('configuration');
+			self::$_instance->settings = Zend_Registry::get('settings');
 		}
 		return self::$_instance;
 	}	
@@ -212,7 +212,7 @@ class View extends Dot_Template
 	protected function paginator($data, $link = '', $currentPage = 1)
 	{		
         $paginator = Zend_Paginator::factory($data);
-        $paginator->setItemCountPerPage($this->config->results_per_page);
+        $paginator->setItemCountPerPage($this->settings->results_per_page);
         $paginator->setCurrentPageNumber($currentPage);
         $paginator->totalItems = count($data);
 		$page = $paginator->getPages();
