@@ -89,10 +89,10 @@ INSERT INTO `settings` (`variable`, `title`, `comment`, `value`, `editable`, `ty
 ('time_format_long', 'Long Time Format.', 'General time format.', '%b %d, %Y, %H:%M', 'Y', 'option', '%d %b %Y, %H:%M;%d %B %Y, %H:%M;%d %B %y, %H:%M;%d %m %Y, %H:%M;%d %m %y, %H:%M;%B %d, %Y, %H:%M;%b %d, %Y, %H:%M'),
 ('security_image_code_length', 'Security image code lenght', 'The number o characters in the security code.', '4', 'Y', 'option', '3;4;5;6;7;8;9;10'),
 ('smtp_addresses', '', '', 'aol.com;aim.com;comcast.net;hotmail.com;earthlink.net;juno.com;juno.net;bellsouth.net;cox.net;roadrunner.com;sbcglobal.net', 'N', 'textarea', ''),
-('smtp_use', '', 'Send email through SMTP', 'N', 'Y', 'radio', 'Y;N');
+('smtp_use', '', 'Send email through SMTP', 'N', 'Y', 'radio', 'Y;N'),
 ('dev_emails', '', '', 'team@dotkernel.com', 'N', 'textarea', ''),
 ('meta_description', '', '', 'Enterprise Level PHP Solutions, based on Zend Framework and DotKernel , build by DotBoost Technologies Inc.', 'N', 'textarea', ''),
-('results_per_page', '', 'How many records will be on every page', '10', 'Y', 'option', '10;20;30;40;50');
+('results_per_page', '', 'How many records will be on every page', '10', 'Y', 'option', '10;20;30;40;50'),
 ('recaptcha_public_key', 'Recaptcha Public Key.', 'Use this in the JavaScript code that is served to your users. http://recaptcha.net/', '123XXX', 'Y', 'textarea', ''), 
 ('recaptcha_private_key', 'Recaptcha Private Key.', 'Use this when communicating between your server and our server. Because this key is a global key, it is OK if the private key is distributed to multiple users. http://recaptcha.net/', '123XXX', 'Y', 'textarea', '');
 
