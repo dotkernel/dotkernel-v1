@@ -60,9 +60,7 @@ class User_View extends View
 		}
 		if('add' == $templateFile)
 		{
-			// add secure image using ReCaptcha
-			$recaptcha = new Zend_Service_ReCaptcha($this->settings->recaptcha_public_key, $this->settings->recaptcha_private_key);
-			$this->tpl->setVar('SECUREIMAGE',$recaptcha->getHTML());			
+			$this->tpl->setVar('SECUREIMAGE',$this->getRecaptcha());			
 		}
 		$errorMessage = '';
 		if(!empty($error))
@@ -73,5 +71,12 @@ class User_View extends View
 			}
 		}
 		$this->tpl->setVar('ERROR',$errorMessage);
+	}
+	public function getRecaptcha()
+	{
+		// add secure image using ReCaptcha
+		$recaptcha = new Zend_Service_ReCaptcha($this->settings->recaptcha_public_key, $this->settings->recaptcha_private_key);
+		$recaptcha->setOptions(array('linkTitle' => 'Click me'));
+		return $recaptcha;
 	}
 }

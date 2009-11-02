@@ -108,49 +108,51 @@ switch ($requestAction)
 			if(strlen($_POST['recaptcha_response_field']) == 0)
 			{
 				$error['Secure Image'] = 'Incorrect. Try again.';
+			}
+			else
+			{
+				// validate secure image code
+				$result = $userView->getRecaptcha()->verify($_POST['recaptcha_challenge_field'],$_POST['recaptcha_response_field']);				
+				if (!$result->isValid()) 
+				{
+					$error['Secure Image'] = 'Incorrect. Try again. ';
+				}
 			}			
 			if(empty($error))
 			{
-				// validate secure image code
-				$recaptcha = new Zend_Service_ReCaptcha($settings->recaptcha_public_key, $settings->recaptcha_private_key);
-				$result = $recaptcha->verify($_POST['recaptcha_challenge_field'],$_POST['recaptcha_response_field']);				
-				if ($result->isValid()) 
+			   //add admin user
+				$frontendUser->add($data);
+				$validate = Dot_AuthorizeUser::validateLogin($data['username'], $data['password'], 'on');
+				if(!empty($validate['login']) && empty($validate['error']))
 				{
-				   //add admin user
-					$frontendUser->add($data);
-					$validate = Dot_AuthorizeUser::validateLogin($data['username'], $data['password'], 'on');
-					if(!empty($validate['login']) && empty($validate['error']))
+					// login info are VALID, we can see if is a valid user now 
+					$user = $frontendUser->checkLogin($validate['login']);
+					if(!empty($user))
 					{
-						// login info are VALID, we can see if is a valid user now 
-						$user = $frontendUser->checkLogin($validate['login']);
-						if(!empty($user))
-						{
-							$_SESSION['kernel']['user'] = $user[0];
-							header('location: '.$config->website->params->url.'/user/account');
-							exit;
-						}
-						else
-						{
-							unset($_SESSION['kernel']['user']);
-							$_SESSION['kernel']['login_user'] = 'Wrong Login Credentials';
-							header('Location: '.$config->website->params->url.'/user/login');
-							exit;				
-						}
+						$_SESSION['kernel']['user'] = $user[0];
+						$data = array();
+						$error = array();
+					}
+					else
+					{
+						unset($_SESSION['kernel']['user']);
+						$error['Error Login'] = 'Wrong Login Credentials';
 					}
 				}
-				else
-				{
-					// Failed validation recaptcha
-					$error['Secure Image'] = 'Incorrect. Try again. ';
-				}				
 			}
-			elseif(array_key_exists('password', $data))
-			{ 
-				// do not display password in the add form
-				unset($data['password']);
+			else
+			{
+				if(array_key_exists('password', $data))
+				{ 
+					// do not display password in the add form
+					unset($data['password']);				
+				}							
 			}
+			//return $data and $error as json
+			echo Zend_Json::encode(array('data'=>$data, 'error'=>$error));
+			exit;			
 		}
-		$userView->details('add',$data,$error);			
+		$userView->details('add',$data,$error);
 	break;
 	case 'forgot-password':
 		$data = array();
@@ -173,5 +175,9 @@ switch ($requestAction)
 		$frontendUser->logout();
 		header('location: '.$config->website->params->url);
 		exit;
-	break;	
+	break;
+	case 'get_recaptcha':
+		echo $userView->getRecaptcha()->getHtml();
+		exit;
+			
 }
