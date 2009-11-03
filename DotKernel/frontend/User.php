@@ -56,6 +56,30 @@ class Frontend_User
 		}
 	}	
 	/**
+	 * Get user by field
+	 * @access public
+	 * @param string $field
+	 * @param string $value
+	 * @return array
+	 */
+	public function getUserBy($field = '', $value = '')
+	{
+		$query = "SELECT * FROM users
+		WHERE $field = ? 
+		LIMIT 1"; 
+		$stmt = $this->db->query($query,array($value));
+		$results = $stmt->fetchAll();
+		if( 1 == count($results))
+		{
+			return $results;
+		}
+		else
+		{
+			return array();
+		}
+	}	
+	
+	/**
 	 * Logout admin user. Using Dot_AuthorizeUser class
 	 * @access public
 	 * @return void
