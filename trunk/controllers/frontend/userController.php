@@ -117,10 +117,24 @@ switch ($requestAction)
 				{
 					$error['Secure Image'] = 'Incorrect. Try again. ';
 				}
-			}			
+			}	
+			if(empty($error))
+			{	
+				//check if user already exists by $field ('username','email')
+				$checkBy = array('username','email');
+				foreach ($checkBy as $field)
+				{					
+				   	$userExists = $frontendUser->getUserBy($field, $data[$field]);
+					if(!empty($userExists))
+					{
+						$error[$field] = ucfirst($field).' already exists !';
+					}
+				}	
+			}
 			if(empty($error))
 			{
-			   //add admin user
+				
+			   	//add admin user
 				$frontendUser->add($data);
 				$validate = Dot_AuthorizeUser::validateLogin($data['username'], $data['password'], 'on');
 				if(!empty($validate['login']) && empty($validate['error']))
