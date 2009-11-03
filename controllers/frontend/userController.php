@@ -175,9 +175,5 @@ switch ($requestAction)
 		$frontendUser->logout();
 		header('location: '.$config->website->params->url);
 		exit;
-	break;
-	case 'get_recaptcha':
-		echo $userView->getRecaptcha()->getHtml();
-		exit;
-			
+	break;			
 }
