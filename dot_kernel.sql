@@ -111,6 +111,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `lastname` varchar(255) NOT NULL,
   `date_created` datetime NOT NULL,
   `active` enum('0','1') NOT NULL default '1',
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `email` (`email`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
