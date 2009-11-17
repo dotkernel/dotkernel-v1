@@ -66,7 +66,7 @@ $tpl->parse('MAIN_CONTENT', 'tpl_main');
 // show debug info ONLY of we are in development mode
 if(ini_get('display_errors') == 1)
 {
-	$debug = new Dot_Debug($db, $tpl);
+	$debug = new Dot_Debug($db, $tpl, $config);
 	$debug->startTimer = $startTime;
 	$debug->show();
 }
