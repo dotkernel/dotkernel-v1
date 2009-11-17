@@ -1,4 +1,4 @@
-<link rel="stylesheet" href ="{TEMPLATES_URL}/css/debugger.css" type="text/css" >
+<link rel="stylesheet" href ="{SITE_URL}/templates/css/debugger.css" type="text/css" >
 <script language="JavaScript" type="text/javascript">
 <!--
 function ShowHideDiv (id)
@@ -17,25 +17,25 @@ function ShowHideDiv (id)
 </script>
 <div class="index_debugger">
 	<!-- BEGIN dot_version -->
-	<div class="version_zf"><img src="{IMAGES_URL}/debugbar/dotkernel.png" class="debugger_images"><b>{DOT_VERSION}</b></div>
+	<div class="version_zf"><img src="{SITE_URL}/images/debugbar/dotkernel.png" class="debugger_images"><b>{DOT_VERSION}</b></div>
 	<!-- END dot_version -->
 	<!-- BEGIN zf_version -->
-	<div class="version_zf"><img src="{IMAGES_URL}/debugbar/copyright.gif" class="debugger_images"><b>{ZF_VERSION}</b></div>
+	<div class="version_zf"><img src="{SITE_URL}/images/debugbar/copyright.gif" class="debugger_images"><b>{ZF_VERSION}</b></div>
 	<!-- END zf_version -->
 	<!-- BEGIN php_version -->
-	<div class="version_php"><img src="{IMAGES_URL}/debugbar/php.png" class="debugger_images"><b>{PHP_VERSION}</b></div>
+	<div class="version_php"><img src="{SITE_URL}/images/debugbar/php.png" class="debugger_images"><b>{PHP_VERSION}</b></div>
 	<!-- END php_version -->
 	<!-- BEGIN total_time -->
-	<div class="total_time"><img src="{IMAGES_URL}/debugbar/time.png" class="debugger_images"><b>Page generated in</b> : {TOTAL_GENERAL_TIME} ms</div>
+	<div class="total_time"><img src="{SITE_URL}/images/debugbar/time.png" class="debugger_images"><b>Page generated in</b> : {TOTAL_GENERAL_TIME} ms</div>
 	<!-- END total_time -->
 	<!-- BEGIN memory_usage -->
-	<div class="memory_usage"><img src="{IMAGES_URL}/debugbar/memory.png" class="debugger_images"><b>Memory usage</b> : {MEMORY_USAGE} MB</div>
+	<div class="memory_usage"><img src="{SITE_URL}/images/debugbar/memory.png" class="debugger_images"><b>Memory usage</b> : {MEMORY_USAGE} MB</div>
 	<!-- END memory_usage -->
 	<!-- BEGIN details_db_debug -->
-	<div class="details_debugger_db" onclick="ShowHideDiv('db');"><img src="{IMAGES_URL}/debugbar/database.png" class="debugger_images"><b>Executed queries</b> : {TOTAL_QUERIES}, in {TOTAL_TIME} ms.</div>
+	<div class="details_debugger_db" onclick="ShowHideDiv('db');"><img src="{SITE_URL}/images/debugbar/database.png" class="debugger_images"><b>Executed queries</b> : {TOTAL_QUERIES}, in {TOTAL_TIME} ms.</div>
 	<!-- END details_db_debug -->
 	<!-- BEGIN db_debug -->
-	<div class="debugger_db"><img src="{IMAGES_URL}/debugbar/database.png" class="debugger_images"><b>Executed queries</b> : {TOTAL_QUERIES}, in {TOTAL_TIME} ms.</div>
+	<div class="debugger_db"><img src="{SITE_URL}/images/debugbar/database.png" class="debugger_images"><b>Executed queries</b> : {TOTAL_QUERIES}, in {TOTAL_TIME} ms.</div>
 	<!-- END db_debug -->
 
 	<!-- BEGIN if_show_debug -->

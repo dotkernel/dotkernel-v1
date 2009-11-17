@@ -53,7 +53,7 @@ class Dot_Debug
 	public function __construct($db, $tpl)
 	{
 		$this->db = $db;
-		$this->tpl = $tpl;
+		$this->tpl = $tpl;		
 	}	
 	/**
 	 * Set magic method
@@ -141,6 +141,8 @@ class Dot_Debug
 			$this->showTotalTime($this->tpl);
 		}
 		$this->tpl->parse('DEBUGGER', 'tpl_debugger');
+		
+		$this->tpl->setVar('DEBUGGER_DOJO', 'djConfig="parseOnLoad:true, isDebug:true"');
 	}
 	/**
 	 * Display total time 
