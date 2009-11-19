@@ -20,7 +20,7 @@ function formSubmit(formId, msgBoxId, url)
 				console.log(response);
 			}
 			// no error, redirect to home page			
-			if(response.error == '')
+			if(response.error == '' || typeof(response.error) == "undefined")
 			{
 				window.location = url;
 			}
