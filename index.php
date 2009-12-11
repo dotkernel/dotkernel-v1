@@ -18,6 +18,9 @@
 // Start counting the time nedded to display all content, from the very beginning
 $startTime = microtime();
 
+//Set error reporting
+ini_get('display_errors') == 1 ? error_reporting(E_ALL | E_STRICT) : error_reporting(0);
+
 // Define application environment
 defined('APPLICATION_ENV') || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 
