@@ -73,3 +73,6 @@ if(ini_get('display_errors') == 1)
 
 //parse and print the output
 $tpl->pparse('OUTPUT', 'tpl_index');
+
+
+ini_get('display_errors') == 1 ? error_reporting(E_ALL | E_ERROR | E_WARNING | E_PARSE | E_STRICT) : '';
