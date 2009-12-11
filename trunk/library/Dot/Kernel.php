@@ -37,7 +37,7 @@ class Dot_Kernel
     /**
      * Dot Kernel version identification
      */
-    const VERSION = '1.0.6';    
+    const VERSION = '1.0.7';    
 	/**
 	 * Constructor
 	 * @access public
@@ -147,7 +147,11 @@ class Dot_Kernel
 			{
 				foreach ($validator->getMessages() as $message)
 				{
-					$error[$k] = $message;
+					//filter the output
+					$filter = new Zend_Filter();
+					$filter->addFilter(new Zend_Filter_HtmlEntities());
+					$filter->addFilter(new Zend_Filter_StringTrim());
+					$error[$k] = str_replace($values[$k], $filter->filter($values[$k]), $message);
 				}
 			}
 		}
