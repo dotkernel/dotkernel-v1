@@ -183,7 +183,7 @@ switch ($requestAction)
 				$error = $frontendUser->forgotPassword($data['email']);						
 			}
 		}
-		$userView->details('forgot-password',$data,$error);		
+		$userView->details('forgot_password',$data,$error);		
 	break;
 	case 'logout':
 		$frontendUser->logout();

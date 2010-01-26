@@ -76,7 +76,7 @@ if ($requestModule != 'frontend')
     array_shift($requestRaw);
     
 // set Controller and Action values
-$requestController = isset($requestRaw['0']) && $requestRaw['0'] != '' ? basename(stripslashes($requestRaw['0'])) : 'index';
+$requestController = isset($requestRaw['0']) && $requestRaw['0'] != '' ? basename(stripslashes($requestRaw['0'])) : 'Index';
 $requestAction = isset($requestRaw['1']) && $requestRaw['1'] != '' ? basename(stripslashes($requestRaw['1'])) : '';
 
 // we have extra variables, so we load all in the global array $request
@@ -97,5 +97,5 @@ $dotKernel = new Dot_Kernel();
 *  From this point , the control is taken by the Front Controller
 *  call the Front Controller specific file, but check first if exists 
 */
-$frontControllerPath = CONTROLLERS_PATH.'/'.$requestModule.'/'.'indexController.php';
+$frontControllerPath = CONTROLLERS_PATH.'/'.$requestModule.'/'.'IndexController.php';
 !file_exists($frontControllerPath) ?  $dotKernel->pageNotFound() :  require($frontControllerPath);

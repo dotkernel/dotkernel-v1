@@ -36,11 +36,14 @@ class Admin_User
 	 */
 	public function checkLogin($data)
 	{
+		//Salt is in clear because we use it only here, in admin 
+		$salt = "5F6WQ9U3YT";
+		$password = md5($data['username'].$salt.$data['password']);
 		$query = "SELECT * FROM admins
 		WHERE username = ? 
 		AND password = ? 
 		AND active = '1'";
-		$stmt = $this->db->query($query,array($data['username'], $data['password']));
+		$stmt = $this->db->query($query,array($data['username'], $password));
 		$results = $stmt->fetchAll();
 		if( 1 == count($results))
 		{

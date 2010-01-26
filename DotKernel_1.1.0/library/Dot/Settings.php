@@ -107,11 +107,11 @@ class Dot_Settings
 			} 
 			else die ('The file: ' . DOTKERNEL_PATH . '/' . $modulePath . $value . '.php' . ' does NOT exist');  
 			// VIEW class
-			if(file_exists(DOTKERNEL_PATH . '/' . $modulePath . 'views/' . strtolower($value) . 'View.php'))
+			if(file_exists(DOTKERNEL_PATH . '/' . $modulePath . 'views/' . ucfirst($value) . 'View.php'))
 			{
-				require_once(DOTKERNEL_PATH . '/' . $modulePath . 'views/' . strtolower($value) . 'View.php');		
+				require_once(DOTKERNEL_PATH . '/' . $modulePath . 'views/' . ucfirst($value) . 'View.php');		
 			} 
-			else die ('The file: ' . DOTKERNEL_PATH . '/' . $modulePath . 'views/' . strtolower($value) . 'View.php' . ' does NOT exist');  
+			else die ('The file: ' . DOTKERNEL_PATH . '/' . $modulePath . 'views/' . ucfirst($value) . 'View.php' . ' does NOT exist');  
 		}
 	}
 

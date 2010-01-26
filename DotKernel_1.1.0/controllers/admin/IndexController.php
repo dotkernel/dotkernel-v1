@@ -17,7 +17,7 @@
 */ 
 
 // set Module and Action default values
-$requestController = isset($requestController) && $requestController !='index' ? $requestController : 'system';
+$requestController = isset($requestController) && $requestController !='Index' ? $requestController : 'System';
 $requestAction     = isset($requestAction) && $requestAction !=''         ? $requestAction     : 'dashboard';
 
 // check admin permission
@@ -32,6 +32,7 @@ if(!$authorizeUser->isLogin('admin') && $requestAction != 'auth')
 require(DOTKERNEL_PATH . '/' . $requestModule . '/' . 'View.php');	
 $tpl = View::getInstance(TEMPLATES_PATH . '/' . $requestModule);
 $tpl->init($requestModule, $requestController, $requestAction);
+
 
 // Assign Index Template file
 $tpl->setViewFile();
@@ -62,7 +63,6 @@ $tpl->setViewTitle($settings, $pageTitle);
 
 // parse the main content block
 $tpl->parse('MAIN_CONTENT', 'tpl_main');
-
 // show debug info ONLY of we are in development mode
 if(ini_get('display_errors') == 1)
 {

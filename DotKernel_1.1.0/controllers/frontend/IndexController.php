@@ -17,7 +17,7 @@
 */ 
 
 // set Module and Action default values
-$requestController = isset($requestController) && $requestController !='index' ? $requestController : 'page';
+$requestController = isset($requestController) && $requestController !='Index' ? $requestController : 'page';
 $requestAction     = isset($requestAction) && $requestAction !=''         ? $requestAction     : 'home';
 
 // Start the template object, empty for the moment 
