@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.2.1
+-- version 3.2.3
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 02, 2009 at 11:51 AM
--- Server version: 5.0.45
--- PHP Version: 5.2.10
+-- Generation Time: Jan 26, 2010 at 11:44 AM
+-- Server version: 5.0.77
+-- PHP Version: 5.2.12
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -22,7 +22,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 CREATE TABLE IF NOT EXISTS `admins` (
   `id` int(11) unsigned NOT NULL auto_increment,
   `username` varchar(255) NOT NULL,
-  `password` varchar(25) NOT NULL,
+  `password` varchar(64) NOT NULL,
   `email` varchar(255) NOT NULL,
   `firstname` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
@@ -93,7 +93,7 @@ INSERT INTO `settings` (`variable`, `title`, `comment`, `value`, `editable`, `ty
 ('dev_emails', '', '', 'team@dotkernel.com', 'N', 'textarea', ''),
 ('meta_description', '', '', 'Enterprise Level PHP Solutions, based on Zend Framework and DotKernel , build by DotBoost Technologies Inc.', 'N', 'textarea', ''),
 ('results_per_page', '', 'How many records will be on every page', '10', 'Y', 'option', '10;20;30;40;50'),
-('recaptcha_public_key', 'Recaptcha Public Key.', 'Use this in the JavaScript code that is served to your users. http://recaptcha.net/', '123XXX', 'Y', 'textarea', ''), 
+('recaptcha_public_key', 'Recaptcha Public Key.', 'Use this in the JavaScript code that is served to your users. http://recaptcha.net/', '123XXX', 'Y', 'textarea', ''),
 ('recaptcha_private_key', 'Recaptcha Private Key.', 'Use this when communicating between your server and our server. Because this key is a global key, it is OK if the private key is distributed to multiple users. http://recaptcha.net/', '123XXX', 'Y', 'textarea', '');
 
 -- --------------------------------------------------------
