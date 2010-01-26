@@ -121,11 +121,7 @@ switch ($requestAction)
 				exit;				
 			}
 		}
-		else
-		{
-			$data = $adminUser->getUserInfo($request['id']);			
-			
-		}
+		$data = $adminUser->getUserInfo($request['id']);
 		$userView->details('update',$data,$error);	
 	break;
 }

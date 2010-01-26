@@ -6,7 +6,7 @@
 	<table cellpadding="0" cellspacing="1" class="big_table" width="30%">
 		<tr>
 			<td class="row2"><span >Username:</span></td>
-			<td class="row1"><input type="text" name="username" value="{USERNAME}" /></td>
+			<td class="row1">{USERNAME}</td>
 		</tr>
 		<tr>
 			<td class="row2"><span >Password:</span></td>
