@@ -21,6 +21,10 @@
 class Admin_User
 {
 	/**
+	 * Constant SALT is in clear because we use it only here, in admin 
+	 */
+	const SALT = "5F6WQ9U3YT";
+	/**
 	 * Constructor
 	 * @access public
 	 */
@@ -36,9 +40,7 @@ class Admin_User
 	 */
 	public function checkLogin($data)
 	{
-		//Salt is in clear because we use it only here, in admin 
-		$salt = "5F6WQ9U3YT";
-		$password = md5($data['username'].$salt.$data['password']);
+		$password = md5($data['username'].self::SALT.$data['password']);
 		$query = "SELECT * FROM admins
 		WHERE username = ? 
 		AND password = ? 
@@ -71,9 +73,10 @@ class Admin_User
 	 */
 	public function getUserInfo($id)
 	{
-		$query = "SELECT * FROM admins WHERE id = ? ";
-		$stmt = $this->db->query($query,$id);		
-		return $stmt->fetch();
+		$select = $this->db->select()
+						   ->from('admins')
+						   ->where('id = ?', $id);
+		return $this->db->fetchRow($select);
 	}
 	/**
 	 * Get user list
@@ -105,8 +108,14 @@ class Admin_User
 	 */
 	public function updateUser($data)
 	{
+		Zend_Debug::dump($data);
 		$id = $data['id'];
         unset ($data['id']);
+		if(array_key_exists('password', $data))
+		{
+			$user = $this->getUserInfo($id);
+			$data['password'] = md5($user['username'].self::SALT.$data['password']);
+		}
         $this->db->update('admins', $data, 'id = '.$id);
 	}
 	/**
