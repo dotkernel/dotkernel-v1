@@ -76,7 +76,7 @@ if ($requestModule != 'frontend')
     array_shift($requestRaw);
     
 // set Controller and Action values
-$requestController = isset($requestRaw['0']) && $requestRaw['0'] != '' ? basename(stripslashes($requestRaw['0'])) : 'Index';
+$requestController = isset($requestRaw['0']) && $requestRaw['0'] != '' ? ucfirst(basename(stripslashes($requestRaw['0']))) : 'Index';
 $requestAction = isset($requestRaw['1']) && $requestRaw['1'] != '' ? basename(stripslashes($requestRaw['1'])) : '';
 
 // we have extra variables, so we load all in the global array $request
