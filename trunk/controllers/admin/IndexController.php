@@ -19,7 +19,6 @@
 // set Module and Action default values
 $requestController = isset($requestController) && $requestController !='Index' ? $requestController : 'System';
 $requestAction     = isset($requestAction) && $requestAction !=''         ? $requestAction     : 'dashboard';
-var_dump($requestModule,$requestAction,$requestController);exit;
 // check admin permission
 $authorizeUser = new Dot_AuthorizeUser();
 if(!$authorizeUser->isLogin('admin') && $requestAction != 'auth')
