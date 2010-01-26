@@ -84,6 +84,8 @@ class User_View extends View
 		{
 		    $this->tpl->setVar(strtoupper($k), $v);
 		}
+		//empty because password is encrypted with md5
+		$this->tpl->setVar('PASSWORD', '');
 		$errorMessage = '';
 		if(!empty($error))
 		{

@@ -130,19 +130,22 @@ class Admin_User
 		$data = array_merge($data, $validAlpha['data'], $validEmail['data']);
 		$error = array_merge($error, $validAlpha['error'], $validEmail['error']);
 		//validate paswword				
-		if($_POST['password'] == $_POST['password2'])
-		{
-			$validatorChain = new Zend_Validate();
-			$validatorChain->addValidator(new Zend_Validate_Alnum())
-							->addValidator(new Zend_Validate_StringLength(3,20));			
-			$values = array('password'=>$_POST['password']);
-			$validPass = Dot_Kernel::validate($validatorChain, $values);
-			$data = array_merge($data, $validPass['data']);
-			$error = array_merge($error, $validPass['error']);	
-		}
-		else
-		{
-			$error['password'] = "You didn't enter the same password twice. Please re-enter your password";
+		if($_POST['password'] != '' || $_POST['password2'] != '')
+		{			
+			if($_POST['password'] == $_POST['password2'])
+			{
+				$validatorChain = new Zend_Validate();
+				$validatorChain->addValidator(new Zend_Validate_Alnum())
+								->addValidator(new Zend_Validate_StringLength(3,20));			
+				$values = array('password'=>$_POST['password']);
+				$validPass = Dot_Kernel::validate($validatorChain, $values);
+				$data = array_merge($data, $validPass['data']);
+				$error = array_merge($error, $validPass['error']);	
+			}
+			else
+			{
+				$error['password'] = "You didn't enter the same password twice. Please re-enter your password";
+			}
 		}
 		return array('data' => $data, 
 					'error' => $error);
