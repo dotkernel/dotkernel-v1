@@ -37,7 +37,7 @@ class Dot_Kernel
     /**
      * Dot Kernel version identification
      */
-    const VERSION = '1.0.7';    
+    const VERSION = '1.1.0';    
 	/**
 	 * Constructor
 	 * @access public
