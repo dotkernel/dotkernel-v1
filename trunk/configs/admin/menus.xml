@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menus>	
+<config>	
+<menu>
+	<id>1</id>
+	<type>horizontal</type>
+	<display>true</display>
+	<item>
+		<title>Dashboard</title>
+		<link>system/dashboard/</link>
+		<description>Dashboard admin</description>
+		<subItems>
+			<subItem>
+				<title>Home</title>
+				<link>system/dashboard/</link>
+				<description>Dashboard admin</description>
+			</subItem>
+		</subItems>
+	</item>
+	<item>
+		<title>Admin</title>
+		<link>user/list/</link>
+		<description>Admin user details</description>
+		<subItems>			
+			<subItem>
+				<title>List</title>
+				<link>user/list/</link>
+				<description>List admin users</description>
+			</subItem>						
+			<subItem>
+				<title>Add new</title>
+				<link>user/add/</link>
+				<description>Add admin user</description>
+			</subItem>
+			<subItem>
+				<title>My Account</title>
+				<link>user/account/</link>
+				<description>Admin user account</description>
+			</subItem>
+		</subItems>
+	</item>
+</menu>
+<menu>
+	<id>2</id>
+	<type>vertical</type>
+	<display>false</display>
+	<item>
+		<title>Dashboard</title>
+		<link>system/dashboard/</link>
+		<description>Dashboard admin</description>
+		<subItems>
+			<subItem>
+				<title>Home</title>
+				<link>system/dashboard/</link>
+				<description>Dashboard admin</description>
+			</subItem>
+		</subItems>
+	</item>
+</menu>
+</config>
+</menus>
