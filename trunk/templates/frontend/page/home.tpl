@@ -1,4 +1,10 @@
 <p>	
+		<h3>Documentation</h3>
+		<a href=" http://www.dotkernel.com/docs/"> http://www.dotkernel.com/docs/</a>
+		
+		<h3>Download latest version</h3>
+		<a href="http://www.dotkernel.com/download/">http://www.dotkernel.com/download/</a>
+		
 	<h3>1. Special Controllers</h3>
 	<p>Backend: <a href="{SITE_URL}/admin/ ">Admin </a></p>
 	<p>RSS: <a href="{SITE_URL}/rss/ ">RSS </a></p>
@@ -20,9 +26,5 @@
 		 
 
 		 <p>- you <b>MUST</b>  add in <b>config/application.ini</b> the line:</p>
-		 <p>resources.controllers.frontend.articles = Articles</p>
-		 
-		<h3>4. Structure of folders</h3>
-		<img src="{IMAGES_URL}/MVC-structure.png" alt="" />
-		 
+		 <p>resources.controllers.frontend.articles = Articles</p>		 
 </p>
