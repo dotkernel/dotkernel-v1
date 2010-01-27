@@ -19,11 +19,7 @@
 */
 
 class Admin_User
-{
-	/**
-	 * Constant SALT is in clear because we use it only here, in admin 
-	 */
-	const SALT = "5F6WQ9U3YT";
+{	
 	/**
 	 * Constructor
 	 * @access public
@@ -31,6 +27,7 @@ class Admin_User
 	public function __construct()
 	{		
 		$this->db = Zend_Registry::get('database');
+		$this->config = Zend_Registry::get('configuration');
 	}
 	/**
 	 * Check to see if user can login
@@ -40,13 +37,14 @@ class Admin_User
 	 */
 	public function checkLogin($data)
 	{
-		$password = md5($data['username'].self::SALT.$data['password']);
-		$query = "SELECT * FROM admins
-		WHERE username = ? 
-		AND password = ? 
-		AND active = '1'";
-		$stmt = $this->db->query($query,array($data['username'], $password));
-		$results = $stmt->fetchAll();
+		$password = md5($data['username'].$this->config->settings->admin->salt.$data['password']);
+		$select = $this->db->select()
+						   ->from('admins')
+						   ->where('active = ?','1')
+						   ->where('username = ?', $data['username'])
+						   ->where('password = ?', $password);
+						   echo $select->__toString();
+		$results = $this->db->fetchAll($select);		
 		if( 1 == count($results))
 		{
 			return $results;
@@ -98,6 +96,7 @@ class Admin_User
 	{		
 		$data['date_created'] = date('Y-m-d H:i:s');
 		$data['active'] = 1;
+		$data['password'] = md5($user['username'].$this->config->settings->admin->salt.$data['password']);
 		$this->db->insert('admins',$data);		
 	}	
 	/**
@@ -114,7 +113,7 @@ class Admin_User
 		if(array_key_exists('password', $data))
 		{
 			$user = $this->getUserInfo($id);
-			$data['password'] = md5($user['username'].self::SALT.$data['password']);
+			$data['password'] = md5($user['username'].$this->config->settings->admin->salt.$data['password']);
 		}
         $this->db->update('admins', $data, 'id = '.$id);
 	}
