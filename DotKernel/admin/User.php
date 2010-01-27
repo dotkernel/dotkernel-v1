@@ -43,7 +43,6 @@ class Admin_User
 						   ->where('active = ?','1')
 						   ->where('username = ?', $data['username'])
 						   ->where('password = ?', $password);
-						   echo $select->__toString();
 		$results = $this->db->fetchAll($select);		
 		if( 1 == count($results))
 		{
