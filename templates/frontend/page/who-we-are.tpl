@@ -1,6 +1,5 @@
 <p>
-	text for <b>who we are</b> page<br />
-	<h3>we are a team  </h3>
-	<h2>YES YES </h2>
+	text for <b>who we are</b> page<br /><br />
+  edit the file <b>templates/frontend/page/who-we-are.tpl</b>
 	
 </p>

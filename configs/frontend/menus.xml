@@ -175,14 +175,14 @@
 	</item>
 	<item>
 		<title>About Us</title>
-		<link>page/about/</link>
-		<target></target>
-		<external>false</external>
+		<link>http://www.dotboost.com/about-us/</link>
+		<target>_blank</target>
+		<external>true</external>
 		<isLogged>true</isLogged>
 		<notLogged>true</notLogged>
 	</item>
 	<item>
-		<title>Blog</title>
+		<title>DotKernel</title>
 		<link>http://www.dotkernel.com/</link>
 		<target>_blank</target>
 		<external>true</external>
@@ -191,9 +191,9 @@
 	</item>
 	<item>
 		<title>Contact</title>
-		<link>page/contact/</link>
-		<target></target>
-		<external>false</external>
+		<link>http://www.dotkernel.com/contact/</link>
+		<target>_blank</target>
+		<external>true</external>
 		<isLogged>true</isLogged>
 		<notLogged>true</notLogged>
 	</item>

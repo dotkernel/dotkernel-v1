@@ -3,7 +3,7 @@
 <br />
 <form id="userRegister" action="" method="post">
 <input type="hidden" name="send" value="on">
-<table cellpadding="0" cellspacing="1" width="40%">
+<table cellpadding="0" cellspacing="1" width="60%">
 	<tr>
 		<td><span >Username:</span></td>
 		<td><input id="username" type="text" name="username" value="{USERNAME}" /></td>
