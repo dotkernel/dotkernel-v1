@@ -95,7 +95,7 @@ class Admin_User
 	{		
 		$data['date_created'] = date('Y-m-d H:i:s');
 		$data['active'] = 1;
-		$data['password'] = md5($user['username'].$this->config->settings->admin->salt.$data['password']);
+		$data['password'] = md5($data['username'].$this->config->settings->admin->salt.$data['password']);
 		$this->db->insert('admins',$data);		
 	}	
 	/**
