@@ -76,7 +76,7 @@ class User_View extends View
 	{
 		// add secure image using ReCaptcha
 		$recaptcha = new Zend_Service_ReCaptcha($this->settings->recaptcha_public_key, $this->settings->recaptcha_private_key);
-		$recaptcha->setOptions(array('linkTitle' => 'Click me'));
+		$recaptcha->setOptions(array('linkTitle' => 'Click me', 'theme'=>'white','tabindex'=>'2'));
 		return $recaptcha;
 	}
 }
