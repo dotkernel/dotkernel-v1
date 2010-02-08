@@ -18,9 +18,6 @@
 // Start counting the time needed to display all content, from the very beginning
 $startTime = microtime();
 
-//Set error reporting
-ini_get('display_errors') == 1 ? error_reporting(E_ALL | E_STRICT) : error_reporting(0);
-
 // Define application environment
 defined('APPLICATION_ENV') || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 
@@ -64,6 +61,9 @@ $registry->settings = $settings;
 
 //Set PHP configuration settings from application.ini file
 Dot_Settings::setPhpSettings($config->phpSettings->toArray());
+
+//Set error reporting
+ini_get('display_errors') == 1 ? error_reporting(E_ALL | E_STRICT) : error_reporting(0);
 
 // Start Index Controller
 $requestRaw = explode('/', trim(substr($_SERVER['REQUEST_URI'], strlen(dirname($_SERVER['PHP_SELF']))), '/'));
