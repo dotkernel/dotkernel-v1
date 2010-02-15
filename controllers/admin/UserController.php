@@ -69,8 +69,9 @@ switch ($requestAction)
 	break;
 	case 'list':
 		$pageTitle = 'List Admin Users';
-		$users = $adminUser->getUserList();		
-		$userView->listUser('list', $users);	
+		$page = (isset($request['page'])) ? $request['page'] : 1;
+		$users = $adminUser->getUserList($page);		
+		$userView->listUser('list', $users,$page);	
 	break;	
 	case 'add':
 		$data = array();
