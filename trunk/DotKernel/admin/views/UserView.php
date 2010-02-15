@@ -48,15 +48,16 @@ class User_View extends View
 	 * List the admin users
 	 * @access public
 	 * @param string $templateFile
-	 * @param array $users
+	 * @param array $list
+	 * @param int $page
 	 * @return void
 	 */
-	public function listUser($templateFile, $users)
+	public function listUser($templateFile, $list, $page)
 	{
 		$this->tpl->setFile('tpl_main', 'user/' . $templateFile . '.tpl');
 		$this->tpl->setBlock('tpl_main', 'list', 'list_block');
-		$this->tpl->paginator($users,'page',1);
-		foreach ($users as $k => $v)
+		$this->tpl->paginator($list['paginatorAdapter'],$page);
+		foreach ($list['data'] as $k => $v)
 		{
 		    $this->tpl->setVar('BG', $k%2+1);
 			$this->tpl->setVar('ID', $v['id']);

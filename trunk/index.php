@@ -89,7 +89,7 @@ while (list($key, $val) = each($requestRaw))
 }
 // remove first element of the request array, is module and action in it
 array_shift($request);
-
+$registry->param = $request;
 // Start dotKernel object
 $dotKernel = new Dot_Kernel();
 

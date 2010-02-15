@@ -28,6 +28,7 @@ class Admin_User
 	{		
 		$this->db = Zend_Registry::get('database');
 		$this->config = Zend_Registry::get('configuration');
+		$this->settings = Zend_Registry::get('settings');
 	}
 	/**
 	 * Check to see if user can login
@@ -78,12 +79,20 @@ class Admin_User
 	/**
 	 * Get user list
 	 * @access public 
-	 * @return array
+	 * @param int $page [optional]
+	 * @return array(array(), Zend_Paginator_Adapter())
 	 */
-	public function getUserList()
+	public function getUserList($page = 1)
 	{
-		$select = $this->db->select()->from('admins');		
-		return $this->db->fetchAll($select);
+		$select = $this->db->select()->from('admins');
+				
+ 		$paginatorAdapter = new Zend_Paginator_Adapter_DbSelect($select);
+		($page == 1) ? 
+			$select->limit($this->settings->results_per_page) : 
+			$select->limit($this->settings->results_per_page, ($page-1)*$this->settings->results_per_page);
+							
+		$data = $this->db->fetchAll($select);
+		return array('data'=> $data,'paginatorAdapter'=> $paginatorAdapter);
 	}
 	/**
 	 * Add new user

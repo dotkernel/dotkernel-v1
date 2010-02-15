@@ -209,31 +209,35 @@ class View extends Dot_Template
 	 * @param int $current_page [optional]
 	 * @return string
 	 */
-	protected function paginator($data, $link = '', $currentPage = 1)
+	protected function paginator($adapter, $currentPage = 1)
 	{		
-        $paginator = Zend_Paginator::factory($data);
+		
+        $paginator = new Zend_Paginator($adapter);
         $paginator->setItemCountPerPage($this->settings->results_per_page);
         $paginator->setCurrentPageNumber($currentPage);
-        $paginator->totalItems = count($data);
-		$page = $paginator->getPages();
+        $paginator->totalItems = $adapter->count();
+		$page = $paginator->getPages();	
 		$this->setFile('page_file', 'paginator.tpl');
 		$this->setVar('TOTAL_PAGES', $paginator->totalItems);
 		$this->setBlock('page_file', 'previous', 'previous_row');
 		$this->setBlock('page_file', 'next', 'next_row');
 		$this->setBlock('page_file', 'current_page', 'current_row');
-		$this->setBlock('page_file', 'other_page', 'other_row');
-		
+		$this->setBlock('page_file', 'other_page', 'other_row');		
 		$this->setBlock('page_file', 'pages', 'pages_row');
+
+		$param = Zend_Registry::get('param');
+		$link = (array_key_exists('page',$param)) ?  '' : 'page/';
+		
 		if ($page->first != $page->current)
 		{
-			$this->setVar('PREVIOUS_LINK',$link($page->current-1));
+			$this->setVar('PREVIOUS_LINK',$link.($page->current-1));
 			$this->parse('previous_row', 'previous', TRUE);
 		}
 		else
 		{
 			$this->parse('previous_row', '');
 		}
-		if ($page->last != $page->current)
+		if ($page->last>0 && $page->last != $page->current)
 		{
 			$this->setVar('NEXT_LINK',$link.$page->next);
 			$this->parse('next_row', 'next', TRUE);
@@ -260,9 +264,6 @@ class View extends Dot_Template
 			}				
 			$this->parse('pages_row', 'pages', TRUE);
 		}
-		$this->parse('PAGINATION', 'page_file');
-		//$a = $this->getVar('PAGINATION');		
-		//return $a;		
-				
+		$this->parse('PAGINATION', 'page_file');				
 	}
 }
