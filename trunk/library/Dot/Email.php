@@ -154,9 +154,10 @@ class Dot_Email extends Zend_Mail
 	/**
 	 * Send email
 	 * @access public 
+	 * @param  Zend_Mail_Transport_Abstract $transport
 	 * @return void
 	 */
-	public function send()
+	public function send($transport = null)
 	{		
 		/**
 		 * @TODO is this the proper error trapping system 		 
