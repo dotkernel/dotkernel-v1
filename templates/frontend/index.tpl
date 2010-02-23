@@ -7,7 +7,7 @@
 	<meta name="description" content="{PAGE_DESCRIPTION}" >
 	<link rel="canonical" href="{CANONICAL_URL}"/>
 	<link rel="stylesheet" href ="{TEMPLATES_URL}/css/frontend/style.css" type="text/css" >	
-	<script type="text/javascript" src="{SITE_URL}/externals/dojo/dojo.js" {DEBUGGER_DOJO}></script>
+	<script type="text/javascript" src="{SITE_URL}/externals/dojo/dojo.xd.js" parseOnLoad:true, isDebug:false></script>
 	<script type="text/javascript" src="{TEMPLATES_URL}/js/frontend/main.js"></script>
 </head>
 <body>

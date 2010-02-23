@@ -140,9 +140,7 @@ class Dot_Debug
 		{
 			$this->showTotalTime($this->tpl);
 		}
-		$this->tpl->parse('DEBUGGER', 'tpl_debugger');
-		
-		$this->tpl->setVar('DEBUGGER_DOJO', 'djConfig="parseOnLoad:true, isDebug:true"');
+		$this->tpl->parse('DEBUGGER', 'tpl_debugger');		
 	}
 	/**
 	 * Display total time 
