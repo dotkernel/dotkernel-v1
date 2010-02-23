@@ -115,7 +115,6 @@ class Admin_User
 	 */
 	public function updateUser($data)
 	{
-		Zend_Debug::dump($data);
 		$id = $data['id'];
         unset ($data['id']);
 		if(array_key_exists('password', $data))
