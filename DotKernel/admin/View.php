@@ -198,7 +198,8 @@ class View extends Dot_Template
 		if(Dot_AuthorizeUser::isLogin('admin'))
 		{			
 			$this->setFile('tpl_info', 'blocks/info_bar.tpl');
-			$this->setVar('ADMIN_USERNAME', $_SESSION['kernel']['admin']['username']);
+			$session = Zend_Registry::get('session');
+			$this->setVar('ADMIN_USERNAME', $session->admin['username']);
 			$this->parse('INFO_BAR', 'tpl_info');			
 		}
 	}

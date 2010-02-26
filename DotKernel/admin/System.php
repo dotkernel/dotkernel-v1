@@ -27,4 +27,20 @@ class System
 	{
 		$this->db = Zend_Registry::get('database');
 	}
+	public function listSettings($editable='1')
+	{
+		$select = $this->db->select()
+						   ->from('settings')
+						   ->where('editable = ? ', $editable);
+		return $this->db->fetchAll($select);
+	}
+	public function updateSettings($data)
+	{
+		Zend_Debug::dump($data);	
+		foreach ($data as $k => $v)
+		{			
+			$this->db->update('settings', array('value' => $v), 'variable = '.$this->db->quote($k));
+		}	
+		
+	}
 }

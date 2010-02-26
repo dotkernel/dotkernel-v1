@@ -40,12 +40,13 @@ $zend_loader = Zend_Loader_Autoloader::getInstance();
 //includes all classes in library folder. That class names must start with Dot_
 $zend_loader->registerNamespace('Dot_');
 
-//Initialize the session
-Dot_Sessions::start();
-
 // Create registry object, as read-only object to store there config, settings, and database
 $registry = new Zend_Registry(array(), ArrayObject::ARRAY_AS_PROPS);
 Zend_Registry::setInstance($registry);
+
+//Initialize the session
+Dot_Sessions::start();
+$session = Zend_Registry::get('session');
 
 //Load configuration settings from application.ini file and store it in registry
 $config = new Zend_Config_Ini(CONFIGURATION_PATH.'/application.ini', APPLICATION_ENV);

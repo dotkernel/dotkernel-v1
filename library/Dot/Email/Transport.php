@@ -31,9 +31,9 @@ class Dot_Email_Transport extends Dot_Email
 		$this->db = Zend_Registry::get('database');
 		$this->smtp_data = $this->getSMTP();		
 		$mailConfigs = array('auth' => 'login',
-                     'username' => $this->smtp_data['smtp_username'],
-                     'password' => $this->smtp_data['smtp_password'],
-                     'ssl' => 'tls');
+                             'username' => $this->smtp_data['smtp_username'],
+                             'password' => $this->smtp_data['smtp_password'],
+                             'ssl' => 'tls');
 		$this->transport = new Zend_Mail_Transport_Smtp($this->smtp_data['smtp_server'], $mailConfigs);		
 	}	
 	/**
@@ -47,7 +47,7 @@ class Dot_Email_Transport extends Dot_Email
 		return $this->transport;
 	}
 	/**
-	 * Get the curent SMTP for sending the emails
+	 * Get the current SMTP for sending the emails
 	 * @access private
 	 * @return array
 	 */
@@ -55,11 +55,11 @@ class Dot_Email_Transport extends Dot_Email
 	{
 		$smtp = array();
 		$select = $this->db->select()
-		->from('email_transporter',array('id','smtp_username'=>'user','smtp_password'=>'pass','smtp_server'=>'server'))
-		->where('counter < capacity')
-		->where('active = ?','Y')
-		->order('id')
-		->limit('1');
+						   ->from('email_transporter',array('id', 'smtp_username' => 'user', 'smtp_password' => 'pass', 'smtp_server' => 'server'))
+						   ->where('counter < capacity')
+						   ->where('active = ?','1')
+						   ->order('id')
+						   ->limit('1');
 		$result = $this->db->fetchAll($select);	
 		if (count($result) > 0)
 		{			
@@ -68,15 +68,14 @@ class Dot_Email_Transport extends Dot_Email
 		}else
 		{
 			
-			$where = array(" `date` < DATE_FORMAT( NOW( ) , '%Y-%m-%d' )","active = 'Y'");
+			$where = array(" `date` < DATE_FORMAT( NOW( ) , '%Y-%m-%d' )","active = '1'");
 			$this->db->update('email_transporter', array('counter'=>0), $where);
 			$this->db->update('email_transporter', array('date'=>'NOW()'), $where);
 			$select->where("`date` = DATE_FORMAT( NOW( ) , '%Y-%m-%d' )");
 			$result = $this->db->fetchAll($select);	
 			if (count($result) > 0)
 			{			
-				$smtp = $result[0];
-				
+				$smtp = $result[0];				
 			}
 		}
 		return $smtp;

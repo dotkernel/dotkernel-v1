@@ -37,14 +37,14 @@ switch ($requestAction)
 			$user = $frontendUser->checkLogin($validate['login']);
 			if(!empty($user))
 			{
-				$_SESSION['kernel']['user'] = $user[0];
+				$session->user = $user[0];
 				header('location: '.$config->website->params->url.'/user/account');
 				exit;
 			}
 			else
 			{
-				unset($_SESSION['kernel']['user']);
-				$_SESSION['kernel']['login_user'] = 'Wrong Login Credentials';
+				unset($session->user);
+				$session->loginUserError = 'Wrong Login Credentials';
 				header('Location: '.$config->website->params->url.'/user/login');
 				exit;				
 			}
@@ -52,7 +52,7 @@ switch ($requestAction)
 		else
 		{
 			// login info are NOT VALID
-			$_SESSION['kernel']['login_user'] = $validate['error']['username'] . ' <br> '. $validate['error']['password'];
+			$session->loginUserError = $validate['error']['username'] . ' <br> '. $validate['error']['password'];
 			header('Location: '.$config->website->params->url.'/user/login');
 			exit;
 		}			
@@ -65,9 +65,15 @@ switch ($requestAction)
 		$pageTitle = 'User Account';
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
 		{						
-			$values = array('firstname'=>$_POST['firstname'],
-						'lastname'=>$_POST['lastname']
-						);
+			$values = array('alpha' => 
+								array('firstname'=>$_POST['firstname'],
+									  'lastname'=>$_POST['lastname']
+									 ),
+							'email' => array('email' => $_POST['email']),
+							'password' => array('password' => $_POST['password'],
+												'password2' =>  $_POST['password2']
+											   )
+						  );
 			$valid = $frontendUser->validateUser($values);
 			$data = $valid['data'];
 			$error = $valid['error'];
@@ -83,12 +89,12 @@ switch ($requestAction)
 				// do not display password in the add form
 				unset($data['password']);
 			}
-			$dataTmp = $frontendUser->getUserInfo($_SESSION['kernel']['user']['id']);
+			$dataTmp = $frontendUser->getUserInfo($session->user['id']);
 			$data['username'] = $dataTmp['username'];
 		}
 		else
 		{			
-			$data = $frontendUser->getUserInfo($_SESSION['kernel']['user']['id']);
+			$data = $frontendUser->getUserInfo($session->user['id']);
 		}
 		$userView->details('update',$data,$error);	
 	break;
@@ -98,10 +104,16 @@ switch ($requestAction)
 		$pageTitle = 'User Register';
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
 		{		
-			$values = array('username'=>$_POST['username'],
-						'firstname'=>$_POST['firstname'],
-						'lastname'=>$_POST['lastname']
-						);
+			$values = array('alpha' => 
+								array('username'=>$_POST['username'],
+									  'firstname'=>$_POST['firstname'],
+									  'lastname'=>$_POST['lastname']
+									 ),
+							'email' => array('email' => $_POST['email']),
+							'password' => array('password' => $_POST['password'],
+												'password2' =>  $_POST['password2']
+											   )
+						  );
 			$valid = $frontendUser->validateUser($values);
 			$data = $valid['data'];
 			$error = $valid['error'];
@@ -143,13 +155,13 @@ switch ($requestAction)
 					$user = $frontendUser->checkLogin($validate['login']);
 					if(!empty($user))
 					{
-						$_SESSION['kernel']['user'] = $user[0];
+						$session->user = $user[0];
 						$data = array();
 						$error = array();
 					}
 					else
 					{
-						unset($_SESSION['kernel']['user']);
+						unset($session->user);
 						$error['Error Login'] = 'Wrong Login Credentials';
 					}
 				}
