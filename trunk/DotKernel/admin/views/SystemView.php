@@ -76,5 +76,60 @@ class System_View extends View
 			$this->tpl->setVar('RSS_LINK', $v->link('alternate'));
 			$this->tpl->parse('rss_link_block', 'rss_link', true);
 		}		
+	}	
+	/**
+	 * Display settings
+	 * @access public
+	 * @param string $templateFile
+	 * @return void
+	 */
+	public function displaySettings($templateFile, $data)
+	{
+		$this->tpl->setFile('tpl_main', 'system/' . $templateFile . '.tpl');
+		$this->tpl->setBlock('tpl_main', 'textarea', 'textarea_row');
+		$this->tpl->setBlock('tpl_main', 'options', 'options_row');
+		$this->tpl->setBlock('tpl_main', 'option', 'option_row');
+		$this->tpl->setBlock('tpl_main', 'radios', 'radios_row');
+		$this->tpl->setBlock('tpl_main', 'radio', 'radio_row');
+		foreach ($data as $v)
+		{			
+			$this->tpl->setVar('NAME', $v['title']);
+			$this->tpl->setVar('VARIABLE', $v['variable']);
+			$this->tpl->setVar('DEFAULT', $v['possible_values']);
+			$this->tpl->setVar('EXPLANATION', $v['comment']);
+			switch ($v['type']) 
+			{
+				case 'textarea':	
+					$this->tpl->setVar('CURRENT_VALUE', $v['value']);
+					$this->tpl->parse('textarea_row', 'textarea', true);
+				break;
+				case 'option':
+					$this->tpl->parse('options_row', '');
+					$options = explode(';', $v['possible_values']);
+					foreach ($options as $opt)
+					{
+						$this->tpl->setVar('LIST_OPTION', $opt);
+						$optionSelect = ($v['value'] == $opt) ? 'selected' : '';
+						$this->tpl->setVar('SELECTED_OPTION', $optionSelect);
+						$this->tpl->parse('options_row', 'options', true);												
+					}
+					$this->tpl->parse('option_row', 'option', true);
+				break;
+				case 'radio':
+					$this->tpl->parse('radios_row', '');
+					$radios = explode(';', $v['possible_values']);
+					foreach ($radios as $val)
+					{
+						$this->tpl->setVar('POSIBLE_VALUE', $val);
+						$radioTxt = ($val == 1) ? 'Yes' : 'No';
+						$this->tpl->setVar('POSIBLE_VALUE_TXT', $radioTxt);
+						$radioCheck = ($v['value'] == $val) ? 'checked' : '';
+						$this->tpl->setVar('CHECKED_OPTION', $radioCheck);
+						$this->tpl->parse('radios_row', 'radios', true);												
+					}
+					$this->tpl->parse('radio_row', 'radio', true);
+				break;
+			}
+		}
 	}
 }

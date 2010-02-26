@@ -37,11 +37,12 @@ class User_View extends View
 	 */
 	public function loginForm($templateFile)
 	{
-		$this->tpl->setFile('tpl_main', 'user/' . $templateFile . '.tpl');
-		if(array_key_exists('login_user', $_SESSION['kernel']))
+		$session = Zend_Registry::get('session');
+		$this->tpl->setFile('tpl_main', 'user/' . $templateFile . '.tpl');		
+		if(isset($session->loginUserError))
 		{
-			$this->tpl->setVar('ERROR',$_SESSION['kernel']['login_user']);
-			unset($_SESSION['kernel']['login_user']);
+			$this->tpl->setVar('ERROR',$session->loginUserError);
+			unset($session->loginUserError);
 		}
 	}
 	/**

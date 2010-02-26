@@ -138,22 +138,22 @@ class Admin_User
 		$validatorChain = new Zend_Validate();
 		$validatorChain->addValidator(new Zend_Validate_Alpha())
 						->addValidator(new Zend_Validate_StringLength(3,20));
-		$validAlpha = Dot_Kernel::validate($validatorChain, $values);
+		$validAlpha = Dot_Kernel::validate($validatorChain, $values['alpha']);
 		//validate email
 		$validatorEmail = new Zend_Validate_EmailAddress();		
-		$validEmail = Dot_Kernel::validate($validatorEmail, array('email'=>$_POST['email']));
+		$validEmail = Dot_Kernel::validate($validatorEmail, $values['email']);
 		$data = array_merge($data, $validAlpha['data'], $validEmail['data']);
 		$error = array_merge($error, $validAlpha['error'], $validEmail['error']);
 		//validate paswword				
-		if($_POST['password'] != '' || $_POST['password2'] != '')
+		if($values['password']['password'] != '' || $values['password']['password2'] != '')
 		{			
-			if($_POST['password'] == $_POST['password2'])
+			if($values['password']['password'] == $values['password']['password2'])
 			{
+				unset($values['password']['password2']);
 				$validatorChain = new Zend_Validate();
 				$validatorChain->addValidator(new Zend_Validate_Alnum())
 								->addValidator(new Zend_Validate_StringLength(3,20));			
-				$values = array('password'=>$_POST['password']);
-				$validPass = Dot_Kernel::validate($validatorChain, $values);
+				$validPass = Dot_Kernel::validate($validatorChain, $values['password']);
 				$data = array_merge($data, $validPass['data']);
 				$error = array_merge($error, $validPass['error']);	
 			}

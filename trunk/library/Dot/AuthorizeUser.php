@@ -81,7 +81,8 @@ class Dot_AuthorizeUser
 	 */
 	public static function isLogin($who='user')
 	{
-		if(array_key_exists($who, $_SESSION['kernel']) && !empty($_SESSION['kernel'][$who]))
+		$session = Zend_Registry::get('session');
+		if(isset($session->$who) && !empty($session->$who))
 		{
 			return true;
 		}
@@ -98,12 +99,13 @@ class Dot_AuthorizeUser
 	 */
 	public static function checkPermissions($config, $who='user')
 	{
+		$session = Zend_Registry::get('session');
 		switch($who)
 		{
 		    case 'user':
 		        if( !self::isLogin('user') )
 				{
-					$_SESSION['kernel']['login_user'] = "You don't have enough credentials to access this url.";
+					$session->loginUserError = "You don't have enough credentials to access this url.";
 					header('Location: ' . $config->website->params->url . '/user/login');
 					exit;
 				}
@@ -112,7 +114,7 @@ class Dot_AuthorizeUser
 			case 'admin':
 		        if( !self::isLogin('admin') )
 				{
-					$_SESSION['kernel']['login_user'] = "You don't have enough credentials to access this url.";
+					$session->loginUserError = "You don't have enough credentials to access this url.";
 					header('Location: ' . $config->website->params->url . '/'. $who);
 					exit;
 				}
@@ -132,9 +134,10 @@ class Dot_AuthorizeUser
 	 */
 	public static function logout($who='user')
 	{
+		$session = Zend_Registry::get('session');
 		if(self::isLogin($who))
 		{
-			unset($_SESSION['kernel'][$who]);
+			unset($session->$who);
 		}
 	}
 	

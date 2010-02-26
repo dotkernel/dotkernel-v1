@@ -35,10 +35,16 @@ class Dot_Sessions
 	 */
 	public static function start()
 	{
-		session_start();
-		if(!array_key_exists('kernel', $_SESSION))
+		Zend_Session::start();
+		if(!(Zend_Registry::isRegistered('session')))
 		{
-			$_SESSION['kernel'] = array();
+			$session = new Zend_Session_Namespace('kernel');
+			if(!isset($session->initialized))
+			{
+				Zend_Session::regenerateId();
+				$session->initialized = TRUE;
+			}
+			Zend_Registry::set('session',$session);
 		}
 	}
 }

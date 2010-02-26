@@ -42,14 +42,14 @@ switch ($requestAction)
 			$user = $adminUser->checkLogin($validate['login']);
 			if(!empty($user))
 			{
-				$_SESSION['kernel']['admin'] = $user[0];
+				$session->admin = $user[0];
 				header('location: '.$config->website->params->url.'/' . $requestModule );
 				exit;
 			}
 			else
 			{
-				unset($_SESSION['kernel']['admin']);
-				$_SESSION['kernel']['login_user'] = 'Wrong Login Credentials';
+				unset($session->admin);
+				$session->loginUserError = 'Wrong Login Credentials';
 				header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/login');
 				exit;				
 			}
@@ -57,14 +57,14 @@ switch ($requestAction)
 		else
 		{
 			// login info are NOT VALID
-			$_SESSION['kernel']['login_user'] = $validate['error']['username'] . ' <br> '. $validate['error']['password'];
+			$session->loginUserError = $validate['error']['username'] . ' <br> '. $validate['error']['password'];
 			header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/login');
 			exit;
 		}			
 	break;
 	case 'account':
 		$pageTitle = 'My Admin User Account';
-		$data = $adminUser->getUserInfo($_SESSION['kernel']['admin']['id']);
+		$data = $adminUser->getUserInfo($session->admin['id']);
 		$userView->details('update',$data);	
 	break;
 	case 'list':
@@ -79,10 +79,16 @@ switch ($requestAction)
 		$pageTitle = 'Add New Admin User';
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
 		{						
-			$values = array('username'=>$_POST['username'],
-						'firstname'=>$_POST['firstname'],
-						'lastname'=>$_POST['lastname']
-						);
+			$values = array('alpha' => 
+								array('username'=>$_POST['username'],
+									  'firstname'=>$_POST['firstname'],
+									  'lastname'=>$_POST['lastname']
+									 ),
+							'email' => array('email' => $_POST['email']),
+							'password' => array('password' => $_POST['password'],
+												'password2' =>  $_POST['password2']
+											   )
+						  );
 			$valid = $adminUser->validateUser($values);
 			$data = $valid['data'];
 			$error = $valid['error'];
@@ -107,9 +113,15 @@ switch ($requestAction)
 		$pageTitle = 'Update Admin User';
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
 		{						
-			$values = array('firstname'=>$_POST['firstname'],
-						'lastname'=>$_POST['lastname']
-						);
+			$values = array('alpha' => 
+								array('firstname'=>$_POST['firstname'],
+									  'lastname'=>$_POST['lastname']
+									 ),
+							'email' => array('email' => $_POST['email']),
+							'password' => array('password' => $_POST['password'],
+												'password2' =>  $_POST['password2']
+											   )
+						  );
 			$valid = $adminUser->validateUser($values);
 			$data = $valid['data'];
 			$error = $valid['error'];
