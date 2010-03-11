@@ -41,7 +41,7 @@ class Dot_Authorize
 	public static function validateLogin($username, $password, $send = 'off')
 	{
 		$login = array();
-		$error = array();
+		$error = array(); 
 		if ($send =='on')
 		{
 			$validator_username = new Zend_Validate();
