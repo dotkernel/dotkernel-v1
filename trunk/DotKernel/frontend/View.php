@@ -121,7 +121,7 @@ class View extends Dot_Template
 		foreach ($menu as $child)
 		{	
 			//don't display the menu
-			if($child->display == 'false') continue;		
+			if(0 == $child->display) continue;		
 			$this->setFile('tpl_menu_'.$child->id, 'blocks/menu_'.$child->type.'.tpl');
 			//is not simple menu, so let's set the submenu blocks and variables
 			if(strpos($child->type,'simple') === FALSE)
@@ -163,19 +163,19 @@ class View extends Dot_Template
 			}			
 			foreach ($items as $key => $val)
 			{						
-				if ((Dot_Authorize::isLogin() && $val->isLogged == 'true') || (!Dot_Authorize::isLogin() && $val->notLogged == 'true'))
+				if ((Dot_Authorize::isLogin() && 1 == $val->isLogged) || (!Dot_Authorize::isLogin() && 1 == $val->notLogged))
 				{	// display menus based on user is logged in or not
 					$this->setVar('TOP_MENU_ID', $i);
 					$tplVariables = array('TOP_MENU_SEL', 
 					                      'TOP_SUB_MENU_SEL', 
 										  'TOP_SUB_MENU_ITEM_SEL');
 					$this->initVar($tplVariables,'');	
-					if (stripos($val->link, $this->requestController.'/'.$this->requestAction.'/') !== false)
-					{	//if curent menu is the curent viewed page
+					if (false !== stripos($val->link, $this->requestController.'/'.$this->requestAction.'/'))
+					{	//if current menu is the current viewed page
 						$this->setVar('TOP_MENU_SEL', '_selected');
 						$this->setVar('TOP_SUB_MENU_SEL', '_selected');
 					}
-					elseif('vertical' == $child->type && strpos($child->type,'simple') === FALSE)
+					elseif('vertical' == $child->type && FALSE === strpos($child->type,'simple'))
 					{
 						$this->parse('top_sub_menu_block', '');
 					}
@@ -183,7 +183,7 @@ class View extends Dot_Template
 					{	
 						$this->setVar('TOP_MENU_'.strtoupper($k), is_string($v) ? $v : '');
 					}	
-					if ((string)$val->external == 'true') 
+					if (1 == $val->external) 
 					{
 						$this->setVar('TOP_MENU_LINK', $val->link);
 					}
@@ -191,7 +191,7 @@ class View extends Dot_Template
 					{
 						$this->setVar('TOP_MENU_LINK', $config->website->params->url.'/'.$val->link);	
 					} 
-					if(strpos($child->type,'simple') === FALSE)
+					if(FALSE === strpos($child->type,'simple'))
 					{														
 						if ((string)$val->link != '')
 						{
@@ -212,7 +212,7 @@ class View extends Dot_Template
 							}							
 							foreach ($subItems as $k2 => $v2)
 							{			
-								if ((Dot_Authorize::isLogin() && $v2->isLogged == 'true') || (!Dot_Authorize::isLogin() && $v2->notLogged == 'true'))
+								if ((Dot_Authorize::isLogin() && 1 == $v2->isLogged) || (!Dot_Authorize::isLogin() && 1 == $v2->notLogged))
 								{				
 									// display menus based on user is logged in or not		
 									$this->setVar('TOP_SUB_MENU_ITEM_SEL', '');												
@@ -220,7 +220,7 @@ class View extends Dot_Template
 									{
 										$this->setVar('TOP_SUB_MENU_'.strtoupper($k), is_string($v) ? $v : '');
 									}
-									if ((string)$v2->external == 'true') 
+									if (1 == $v2->external) 
 									{
 										$this->setVar('TOP_SUB_MENU_LINK', $v2->link);
 									}
@@ -228,7 +228,7 @@ class View extends Dot_Template
 									{
 										$this->setVar('TOP_SUB_MENU_LINK', $config->website->params->url.'/'.$v2->link);
 									}
-									if (stripos($v2->link, $this->requestController.'/'.$this->requestAction.'/') !== false)
+									if (FALSE  !==stripos($v2->link, $this->requestController.'/'.$this->requestAction.'/'))
 									{	//if curent menu is the curent viewed page then parent menu will be selected and sub menu shown
 										$tplVariables = array('TOP_MENU_SEL', 
 										                      'TOP_SUB_MENU_SEL', 
