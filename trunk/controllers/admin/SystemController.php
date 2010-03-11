@@ -30,7 +30,8 @@ switch ($requestAction)
 	case 'settings':
 		$pageTitle = 'Settings';
 		$data = $systemModel->listSettings();	
-		$systemView->displaySettings('settings', $data);
+		$error = (isset($request['update']) && $request['update'] == 'done') ? 'Update Succesfully !' : '';
+		$systemView->displaySettings('settings', $data, $error);
 	break;
 	case 'settings-update':
 		$data = array();
@@ -42,8 +43,8 @@ switch ($requestAction)
 			// are to many fields, with different value types
 			unset($_POST['send']);
 			$data = array_map('addslashes', $_POST);
-			$systemModel->updateSettings($data);
-			header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/settings');
+			$systemModel->updateSettings($data);			
+			header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/settings/update/done');
 				exit;
 		}
 		

@@ -22,11 +22,11 @@
 		</tr>			
 		<tr>
 			<td class="row2"><span >First Name:</span></td>
-			<td class="row1"><input type="text" name="firstname" value="{FIRSTNAME}" /></td>
+			<td class="row1"><input type="text" name="firstName" value="{FIRSTNAME}" /></td>
 		</tr>		
 		<tr>
 			<td class="row2"><span >Last Name:</span></td>
-			<td class="row1"><input type="text" name="lastname" value="{LASTNAME}" /></td>
+			<td class="row1"><input type="text" name="lastName" value="{LASTNAME}" /></td>
 		</tr>
 		<tr>
 			<td colspan="2" class="row1" align="center"><input type="submit" onclick="" class="small_btn" value="update"></td>

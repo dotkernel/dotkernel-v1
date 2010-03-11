@@ -35,7 +35,7 @@ switch ($requestAction)
 	break;	
 	case 'auth':	
 		// validate the authorization request paramethers 
-		$validate = Dot_AuthorizeUser::validateLogin($_POST['username'], $_POST['password'], $_POST['send']);
+		$validate = Dot_Authorize::validateLogin($_POST['username'], $_POST['password'], $_POST['send']);
 		if(!empty($validate['login']) && empty($validate['error']))
 		{
 			// login info are VALID, we can see if is a valid user now 
@@ -81,8 +81,8 @@ switch ($requestAction)
 		{						
 			$values = array('alpha' => 
 								array('username'=>$_POST['username'],
-									  'firstname'=>$_POST['firstname'],
-									  'lastname'=>$_POST['lastname']
+									  'firstName'=>$_POST['firstName'],
+									  'lastName'=>$_POST['lastName']
 									 ),
 							'email' => array('email' => $_POST['email']),
 							'password' => array('password' => $_POST['password'],
@@ -114,8 +114,8 @@ switch ($requestAction)
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
 		{						
 			$values = array('alpha' => 
-								array('firstname'=>$_POST['firstname'],
-									  'lastname'=>$_POST['lastname']
+								array('firstName'=>$_POST['firstName'],
+									  'lastName'=>$_POST['lastName']
 									 ),
 							'email' => array('email' => $_POST['email']),
 							'password' => array('password' => $_POST['password'],

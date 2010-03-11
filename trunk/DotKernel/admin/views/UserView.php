@@ -64,10 +64,10 @@ class User_View extends View
 			$this->tpl->setVar('ID', $v['id']);
 			$this->tpl->setVar('USERNAME', $v['username']);
 			$this->tpl->setVar('EMAIL', $v['email']);
-			$this->tpl->setVar('FIRSTNAME', $v['firstname']);
-			$this->tpl->setVar('LASTNAME', $v['lastname']);
-			$this->tpl->setVar('DATE_CREATED', $v['date_created']);
-			$this->tpl->setVar('ACTIVE_IMG', $v['active'] == 1 ? 'active' : 'inactive');
+			$this->tpl->setVar('FIRSTNAME', $v['firstName']);
+			$this->tpl->setVar('LASTNAME', $v['lastName']);
+			$this->tpl->setVar('DATE_CREATED', $v['dateCreated']);
+			$this->tpl->setVar('ACTIVE_IMG', $v['isActive'] == 1 ? 'active' : 'inactive');
 			$this->tpl->parse('list_block', 'list', true);
 		}
 	}

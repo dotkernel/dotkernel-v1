@@ -40,8 +40,8 @@ class Admin_User
 	{
 		$password = md5($data['username'].$this->config->settings->admin->salt.$data['password']);
 		$select = $this->db->select()
-						   ->from('admins')
-						   ->where('active = ?','1')
+						   ->from('admin')
+						   ->where('isActive = ?','1')
 						   ->where('username = ?', $data['username'])
 						   ->where('password = ?', $password);
 		$results = $this->db->fetchAll($select);		
@@ -55,13 +55,13 @@ class Admin_User
 		}
 	}
 	/**
-	 * Logout admin user. Using Dot_AuthorizeUser class
+	 * Logout admin user. Using Dot_Authorize class
 	 * @access public
 	 * @return void
 	 */
 	public function logout()
 	{
-		Dot_AuthorizeUser::logout('admin');
+		Dot_Authorize::logout('admin');
 	}
 	/**
 	 * Get user info
@@ -72,7 +72,7 @@ class Admin_User
 	public function getUserInfo($id)
 	{
 		$select = $this->db->select()
-						   ->from('admins')
+						   ->from('admin')
 						   ->where('id = ?', $id);
 		return $this->db->fetchRow($select);
 	}
@@ -84,7 +84,7 @@ class Admin_User
 	 */
 	public function getUserList($page = 1)
 	{
-		$select = $this->db->select()->from('admins');
+		$select = $this->db->select()->from('admin');
 				
  		$paginatorAdapter = new Zend_Paginator_Adapter_DbSelect($select);
 		($page == 1) ? 
@@ -102,10 +102,10 @@ class Admin_User
 	 */
 	public function addUser($data)
 	{		
-		$data['date_created'] = date('Y-m-d H:i:s');
-		$data['active'] = 1;
+		$data['dateCreated'] = date('Y-m-d H:i:s');
+		$data['isActive'] = 1;
 		$data['password'] = md5($data['username'].$this->config->settings->admin->salt.$data['password']);
-		$this->db->insert('admins',$data);		
+		$this->db->insert('admin',$data);		
 	}	
 	/**
 	 * Update user
@@ -122,7 +122,7 @@ class Admin_User
 			$user = $this->getUserInfo($id);
 			$data['password'] = md5($user['username'].$this->config->settings->admin->salt.$data['password']);
 		}
-        $this->db->update('admins', $data, 'id = '.$id);
+        $this->db->update('admin', $data, 'id = '.$id);
 	}
 	/**
 	 * Validate user input, add or update form

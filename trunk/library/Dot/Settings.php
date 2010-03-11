@@ -38,7 +38,7 @@ class Dot_Settings
 	{
 		$settings = new stdClass();
 		$db = Zend_Registry::get('database');
-		$query = 'SELECT * FROM settings';
+		$query = 'SELECT * FROM setting';
 		$results = $db->fetchAssoc($query);
 		foreach ($results as $key => $val)
 		{

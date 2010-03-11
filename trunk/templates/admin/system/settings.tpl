@@ -9,6 +9,7 @@
 	}
 //-->
 </script>
+<span style="color: #ff0000;">{ERROR}</span>
 <fieldset>
 <legend>List Settings Variables</legend>
 <form method="post" name="configs" action="{SITE_URL}/admin/system/settings-update">

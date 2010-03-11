@@ -20,8 +20,8 @@
 $requestController = isset($requestController) && $requestController !='Index' ? $requestController : 'System';
 $requestAction     = isset($requestAction) && $requestAction !=''         ? $requestAction     : 'dashboard';
 // check admin permission
-$authorizeUser = new Dot_AuthorizeUser();
-if(!$authorizeUser->isLogin('admin') && $requestAction != 'auth')
+$authorize = new Dot_Authorize();
+if(!$authorize->isLogin('admin') && $requestAction != 'auth')
 {
 	$requestController = 'User';
 	$requestAction = 'login';
