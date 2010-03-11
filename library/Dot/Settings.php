@@ -36,15 +36,15 @@ class Dot_Settings
  	 */
 	public static function getSettings()
 	{
-		$settings = new stdClass();
+		$settings = array();
 		$db = Zend_Registry::get('database');
 		$query = 'SELECT * FROM setting';
 		$results = $db->fetchAll($query);
 		foreach ($results as $key => $val)
 		{
-			$settings->$val['key'] = $val['value'];
+			$settings[$val['key']] = $val['value'];
 		}	
-		return $settings;
+		return (object)$settings;
 	}
 	/**
 	 * Set PHP configuration settings
