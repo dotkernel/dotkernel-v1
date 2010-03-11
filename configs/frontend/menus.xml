@@ -4,30 +4,30 @@
 <menu>
 	<id>1</id>
 	<type>horizontal</type>
-	<display>true</display>
+	<display>1</display>
 	<item>
 		<title>Home</title>
 		<link>page/home/</link>
 		<target></target>
-		<external>false</external>
-		<isLogged>true</isLogged>
-		<notLogged>true</notLogged>
+		<external>0</external>
+		<isLogged>1</isLogged>
+		<notLogged>1</notLogged>
 		<subItems>
 			<subItem>
 				<title>About Us</title>
 				<link>page/about/</link>
 				<target></target>
-				<external>false</external>
-				<isLogged>true</isLogged>
-				<notLogged>true</notLogged>
+				<external>0</external>
+				<isLogged>1</isLogged>
+				<notLogged>1</notLogged>
 			</subItem>
 			<subItem>
 				<title>Who We Are</title>
 				<link>page/who-we-are/</link>
 				<target></target>
-				<external>false</external>
-				<isLogged>true</isLogged>
-				<notLogged>true</notLogged>
+				<external>0</external>
+				<isLogged>1</isLogged>
+				<notLogged>1</notLogged>
 			</subItem>
 		</subItems>
 	</item>
@@ -35,9 +35,9 @@
 		<title>Login</title>
 		<link>user/login/</link>
 		<target></target>
-		<external>false</external>
-		<isLogged>false</isLogged>
-		<notLogged>true</notLogged>
+		<external>0</external>
+		<isLogged>0</isLogged>
+		<notLogged>1</notLogged>
 		<subItems>
 		</subItems>
 	</item>
@@ -45,9 +45,9 @@
 		<title>Logout</title>
 		<link>user/logout/</link>
 		<target></target>
-		<external>false</external>
-		<isLogged>true</isLogged>
-		<notLogged>false</notLogged>
+		<external>0</external>
+		<isLogged>1</isLogged>
+		<notLogged>0</notLogged>
 		<subItems>
 		</subItems>
 	</item>
@@ -55,9 +55,9 @@
 		<title>Account</title>
 		<link>user/account/</link>
 		<target></target>
-		<external>false</external>
-		<isLogged>true</isLogged>
-		<notLogged>false</notLogged>
+		<external>0</external>
+		<isLogged>1</isLogged>
+		<notLogged>0</notLogged>
 		<subItems>
 		</subItems>
 	</item>
@@ -65,9 +65,9 @@
 		<title>Register</title>
 		<link>user/register/</link>
 		<target></target>
-		<external>false</external>
-		<isLogged>false</isLogged>
-		<notLogged>true</notLogged>
+		<external>0</external>
+		<isLogged>0</isLogged>
+		<notLogged>1</notLogged>
 		<subItems>
 		</subItems>
 	</item>
@@ -75,33 +75,33 @@
 		<title>Outbound Links</title>
 		<link>page/outbound-links/</link>
 		<target></target>
-		<external>false</external>
-		<isLogged>true</isLogged>
-		<notLogged>true</notLogged>
+		<external>0</external>
+		<isLogged>1</isLogged>
+		<notLogged>1</notLogged>
 		<subItems>
 			<subItem>
 				<title>php.net</title>
 				<link>http://php.net/</link>
 				<target>_blank</target>
-				<external>true</external>
-				<isLogged>true</isLogged>
-				<notLogged>true</notLogged>
+				<external>1</external>
+				<isLogged>1</isLogged>
+				<notLogged>1</notLogged>
 			</subItem>
 			<subItem>
 				<title>Zend Framework Manual</title>
 				<link>http://framework.zend.com/manual/en/</link>
 				<target>_blank</target>
-				<external>true</external>
-				<isLogged>true</isLogged>
-				<notLogged>true</notLogged>
+				<external>1</external>
+				<isLogged>1</isLogged>
+				<notLogged>1</notLogged>
 			</subItem>
 			<subItem>
 				<title>Tutorials</title>
 				<link>http://dotboost.net/php/</link>
 				<target>_blank</target>
-				<external>true</external>
-				<isLogged>true</isLogged>
-				<notLogged>true</notLogged>
+				<external>1</external>
+				<isLogged>1</isLogged>
+				<notLogged>1</notLogged>
 			</subItem>
 		</subItems>
 	</item>
@@ -109,30 +109,30 @@
 <menu>
 	<id>2</id>
 	<type>vertical</type>
-	<display>true</display>
+	<display>1</display>
 	<item>
 		<title>Home</title>
 		<link>page/home/</link>
 		<target></target>
-		<external>false</external>
-		<isLogged>true</isLogged>
-		<notLogged>true</notLogged>
+		<external>0</external>
+		<isLogged>1</isLogged>
+		<notLogged>1</notLogged>
 		<subItems>
 			<subItem>
 				<title>About Us</title>
 				<link>page/about/</link>
 				<target></target>
-				<external>false</external>
-				<isLogged>true</isLogged>
-				<notLogged>true</notLogged>
+				<external>0</external>
+				<isLogged>1</isLogged>
+				<notLogged>1</notLogged>
 			</subItem>
 			<subItem>
 				<title>Who We Are</title>
 				<link>page/who-we-are/</link>
 				<target></target>
-				<external>false</external>
-				<isLogged>true</isLogged>
-				<notLogged>true</notLogged>
+				<external>0</external>
+				<isLogged>1</isLogged>
+				<notLogged>1</notLogged>
 			</subItem>
 		</subItems>
 	</item>
@@ -140,75 +140,75 @@
 		<title>Login</title>
 		<link>user/login/</link>
 		<target></target>
-		<external>false</external>
-		<isLogged>false</isLogged>
-		<notLogged>true</notLogged>
+		<external>0</external>
+		<isLogged>0</isLogged>
+		<notLogged>1</notLogged>
 	</item>
 	<item>
 		<title>My Account</title>
 		<link>user/account/</link>
 		<target></target>
-		<external>false</external>
-		<isLogged>true</isLogged>
-		<notLogged>false</notLogged>
+		<external>0</external>
+		<isLogged>1</isLogged>
+		<notLogged>0</notLogged>
 	</item>
 	<item>
 		<title>Logout</title>
 		<link>user/logout/</link>
 		<target></target>
-		<external>false</external>
-		<isLogged>true</isLogged>
-		<notLogged>false</notLogged>
+		<external>0</external>
+		<isLogged>1</isLogged>
+		<notLogged>0</notLogged>
 	</item>
 </menu>
 <menu>
 	<id>3</id>
 	<type>horizontal_simple</type>	
-	<display>true</display>
+	<display>1</display>
 	<item>
 		<title>Home</title>
 		<link>page/home/</link>
 		<target></target>
-		<external>false</external>
-		<isLogged>true</isLogged>
-		<notLogged>true</notLogged>
+		<external>0</external>
+		<isLogged>1</isLogged>
+		<notLogged>1</notLogged>
 	</item>
 	<item>
 		<title>About Us</title>
 		<link>http://www.dotboost.com/about-us/</link>
 		<target>_blank</target>
-		<external>true</external>
-		<isLogged>true</isLogged>
-		<notLogged>true</notLogged>
+		<external>1</external>
+		<isLogged>1</isLogged>
+		<notLogged>1</notLogged>
 	</item>
 	<item>
 		<title>DotKernel</title>
 		<link>http://www.dotkernel.com/</link>
 		<target>_blank</target>
-		<external>true</external>
-		<isLogged>true</isLogged>
-		<notLogged>true</notLogged>
+		<external>1</external>
+		<isLogged>1</isLogged>
+		<notLogged>1</notLogged>
 	</item>
 	<item>
 		<title>Contact</title>
 		<link>http://www.dotkernel.com/contact/</link>
 		<target>_blank</target>
-		<external>true</external>
-		<isLogged>true</isLogged>
-		<notLogged>true</notLogged>
+		<external>1</external>
+		<isLogged>1</isLogged>
+		<notLogged>1</notLogged>
 	</item>
 </menu>
 <menu>
 	<id>4</id>
 	<type>horizontal</type>
-	<display>false</display>
+	<display>0</display>
 	<item>
 		<title>Home</title>
 		<link>page/home/</link>
 		<target></target>
-		<external>false</external>
-		<isLogged>false</isLogged>
-		<notLogged>true</notLogged>
+		<external>0</external>
+		<isLogged>0</isLogged>
+		<notLogged>1</notLogged>
 	</item>
 </menu>		
 </config>

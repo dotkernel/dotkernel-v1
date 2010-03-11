@@ -67,7 +67,7 @@ class System_View extends View
 		foreach ($data as $v)
 		{			
 			$this->tpl->setVar('NAME', $v['title']);
-			$this->tpl->setVar('VARIABLE', $v['variable']);
+			$this->tpl->setVar('VARIABLE', $v['key']);
 			$this->tpl->setVar('DEFAULT', $v['possibleValues']);
 			$this->tpl->setVar('EXPLANATION', $v['comment']);
 			switch ($v['type']) 

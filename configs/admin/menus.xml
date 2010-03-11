@@ -4,7 +4,7 @@
 <menu>
 	<id>1</id>
 	<type>horizontal</type>
-	<display>true</display>
+	<display>1</display>
 	<item>
 		<title>Dashboard</title>
 		<link>system/dashboard/</link>
@@ -48,7 +48,7 @@
 <menu>
 	<id>2</id>
 	<type>vertical</type>
-	<display>false</display>
+	<display>0</display>
 	<item>
 		<title>Dashboard</title>
 		<link>system/dashboard/</link>

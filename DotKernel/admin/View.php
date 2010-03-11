@@ -114,7 +114,7 @@ class View extends Dot_Template
 			foreach ($menu as $child)
 			{	
 				//don't display the menu
-				if($child->display == 'false') continue;		
+				if(0 == $child->display) continue;		
 				$this->setFile('tpl_menu_'.$child->id, 'blocks/menu_'.$child->type.'.tpl');
 				$this->setBlock('tpl_menu_'.$child->id, 'top_sub_menu_item', 'top_sub_menu_item_block');
 				$this->setBlock('tpl_menu_'.$child->id, 'top_normal_menu_item', 'top_normal_menu_item_block');
@@ -150,7 +150,7 @@ class View extends Dot_Template
 					                      'TOP_SUB_MENU_SEL', 
 										  'TOP_SUB_MENU_ITEM_SEL');
 					$this->initVar($tplVariables,'');	
-					if (stripos($val->link, $this->requestController.'/'.$this->requestAction.'/') !== false)
+					if (FALSE !== stripos($val->link, $this->requestController.'/'.$this->requestAction.'/'))
 					{	//if curent menu is the curent viewed page
 						$this->setVar('TOP_MENU_SEL', '_selected');
 						$this->setVar('TOP_SUB_MENU_SEL', '_selected');
@@ -172,7 +172,7 @@ class View extends Dot_Template
 							$this->setVar('TOP_SUB_MENU_TITLE', $v2->title);
 							$this->setVar('TOP_SUB_MENU_LINK', $config->website->params->url.'/'.$this->requestModule.'/'.$v2->link);
 							$this->setVar('TOP_SUB_MENU_DESCRIPTION', $v2->description);
-							if (stripos($val->link, $this->requestController.'/') !== false)
+							if (FALSE !== stripos($val->link, $this->requestController.'/'))
 							{	//if curent menu is the curent viewed page
 								$this->parse('top_sub_menu_item_block', 'top_sub_menu_item', true);	
 							}							
