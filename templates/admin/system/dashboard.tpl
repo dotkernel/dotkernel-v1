@@ -14,14 +14,3 @@
 	</tr>
 </table>
 <br /><br />
-<h3>Latest News</h3>
-<div style="overflow: auto; width: 800px; height: 200px; border: 1px solid #CFCFCF; background-color: #F7F7F7;" >
-	<table>
-		<!-- BEGIN rss_link -->	
-		<tr>
-			<td class="row{BG}"><a href="{RSS_LINK}">{RSS_TITLE}</a></td>
-		</tr>
-		<!-- END rss_link -->
-	</table>
-</div>
-</textarea>

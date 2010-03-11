@@ -29,12 +29,12 @@ class Dot_Email_Transport extends Dot_Email
 	public function __construct($to = null, $fromName = null, $fromEmail = null, $subject = null)
 	{
 		$this->db = Zend_Registry::get('database');
-		$this->smtp_data = $this->getSMTP();		
+		$this->smtpData = $this->getSMTP();		
 		$mailConfigs = array('auth' => 'login',
-                             'username' => $this->smtp_data['smtp_username'],
-                             'password' => $this->smtp_data['smtp_password'],
+                             'username' => $this->smtpData['smtpUsername'],
+                             'password' => $this->smtpData['smtpPassword'],
                              'ssl' => 'tls');
-		$this->transport = new Zend_Mail_Transport_Smtp($this->smtp_data['smtp_server'], $mailConfigs);		
+		$this->transport = new Zend_Mail_Transport_Smtp($this->smtpData['smtpServer'], $mailConfigs);		
 	}	
 	/**
 	 * Return the transporter
@@ -43,7 +43,7 @@ class Dot_Email_Transport extends Dot_Email
 	 */
 	public function getTransport()
 	{
-		$this->updateSMTPCounter($this->smtp_data['id']);
+		$this->updateSMTPCounter($this->smtpData['id']);
 		return $this->transport;
 	}
 	/**
@@ -55,9 +55,9 @@ class Dot_Email_Transport extends Dot_Email
 	{
 		$smtp = array();
 		$select = $this->db->select()
-						   ->from('email_transporter',array('id', 'smtp_username' => 'user', 'smtp_password' => 'pass', 'smtp_server' => 'server'))
+						   ->from('emailTransporter',array('id', 'smtpUsername' => 'user', 'smtpPassword' => 'pass', 'smtpServer' => 'server'))
 						   ->where('counter < capacity')
-						   ->where('active = ?','1')
+						   ->where('isActive = ?','1')
 						   ->order('id')
 						   ->limit('1');
 		$result = $this->db->fetchAll($select);	
@@ -68,9 +68,9 @@ class Dot_Email_Transport extends Dot_Email
 		}else
 		{
 			
-			$where = array(" `date` < DATE_FORMAT( NOW( ) , '%Y-%m-%d' )","active = '1'");
-			$this->db->update('email_transporter', array('counter'=>0), $where);
-			$this->db->update('email_transporter', array('date'=>'NOW()'), $where);
+			$where = array(" `date` < DATE_FORMAT( NOW( ) , '%Y-%m-%d' )","isActive = '1'");
+			$this->db->update('emailTransporter', array('counter'=>0), $where);
+			$this->db->update('emailTransporter', array('date'=>'NOW()'), $where);
 			$select->where("`date` = DATE_FORMAT( NOW( ) , '%Y-%m-%d' )");
 			$result = $this->db->fetchAll($select);	
 			if (count($result) > 0)
@@ -88,6 +88,6 @@ class Dot_Email_Transport extends Dot_Email
 	 */
 	private function updateSMTPCounter ($id)
 	{
-		$this->db->query("UPDATE email_transporter SET counter = counter+1 WHERE id = '".$id."'");
+		$this->db->query("UPDATE emailTransporter SET counter = counter+1 WHERE id = '".$id."'");
 	}
 }

@@ -45,45 +45,14 @@ class System_View extends View
 		$this->tpl->setVar('PHP',phpversion());
 		$this->tpl->setVar('PHPAPI',php_sapi_name());
 		$this->tpl->setVar('ZFVERSION', Zend_Version::VERSION);
-		#$this->parseRss('http://www.zend.com/en/company/news/press/feed');		
 	}
-	/**
-	 * Get the Rss by using Zend_Feed_Atom and parse it
-	 * @access private
-	 * @param string $link
-	 * @return void
-	 */
-	private function parseRss($link)
-	{
-		/**
-		 * @todo check if can't connect to the url link
-		 */
-		// Fetch the latest Slashdot headlines
-		try
-		{
-			$feed = new Zend_Feed_Atom($link);
-		} 
-		catch (Zend_Feed_Exception $e) 
-		{
-		    // feed import failed
-		    die ("Exception caught importing feed: {$e->getMessage()}");
-		}
-		$this->tpl->setBlock('tpl_main', 'rss_link', 'rss_link_block');
-		foreach ($feed as $k => $v) 
-		{
-			$this->tpl->setVar('BG', $k%2+1);
-			$this->tpl->setVar('RSS_TITLE', $v->title());
-			$this->tpl->setVar('RSS_LINK', $v->link('alternate'));
-			$this->tpl->parse('rss_link_block', 'rss_link', true);
-		}		
-	}	
 	/**
 	 * Display settings
 	 * @access public
 	 * @param string $templateFile
 	 * @return void
 	 */
-	public function displaySettings($templateFile, $data)
+	public function displaySettings($templateFile, $data, $error)
 	{
 		$this->tpl->setFile('tpl_main', 'system/' . $templateFile . '.tpl');
 		$this->tpl->setBlock('tpl_main', 'textarea', 'textarea_row');
@@ -91,11 +60,15 @@ class System_View extends View
 		$this->tpl->setBlock('tpl_main', 'option', 'option_row');
 		$this->tpl->setBlock('tpl_main', 'radios', 'radios_row');
 		$this->tpl->setBlock('tpl_main', 'radio', 'radio_row');
+		if($error != '')
+		{
+			$this->tpl->setVar('ERROR', $error);
+		}
 		foreach ($data as $v)
 		{			
 			$this->tpl->setVar('NAME', $v['title']);
 			$this->tpl->setVar('VARIABLE', $v['variable']);
-			$this->tpl->setVar('DEFAULT', $v['possible_values']);
+			$this->tpl->setVar('DEFAULT', $v['possibleValues']);
 			$this->tpl->setVar('EXPLANATION', $v['comment']);
 			switch ($v['type']) 
 			{
@@ -105,7 +78,7 @@ class System_View extends View
 				break;
 				case 'option':
 					$this->tpl->parse('options_row', '');
-					$options = explode(';', $v['possible_values']);
+					$options = explode(';', $v['possibleValues']);
 					foreach ($options as $opt)
 					{
 						$this->tpl->setVar('LIST_OPTION', $opt);
@@ -117,7 +90,7 @@ class System_View extends View
 				break;
 				case 'radio':
 					$this->tpl->parse('radios_row', '');
-					$radios = explode(';', $v['possible_values']);
+					$radios = explode(';', $v['possibleValues']);
 					foreach ($radios as $val)
 					{
 						$this->tpl->setVar('POSIBLE_VALUE', $val);

@@ -40,10 +40,10 @@ class Frontend_User
 	 */
 	public function checkLogin($data)
 	{
-		$query = "SELECT * FROM users
+		$query = "SELECT * FROM user
 		WHERE username = ? 
 		AND password = ? 
-		AND active = '1'";
+		AND isActive = '1'";
 		$stmt = $this->db->query($query,array($data['username'], $data['password']));
 		$results = $stmt->fetchAll();
 		if( 1 == count($results))
@@ -64,7 +64,7 @@ class Frontend_User
 	 */
 	public function getUserBy($field = '', $value = '')
 	{
-		$query = "SELECT * FROM users
+		$query = "SELECT * FROM user
 		WHERE $field = ? 
 		LIMIT 1"; 
 		$stmt = $this->db->query($query,array($value));
@@ -80,13 +80,13 @@ class Frontend_User
 	}	
 	
 	/**
-	 * Logout admin user. Using Dot_AuthorizeUser class
+	 * Logout admin user. Using Dot_Authorize class
 	 * @access public
 	 * @return void
 	 */
 	public function logout()
 	{
-		Dot_AuthorizeUser::logout('user');
+		Dot_Authorize::logout('user');
 	}
 	/**
 	 * Get user info
@@ -96,7 +96,7 @@ class Frontend_User
 	 */
 	public function getUserInfo($id)
 	{
-		$query = "SELECT * FROM users WHERE id = ? ";
+		$query = "SELECT * FROM user WHERE id = ? ";
 		$stmt = $this->db->query($query,$id);		
 		return $stmt->fetch();
 	}		
@@ -108,9 +108,9 @@ class Frontend_User
 	 */
 	public function add($data)
 	{		
-		$data['date_created'] = date('Y-m-d H:i:s');
-		$data['active'] = 1;
-		$this->db->insert('users',$data);		
+		$data['dateCreated'] = date('Y-m-d H:i:s');
+		$data['isActive'] = 1;
+		$this->db->insert('user',$data);		
 	}
 	/**
 	 * Update user
@@ -122,7 +122,7 @@ class Frontend_User
 	{
 		$id = $data['id'];
         unset ($data['id']);
-        $this->db->update('users', $data, 'id = '.$id);
+        $this->db->update('user', $data, 'id = '.$id);
 	}
 	/**
 	 * Validate user input, add or update form
@@ -183,7 +183,7 @@ class Frontend_User
 	public function forgotPassword($email)
 	{
 		
-		$select = $this->db->select()->from('users', array('password'))->where('email = ?',$email);
+		$select = $this->db->select()->from('user', array('password'))->where('email = ?',$email);
 		$value = $this->db->fetchRow($select);
 		if(!empty($value))
 		{

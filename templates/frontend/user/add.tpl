@@ -22,11 +22,11 @@
 	</tr>			
 	<tr>
 		<td><span >First Name:</span></td>
-		<td><input type="text" name="firstname" value="{FIRSTNAME}" id="firstname" /></td>
+		<td><input type="text" name="firstName" value="{FIRSTNAME}" id="firstName" /></td>
 	</tr>		
 	<tr>
 		<td><span >Last Name:</span></td>
-		<td><input type="text" name="lastname" value="{LASTNAME}" id="lastname" /></td>
+		<td><input type="text" name="lastName" value="{LASTNAME}" id="lastName" /></td>
 	</tr>			
 	<tr>
 		<td><span >Secure Image:</span></td>

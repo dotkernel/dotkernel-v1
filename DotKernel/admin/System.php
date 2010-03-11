@@ -27,11 +27,11 @@ class System
 	{
 		$this->db = Zend_Registry::get('database');
 	}
-	public function listSettings($editable='1')
+	public function listSettings($isEditable='1')
 	{
 		$select = $this->db->select()
-						   ->from('settings')
-						   ->where('editable = ? ', $editable);
+						   ->from('setting')
+						   ->where('isEditable = ? ', $isEditable);
 		return $this->db->fetchAll($select);
 	}
 	public function updateSettings($data)
@@ -39,7 +39,7 @@ class System
 		Zend_Debug::dump($data);	
 		foreach ($data as $k => $v)
 		{			
-			$this->db->update('settings', array('value' => $v), 'variable = '.$this->db->quote($k));
+			$this->db->update('setting', array('value' => $v), 'variable = '.$this->db->quote($k));
 		}	
 		
 	}

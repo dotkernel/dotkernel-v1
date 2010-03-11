@@ -17,7 +17,7 @@
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
-class Dot_AuthorizeUser
+class Dot_Authorize
 {
 	/**
 	 * Constructor

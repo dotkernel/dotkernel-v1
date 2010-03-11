@@ -21,6 +21,9 @@ $startTime = microtime();
 // Define application environment
 defined('APPLICATION_ENV') || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 
+//Set error reporting
+if(APPLICATION_ENV != 'production') error_reporting(-1);
+
 //Set include  path to library directory
 set_include_path(implode(PATH_SEPARATOR, array(realpath(dirname(__FILE__).'/library'), get_include_path())));
 
@@ -62,9 +65,6 @@ $registry->settings = $settings;
 
 //Set PHP configuration settings from application.ini file
 Dot_Settings::setPhpSettings($config->phpSettings->toArray());
-
-//Set error reporting
-ini_get('display_errors') == 1 ? error_reporting(E_ALL | E_STRICT) : error_reporting(0);
 
 // Start Index Controller
 $requestRaw = explode('/', trim(substr($_SERVER['REQUEST_URI'], strlen(dirname($_SERVER['PHP_SELF']))), '/'));

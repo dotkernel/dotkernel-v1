@@ -102,7 +102,7 @@ class View extends Dot_Template
 	 */
 	public function setViewMenu($config)
 	{		
-		if(Dot_AuthorizeUser::isLogin('admin'))
+		if(Dot_Authorize::isLogin('admin'))
 		{
 			$menu_xml = new Zend_Config_Xml(CONFIGURATION_PATH . '/' . $this->requestModule . '/' . 'menus.xml', 'config');
 			$menu = $menu_xml->menu;
@@ -195,7 +195,7 @@ class View extends Dot_Template
 	 */
 	public function setInfoBar()
 	{		
-		if(Dot_AuthorizeUser::isLogin('admin'))
+		if(Dot_Authorize::isLogin('admin'))
 		{			
 			$this->setFile('tpl_info', 'blocks/info_bar.tpl');
 			$session = Zend_Registry::get('session');
