@@ -110,21 +110,19 @@ class Dot_Authorize
 					exit;
 				}
 				return true;
-		        break;
-			case 'admin':
-		        if( !self::isLogin('admin') )
-				{
-					$session->loginUserError = "You don't have enough credentials to access this url.";
-					header('Location: ' . $config->website->params->url . '/'. $who);
-					exit;
-				}
-				return true;
-		        break;
-		
+		    break;
+				case 'admin':
+		    	if( !self::isLogin('admin') )
+					{
+						$session->loginUserError = "You don't have enough credentials to access this url.";
+						header('Location: ' . $config->website->params->url . '/'. $who);
+						exit;
+					}
+					return true;
+		    break;
 		    default:
-			return false;
-		}
-		
+					return false;
+		}		
 	}
 	/**
 	 * Logout the user

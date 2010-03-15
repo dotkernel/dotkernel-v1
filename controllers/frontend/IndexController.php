@@ -43,6 +43,11 @@ $tpl->setLoginBox();
 Dot_Settings :: loadControllerFiles($requestModule);
 
 /**
+ * Start the variable for Page Title, this will be used as H1 tag too 
+*/
+$pageTitle = 'Overwrite Me Please !';
+
+/**
 *  From this point , the control is taken by the Action specific controller
 *  call the Action specific file, but check first if exists 
 */
@@ -57,14 +62,14 @@ $tpl->setViewTitle($settings, $pageTitle);
 
 /**
  * @TODO improvement of canonical url's
- */
+*/
 $tpl->setVar('CANONICAL_URL', $config->website->params->url . substr($_SERVER['REQUEST_URI'], strlen(dirname($_SERVER['PHP_SELF']))));
 
 // parse the main content block
 $tpl->parse('MAIN_CONTENT', 'tpl_main');
 
-// show debug info ONLY of we are in development mode
-if(ini_get('display_errors') == 1)
+// show debugbar 
+if(TRUE == $config->settings->frontend->debugbar)
 {
 	$debug = new Dot_Debug($db, $tpl, $config);
 	$debug->startTimer = $startTime;
@@ -73,6 +78,3 @@ if(ini_get('display_errors') == 1)
 
 //parse and print the output
 $tpl->pparse('OUTPUT', 'tpl_index');
-
-
-ini_get('display_errors') == 1 ? error_reporting(E_ALL | E_ERROR | E_WARNING | E_PARSE | E_STRICT) : '';

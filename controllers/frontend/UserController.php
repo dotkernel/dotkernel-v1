@@ -14,8 +14,7 @@
 * User Controller
 * @author     DotKernel Team <team@dotkernel.com>
 */
-// All actions MUST return this variable
-$pageTitle = '';
+// All actions MUST set  the variable  $pageTitle
 
 // instantiate  AuthUser object
 $frontendUser = new Frontend_User(); 
@@ -28,7 +27,7 @@ switch ($requestAction)
 		$pageTitle = 'Login User';	
 		$userView->loginForm('login');
 	break;
-	case 'auth':
+	case 'authorize':
 		// validate the authorization request paramethers 
 		$validate = Dot_Authorize::validateLogin($_POST['username'], $_POST['password'], $_POST['send']);
 		if(!empty($validate['login']) && empty($validate['error']))
@@ -59,7 +58,7 @@ switch ($requestAction)
 	break;
 	case 'account':
 		// Show My Account Page, if he is logged in 
-    	Dot_Authorize::checkPermissions($config);
+		Dot_Authorize::checkPermissions($config);
 		$data = array();
 		$error = array();
 		$pageTitle = 'User Account';
@@ -81,7 +80,7 @@ switch ($requestAction)
 			if(empty($error))
 			{				
 				//update user
-				$frontendUser->update($data);
+				$frontendUser->updateUser($data);
 				
 			}
 			elseif(array_key_exists('password', $data))
@@ -147,7 +146,7 @@ switch ($requestAction)
 			{
 				
 			   	//add admin user
-				$frontendUser->add($data);
+				$frontendUser->addUser($data);
 				$validate = Dot_Authorize::validateLogin($data['username'], $data['password'], 'on');
 				if(!empty($validate['login']) && empty($validate['error']))
 				{

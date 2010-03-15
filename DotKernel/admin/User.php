@@ -102,8 +102,8 @@ class Admin_User
 	 */
 	public function addUser($data)
 	{		
-		$data['dateCreated'] = date('Y-m-d H:i:s');
-		$data['isActive'] = 1;
+		// if you want to add an inactive user, uncomment the below line
+		// $data['isActive'] = 0;
 		$data['password'] = md5($data['username'].$this->config->settings->admin->salt.$data['password']);
 		$this->db->insert('admin',$data);		
 	}	

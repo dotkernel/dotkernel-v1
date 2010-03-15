@@ -14,8 +14,7 @@
 * System Controller
 * @author     DotKernel Team <team@dotkernel.com>
 */
-// All actions MUST return this variable
-$pageTitle = '';
+// All actions MUST set  the variable  $pageTitle
 
 // instantiate  AuthUser object
 $systemView = new System_View($tpl);
@@ -47,11 +46,10 @@ switch ($requestAction)
 			header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/settings/update/done');
 				exit;
 		}
-		
 	break;
 	case 'phpinfo':
-		phpinfo();
-		exit;
+		$pageTitle = 'PHP Info';	
+		$systemView->showPHPInfo('phpinfo');
 	break;	
 }
 

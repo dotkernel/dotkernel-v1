@@ -1,7 +1,7 @@
 <span style="color: #ff0000;">{ERROR}</span>
 	<p class="left_head">Login</p>
 	<div class="login">
-		<form action="{SITE_URL}/user/auth" method="post" >
+		<form action="{SITE_URL}/user/authorize" method="post" >
 			<input type="hidden" name="send" value="on">
 			<p>Username</p><input type="text" name="username" />
 			<p>Password</p><input type="password" name="password" />

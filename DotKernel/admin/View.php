@@ -104,7 +104,7 @@ class View extends Dot_Template
 	{		
 		if(Dot_Authorize::isLogin('admin'))
 		{
-			$menu_xml = new Zend_Config_Xml(CONFIGURATION_PATH . '/' . $this->requestModule . '/' . 'menus.xml', 'config');
+			$menu_xml = new Zend_Config_Xml(CONFIGURATION_PATH . '/' . $this->requestModule . '/' . 'menu.xml', 'config');
 			$menu = $menu_xml->menu;
 			// if we have only one menu, Zend_Config_Xml return a simple array, not an array with key 0(zero)
 			if(is_null($menu->{0}))

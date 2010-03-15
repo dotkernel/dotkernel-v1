@@ -15,8 +15,8 @@
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
-// All actions MUST return this variable
-$pageTitle = '';
+// All actions MUST set  the variable  $pageTitle
+
 $pageView = new Page_View($tpl);
 // switch based on the action, don't forget the default action
 switch ($requestAction)
@@ -35,30 +35,6 @@ switch ($requestAction)
 	break;
 	case 'who-we-are':
 		$pageTitle = 'Who We Are';
-		$pageView->showPage($requestAction);
-	break;
-	case 'manual':
-		$pageTitle = 'Dot Kernel Manual';
-		$pageView->showPage($requestAction);
-	break;
-	case 'manual-show-hide-options':
-		$pageTitle = 'Show/Hide Options';
-		$pageView->showPage($requestAction);
-	break;
-	case 'manual-menues-xml':
-		$pageTitle = 'Menues XML';
-		$pageView->showPage($requestAction);
-	break;
-	case 'manual-modules':
-		$pageTitle = 'Modules';
-		$pageView->showPage($requestAction);
-	break;
-	case 'manual-controlers':
-		$pageTitle = 'Controlers';
-		$pageView->showPage($requestAction);
-	break;
-	case 'manual-good-to-know':
-		$pageTitle = 'Good to Know';
 		$pageView->showPage($requestAction);
 	break;
 	case 'outbound-links':

@@ -41,9 +41,9 @@ class Frontend_User
 	public function checkLogin($data)
 	{
 		$query = "SELECT * FROM user
-		WHERE username = ? 
-		AND password = ? 
-		AND isActive = '1'";
+								WHERE username = ? 
+									AND password = ? 
+										AND isActive = '1'";
 		$stmt = $this->db->query($query,array($data['username'], $data['password']));
 		$results = $stmt->fetchAll();
 		if( 1 == count($results))
@@ -65,8 +65,8 @@ class Frontend_User
 	public function getUserBy($field = '', $value = '')
 	{
 		$query = "SELECT * FROM user
-		WHERE $field = ? 
-		LIMIT 1"; 
+								WHERE $field = ? 
+									LIMIT 1"; 
 		$stmt = $this->db->query($query,array($value));
 		$results = $stmt->fetchAll();
 		if( 1 == count($results))
@@ -106,10 +106,10 @@ class Frontend_User
 	 * @param array $data
 	 * @return void
 	 */
-	public function add($data)
+	public function addUser($data)
 	{		
-		$data['dateCreated'] = date('Y-m-d H:i:s');
-		$data['isActive'] = 1;
+		// if you want to add an inactive user, uncomment the below line
+		// $data['isActive'] = 0;
 		$this->db->insert('user',$data);		
 	}
 	/**
@@ -118,11 +118,11 @@ class Frontend_User
 	 * @param array $data
 	 * @return void
 	 */
-	public function update($data)
+	public function updateUser($data)
 	{
 		$id = $data['id'];
-        unset ($data['id']);
-        $this->db->update('user', $data, 'id = '.$id);
+		unset ($data['id']);
+		$this->db->update('user', $data, 'id = '.$id);
 	}
 	/**
 	 * Validate user input, add or update form
