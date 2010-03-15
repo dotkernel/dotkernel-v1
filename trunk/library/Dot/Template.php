@@ -841,7 +841,7 @@ class Dot_Template
 					}</style></head><body>&nbsp;<br><br><blockquote><b>There is an error with the
 					template system.</b><br><b>Error Returned: </b><br>
 			<form name='mysql'><textarea rows=\"5\" cols=\"60\">".htmlspecialchars($the_error)."</textarea></form></blockquote></body></html>";
-		if(ini_get('display_errors') == 1) print $out; 
+		if(APPLICATION_ENV != 'production') print $out;
 		exit();
 	}
 	/**

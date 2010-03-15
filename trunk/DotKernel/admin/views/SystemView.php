@@ -105,4 +105,35 @@ class System_View extends View
 			}
 		}
 	}
+	/**
+	 * Display phpinfo values
+	 * @access public
+	 * @param string $templateFile
+	 * @return void
+	 */
+	public function showPHPInfo($templateFile)
+	{
+		$this->tpl->setFile('tpl_main', 'system/' . $templateFile . '.tpl');
+		ob_start();
+		phpinfo();
+		$parsed = ob_get_contents();
+		ob_end_clean();
+		preg_match( "#<body>(.*)</body>#is" , $parsed, $match1 );
+
+		$phpBody  = $match1[1];
+
+		// PREVENT WRAP: Most cookies	
+		$phpBody  = str_replace( "; " , ";<br />"   , $phpBody );
+		// PREVENT WRAP: Very long string cookies
+		$phpBody  = str_replace( "%3B", "<br />"    , $phpBody );
+		// PREVENT WRAP: Serialized array string cookies
+		$phpBody  = str_replace( ";i:", ";<br />i:" , $phpBody );
+		$phpBody  = str_replace( ":", ";<br>" , $phpBody );
+		$phpBody = preg_replace('#<table#', '<table class="grey" align="center"', $phpBody);
+		$phpBody = preg_replace('#<th#', '<th  class="bgmain"', $phpBody);
+		$phpBody = preg_replace('#(\w),(\w)#', '\1, \2', $phpBody);
+		$phpBody = preg_replace('#border="0" cellpadding="3" width="600"#', 'border="0" cellspacing="1" cellpadding="4" width="95%"', 		$phpBody);
+		$phpBody = preg_replace('#<hr />#', '', $phpBody);
+		$this->tpl->setVar("PHPINFO", $phpBody);
+	}
 }

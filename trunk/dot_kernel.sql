@@ -2,10 +2,10 @@
 -- version 3.3.0
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Mar 11, 2010 at 07:29 AM
--- Server version: 5.0.77
--- PHP Version: 5.3.2
+-- Host: 127.0.0.1
+-- Generation Time: Mar 15, 2010 at 01:34 AM
+-- Server version: 5.1.36
+-- PHP Version: 5.3.1
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -19,42 +19,47 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Table structure for table `admin`
 --
 
-CREATE TABLE IF NOT EXISTS `admin` 
-(
-  `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(255) NOT NULL,
-  `password` VARCHAR(64) NOT NULL,
-  `email` VARCHAR(255) NOT NULL,
-  `firstName` VARCHAR(255) NOT NULL,
-  `lastName` VARCHAR(255) NOT NULL,
-  `dateCreated` DATETIME NOT NULL,
-  `isActive` ENUM('0','1') NOT NULL DEFAULT '1',
-  PRIMARY KEY  (`id`)
-) 
-  ENGINE=MyISAM  
-  DEFAULT CHARSET=latin1 
-  AUTO_INCREMENT=1 ;
+CREATE TABLE IF NOT EXISTS `admin` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(64) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `firstName` varchar(255) NOT NULL,
+  `lastName` varchar(255) NOT NULL,
+  `dateCreated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `isActive` enum('0','1') NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `username`, `password`, `email`, `firstName`, `lastName`, `dateCreated`, `isActive`) VALUES
+(1, 'admin', '497fa091cb2c62a6b61e5d50f9079b71', 'team@dotkernel.com', 'Default', 'Account', '2010-03-15 03:05:43', '1');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `emailTransporter`
+-- Table structure for table `emailtransporter`
 --
 
-CREATE TABLE IF NOT EXISTS `emailTransporter` 
-(
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `user` VARCHAR(100) NOT NULL,
-  `pass` VARCHAR(100) NOT NULL,
-  `server` VARCHAR(100) NOT NULL DEFAULT 'smtp.gmail.com',
-  `capacity` INT(11) NOT NULL DEFAULT '2000',
-  `date` DATE NOT NULL DEFAULT '0000-00-00',
-  `counter` INT(11) NOT NULL DEFAULT '0',
-  `isActive` ENUM('1','0') NOT NULL DEFAULT '1',
-  PRIMARY KEY  (`id`)
-) 
-  ENGINE=MyISAM  
-  DEFAULT CHARSET=utf8 
-  AUTO_INCREMENT=1 ;
+CREATE TABLE IF NOT EXISTS `emailtransporter` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` varchar(100) NOT NULL,
+  `pass` varchar(100) NOT NULL,
+  `server` varchar(100) NOT NULL DEFAULT 'smtp.gmail.com',
+  `capacity` int(11) NOT NULL DEFAULT '2000',
+  `date` date NOT NULL DEFAULT '0000-00-00',
+  `counter` int(11) NOT NULL DEFAULT '0',
+  `isActive` enum('1','0') NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `emailtransporter`
+--
+
 
 -- --------------------------------------------------------
 
@@ -62,27 +67,22 @@ CREATE TABLE IF NOT EXISTS `emailTransporter`
 -- Table structure for table `setting`
 --
 
-CREATE TABLE IF NOT EXISTS `setting` 
-(
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `key` VARCHAR(255) NOT NULL,
-  `value` TEXT NOT NULL,
-  `title` TEXT NOT NULL,
-  `comment` TEXT NOT NULL,
-  `isEditable` ENUM('1','0') NOT NULL DEFAULT '0',
-  `type` ENUM('radio','option','textarea') NOT NULL DEFAULT 'textarea',
-  `possibleValues` TEXT NOT NULL,
+CREATE TABLE IF NOT EXISTS `setting` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `key` varchar(255) NOT NULL,
+  `value` text NOT NULL,
+  `title` text NOT NULL,
+  `comment` text NOT NULL,
+  `isEditable` enum('1','0') NOT NULL DEFAULT '0',
+  `type` enum('radio','option','textarea') NOT NULL DEFAULT 'textarea',
+  `possibleValues` text NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `key` (`key`)
-) 
-  ENGINE=MyISAM  
-  DEFAULT CHARSET=latin1
-  AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 
 --
 -- Dumping data for table `setting`
 --
-
 
 INSERT INTO `setting` (`id`, `key`, `value`, `title`, `comment`, `isEditable`, `type`, `possibleValues`) VALUES
 (1, 'meta_keywords', 'DotKernel, DotKernel, php, Zend Framework, ', 'Default Meta Keywords.', 'The default meta keywords.', '1', 'textarea', ''),
@@ -107,8 +107,8 @@ INSERT INTO `setting` (`id`, `key`, `value`, `title`, `comment`, `isEditable`, `
 (20, 'smtp_use', '0', '', 'Send email through SMTP', '1', 'radio', '1;0'),
 (21, 'dev_emails', 'team@dotkernel.com', '', '', '0', 'textarea', ''),
 (22, 'results_per_page', '10', '', 'How many records will be on every page', '1', 'option', '10;20;30;40;50'),
-(23, 'recaptcha_public_key', '123XXX', 'Recaptcha Public Key.', 'Use this in the JavaScript code that is served to your users. http://recaptcha.net/', '1', 'textarea', ''),
-(24, 'recaptcha_private_key', '123XXX', 'Recaptcha Private Key.', 'Use this when communicating between your server and our server. Because this key is a global key, it is OK if the private key is distributed to multiple users. http://recaptcha.net/', '1', 'textarea', '');
+(23, 'recaptcha_public_key', '123xxx ', 'Recaptcha Public Key.', 'Use this in the JavaScript code that is served to your users. http://recaptcha.net/', '1', 'textarea', ''),
+(24, 'recaptcha_private_key', '123xxx-PdOn44', 'Recaptcha Private Key.', 'Use this when communicating between your server and our server. Because this key is a global key, it is OK if the private key is distributed to multiple users. http://recaptcha.net/', '1', 'textarea', '');
 
 -- --------------------------------------------------------
 
@@ -117,18 +117,20 @@ INSERT INTO `setting` (`id`, `key`, `value`, `title`, `comment`, `isEditable`, `
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(255) NOT NULL,
-  `password` VARCHAR(25) NOT NULL,
-  `email` VARCHAR(100) NOT NULL,
-  `firstName` VARCHAR(255) NOT NULL,
-  `lastName` VARCHAR(255) NOT NULL,
-  `dateCreated` DATETIME NOT NULL,
-  `isActive` ENUM('0','1') NOT NULL DEFAULT '1',
-  PRIMARY KEY  (`id`),
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(25) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `firstName` varchar(255) NOT NULL,
+  `lastName` varchar(255) NOT NULL,
+  `dateCreated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `isActive` enum('0','1') NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
-)
- ENGINE=MyISAM
- DEFAULT CHARSET=latin1 
- AUTO_INCREMENT=1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `user`
+--
+

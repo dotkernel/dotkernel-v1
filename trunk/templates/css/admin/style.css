@@ -427,6 +427,12 @@ legend{
 	color:#999999;
 	text-align:center;
 	}
-
+/*PHP INFO*/
+.center {text-align: center;}
+.center table { margin-left: auto; margin-right: auto; text-align: left; }
+.center th { text-align: center; }
+.e {background-color: #F9F9F9; font-weight: bold;}
+.h {background-color: #FFF; font-weight: bold;}
+.v {background-color: #F9F9F9; white-space: normal;}
 
 

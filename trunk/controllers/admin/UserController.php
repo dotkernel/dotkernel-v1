@@ -14,8 +14,7 @@
 * User Controller
 * @author     DotKernel Team <team@dotkernel.com>
 */
-// All actions MUST return this variable
-$pageTitle = '';
+// All actions MUST set  the variable  $pageTitle
 
 // instantiate  AuthUser object
 $adminUser = new Admin_User(); 
@@ -33,7 +32,7 @@ switch ($requestAction)
 		header('location: '.$config->website->params->url.'/' . $requestModule);
 		exit;
 	break;	
-	case 'auth':	
+	case 'authorize':	
 		// validate the authorization request paramethers 
 		$validate = Dot_Authorize::validateLogin($_POST['username'], $_POST['password'], $_POST['send']);
 		if(!empty($validate['login']) && empty($validate['error']))
@@ -43,7 +42,7 @@ switch ($requestAction)
 			if(!empty($user))
 			{
 				$session->admin = $user[0];
-				header('location: '.$config->website->params->url.'/' . $requestModule );
+				header('Location: '.$config->website->params->url.'/' . $requestModule );
 				exit;
 			}
 			else
