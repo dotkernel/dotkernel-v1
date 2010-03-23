@@ -32,7 +32,7 @@ class Dot_Settings
 	 * @access public
 	 * @static
 	 * @param  database connection singleton
-	 * @return array with settings from setting table
+	 * @return object with values from setting table
  	 */
 	public static function getSettings()
 	{
