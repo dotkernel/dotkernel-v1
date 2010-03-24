@@ -98,7 +98,7 @@ class Dot_Email extends Zend_Mail
 		parent::setSubject($this->subject);
 		parent::setFrom($this->fromEmail, $this->fromName);
 		//  set the transporter		
-		if($this->settings->smtpUse == 'Y')
+		if('1' == $this->settings->smtp_use)
 		{
 			$partial = @explode('@', $this->to);
 			if(stristr($this->settings->smtpAddresses, $partial['1']) !== FALSE)
