@@ -36,7 +36,7 @@ switch ($requestAction)
 			$user = $frontendUser->checkLogin($validate['login']);
 			if(!empty($user))
 			{
-				$session->user = $user[0];
+				$session->user = $user;
 				header('location: '.$config->website->params->url.'/user/account');
 				exit;
 			}
@@ -154,7 +154,7 @@ switch ($requestAction)
 					$user = $frontendUser->checkLogin($validate['login']);
 					if(!empty($user))
 					{
-						$session->user = $user[0];
+						$session->user = $user;
 						$data = array();
 						$error = array();
 					}

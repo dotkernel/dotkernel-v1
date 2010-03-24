@@ -40,20 +40,14 @@ class Frontend_User
 	 */
 	public function checkLogin($data)
 	{
-		$query = "SELECT * FROM user
-								WHERE username = ? 
-									AND password = ? 
-										AND isActive = '1'";
-		$stmt = $this->db->query($query,array($data['username'], $data['password']));
-		$results = $stmt->fetchAll();
-		if( 1 == count($results))
-		{
-			return $results;
-		}
-		else
-		{
-			return array();
-		}
+		$select = $this->db->select()
+						   ->from('user')
+						   ->where('isActive = ?','1')
+						   ->where('username = ?', $data['username'])
+						   ->where('password = ?', $data['password']);
+		$result = $this->db->fetchAll($select);
+		( 1 == count($result)) ? $return = $result[0] : $return = array();
+		return $return;
 	}	
 	/**
 	 * Get user by field
@@ -63,20 +57,13 @@ class Frontend_User
 	 * @return array
 	 */
 	public function getUserBy($field = '', $value = '')
-	{
-		$query = "SELECT * FROM user
-								WHERE $field = ? 
-									LIMIT 1"; 
-		$stmt = $this->db->query($query,array($value));
-		$results = $stmt->fetchAll();
-		if( 1 == count($results))
-		{
-			return $results;
-		}
-		else
-		{
-			return array();
-		}
+	{		
+		$select = $this->db->select()
+					   ->from('user')
+					   ->where($field.' = ?', $value)
+					   ->limit(1);					   
+		$result = $this->db->fetchRow($select);
+		return $result;
 	}	
 	
 	/**
@@ -96,9 +83,10 @@ class Frontend_User
 	 */
 	public function getUserInfo($id)
 	{
-		$query = "SELECT * FROM user WHERE id = ? ";
-		$stmt = $this->db->query($query,$id);		
-		return $stmt->fetch();
+		$select = $this->db->select()
+					   ->from('user')
+					   ->where('id = ?', $id);
+		return $this->db->fetchRow($select);
 	}		
 	/**
 	 * Add new user
@@ -108,7 +96,7 @@ class Frontend_User
 	 */
 	public function addUser($data)
 	{		
-		// if you want to add an inactive user, uncomment the below line
+		// if you want to add an inactive user, un-comment the below line
 		// $data['isActive'] = 0;
 		$this->db->insert('user',$data);		
 	}
@@ -172,14 +160,17 @@ class Frontend_User
 	public function validateEmail($value)
 	{
 		$data = array();
-		$error = array();		
-		//validate email
+		$error = array();
 		$validatorEmail = new Zend_Validate_EmailAddress();		
 		$validEmail = Dot_Kernel::validate($validatorEmail, array('email'=>$value));
 		return $validEmail;
 	}
-	public function setUserInfo()
-	{}
+	/**
+	 * Send forgot password to user
+	 * @acess public
+	 * @param string $email
+	 * @return array
+	 */
 	public function forgotPassword($email)
 	{
 		

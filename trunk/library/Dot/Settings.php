@@ -38,8 +38,9 @@ class Dot_Settings
 	{
 		$settings = array();
 		$db = Zend_Registry::get('database');
-		$query = 'SELECT * FROM setting';
-		$results = $db->fetchAll($query);
+		$select = $db->select()
+					 ->from('setting');
+		$results = $db->fetchAll($select);
 		foreach ($results as $key => $val)
 		{
 			$settings[$val['key']] = $val['value'];

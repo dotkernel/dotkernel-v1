@@ -88,6 +88,6 @@ class Dot_Email_Transport extends Dot_Email
 	 */
 	private function updateSMTPCounter ($id)
 	{
-		$this->db->query("UPDATE emailTransporter SET counter = counter+1 WHERE id = '".$id."'");
+		$this->db->update('emailTransporter', array('counter' => new Zend_Db_Expr('counter+1')), 'id = '.$id);
 	}
 }
