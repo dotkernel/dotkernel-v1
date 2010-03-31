@@ -87,7 +87,7 @@ color:#068fcc;;
 	text-decoration:none;
 }
 a:hover{
-	color: #bd484d;;
+	color: #F07709;
 	text-decoration:underline;
 }
 input{
@@ -99,24 +99,23 @@ input{
 }
 /*....................header.........................................*/
 .header_bg{
-	height: 166px;
-	background: url('images/header_bg.png') repeat-x top;
+	height: 100px;
+	background: url('images/header_bg.png') repeat-x bottom;
 	text-align:center;
 	}
 .header{
 	width: 1000px;
-	height: 166px;
+	height: 100px;
 	margin: 0px auto;
 	text-align:left;
 }
 .menu_1{
 	float: right;
-	margin-top:20px;
+	margin-top:15px;
 	width: 700px;
 	font-size: 15px;
 	font-weight:bold;
-	border-bottom: 1px solid #DDDDDD;
-	font-family: 'Lucida sans unicode',trebuchet ms, sans-serif;
+	font-family: 'Tahoma',trebuchet ms, sans-serif;
 }
 .menu_1 ul li{
 	float:left;
@@ -130,7 +129,7 @@ input{
 	text-decoration:none;
 }
 .menu_1 ul li a:hover{
-	color: #bd484d;
+	color: #F58810;
 	text-decoration:none;
 }
 .menu_2{
@@ -149,16 +148,17 @@ input{
 	display:block;
 	line-height: 24px;
 	padding: 0px 10px 0px 10px;
-	color: #1893ca;
+	color: #178EC1;
 	text-decoration:none;
 }
 .menu_2 ul li a:hover{
-	color: #bd484d;
+	color: #F58810;
 	text-decoration:none;
 }
 .logo{
-	padding-top:70px;
+	padding-top:10px;
 	float:left;
+	margin-left: 40px;
 }
 /*....................end of header..................................*/
 
@@ -176,7 +176,7 @@ input{
 }
 .left_bar{
 	float:left;
-	margin: 30px 40px 20px 40px;;
+	margin: 30px 40px 20px 40px;
 	width: 200px;
 }
 .left_bar input{
@@ -210,7 +210,7 @@ input{
 	background: url('images/menu_arrow.png') no-repeat left top;
 }
 .vertical_menu1 li a:hover{
-	color: #bd484d;
+	color: #F58810;
 	background: url('images/menu_hover_arrow.png') no-repeat left top;
 	text-decoration: none;
 }
@@ -258,13 +258,14 @@ input{
 .content p{
 	line-height: 17px;
 }
+
 /*....................end of main content..............................*/
 
 /*.........................footer......................................*/
 .footer_bg{
 	clear:both;
-	min-height: 157px;
-	_height: 157px;
+	min-height: 120px;
+	_height: 120px;
 	height:auto !important;
 	background: url('images/footer_bg.png') repeat-x left top;
 	text-align:center;
@@ -274,17 +275,20 @@ input{
 	margin:0px auto;
 	text-align:left;
 	font-size: 12px;
-	padding-top: 20px;
+	padding-top: 10px;
 	}
-.footer ul{
+.foot_menu{
+	margin: 0px 0px 20px 0px;
+}
+.foot_menu ul{
 	list-style: none;
 	font-size: 11px;
 	}
-.footer li{
+.foot_menu li{
 	float: left;
 	background: url('images/footer_separator.png') no-repeat left;
 	}
-.footer li a{
+.foot_menu li a{
 	display:block;
 	padding: 4px 0px 4px 0px;
 	margin-right: 10px;
@@ -295,7 +299,7 @@ input{
 	color: #477EDA;
 	text-decoration:none;
 	}
-.footer li a:hover{
+.foot_menu li a:hover{
 	color:#296CBE;
 }
 
@@ -317,14 +321,14 @@ input{
 }
 
 .top_sub_menu_item_selected a{
-	color: #DB9B9E !important;
+	color: #606060 !important;
 }
 
 .top_menu{
 }
 
 .top_menu_selected a{
-	color: #DB9B9E !important;
+	color: #F07709 !important;
 }
 
 .list td{
@@ -343,6 +347,18 @@ input{
 	width: 200px;
 	margin: 0px auto;
 }
+.login_big{
+	margin: 20px 0px 10px 0px;
+	width: 400px;
+}
+.login_big input{
+	width: 250px;
+}
+.g_form li{ margin:0px 0px 10px 0px;}
+.g_form li .contact_label{ float:left; width:70px; margin-right:20px; padding-top: 10px; text-align:left; font-weight: bold; color: #535353;}
+.g_form  li input{ float:left; font-size:13px; height:26px; background-color:#FCFCFC; border:1px solid #D0CACD; color:#44393F; line-height:26px; width:250px; vertical-align:middle;}
+.g_form  li textarea{ float:left; font-size:13px; height:150px; background-color:#FCFCFC; border:1px solid #D0CACD; color:#44393F; line-height:26px; width:420px; vertical-align:middle;}
+.g_form li.positioned { position:relative;}
 
 .button{
 	padding:0px !important;

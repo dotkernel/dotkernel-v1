@@ -10,8 +10,8 @@
 		<!-- END top_menu_item -->
 	</ul>
 </div>
-<div class="menu_2">
-	<ul>
+<div class="menu_2_bg">
+	<ul class="menu_2">
 		<!-- BEGIN top_sub_menu_item -->
 			<li><a href="{TOP_SUB_MENU_LINK}" title="{TOP_SUB_MENU_DESCRIPTION}">{TOP_SUB_MENU_TITLE}</a></li>
 		<!-- END top_sub_menu_item -->

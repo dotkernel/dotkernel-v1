@@ -34,7 +34,7 @@
 	</div>
 	<div class="footer_bg">
 		<div class="footer">
-			<p>{MENU_3}</p>
+			{MENU_3}
 		</div>
 		{DEBUGGER}
 		</div>
