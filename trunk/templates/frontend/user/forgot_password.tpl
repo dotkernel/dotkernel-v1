@@ -1,9 +1,12 @@
 <span style="color: #ff0000;">{ERROR}</span>
-	<p class="left_head">Login</p>
-	<div class="login">
-		<form action="{SITE_URL}/user/forgot-password" method="post" >
-			<input type="hidden" name="send" value="on">
-			<p>Email</p><input type="text" name="email" />
-			<input type="submit" onclick="" class="button" value="Get Password">
-		</form>
-	</div>
+<form action="{SITE_URL}/user/forgot-password" method="post" >
+	<input type="hidden" name="send" value="on">
+<ul class="g_form">
+	<li class="clearfix positioned">
+		<p class="contact_label">Email:</p><input id="email" type="text" name="email" />
+	</li>
+	<li class="clearfix positioned">
+		<p class="contact_label">&nbsp;</p><input type="submit" class="btn" value="Get It" />
+	</li>
+</ul>
+</form>
