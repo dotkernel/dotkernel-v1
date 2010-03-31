@@ -49,11 +49,11 @@ class Dot_Email extends Zend_Mail
 	{
 		if ($format == 'text/html' )
 		{
-			parent::SetBodyHtml($content);
+			parent::setBodyHtml($content);
 		}
 		else
 		{
-			parent::SetBodyText($content);
+			parent::setBodyText($content);
 		}
 	}
 	
