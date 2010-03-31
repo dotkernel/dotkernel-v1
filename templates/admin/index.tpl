@@ -16,8 +16,9 @@
 				<div class="top_user_menu clearfix">
 					{INFO_BAR}
 				</div>
-				{MENU_1}
+				
 			</div>
+			{MENU_1}
 		</div>
 
 		<div class="main">

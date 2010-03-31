@@ -178,9 +178,13 @@ class Frontend_User
 		$value = $this->db->fetchRow($select);
 		if(!empty($value))
 		{
-			$send = new Dot_Email($email, $this->settings->site_name, $this->settings->contact_recipient,'Forgot Password');
-			$send->setTextContent('Your password is '.$value['password']);
-			$succeed = $send->Send();
+			$dotEmail = new Dot_Email();
+			$dotEmail->addTo($email);
+			$dotEmail->setFrom($this->settings->contact_recipient, $this->settings->site_name);
+			$dotEmail->setSubject('Forgot Password');			
+			$dotEmail->setBodyText('Your password is '.$value['password']);
+			
+			$succeed = $dotEmail->send();
 			if($succeed)
 			{
 				$error['Email Sent'] = 'Your password was sent to '.$email;

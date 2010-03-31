@@ -10,23 +10,23 @@
 		</tr>
 		<tr>
 			<td class="row2"><span >Password:</span></td>
-			<td class="row1"><input type="password" name="password" value="{PASSWORD}" /></td>
+			<td class="row1"><input type="password" name="password" value="{PASSWORD}" class="bigger"></td>
 		</tr>
 		<tr>
 			<td class="row2"><span >Re-type Password:</span></td>
-			<td class="row1"><input type="password" name="password2" value="{PASSWORD}" /></td>
+			<td class="row1"><input type="password" name="password2" value="{PASSWORD}" class="bigger"></td>
 		</tr>		
 		<tr>
 			<td class="row2"><span >Email:</span></td>
-			<td class="row1"><input type="text" name="email" value="{EMAIL}" /></td>
+			<td class="row1"><input type="text" name="email" value="{EMAIL}" class="bigger"></td>
 		</tr>			
 		<tr>
 			<td class="row2"><span >First Name:</span></td>
-			<td class="row1"><input type="text" name="firstName" value="{FIRSTNAME}" /></td>
+			<td class="row1"><input type="text" name="firstName" value="{FIRSTNAME}" class="bigger"></td>
 		</tr>		
 		<tr>
 			<td class="row2"><span >Last Name:</span></td>
-			<td class="row1"><input type="text" name="lastName" value="{LASTNAME}" /></td>
+			<td class="row1"><input type="text" name="lastName" value="{LASTNAME}" class="bigger"></td>
 		</tr>
 		<tr>
 			<td colspan="2" class="row1" align="center"><input type="submit" onclick="" class="small_btn" value="update"></td>

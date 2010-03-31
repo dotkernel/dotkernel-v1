@@ -67,6 +67,16 @@ table {
 * html .clearfix {height:1px;}
 
 /* END OF CLEARFIX CLASS */
+input,textarea,select{
+	font-family: Arial, Tahoma, sans-serif;
+	font-size: 12px;
+}
+input{
+	border: 1px solid #9EB1BC;
+	height: 24px;
+	line-height: 24px;
+	
+	}
 
 body{
 	font-family: Arial,sans-serif;
@@ -115,43 +125,44 @@ legend{
 }
 
 .header_bg{
-	height: 200px;
-	background-image: url('images/header_bg.png');
-	background-repeat: repeat-x;
+	position:relative;
+	height: 130px;
+	background-image: url('images/html_bg.png');
+	background-repeat: repeat;
 	text-align:center;
+	padding: 0px 50px 0px 50px;
 }
 .header{
-	position:relative;
 	margin:0px auto;
-	height: 200px;
-	width: 80%;
+	height:50px;
 	text-align:left;
 }
 .logo{
 	float:left;
-	padding-top:70px;
-	font-size:28px;
+	padding-top:12px;
+	font-size:18px;
 	text-transform:uppercase;
 	font-weight: bold;
+	letter-spacing: 0.2em;
 }
 .logo a{
-	color:#eadf93;
+	color:#F8DE85;
 	text-decoration: none;
 }
 .top_user_menu{
 	position: absolute;
-	right: 0px;
+	right: 50px;
 	top: 10px;
 	color: #a9c0c9;
 }
 .top_user_menu a{
-	color: #e5d088;
+	color: #FABE43;
 	margin: 0px 5px 0px 0px;
 }
 .menu_1{
 	position: absolute;
-	top: 126px;
-	left: 0px;
+	top: 56px;
+	left: 50px;
 	z-index: 1;
 }
 .menu_1 ul{
@@ -161,7 +172,7 @@ legend{
 	line-height:34px;
 	}
 .menu_1 li{
-	padding: 0px 0px 0px 6px;
+	padding: 0px 0px 0px 0px;
 	float:left;
 	font-weight:bold;
 	margin-right: 1px;
@@ -170,42 +181,51 @@ legend{
 	float: left;
 	display: block;
 	padding: 0px 20px 0px 18px;
-	background: url(images/link_tab_right.png) no-repeat top right;
+	/*background: url(images/link_tab_right.png) no-repeat top right;*/
 	text-decoration: none;
 	font-size: 14px;
-	color: #1173A8;
+	color: #172E3C;
+	background-color: #FDB95E;
+	border-top: 1px solid #FFEDA6;
+	border-left: 1px solid #FFEDA6;
+	border-right: 1px solid #EFAE56;
 }
 .menu_1 li a:hover{
-	color:#0D5A77;
+	color:#09394D;
 	text-decoration:none;
-	background: url(images/hover_tab_right.png) no-repeat top right;
+	background-color: #D5EFF4;
+	/*background: url(images/hover_tab_right.png) no-repeat top right;*/
 }
+/*
 .menu_1 .hover_list{
 	background: url(images/hover_tab_left.png) no-repeat top left !important;
 }
 .menu_1 .normal{
 	background: url(images/link_tab_left.png) no-repeat top left;
 }
-
+*/
 .menu_1 .normal_selected{		
 	color:#0D5A77;
 	text-decoration:none;
 	background: url(images/hover_tab_right.png) no-repeat top right;
 }
-.menu_2{
+.menu_2_bg{
 	position: absolute;
-	top: 161px;
+	bottom: 0px;
 	left: 0px;
-	height: 36px;
+	padding: 0px 50px 0px 50px;
+	height: 40px;
 	width: 100%;
-	line-height: 36px;
+	line-height: 40px;
 	margin:0px auto;
 	text-align:left;
 	z-index: 2;
+	background: url(images/menu_bg_.png) repeat-x top left;
+	border-bottom: 1px solid #B3C5D7;
 	}
-.menu_2 ul{
+.menu_2{
 	height: 36px;
-	margin:0px;
+	margin:2px 0px 0px 20px;
 	list-style: none;
 	line-height:34px;
 	}
@@ -217,9 +237,9 @@ legend{
 }
 .menu_2 li a{
 	display: block;
-	padding: 0px 10px 0px 10px;
+	padding: 0px 10px 0px 13px;
 	font-size: 13px;
-	color:#006A93;
+	color:#004159;
 	text-decoration:none;
 	background: url('images/blue_arr.png') no-repeat;
 }
@@ -229,21 +249,21 @@ legend{
 	text-decoration:none;
 }
 .main{
-	padding-top: 20px;
+	padding: 20px 50px 0px 50px;
 	background: url('images/main_bg.png') repeat-x top left;
 	text-align:center;
 }
 .content {
+	border-top: 1px solid #C9D5DE;
 	margin: 0px auto;
-	width:80%;
+	padding: 0px 20px 20px 20px;
 	color:#1E1E1E;
 	background-color: #ffffff;
 	text-align:center;
 }
 .in_content{
 	margin: 0px auto;
-	width: 93%;
-	padding-top: 15px;
+	padding-top: 5px;
 	text-align:left;
 }
 .table_container{
@@ -328,7 +348,7 @@ legend{
 	border-top:0px;
 	margin: 0px 0px 0px 0px;
 	color:#242321;
-	background-color: #e2ecf0;
+	background-color: #D6E4E9;
 }
 .big_table td{
 	padding: 10px 10px 10px 15px;
@@ -336,6 +356,10 @@ legend{
 	color: #3B3B3B;
 	/*border: 1px solid #ffffff;*/
 }
+.login_inputs{
+	width: 100%;
+}
+
 .table_subhead{
 	padding: 0px 0px 0px 15px !important;
 	margin-top:10px;
@@ -343,7 +367,7 @@ legend{
 	line-height:40px;
 	background-image: url('images/table_head.png');
 	background-repeat: repeat-x;
-	color: #547785 !important;
+	color: #2D4F68 !important;
 	font-size:14px;
 	font-weight:bold;
 	text-transform:uppercase;
@@ -358,7 +382,7 @@ legend{
 	text-transform:none;
 }
 .row2{
-	background-color: #f7fafb;
+	background-color: #F2F8F9;
 	border:none ;
 	font-size:12px;
 	font-weight:normal;
@@ -435,4 +459,14 @@ legend{
 .h {background-color: #FFF; font-weight: bold;}
 .v {background-color: #F9F9F9; white-space: normal;}
 
-
+.explanation{
+	font-style: italic;
+	font-size: 11px;
+	color: #5F5F5F;
+}
+.category_title{
+	font-size: 14px;
+	font-weight: bold;
+	margin: 0px 0px 5px 0px;
+}
+input.bigger{width: 100%;}

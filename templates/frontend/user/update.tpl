@@ -3,33 +3,33 @@
 <form action="{SITE_URL}/user/account/id/{ID}" method="post">
 <input type="hidden" name="send" value="on">
 <input type="hidden" name="id" value="{ID}">
-<table cellpadding="0" cellspacing="1" width="40%">
-	<tr>
-		<td><span >Username:</span></td>
-		<td>{USERNAME}</td>
-	</tr>
-	<tr>
-		<td><span >Password:</span></td>
-		<td><input type="password" name="password" value="{PASSWORD}" /></td>
-	</tr>
-	<tr>
-		<td><span >Re-type Password:</span></td>
-		<td><input type="password" name="password2" value="{PASSWORD}" /></td>
-	</tr>		
-	<tr>
-		<td><span >Email:</span></td>
-		<td><input type="text" name="email" value="{EMAIL}" /></td>
-	</tr>			
-	<tr>
-		<td><span >First Name:</span></td>
-		<td><input type="text" name="firstName" value="{FIRSTNAME}" /></td>
-	</tr>		
-	<tr>
-		<td><span >Last Name:</span></td>
-		<td><input type="text" name="lastName" value="{LASTNAME}" /></td>
-	</tr>
-	<tr>
-		<td colspan="2" align="center"><input type="submit" onclick="" class="btn" value="Update"></td>
-	</tr>
-</table>
+<ul class="g_form">
+		<li class="clearfix positioned">
+			<p class="contact_label">Username:</p>{USERNAME}
+		</li>
+		<li class="clearfix positioned">
+			<p class="contact_label">Password:</p>
+			<input type="password" name="password" value="{PASSWORD}" id="password" />
+		</li>	
+		<li class="clearfix positioned">
+			<p class="contact_label">Re-type Password:</p>
+			<input type="password" name="password2" value="{PASSWORD}" id="password2" />
+		</li>
+		<li class="clearfix positioned">
+			<p class="contact_label">Email:</p>
+			<input id="email" type="text" name="email" value="{EMAIL}" />
+		</li>
+		<li class="clearfix positioned">
+			<p class="contact_label">First Name:</p>
+			<input type="text" name="firstName" value="{FIRSTNAME}" id="firstName" />
+		</li>
+		<li class="clearfix positioned">
+			<p class="contact_label">Last Name:</p>
+			<input type="text" name="lastName" value="{LASTNAME}" id="lastName" />
+		</li>
+		<li class="clearfix positioned">
+			<p class="contact_label">&nbsp;</p>
+			<input type="submit" class="btn" value="Update" />
+		</li>
+	</ul>
 </form>
