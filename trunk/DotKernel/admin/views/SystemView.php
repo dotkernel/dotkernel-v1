@@ -11,7 +11,7 @@
 */
 
 /**
-* User View Class
+* System View Class
 * class that prepare output related to User controller 
 * @category   DotKernel
 * @package    Admin 

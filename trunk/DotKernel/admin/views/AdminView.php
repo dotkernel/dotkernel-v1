@@ -11,14 +11,14 @@
 */
 
 /**
-* User View Class
+* Admin View Class
 * class that prepare output related to User controller 
 * @category   DotKernel
 * @package    Admin 
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
-class User_View extends View
+class Admin_View extends View
 {
 	/**
 	 * Constructor
@@ -38,7 +38,7 @@ class User_View extends View
 	public function loginForm($templateFile)
 	{
 		$session = Zend_Registry::get('session');
-		$this->tpl->setFile('tpl_main', 'user/' . $templateFile . '.tpl');		
+		$this->tpl->setFile('tpl_main', 'admin/' . $templateFile . '.tpl');		
 		if(isset($session->loginUserError))
 		{
 			$this->tpl->setVar('ERROR',$session->loginUserError);
@@ -55,7 +55,7 @@ class User_View extends View
 	 */
 	public function listUser($templateFile, $list, $page)
 	{
-		$this->tpl->setFile('tpl_main', 'user/' . $templateFile . '.tpl');
+		$this->tpl->setFile('tpl_main', 'admin/' . $templateFile . '.tpl');
 		$this->tpl->setBlock('tpl_main', 'list', 'list_block');
 		$this->tpl->paginator($list['paginatorAdapter'],$page);
 		foreach ($list['data'] as $k => $v)
@@ -81,7 +81,7 @@ class User_View extends View
 	 */
 	public function details($templateFile, $data=array(), $error=array())
 	{
-		$this->tpl->setFile('tpl_main', 'user/' . $templateFile . '.tpl');				
+		$this->tpl->setFile('tpl_main', 'admin/' . $templateFile . '.tpl');				
 		foreach ($data as $k=>$v)
 		{
 		    $this->tpl->setVar(strtoupper($k), $v);

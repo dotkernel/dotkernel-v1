@@ -14,7 +14,7 @@
 <!-- BEGIN list -->
 	<tr>
 		<td class="row{BG}">{ID}</td>
-		<td class="row{BG}">[ <a href="{SITE_URL}/admin/user/update/id/{ID}">{USERNAME}</a></a> ]</td>
+		<td class="row{BG}">[ <a href="{SITE_URL}/admin/admin/update/id/{ID}">{USERNAME}</a></a> ]</td>
 		<td class="row{BG}">{EMAIL}</td>
 		<td class="row{BG}">{FIRSTNAME}</td>
 		<td class="row{BG}">{LASTNAME}</td>

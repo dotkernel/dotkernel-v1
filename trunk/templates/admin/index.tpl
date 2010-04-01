@@ -32,9 +32,6 @@
 		<div class="clearfooter"></div>
 	</div>
 	<div class="footer_bg">
-		<div class="footer">
-			
-		</div>
 	</div>
 	<div class="debugger">
 		{DEBUGGER}

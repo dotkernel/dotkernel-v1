@@ -1,6 +1,6 @@
 <span style="color: #ff0000;">{ERROR}</span>
 <br />
-<form action="{SITE_URL}/admin/user/add" method="post" >
+<form action="{SITE_URL}/admin/admin/add" method="post" >
 <input type="hidden" name="send" value="on">
 	<table cellpadding="0" cellspacing="1" class="big_table" width="30%">
 		<tr>
