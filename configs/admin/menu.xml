@@ -24,22 +24,22 @@
 	</item>
 	<item>
 		<title>Admin</title>
-		<link>user/list/</link>
+		<link>admin/list/</link>
 		<description>Admin user details</description>
 		<subItems>			
 			<subItem>
 				<title>List</title>
-				<link>user/list/</link>
+				<link>admin/list/</link>
 				<description>List admin users</description>
 			</subItem>						
 			<subItem>
 				<title>Add new</title>
-				<link>user/add/</link>
+				<link>admin/add/</link>
 				<description>Add admin user</description>
 			</subItem>
 			<subItem>
 				<title>My Account</title>
-				<link>user/account/</link>
+				<link>admin/account/</link>
 				<description>Admin user account</description>
 			</subItem>
 		</subItems>

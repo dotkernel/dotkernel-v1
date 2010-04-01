@@ -11,24 +11,22 @@
 */
 
 /**
-* User Controller
+* Admin Controller
 * @author     DotKernel Team <team@dotkernel.com>
 */
-// All actions MUST set  the variable  $pageTitle
 
-// instantiate  AuthUser object
-$adminUser = new Admin_User(); 
-$userView = new User_View($tpl);
+$adminView = new Admin_View($tpl);
+$adminModel = new Admin();
 // switch based on the action, NO default action here
 switch ($requestAction)
 {
 	case 'login':
 		// Show the Login form
 		$pageTitle = 'Admin Login User';	
-		$userView->loginForm('login');
+		$adminView->loginForm('login');
 	break;	
 	case 'logout':
-		$adminUser->logout();
+		$adminModel->logout();
 		header('location: '.$config->website->params->url.'/' . $requestModule);
 		exit;
 	break;	
@@ -38,7 +36,7 @@ switch ($requestAction)
 		if(!empty($validate['login']) && empty($validate['error']))
 		{
 			// login info are VALID, we can see if is a valid user now 
-			$user = $adminUser->checkLogin($validate['login']);
+			$user = $adminModel->checkLogin($validate['login']);
 			if(!empty($user))
 			{
 				$session->admin = $user[0];
@@ -63,14 +61,14 @@ switch ($requestAction)
 	break;
 	case 'account':
 		$pageTitle = 'My Admin User Account';
-		$data = $adminUser->getUserInfo($session->admin['id']);
-		$userView->details('update',$data);	
+		$data = $adminModel->getUserInfo($session->admin['id']);
+		$adminView->details('update',$data);	
 	break;
 	case 'list':
 		$pageTitle = 'List Admin Users';
 		$page = (isset($request['page'])) ? $request['page'] : 1;
-		$users = $adminUser->getUserList($page);		
-		$userView->listUser('list', $users,$page);	
+		$users = $adminModel->getUserList($page);		
+		$adminView->listUser('list', $users,$page);	
 	break;	
 	case 'add':
 		$data = array();
@@ -88,13 +86,13 @@ switch ($requestAction)
 												'password2' =>  $_POST['password2']
 											   )
 						  );
-			$valid = $adminUser->validateUser($values);
+			$valid = $adminModel->validateUser($values);
 			$data = $valid['data'];
 			$error = $valid['error'];
 			if(empty($error))
 			{
 				//add admin user
-				$adminUser->addUser($data);
+				$adminModel->addUser($data);
 				header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/list');
 				exit;	
 				
@@ -105,7 +103,7 @@ switch ($requestAction)
 				unset($data['password']);
 			}
 		}
-		$userView->details('add',$data,$error);		
+		$adminView->details('add',$data,$error);		
 	break;
 	case 'update':
 		$error = array();
@@ -121,20 +119,20 @@ switch ($requestAction)
 												'password2' =>  $_POST['password2']
 											   )
 						  );
-			$valid = $adminUser->validateUser($values);
+			$valid = $adminModel->validateUser($values);
 			$data = $valid['data'];
 			$error = $valid['error'];
 			if(empty($error))
 			{
 				$data['id'] = $request['id'];
 				//add admin user
-				$adminUser->updateUser($data);
+				$adminModel->updateUser($data);
 				header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/list');
 				exit;				
 			}
 		}
-		$data = $adminUser->getUserInfo($request['id']);
-		$userView->details('update',$data,$error);	
+		$data = $adminModel->getUserInfo($request['id']);
+		$adminView->details('update',$data,$error);	
 	break;
 }
 

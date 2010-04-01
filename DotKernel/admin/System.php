@@ -11,7 +11,7 @@
 */
 
 /**
-* Admin User Model
+* System Model
 * Here are all the actions related to the user
 * @category   DotKernel
 * @package    Admin 

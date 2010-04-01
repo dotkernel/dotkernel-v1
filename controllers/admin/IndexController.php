@@ -24,7 +24,7 @@ $requestAction     = isset($requestAction) && $requestAction !=''         ? $req
 $authorize = new Dot_Authorize();
 if(!$authorize->isLogin('admin') && $requestAction != 'authorize')
 {
-	$requestController = 'User';
+	$requestController = 'Admin';
 	$requestAction = 'login';
 }
 

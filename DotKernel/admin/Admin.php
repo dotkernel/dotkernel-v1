@@ -11,14 +11,14 @@
 */
 
 /**
-* Admin User Model
+* Admin Model
 * Here are all the actions related to the user
 * @category   DotKernel
 * @package    Admin 
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
-class Admin_User
+class Admin
 {	
 	/**
 	 * Constructor

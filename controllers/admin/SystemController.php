@@ -14,9 +14,7 @@
 * System Controller
 * @author     DotKernel Team <team@dotkernel.com>
 */
-// All actions MUST set  the variable  $pageTitle
 
-// instantiate  AuthUser object
 $systemView = new System_View($tpl);
 $systemModel = new System();
 // switch based on the action, NO default action here

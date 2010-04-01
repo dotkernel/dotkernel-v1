@@ -442,15 +442,6 @@ legend{
 	background-color: #008ADD;
 	font-weight: bold;
 }
-.footer{
-	margin-top:20px;
-	background-image: url('images/footer.png');
-	background-repeat: repeat-x;
-	height: 94px;
-	padding-top:10px;
-	color:#999999;
-	text-align:center;
-	}
 /*PHP INFO*/
 .center {text-align: center;}
 .center table { margin-left: auto; margin-right: auto; text-align: left; }
