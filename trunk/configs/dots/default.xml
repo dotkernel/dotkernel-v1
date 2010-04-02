@@ -1,0 +1,12 @@
+<!-- This file is the default file used for config dots. Each config dots file must have this scope, no matter if you use them or not -->
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<body>
+	<variable scope="global">
+	</variable>
+	<variable scope="admin">
+	</variable>
+	<variable scope="frontend">
+	</variable>		
+	</body>
+</config>

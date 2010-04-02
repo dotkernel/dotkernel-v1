@@ -115,5 +115,34 @@ class Dot_Settings
 			else die ('The file: ' . DOTKERNEL_PATH . '/' . $modulePath . 'views/' . ucfirst($value) . 'View.php' . ' does NOT exist');  
 		}
 	}
+	/**
+	 * Get the scope variables from an xml file for the current dots
+	 * @param string $requestModule
+	 * @param string $requestController
+	 * @return Zend_Config
+	 */
+	public static function getScopeVariables($requestModule,$requestController)
+	{		
+		$scope = array();	
+		$dirScope = CONFIGURATION_PATH.'/dots/';
+		$fileScope = strtolower($requestController).'.xml';
+		$validFile = new Zend_Validate_File_Exists();
+		$validFile->setDirectory($dirScope);		
+		if($validFile->isValid($fileScope))
+		{
+			$xml = new Zend_Config_Xml($dirScope.$fileScope, 'body');
+			$arrayScope = $xml->variable->toArray();
+			foreach ($arrayScope as $v)
+			{
+				if(in_array($v['scope'], array('global', $requestModule)))
+				{				
+					$scope = array_merge_recursive($scope,$v);
+				}
+			}
+		}
+		$scope = new Zend_Config($scope);
+		return $scope;
+		
+	} 
 
 }

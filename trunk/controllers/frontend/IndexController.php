@@ -11,10 +11,10 @@
 */
 
 /**
-* Frontend Module Controller
-* Is doing all the job for specific frontend control stuff
-* @author     DotKernel Team <team@dotkernel.com>
-*/ 
+ * Frontend Module Controller
+ * Is doing all the job for specific frontend control stuff
+ * @author     DotKernel Team <team@dotkernel.com>
+ */ 
 
 // set Module and Action default values
 $requestController = isset($requestController) && $requestController !='Index' ? $requestController : 'Page';
@@ -39,18 +39,25 @@ $tpl->setLoginBox();
 
 /** 
  * each Controller  must load its own specific models and views
-*/
+ */
 Dot_Settings :: loadControllerFiles($requestModule);
 
 /**
+ * Load scope(specific configuration file for current dot) file
+ * @TODO linking N dots together
+ */
+$scope = Dot_Settings::getScopeVariables($requestModule,$requestController);
+$registry->scope = $scope;
+
+/**
  * Start the variable for Page Title, this will be used as H1 tag too 
-*/
+ */
 $pageTitle = 'Overwrite Me Please !';
 
 /**
-*  From this point , the control is taken by the Action specific controller
-*  call the Action specific file, but check first if exists 
-*/
+ * From this point , the control is taken by the Action specific controller
+ * call the Action specific file, but check first if exists 
+ */
 $actionControllerPath = CONTROLLERS_PATH . '/' . $requestModule . '/' . $requestController . 'Controller.php';
 !file_exists($actionControllerPath) ?  $dotKernel->pageNotFound() :  require($actionControllerPath);
 	
@@ -62,7 +69,7 @@ $tpl->setViewTitle($settings, $pageTitle);
 
 /**
  * @TODO improvement of canonical url's
-*/
+ */
 $tpl->setVar('CANONICAL_URL', $config->website->params->url . substr($_SERVER['REQUEST_URI'], strlen(dirname($_SERVER['PHP_SELF']))));
 
 // parse the main content block

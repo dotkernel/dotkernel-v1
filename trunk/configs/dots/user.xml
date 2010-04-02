@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<body>
+	<variable scope="global">
+		<pageTitle>
+			<action>
+				<update>Update User Account</update>
+			</action>
+		</pageTitle>
+	</variable>
+	<variable scope="admin">
+	</variable>
+	<variable scope="frontend">
+		<pageTitle>
+			<action>
+				<login>User Login</login>
+				<register>User Register</register>
+				<forgot-password>Forgot your password?</forgot-password>
+			</action>
+		</pageTitle>
+		<errorMessage>
+			<login>Wrong Login Credentials</login>
+			<captcha>Incorrect. Try again.</captcha>			
+		</errorMessage>
+		<captchaOptions>
+			<linkTitle>Click me</linkTitle>
+			<linkHiddenText>...</linkHiddenText>
+			<theme>white</theme>
+			<tabindex>2</tabindex>
+			<lang>en</lang>
+		</captchaOptions>
+	</variable>		
+	</body>
+</config>
