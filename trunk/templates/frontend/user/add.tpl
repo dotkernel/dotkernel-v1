@@ -35,7 +35,7 @@
 		</li>
 		<li class="clearfix positioned">
 			<p class="contact_label">&nbsp;</p>
-			<input type="button" class="btn" value="register" />
+			<input type="button" class="btn" value="register" onclick="formSubmit('userRegister', 'msgError', '{SITE_URL}/user/account');">
 		</li>
 	</ul>
 </form>
