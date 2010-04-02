@@ -192,7 +192,8 @@ class Frontend_User
 			else
 			{
 				$error['Email Not Sent'] = 'Your password could not be sent to '.$email;
-			}			
+			}	
+			echo "Message sent!";		
 		}
 		else
 		{

@@ -20,11 +20,11 @@
 $frontendUser = new Frontend_User(); 
 $userView = new User_View($tpl, $settings);
 // switch based on the action, NO default action here
+$pageTitle = $scope->pageTitle->action->{$requestAction};
 switch ($requestAction)
 {
 	case 'login':
-		// Show the Login form
-		$pageTitle = 'Login User';	
+		// Show the Login form	
 		$userView->loginForm('login');
 	break;
 	case 'authorize':
@@ -43,7 +43,7 @@ switch ($requestAction)
 			else
 			{
 				unset($session->user);
-				$session->loginUserError = 'Wrong Login Credentials';
+				$session->loginUserError = $scope->errorMessage->login;
 				header('Location: '.$config->website->params->url.'/user/login');
 				exit;				
 			}
@@ -61,7 +61,6 @@ switch ($requestAction)
 		Dot_Authorize::checkPermissions($config);
 		$data = array();
 		$error = array();
-		$pageTitle = 'User Account';
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
 		{						
 			$values = array('alpha' => 
@@ -100,7 +99,6 @@ switch ($requestAction)
 	case 'register':
 		$data = array();
 		$error = array();
-		$pageTitle = 'User Register';
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
 		{		
 			$values = array('alpha' => 
@@ -118,7 +116,7 @@ switch ($requestAction)
 			$error = $valid['error'];
 			if(strlen($_POST['recaptcha_response_field']) == 0)
 			{
-				$error['Secure Image'] = 'Incorrect. Try again.';
+				$error['Secure Image'] = $scope->errorMessage->captcha;
 			}
 			else
 			{
@@ -126,7 +124,7 @@ switch ($requestAction)
 				$result = $userView->getRecaptcha()->verify($_POST['recaptcha_challenge_field'],$_POST['recaptcha_response_field']);				
 				if (!$result->isValid()) 
 				{
-					$error['Secure Image'] = 'Incorrect. Try again. ';
+					$error['Secure Image'] = $scope->errorMessage->captcha;
 				}
 			}	
 			if(empty($error))
@@ -161,7 +159,7 @@ switch ($requestAction)
 					else
 					{
 						unset($session->user);
-						$error['Error Login'] = 'Wrong Login Credentials';
+						$error['Error Login'] = $scope->errorMessage->login;
 					}
 				}
 			}
@@ -182,7 +180,6 @@ switch ($requestAction)
 	case 'forgot-password':
 		$data = array();
 		$error = array();
-		$pageTitle = 'Forgot your password?';
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
 		{				
 			$valid = $frontendUser->validateEmail($_POST['email']);
