@@ -213,7 +213,6 @@ legend{
 	position: absolute;
 	bottom: 0px;
 	left: 0px;
-	padding: 0px 50px 0px 50px;
 	height: 40px;
 	width: 100%;
 	line-height: 40px;
@@ -225,7 +224,7 @@ legend{
 	}
 .menu_2{
 	height: 36px;
-	margin:2px 0px 0px 20px;
+	margin:2px 50px 0px 70px;
 	list-style: none;
 	line-height:34px;
 	}
