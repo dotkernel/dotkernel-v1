@@ -22,7 +22,7 @@ switch ($requestAction)
 {
 	case 'login':
 		// Show the Login form
-		$pageTitle = 'Admin Login User';	
+		$pageTitle = 'Login';	
 		$adminView->loginForm('login');
 	break;	
 	case 'logout':
@@ -46,7 +46,7 @@ switch ($requestAction)
 			else
 			{
 				unset($session->admin);
-				$session->loginUserError = 'Wrong Login Credentials';
+				$session->loginUserError = 'Wrong Login Credentials.';
 				header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/login');
 				exit;				
 			}
@@ -54,13 +54,13 @@ switch ($requestAction)
 		else
 		{
 			// login info are NOT VALID
-			$session->loginUserError = $validate['error']['username'] . ' <br> '. $validate['error']['password'];
+			$session->loginUserError = $validate['error']['username'] . ' '. $validate['error']['password'];
 			header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/login');
 			exit;
 		}			
 	break;
 	case 'account':
-		$pageTitle = 'My Admin User Account';
+		$pageTitle = 'My Admin Account';
 		$data = $adminModel->getUserInfo($session->admin['id']);
 		$adminView->details('update',$data);	
 	break;
@@ -93,7 +93,7 @@ switch ($requestAction)
 			{
 				//add admin user
 				$adminModel->addUser($data);
-				header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/list');
+				header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/list/');
 				exit;	
 				
 			}
@@ -127,7 +127,7 @@ switch ($requestAction)
 				$data['id'] = $request['id'];
 				//add admin user
 				$adminModel->updateUser($data);
-				header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/list');
+				header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/list/');
 				exit;				
 			}
 		}

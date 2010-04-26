@@ -41,7 +41,8 @@ class Admin_View extends View
 		$this->tpl->setFile('tpl_main', 'admin/' . $templateFile . '.tpl');		
 		if(isset($session->loginUserError))
 		{
-			$this->tpl->setVar('ERROR',$session->loginUserError);
+			$this->tpl->setVar('MESSAGE_TEXT',$session->loginUserError);
+			$this->tpl->setVar('MESSAGE_TYPE', 'error');
 			unset($session->loginUserError);
 		}
 	}
@@ -95,7 +96,8 @@ class Admin_View extends View
 			{
 			    $errorMessage .= '<b>'.ucfirst($k).':</b> '.$v.'<br />';
 			}
+			$this->tpl->setVar('MESSAGE_TYPE', 'error');
 		}
-		$this->tpl->setVar('ERROR',$errorMessage);
+		$this->tpl->setVar('MESSAGE_TEXT', $errorMessage);
 	}
 }

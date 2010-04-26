@@ -1,9 +1,9 @@
 {PAGINATION}
-<fieldset>
-<legend>Table head</legend>
-<table cellpadding="0" cellspacing="1" class="big_table" width="100%">
+<fieldset style="width: 100%">
+<legend>List Admins</legend>
+<table cellpadding="0" cellspacing="1" class="big_table">
 	<tr>
-		<td class="table_subhead"><span>ID</span></td>
+		<td class="table_subhead"><span>#</span></td>
 		<td class="table_subhead"><span>Username</span></td>
 		<td class="table_subhead"><span>Email</span></td>
 		<td class="table_subhead"><span>First name</span></td>
@@ -14,7 +14,7 @@
 <!-- BEGIN list -->
 	<tr>
 		<td class="row{BG}">{ID}</td>
-		<td class="row{BG}">[ <a href="{SITE_URL}/admin/admin/update/id/{ID}">{USERNAME}</a></a> ]</td>
+		<td class="row{BG}"> <a href="{SITE_URL}/admin/admin/update/id/{ID}">{USERNAME}</a></td>
 		<td class="row{BG}">{EMAIL}</td>
 		<td class="row{BG}">{FIRSTNAME}</td>
 		<td class="row{BG}">{LASTNAME}</td>
@@ -23,3 +23,4 @@
 	</tr>
 <!-- END list -->
 </table>
+</fieldset>

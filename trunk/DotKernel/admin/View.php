@@ -89,7 +89,7 @@ class View extends Dot_Template
 	 */
 	public function setViewTitle($settings, $pageTitle)
 	{
-		$this->setVar('PAGE_TITLE', $pageTitle . ' | ' .$settings->page_title);
+		$this->setVar('PAGE_TITLE', $pageTitle . ' | ' .$settings->defaultPageTitle);
 		$this->setVar('PAGE_CONTENT_TITLE', $pageTitle );
 	}
 	/**
@@ -212,14 +212,14 @@ class View extends Dot_Template
 	 */
 	protected function paginator($adapter, $currentPage = 1)
 	{		
-		
-        $paginator = new Zend_Paginator($adapter);
-        $paginator->setItemCountPerPage($this->settings->results_per_page);
-        $paginator->setCurrentPageNumber($currentPage);
-        $paginator->totalItems = $adapter->count();
+		$paginator = new Zend_Paginator($adapter);
+		$paginator->setItemCountPerPage($this->settings->resultsPerPage);
+		$paginator->setCurrentPageNumber($currentPage);
+		$paginator->totalItems = $adapter->count();
 		$page = $paginator->getPages();	
 		$this->setFile('page_file', 'paginator.tpl');
-		$this->setVar('TOTAL_PAGES', $paginator->totalItems);
+		$this->setVar('TOTAL_RECORDS', $paginator->totalItems);
+		$this->setVar('TOTAL_PAGES', $page->pageCount );
 		$this->setBlock('page_file', 'previous', 'previous_row');
 		$this->setBlock('page_file', 'next', 'next_row');
 		$this->setBlock('page_file', 'current_page', 'current_row');

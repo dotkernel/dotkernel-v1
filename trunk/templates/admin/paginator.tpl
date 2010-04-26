@@ -1,10 +1,8 @@
-<table class="g_box" cellpadding="0" cellspacing="1">
-    <tr>
-        <td class="emph" width="100">
-            <span>Pages ({TOTAL_PAGES}): </span>
-        </td>
-        <td>
-            <ul class="pagination">
+<div class="paginator clearfix">
+	<div class="emph left"> <span><b>{TOTAL_RECORDS}</b> records </span></div>
+	<div class="emph left"> <span>Pages <b>({TOTAL_PAGES})</b> </span></div>
+	<div class="right"> 
+		<ul class="pagination">
                 <!-- BEGIN previous -->
                 <li>
                     <a href="{PREVIOUS_LINK}">Previous</a>
@@ -27,7 +25,5 @@
                 <a href="{NEXT_LINK}">Next</a>
             </li>
             <!-- END next -->
-            </ul>
-        </td>
-    </tr>
-</table>
+            </ul></div>
+</div>

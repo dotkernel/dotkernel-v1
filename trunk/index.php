@@ -70,8 +70,8 @@ Dot_Settings::setPhpSettings($config->phpSettings->toArray());
 
 // Start Index Controller
 $requestRaw = explode('/', 
-								trim(substr($_SERVER['REQUEST_URI'],
-									 strlen(dirname($_SERVER['PHP_SELF']))), '/'));
+											trim(substr($_SERVER['REQUEST_URI'], 
+											strlen(dirname($_SERVER['PHP_SELF']))), '/'));
 
 // We are in frontend or in other module ? Prebuilt modules: frontend, admin, rss, ajax 
 $requestModule = 'frontend';
@@ -87,7 +87,7 @@ if ($requestModule != 'frontend')
 $requestController = 'Index';
 if (isset($requestRaw['0']) && $requestRaw['0'] != '')
 {
-	$requestController = 	ucfirst(basename(stripslashes($requestRaw['0'])));
+	$requestController = ucfirst(basename(stripslashes($requestRaw['0'])));
 }
 
 // set Action value, default nothing

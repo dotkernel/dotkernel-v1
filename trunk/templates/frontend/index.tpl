@@ -14,8 +14,7 @@
 	<div class="header_bg">
 		<div class="header">
 			<div class="logo">
-				<a href="{SITE_URL}/"><h1><i><b>Dot Kernel</b></i></h1></a>
-			</div>
+				<a href="{SITE_URL}/"><h1><i><b>Dot Kernel</b></i></h1></a></div>
 			{MENU_1}
 		</div>
 	</div>
@@ -33,10 +32,8 @@
 			</div>
 	</div>
 	<div class="footer_bg">
-		<div class="footer">
-			{MENU_3}
-		</div>
-		{DEBUGGER}
-		</div>
+		<div class="footer">{MENU_3}</div>
+		<center>{DEBUGGER}</center>
+	</div>
 </body>
 </html>

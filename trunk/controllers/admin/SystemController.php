@@ -27,8 +27,8 @@ switch ($requestAction)
 	case 'settings':
 		$pageTitle = 'Settings';
 		$data = $systemModel->listSettings();	
-		$error = (isset($request['update']) && $request['update'] == 'done') ? 'Update Succesfully !' : '';
-		$systemView->displaySettings('settings', $data, $error);
+		$message = (isset($request['update']) && $request['update'] == 'done') ? 'System Settings was updated.' : '';
+		$systemView->displaySettings('settings', $data, $message);
 	break;
 	case 'settings-update':
 		$data = array();
@@ -36,13 +36,10 @@ switch ($requestAction)
 		$pageTitle = 'Update Settings';
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
 		{
-			// We don't do validation, only addslashes, because there 
-			// are to many fields, with different value types
 			unset($_POST['send']);
-			$data = array_map('addslashes', $_POST);
-			$systemModel->updateSettings($data);			
+			$systemModel->updateSettings($_POST);			
 			header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/settings/update/done');
-				exit;
+			exit;
 		}
 	break;
 	case 'phpinfo':

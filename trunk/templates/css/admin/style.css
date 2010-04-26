@@ -1,14 +1,9 @@
 
 /* CSS RESET */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, font, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td {
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var, b,  u, i, center, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -73,8 +68,8 @@ input,textarea,select{
 }
 input{
 	border: 1px solid #9EB1BC;
-	height: 24px;
-	line-height: 24px;
+	height: 26px;
+	line-height: 26px;
 	
 	}
 
@@ -83,10 +78,10 @@ body{
 	font-size:12px;
 }
 h1{
-	font-size:24px;
+	font-size:16px;
 	padding:10px 0px 5px 0px;
 	margin: 10px 0px 5px 0px;
-	color:#555555;
+	color:#2D4F68;
 }
 h2{
 	padding:10px 0px 5px 0px;
@@ -109,9 +104,9 @@ a:hover{
 	text-decoration:underline;
 }
 fieldset{
-	border: 1px solid #dee6e9;
+	border: 1px solid #EDF1F3;
 	margin:20px 0px 10px 0px;
-	padding:0px 0px 0px 0px;
+	padding:4px;
 	background-color:#FFFFFF;
 	color:#787878;
 	}
@@ -125,7 +120,6 @@ legend{
 }
 
 .header_bg{
-	position:relative;
 	height: 130px;
 	background-image: url('images/html_bg.png');
 	background-repeat: repeat;
@@ -160,10 +154,8 @@ legend{
 	margin: 0px 5px 0px 0px;
 }
 .menu_1{
-	position: absolute;
-	top: 56px;
-	left: 50px;
-	z-index: 1;
+	margin: -75px 0px -2px 50px;
+
 }
 .menu_1 ul{
 	height: 34px;
@@ -194,6 +186,9 @@ legend{
 	color:#09394D;
 	text-decoration:none;
 	background-color: #D5EFF4;
+	border-top: 1px solid #F0FAFF;
+	border-left: 1px solid #F0FAFF;
+	border-right: 1px solid #269EC6;
 	/*background: url(images/hover_tab_right.png) no-repeat top right;*/
 }
 /*
@@ -210,15 +205,11 @@ legend{
 	background: url(images/hover_tab_right.png) no-repeat top right;
 }
 .menu_2_bg{
-	position: absolute;
-	bottom: 0px;
-	left: 0px;
 	height: 40px;
 	width: 100%;
 	line-height: 40px;
 	margin:0px auto;
 	text-align:left;
-	z-index: 2;
 	background: url(images/menu_bg_.png) repeat-x top left;
 	border-bottom: 1px solid #B3C5D7;
 	}
@@ -236,9 +227,10 @@ legend{
 }
 .menu_2 li a{
 	display: block;
+	margin-top: 2px;
 	padding: 0px 10px 0px 13px;
 	font-size: 13px;
-	color:#004159;
+	color:#003346;
 	text-decoration:none;
 	background: url('images/blue_arr.png') no-repeat;
 }
@@ -254,22 +246,17 @@ legend{
 }
 .content {
 	border-top: 1px solid #C9D5DE;
-	margin: 0px auto;
 	padding: 0px 20px 20px 20px;
 	color:#1E1E1E;
 	background-color: #ffffff;
-	text-align:center;
-}
-.in_content{
-	margin: 0px auto;
-	padding-top: 5px;
 	text-align:left;
 }
+
 .table_container{
 	border: 1px solid #D6E9EF;
 }
 .g_box{
-	width: 100%;
+	display: block;
 	background-color: #dee6e9;
 	font-weight:bold;
 	margin: 10px 0px 10px 0px;
@@ -303,8 +290,27 @@ legend{
 	border-left: 1px solid #B7B7B7;
 	vertical-align:middle;
 }
+.paginator{
+	margin: 15px 0px 15px 0px;
+	border: 1px solid #DEE6E9;
+}
+.paginator .left{
+	line-height: 44px;
+	padding: 0px 0px 0px 10px;
+	border-right: 1px solid #DEE6E9;
+	width: 100px;
+	float: left;
+	background-color: #f1f7f9 !important;
+	color: #28506C !important;
+	vertical-align:middle;
+}
+.paginator .right{
+	float: left;
+	background-color: #ffffff;
+	padding: 8px 10px 8px 10px;
+}
 .pagination{
-	margin-bottom: 5px;
+	
 }
 .pagination li{
 	float: left;
@@ -348,9 +354,10 @@ legend{
 	margin: 0px 0px 0px 0px;
 	color:#242321;
 	background-color: #D6E4E9;
+	width: 100%;
 }
 .big_table td{
-	padding: 10px 10px 10px 15px;
+	padding: 10px 10px 10px 10px;
 	text-align:left;
 	color: #3B3B3B;
 	/*border: 1px solid #ffffff;*/
@@ -460,3 +467,28 @@ legend{
 	margin: 0px 0px 5px 0px;
 }
 input.bigger{width: 100%;}
+
+/*MESSAGES ERROR AND INFO*/
+.message_info{
+	background-color: #DDFFEE;
+	border: 1px solid #00CC00;
+	vertical-align: middle;
+	text-align: left;
+	font-weight: bold;
+	font-size: 13px;
+	padding: 5px;
+	margin: 5px;
+	width: 400px;
+}
+.message_error{
+	background-color: #FFC4C4;
+	border: 1px solid #CC0000;
+	vertical-align: middle;
+	text-align: left;
+	font-weight: bold;
+	font-size: 13px;
+	padding: 5px;
+	margin: 5px;
+	width: 400px;
+}
+/*END MESSAGES*/

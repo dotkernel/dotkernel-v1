@@ -86,8 +86,8 @@ class View extends Dot_Template
 	 */
 	public function setViewMeta($settings)
 	{
-		$this->setVar('PAGE_KEYWORDS', $settings->meta_keywords);
-		$this->setVar('PAGE_DESCRIPTION', $settings->meta_description);
+		$this->setVar('PAGE_KEYWORDS', $settings->defaultMetaKeywords);
+		$this->setVar('PAGE_DESCRIPTION', $settings->defaultMetaDescription);
 	}
 	/**
 	 * Set the title html tag
@@ -98,7 +98,7 @@ class View extends Dot_Template
 	 */
 	public function setViewTitle($settings, $pageTitle)
 	{
-		$this->setVar('PAGE_TITLE', $pageTitle . ' | ' .$settings->page_title);
+		$this->setVar('PAGE_TITLE', $pageTitle . ' | ' .$settings->defaultPageTitle);
 		$this->setVar('PAGE_CONTENT_TITLE', $pageTitle );
 	}
 	/**

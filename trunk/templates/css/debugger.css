@@ -1,24 +1,47 @@
-.index_debugger{
-	border: 0px;
-	font-size: 11px;
-	font-family: "Lucida Sans Unicode";
-	width: 1000px;
-	margin: 0px auto;
-	margin-bottom: 20px;
+/* CLEARFIX CLASS */
+.clearfix:after {
+	content:".";
+	display:block;
+	height:0;
+	clear:both;
+	visibility:hidden;
 }
+.clearfix {display:inline-block;}
+/* Hide from IE Mac \*/
+.clearfix {display:block;}
+/* End hide from IE Mac */
+* html .clearfix {height:1px;}
+
+/* END OF CLEARFIX CLASS */
+
 
 .debugger{
 	border: 0px;
-	background-color: #E4E4E4;
+	margin: 35px 0px 21px 0px;
 	font-size: 10px;
-	font-family: "Lucida Sans Unicode";
+	font-family: "tahoma";
 	width:100%;
 }
 
+.index_debugger{
+	width: 980px;
+	border: 0px;
+	font-size: 11px;
+	padding: 15px;	
+	text-align: center;
+}
+.index_debugger b{
+	float: left;
+	padding: 0px 0px 0px 0px;
+}
+.index_debugger span{
+	color: #6B6B6B;
+}
 .debugger_images{
+	float: left;
 	vertical-align: middle;
 	border: 0px;
-	padding: 3px;
+	margin: 3px 5px 3px 5px;
 }
 
 .debug_table{
@@ -56,70 +79,70 @@
 }
 
 .details_debugger_db{
+	height: 21px;
+	line-height: 21px;
 	float: left;
-	margin-top: 20px;
 	margin-left: 3px;
-	margin-bottom: 20px;
 	cursor: pointer;
-	background-color: #E4E4E4;
+	background-color: #ffffff;
 	border: 1px solid #CFCFCF;
-	width: 250px;
+	width: 260px;
 	padding: 6px 4px 6px 4px;
 }
 
 .debugger_db{
 	float: left;
-	margin-top: 20px;
 	margin-left: 3px;
-	margin-bottom: 20px;
-	background-color: #E4E4E4;
+	background-color: #ffffff;
 	border: 1px solid #CFCFCF;
 	width: 250px;
 	padding: 6px 4px 6px 4px;
+	height: 21px;
+	line-height: 21px;
 }
 
 .version_zf{
 	float: left;
-	margin-top: 20px;
 	margin-left: 3px;
-	margin-bottom: 20px;
-	background-color: #E4E4E4;
+	background-color: #ffffff;
 	border: 1px solid #CFCFCF;
-	width: 75px;
+	width: 80px;
 	padding: 6px 4px 6px 4px;
+		height: 21px;
+	line-height: 21px;
 }
 
 .version_php{
 	float: left;
-	margin-top: 20px;
 	margin-left: 3px;
-	margin-bottom: 20px;
-	background-color: #E4E4E4;
+	background-color: #ffffff;
 	border: 1px solid #CFCFCF;
-	width: 90px;
+	width: 95px;
 	padding: 6px 4px 6px 4px;
+		height: 21px;
+	line-height: 21px;
 }
 
 .total_time{
 	float: left;
-	margin-top: 20px;
 	margin-left: 3px;
-	margin-bottom: 20px;
-	background-color: #E4E4E4;
+	background-color: #ffffff;
 	border: 1px solid #CFCFCF;
-	width: 200px;
+	width: 205px;
 	padding: 6px 4px 6px 4px;
+	height: 21px;
+	line-height: 21px;
 }
 
 .memory_usage{
 	float: left;
-	margin-top: 20px;
 	margin-left: 3px;
-	margin-bottom: 20px;
-	background-color: #E4E4E4;
+	background-color: #ffffff;
 	border: 1px solid #CFCFCF;
-	width: 170px;
+	width: 180px;
 	padding: 6px 4px 6px 4px;
+		height: 21px;
+	line-height: 21px;
 }
 
 .db_debug_rows{

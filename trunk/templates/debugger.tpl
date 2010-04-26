@@ -15,7 +15,7 @@ function ShowHideDiv (id)
 }
 //-->
 </script>
-<div class="index_debugger">
+<div class="index_debugger clearfix">
 	<!-- BEGIN dot_version -->
 	<div class="version_zf"><img src="{SITE_URL}/images/debugbar/dotkernel.png" class="debugger_images"><b>{DOT_VERSION}</b></div>
 	<!-- END dot_version -->
@@ -26,16 +26,16 @@ function ShowHideDiv (id)
 	<div class="version_php"><img src="{SITE_URL}/images/debugbar/php.png" class="debugger_images"><b>{PHP_VERSION}</b></div>
 	<!-- END php_version -->
 	<!-- BEGIN total_time -->
-	<div class="total_time"><img src="{SITE_URL}/images/debugbar/time.png" class="debugger_images"><b>Page generated in</b> : {TOTAL_GENERAL_TIME} ms</div>
+	<div class="total_time"><img src="{SITE_URL}/images/debugbar/time.png" class="debugger_images"><b><span class="">Page generated in:</span> {TOTAL_GENERAL_TIME} ms</b>  </div>
 	<!-- END total_time -->
 	<!-- BEGIN memory_usage -->
-	<div class="memory_usage"><img src="{SITE_URL}/images/debugbar/memory.png" class="debugger_images"><b>Memory usage</b> : {MEMORY_USAGE} MB</div>
+	<div class="memory_usage"><img src="{SITE_URL}/images/debugbar/memory.png" class="debugger_images"><b><span class="">Memory usage:</span> {MEMORY_USAGE} MB</b> </div>
 	<!-- END memory_usage -->
 	<!-- BEGIN details_db_debug -->
-	<div class="details_debugger_db" onclick="ShowHideDiv('db');"><img src="{SITE_URL}/images/debugbar/database.png" class="debugger_images"><b>Executed queries</b> : {TOTAL_QUERIES}, in {TOTAL_TIME} ms.</div>
+	<div class="details_debugger_db" onclick="ShowHideDiv('db');"><img src="{SITE_URL}/images/debugbar/database.png" class="debugger_images"><b><span class="">Executed queries:</span> {TOTAL_QUERIES}, in {TOTAL_TIME} ms.</b> </div>
 	<!-- END details_db_debug -->
 	<!-- BEGIN db_debug -->
-	<div class="debugger_db"><img src="{SITE_URL}/images/debugbar/database.png" class="debugger_images"><b>Executed queries</b> : {TOTAL_QUERIES}, in {TOTAL_TIME} ms.</div>
+	<div class="debugger_db"><img src="{SITE_URL}/images/debugbar/database.png" class="debugger_images"><b><span class="">Executed queries :</span> {TOTAL_QUERIES}, in {TOTAL_TIME} ms.</b></div>
 	<!-- END db_debug -->
 
 	<!-- BEGIN if_show_debug -->
