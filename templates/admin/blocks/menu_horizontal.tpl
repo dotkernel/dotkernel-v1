@@ -1,6 +1,6 @@
 <!-- BEGIN top_menu -->
-<div class="menu_1">
-	<ul>
+<div class="menu_1 clearfix">
+	<ul class="clearfix">
 		<!-- BEGIN top_menu_item -->
 			<li class="normal{TOP_MENU_SEL}" id="top_{TOP_MENU_ID}">
 				<!-- BEGIN top_normal_menu_item -->

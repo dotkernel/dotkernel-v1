@@ -88,8 +88,8 @@ class Admin
 				
  		$paginatorAdapter = new Zend_Paginator_Adapter_DbSelect($select);
 		($page == 1) ? 
-			$select->limit($this->settings->results_per_page) : 
-			$select->limit($this->settings->results_per_page, ($page-1)*$this->settings->results_per_page);
+			$select->limit($this->settings->resultsPerPage) : 
+			$select->limit($this->settings->resultsPerPage, ($page-1)*$this->settings->resultsPerPage);
 							
 		$data = $this->db->fetchAll($select);
 		return array('data'=> $data,'paginatorAdapter'=> $paginatorAdapter);
@@ -159,10 +159,9 @@ class Admin
 			}
 			else
 			{
-				$error['password'] = "You didn't enter the same password twice. Please re-enter your password";
+				$error['password'] = "You didn't typed the same password twice. Please re-enter your password";
 			}
 		}
-		return array('data' => $data, 
-					'error' => $error);
+		return array('data' => $data, 'error' => $error);
 	}
 }

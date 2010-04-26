@@ -68,11 +68,11 @@ class Dot_Email extends Zend_Mail
 		//check id replyTo is empty
 		if(is_null($this->getReplyTo()))	
 		{
-			$this->setReplyTo($this->settings->contact_recipient, $this->settings->site_name);
+			$this->setReplyTo($this->settings->siteEmail, $this->settings->siteName);
 		}
 		//don't check if returnPath is empty, because if not set, will return $this->_from
 		//  set the transporter		
-		if('1' == $this->settings->smtp_use)
+		if('1' == $this->settings->smtpActive)
 		{
 			$partial = @explode('@', $this->_to[0]);
 			if(stristr($this->settings->smtpAddresses, $partial['1']) !== FALSE)
@@ -99,9 +99,9 @@ class Dot_Email extends Zend_Mail
 			/**
 			 * @TODO definitely we want to create an exception class, Other code to recover from the error
 			 */
-			$dev_emails = @explode(',', $this->settings->dev_emails);
-			$date_now = date('F dS, Y h:i:s A');
-			$mailSubject  = "SMTP Error on ". $this->settings->site_name;
+			$devEmails = @explode(',', $this->settings->devEmails);
+			$dateNow = date('F dS, Y h:i:s A');
+			$mailSubject  = "SMTP Error on ". $this->settings->siteName;
 			$mailContent  = "We were unable to send SMTP email."."\n";
 			$mailContent .= "---------------------------------"."\n";
 			$mailContent .="Caught exception: ". get_class($e)."\n";
@@ -110,10 +110,10 @@ class Dot_Email extends Zend_Mail
 			$to = $this->getRecipients();
 			$mailContent .="To Email: ".$to[0]."\n";
 			$mailContent .="From Email: ".$this->getFrom()."\n";
-			$mailContent .="Date: ".$date_now ."\n";
-			$mailHeader   = "From: ".$this->settings->contact_recipient."\r\n";
-			$mailHeader  .= "Reply-To:".$this->settings->contact_recipient."\r\n"."X-Mailer: PHP/".phpversion();
-			foreach($dev_emails as $ky => $mailTo)
+			$mailContent .="Date: ".$dateNow ."\n";
+			$mailHeader   = "From: ".$this->settings->siteEmail."\r\n";
+			$mailHeader  .= "Reply-To:".$this->settings->siteEmail."\r\n"."X-Mailer: PHP/".phpversion();
+			foreach($devEmails as $ky => $mailTo)
 			{
 				var_dump($mailTo, $mailSubject, $mailContent, $mailHeader);
 				mail($mailTo, $mailSubject, $mailContent, $mailHeader);

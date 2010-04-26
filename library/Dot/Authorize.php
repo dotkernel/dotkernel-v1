@@ -44,29 +44,29 @@ class Dot_Authorize
 		$error = array(); 
 		if ($send =='on')
 		{
-			$validator_username = new Zend_Validate();
-			$validator_username->addValidator(new Zend_Validate_StringLength(3, 255))
+			$validatorUsername = new Zend_Validate();
+			$validatorUsername->addValidator(new Zend_Validate_StringLength(3, 255))
 			->addValidator(new Zend_Validate_Alnum());
-			if ($validator_username->isValid($username))
+			if ($validatorUsername->isValid($username))
 			{
 				$login['username'] = $username;
 			}
 			else
 			{
-				$error['username'] = 'Invalid Username !';
+				$error['username'] = 'Invalid Username. ';
 				$login['username'] = '';
 			}
 
-			$validator_password = new Zend_Validate();
-			$validator_password->addValidator(new Zend_Validate_StringLength(3, 25))
+			$validatorPassword = new Zend_Validate();
+			$validatorPassword->addValidator(new Zend_Validate_StringLength(3, 25))
 			->addValidator(new Zend_Validate_Alnum());
-			if ($validator_password->isValid($password))
+			if ($validatorPassword->isValid($password))
 			{
 				$login['password'] = $password;
 			}
 			else
 			{
-				$error['password'] = 'Invalid Password !';
+				$error['password'] = 'Invalid Password.';
 				$login['password'] = '';
 			}			
 		}
@@ -102,26 +102,26 @@ class Dot_Authorize
 		$session = Zend_Registry::get('session');
 		switch($who)
 		{
-		    case 'user':
-		        if( !self::isLogin('user') )
+			case 'user':
+		  	if( !self::isLogin('user') )
 				{
 					$session->loginUserError = "You don't have enough credentials to access this url.";
 					header('Location: ' . $config->website->params->url . '/user/login');
 					exit;
 				}
 				return true;
-		    break;
-				case 'admin':
-		    	if( !self::isLogin('admin') )
-					{
-						$session->loginUserError = "You don't have enough credentials to access this url.";
-						header('Location: ' . $config->website->params->url . '/'. $who);
-						exit;
-					}
-					return true;
-		    break;
-		    default:
-					return false;
+		  break;
+			case 'admin':
+		  	if( !self::isLogin('admin') )
+				{
+					$session->loginUserError = "You don't have enough credentials to access this url.";
+					header('Location: ' . $config->website->params->url . '/'. $who);
+					exit;
+				}
+				return true;
+			break;
+		  default:
+			return false;
 		}		
 	}
 	/**

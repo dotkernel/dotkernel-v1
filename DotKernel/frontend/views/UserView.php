@@ -77,7 +77,7 @@ class User_View extends View
 	{
 		$scope = Zend_Registry::get('scope');
 		// add secure image using ReCaptcha
-		$recaptcha = new Zend_Service_ReCaptcha($this->settings->recaptcha_public_key, $this->settings->recaptcha_private_key);
+		$recaptcha = new Zend_Service_ReCaptcha($scope->captchaOptions->recaptchaPublicKey, $scope->captchaOptions->recaptchaPrivateKey);
 		$recaptcha->setOptions($scope->captchaOptions->toArray());
 		return $recaptcha;
 	}
