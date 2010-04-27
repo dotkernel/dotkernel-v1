@@ -34,6 +34,9 @@ $tpl->setViewPaths($config);
 //Set  HTML head structure  tags 
 $tpl->setViewMeta($settings);
 
+//Set  Logo, using site name  
+$tpl->setViewLogo($settings);
+
 //Display login box
 $tpl->setLoginBox();
 
