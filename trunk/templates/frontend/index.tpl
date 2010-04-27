@@ -14,7 +14,7 @@
 	<div class="header_bg">
 		<div class="header">
 			<div class="logo">
-				<a href="{SITE_URL}/"><h1><i><b>Dot Kernel</b></i></h1></a></div>
+				<a href="{SITE_URL}/"><h1><i><b>{SITE_NAME}</b></i></h1></a></div>
 			{MENU_1}
 		</div>
 	</div>

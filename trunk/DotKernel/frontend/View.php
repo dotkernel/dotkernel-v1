@@ -101,6 +101,16 @@ class View extends Dot_Template
 		$this->setVar('PAGE_TITLE', $pageTitle . ' | ' .$settings->defaultPageTitle);
 		$this->setVar('PAGE_CONTENT_TITLE', $pageTitle );
 	}
+		/**
+	 * Set the logo, in the future replaced with an image 
+	 * @access public 
+	 * @param Dot_Settings $settings
+	 * @return void
+	 */
+	public function setViewLogo($settings)
+	{
+		$this->setVar('SITE_NAME', $settings->siteName);
+	}
 	/**
 	 * Display the specific menu that were declared in configs/menu.xml file
 	 * @access public 
