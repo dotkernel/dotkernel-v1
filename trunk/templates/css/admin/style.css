@@ -104,15 +104,16 @@ a:hover{
 	text-decoration:underline;
 }
 fieldset{
-	border: 1px solid #EDF1F3;
-	margin:20px 0px 10px 0px;
-	padding:4px;
+	border: 0px;
+	border-top: 2px solid #F19F56;
+	margin: 20px 0px 10px 0px;
+	padding:0px;
 	background-color:#FFFFFF;
 	color:#787878;
-	}
+}
 legend{
-	padding: 0px 5px 0px 5px;
-	margin: 0px 10px 5px 10px;
+	padding: 0px 5px 0px 0px;
+	margin: 0px 10px 5px 0px;
 	color: #ee8b33;
 	font-size:14px;
 	font-weight:bold;
@@ -137,7 +138,8 @@ legend{
 	font-size:18px;
 	text-transform:uppercase;
 	font-weight: bold;
-	letter-spacing: 0.2em;
+	letter-spacing: 0.4em;
+	margin-left: 20px;
 }
 .logo a{
 	color:#F8DE85;
@@ -154,7 +156,7 @@ legend{
 	margin: 0px 5px 0px 0px;
 }
 .menu_1{
-	margin: -75px 0px -2px 50px;
+	margin: -85px 0px -2px 50px;
 
 }
 .menu_1 ul{
@@ -163,6 +165,7 @@ legend{
 	list-style: none;
 	line-height:34px;
 	}
+/*
 .menu_1 li{
 	padding: 0px 0px 0px 0px;
 	float:left;
@@ -173,11 +176,11 @@ legend{
 	float: left;
 	display: block;
 	padding: 0px 20px 0px 18px;
-	/*background: url(images/link_tab_right.png) no-repeat top right;*/
+	background: url(images/link_tab_right.png) no-repeat top right;
 	text-decoration: none;
 	font-size: 14px;
 	color: #172E3C;
-	background-color: #FDB95E;
+	background-color: #FFC271;
 	border-top: 1px solid #FFEDA6;
 	border-left: 1px solid #FFEDA6;
 	border-right: 1px solid #EFAE56;
@@ -189,8 +192,35 @@ legend{
 	border-top: 1px solid #F0FAFF;
 	border-left: 1px solid #F0FAFF;
 	border-right: 1px solid #269EC6;
+	background: url(images/hover_tab_right.png) no-repeat top right;*/
+}
+
+.menu_1 li{
+	padding: 0px 0px 0px 0px;
+	float:left;
+	font-weight:bold;
+	margin-right: 1px;
+	}
+.menu_1 li a{
+	float: left;
+	display: block;
+	padding: 2px 20px 2px 20px;
+	/*background: url(images/link_tab_right.png) no-repeat top right;*/
+	text-decoration: none;
+	font-size: 15px;
+	color: #DFFCFF;
+	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+.menu_1 li a:hover{
+	color:#09394D;
+	text-decoration:none;
+	background-color: #D5EFF4;
 	/*background: url(images/hover_tab_right.png) no-repeat top right;*/
 }
+
+
 /*
 .menu_1 .hover_list{
 	background: url(images/hover_tab_left.png) no-repeat top left !important;
@@ -351,7 +381,6 @@ legend{
 }
 .big_table{
 	border-top:0px;
-	margin: 0px 0px 0px 0px;
 	color:#242321;
 	background-color: #D6E4E9;
 	width: 100%;

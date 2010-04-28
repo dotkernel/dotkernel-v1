@@ -40,7 +40,7 @@ function ShowHideDiv (id)
 
 	<!-- BEGIN if_show_debug -->
 	<div id="db" style="display: {INITIAL_DISPLAY};" class="db_debug_rows" >
-		<table border="0" cellspacing="1" cellpadding="4" class="debugger">
+		<table border="0" cellspacing="1" cellpadding="4" class="debuggertable">
 			<tr>
 				<th width="70">Query #</th>
 				<th>Time</th>
@@ -65,7 +65,7 @@ function ShowHideDiv (id)
 			</tr>
 			<!-- END queries -->
 		</table><br>
-		<table border="0" cellspacing="1" cellpadding="4" class="debugger">
+		<table border="0" cellspacing="1" cellpadding="4" class="debuggertable">
 			<tr>
 				<td class="debugger_1"><b>Total queries executed</b> : </td>
 				<td class="debugger_2">{TOTAL_QUERIES}</td>
