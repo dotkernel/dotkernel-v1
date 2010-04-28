@@ -35,7 +35,6 @@ class Dot_Email extends Zend_Mail
 	{
 		$this->settings = Zend_Registry::get('settings');
 		$this->db = Zend_Registry::get('database');
-		$this->settings = Zend_Registry::get('settings');
 		$this->addHeader('X-Mailer', $this->xmailer);		
 	}
 	/**
@@ -65,30 +64,30 @@ class Dot_Email extends Zend_Mail
 	 */
 	public function send($transport = null)
 	{		
-		//check id replyTo is empty
-		if(is_null($this->getReplyTo()))	
-		{
-			$this->setReplyTo($this->settings->siteEmail, $this->settings->siteName);
-		}
-		//don't check if returnPath is empty, because if not set, will return $this->_from
-		//  set the transporter		
+		// set From and ReplyTo, in case we forgot it in code
+		parent::setDefaultFrom($this->settings->siteEmail, $this->settings->siteName);
+		parent::setDefaultReplyTo($this->settings->siteEmail, $this->settings->siteName);
+		
+		//  set the simple transporter as default 
+		$tr = new Dot_Email_Simple($this->_from);	
+		
+		// check if we need to use an external SMTP
 		if('1' == $this->settings->smtpActive)
 		{
 			$partial = @explode('@', $this->_to[0]);
 			if(stristr($this->settings->smtpAddresses, $partial['1']) !== FALSE)
 			{
-				//  SMTP Transporter
 				$tr = new Dot_Email_Transport();
+				if(empty($tr->smtpData))
+				{
+					// we can't use SMTP in this case 
+					$tr = new Dot_Email_Simple($this->_from);	
+				}
 			}
 		}
-		else
-		{
-			$tr = new Dot_Email_Simple($this->_from);			
-		}
 		$this->setDefaultTransport($tr->getTransport());
-		/**
-		 * @TODO is this the proper error trapping system 		 
-		 */
+		
+		//try to send the email
 		try
 		{
 			parent::send();
@@ -115,7 +114,6 @@ class Dot_Email extends Zend_Mail
 			$mailHeader  .= "Reply-To:".$this->settings->siteEmail."\r\n"."X-Mailer: PHP/".phpversion();
 			foreach($devEmails as $ky => $mailTo)
 			{
-				var_dump($mailTo, $mailSubject, $mailContent, $mailHeader);
 				mail($mailTo, $mailSubject, $mailContent, $mailHeader);
 			}
 			return FALSE;

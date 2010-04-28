@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2010 at 12:07 AM
+-- Generation Time: Apr 28, 2010 at 01:50 AM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.2
 
@@ -49,6 +49,8 @@ CREATE TABLE IF NOT EXISTS `emailTransporter` (
   `user` varchar(100) NOT NULL,
   `pass` varchar(100) NOT NULL,
   `server` varchar(100) NOT NULL DEFAULT 'smtp.gmail.com',
+  `port` int(5) NOT NULL DEFAULT '465',
+  `ssl` enum('tls','ssl') NOT NULL DEFAULT 'tls',
   `capacity` int(11) NOT NULL DEFAULT '2000',
   `date` date NOT NULL DEFAULT '0000-00-00',
   `counter` int(11) NOT NULL DEFAULT '0',
@@ -62,6 +64,7 @@ CREATE TABLE IF NOT EXISTS `emailTransporter` (
 
 
 -- --------------------------------------------------------
+
 
 --
 -- Table structure for table `setting`

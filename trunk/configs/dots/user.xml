@@ -23,8 +23,8 @@
 			<captcha>Incorrect. Try again.</captcha>			
 		</errorMessage>
 		<captchaOptions>
-			<recaptchaPublicKey>6Ld2zQoAAAAAADLtiXWUpdS3LVbW1Iw1axxxx</recaptchaPublicKey>
-			<recaptchaPrivateKey>6Ld2zQoAAAAAAPCmUYjpG8VQyX5_xxxxxx</recaptchaPrivateKey>
+			<recaptchaPublicKey>xxx</recaptchaPublicKey>
+			<recaptchaPrivateKey>xxx-PdOn44</recaptchaPrivateKey>
 			<linkTitle>Click me</linkTitle>
 			<linkHiddenText>...</linkHiddenText>
 			<theme>white</theme>

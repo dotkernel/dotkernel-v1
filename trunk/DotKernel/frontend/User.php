@@ -180,7 +180,6 @@ class Frontend_User
 		{
 			$dotEmail = new Dot_Email();
 			$dotEmail->addTo($email);
-			$dotEmail->setFrom($this->settings->siteEmail, $this->settings->siteName);
 			$dotEmail->setSubject('Forgot Password');			
 			$dotEmail->setBodyText('Your password is '.$value['password']);
 			
@@ -192,8 +191,7 @@ class Frontend_User
 			else
 			{
 				$error['Email Not Sent'] = 'Your password could not be sent to '.$email;
-			}	
-			echo "Message sent!";		
+			}		
 		}
 		else
 		{
