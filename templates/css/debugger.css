@@ -22,7 +22,14 @@
 	font-family: "tahoma";
 	width:100%;
 }
-
+.debuggertable{
+	border: 0px;
+	margin: 10px 0px 10px 0px;
+	font-size: 10px;
+	font-family: "tahoma";
+	width:100%;
+	background-color: #E2E2E2;
+}
 .index_debugger{
 	width: 980px;
 	border: 0px;
@@ -50,13 +57,13 @@
 	width:100%;
 }
 
-.debugger th{
-	background-color: #E4E4E4;
+.debuggertable th{
+	background-color: #E2E2E2;
 	border: 1px solid #FFFFFF;
 	padding: 3px 0px 3px 3px;
 }
 
-.debugger td{
+.debuggertable td{
 	padding: 3px 0px 3px 3px;
 }
 
