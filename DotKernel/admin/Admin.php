@@ -198,7 +198,8 @@ class Admin
 		if(array_key_exists('username', $values))
 		{
 			$validatorChain = new Zend_Validate();
-			$validatorChain->addValidator(new Zend_Validate_StringLength(
+			$validatorChain->addValidator(new Zend_Validate_Alpha())
+							->addValidator(new Zend_Validate_StringLength(
 													$this->scope->validate->details->lengthMin, 
 													$this->scope->validate->details->lengthMax
 												));
@@ -218,8 +219,7 @@ class Admin
 			{
 				unset($values['password']['password2']);
 				$validatorChain = new Zend_Validate();
-				$validatorChain->addValidator(new Zend_Validate_Alnum())
-							   ->addValidator(new Zend_Validate_StringLength(
+				$validatorChain->addValidator(new Zend_Validate_StringLength(
 												$this->scope->validate->password->lengthMin, 
 												$this->scope->validate->password->lengthMax
 											));			
