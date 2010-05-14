@@ -18,7 +18,7 @@
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
-class Frontend_Page
+class Page
 {
 	/**
 	 * Constructor

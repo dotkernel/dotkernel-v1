@@ -173,7 +173,7 @@ class View extends Dot_Template
 			}			
 			foreach ($items as $key => $val)
 			{						
-				if ((Dot_Authorize::isLogin() && 1 == $val->isLogged) || (!Dot_Authorize::isLogin() && 1 == $val->notLogged))
+				if ((Dot_Auth::hasIdentity('user') && 1 == $val->isLogged) || (!Dot_Auth::hasIdentity('user') && 1 == $val->notLogged))
 				{	// display menus based on user is logged in or not
 					$this->setVar('TOP_MENU_ID', $i);
 					$tplVariables = array('TOP_MENU_SEL', 
@@ -222,7 +222,7 @@ class View extends Dot_Template
 							}							
 							foreach ($subItems as $k2 => $v2)
 							{			
-								if ((Dot_Authorize::isLogin() && 1 == $v2->isLogged) || (!Dot_Authorize::isLogin() && 1 == $v2->notLogged))
+								if ((Dot_Auth::hasIdentity('user') && 1 == $v2->isLogged) || (!Dot_Auth::hasIdentity('user') && 1 == $v2->notLogged))
 								{				
 									// display menus based on user is logged in or not		
 									$this->setVar('TOP_SUB_MENU_ITEM_SEL', '');												
@@ -277,7 +277,7 @@ class View extends Dot_Template
 	 */
 	public function setLoginBox()
 	{
-		if (!Dot_Authorize::isLogin())
+		if (!Dot_Auth::hasIdentity('user'))
 		{
 			$this->setFile('tpl_login', 'blocks/login_box.tpl');
 			$this->parse('LOGIN_BOX', 'tpl_login');

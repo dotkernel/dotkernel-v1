@@ -21,8 +21,7 @@ $requestController = isset($requestController) && $requestController !='Index' ?
 $requestAction     = isset($requestAction) && $requestAction !=''         ? $requestAction     : 'dashboard';
 
 // check admin permission
-$authorize = new Dot_Authorize();
-if(!$authorize->isLogin('admin') && $requestAction != 'authorize')
+if(!Dot_Auth::hasIdentity('admin') && $requestAction != 'authorize')
 {
 	$requestController = 'Admin';
 	$requestAction = 'login';
@@ -43,6 +42,13 @@ $tpl->setViewPaths($config);
  * each Controller  must load its own specific models and views
 */
 Dot_Settings :: loadControllerFiles($requestModule);
+
+/**
+ * Load scope(specific configuration file for current dot) file
+ * @TODO linking N dots together
+ */
+$scope = Dot_Settings::getScopeVariables($requestModule,$requestController);
+$registry->scope = $scope;
 
 /**
  * Start the variable for Page Title, this will be used as H1 tag too 

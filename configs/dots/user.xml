@@ -13,24 +13,50 @@
 	<variable scope="frontend">
 		<pageTitle>
 			<action>
+				<account>My Account</account>
 				<login>User Login</login>
 				<register>User Register</register>
 				<forgot-password>Forgot your password?</forgot-password>
 			</action>
 		</pageTitle>
+		<message>
+			<update>Your account was updated !</update>
+		</message>
 		<errorMessage>
 			<login>Wrong Login Credentials</login>
-			<captcha>Incorrect. Try again.</captcha>			
+			<captcha>Incorrect. Try again.</captcha>	
+			<passwordTwice>You did not enter the same password twice. Please re-enter your password.</passwordTwice>	
+			<emailSent>Your password was sent to </emailSent>	
+			<emailNotSent>Your password could not be sent to </emailNotSent>
+			<emailNotFound> was not found in our records !</emailNotFound>
+			<invalidUsername>Invalid Username !</invalidUsername>
+			<invalidPassword>Invalid Password !</invalidPassword>
+			<userExists> already exists! </userExists>
+			<userPermission>You don't have enough credentials to access this url.</userPermission>
 		</errorMessage>
 		<captchaOptions>
 			<recaptchaPublicKey>xxx</recaptchaPublicKey>
-			<recaptchaPrivateKey>xxx-PdOn44</recaptchaPrivateKey>
+			<recaptchaPrivateKey>xxx</recaptchaPrivateKey>
 			<linkTitle>Click me</linkTitle>
 			<linkHiddenText>...</linkHiddenText>
 			<theme>white</theme>
 			<tabindex>2</tabindex>
 			<lang>en</lang>
 		</captchaOptions>
+		<validate>
+			<details>
+				<lengthMin>3</lengthMin>
+				<lengthMax>255</lengthMax>
+			</details>
+			<password>
+				<lengthMin>3</lengthMin>
+				<lengthMax>20</lengthMax>
+			</password>
+			<username>
+				<lengthMin>3</lengthMin>
+				<lengthMax>255</lengthMax>
+			</username>
+		</validate>		
 	</variable>		
 	</body>
 </config>

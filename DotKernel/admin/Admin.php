@@ -29,6 +29,7 @@ class Admin
 		$this->db = Zend_Registry::get('database');
 		$this->config = Zend_Registry::get('configuration');
 		$this->settings = Zend_Registry::get('settings');
+		$this->scope = Zend_Registry::get('scope');		
 	}
 	/**
 	 * Check to see if user can login
@@ -44,7 +45,7 @@ class Admin
 						   ->where('isActive = ?','1')
 						   ->where('username = ?', $data['username'])
 						   ->where('password = ?', $password);
-		$results = $this->db->fetchAll($select);		
+		$results = $this->db->fetchAll($select);	
 		if( 1 == count($results))
 		{
 			return $results;
@@ -54,22 +55,30 @@ class Admin
 			return array();
 		}
 	}
+		
 	/**
-	 * Logout admin user. Using Dot_Authorize class
+	 * Get admin by field
 	 * @access public
-	 * @return void
+	 * @param string $field
+	 * @param string $value
+	 * @return array
 	 */
-	public function logout()
-	{
-		Dot_Authorize::logout('admin');
-	}
+	public function getAdminBy($field = '', $value = '')
+	{		
+		$select = $this->db->select()
+					   ->from('admin')
+					   ->where($field.' = ?', $value)
+					   ->limit(1);					   
+		$result = $this->db->fetchRow($select);
+		return $result;
+	}	
 	/**
-	 * Get user info
+	 * Get admin info
 	 * @access public
 	 * @param int $id
 	 * @return array
 	 */
-	public function getUserInfo($id)
+	public function getAdminInfo($id)
 	{
 		$select = $this->db->select()
 						   ->from('admin')
@@ -119,10 +128,57 @@ class Admin
         unset ($data['id']);
 		if(array_key_exists('password', $data))
 		{
-			$user = $this->getUserInfo($id);
+			$user = $this->getAdminInfo($id);
 			$data['password'] = md5($user['username'].$this->config->settings->admin->salt.$data['password']);
 		}
         $this->db->update('admin', $data, 'id = '.$id);
+	}	
+	/**
+	 * Validate the data that comes from login form
+	 * @access public
+	 * @param string $username
+	 * @param string $password
+	 * @param string $send [optional] which is a control key
+	 * @return bool
+	 */
+	public function validateLogin($username, $password, $send = 'off')
+	{
+		$login = array();
+		$error = array(); 
+		if ($send =='on')
+		{
+			$validatorUsername = new Zend_Validate();
+			$validatorUsername->addValidator(new Zend_Validate_StringLength(
+												$this->scope->validate->username->lengthMin, 
+												$this->scope->validate->username->lengthMax
+											))   
+							  ->addValidator(new Zend_Validate_Alnum());
+			if ($validatorUsername->isValid($username))
+			{
+				$login['username'] = $username;
+			}
+			else
+			{
+				$error['username'] = $this->scope->errorMessage->invalidUsername;
+				$login['username'] = '';
+			}
+
+			$validatorPassword = new Zend_Validate();
+			$validatorPassword->addValidator(new Zend_Validate_StringLength(
+												$this->scope->validate->password->lengthMin, 
+												$this->scope->validate->password->lengthMax
+											));
+			if ($validatorPassword->isValid($password))
+			{
+				$login['password'] = $password;
+			}
+			else
+			{
+				$error['password'] = $this->scope->errorMessage->invalidPassword;
+				$login['password'] = '';
+			}			
+		}
+		return array('login'=>$login, 'error'=>$error);
 	}
 	/**
 	 * Validate user input, add or update form
@@ -134,17 +190,29 @@ class Admin
 	{
 		$data = array();
 		$error = array();
-		//validate the imput data	
+		//validate the input data - Username, password and email will be also filtered
+		//only validate the details parameters	
 		$validatorChain = new Zend_Validate();
-		$validatorChain->addValidator(new Zend_Validate_Alpha())
-						->addValidator(new Zend_Validate_StringLength(3,20));
-		$validAlpha = Dot_Kernel::validate($validatorChain, $values['alpha']);
+		$validDetails = Dot_Kernel::validateFilter($validatorChain, $values['details']);
+		//validate username
+		if(array_key_exists('username', $values))
+		{
+			$validatorChain = new Zend_Validate();
+			$validatorChain->addValidator(new Zend_Validate_Alpha())
+							->addValidator(new Zend_Validate_StringLength(
+													$this->scope->validate->details->lengthMin, 
+													$this->scope->validate->details->lengthMax
+												));
+			$validUsername = Dot_Kernel::validateFilter($validatorChain, $values['username']);
+			$data = array_merge($data, $validUsername['data'], $validDetails['data']);
+			$error = array_merge($error, $validUsername['error'], $validDetails['error']);
+		}
 		//validate email
 		$validatorEmail = new Zend_Validate_EmailAddress();		
-		$validEmail = Dot_Kernel::validate($validatorEmail, $values['email']);
-		$data = array_merge($data, $validAlpha['data'], $validEmail['data']);
-		$error = array_merge($error, $validAlpha['error'], $validEmail['error']);
-		//validate paswword				
+		$validEmail = Dot_Kernel::validateFilter($validatorEmail, $values['email']);
+		$data = array_merge($data, $validEmail['data']);
+		$error = array_merge($error, $validEmail['error']);
+		//validate password				
 		if($values['password']['password'] != '' || $values['password']['password2'] != '')
 		{			
 			if($values['password']['password'] == $values['password']['password2'])
@@ -152,14 +220,17 @@ class Admin
 				unset($values['password']['password2']);
 				$validatorChain = new Zend_Validate();
 				$validatorChain->addValidator(new Zend_Validate_Alnum())
-								->addValidator(new Zend_Validate_StringLength(3,20));			
-				$validPass = Dot_Kernel::validate($validatorChain, $values['password']);
+							   ->addValidator(new Zend_Validate_StringLength(
+												$this->scope->validate->password->lengthMin, 
+												$this->scope->validate->password->lengthMax
+											));			
+				$validPass = Dot_Kernel::validateFilter($validatorChain, $values['password']);
 				$data = array_merge($data, $validPass['data']);
 				$error = array_merge($error, $validPass['error']);	
 			}
 			else
 			{
-				$error['password'] = "You didn't typed the same password twice. Please re-enter your password";
+				$error['password'] = $this->scope->errorMessage->passwordTwice;
 			}
 		}
 		return array('data' => $data, 'error' => $error);

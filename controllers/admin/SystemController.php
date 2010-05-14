@@ -18,22 +18,20 @@
 $systemView = new System_View($tpl);
 $systemModel = new System();
 // switch based on the action, NO default action here
+$pageTitle = $scope->pageTitle->action->{$requestAction};
 switch ($requestAction)
 {
-	case 'dashboard':
-		$pageTitle = 'Dashboard';		
+	case 'dashboard':		
 		$systemView->dashboard('dashboard');
 	break;
 	case 'settings':
-		$pageTitle = 'Settings';
 		$data = $systemModel->listSettings();	
-		$message = (isset($request['update']) && $request['update'] == 'done') ? 'System Settings was updated.' : '';
+		$message = (isset($request['update']) && $request['update'] == 'done') ? $scope->message->settingsUpdate : '';
 		$systemView->displaySettings('settings', $data, $message);
 	break;
 	case 'settings-update':
 		$data = array();
 		$error = array();
-		$pageTitle = 'Update Settings';
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
 		{
 			unset($_POST['send']);
@@ -43,7 +41,6 @@ switch ($requestAction)
 		}
 	break;
 	case 'phpinfo':
-		$pageTitle = 'PHP Info';	
 		$systemView->showPHPInfo('phpinfo');
 	break;	
 }

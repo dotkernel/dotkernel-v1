@@ -68,8 +68,8 @@ class Dot_Email extends Zend_Mail
 		parent::setDefaultFrom($this->settings->siteEmail, $this->settings->siteName);
 		parent::setDefaultReplyTo($this->settings->siteEmail, $this->settings->siteName);
 		
-		//  set the simple transporter as default 
-		$tr = new Dot_Email_Simple($this->_from);	
+		//  set the sendmail transporter as default 
+		$tr = new Dot_Email_Sendmail($this->_from);	
 		
 		// check if we need to use an external SMTP
 		if('1' == $this->settings->smtpActive)
@@ -77,11 +77,11 @@ class Dot_Email extends Zend_Mail
 			$partial = @explode('@', $this->_to[0]);
 			if(stristr($this->settings->smtpAddresses, $partial['1']) !== FALSE)
 			{
-				$tr = new Dot_Email_Transport();
+				$tr = new Dot_Email_Smtp();
 				if(empty($tr->smtpData))
 				{
 					// we can't use SMTP in this case 
-					$tr = new Dot_Email_Simple($this->_from);	
+					$tr = new Dot_Email_Sendmail($this->_from);	
 				}
 			}
 		}

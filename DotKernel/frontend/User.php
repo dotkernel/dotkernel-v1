@@ -6,7 +6,7 @@
 * @category   DotKernel
 * @package    Frontend
 * @copyright  Copyright (c) 2009 DotBoost  Technologies (http://www.dotboost.com)
-* @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+* @license    http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
 * @version    $Id$
 */
 
@@ -18,19 +18,19 @@
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
-class Frontend_User
+class User
 {
 	/**
 	 * Constructor
 	 * @access public 
-	 * @return Frontend_User
+	 * @return User
 	 */
 	public function __construct()
 	{		
 		$this->db = Zend_Registry::get('database');
 		$this->config = Zend_Registry::get('configuration');
 		$this->settings = Zend_Registry::get('settings');
-		
+		$this->scope = Zend_Registry::get('scope');		
 	}
 	/**
 	 * Check to see if user can login
@@ -65,16 +65,6 @@ class Frontend_User
 		$result = $this->db->fetchRow($select);
 		return $result;
 	}	
-	
-	/**
-	 * Logout admin user. Using Dot_Authorize class
-	 * @access public
-	 * @return void
-	 */
-	public function logout()
-	{
-		Dot_Authorize::logout('user');
-	}
 	/**
 	 * Get user info
 	 * @access public
@@ -111,7 +101,55 @@ class Frontend_User
 		$id = $data['id'];
 		unset ($data['id']);
 		$this->db->update('user', $data, 'id = '.$id);
+	}	
+	/**
+	 * Validate the data that comes from login form
+	 * @access public
+	 * @param string $username
+	 * @param string $password
+	 * @param string $send [optional] which is a control key
+	 * @return bool
+	 */
+	public function validateLogin($username, $password, $send = 'off')
+	{
+		$login = array();
+		$error = array(); 
+		if ($send =='on')
+		{
+			$validatorUsername = new Zend_Validate();
+			$validatorUsername->addValidator(new Zend_Validate_StringLength(
+												$this->scope->validate->username->lengthMin, 
+												$this->scope->validate->username->lengthMax
+											))   
+							  ->addValidator(new Zend_Validate_Alnum());
+			if ($validatorUsername->isValid($username))
+			{
+				$login['username'] = $username;
+			}
+			else
+			{
+				$error['username'] = $this->scope->errorMessage->invalidUsername;
+				$login['username'] = '';
+			}
+
+			$validatorPassword = new Zend_Validate();
+			$validatorPassword->addValidator(new Zend_Validate_StringLength(
+												$this->scope->validate->password->lengthMin, 
+												$this->scope->validate->password->lengthMax
+											));
+			if ($validatorPassword->isValid($password))
+			{
+				$login['password'] = $password;
+			}
+			else
+			{
+				$error['password'] = $this->scope->errorMessage->invalidPassword;
+				$login['password'] = '';
+			}			
+		}
+		return array('login'=>$login, 'error'=>$error);
 	}
+	
 	/**
 	 * Validate user input, add or update form
 	 * @access public
@@ -123,30 +161,32 @@ class Frontend_User
 		
 		$data = array();
 		$error = array();
-		//validate the imput data	
+		//validate the input data	
 		$validatorChain = new Zend_Validate();
-		$validatorChain->addValidator(new Zend_Validate_Alpha())
-						->addValidator(new Zend_Validate_StringLength(3,20));
-		$validAlpha = Dot_Kernel::validate($validatorChain, $values['alpha']);
+		// Only validate the details parameters. Username, password and email will be also filtered
+		$validDetails = Dot_Kernel::validateFilter($validatorChain, $values['details']);
 		//validate email
 		$validatorEmail = new Zend_Validate_EmailAddress();		
-		$validEmail = Dot_Kernel::validate($validatorEmail, $values['email']);
-		$data = array_merge($data, $validAlpha['data'], $validEmail['data']);
-		$error = array_merge($error, $validAlpha['error'], $validEmail['error']);
+		$validEmail = Dot_Kernel::validateFilter($validatorEmail, $values['email']);
+		$data = array_merge($data, $validDetails['data'], $validEmail['data']);
+		$error = array_merge($error, $validDetails['error'], $validEmail['error']);
 		//validate paswword				
 		if($values['password']['password'] == $values['password']['password2'])
 		{
 			unset($values['password']['password2']);
 			$validatorChain = new Zend_Validate();
 			$validatorChain->addValidator(new Zend_Validate_Alnum())
-							->addValidator(new Zend_Validate_StringLength(3,20));
-			$validPass = Dot_Kernel::validate($validatorChain, $values['password']);
+							->addValidator(new Zend_Validate_StringLength(
+											   $this->scope->validate->password->lengthMin, 
+											   $this->scope->validate->password->lengthMax
+										  ));
+			$validPass = Dot_Kernel::validateFilter($validatorChain, $values['password']);
 			$data = array_merge($data, $validPass['data']);
 			$error = array_merge($error, $validPass['error']);	
 		}
 		else
 		{
-			$error['password'] = "You didn't enter the same password twice. Please re-enter your password";
+			$error['password'] = $this->scope->errorMessage->passwordTwice;
 		}
 		return array('data' => $data, 
 					'error' => $error);
@@ -162,7 +202,7 @@ class Frontend_User
 		$data = array();
 		$error = array();
 		$validatorEmail = new Zend_Validate_EmailAddress();		
-		$validEmail = Dot_Kernel::validate($validatorEmail, array('email'=>$value));
+		$validEmail = Dot_Kernel::validateFilter($validatorEmail, array('email'=>$value));
 		return $validEmail;
 	}
 	/**
@@ -174,30 +214,30 @@ class Frontend_User
 	public function forgotPassword($email)
 	{
 		
-		$select = $this->db->select()->from('user', array('password'))->where('email = ?',$email);
+		$select = $this->db->select()
+						   ->from('user', array('password'))
+						   ->where('email = ?',$email);
 		$value = $this->db->fetchRow($select);
 		if(!empty($value))
 		{
 			$dotEmail = new Dot_Email();
 			$dotEmail->addTo($email);
 			$dotEmail->setSubject('Forgot Password');			
-			$dotEmail->setBodyText('Your password is '.$value['password']);
-			
+			$dotEmail->setBodyText('Your password is '.$value['password']);			
 			$succeed = $dotEmail->send();
 			if($succeed)
 			{
-				$error['Email Sent'] = 'Your password was sent to '.$email;
+				$error['Email Sent'] = $this->scope->errorMessage->emailSent.$email;
 			}
 			else
 			{
-				$error['Email Not Sent'] = 'Your password could not be sent to '.$email;
+				$error['Email Not Sent'] = $this->scope->errorMessage->emailNotSent.$email;
 			}		
 		}
 		else
 		{
-			$error['Not Found'] = 'Email '.$email.' was not found in our records !';
+			$error['Not Found'] = $email.$this->scope->errorMessage->emailNotFound;
 		}
-		return $error;
-		
-	}
+		return $error;		
+	}	
 }
