@@ -18,13 +18,13 @@
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
-class Dot_Email_Simple extends Dot_Email
+class Dot_Email_Sendmail extends Dot_Email
 {
 	/**
 	 * Email constructor
 	 * @access public 
 	 * @param string $fromEmail [optional]
-	 * @return Dot_Email_Simple
+	 * @return Dot_Email_Sendmail
 	 */
 	public function __construct($fromEmail = null)
 	{

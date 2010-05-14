@@ -127,7 +127,7 @@ class Dot_Kernel
         return $realIp;
     }
 	/**
-	 * Process that validatate and filter the input/output data.
+	 * Process that validate and filter the input/output data.
 	 * Return valid and filtered data
 	 * @access public
 	 * @static
@@ -135,7 +135,7 @@ class Dot_Kernel
 	 * @param array $values
 	 * @return array
 	 */
-	public static function validate($validator, $values)
+	public static function validateFilter($validator, $values)
 	{
 		$data = $error = array();
 		$filter = new Zend_Filter();

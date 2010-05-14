@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<body>
+	<variable scope="global">
+	</variable>
+	<variable scope="admin">
+		<pageTitle>
+			<action>
+				<login>Login</login>
+				<account>My Admin Account</account>
+				<list>List Admin Users</list>
+				<add>Add New Admin User</add>
+				<update>Update Admin User</update>
+			</action>
+		</pageTitle>
+		<errorMessage>			
+			<passwordTwice>You didn't enter the same password twice. Please re-enter your password</passwordTwice>
+			<invalidUsername>Invalid Username !</invalidUsername>
+			<invalidPassword>Invalid Password !</invalidPassword>
+			<wrongCredentials>Wrong Login Credentials !</wrongCredentials>
+			<adminExists> already exists! </adminExists>
+		</errorMessage>
+		<validate>
+			<details>
+				<lengthMin>3</lengthMin>
+				<lengthMax>255</lengthMax>
+			</details>
+			<password>
+				<lengthMin>3</lengthMin>
+				<lengthMax>20</lengthMax>
+			</password>
+			<username>
+				<lengthMin>3</lengthMin>
+				<lengthMax>255</lengthMax>
+			</username>
+		</validate>	
+	</variable>
+	<variable scope="frontend">
+	</variable>		
+	</body>
+</config>

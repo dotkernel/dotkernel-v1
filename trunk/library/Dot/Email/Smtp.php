@@ -18,7 +18,7 @@
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
-class Dot_Email_Transport extends Dot_Email
+class Dot_Email_Smtp extends Dot_Email
 {
 	/**
 	 * Email constructor

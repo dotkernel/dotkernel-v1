@@ -17,7 +17,7 @@
 // All actions MUST set  the variable  $pageTitle
 
 // instantiate  AuthUser object
-$frontendUser = new Frontend_User(); 
+$userModel = new User(); 
 $userView = new User_View($tpl, $settings);
 // switch based on the action, NO default action here
 $pageTitle = $scope->pageTitle->action->{$requestAction};
@@ -29,11 +29,11 @@ switch ($requestAction)
 	break;
 	case 'authorize':
 		// validate the authorization request paramethers 
-		$validate = Dot_Authorize::validateLogin($_POST['username'], $_POST['password'], $_POST['send']);
+		$validate = $userModel->validateLogin($_POST['username'], $_POST['password'], $_POST['send']);
 		if(!empty($validate['login']) && empty($validate['error']))
 		{
 			// login info are VALID, we can see if is a valid user now 
-			$user = $frontendUser->checkLogin($validate['login']);
+			$user = $userModel->checkLogin($validate['login']);
 			if(!empty($user))
 			{
 				$session->user = $user;
@@ -58,12 +58,12 @@ switch ($requestAction)
 	break;
 	case 'account':
 		// Show My Account Page, if he is logged in 
-		Dot_Authorize::checkPermissions($config);
+		Dot_Auth::checkIdentity();
 		$data = array();
 		$error = array();
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
 		{						
-			$values = array('alpha' => 
+			$values = array('details' => 
 								array('firstName'=>$_POST['firstName'],
 									  'lastName'=>$_POST['lastName']
 									 ),
@@ -72,14 +72,15 @@ switch ($requestAction)
 												'password2' =>  $_POST['password2']
 											   )
 						  );
-			$valid = $frontendUser->validateUser($values);
+			$valid = $userModel->validateUser($values);
 			$data = $valid['data'];
 			$error = $valid['error'];
 			$data['id'] = $request['id'];		
 			if(empty($error))
 			{				
 				//update user
-				$frontendUser->updateUser($data);
+				$userModel->updateUser($data);
+				$error[] = $scope->message->update;
 				
 			}
 			elseif(array_key_exists('password', $data))
@@ -87,12 +88,12 @@ switch ($requestAction)
 				// do not display password in the add form
 				unset($data['password']);
 			}
-			$dataTmp = $frontendUser->getUserInfo($session->user['id']);
+			$dataTmp = $userModel->getUserInfo($session->user['id']);
 			$data['username'] = $dataTmp['username'];
 		}
 		else
 		{			
-			$data = $frontendUser->getUserInfo($session->user['id']);
+			$data = $userModel->getUserInfo($session->user['id']);
 		}
 		$userView->details('update',$data,$error);	
 	break;
@@ -101,7 +102,7 @@ switch ($requestAction)
 		$error = array();
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
 		{		
-			$values = array('alpha' => 
+			$values = array('details' => 
 								array('username'=>$_POST['username'],
 									  'firstName'=>$_POST['firstName'],
 									  'lastName'=>$_POST['lastName']
@@ -111,7 +112,7 @@ switch ($requestAction)
 												'password2' =>  $_POST['password2']
 											   )
 						  );
-			$valid = $frontendUser->validateUser($values);
+			$valid = $userModel->validateUser($values);
 			$data = $valid['data'];
 			$error = $valid['error'];
 			if(strlen($_POST['recaptcha_response_field']) == 0)
@@ -133,23 +134,22 @@ switch ($requestAction)
 				$checkBy = array('username','email');
 				foreach ($checkBy as $field)
 				{					
-				   	$userExists = $frontendUser->getUserBy($field, $data[$field]);
+				   	$userExists = $userModel->getUserBy($field, $data[$field]);
 					if(!empty($userExists))
 					{
-						$error[$field] = ucfirst($field).' already exists !';
+						$error[$field] = ucfirst($field).$scope->errorMessage->userExists;
 					}
 				}	
 			}
 			if(empty($error))
-			{
-				
+			{				
 			   	//add admin user
-				$frontendUser->addUser($data);
-				$validate = Dot_Authorize::validateLogin($data['username'], $data['password'], 'on');
+				$userModel->addUser($data);
+				$validate = $userModel->validateLogin($data['username'], $data['password'], 'on');
 				if(!empty($validate['login']) && empty($validate['error']))
 				{
 					// login info are VALID, we can see if is a valid user now 
-					$user = $frontendUser->checkLogin($validate['login']);
+					$user = $userModel->checkLogin($validate['login']);
 					if(!empty($user))
 					{
 						$session->user = $user;
@@ -182,19 +182,19 @@ switch ($requestAction)
 		$error = array();
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
 		{				
-			$valid = $frontendUser->validateEmail($_POST['email']);
+			$valid = $userModel->validateEmail($_POST['email']);
 			$data = $valid['data'];
 			$error = $valid['error'];
 			if(empty($error))
 			{	
 				 // re-send password
-				$error = $frontendUser->forgotPassword($data['email']);						
+				$error = $userModel->forgotPassword($data['email']);						
 			}
 		}
 		$userView->details('forgot_password',$data,$error);		
 	break;
 	case 'logout':
-		$frontendUser->logout();
+		Dot_Auth::clearIdentity('user');
 		header('location: '.$config->website->params->url);
 		exit;
 	break;			

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<body>
+	<variable scope="global">
+	</variable>
+	<variable scope="admin">
+		<pageTitle>
+			<action>
+				<dashboard>Dashboard</dashboard>
+				<settings>Settings</settings>
+				<settings-update>Update Settings</settings-update>
+				<phpinfo>PHP Info</phpinfo>
+			</action>
+		</pageTitle>
+		<message>
+			<settingsUpdate>System settings was updated.</settingsUpdate>
+		</message>
+	</variable>
+	<variable scope="frontend">
+	</variable>		
+	</body>
+</config>
