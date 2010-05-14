@@ -109,8 +109,8 @@ INSERT INTO `setting` (`id`, `key`, `value`, `title`, `comment`, `isEditable`, `
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
-  `password` varchar(25) NOT NULL,
-  `email` varchar(100) NOT NULL,
+  `password` varchar(64) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `firstName` varchar(255) NOT NULL,
   `lastName` varchar(255) NOT NULL,
   `dateCreated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,

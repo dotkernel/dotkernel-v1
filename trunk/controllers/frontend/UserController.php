@@ -80,7 +80,7 @@ switch ($requestAction)
 			{				
 				//update user
 				$userModel->updateUser($data);
-				$error[] = $scope->message->update;
+				$error['update'] = $scope->message->update;
 				
 			}
 			elseif(array_key_exists('password', $data))
