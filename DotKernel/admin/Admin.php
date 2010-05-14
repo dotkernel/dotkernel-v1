@@ -198,8 +198,7 @@ class Admin
 		if(array_key_exists('username', $values))
 		{
 			$validatorChain = new Zend_Validate();
-			$validatorChain->addValidator(new Zend_Validate_Alpha())
-							->addValidator(new Zend_Validate_StringLength(
+			$validatorChain->addValidator(new Zend_Validate_StringLength(
 													$this->scope->validate->details->lengthMin, 
 													$this->scope->validate->details->lengthMax
 												));
