@@ -175,8 +175,7 @@ class User
 		{
 			unset($values['password']['password2']);
 			$validatorChain = new Zend_Validate();
-			$validatorChain->addValidator(new Zend_Validate_Alnum())
-							->addValidator(new Zend_Validate_StringLength(
+			$validatorChain->addValidator(new Zend_Validate_StringLength(
 											   $this->scope->validate->password->lengthMin, 
 											   $this->scope->validate->password->lengthMax
 										  ));
