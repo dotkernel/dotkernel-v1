@@ -57,6 +57,10 @@ $session = Zend_Registry::get('session');
 $config = new Zend_Config_Ini(CONFIGURATION_PATH.'/application.ini', APPLICATION_ENV);
 $registry->configuration = $config;
 
+//Load resource(modules, controllers, actions) settings from resource.ini file and store it in registry
+$resource = new Zend_Config_Xml(CONFIGURATION_PATH.'/resource.xml');
+$registry->resource = $resource;
+
 // Create  connection to database, as singleton , and store it in registry
 $db = Zend_Db::factory('Pdo_Mysql', $config->database->params->toArray());
 $registry->database = $db;

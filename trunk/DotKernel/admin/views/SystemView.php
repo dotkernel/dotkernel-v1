@@ -50,9 +50,10 @@ class System_View extends View
 	 * Display settings
 	 * @access public
 	 * @param string $templateFile
+	 * @param array $data
 	 * @return void
 	 */
-	public function displaySettings($templateFile, $data, $message)
+	public function displaySettings($templateFile, $data)
 	{
 		$this->tpl->setFile('tpl_main', 'system/' . $templateFile . '.tpl');
 		$this->tpl->setBlock('tpl_main', 'textarea', 'textarea_row');
@@ -60,11 +61,6 @@ class System_View extends View
 		$this->tpl->setBlock('tpl_main', 'option', 'option_row');
 		$this->tpl->setBlock('tpl_main', 'radios', 'radios_row');
 		$this->tpl->setBlock('tpl_main', 'radio', 'radio_row');
-		if($message != '')
-		{
-			$this->tpl->setVar('MESSAGE_TEXT', $message);
-			$this->tpl->setVar('MESSAGE_TYPE', 'info');
-		}
 		foreach ($data as $v)
 		{			
 			$this->tpl->setVar('NAME', $v['title']);

@@ -27,6 +27,7 @@
 				</div>
 				<div class="content">
 					<h1>{PAGE_CONTENT_TITLE}</h1>
+						{MESSAGE_BLOCK}
 					{MAIN_CONTENT}
 				</div>
 			</div>

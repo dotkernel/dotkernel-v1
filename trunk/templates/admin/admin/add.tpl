@@ -1,4 +1,3 @@
-<div class="message_{MESSAGE_TYPE}">{MESSAGE_TEXT}</div>
 <form action="{SITE_URL}/admin/admin/add" method="post" >
 <input type="hidden" name="send" value="on">
 <fieldset style="width: 500px">

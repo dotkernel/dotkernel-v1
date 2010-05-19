@@ -1,5 +1,4 @@
 <center>
-<div class="message_{MESSAGE_TYPE}">{MESSAGE_TEXT}</div>
 	<form action="{SITE_URL}/admin/admin/authorize" method="post" >
 <fieldset style="width: 350px;">
 	<legend>Login</legend>

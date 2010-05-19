@@ -37,14 +37,7 @@ class Admin_View extends View
 	 */
 	public function loginForm($templateFile)
 	{
-		$session = Zend_Registry::get('session');
-		$this->tpl->setFile('tpl_main', 'admin/' . $templateFile . '.tpl');		
-		if(isset($session->loginUserError))
-		{
-			$this->tpl->setVar('MESSAGE_TEXT',$session->loginUserError);
-			$this->tpl->setVar('MESSAGE_TYPE', 'error');
-			unset($session->loginUserError);
-		}
+		$this->tpl->setFile('tpl_main', 'admin/' . $templateFile . '.tpl');	
 	}
 	/**
 	 * List the admin users
@@ -77,10 +70,9 @@ class Admin_View extends View
 	 * @access public
 	 * @param string $templateFile
 	 * @param array $data [optional]
-	 * @param array $error [optional]
 	 * @return void
 	 */
-	public function details($templateFile, $data=array(), $error=array())
+	public function details($templateFile, $data=array())
 	{
 		$this->tpl->setFile('tpl_main', 'admin/' . $templateFile . '.tpl');				
 		foreach ($data as $k=>$v)
@@ -89,15 +81,5 @@ class Admin_View extends View
 		}
 		//empty because password is encrypted with md5
 		$this->tpl->setVar('PASSWORD', '');
-		$errorMessage = '';
-		if(!empty($error))
-		{
-			foreach ($error as $k=>$v)
-			{
-			    $errorMessage .= '<b>'.ucfirst($k).':</b> '.$v.'<br />';
-			}
-			$this->tpl->setVar('MESSAGE_TYPE', 'error');
-		}
-		$this->tpl->setVar('MESSAGE_TEXT', $errorMessage);
 	}
 }

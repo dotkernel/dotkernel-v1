@@ -520,4 +520,16 @@ input.bigger{width: 100%;}
 	margin: 5px;
 	width: 400px;
 }
+
+.message_warning{
+	background-color: #FFFFB0;
+	border: 1px solid #F19F56;
+	vertical-align: middle;
+	text-align: left;
+	font-weight: bold;
+	font-size: 13px;
+	padding: 5px;
+	margin: 5px;
+	width: 400px;
+}
 /*END MESSAGES*/

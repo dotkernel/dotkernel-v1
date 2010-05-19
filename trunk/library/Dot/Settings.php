@@ -73,8 +73,8 @@ class Dot_Settings
 	 */
 	public static function loadControllerFiles($requestModule)
 	{
-		$config = Zend_Registry::get('configuration');
-		$modules = $config->resources->controllers->toArray();
+		$resource = Zend_Registry::get('resource');
+		$modules = $resource->controllers->toArray();		
 		
 		/**
 		 *  if we are in frontend , we have an empty variable for $requestModule

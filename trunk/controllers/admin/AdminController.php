@@ -46,7 +46,8 @@ switch ($requestAction)
 			else
 			{
 				unset($session->admin);
-				$session->loginUserError = $scope->errorMessage->wrongCredentials;
+				$session->message['txt'] = $scope->errorMessage->wrongCredentials;
+				$session->message['type'] = 'error';
 				header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/login');
 				exit;				
 			}
@@ -54,13 +55,14 @@ switch ($requestAction)
 		else
 		{
 			// login info are NOT VALID
-			$session->loginUserError = $validate['error']['username'] . ' '. $validate['error']['password'];
+			$session->message['txt'] = array($validate['error']['username'], $validate['error']['password']);
+			$session->message['type'] = 'error';
 			header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/login');
 			exit;
 		}			
 	break;
 	case 'account':
-		$data = $adminModel->getUserInfo($session->admin['id']);
+		$data = $adminModel->getAdminInfo($session->admin['id']);
 		$adminView->details('update',$data);	
 	break;
 	case 'list':
@@ -97,25 +99,28 @@ switch ($requestAction)
 				   	$adminExists = $adminModel->getAdminBy($field, $data[$field]);
 					if(!empty($adminExists))
 					{
-						$error[$field] = $data[$field].$scope->errorMessage->adminExists;
+						$session->message['txt'] = $data[$field].$scope->errorMessage->adminExists;
+						$session->message['type'] = 'error';
 					}
 				}	
 			}
 			if(empty($error))
 			{
 				//add admin user
-				$adminModel->addUser($data);
+				$adminModel->addUser($data);				
+				$session->message['txt'] = $scope->infoMessage->accountAdd;
+				$session->message['type'] = 'info';
 				header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/list/');
 				exit;	
 				
 			}
-			elseif(array_key_exists('password', $data))
-			{ 
-				// do not display password in the add form
-				unset($data['password']);
+			else
+			{				
+				$session->message['txt'] = $error;
+				$session->message['type'] = 'error';
 			}
 		}
-		$adminView->details('add',$data,$error);		
+		$adminView->details('add',$data);		
 	break;
 	case 'update':
 		$error = array();
@@ -133,17 +138,24 @@ switch ($requestAction)
 			$valid = $adminModel->validateUser($values);
 			$data = $valid['data'];
 			$error = $valid['error'];			
-			if(empty($error))
+			if(empty($valid['error']))
 			{
 				$data['id'] = $request['id'];
 				//add admin user
 				$adminModel->updateUser($data);
+				$session->message['txt'] = $scope->infoMessage->accountUpdate;
+				$session->message['type'] = 'info';
 				header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/list/');
 				exit;				
 			}
+			else
+			{
+				$session->message['txt'] = $error;
+				$session->message['type'] = 'error';
+			}
 		}
 		$data = $adminModel->getAdminInfo($request['id']);
-		$adminView->details('update',$data,$error);	
+		$adminView->details('update',$data);	
 	break;
 }
 

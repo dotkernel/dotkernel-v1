@@ -35,8 +35,7 @@ class System
 		return $this->db->fetchAll($select);
 	}
 	public function updateSettings($data)
-	{
-		Zend_Debug::dump($data);	
+	{		
 		foreach ($data as $k => $v)
 		{			
 			$this->db->update('setting', array('value' => $v), $this->db->quoteIdentifier('key').' = '.$this->db->quote($k));

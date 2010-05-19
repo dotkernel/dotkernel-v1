@@ -23,11 +23,13 @@ $pageTitle = $scope->pageTitle->action->{$requestAction};
 switch ($requestAction)
 {
 	default:
+		// default action
+		$pageTitle = $scope->pageTitle->action->home;
 	case 'home';
 		// a call to specific view function
 		// like: viewControllerAction() , a.k.a viewPageHome()
 		// call to view function
-		$pageView->showPage('home');
+		$pageView->showPage($requestAction);
 	break;
 	case 'about':
 		$pageView->showPage($requestAction);

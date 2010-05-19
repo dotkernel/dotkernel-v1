@@ -17,9 +17,10 @@
  */ 
 
 // set Module and Action default values
-$requestController = isset($requestController) && $requestController !='Index' ? $requestController : 'Page';
-$requestAction     = isset($requestAction) && $requestAction !=''         ? $requestAction     : 'home';
-
+$defaultController = $resource->route->controller->$requestModule;
+$requestController = isset($requestController) && $requestController !='Index' ? $requestController : $defaultController;
+$defaultAction = $resource->route->action->$requestModule->$requestController;
+$requestAction     = isset($requestAction) && $requestAction !=''         ? $requestAction     : $defaultAction;
 // Start the template object, empty for the moment 
 require(DOTKERNEL_PATH . '/' . $requestModule . '/' . 'View.php');	
 $tpl = View::getInstance(TEMPLATES_PATH . '/' . $requestModule);
@@ -69,6 +70,9 @@ $tpl->setViewMenu($config);
 
 //Set  HTML head structure  tags 
 $tpl->setViewTitle($settings, $pageTitle);
+
+//Dispaly message (error, warning, info)	
+$tpl->displayMessage();
 
 /**
  * @TODO improvement of canonical url's

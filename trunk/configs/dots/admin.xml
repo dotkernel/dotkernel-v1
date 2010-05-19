@@ -14,12 +14,16 @@
 			</action>
 		</pageTitle>
 		<errorMessage>			
-			<passwordTwice>You didn't enter the same password twice. Please re-enter your password</passwordTwice>
+			<passwordTwice>You didn't enter the same password twice. Please re-enter your it again</passwordTwice>
 			<invalidUsername>Invalid Username !</invalidUsername>
 			<invalidPassword>Invalid Password !</invalidPassword>
 			<wrongCredentials>Wrong Login Credentials !</wrongCredentials>
-			<adminExists> already exists! </adminExists>
+			<adminExists> already exists ! </adminExists>			
 		</errorMessage>
+		<infoMessage>
+			<accountAdd>Account created ! </accountAdd>
+			<accountUpdate>Account updated ! </accountUpdate>
+		</infoMessage>
 		<validate>
 			<details>
 				<lengthMin>3</lengthMin>

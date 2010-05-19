@@ -17,8 +17,10 @@
 */ 
 
 // set Module and Action default values
-$requestController = isset($requestController) && $requestController !='Index' ? $requestController : 'System';
-$requestAction     = isset($requestAction) && $requestAction !=''         ? $requestAction     : 'dashboard';
+$defaultController = $resource->route->controller->$requestModule;
+$requestController = isset($requestController) && $requestController !='Index' ? $requestController : $defaultController;
+$defaultAction = $resource->route->action->$requestModule->$requestController;
+$requestAction     = isset($requestAction) && $requestAction !=''         ? $requestAction     : $defaultAction;
 
 // check admin permission
 if(!Dot_Auth::hasIdentity('admin') && $requestAction != 'authorize')
@@ -70,6 +72,9 @@ $tpl->setInfoBar();
 
 //Set  HTML head structure  tags 
 $tpl->setViewTitle($settings, $pageTitle);
+
+//Dispaly message (error, warning, info)	
+$tpl->displayMessage();
 
 // parse the main content block
 $tpl->parse('MAIN_CONTENT', 'tpl_main');

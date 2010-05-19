@@ -26,8 +26,12 @@ switch ($requestAction)
 	break;
 	case 'settings':
 		$data = $systemModel->listSettings();	
-		$message = (isset($request['update']) && $request['update'] == 'done') ? $scope->message->settingsUpdate : '';
-		$systemView->displaySettings('settings', $data, $message);
+		if(isset($request['update']) && $request['update'] == 'done')
+		{			
+				$session->message['txt'] = $scope->infoMessage->settingsUpdate;
+				$session->message['type'] = 'info';
+		}
+		$systemView->displaySettings('settings', $data);
 	break;
 	case 'settings-update':
 		$data = array();
