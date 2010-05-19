@@ -59,7 +59,11 @@
 				<lengthMin>3</lengthMin>
 				<lengthMax>255</lengthMax>
 			</username>
-		</validate>		
+		</validate>	
+		<forgotPassword>
+			<subject>Forgot Password</subject>
+			<message>Dear %FIRSTNAME%, your password is %PASSWORD%</message>
+		</forgotPassword> 	
 	</variable>		
 	</body>
 </config>

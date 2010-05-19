@@ -229,15 +229,18 @@ class User
 	{
 		$session = Zend_Registry::get('session');
 		$select = $this->db->select()
-						   ->from('user', array('password'))
+						   ->from('user')
 						   ->where('email = ?',$email);
 		$value = $this->db->fetchRow($select);
 		if(!empty($value))
 		{
 			$dotEmail = new Dot_Email();
 			$dotEmail->addTo($email);
-			$dotEmail->setSubject('Forgot Password');			
-			$dotEmail->setBodyText('Your password is '.$value['password']);			
+			$dotEmail->setSubject($this->scope->forgotPassword->subject);
+			$msg = str_replace(array('%FIRSTNAME%', '%PASSWORD%'), 
+							   array($value['firstName'], $value['password']), 
+				              $this->scope->forgotPassword->message);
+			$dotEmail->setBodyText($msg);			
 			$succeed = $dotEmail->send();
 			if($succeed)
 			{
