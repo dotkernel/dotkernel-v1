@@ -223,11 +223,11 @@ class User
 	 * Send forgot password to user
 	 * @acess public
 	 * @param string $email
-	 * @return array
+	 * @return void
 	 */
 	public function forgotPassword($email)
 	{
-		
+		$session = Zend_Registry::get('session');
 		$select = $this->db->select()
 						   ->from('user', array('password'))
 						   ->where('email = ?',$email);
@@ -241,17 +241,19 @@ class User
 			$succeed = $dotEmail->send();
 			if($succeed)
 			{
-				$error['Email Sent'] = $this->scope->errorMessage->emailSent.$email;
+				$session->message['txt'] = $this->scope->errorMessage->emailSent.$email;
+				$session->message['type'] = 'info';
 			}
 			else
 			{
-				$error['Email Not Sent'] = $this->scope->errorMessage->emailNotSent.$email;
+				$session->message['txt'] = $this->scope->errorMessage->emailNotSent.$email;
+				$session->message['type'] = 'error';
 			}		
 		}
 		else
 		{
-			$error['Not Found'] = $email.$this->scope->errorMessage->emailNotFound;
-		}
-		return $error;		
+			$session->message['txt'] = $email.$this->scope->errorMessage->emailNotFound;
+			$session->message['type'] = 'error';
+		}		
 	}	
 }
