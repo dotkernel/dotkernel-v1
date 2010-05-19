@@ -23,38 +23,58 @@ $userView = new User_View($tpl, $settings);
 $pageTitle = $scope->pageTitle->action->{$requestAction};
 switch ($requestAction)
 {
+	default:
+		// default action
+		$pageTitle = $scope->pageTitle->action->login;
 	case 'login':
-		// Show the Login form	
-		$userView->loginForm('login');
+		if(!isset($session->user))
+		{
+			// Show the Login form
+			$userView->loginForm('login');
+		}
+		else
+		{			
+			header('Location: '.$config->website->params->url.'/user/account');
+			exit;
+		}
 	break;
 	case 'authorize':
-		// validate the authorization request paramethers 
-		$validate = $userModel->validateLogin($_POST['username'], $_POST['password'], $_POST['send']);
-		if(!empty($validate['login']) && empty($validate['error']))
-		{
-			// login info are VALID, we can see if is a valid user now 
-			$user = $userModel->checkLogin($validate['login']);
-			if(!empty($user))
+		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
+		{	
+			// validate the authorization request paramethers 
+			$validate = $userModel->validateLogin($_POST['username'], $_POST['password'], $_POST['send']);
+			if(!empty($validate['login']) && empty($validate['error']))
 			{
-				$session->user = $user;
-				header('location: '.$config->website->params->url.'/user/account');
-				exit;
+				// login info are VALID, we can see if is a valid user now 
+				$user = $userModel->checkLogin($validate['login']);
+				if(!empty($user))
+				{
+					$session->user = $user;
+					header('location: '.$config->website->params->url.'/user/account');
+					exit;
+				}
+				else
+				{
+					unset($session->user);
+					$session->message['txt'] = $scope->errorMessage->login;
+					$session->message['type'] = 'error';
+				}
 			}
 			else
 			{
-				unset($session->user);
-				$session->loginUserError = $scope->errorMessage->login;
-				header('Location: '.$config->website->params->url.'/user/login');
-				exit;				
-			}
+				// login info are NOT VALID
+				$session->message['txt'] = array($validate['error']['username'], $validate['error']['password']);
+				$session->message['type'] = 'error';
+			}		
 		}
 		else
 		{
-			// login info are NOT VALID
-			$session->loginUserError = $validate['error']['username'] . ' <br> '. $validate['error']['password'];
-			header('Location: '.$config->website->params->url.'/user/login');
-			exit;
-		}			
+			$session->message['txt'] = $scope->warningMessage->userPermission;
+			$session->message['type'] = 'warning';
+		}
+		header('Location: '.$config->website->params->url.'/user/login');
+		exit;				
+			
 	break;
 	case 'account':
 		// Show My Account Page, if he is logged in 
@@ -80,14 +100,14 @@ switch ($requestAction)
 			{				
 				//update user
 				$userModel->updateUser($data);
-				$error['update'] = $scope->message->update;
-				
+				$session->message['txt'] = $scope->infoMessage->update;
+				$session->message['type'] = 'info';			
 			}
-			elseif(array_key_exists('password', $data))
-			{ 
-				// do not display password in the add form
-				unset($data['password']);
-			}
+			else
+			{
+				$session->message['txt'] = $error;
+				$session->message['type'] = 'error';
+			}			
 			$dataTmp = $userModel->getUserInfo($session->user['id']);
 			$data['username'] = $dataTmp['username'];
 		}
@@ -95,7 +115,7 @@ switch ($requestAction)
 		{			
 			$data = $userModel->getUserInfo($session->user['id']);
 		}
-		$userView->details('update',$data,$error);	
+		$userView->details('update',$data);	
 	break;
 	case 'register':
 		$data = array();
@@ -103,10 +123,10 @@ switch ($requestAction)
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
 		{		
 			$values = array('details' => 
-								array('username'=>$_POST['username'],
-									  'firstName'=>$_POST['firstName'],
+								array('firstName'=>$_POST['firstName'],
 									  'lastName'=>$_POST['lastName']
 									 ),
+							'username' => array('username'=>$_POST['username']),
 							'email' => array('email' => $_POST['email']),
 							'password' => array('password' => $_POST['password'],
 												'password2' =>  $_POST['password2']
@@ -143,8 +163,10 @@ switch ($requestAction)
 			}
 			if(empty($error))
 			{				
-			   	//add admin user
+			   	//add user user
 				$userModel->addUser($data);
+				$session->message['txt'] = $scope->infoMessage->add;
+				$session->message['type'] = 'info';
 				$validate = $userModel->validateLogin($data['username'], $data['password'], 'on');
 				if(!empty($validate['login']) && empty($validate['error']))
 				{
@@ -164,7 +186,7 @@ switch ($requestAction)
 				}
 			}
 			else
-			{
+			{	
 				if(array_key_exists('password', $data))
 				{ 
 					// do not display password in the add form
@@ -175,7 +197,7 @@ switch ($requestAction)
 			echo Zend_Json::encode(array('data'=>$data, 'error'=>$error));
 			exit;			
 		}
-		$userView->details('add',$data,$error);
+		$userView->details('add',$data);
 	break;
 	case 'forgot-password':
 		$data = array();
@@ -197,5 +219,5 @@ switch ($requestAction)
 		Dot_Auth::clearIdentity('user');
 		header('location: '.$config->website->params->url);
 		exit;
-	break;			
+	break;	
 }

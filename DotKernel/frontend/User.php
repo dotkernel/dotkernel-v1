@@ -163,21 +163,36 @@ class User
 		$error = array();
 		//validate the input data	
 		$validatorChain = new Zend_Validate();
-		// Only validate the details parameters. Username, password and email will be also filtered
+		// Only filter the details parameters. Username, password and email will also be validated
 		$validDetails = Dot_Kernel::validateFilter($validatorChain, $values['details']);
+		
 		//validate email
 		$validatorEmail = new Zend_Validate_EmailAddress();		
 		$validEmail = Dot_Kernel::validateFilter($validatorEmail, $values['email']);
+		
 		$data = array_merge($data, $validDetails['data'], $validEmail['data']);
 		$error = array_merge($error, $validDetails['error'], $validEmail['error']);
+		//validate username
+		if(array_key_exists('username', $values))
+		{
+			$validatorChain = new Zend_Validate();
+			$validatorChain->addValidator(new Zend_Validate_Alnum())
+							->addValidator(new Zend_Validate_StringLength(
+													$this->scope->validate->details->lengthMin, 
+													$this->scope->validate->details->lengthMax
+												));
+			$validUsername = Dot_Kernel::validateFilter($validatorChain, $values['username']);
+			$data = array_merge($data, $validUsername['data'], $validDetails['data']);
+			$error = array_merge($error, $validUsername['error'], $validDetails['error']);
+		}
 		//validate paswword				
 		if($values['password']['password'] == $values['password']['password2'])
 		{
 			unset($values['password']['password2']);
 			$validatorChain = new Zend_Validate();
 			$validatorChain->addValidator(new Zend_Validate_StringLength(
-											   $this->scope->validate->password->lengthMin, 
-											   $this->scope->validate->password->lengthMax
+											   $this->scope->validate->username->lengthMin, 
+											   $this->scope->validate->username->lengthMax
 										  ));
 			$validPass = Dot_Kernel::validateFilter($validatorChain, $values['password']);
 			$data = array_merge($data, $validPass['data']);

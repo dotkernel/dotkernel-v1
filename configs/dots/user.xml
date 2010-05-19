@@ -19,9 +19,6 @@
 				<forgot-password>Forgot your password?</forgot-password>
 			</action>
 		</pageTitle>
-		<message>
-			<update>Your account was updated !</update>
-		</message>
 		<errorMessage>
 			<login>Wrong Login Credentials</login>
 			<captcha>Incorrect. Try again.</captcha>	
@@ -32,8 +29,14 @@
 			<invalidUsername>Invalid Username !</invalidUsername>
 			<invalidPassword>Invalid Password !</invalidPassword>
 			<userExists> already exists! </userExists>
-			<userPermission>You don't have enough credentials to access this url.</userPermission>
 		</errorMessage>
+		<infoMessage>
+			<add>Your account was created !</add>
+			<update>Your account was updated !</update>
+		</infoMessage>
+		<warningMessage>
+			<userPermission>You don't have enough credentials to access this url.</userPermission>
+		</warningMessage>
 		<captchaOptions>
 			<recaptchaPublicKey>xxx</recaptchaPublicKey>
 			<recaptchaPrivateKey>xxx</recaptchaPrivateKey>

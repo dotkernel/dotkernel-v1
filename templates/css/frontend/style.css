@@ -373,3 +373,39 @@ input{
 	font-family: 'lucida sans unicode', trebuchet ms, sans-serif;
 	cursor:pointer;
 }
+/*MESSAGES ERROR AND INFO*/
+.message_info{
+	background-color: #CDEFFE;
+	border: 1px solid #068FCC;
+	vertical-align: middle;
+	text-align: left;
+	font-weight: bold;
+	font-size: 13px;
+	padding: 5px;
+	margin: 5px;
+	width: 400px;
+}
+.message_error{
+	background-color: #FDDCBD;
+	border: 1px solid #F07709;
+	vertical-align: middle;
+	text-align: left;
+	font-weight: bold;
+	font-size: 13px;
+	padding: 5px;
+	margin: 5px;
+	width: 400px;
+}
+
+.message_warning{
+	background-color: #FFEFC4;
+	border: 1px solid #FAD605;
+	vertical-align: middle;
+	text-align: left;
+	font-weight: bold;
+	font-size: 13px;
+	padding: 5px;
+	margin: 5px;
+	width: 400px;
+}
+/*END MESSAGES*/

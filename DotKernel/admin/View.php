@@ -267,4 +267,34 @@ class View extends Dot_Template
 		}
 		$this->parse('PAGINATION', 'page_file');				
 	}
+	/**
+	 * Display message - error, warning, info
+	 * @access public
+	 * @return void
+	 */
+	public function displayMessage()
+	{
+		$session = Zend_Registry::get('session');		
+		if(isset($session->message))
+		{
+			$this->setFile('tpl_msg', 'blocks/message.tpl');
+			$this->setBlock('tpl_msg', 'msg_array', 'msg_array_row');
+			$this->setVar('MESSAGE_TYPE', $session->message['type']);
+			if(is_array($session->message['txt']))
+			{			
+				foreach ($session->message['txt'] as $k => $msg)
+				{
+					$this->setVar('MESSAGE_ARRAY', is_string($k) ? $msg = ucfirst($k) . ' - ' . $msg : $msg);
+					$this->parse('msg_array_row', 'msg_array', true);
+				}
+			}
+			else
+			{
+				$this->parse('msg_array_row', '');
+				$this->setVar('MESSAGE_STRING', $session->message['txt']);
+			}
+			$this->parse('MESSAGE_BLOCK', 'tpl_msg');
+			unset($session->message);
+		}		
+	}
 }

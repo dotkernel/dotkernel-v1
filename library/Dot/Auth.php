@@ -33,7 +33,8 @@ class Dot_Auth
 		{
 			$scope = Zend_Registry::get('scope');
 			$config = Zend_Registry::get('configuration');
-			$session->loginUserError = $scope->errorMessage->userPermission;
+			$session->message['txt'] = $scope->warningMessage->userPermission;
+			$session->message['type'] = 'warning';
 			header('Location: ' . $config->website->params->url . '/' . $who . '/login');
 			exit;
 		}

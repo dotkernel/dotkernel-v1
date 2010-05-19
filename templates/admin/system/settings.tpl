@@ -1,4 +1,3 @@
-<div class="message_{MESSAGE_TYPE}">{MESSAGE_TEXT}</div>
 <fieldset style="width: 100%">
 <legend>List Settings Variables</legend>
 <form method="post" name="configs" action="{SITE_URL}/admin/system/settings-update">

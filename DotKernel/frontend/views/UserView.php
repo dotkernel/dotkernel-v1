@@ -38,13 +38,7 @@ class User_View extends View
 	 */
 	public function loginForm($templateFile)
 	{
-		$session = Zend_Registry::get('session');
-		$this->tpl->setFile('tpl_main', 'user/' . $templateFile . '.tpl');		
-		if(isset($session->loginUserError))
-		{
-			$this->tpl->setVar('ERROR',$session->loginUserError);
-			unset($session->loginUserError);
-		}
+		$this->tpl->setFile('tpl_main', 'user/' . $templateFile . '.tpl');
 	}
 	/**
 	 * Display user's signup form

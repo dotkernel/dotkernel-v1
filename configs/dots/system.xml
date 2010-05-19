@@ -12,9 +12,9 @@
 				<phpinfo>PHP Info</phpinfo>
 			</action>
 		</pageTitle>
-		<message>
+		<infoMessage>
 			<settingsUpdate>System settings was updated.</settingsUpdate>
-		</message>
+		</infoMessage>
 	</variable>
 	<variable scope="frontend">
 	</variable>		

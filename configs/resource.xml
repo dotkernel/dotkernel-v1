@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <resources>
+ 	<!-- all controllers listed here-->
+	<!-- 1. for whitelist approach & a secure autoload of all controllers-->
+	<controllers>
+		<frontend>Page</frontend>
+		<frontend>User</frontend>
+		<admin>Admin</admin>
+		<admin>System</admin>
+	</controllers>
+ 	<route>
+ 		<!-- default controllers for modules -->
+		<controller>
+			<frontend>Page</frontend>
+			<admin>System</admin>
+		</controller>
+		<action>
+			<!-- default action for controllers ... -->
+			<frontend>
+				<Page>home</Page>
+				<User>login</User>
+			</frontend>
+			<admin>
+				<Admin>account</Admin>
+				<System>dashboard</System>
+			</admin>
+		</action>
+ 	</route>
+ </resources>
