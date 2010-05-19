@@ -210,10 +210,15 @@ switch ($requestAction)
 			if(empty($error))
 			{	
 				 // re-send password
-				$error = $userModel->forgotPassword($data['email']);						
+				$userModel->forgotPassword($data['email']);						
 			}
+			else
+			{
+				$session->message['txt'] = $error;
+				$session->message['type'] = 'error';
+			}			
 		}
-		$userView->details('forgot_password',$data,$error);		
+		$userView->details('forgot_password',$data);		
 	break;
 	case 'logout':
 		Dot_Auth::clearIdentity('user');

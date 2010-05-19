@@ -44,9 +44,10 @@ class User_View extends View
 	 * Display user's signup form
 	 * @access public
 	 * @param string $templateFile
+	 * @param array $data [optional]
 	 * @return void
 	 */
-	public function details($templateFile, $data=array(), $error=array())
+	public function details($templateFile, $data=array())
 	{
 		$this->tpl->setFile('tpl_main', 'user/' . $templateFile . '.tpl');				
 		foreach ($data as $k=>$v)
@@ -57,15 +58,6 @@ class User_View extends View
 		{
 			$this->tpl->setVar('SECUREIMAGE',$this->getRecaptcha());			
 		}
-		$errorMessage = '';
-		if(!empty($error))
-		{
-			foreach ($error as $k=>$v)
-			{
-			    $errorMessage .= '<b>'.ucfirst($k).':</b> '.$v.'<br />';
-			}
-		}
-		$this->tpl->setVar('ERROR',$errorMessage);
 	}
 	public function getRecaptcha()
 	{
