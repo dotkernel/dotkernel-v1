@@ -1,7 +1,7 @@
 <?php
 /**
 * DotBoost Technologies Inc.
-* DotKernel v1.0
+* DotKernel v1.2
 *
 * @category   DotKernel
 * @package    DotLibrary
@@ -11,7 +11,7 @@
 */
 
 /**
-* CURL with TOR class
+* CURL with TOR and country proxy features
 * @category   DotKernel
 * @package    DotLibrary
 * @author     DotKernel Team <team@dotkernel.com>
@@ -33,11 +33,23 @@ class Dot_Curl
 		'Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)'
 	);
 	/**
+	 * Used in case you want to specify userAgent
+	 * @access public
+	 * @var string
+	 */
+	public $defaultUserAgent = '';
+	/**
 	 * Used in case you want to bypass tor proxy
 	 * @access public
 	 * @var bool
 	 */
 	public $useTor = true;
+	/**
+	 * Use in case you want to use country proxy feature
+	 * @access public
+	 * @var integer
+	 */
+	public $countryId = 0;
 	/**
 	 * localhost ip
 	 * @access public
@@ -87,6 +99,12 @@ class Dot_Curl
 	 */
 	public $errors = array();
 	/**
+	 * Info , stores curl_getinfo() response
+	 * @access public
+	 * @var array
+	 */
+	public $info = array();
+	/**
 	 * Post vars , leave empty if not needed
 	 * @access public
 	 * @var array
@@ -123,7 +141,13 @@ class Dot_Curl
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, $this->followLocation);
 
 		//get a random user agent
-		curl_setopt($ch, CURLOPT_USERAGENT, $this->userAgents[rand(0, count($this->userAgents) -1)]);
+		if ($this->defaultUserAgent != '')
+		{
+			curl_setopt($ch, CURLOPT_USERAGENT, $this->defaultUserAgent);
+		}else 
+		{
+			curl_setopt($ch, CURLOPT_USERAGENT, $this->userAgents[rand(0, count($this->userAgents) -1)]);
+		}
 
 		//if useTor is true connection will be done throu tor proxy
 		if ($this->useTor)
@@ -231,19 +255,24 @@ class Dot_Curl
 		//reset every time to avoid stacking
 		$this->errors = array();
 		$this->usedPorts = array();
+		$content = '';
 
 		$obj = curl_init($url);
 
 		$this->setOptions($obj, $url, $referer);
 
-		$content = curl_exec($obj);
-
-		if (curl_errno($obj) != 0)
+		if (count($this->errors) <= 0)
 		{
-			curl_close($obj);
-			$this->errors[] = 'Connection problem (cURL ERROR: '.curl_errno($ch).': '.curl_error($ch).')';
+			$content = curl_exec($obj);
+			$this->info = curl_getinfo($obj);
+
+			if (curl_errno($obj) != 0)
+			{
+				$this->errors[] = 'Connection problem (DOT CURL ERROR: '.curl_errno($obj).': '.curl_error($obj).')';
+			}
 		}
-		else curl_close($obj);
+
+		curl_close($obj);
 
 		return $content;
 	}
