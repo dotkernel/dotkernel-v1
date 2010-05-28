@@ -15,6 +15,7 @@
  * Setup environment, setup index controllers , and  load module to run
  * @author     DotKernel Team <team@dotkernel.com>
  */
+
 // Start counting the time needed to display all content, from the very beginning
 $startTime = microtime();
 
