@@ -75,8 +75,8 @@ Dot_Settings::setPhpSettings($config->phpSettings->toArray());
 
 // Start Index Controller
 $requestRaw = explode('/', 
-											trim(substr($_SERVER['REQUEST_URI'], 
-											strlen(dirname($_SERVER['PHP_SELF']))), '/'));
+					  trim(substr($_SERVER['REQUEST_URI'], 
+					  strlen(dirname($_SERVER['PHP_SELF']))), '/'));
 
 // We are in frontend or in other module ? Prebuilt modules: frontend, admin, rss, ajax 
 $requestModule = 'frontend';
