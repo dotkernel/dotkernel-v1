@@ -123,6 +123,5 @@ $dotKernel = new Dot_Kernel();
 *  From this point , the control is taken by the Front Controller
 *  call the Front Controller specific file, but check first if exists 
 */
-
 $frontControllerPath = CONTROLLERS_PATH.'/'.$requestModule.'/'.'IndexController.php';
 !file_exists($frontControllerPath) ?  $dotKernel->pageNotFound() :  require($frontControllerPath);
