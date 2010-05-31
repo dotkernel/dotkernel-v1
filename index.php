@@ -109,6 +109,7 @@ while (list($key, $val) = each($requestRaw))
     $request[$val] = current($requestRaw);
     next($requestRaw);
 }
+
 // remove first element of the request array, is module and action in it
 array_shift($request);
 
