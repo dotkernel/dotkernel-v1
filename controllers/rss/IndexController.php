@@ -1,7 +1,7 @@
 <?php
 /**
 * DotBoost Technologies Inc.
-* DotKernel v1.0
+* DotKernel Application Framework
 *
 * @category   DotKernel
 * @package    Rss
