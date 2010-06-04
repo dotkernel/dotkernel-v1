@@ -45,13 +45,15 @@ class Admin_View extends View
 	 * @param string $templateFile
 	 * @param array $list
 	 * @param int $page
+	 * @param bool $ajax - Using ajax, parse only the list content
 	 * @return void
 	 */
-	public function listUser($templateFile, $list, $page)
+	public function listUser($templateFile, $list, $page, $ajax = false)
 	{
 		$this->tpl->setFile('tpl_main', 'admin/' . $templateFile . '.tpl');
 		$this->tpl->setBlock('tpl_main', 'list', 'list_block');
 		$this->tpl->paginator($list['paginatorAdapter'],$page);
+		$this->tpl->setVar('PAGE', $page);
 		foreach ($list['data'] as $k => $v)
 		{
 		    $this->tpl->setVar('BG', $k%2+1);
@@ -64,6 +66,10 @@ class Admin_View extends View
 			$this->tpl->setVar('ISACTIVE', $v['isActive']*(-1)+1);
 			$this->tpl->setVar('ACTIVE_IMG', $v['isActive'] == 1 ? 'active' : 'inactive');
 			$this->tpl->parse('list_block', 'list', true);
+		}
+		if($ajax)
+		{
+			$this->tpl->pparse('AJAX', 'tpl_main');exit;
 		}
 	}
 	/**
