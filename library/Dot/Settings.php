@@ -135,7 +135,7 @@ class Dot_Settings
 			foreach ($arrayScope as $v)
 			{
 				if(in_array($v['scope'], array('global', $requestModule)))
-				{				
+				{			
 					$scope = array_merge_recursive($scope,$v);
 				}
 			}

@@ -26,6 +26,13 @@
 		<tr>
 			<td class="row2"><b>Last Name</b></td>
 			<td class="row1"><input type="text" name="lastName" value="{LASTNAME}" class="bigger"></td>
+		</tr>		
+		<tr>
+			<td class="row2"><b>Active</b></td>
+			<td class="row1">
+				Yes <input type="radio" name="isActive" value="1" style="height: auto;" {ACTIVE_1}> 
+				No 	<input type="radio" name="isActive" value="0" style="height: auto;" {ACTIVE_0}>
+			</td>
 		</tr>
 		<tr>
 			<td colspan="2" class="row1" style="text-align: center;">

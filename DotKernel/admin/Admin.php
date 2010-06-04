@@ -190,10 +190,15 @@ class Admin
 	{
 		$data = array();
 		$error = array();
-		//validate the input data - Username, password and email will be also filtered
-		//only validate the details parameters	
+		//validate the input data - username, password and email will be also filtered
 		$validatorChain = new Zend_Validate();
-		$validDetails = Dot_Kernel::validateFilter($validatorChain, $values['details']);
+		//validate details parameters	
+		if(array_key_exists('details', $values))
+		{
+			$validDetails = Dot_Kernel::validateFilter($validatorChain, $values['details']);
+			$data = array_merge($data, $validDetails['data']);
+			$error = array_merge($error, $validDetails['error']);
+		}		
 		//validate username
 		if(array_key_exists('username', $values))
 		{
@@ -204,16 +209,28 @@ class Admin
 													$this->scope->validate->details->lengthMax
 												));
 			$validUsername = Dot_Kernel::validateFilter($validatorChain, $values['username']);
-			$data = array_merge($data, $validUsername['data'], $validDetails['data']);
-			$error = array_merge($error, $validUsername['error'], $validDetails['error']);
+			$data = array_merge($data, $validUsername['data']);
+			$error = array_merge($error, $validUsername['error']);
 		}
 		//validate email
-		$validatorEmail = new Zend_Validate_EmailAddress();		
-		$validEmail = Dot_Kernel::validateFilter($validatorEmail, $values['email']);
-		$data = array_merge($data, $validEmail['data']);
-		$error = array_merge($error, $validEmail['error']);
+		if(array_key_exists('email', $values))
+		{
+			$validatorEmail = new Zend_Validate_EmailAddress();		
+			$validEmail = Dot_Kernel::validateFilter($validatorEmail, $values['email']);
+			$data = array_merge($data, $validEmail['data']);
+			$error = array_merge($error, $validEmail['error']);
+		}			
+		//validate enum
+		if(array_key_exists('enum', $values))
+		{
+			$validatorEnum = new Zend_Validate_InArray(explode(',', $values['enum'][0]));
+			unset($values['enum'][0]);
+			$validEnum = Dot_Kernel::validateFilter($validatorEnum, $values['enum']);
+			$data = array_merge($data, $validEnum['data']);
+			$error = array_merge($error, $validEnum['error']);
+		}		
 		//validate password				
-		if($values['password']['password'] != '' || $values['password']['password2'] != '')
+		if(array_key_exists('email', $values) && ($values['password']['password'] != '' || $values['password']['password2'] != ''))
 		{			
 			if($values['password']['password'] == $values['password']['password2'])
 			{
@@ -233,5 +250,9 @@ class Admin
 			}
 		}
 		return array('data' => $data, 'error' => $error);
+	}
+	public function activateAdmin($id, $isActive)
+	{		
+        $this->db->update('admin', array('isActive' => $isActive), 'id = '.$id);
 	}
 }

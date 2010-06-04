@@ -18,7 +18,7 @@
 		<td class="row{BG}">{EMAIL}</td>
 		<td class="row{BG}">{FIRSTNAME}</td>
 		<td class="row{BG}">{LASTNAME}</td>
-		<td class="row{BG}"><img src="{IMAGES_URL}/{ACTIVE_IMG}.png" border='0'></td>
+		<td class="row{BG}"><a href="{SITE_URL}/admin/admin/activate/id/{ID}/isActive/{ISACTIVE}"><img src="{IMAGES_URL}/{ACTIVE_IMG}.png" border='0'></a></td>
 		<td class="row{BG}">{DATE_CREATED}</td>
 	</tr>
 <!-- END list -->
