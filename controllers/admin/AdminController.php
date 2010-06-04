@@ -165,8 +165,9 @@ switch ($requestAction)
 		$adminView->details('update',$data);	
 	break;
 	case 'activate':
-		$id = (isset($request['id'])) ? (int)$request['id'] : 0;
-		$isActive = (isset($request['isActive'])) ? $request['isActive'] : 0;
+		$id = (isset($_POST['id'])) ? (int)$_POST['id'] : 0;
+		$isActive = (isset($_POST['isActive'])) ? $_POST['isActive'] : 0;
+		$page = (isset($_POST['page'])) ? (int)$_POST['page'] : 1;
 		$values = array('enum' => array('0' => '0,1', 'isActive' => $isActive));
 		$valid = $adminModel->validateUser($values);
 		if(empty($valid['error']))
@@ -178,8 +179,9 @@ switch ($requestAction)
 			$session->message['txt'] = $scope->errorMessage->trickUserError;
 			$session->message['type'] = 'error';
 		}
-		header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/list/');
-		exit;
+		$users = $adminModel->getUserList($page);
+		$session->useAjaxView = true;		
+		$adminView->listUser('list', $users, $page, true);
 	break;
 }
 
