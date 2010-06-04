@@ -46,8 +46,12 @@ switch ($requestAction)
 			else
 			{
 				unset($session->admin);
-				$session->message['txt'] = $scope->errorMessage->wrongCredentials;
-				$session->message['type'] = 'error';
+				//check if account is inactive
+				$adminTmp = $adminModel->getAdminBy('username',$validate['login']['username']);
+				(1 == $adminTmp['isActive']) ?
+					$session->message['txt'] = $scope->errorMessage->wrongCredentials:
+					$session->message['txt'] = $scope->errorMessage->inactiveAcount;
+				$session->message['type'] = 'error';				
 				header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/login');
 				exit;				
 			}
@@ -83,6 +87,8 @@ switch ($requestAction)
 									  'lastName' => $_POST['lastName']
 									 ),
 							'email' => array('email' => $_POST['email']),
+							'enum' => array('0' => '0,1',
+											'isActive' => $_POST['isActive']),
 							'password' => array('password' => $_POST['password'],
 												'password2' =>  $_POST['password2']
 											   )
@@ -93,14 +99,13 @@ switch ($requestAction)
 			if(empty($error))
 			{	
 				//check if admin already exists by $field ('username','email')
-				$checkBy = array('username','email');
+				$checkBy = array('username', 'email');
 				foreach ($checkBy as $field)
 				{					
 				   	$adminExists = $adminModel->getAdminBy($field, $data[$field]);
 					if(!empty($adminExists))
 					{
-						$session->message['txt'] = $data[$field].$scope->errorMessage->adminExists;
-						$session->message['type'] = 'error';
+						$error = ucfirst($field) . ' '. $data[$field] . $scope->errorMessage->adminExists;
 					}
 				}	
 			}
@@ -131,6 +136,8 @@ switch ($requestAction)
 									  'lastName'=>$_POST['lastName']
 									 ),
 							'email' => array('email' => $_POST['email']),
+							'enum' => array('0' => '0,1',
+											'isActive' => $_POST['isActive']),
 							'password' => array('password' => $_POST['password'],
 												'password2' =>  $_POST['password2']
 											   )
@@ -156,6 +163,23 @@ switch ($requestAction)
 		}
 		$data = $adminModel->getAdminInfo($request['id']);
 		$adminView->details('update',$data);	
+	break;
+	case 'activate':
+		$id = (isset($request['id'])) ? (int)$request['id'] : 0;
+		$isActive = (isset($request['isActive'])) ? $request['isActive'] : 0;
+		$values = array('enum' => array('0' => '0,1', 'isActive' => $isActive));
+		$valid = $adminModel->validateUser($values);
+		if(empty($valid['error']))
+		{
+			$adminModel->activateAdmin($id, $valid['data']['isActive']);		
+		}
+		else
+		{
+			$session->message['txt'] = $scope->errorMessage->trickUserError;
+			$session->message['type'] = 'error';
+		}
+		header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/list/');
+		exit;
 	break;
 }
 

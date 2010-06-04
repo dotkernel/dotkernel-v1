@@ -18,7 +18,9 @@
 			<invalidUsername>Invalid Username !</invalidUsername>
 			<invalidPassword>Invalid Password !</invalidPassword>
 			<wrongCredentials>Wrong Login Credentials !</wrongCredentials>
-			<adminExists> already exists ! </adminExists>			
+			<inactiveAcount>This account is inactive !</inactiveAcount>
+			<adminExists> already exists ! </adminExists>	
+			<trickUserError>Why are you so smart ? &lt;/br&gt; Don't play with the fire !</trickUserError>		
 		</errorMessage>
 		<infoMessage>
 			<accountAdd>Account created ! </accountAdd>

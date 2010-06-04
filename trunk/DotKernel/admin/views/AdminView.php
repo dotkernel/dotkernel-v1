@@ -61,6 +61,7 @@ class Admin_View extends View
 			$this->tpl->setVar('FIRSTNAME', $v['firstName']);
 			$this->tpl->setVar('LASTNAME', $v['lastName']);
 			$this->tpl->setVar('DATE_CREATED', $v['dateCreated']);
+			$this->tpl->setVar('ISACTIVE', $v['isActive']*(-1)+1);
 			$this->tpl->setVar('ACTIVE_IMG', $v['isActive'] == 1 ? 'active' : 'inactive');
 			$this->tpl->parse('list_block', 'list', true);
 		}
@@ -74,10 +75,17 @@ class Admin_View extends View
 	 */
 	public function details($templateFile, $data=array())
 	{
-		$this->tpl->setFile('tpl_main', 'admin/' . $templateFile . '.tpl');				
+		$this->tpl->setFile('tpl_main', 'admin/' . $templateFile . '.tpl');
+		// for 'add' template file		
+		$this->tpl->setVar('ACTIVE_1', 'checked');		
 		foreach ($data as $k=>$v)
 		{
-		    $this->tpl->setVar(strtoupper($k), $v);
+		    $this->tpl->setVar(strtoupper($k), $v);			
+			if('isActive' == $k)
+			{
+				$this->tpl->setVar('ACTIVE_'.$v, 'checked');
+				$this->tpl->setVar('ACTIVE_'.$v*(-1)+1, '');
+			}
 		}
 		//empty because password is encrypted with md5
 		$this->tpl->setVar('PASSWORD', '');
