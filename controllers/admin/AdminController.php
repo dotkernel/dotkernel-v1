@@ -183,6 +183,27 @@ switch ($requestAction)
 		$session->useAjaxView = true;		
 		$adminView->listUser('list', $users, $page, true);
 	break;
+	case 'delete':
+		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
+		{	
+			if (1 == $_POST['delete'])
+			{
+				//delete admin user
+				$adminModel->deleteUser($request['id']);
+				$session->message['txt'] = $scope->infoMessage->accountDelete;
+				$session->message['type'] = 'info';
+			}
+			else
+			{
+				$session->message['txt'] = $scope->infoMessage->noAccountDelete;
+				$session->message['type'] = 'info';
+			}
+			header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/list/');
+			exit;				
+		}
+		$data = $adminModel->getAdminInfo($request['id']);
+		$adminView->details('delete', $data);	
+	break;
 }
 
 
