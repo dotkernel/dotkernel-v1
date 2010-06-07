@@ -131,8 +131,12 @@ class Admin
 			$user = $this->getAdminInfo($id);
 			$data['password'] = md5($user['username'].$this->config->settings->admin->salt.$data['password']);
 		}
-        $this->db->update('admin', $data, 'id = '.$id);
+        $this->db->update('admin', $data, 'id = ' . $id);
 	}	
+	public function deleteUser($id)
+	{
+		$this->db->delete('admin', 'id = ' . $id);
+	}
 	/**
 	 * Validate the data that comes from login form
 	 * @access public

@@ -25,6 +25,8 @@
 		<infoMessage>
 			<accountAdd>Account created ! </accountAdd>
 			<accountUpdate>Account updated ! </accountUpdate>
+			<accountDelete>Account was deleted ! </accountDelete>
+			<noAccountDelete>No account was deleted ! </noAccountDelete>
 		</infoMessage>
 		<validate>
 			<details>
