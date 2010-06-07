@@ -128,19 +128,19 @@ class Dot_Kernel
 	 * @access public
 	 * @static
 	 * @param string $date
-	 * @param string $format - "N" mean short format, "Y" long format
+	 * @param string $format - 'short', 'long'
 	 * @return string
 	 */
-	public static function timeFormat($date, $format='N')
+	public static function timeFormat($date, $format='short')
 	{
 		$settings = Zend_Registry::get('settings');
 		$times = strtotime($date);
 		switch($format)
 		{
-			case 'Y':
+			case 'long':
 				$times = strftime($settings->timeFormatLong,$times);
 			break;			
-			case 'N':
+			case 'short':
 			default:
 				$times = strftime($settings->timeFormatShort,$times);
 			break;
