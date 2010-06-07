@@ -20,12 +20,12 @@
 $userModel = new User(); 
 $userView = new User_View($tpl, $settings);
 // switch based on the action, NO default action here
-$pageTitle = $scope->pageTitle->action->{$requestAction};
+$pageTitle = $option->pageTitle->action->{$requestAction};
 switch ($requestAction)
 {
 	default:
 		// default action
-		$pageTitle = $scope->pageTitle->action->login;
+		$pageTitle = $option->pageTitle->action->login;
 	case 'login':
 		if(!isset($session->user))
 		{
@@ -56,7 +56,7 @@ switch ($requestAction)
 				else
 				{
 					unset($session->user);
-					$session->message['txt'] = $scope->errorMessage->login;
+					$session->message['txt'] = $option->errorMessage->login;
 					$session->message['type'] = 'error';
 				}
 			}
@@ -69,7 +69,7 @@ switch ($requestAction)
 		}
 		else
 		{
-			$session->message['txt'] = $scope->warningMessage->userPermission;
+			$session->message['txt'] = $option->warningMessage->userPermission;
 			$session->message['type'] = 'warning';
 		}
 		header('Location: '.$config->website->params->url.'/user/login');
@@ -100,7 +100,7 @@ switch ($requestAction)
 			{				
 				//update user
 				$userModel->updateUser($data);
-				$session->message['txt'] = $scope->infoMessage->update;
+				$session->message['txt'] = $option->infoMessage->update;
 				$session->message['type'] = 'info';			
 			}
 			else
@@ -137,7 +137,7 @@ switch ($requestAction)
 			$error = $valid['error'];
 			if(strlen($_POST['recaptcha_response_field']) == 0)
 			{
-				$error['Secure Image'] = $scope->errorMessage->captcha;
+				$error['Secure Image'] = $option->errorMessage->captcha;
 			}
 			else
 			{
@@ -145,7 +145,7 @@ switch ($requestAction)
 				$result = $userView->getRecaptcha()->verify($_POST['recaptcha_challenge_field'],$_POST['recaptcha_response_field']);				
 				if (!$result->isValid()) 
 				{
-					$error['Secure Image'] = $scope->errorMessage->captcha;
+					$error['Secure Image'] = $option->errorMessage->captcha;
 				}
 			}	
 			if(empty($error))
@@ -157,7 +157,7 @@ switch ($requestAction)
 				   	$userExists = $userModel->getUserBy($field, $data[$field]);
 					if(!empty($userExists))
 					{
-						$error[$field] = ucfirst($field).$scope->errorMessage->userExists;
+						$error[$field] = ucfirst($field).$option->errorMessage->userExists;
 					}
 				}	
 			}
@@ -165,7 +165,7 @@ switch ($requestAction)
 			{				
 			   	//add user user
 				$userModel->addUser($data);
-				$session->message['txt'] = $scope->infoMessage->add;
+				$session->message['txt'] = $option->infoMessage->add;
 				$session->message['type'] = 'info';
 				$validate = $userModel->validateLogin($data['username'], $data['password'], 'on');
 				if(!empty($validate['login']) && empty($validate['error']))
@@ -181,7 +181,7 @@ switch ($requestAction)
 					else
 					{
 						unset($session->user);
-						$error['Error Login'] = $scope->errorMessage->login;
+						$error['Error Login'] = $option->errorMessage->login;
 					}
 				}
 			}

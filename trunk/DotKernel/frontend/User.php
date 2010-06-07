@@ -30,7 +30,7 @@ class User
 		$this->db = Zend_Registry::get('database');
 		$this->config = Zend_Registry::get('configuration');
 		$this->settings = Zend_Registry::get('settings');
-		$this->scope = Zend_Registry::get('scope');		
+		$this->option = Zend_Registry::get('option');		
 	}
 	/**
 	 * Check to see if user can login
@@ -118,8 +118,8 @@ class User
 		{
 			$validatorUsername = new Zend_Validate();
 			$validatorUsername->addValidator(new Zend_Validate_StringLength(
-												$this->scope->validate->username->lengthMin, 
-												$this->scope->validate->username->lengthMax
+												$this->option->validate->username->lengthMin, 
+												$this->option->validate->username->lengthMax
 											))   
 							  ->addValidator(new Zend_Validate_Alnum());
 			if ($validatorUsername->isValid($username))
@@ -128,14 +128,14 @@ class User
 			}
 			else
 			{
-				$error['username'] = $this->scope->errorMessage->invalidUsername;
+				$error['username'] = $this->option->errorMessage->invalidUsername;
 				$login['username'] = '';
 			}
 
 			$validatorPassword = new Zend_Validate();
 			$validatorPassword->addValidator(new Zend_Validate_StringLength(
-												$this->scope->validate->password->lengthMin, 
-												$this->scope->validate->password->lengthMax
+												$this->option->validate->password->lengthMin, 
+												$this->option->validate->password->lengthMax
 											));
 			if ($validatorPassword->isValid($password))
 			{
@@ -143,7 +143,7 @@ class User
 			}
 			else
 			{
-				$error['password'] = $this->scope->errorMessage->invalidPassword;
+				$error['password'] = $this->option->errorMessage->invalidPassword;
 				$login['password'] = '';
 			}			
 		}
@@ -178,8 +178,8 @@ class User
 			$validatorChain = new Zend_Validate();
 			$validatorChain->addValidator(new Zend_Validate_Alnum())
 							->addValidator(new Zend_Validate_StringLength(
-													$this->scope->validate->details->lengthMin, 
-													$this->scope->validate->details->lengthMax
+													$this->option->validate->details->lengthMin, 
+													$this->option->validate->details->lengthMax
 												));
 			$validUsername = Dot_Kernel::validateFilter($validatorChain, $values['username']);
 			$data = array_merge($data, $validUsername['data'], $validDetails['data']);
@@ -191,8 +191,8 @@ class User
 			unset($values['password']['password2']);
 			$validatorChain = new Zend_Validate();
 			$validatorChain->addValidator(new Zend_Validate_StringLength(
-											   $this->scope->validate->username->lengthMin, 
-											   $this->scope->validate->username->lengthMax
+											   $this->option->validate->username->lengthMin, 
+											   $this->option->validate->username->lengthMax
 										  ));
 			$validPass = Dot_Kernel::validateFilter($validatorChain, $values['password']);
 			$data = array_merge($data, $validPass['data']);
@@ -200,7 +200,7 @@ class User
 		}
 		else
 		{
-			$error['password'] = $this->scope->errorMessage->passwordTwice;
+			$error['password'] = $this->option->errorMessage->passwordTwice;
 		}
 		return array('data' => $data, 
 					'error' => $error);
@@ -236,26 +236,26 @@ class User
 		{
 			$dotEmail = new Dot_Email();
 			$dotEmail->addTo($email);
-			$dotEmail->setSubject($this->scope->forgotPassword->subject);
+			$dotEmail->setSubject($this->option->forgotPassword->subject);
 			$msg = str_replace(array('%FIRSTNAME%', '%PASSWORD%'), 
 							   array($value['firstName'], $value['password']), 
-				              $this->scope->forgotPassword->message);
+				              $this->option->forgotPassword->message);
 			$dotEmail->setBodyText($msg);			
 			$succeed = $dotEmail->send();
 			if($succeed)
 			{
-				$session->message['txt'] = $this->scope->errorMessage->emailSent.$email;
+				$session->message['txt'] = $this->option->errorMessage->emailSent.$email;
 				$session->message['type'] = 'info';
 			}
 			else
 			{
-				$session->message['txt'] = $this->scope->errorMessage->emailNotSent.$email;
+				$session->message['txt'] = $this->option->errorMessage->emailNotSent.$email;
 				$session->message['type'] = 'error';
 			}		
 		}
 		else
 		{
-			$session->message['txt'] = $email.$this->scope->errorMessage->emailNotFound;
+			$session->message['txt'] = $email.$this->option->errorMessage->emailNotFound;
 			$session->message['type'] = 'error';
 		}		
 	}	

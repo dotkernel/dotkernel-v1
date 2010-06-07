@@ -29,7 +29,7 @@ class Admin
 		$this->db = Zend_Registry::get('database');
 		$this->config = Zend_Registry::get('configuration');
 		$this->settings = Zend_Registry::get('settings');
-		$this->scope = Zend_Registry::get('scope');		
+		$this->option = Zend_Registry::get('option');		
 	}
 	/**
 	 * Check to see if user can login
@@ -153,8 +153,8 @@ class Admin
 		{
 			$validatorUsername = new Zend_Validate();
 			$validatorUsername->addValidator(new Zend_Validate_StringLength(
-												$this->scope->validate->username->lengthMin, 
-												$this->scope->validate->username->lengthMax
+												$this->option->validate->username->lengthMin, 
+												$this->option->validate->username->lengthMax
 											))   
 							  ->addValidator(new Zend_Validate_Alnum());
 			if ($validatorUsername->isValid($username))
@@ -163,14 +163,14 @@ class Admin
 			}
 			else
 			{
-				$error['username'] = $this->scope->errorMessage->invalidUsername;
+				$error['username'] = $this->option->errorMessage->invalidUsername;
 				$login['username'] = '';
 			}
 
 			$validatorPassword = new Zend_Validate();
 			$validatorPassword->addValidator(new Zend_Validate_StringLength(
-												$this->scope->validate->password->lengthMin, 
-												$this->scope->validate->password->lengthMax
+												$this->option->validate->password->lengthMin, 
+												$this->option->validate->password->lengthMax
 											));
 			if ($validatorPassword->isValid($password))
 			{
@@ -178,7 +178,7 @@ class Admin
 			}
 			else
 			{
-				$error['password'] = $this->scope->errorMessage->invalidPassword;
+				$error['password'] = $this->option->errorMessage->invalidPassword;
 				$login['password'] = '';
 			}			
 		}
@@ -209,8 +209,8 @@ class Admin
 			$validatorChain = new Zend_Validate();
 			$validatorChain->addValidator(new Zend_Validate_Alpha())
 							->addValidator(new Zend_Validate_StringLength(
-													$this->scope->validate->details->lengthMin, 
-													$this->scope->validate->details->lengthMax
+													$this->option->validate->details->lengthMin, 
+													$this->option->validate->details->lengthMax
 												));
 			$validUsername = Dot_Kernel::validateFilter($validatorChain, $values['username']);
 			$data = array_merge($data, $validUsername['data']);
@@ -241,8 +241,8 @@ class Admin
 				unset($values['password']['password2']);
 				$validatorChain = new Zend_Validate();
 				$validatorChain->addValidator(new Zend_Validate_StringLength(
-												$this->scope->validate->password->lengthMin, 
-												$this->scope->validate->password->lengthMax
+												$this->option->validate->password->lengthMin, 
+												$this->option->validate->password->lengthMax
 											));			
 				$validPass = Dot_Kernel::validateFilter($validatorChain, $values['password']);
 				$data = array_merge($data, $validPass['data']);
@@ -250,7 +250,7 @@ class Admin
 			}
 			else
 			{
-				$error['password'] = $this->scope->errorMessage->passwordTwice;
+				$error['password'] = $this->option->errorMessage->passwordTwice;
 			}
 		}
 		return array('data' => $data, 'error' => $error);

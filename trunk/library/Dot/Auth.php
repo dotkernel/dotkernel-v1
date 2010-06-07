@@ -31,9 +31,9 @@ class Dot_Auth
 		$session = Zend_Registry::get('session');
 		if(!self::hasIdentity($who))
 		{
-			$scope = Zend_Registry::get('scope');
+			$option = Zend_Registry::get('option');
 			$config = Zend_Registry::get('configuration');
-			$session->message['txt'] = $scope->warningMessage->userPermission;
+			$session->message['txt'] = $option->warningMessage->userPermission;
 			$session->message['type'] = 'warning';
 			header('Location: ' . $config->website->params->url . '/' . $who . '/login');
 			exit;
