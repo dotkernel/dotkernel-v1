@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
 	<body>
-	<variable scope="global">
+	<variable option="global">
 	</variable>
-	<variable scope="admin">
+	<variable option="admin">
 		<pageTitle>
 			<action>
 				<dashboard>Dashboard</dashboard>
@@ -16,7 +16,7 @@
 			<settingsUpdate>System settings was updated.</settingsUpdate>
 		</infoMessage>
 	</variable>
-	<variable scope="frontend">
+	<variable option="frontend">
 	</variable>		
 	</body>
 </config>

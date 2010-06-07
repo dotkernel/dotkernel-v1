@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
 	<body>
-	<variable scope="global">
+	<variable option="global">
 	</variable>
-	<variable scope="admin">
+	<variable option="admin">
 	</variable>
-	<variable scope="frontend">
+	<variable option="frontend">
 		<pageTitle>
 			<action>
 				<home>Home Page</home>

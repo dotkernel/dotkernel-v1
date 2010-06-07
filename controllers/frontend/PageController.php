@@ -19,12 +19,12 @@
 
 $pageView = new Page_View($tpl);
 // switch based on the action, don't forget the default action
-$pageTitle = $scope->pageTitle->action->{$requestAction};
+$pageTitle = $option->pageTitle->action->{$requestAction};
 switch ($requestAction)
 {
 	default:
 		// default action
-		$pageTitle = $scope->pageTitle->action->home;
+		$pageTitle = $option->pageTitle->action->home;
 	case 'home';
 		// a call to specific view function
 		// like: viewControllerAction() , a.k.a viewPageHome()

@@ -116,32 +116,32 @@ class Dot_Settings
 		}
 	}
 	/**
-	 * Get the scope variables from an xml file for the current dots
+	 * Get the option variables from an xml file for the current dots
 	 * @param string $requestModule
 	 * @param string $requestController
 	 * @return Zend_Config
 	 */
-	public static function getScopeVariables($requestModule,$requestController)
+	public static function getOptionVariables($requestModule,$requestController)
 	{		
-		$scope = array();	
-		$dirScope = CONFIGURATION_PATH.'/dots/';
-		$fileScope = strtolower($requestController).'.xml';
+		$option = array();	
+		$dirOption = CONFIGURATION_PATH.'/dots/';
+		$fileOption = strtolower($requestController).'.xml';
 		$validFile = new Zend_Validate_File_Exists();
-		$validFile->setDirectory($dirScope);		
-		if($validFile->isValid($fileScope))
+		$validFile->setDirectory($dirOption);		
+		if($validFile->isValid($fileOption))
 		{
-			$xml = new Zend_Config_Xml($dirScope.$fileScope, 'body');
-			$arrayScope = $xml->variable->toArray();
-			foreach ($arrayScope as $v)
+			$xml = new Zend_Config_Xml($dirOption.$fileOption, 'body');
+			$arrayOption = $xml->variable->toArray();
+			foreach ($arrayOption as $v)
 			{
-				if(in_array($v['scope'], array('global', $requestModule)))
+				if(in_array($v['option'], array('global', $requestModule)))
 				{			
-					$scope = array_merge_recursive($scope,$v);
+					$option = array_merge_recursive($option,$v);
 				}
 			}
 		}
-		$scope = new Zend_Config($scope);
-		return $scope;
+		$option = new Zend_Config($option);
+		return $option;
 		
 	} 
 

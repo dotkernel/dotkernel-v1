@@ -18,7 +18,7 @@
 $adminView = new Admin_View($tpl);
 $adminModel = new Admin();
 // switch based on the action, NO default action here
-$pageTitle = $scope->pageTitle->action->{$requestAction};
+$pageTitle = $option->pageTitle->action->{$requestAction};
 switch ($requestAction)
 {
 	case 'login':
@@ -49,8 +49,8 @@ switch ($requestAction)
 				//check if account is inactive
 				$adminTmp = $adminModel->getAdminBy('username',$validate['login']['username']);
 				(1 == $adminTmp['isActive']) ?
-					$session->message['txt'] = $scope->errorMessage->wrongCredentials:
-					$session->message['txt'] = $scope->errorMessage->inactiveAcount;
+					$session->message['txt'] = $option->errorMessage->wrongCredentials:
+					$session->message['txt'] = $option->errorMessage->inactiveAcount;
 				$session->message['type'] = 'error';				
 				header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/login');
 				exit;				
@@ -105,7 +105,7 @@ switch ($requestAction)
 				   	$adminExists = $adminModel->getAdminBy($field, $data[$field]);
 					if(!empty($adminExists))
 					{
-						$error = ucfirst($field) . ' '. $data[$field] . $scope->errorMessage->adminExists;
+						$error = ucfirst($field) . ' '. $data[$field] . $option->errorMessage->adminExists;
 					}
 				}	
 			}
@@ -113,7 +113,7 @@ switch ($requestAction)
 			{
 				//add admin user
 				$adminModel->addUser($data);				
-				$session->message['txt'] = $scope->infoMessage->accountAdd;
+				$session->message['txt'] = $option->infoMessage->accountAdd;
 				$session->message['type'] = 'info';
 				header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/list/');
 				exit;	
@@ -150,7 +150,7 @@ switch ($requestAction)
 				$data['id'] = $request['id'];
 				//add admin user
 				$adminModel->updateUser($data);
-				$session->message['txt'] = $scope->infoMessage->accountUpdate;
+				$session->message['txt'] = $option->infoMessage->accountUpdate;
 				$session->message['type'] = 'info';
 				header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/list/');
 				exit;				
@@ -176,7 +176,7 @@ switch ($requestAction)
 		}
 		else
 		{
-			$session->message['txt'] = $scope->errorMessage->trickUserError;
+			$session->message['txt'] = $option->errorMessage->trickUserError;
 			$session->message['type'] = 'error';
 		}
 		$users = $adminModel->getUserList($page);
@@ -190,12 +190,12 @@ switch ($requestAction)
 			{
 				//delete admin user
 				$adminModel->deleteUser($request['id']);
-				$session->message['txt'] = $scope->infoMessage->accountDelete;
+				$session->message['txt'] = $option->infoMessage->accountDelete;
 				$session->message['type'] = 'info';
 			}
 			else
 			{
-				$session->message['txt'] = $scope->infoMessage->noAccountDelete;
+				$session->message['txt'] = $option->infoMessage->noAccountDelete;
 				$session->message['type'] = 'info';
 			}
 			header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/list/');

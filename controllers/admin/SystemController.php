@@ -18,7 +18,7 @@
 $systemView = new System_View($tpl);
 $systemModel = new System();
 // switch based on the action, NO default action here
-$pageTitle = $scope->pageTitle->action->{$requestAction};
+$pageTitle = $option->pageTitle->action->{$requestAction};
 switch ($requestAction)
 {
 	case 'dashboard':		
@@ -28,7 +28,7 @@ switch ($requestAction)
 		$data = $systemModel->listSettings();	
 		if(isset($request['update']) && $request['update'] == 'done')
 		{			
-				$session->message['txt'] = $scope->infoMessage->settingsUpdate;
+				$session->message['txt'] = $option->infoMessage->settingsUpdate;
 				$session->message['type'] = 'info';
 		}
 		$systemView->displaySettings('settings', $data);

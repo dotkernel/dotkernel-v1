@@ -61,10 +61,10 @@ class User_View extends View
 	}
 	public function getRecaptcha()
 	{
-		$scope = Zend_Registry::get('scope');
+		$option = Zend_Registry::get('option');
 		// add secure image using ReCaptcha
-		$recaptcha = new Zend_Service_ReCaptcha($scope->captchaOptions->recaptchaPublicKey, $scope->captchaOptions->recaptchaPrivateKey);
-		$recaptcha->setOptions($scope->captchaOptions->toArray());
+		$recaptcha = new Zend_Service_ReCaptcha($option->captchaOptions->recaptchaPublicKey, $option->captchaOptions->recaptchaPrivateKey);
+		$recaptcha->setOptions($option->captchaOptions->toArray());
 		return $recaptcha;
 	}
 }
