@@ -45,9 +45,6 @@ class Dot_Kernel
 	 */
     public function __construct()
     {
-        $this->config = Zend_Registry::get('configuration');
-        $this->settings = Zend_Registry::get('settings');
-        $this->db = Zend_Registry::get('database');
     }
     /**
      * End the execution of the application, by sending an 404 header and redirecting to home page
@@ -126,6 +123,30 @@ class Dot_Kernel
         }
         return $realIp;
     }
+	/**
+	 * Return date formatted fancy
+	 * @access public
+	 * @static
+	 * @param string $date
+	 * @param string $format - "N" mean short format, "Y" long format
+	 * @return string
+	 */
+	public static function timeFormat($date, $format='N')
+	{
+		$settings = Zend_Registry::get('settings');
+		$times = strtotime($date);
+		switch($format)
+		{
+			case 'Y':
+				$times = strftime($settings->timeFormatLong,$times);
+			break;			
+			case 'N':
+			default:
+				$times = strftime($settings->timeFormatShort,$times);
+			break;
+		}
+		return $times;
+	}
 	/**
 	 * Process that validate and filter the input/output data.
 	 * Return valid and filtered data

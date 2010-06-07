@@ -62,7 +62,7 @@ class Admin_View extends View
 			$this->tpl->setVar('EMAIL', $v['email']);
 			$this->tpl->setVar('FIRSTNAME', $v['firstName']);
 			$this->tpl->setVar('LASTNAME', $v['lastName']);
-			$this->tpl->setVar('DATE_CREATED', $v['dateCreated']);
+			$this->tpl->setVar('DATE_CREATED', Dot_Kernel::timeFormat($v['dateCreated'], 'Y'));
 			$this->tpl->setVar('ISACTIVE', $v['isActive']*(-1)+1);
 			$this->tpl->setVar('ACTIVE_IMG', $v['isActive'] == 1 ? 'active' : 'inactive');
 			$this->tpl->parse('list_block', 'list', true);
