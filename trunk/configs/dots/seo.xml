@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<body>
+	<variable option="global">
+	</variable>
+	<variable option="admin">
+	</variable>
+	<variable option="frontend">
+		<canonicalUrl></canonicalUrl>
+		<defaultPageTitle>DotKernel</defaultPageTitle>
+		<defaultMetaDescription>Enterprise Level PHP Solutions, based on Zend Framework and DotKernel , build by DotBoost Technologies Inc.</defaultMetaDescription>
+		<defaultMetaKeywords>DotKernel, PHP, Zend Framework, </defaultMetaKeywords>
+		<siteName>DotKernel</siteName>
+	</variable>		
+	</body>
+</config>

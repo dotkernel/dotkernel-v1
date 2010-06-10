@@ -32,12 +32,6 @@ $tpl->setViewFile();
 // Set paths in templates
 $tpl->setViewPaths($config);
 
-//Set  HTML head structure  tags 
-$tpl->setViewMeta($settings);
-
-//Set  Logo, using site name  
-$tpl->setViewLogo($settings);
-
 //Display login box
 $tpl->setLoginBox();
 
@@ -68,16 +62,11 @@ $actionControllerPath = CONTROLLERS_PATH . '/' . $requestModule . '/' . $request
 //Set menus
 $tpl->setViewMenu($config);
 
-//Set  HTML head structure  tags 
-$tpl->setViewTitle($settings, $pageTitle);
+//Set SEO html tags
+$tpl->setSeoValues($pageTitle);
 
 //Dispaly message (error, warning, info)	
 $tpl->displayMessage();
-
-/**
- * @TODO improvement of canonical url's
- */
-$tpl->setVar('CANONICAL_URL', $config->website->params->url . substr($_SERVER['REQUEST_URI'], strlen(dirname($_SERVER['PHP_SELF']))));
 
 // parse the main content block
 $tpl->parse('MAIN_CONTENT', 'tpl_main');

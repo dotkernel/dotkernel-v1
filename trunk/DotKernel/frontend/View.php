@@ -79,37 +79,21 @@ class View extends Dot_Template
 		$this->setVar('SITE_URL', $config->website->params->url);
 	}
 	/**
-	 * Set meta keywords and descriptions html tags
-	 * @access public 
-	 * @param Dot_Settings $settings
+	 * Set SEO values
+	 * @access public
+	 * @param string $pageTitle [optional]
 	 * @return void
 	 */
-	public function setViewMeta($settings)
+	public function setSeoValues($pageTitle = '')
 	{
-		$this->setVar('PAGE_KEYWORDS', $settings->defaultMetaKeywords);
-		$this->setVar('PAGE_DESCRIPTION', $settings->defaultMetaDescription);
-	}
-	/**
-	 * Set the title html tag
-	 * @access public 
-	 * @param Dot_Settings $settings
-	 * @param string $pageTitle
-	 * @return void
-	 */
-	public function setViewTitle($settings, $pageTitle)
-	{
-		$this->setVar('PAGE_TITLE', $pageTitle . ' | ' .$settings->defaultPageTitle);
-		$this->setVar('PAGE_CONTENT_TITLE', $pageTitle );
-	}
-		/**
-	 * Set the logo, in the future replaced with an image 
-	 * @access public 
-	 * @param Dot_Settings $settings
-	 * @return void
-	 */
-	public function setViewLogo($settings)
-	{
-		$this->setVar('SITE_NAME', $settings->siteName);
+		$seo = new Dot_Seo();
+		$option = $seo->getOption();
+		$this->setVar('PAGE_KEYWORDS', $option['defaultMetaKeywords']);
+		$this->setVar('PAGE_DESCRIPTION', $option['defaultMetaDescription']);
+		$this->setVar('PAGE_TITLE', $pageTitle .  ' | ' . $option['defaultPageTitle']);
+		$this->setVar('PAGE_CONTENT_TITLE', $pageTitle);
+		$this->setVar('SITE_NAME', $option['siteName']);
+		$this->setVar('CANONICAL_URL', $option['canonicalUrl']);
 	}
 	/**
 	 * Display the specific menu that were declared in configs/menu.xml file
