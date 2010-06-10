@@ -29,7 +29,7 @@ switch ($requestAction)
 		// a call to specific view function
 		// like: viewControllerAction() , a.k.a viewPageHome()
 		// call to view function
-		$pageView->showPage($requestAction);
+		$pageView->showPage('home');
 	break;
 	case 'about':
 		$pageView->showPage($requestAction);
