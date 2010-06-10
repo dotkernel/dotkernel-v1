@@ -78,7 +78,7 @@ $requestRaw = explode('/',
 					  trim(substr($_SERVER['REQUEST_URI'], 
 					  strlen(dirname($_SERVER['PHP_SELF']))), '/'));
 
-// We are in frontend or in other module ? Prebuilt modules: frontend, admin, rss, ajax 
+// We are in frontend or in other module ? Prebuilt modules: frontend, admin, rss
 $requestModule = 'frontend';
 if (in_array($requestRaw['0'], $config->resources->modules->toArray()))
 {
