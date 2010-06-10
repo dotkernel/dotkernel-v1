@@ -286,7 +286,7 @@ input{
 	}
 .foot_menu li{
 	float: left;
-	background: url('images/footer_separator.png') no-repeat left;
+	background: url('images/footer_bg.png') no-repeat left;
 	}
 .foot_menu li a{
 	display:block;

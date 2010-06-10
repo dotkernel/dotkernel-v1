@@ -113,8 +113,14 @@ while (list($key, $val) = each($requestRaw))
 // remove first element of the request array, is module and action in it
 array_shift($request);
 
+//memory request into param variable
+$param = array();
+$param['module'] = $requestModule;
+$param['controller'] = $requestController;
+$param['action'] = $requestAction;
+$param = array_merge($param, $request);
 // load all extra parameters in registry
-$registry->param = $request;
+$registry->param = $param;
 
 // Start dotKernel object
 $dotKernel = new Dot_Kernel();

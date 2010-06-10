@@ -20,21 +20,11 @@
 class Dot_Kernel
 {
 	/**
-	 * Database instance
-	 * @var Zend_Db
-	 */
-    public $db;
-    /**
      * Configuration instance
      * @var Zend_config
      */
     public $config;
-    /**
-     * Settings variables
-     * @var object
-     */
-    public $settings;    
-    /**
+	/**
      * Dot Kernel version identification
      */
     const VERSION = '1.2.0';    
@@ -45,6 +35,7 @@ class Dot_Kernel
 	 */
     public function __construct()
     {
+    	$this->config = Zend_Registry::get('configuration');
     }
     /**
      * End the execution of the application, by sending an 404 header and redirecting to home page
@@ -52,7 +43,7 @@ class Dot_Kernel
      * @return bool
      */
     public function pageNotFound()
-    {
+    {   	
         // send the 404 header
         header('HTTP/1.0 404 Not Found');
         // redirect to 404 page
