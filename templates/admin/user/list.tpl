@@ -3,7 +3,7 @@
 <div id="adminList">
 	{PAGINATION}
 	<fieldset style="width: 100%">
-	<legend>List Admins</legend>
+	<legend>List Users</legend>
 	<table cellpadding="0" cellspacing="1" class="big_table">
 		<tr>
 			<td class="table_subhead"><span>#</span></td>
@@ -18,7 +18,7 @@
 	<!-- BEGIN list -->
 		<tr>
 			<td class="row{BG}">{ID}</td>
-			<td class="row{BG}"> <a href="{SITE_URL}/admin/admin/update/id/{ID}">{USERNAME}</a> </td>
+			<td class="row{BG}"> <a href="{SITE_URL}/admin/user/update/id/{ID}">{USERNAME}</a> </td>
 			<td class="row{BG}">{EMAIL}</td>
 			<td class="row{BG}">{FIRSTNAME}</td>
 			<td class="row{BG}">{LASTNAME}</td>
@@ -26,8 +26,9 @@
 				<img src="{IMAGES_URL}/{ACTIVE_IMG}.png" border='0'></a> </td>
 			<td class="row{BG}">{DATE_CREATED}</td>
 			<td class="row{BG}" > 
-				<a href="{SITE_URL}/admin/admin/update/id/{ID}" title="Edit/Update"><img src="{IMAGES_URL}/edit.png" border='0' align="left"> </a>
-				<a href="{SITE_URL}/admin/admin/delete/id/{ID}" title="Delete"><img src="{IMAGES_URL}/delete.png" border='0' align="right"> </a>
+				<a href="{SITE_URL}/admin/user/update/id/{ID}" title="Edit/Update"><img src="{IMAGES_URL}/edit.png" border='0'> </a>&nbsp;&nbsp;
+				<a href="{SITE_URL}/admin/user/send-password/id/{ID}" title="Send User Password"><img src="{IMAGES_URL}/help.gif" border='0'> </a>&nbsp;&nbsp;
+				<a href="{SITE_URL}/admin/user/delete/id/{ID}" title="Delete"><img src="{IMAGES_URL}/delete.png" border='0' > </a>
 			</td>
 		</tr>
 	<!-- END list -->

@@ -11,8 +11,8 @@
 */
 
 /**
-* Frontend Module Controller
-* Is doing all the job for specific frontend control stuff
+* Admin Module Controller
+* Is doing all the job for specific admin control stuff
 * @author     DotKernel Team <team@dotkernel.com>
 */ 
 
@@ -29,15 +29,15 @@ if(!Dot_Auth::hasIdentity('admin') && $requestAction != 'authorize')
 	$requestAction = 'login';
 }
 
-// Start the template object, empty for the moment 
+// start the template object, empty for the moment 
 require(DOTKERNEL_PATH . '/' . $requestModule . '/' . 'View.php');	
 $tpl = View::getInstance(TEMPLATES_PATH . '/' . $requestModule);
 $tpl->init($requestModule, $requestController, $requestAction);
 
-// Assign Index Template file
+// assign Index Template file
 $tpl->setViewFile();
 
-// Set paths in templates
+// set paths in templates
 $tpl->setViewPaths($config);
 
 /** 
@@ -64,16 +64,16 @@ $pageTitle = 'Overwrite Me Please !';
 $actionControllerPath = CONTROLLERS_PATH . '/' . $requestModule . '/' . $requestController . 'Controller.php';
 !file_exists($actionControllerPath) ?  $dotKernel->pageNotFound() :  require($actionControllerPath);
 
-//Set menus
+// set menus
 $tpl->setViewMenu($config);
 
-//Set info bar
+// set info bar
 $tpl->setInfoBar();
 
-//Set  HTML head structure  tags 
-$tpl->setViewTitle($settings, $pageTitle);
+// set SEO html tags from dots/seo.xml file
+$tpl->setSeoValues($pageTitle);
 
-//Dispaly message (error, warning, info)	
+// dispaly message (error, warning, info)	
 $tpl->displayMessage();
 
 // parse the main content block
@@ -86,6 +86,5 @@ if(TRUE == $config->settings->admin->debugbar)
 	$debug->startTimer = $startTime;
 	$debug->show();
 }
-
-//parse and print the output
+// parse and print the output
 $tpl->pparse('OUTPUT', 'tpl_index');

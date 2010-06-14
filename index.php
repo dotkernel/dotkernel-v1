@@ -43,6 +43,7 @@ defined('IMAGES_DIR') || define('IMAGES_DIR', '/images');
 // Load Zend Framework
 require_once 'Zend/Loader/Autoloader.php';
 $zend_loader = Zend_Loader_Autoloader::getInstance();
+
 //includes all classes in library folder. That class names must start with Dot_
 $zend_loader->registerNamespace('Dot_');
 
@@ -113,13 +114,12 @@ while (list($key, $val) = each($requestRaw))
 // remove first element of the request array, is module and action in it
 array_shift($request);
 
-//memory request into param variable
+//memory request into param variable and load them into registry
 $param = array();
 $param['module'] = $requestModule;
 $param['controller'] = $requestController;
 $param['action'] = $requestAction;
 $param = array_merge($param, $request);
-// load all extra parameters in registry
 $registry->param = $param;
 
 // Start dotKernel object

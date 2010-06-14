@@ -48,5 +48,3 @@ switch ($requestAction)
 		$systemView->showPHPInfo('phpinfo');
 	break;	
 }
-
-

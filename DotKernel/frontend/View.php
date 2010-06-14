@@ -88,12 +88,12 @@ class View extends Dot_Template
 	{
 		$seo = new Dot_Seo();
 		$option = $seo->getOption();
-		$this->setVar('PAGE_KEYWORDS', $option['defaultMetaKeywords']);
-		$this->setVar('PAGE_DESCRIPTION', $option['defaultMetaDescription']);
-		$this->setVar('PAGE_TITLE', $pageTitle .  ' | ' . $option['defaultPageTitle']);
+		$this->setVar('PAGE_KEYWORDS', $option->defaultMetaKeywords);
+		$this->setVar('PAGE_DESCRIPTION', $option->defaultMetaDescription);
+		$this->setVar('PAGE_TITLE', $option->defaultPageTitle .  ' | ' . $pageTitle);
 		$this->setVar('PAGE_CONTENT_TITLE', $pageTitle);
-		$this->setVar('SITE_NAME', $option['siteName']);
-		$this->setVar('CANONICAL_URL', $option['canonicalUrl']);
+		$this->setVar('SITE_NAME', $option->siteName);
+		$this->setVar('CANONICAL_URL', $option->canonicalUrl);
 	}
 	/**
 	 * Display the specific menu that were declared in configs/menu.xml file

@@ -1,7 +1,7 @@
-<form action="{SITE_URL}/admin/admin/delete/id/{ID}" method="post" >
+<form action="{SITE_URL}/admin/user/delete/id/{ID}" method="post" >
 <input type="hidden" name="send" value="on">
 <fieldset style="width: 500px">
-<legend>Delete Admin Acccount: {USERNAME}</legend>
+<legend>Delete User Acccount: {USERNAME}</legend>
 	<table cellpadding="0" cellspacing="1" class="big_table">
 		<tr>
 			<td class="row2">Are you sure you want to delete this account ?</td>

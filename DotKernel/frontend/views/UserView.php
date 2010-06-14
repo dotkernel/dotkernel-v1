@@ -25,10 +25,10 @@ class User_View extends View
 	 * @access public
 	 * @param Dot_Template $tpl
 	 */
-	public function __construct($tpl, $settings)
+	public function __construct($tpl)
 	{
 		$this->tpl = $tpl;
-		$this->settings = $settings;
+		$this->settings = Zend_Registry::get('settings');
 	}
 	/**
 	 * Display the login form

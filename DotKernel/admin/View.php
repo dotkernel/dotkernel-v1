@@ -81,16 +81,20 @@ class View extends Dot_Template
 		$this->setVar('SITE_URL', $config->website->params->url);
 	}
 	/**
-	 * Set the title html tag
+	 * Set SEO values
 	 * @access public
-	 * @param Dot_Settings $settings
-	 * @param string $pageTitle
+	 * @param string $pageTitle [optional]
 	 * @return void
 	 */
-	public function setViewTitle($settings, $pageTitle)
+	public function setSeoValues($pageTitle = '')
 	{
-		$this->setVar('PAGE_TITLE', $pageTitle . ' | ' .$settings->defaultPageTitle);
-		$this->setVar('PAGE_CONTENT_TITLE', $pageTitle );
+		$seo = new Dot_Seo();
+		$option = $seo->getOption();
+		$this->setVar('PAGE_KEYWORDS', $option->defaultMetaKeywords);
+		$this->setVar('PAGE_DESCRIPTION', $option->defaultMetaDescription);
+		$this->setVar('PAGE_TITLE', $option->defaultPageTitle .  ' | ' . $pageTitle);
+		$this->setVar('PAGE_CONTENT_TITLE', $pageTitle);
+		$this->setVar('SITE_NAME', $option->siteName);
 	}
 	/**
 	 * Display the specific menu that were declared in configs/menu.xml file

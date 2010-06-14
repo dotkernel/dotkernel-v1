@@ -2,15 +2,15 @@
 <config>
 	<body>
 	<variable option="global">
+		<defaultPageTitle>DotKernel</defaultPageTitle>
+		<defaultMetaDescription>Enterprise Level PHP Solutions, based on Zend Framework and DotKernel , build by DotBoost Technologies Inc.</defaultMetaDescription>
+		<defaultMetaKeywords>DotKernel, PHP, Zend Framework, </defaultMetaKeywords>
+		<siteName>DotKernel</siteName>
 	</variable>
 	<variable option="admin">
 	</variable>
 	<variable option="frontend">
 		<canonicalUrl></canonicalUrl>
-		<defaultPageTitle>DotKernel</defaultPageTitle>
-		<defaultMetaDescription>Enterprise Level PHP Solutions, based on Zend Framework and DotKernel , build by DotBoost Technologies Inc.</defaultMetaDescription>
-		<defaultMetaKeywords>DotKernel, PHP, Zend Framework, </defaultMetaKeywords>
-		<siteName>DotKernel</siteName>
 	</variable>		
 	</body>
 </config>
