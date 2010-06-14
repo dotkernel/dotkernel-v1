@@ -20,12 +20,12 @@
 class Dot_Sessions
 {	
 	/**
-	 * Constructor
-	 * @access public
+	 * Constructor is private, because this class is static, can't be instantiated
+	 * @access private
 	 * @return Dot_Sessions
 	 */
-	public function __construct ()
-	{
+	private function __construct ()
+	{		
 	}
 	/**
 	 * Start the session
@@ -33,16 +33,20 @@ class Dot_Sessions
 	 * @static
 	 * @return void
 	 */
-	public static function start()
+	public static function start($module)
 	{
-		Zend_Session::start();
+		$resource = Zend_Registry::get('resource');
+		$namespaceName = $resource->session->$module->name;
+		$rememberMe = $resource->session->$module->rememberMeSeconds;
+		
 		if(!(Zend_Registry::isRegistered('session')))
 		{
-			$session = new Zend_Session_Namespace('kernel');
+			$session = new Zend_Session_Namespace($namespaceName);
 			if(!isset($session->initialized))
 			{
 				Zend_Session::regenerateId();
 				$session->initialized = TRUE;
+				Zend_Session::rememberMe($rememberMe);
 			}
 			Zend_Registry::set('session',$session);
 		}

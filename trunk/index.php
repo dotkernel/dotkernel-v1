@@ -51,10 +51,6 @@ $zend_loader->registerNamespace('Dot_');
 $registry = new Zend_Registry(array(), ArrayObject::ARRAY_AS_PROPS);
 Zend_Registry::setInstance($registry);
 
-//Initialize the session
-Dot_Sessions::start();
-$session = Zend_Registry::get('session');
-
 //Load configuration settings from application.ini file and store it in registry
 $config = new Zend_Config_Ini(CONFIGURATION_PATH.'/application.ini', APPLICATION_ENV);
 $registry->configuration = $config;
@@ -124,6 +120,10 @@ $registry->param = $param;
 
 // Start dotKernel object
 $dotKernel = new Dot_Kernel();
+
+//Initialize the session
+Dot_Sessions::start($requestModule);
+$session = Zend_Registry::get('session');
 
 /**
 *  From this point , the control is taken by the Front Controller
