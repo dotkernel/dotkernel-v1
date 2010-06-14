@@ -4,11 +4,46 @@
 	<variable option="global">
 		<pageTitle>
 			<action>
+				<list>List Users</list>
+				<add>Add User Account</add>
 				<update>Update User Account</update>
+				<delete>Delete User Account</delete>
 			</action>
 		</pageTitle>
+		<validate>
+			<details>
+				<lengthMin>3</lengthMin>
+				<lengthMax>255</lengthMax>
+			</details>
+			<password>
+				<lengthMin>3</lengthMin>
+				<lengthMax>20</lengthMax>
+			</password>
+			<username>
+				<lengthMin>3</lengthMin>
+				<lengthMax>255</lengthMax>
+			</username>
+		</validate>	
+		<forgotPassword>
+			<subject>Forgot Password</subject>
+			<message>Dear %FIRSTNAME%, your password is %PASSWORD% !</message>
+		</forgotPassword> 	
 	</variable>
 	<variable option="admin">
+		<errorMessage>			
+			<passwordTwice>You didn't enter the same password twice. Please re-enter it again</passwordTwice>
+			<userExists> already exists ! </userExists>	
+			<trickUserError>Why are you so smart ? &lt;/br&gt; Don't play with the fire !</trickUserError>		
+			<emailNotSent>Password could not be sent to user </emailNotSent>	
+		</errorMessage>
+		<infoMessage>
+			<accountAdd>Account created ! </accountAdd>
+			<accountUpdate>Account updated ! </accountUpdate>
+			<accountDelete>Account was deleted ! </accountDelete>
+			<noAccountDelete>No account was deleted ! </noAccountDelete>
+			<emailSent>Password was sent to user </emailSent>
+			<emailNotFound> was not found in our records !</emailNotFound>
+		</infoMessage>
 	</variable>
 	<variable option="frontend">
 		<pageTitle>
@@ -46,24 +81,6 @@
 			<tabindex>2</tabindex>
 			<lang>en</lang>
 		</captchaOptions>
-		<validate>
-			<details>
-				<lengthMin>3</lengthMin>
-				<lengthMax>255</lengthMax>
-			</details>
-			<password>
-				<lengthMin>3</lengthMin>
-				<lengthMax>20</lengthMax>
-			</password>
-			<username>
-				<lengthMin>3</lengthMin>
-				<lengthMax>255</lengthMax>
-			</username>
-		</validate>	
-		<forgotPassword>
-			<subject>Forgot Password</subject>
-			<message>Dear %FIRSTNAME%, your password is %PASSWORD%</message>
-		</forgotPassword> 	
 	</variable>		
 	</body>
 </config>

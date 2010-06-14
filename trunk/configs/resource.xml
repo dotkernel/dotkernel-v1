@@ -7,6 +7,7 @@
 		<frontend>User</frontend>
 		<admin>Admin</admin>
 		<admin>System</admin>
+		<admin>User</admin>
 	</controllers>
  	<route>
  		<!-- default controllers for modules -->
@@ -23,6 +24,7 @@
 			<admin>
 				<Admin>account</Admin>
 				<System>dashboard</System>
+				<User>list</User>
 			</admin>
 		</action>
  	</route>

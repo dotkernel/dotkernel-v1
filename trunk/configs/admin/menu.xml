@@ -44,6 +44,23 @@
 			</subItem>
 		</subItems>
 	</item>
+	<item>
+		<title>User</title>
+		<link>user/list/</link>
+		<description>User details</description>
+		<subItems>			
+			<subItem>
+				<title>List</title>
+				<link>user/list/</link>
+				<description>List admin users</description>
+			</subItem>						
+			<subItem>
+				<title>Add new</title>
+				<link>user/add/</link>
+				<description>Add admin user</description>
+			</subItem>
+		</subItems>
+	</item>
 </menu>
 <menu>
 	<id>2</id>

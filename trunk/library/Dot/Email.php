@@ -35,7 +35,9 @@ class Dot_Email extends Zend_Mail
 	{
 		$this->settings = Zend_Registry::get('settings');
 		$this->db = Zend_Registry::get('database');
-		$this->addHeader('X-Mailer', $this->xmailer);		
+		$this->addHeader('X-Mailer', $this->xmailer);	
+		$seo = new Dot_Seo();
+		$this->seoOption = $seo->getOption();	
 	}
 	/**
 	 * Set content
@@ -65,8 +67,8 @@ class Dot_Email extends Zend_Mail
 	public function send($transport = null)
 	{		
 		// set From and ReplyTo, in case we forgot it in code
-		parent::setDefaultFrom($this->settings->siteEmail, $this->settings->siteName);
-		parent::setDefaultReplyTo($this->settings->siteEmail, $this->settings->siteName);
+		parent::setDefaultFrom($this->settings->siteEmail, $this->seoOption->siteName);
+		parent::setDefaultReplyTo($this->settings->siteEmail, $this->seoOption->siteName);
 		
 		//  set the sendmail transporter as default 
 		$tr = new Dot_Email_Sendmail($this->_from);	
@@ -100,7 +102,7 @@ class Dot_Email extends Zend_Mail
 			 */
 			$devEmails = @explode(',', $this->settings->devEmails);
 			$dateNow = date('F dS, Y h:i:s A');
-			$mailSubject  = "SMTP Error on ". $this->settings->siteName;
+			$mailSubject  = "SMTP Error on ". $this->seoOption->siteName;
 			$mailContent  = "We were unable to send SMTP email."."\n";
 			$mailContent .= "---------------------------------"."\n";
 			$mailContent .="Caught exception: ". get_class($e)."\n";

@@ -63,7 +63,7 @@ class Admin
 	 * @param string $value
 	 * @return array
 	 */
-	public function getAdminBy($field = '', $value = '')
+	public function getUserBy($field = '', $value = '')
 	{		
 		$select = $this->db->select()
 					   ->from('admin')
@@ -71,19 +71,6 @@ class Admin
 					   ->limit(1);					   
 		$result = $this->db->fetchRow($select);
 		return $result;
-	}	
-	/**
-	 * Get admin info
-	 * @access public
-	 * @param int $id
-	 * @return array
-	 */
-	public function getAdminInfo($id)
-	{
-		$select = $this->db->select()
-						   ->from('admin')
-						   ->where('id = ?', $id);
-		return $this->db->fetchRow($select);
 	}
 	/**
 	 * Get user list
@@ -128,11 +115,16 @@ class Admin
         unset ($data['id']);
 		if(array_key_exists('password', $data))
 		{
-			$user = $this->getAdminInfo($id);
+			$user = $this->getUserBy('id', $id);
 			$data['password'] = md5($user['username'].$this->config->settings->admin->salt.$data['password']);
 		}
         $this->db->update('admin', $data, 'id = ' . $id);
 	}	
+	/**
+	 * Delete admin user
+	 * @param int $id
+	 * @return void
+	 */
 	public function deleteUser($id)
 	{
 		$this->db->delete('admin', 'id = ' . $id);
@@ -255,7 +247,13 @@ class Admin
 		}
 		return array('data' => $data, 'error' => $error);
 	}
-	public function activateAdmin($id, $isActive)
+	/**
+	 * Update active field for admin user
+	 * @param int $id
+	 * @param int $isActive
+	 * @return void
+	 */
+	public function activateUser($id, $isActive)
 	{		
         $this->db->update('admin', array('isActive' => $isActive), 'id = '.$id);
 	}

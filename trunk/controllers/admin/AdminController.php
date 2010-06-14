@@ -22,7 +22,7 @@ $pageTitle = $option->pageTitle->action->{$requestAction};
 switch ($requestAction)
 {
 	case 'login':
-		// Show the Login form
+		// show the Login form
 		$adminView->loginForm('login');
 	break;	
 	case 'logout':
@@ -46,8 +46,8 @@ switch ($requestAction)
 			else
 			{
 				unset($session->admin);
-				//check if account is inactive
-				$adminTmp = $adminModel->getAdminBy('username',$validate['login']['username']);
+				// check if account is inactive
+				$adminTmp = $adminModel->getUserBy('username',$validate['login']['username']);
 				(1 == $adminTmp['isActive']) ?
 					$session->message['txt'] = $option->errorMessage->wrongCredentials:
 					$session->message['txt'] = $option->errorMessage->inactiveAcount;
@@ -66,7 +66,7 @@ switch ($requestAction)
 		}			
 	break;
 	case 'account':
-		$data = $adminModel->getAdminInfo($session->admin['id']);
+		$data = $adminModel->getUserBy('id', $session->admin['id']);
 		$adminView->details('update',$data);	
 	break;
 	case 'list':
@@ -78,7 +78,8 @@ switch ($requestAction)
 		$data = array();
 		$error = array();
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
-		{						
+		{		
+			// POST values that will be validated				
 			$values = array('username' => 
 								array('username' => $_POST['username']
 									 ),
@@ -98,26 +99,25 @@ switch ($requestAction)
 			$error = $valid['error'];
 			if(empty($error))
 			{	
-				//check if admin already exists by $field ('username','email')
+				// check if admin already exists by $field ('username','email')
 				$checkBy = array('username', 'email');
 				foreach ($checkBy as $field)
 				{					
-				   	$adminExists = $adminModel->getAdminBy($field, $data[$field]);
+				   	$adminExists = $adminModel->getUserBy($field, $data[$field]);
 					if(!empty($adminExists))
 					{
-						$error = ucfirst($field) . ' '. $data[$field] . $option->errorMessage->adminExists;
+						$error = ucfirst($field) . ' '. $data[$field] . $option->errorMessage->userExists;
 					}
 				}	
 			}
 			if(empty($error))
 			{
-				//add admin user
+				// no error - then add admin user
 				$adminModel->addUser($data);				
 				$session->message['txt'] = $option->infoMessage->accountAdd;
 				$session->message['type'] = 'info';
 				header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/list/');
-				exit;	
-				
+				exit;					
 			}
 			else
 			{				
@@ -130,7 +130,8 @@ switch ($requestAction)
 	case 'update':
 		$error = array();
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
-		{						
+		{				
+			// POST values that will be validated						
 			$values = array('details' => 
 								array('firstName'=>$_POST['firstName'],
 									  'lastName'=>$_POST['lastName']
@@ -145,10 +146,10 @@ switch ($requestAction)
 			$valid = $adminModel->validateUser($values);
 			$data = $valid['data'];
 			$error = $valid['error'];			
-			if(empty($valid['error']))
+			if(empty($error))
 			{
-				$data['id'] = $request['id'];
-				//add admin user
+				// no error - then update admin user
+				$data['id'] = $request['id'];				
 				$adminModel->updateUser($data);
 				$session->message['txt'] = $option->infoMessage->accountUpdate;
 				$session->message['type'] = 'info';
@@ -161,18 +162,20 @@ switch ($requestAction)
 				$session->message['type'] = 'error';
 			}
 		}
-		$data = $adminModel->getAdminInfo($request['id']);
+		$data = $adminModel->getUserBy('id', $request['id']);
 		$adminView->details('update',$data);	
 	break;
 	case 'activate':
+		// this action is called from ajax request dojo.xhrPost()
 		$id = (isset($_POST['id'])) ? (int)$_POST['id'] : 0;
 		$isActive = (isset($_POST['isActive'])) ? $_POST['isActive'] : 0;
 		$page = (isset($_POST['page'])) ? (int)$_POST['page'] : 1;
 		$values = array('enum' => array('0' => '0,1', 'isActive' => $isActive));
 		$valid = $adminModel->validateUser($values);
 		if(empty($valid['error']))
-		{
-			$adminModel->activateAdmin($id, $valid['data']['isActive']);		
+		{	
+			// no error - then change active value of admin user
+			$adminModel->activateUser($id, $valid['data']['isActive']);		
 		}
 		else
 		{
@@ -188,7 +191,7 @@ switch ($requestAction)
 		{	
 			if (1 == $_POST['delete'])
 			{
-				//delete admin user
+				// delete admin user
 				$adminModel->deleteUser($request['id']);
 				$session->message['txt'] = $option->infoMessage->accountDelete;
 				$session->message['type'] = 'info';
@@ -201,9 +204,8 @@ switch ($requestAction)
 			header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/list/');
 			exit;				
 		}
-		$data = $adminModel->getAdminInfo($request['id']);
+		$data = $adminModel->getUserBy('id', $request['id']);
+		// delete page confirmation
 		$adminView->details('delete', $data);	
 	break;
 }
-
-

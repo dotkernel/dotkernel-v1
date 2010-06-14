@@ -11,6 +11,7 @@
 				<list>List Admin Users</list>
 				<add>Add New Admin User</add>
 				<update>Update Admin User</update>
+				<delete>Delete Admin User</delete>
 			</action>
 		</pageTitle>
 		<errorMessage>			
@@ -19,7 +20,7 @@
 			<invalidPassword>Invalid Password !</invalidPassword>
 			<wrongCredentials>Wrong Login Credentials !</wrongCredentials>
 			<inactiveAcount>This account is inactive !</inactiveAcount>
-			<adminExists> already exists ! </adminExists>	
+			<userExists> already exists ! </userExists>	
 			<trickUserError>Why are you so smart ? &lt;/br&gt; Don't play with the fire !</trickUserError>		
 		</errorMessage>
 		<infoMessage>

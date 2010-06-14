@@ -14,22 +14,22 @@
 * User Controller
 * @author     DotKernel Team <team@dotkernel.com>
 */
-// All actions MUST set  the variable  $pageTitle
 
-// instantiate  AuthUser object
+// instantiate classes related to User module: model & view
 $userModel = new User(); 
-$userView = new User_View($tpl, $settings);
-// switch based on the action, NO default action here
+$userView = new User_View($tpl);
+// all actions MUST set  the variable  $pageTitle
 $pageTitle = $option->pageTitle->action->{$requestAction};
+// switch based on the action, don't forget the default action
 switch ($requestAction)
 {
 	default:
-		// default action
+		// default action is login
 		$pageTitle = $option->pageTitle->action->login;
 	case 'login':
 		if(!isset($session->user))
 		{
-			// Show the Login form
+			// display Login form
 			$userView->loginForm('login');
 		}
 		else
@@ -49,6 +49,7 @@ switch ($requestAction)
 				$user = $userModel->checkLogin($validate['login']);
 				if(!empty($user))
 				{
+					// user is valid and logged in
 					$session->user = $user;
 					header('location: '.$config->website->params->url.'/user/account');
 					exit;
@@ -77,12 +78,13 @@ switch ($requestAction)
 			
 	break;
 	case 'account':
-		// Show My Account Page, if he is logged in 
+		// show My Account page, if he is logged in 
 		Dot_Auth::checkIdentity();
 		$data = array();
 		$error = array();
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
-		{						
+		{				
+			// POST values that will be validated				
 			$values = array('details' => 
 								array('firstName'=>$_POST['firstName'],
 									  'lastName'=>$_POST['lastName']
@@ -98,7 +100,7 @@ switch ($requestAction)
 			$data['id'] = $request['id'];		
 			if(empty($error))
 			{				
-				//update user
+				// no error - then update user
 				$userModel->updateUser($data);
 				$session->message['txt'] = $option->infoMessage->update;
 				$session->message['type'] = 'info';			
@@ -122,6 +124,7 @@ switch ($requestAction)
 		$error = array();
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
 		{		
+			// POST values that will be validated				
 			$values = array('details' => 
 								array('firstName'=>$_POST['firstName'],
 									  'lastName'=>$_POST['lastName']
@@ -163,7 +166,7 @@ switch ($requestAction)
 			}
 			if(empty($error))
 			{				
-			   	//add user user
+			   	// no error - then add user
 				$userModel->addUser($data);
 				$session->message['txt'] = $option->infoMessage->add;
 				$session->message['type'] = 'info';
@@ -180,6 +183,7 @@ switch ($requestAction)
 					}
 					else
 					{
+						//this else case should never be reach
 						unset($session->user);
 						$error['Error Login'] = $option->errorMessage->login;
 					}
@@ -193,8 +197,9 @@ switch ($requestAction)
 					unset($data['password']);				
 				}							
 			}
-			//return $data and $error as json
+			// add action and validation are made with ajax - dojo.xhrPost, so return json string  
 			echo Zend_Json::encode(array('data'=>$data, 'error'=>$error));
+			// return $data and $error as json
 			exit;			
 		}
 		$userView->details('add',$data);
@@ -209,7 +214,7 @@ switch ($requestAction)
 			$error = $valid['error'];
 			if(empty($error))
 			{	
-				 // re-send password
+				// no error - then send password
 				$userModel->forgotPassword($data['email']);						
 			}
 			else

@@ -7,7 +7,7 @@
 * @package    DotLibrary
 * @copyright  Copyright (c) 2009 DotBoost  Technologies (http://www.dotboost.com)
 * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
-* @version    $Id$
+* @version    $Id: Seo.php 148 2010-06-10 09:05:50Z teo $
 */
 
 /**
@@ -54,22 +54,27 @@ class Dot_Seo
 		if( '/' != substr($url, -1, 1))
 		{
 			$url .= '/';
-		}		
-		if('frontend' != $this->param['module'])
+		}
+		if('frontend' != $param['module'])
 		{
 			$url .=  $param['module'] . '/';
 		}
-		$url .= $param['controller'] . '/';
-		$url .= $param['action'] . '/';
+		if( '' != $param['controller'])
+		{
+			$url .= $param['controller'] . '/';
+		}
+		if( '' != $param['action'])
+		{
+			$url .= $param['action'] . '/';
+		}
 		//unset the request params: module, controller and action
 		unset($param['module']);
 		unset($param['controller']);
 		unset($param['action']);		
-		
 		foreach ($param as $k => $v)
 		{
 			$url .= $k . '/' . $v . '/';
-		}
+		}		
 		return $url;		
 	}
 	/**
@@ -78,13 +83,15 @@ class Dot_Seo
 	 * @return array
 	 */
 	public function getOption()
-	{
-		$option = $this->option->toArray();
+	{		
 		//remove 'option' xml atribute
-		unset($option['option']);
-		// add canonical url to the array from dots/seo.xml file
-		$option['canonicalUrl'] = $this->createCanonicalUrl();
-		return $option;
+		$this->option->__unset('option');
+		if(isset($this->option->canonicalUrl))
+		{
+			// add canonical url to the array from dots/seo.xml file
+			$this->option->__set('canonicalUrl',$this->createCanonicalUrl());
+		}		
+		return $this->option;
 	}
 		
 }

@@ -15,19 +15,16 @@
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
-// All actions MUST set  the variable  $pageTitle
-
 $pageView = new Page_View($tpl);
-// switch based on the action, don't forget the default action
+// all actions MUST set  the variable  $pageTitle
 $pageTitle = $option->pageTitle->action->{$requestAction};
+// switch based on the action, don't forget the default action
 switch ($requestAction)
 {
 	default:
-		// default action
+		// default action is home
 		$pageTitle = $option->pageTitle->action->home;
 	case 'home';
-		// a call to specific view function
-		// like: viewControllerAction() , a.k.a viewPageHome()
 		// call to view function
 		$pageView->showPage('home');
 	break;

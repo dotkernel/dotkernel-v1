@@ -140,7 +140,8 @@ class Dot_Settings
 				}
 			}
 		}
-		$option = new Zend_Config($option);
+		// allow that SEO options may be changed - the 2nd param is true(allowModifications)
+		$option = new Zend_Config($option, true);
 		return $option;
 		
 	} 

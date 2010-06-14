@@ -1,4 +1,9 @@
-// sumbit the form
+/**
+ * Submit add form. Validate it with AJax, using json. 
+ * @param {String} formId
+ * @param {String} msgBoxId
+ * @param {String} url
+ */
 function formSubmit(formId, msgBoxId, url) 
 {	
 	// submit the form in the background
