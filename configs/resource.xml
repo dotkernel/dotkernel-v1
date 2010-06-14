@@ -28,4 +28,16 @@
 			</admin>
 		</action>
  	</route>
+	<!-- session stuff -->
+	<session>
+		<frontend>
+			<name>frontend</name>
+			<rememberMeSeconds>864000</rememberMeSeconds>
+		</frontend>
+		<admin>
+			<name>admin</name>
+			<rememberMeSeconds>864000</rememberMeSeconds>
+		</admin>
+		
+	</session>
  </resources>
