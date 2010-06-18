@@ -28,8 +28,6 @@ class User
 	public function __construct()
 	{		
 		$this->db = Zend_Registry::get('database');
-		$this->config = Zend_Registry::get('configuration');
-		$this->settings = Zend_Registry::get('settings');
 		$this->option = Zend_Registry::get('option');		
 	}
 	/**

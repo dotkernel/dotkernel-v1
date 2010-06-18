@@ -1,3 +1,8 @@
+/**
+ * Display menu in frontend
+ * @param {String} menu
+ * @param {String} parent_id
+ */
 function ShowMenuItem(menu, parent_id)
 {
 	for (var i = 0; i <= 100; i++)

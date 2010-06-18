@@ -7,7 +7,7 @@
 * @package    Admin
 * @copyright  Copyright (c) 2009 DotBoost  Technologies (http://www.dotboost.com)
 * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
-* @version    $Id: UserController.php 145 2010-06-07 12:12:56Z teo $
+* @version    $Id$
 */
 
 /**
@@ -25,11 +25,13 @@ switch ($requestAction)
 {
 	default:
 	case 'list':
+		// list users
 		$page = (isset($request['page'])) ? $request['page'] : 1;
 		$users = $userModel->getUserList($page);		
 		$userView->listUser('list', $users, $page);		
 	break;
 	case 'add':		
+		// display form and add new user
 		$data = array();
 		$error = array();
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
@@ -83,6 +85,7 @@ switch ($requestAction)
 		$userView->details('add',$data);		
 	break;
 	case 'update':
+		// display form and update user
 		$error = array();
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
 		{				
@@ -121,6 +124,7 @@ switch ($requestAction)
 		$userView->details('update',$data);	
 	break;
 	case 'activate':
+		// activate/inactivate user account
 		// this action is called from ajax request dojo.xhrPost()
 		$id = (isset($_POST['id'])) ? (int)$_POST['id'] : 0;
 		$isActive = (isset($_POST['isActive'])) ? $_POST['isActive'] : 0;
@@ -142,6 +146,7 @@ switch ($requestAction)
 		$userView->listUser('list', $users, $page, true);
 	break;
 	case 'delete':
+		// display confirmation form and delete user account
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
 		{	
 			if (1 == $_POST['delete'])
@@ -164,6 +169,7 @@ switch ($requestAction)
 		$userView->details('delete', $data);	
 	break;
 	case 'send-password':
+		// send an email with the password to the selected user
 		$data = array();
 		$error = array();
 		if ($request['id'] > 0)

@@ -25,13 +25,15 @@ class Dot_Kernel
      */
     public $config;
 	/**
+     * Constant
      * Dot Kernel version identification
+     * @var string 
      */
     const VERSION = '1.2.0';    
 	/**
 	 * Constructor
 	 * @access public
-	 * @return void
+	 * @return Dot_Kernel
 	 */
     public function __construct()
     {

@@ -7,7 +7,7 @@
 * @package    DotLibrary
 * @copyright  Copyright (c) 2009 DotBoost  Technologies (http://www.dotboost.com)
 * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
-* @version    $Id: Seo.php 148 2010-06-10 09:05:50Z teo $
+* @version    $Id$
 */
 
 /**
@@ -42,8 +42,7 @@ class Dot_Seo
 	/**
 	 * Create canonical URL
 	 * This method will be changed when will add URL ReWrite alternative
-	 * @TODO improvement of canonical url's
-	 * @
+	 * @todo improvement of canonical url's
 	 * @access private
 	 * @return string 
 	 */
@@ -92,6 +91,5 @@ class Dot_Seo
 			$this->option->__set('canonicalUrl',$this->createCanonicalUrl());
 		}		
 		return $this->option;
-	}
-		
+	}		
 }

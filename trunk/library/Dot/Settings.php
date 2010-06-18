@@ -75,7 +75,6 @@ class Dot_Settings
 	{
 		$resource = Zend_Registry::get('resource');
 		$modules = $resource->controllers->toArray();		
-		
 		/**
 		 *  if we are in frontend , we have an empty variable for $requestModule
 		 *  Also, fix with $modulePath for modules path other then frontend
@@ -142,8 +141,6 @@ class Dot_Settings
 		}
 		// allow that SEO options may be changed - the 2nd param is true(allowModifications)
 		$option = new Zend_Config($option, true);
-		return $option;
-		
+		return $option;		
 	} 
-
 }

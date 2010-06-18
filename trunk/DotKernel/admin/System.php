@@ -27,20 +27,31 @@ class System
 	{
 		$this->db = Zend_Registry::get('database');
 	}
-	public function listSettings($isEditable='1')
+	/**
+	 * Get settings that are by default editable
+	 * @access public
+	 * @param int $isEditable [optional]
+	 * @return array
+	 */
+	public function getSettings($isEditable='1')
 	{
 		$select = $this->db->select()
 						   ->from('setting')
 						   ->where('isEditable = ? ', $isEditable);
 		return $this->db->fetchAll($select);
 	}
+	/**
+	 * Update settings
+	 * @access public
+	 * @param array $data
+	 * @return void
+	 */
 	public function updateSettings($data)
 	{		
 		foreach ($data as $k => $v)
 		{			
 			$this->db->update('setting', array('value' => $v), $this->db->quoteIdentifier('key').' = '.$this->db->quote($k));
 			
-		}	
-		
+		}		
 	}
 }

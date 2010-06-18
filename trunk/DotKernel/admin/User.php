@@ -207,7 +207,8 @@ class User
 		return array('data' => $data, 'error' => $error);
 	}
 	/**
-	 * @param int $id
+	 * Activate/Inactivate user account
+	 * @param int $id - user ID
 	 * @param int $isActive
 	 * @return void
 	 */

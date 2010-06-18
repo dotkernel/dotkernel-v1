@@ -21,103 +21,97 @@
 class Dot_Template
 {
 	/**
-		* Class name - default = 'Template'
-		* @access private
-		* @var string
-		*/
-	private $className = 'Template';
-	/**
-		* If set, echo assignments
-		* @access private
-		* @var bool
-		*/
+	 * If set, echo assignments
+	 * @access private
+	 * @var bool
+	 */
 	private $debug = false;
 	/**
-		* If set, echo blocks time parse
-		* @access private
-		* @var bool
-		*/
+	 * If set, echo blocks time parse
+	 * @access private
+	 * @var bool
+	 */
 	private $debugBlock = false;
 	/**
-		* Relative filenames are relative to this pathname
-		* @access private
-		* @var string
-		*/
+	 * Relative filenames are relative to this pathname
+	 * @access private
+	 * @var string
+	 */
 	private $root = '..';
 	/**
-		* $file[handle] = 'filename';
-		* @access private
-		* @var array
-		*/
+	 * $file[handle] = 'filename';
+	 * @access private
+	 * @var array
+	 */
 	private $file = array();
 	/**
-		* fallback paths that should be defined in a child class
-		* @access private
-		* @var array
-		*/
+	 * fallback paths that should be defined in a child class
+	 * @access private
+	 * @var array
+	 */
 	private $fileFallbacks = array();
 	/**
-		* $varkeys[key] = 'key'
-		* @access private
-		* @var array
-		*/
+	 * $varkeys[key] = 'key'
+	 * @access private
+	 * @var array
+	 */
 	private $varkeys = array();
 	/**
-		* $varvals[key] = 'value';
-		* @access private
-		* @var array
-		*/
+	 * $varvals[key] = 'value';
+	 * @access private
+	 * @var array
+	 */
 	private $varvals = array();
 	/**
-		* 'remove'  => remove undefined variables
-		* 'comment' => replace undefined variables with comments
-		* 'keep'    => keep undefined variables
-		* @access private
-		* @var string
-		*/
+	 * 'remove'  => remove undefined variables
+	 * 'comment' => replace undefined variables with comments
+	 * 'keep'    => keep undefined variables
+	 * @access private
+	 * @var string
+	 */
 	private $unknowns = 'remove';
 	/**
-		* 'yes' => halt,
-		* 'report' => report error, continue,
-		* 'no' => ignore error quietly
-		* @access private
-		* @var string
-		*/
+	 * 'yes' => halt,
+	 * 'report' => report error, continue,
+	 * 'no' => ignore error quietly
+	 * @access private
+	 * @var string
+	 */
 	private $haltOnError = 'yes';
 	/**
-		* The last error message is retained here
-		* @access private
-		* @var string
-		* @see halt
-		*/
+	 * The last error message is retained here
+	 * @access private
+	 * @var string
+	 * @see halt
+	 */
 	private $lastError = '';
 	/**
-		* Determines whether Template outputs filename comments.
-		* false = no filename outputs
-		* true = HTML comments (e.g. <!-- START FILE $filename -->) placed in output
-		* @access private
-		* @var string
-		*/
+	 * Determines whether Template outputs filename comments.
+	 * false = no filename outputs
+	 * true = HTML comments (e.g. <!-- START FILE $filename -->) placed in output
+	 * @access private
+	 * @var string
+	 */
 	private $filenameComments = false;
 	/**
-		* Determines the regular expression used to find unknown variable tags.
-		* 'loose'  = traditional match all curly braces with no whitespace between
-		* 'strict' = adopts PHP's variable naming rules
-		* @access private
-		* @var bool
-		*/
+	 * Determines the regular expression used to find unknown variable tags.
+	 * 'loose'  = traditional match all curly braces with no whitespace between
+	 * 'strict' = adopts PHP's variable naming rules
+	 * @access private
+	 * @var bool
+	 */
 	private $unknownRegexp = 'loose';
 	/**
-		* Start time 
-		* @access private
-		* @var array
-		*/
+	 * Start time 
+	 * @access private
+	 * @var array
+	 */
 	private $start_time = array();
 	/**
-		* End time 
-		* @access private
-		* @var array
-		*/
+	 * End time 
+	 * @access private
+	 * @var array
+	 */
 	private $endTime = array();
 	/**
 	 * Singleton instance
@@ -732,23 +726,18 @@ class Dot_Template
 			$this->halt('filename: file '.$filename.' does not exist.');
 		}
 		if (is_array($this->fileFallbacks) && count($this->fileFallbacks) > 0)
-			{
-				reset($this->fileFallbacks);
-				while (list(,$v) = each($this->fileFallbacks))
-					{
-						if (file_exists($v.basename($filename)))
-							{
-								return $v.basename($filename);
-							}
-					}
-				$this->halt(sprintf('filename: file %s does not exist in the fallback paths %s.',$filename, implode(',', $this->fileFallbacks)));
-				return false;
-			}
-		/*else
-			{
-				$this->halt(sprintf('filename: file %s does not exist.', $filename));
-				return false;
-			}*/
+		{
+			reset($this->fileFallbacks);
+			while (list(,$v) = each($this->fileFallbacks))
+				{
+					if (file_exists($v.basename($filename)))
+						{
+							return $v.basename($filename);
+						}
+				}
+			$this->halt(sprintf('filename: file %s does not exist in the fallback paths %s.',$filename, implode(',', $this->fileFallbacks)));
+			return false;
+		}
 		return $filename;
 	}
 	/**
@@ -835,7 +824,7 @@ class Dot_Template
 		$the_error ='';
 		$the_error .= "\n\n ".$msg."\n\n";
 		$the_error .= "Date: ".date("l dS of F Y h:i:s A");
-
+		
 		$out = "<html><head><title>Template Error</title>
 				<style>P,BODY{ font-family: trebuchet MS,sans-serif; font-size:11px;
 					}</style></head><body>&nbsp;<br><br><blockquote><b>There is an error with the

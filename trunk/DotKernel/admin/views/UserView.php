@@ -30,7 +30,7 @@ class User_View extends View
 		$this->tpl = $tpl;
 	}
 	/**
-	 * List the admin users
+	 * List users
 	 * @access public
 	 * @param string $templateFile
 	 * @param array $list
@@ -64,7 +64,7 @@ class User_View extends View
 		}
 	}
 	/**
-	 * Display users details. It is using for add and update actions
+	 * Display user details. It is used for add and update actions
 	 * @access public
 	 * @param string $templateFile
 	 * @param array $data [optional]

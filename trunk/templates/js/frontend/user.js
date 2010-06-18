@@ -43,13 +43,15 @@ function formSubmit(formId, msgBoxId, url)
 				{
 					i = 'recaptcha_response_field';
 				}
-				dojo.byId(i).value = '';
+				if (dojo.byId(i)) 
+				{
+					dojo.byId(i).value = '';
+				}
 			}
 			dojo.byId(msgBoxId).innerHTML = errorMsg;
 			dojo.byId('password').value = '';
 			dojo.byId('password2').value = '';
-	    }
-		
+	    }		
 	});
 	Recaptcha.switch_type('image');
-};
+}

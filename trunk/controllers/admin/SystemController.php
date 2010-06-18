@@ -25,7 +25,8 @@ switch ($requestAction)
 		$systemView->dashboard('dashboard');
 	break;
 	case 'settings':
-		$data = $systemModel->listSettings();	
+		// list settings values
+		$data = $systemModel->getSettings();	
 		if(isset($request['update']) && $request['update'] == 'done')
 		{			
 				$session->message['txt'] = $option->infoMessage->settingsUpdate;
@@ -34,6 +35,7 @@ switch ($requestAction)
 		$systemView->displaySettings('settings', $data);
 	break;
 	case 'settings-update':
+		// update settings value
 		$data = array();
 		$error = array();
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
@@ -45,6 +47,7 @@ switch ($requestAction)
 		}
 	break;
 	case 'phpinfo':
+		// display phpinfo()
 		$systemView->showPHPInfo('phpinfo');
 	break;	
 }

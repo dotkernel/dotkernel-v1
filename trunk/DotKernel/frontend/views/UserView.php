@@ -59,6 +59,11 @@ class User_View extends View
 			$this->tpl->setVar('SECUREIMAGE',$this->getRecaptcha());			
 		}
 	}
+	/**
+	 * Get captcha display box using Zend_Service_ReCaptcha api
+	 * @access public
+	 * @return Zend_Service_ReCaptcha
+	 */
 	public function getRecaptcha()
 	{
 		$option = Zend_Registry::get('option');
