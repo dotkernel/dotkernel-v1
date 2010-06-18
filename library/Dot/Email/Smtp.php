@@ -34,10 +34,10 @@ class Dot_Email_Smtp extends Dot_Email
 		if(!empty($this->smtpData))
 		{
 			$mailConfigs = array('auth' => 'login',
-													'username' => $this->smtpData['smtpUsername'],
-													'password' => $this->smtpData['smtpPassword'],
-													'port' => $this->smtpData['smtpPort'],
-													'ssl' => $this->smtpData['smtpSsl']);
+											'username' => $this->smtpData['smtpUsername'],
+											'password' => $this->smtpData['smtpPassword'],
+											'port' => $this->smtpData['smtpPort'],
+											'ssl' => $this->smtpData['smtpSsl']);
 			$this->transport = new Zend_Mail_Transport_Smtp($this->smtpData['smtpServer'], $mailConfigs);	
 		}
 	}	
@@ -61,12 +61,12 @@ class Dot_Email_Smtp extends Dot_Email
 		$smtp = array();
 		$select = $this->db->select()
 						   ->from('emailTransporter', 
-							 				array('id', 
-														'smtpUsername' => 'user',
-														'smtpPassword' => 'pass',
-														'smtpServer' => 'server',
-														'smtpPort' => 'port',
-														'smtpSsl' => 'ssl'))
+							 			  array('id', 
+												'smtpUsername' => 'user',
+												'smtpPassword' => 'pass',
+												'smtpServer' => 'server',
+												'smtpPort' => 'port',
+												'smtpSsl' => 'ssl'))
 						   ->where('counter < capacity')
 						   ->where('isActive = ?','1')
 						   ->order('id')

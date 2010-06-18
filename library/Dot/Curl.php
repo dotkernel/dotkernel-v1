@@ -127,8 +127,10 @@ class Dot_Curl
 	private function setOptions($ch, $url, $referer = '')
 	{
 		//if no referer is provided, use the url as the referer
-		if ($referer == '') $referer = $url;
-
+		if ($referer == '') 
+		{
+			$referer = $url;
+		}
 		//general options
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_HEADER, $this->header);
@@ -136,15 +138,14 @@ class Dot_Curl
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, $this->returnTransfer);
 		curl_setopt($ch, CURLOPT_REFERER, $referer);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $this->sslVerifyPeer);
-
 		//follow redirects , be carefull to se open_basedir to none and that php is not in safe mode
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, $this->followLocation);
-
 		//get a random user agent
 		if ($this->defaultUserAgent != '')
 		{
 			curl_setopt($ch, CURLOPT_USERAGENT, $this->defaultUserAgent);
-		}else 
+		}
+		else 
 		{
 			curl_setopt($ch, CURLOPT_USERAGENT, $this->userAgents[rand(0, count($this->userAgents) -1)]);
 		}
@@ -161,13 +162,18 @@ class Dot_Curl
 				{
 					$port = $this->ports[rand(0, (count($this->ports) - 1))];
 
-					if (!in_array($port, $this->usedPorts)) $ok = true;
+					if (!in_array($port, $this->usedPorts)) 
+					{
+						$ok = true;
+					}
 					$i++;
 				}
 			}
 			//get a random port
-			else $port = $this->ports[rand(0, (count($this->ports) - 1))];
-
+			else 
+			{
+				$port = $this->ports[rand(0, (count($this->ports) - 1))];
+			}
 			$this->usedPorts[] = $port;
 
 			curl_setopt ($ch, CURLOPT_PROXY, $this->torIp.':'.$port);
@@ -180,7 +186,6 @@ class Dot_Curl
 			foreach($this->cookies as $k=>$v) $cc[] ="$k=$v";
 			curl_setopt ($ch, CURLOPT_COOKIE, implode('; ',$cc));
 		}
-
 		if(count($this->postVars) > 0)
 		{
 			curl_setopt ($ch, CURLOPT_POST, 1);
@@ -199,28 +204,29 @@ class Dot_Curl
 		//reset every time to avoid stacking
 		$this->errors = array();
 		$this->usedPorts = array();
-
 		//initialize multy curl
 		$mh = curl_multi_init();
 		foreach ($urls as $key => $val)
 		{
 			$url = $urls[$key];
 			$referer = '';
-			if (array_key_exists($val, $referers)) $referer = $referers[$key];
+			if (array_key_exists($val, $referers))
+			{
+				$referer = $referers[$key];
+			}
 			$obj[$key] = curl_init($url);
-
 			//set options for each url
 			$this->setOptions($obj[$key], $url, $referer);
-
 			//add it to the group
 			curl_multi_add_handle($mh, $obj[$key]);
 		}
-
 		//execute all the urls at once
 		$running=null;
-		do curl_multi_exec($mh,$running);
+		do 
+		{
+			curl_multi_exec($mh,$running);
+		}
 		while ($running > 0);
-
 		//retriev results from each request
 		$htmls = array();
 		foreach ($urls as $key => $val)
@@ -232,14 +238,14 @@ class Dot_Curl
 				curl_close($obj[$key]);
 				$this->errors[] = 'Connection problem (cURL ERROR: '.curl_errno($obj[$key]).': '.curl_error($obj[$key]).')';
 			}
-			else curl_close($obj[$key]);
-
+			else 
+			{
+				curl_close($obj[$key]);
+			}
 			curl_multi_remove_handle($mh, $obj[$key]);
 		}
-
 		//close multy curl
 		curl_multi_close($mh);
-
 		//return the array wth all the results
 		return $htmls;
 	}
@@ -258,23 +264,17 @@ class Dot_Curl
 		$content = '';
 
 		$obj = curl_init($url);
-
 		$this->setOptions($obj, $url, $referer);
-
 		if (count($this->errors) <= 0)
 		{
 			$content = curl_exec($obj);
 			$this->info = curl_getinfo($obj);
-
 			if (curl_errno($obj) != 0)
 			{
 				$this->errors[] = 'Connection problem (DOT CURL ERROR: '.curl_errno($obj).': '.curl_error($obj).')';
 			}
 		}
-
 		curl_close($obj);
-
 		return $content;
 	}
 }
-?>

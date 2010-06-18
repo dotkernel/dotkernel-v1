@@ -29,7 +29,7 @@ class Dot_Email extends Zend_Mail
 	/**
 	 * Email constructor
 	 * @access public 
-	 * @return void
+	 * @return Zend_Mail
 	 */
 	public function __construct()
 	{
@@ -62,17 +62,15 @@ class Dot_Email extends Zend_Mail
 	 * Send email. Parameter is included only to be compatible with Zend_Mail
 	 * @access public 
 	 * @param  Zend_Mail_Transport_Abstract $transport [optional]
-	 * @return void
+	 * @return bool
 	 */
 	public function send($transport = null)
 	{		
 		// set From and ReplyTo, in case we forgot it in code
 		parent::setDefaultFrom($this->settings->siteEmail, $this->seoOption->siteName);
 		parent::setDefaultReplyTo($this->settings->siteEmail, $this->seoOption->siteName);
-		
 		//  set the sendmail transporter as default 
-		$tr = new Dot_Email_Sendmail($this->_from);	
-		
+		$tr = new Dot_Email_Sendmail($this->_from);			
 		// check if we need to use an external SMTP
 		if('1' == $this->settings->smtpActive)
 		{
@@ -87,8 +85,7 @@ class Dot_Email extends Zend_Mail
 				}
 			}
 		}
-		$this->setDefaultTransport($tr->getTransport());
-		
+		$this->setDefaultTransport($tr->getTransport());		
 		//try to send the email
 		try
 		{
@@ -98,7 +95,7 @@ class Dot_Email extends Zend_Mail
 		catch (Zend_Exception $e)
 		{
 			/**
-			 * @TODO definitely we want to create an exception class, Other code to recover from the error
+			 * @todo definitely we want to create an exception class, Other code to recover from the error
 			 */
 			$devEmails = @explode(',', $this->settings->devEmails);
 			$dateNow = date('F dS, Y h:i:s A');

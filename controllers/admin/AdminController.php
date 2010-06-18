@@ -66,15 +66,18 @@ switch ($requestAction)
 		}			
 	break;
 	case 'account':
+		//display my account form
 		$data = $adminModel->getUserBy('id', $session->admin['id']);
 		$adminView->details('update',$data);	
 	break;
 	case 'list':
+		// list admin users
 		$page = (isset($request['page'])) ? $request['page'] : 1;
 		$users = $adminModel->getUserList($page);		
 		$adminView->listUser('list', $users,$page);	
 	break;	
 	case 'add':
+		// display form and add new admin
 		$data = array();
 		$error = array();
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
@@ -128,6 +131,7 @@ switch ($requestAction)
 		$adminView->details('add',$data);		
 	break;
 	case 'update':
+		// display form and update admin user
 		$error = array();
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
 		{				
@@ -167,6 +171,7 @@ switch ($requestAction)
 	break;
 	case 'activate':
 		// this action is called from ajax request dojo.xhrPost()
+		// activate/inactivate admin user
 		$id = (isset($_POST['id'])) ? (int)$_POST['id'] : 0;
 		$isActive = (isset($_POST['isActive'])) ? $_POST['isActive'] : 0;
 		$page = (isset($_POST['page'])) ? (int)$_POST['page'] : 1;
@@ -187,6 +192,7 @@ switch ($requestAction)
 		$adminView->listUser('list', $users, $page, true);
 	break;
 	case 'delete':
+		// display confirmation form and delete admin user
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
 		{	
 			if (1 == $_POST['delete'])

@@ -45,6 +45,7 @@ class Admin
 						   ->where('isActive = ?','1')
 						   ->where('username = ?', $data['username'])
 						   ->where('password = ?', $password);
+						   
 		$results = $this->db->fetchAll($select);	
 		if( 1 == count($results))
 		{
@@ -122,6 +123,7 @@ class Admin
 	}	
 	/**
 	 * Delete admin user
+	 * @access public
 	 * @param int $id
 	 * @return void
 	 */
@@ -249,6 +251,7 @@ class Admin
 	}
 	/**
 	 * Update active field for admin user
+	 * @access public 
 	 * @param int $id
 	 * @param int $isActive
 	 * @return void

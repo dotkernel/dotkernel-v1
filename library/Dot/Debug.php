@@ -50,6 +50,13 @@ class Dot_Debug
 	 * @var bool
 	 */	
 	public $memory_usage = true;
+	/**
+	 * Constructor
+	 * @access public
+	 * @param Zend_Db $db
+	 * @param Dot_Template $tpl
+	 * @return Dot_Debug
+	 */
 	public function __construct($db, $tpl)
 	{
 		$this->db = $db;
@@ -102,8 +109,6 @@ class Dot_Debug
 	/**
 	 * Display the debug variables
 	 * @access public
-	 * @param Zend_db $db
-	 * @param Dot_Template $tpl
 	 * @return void
 	 */
 	public function show ()
@@ -122,30 +127,29 @@ class Dot_Debug
 		$this->tpl->setBlock('tpl_debugger', 'queries', 'queries_block');
 		$this->tpl->setBlock('tpl_debugger', 'if_show_debug', 'if_show_debug_block');
 		
-		$this->showZFVersion($this->tpl);
-		$this->showPHPVersion($this->tpl);
-		$this->showDotVersion($this->tpl);
+		$this->showZFVersion();
+		$this->showPHPVersion();
+		$this->showDotVersion();
 		
 		// if we need db debuger
 		if ($this->db_debug)
 		{
-			$this->showDbDebug($this->db, $this->tpl);
+			$this->showDbDebug();
 		}
 		if ($this->memory_usage)
 		{
-			$this->showMemoryUsage($this->tpl);
+			$this->showMemoryUsage();
 		}
 		// if we need to show total time - put this last so it counts the debug of queries, memory limit, etc
 		if ($this->total_time)
 		{
-			$this->showTotalTime($this->tpl);
+			$this->showTotalTime();
 		}
 		$this->tpl->parse('DEBUGGER', 'tpl_debugger');		
 	}
 	/**
 	 * Display total time 
 	 * @access public
-	 * @param Dot_Template $this->tpl
 	 * @return void
 	 */
 	private function showTotalTime ()
@@ -156,8 +160,6 @@ class Dot_Debug
 	/**
 	 * Display DB querys for debug
 	 * @access private
-	 * @param Zend_db $this->db
-	 * @param Dot_Template $this->tpl
 	 * @return void
 	 */
 	private function showDbDebug ()
@@ -215,7 +217,6 @@ class Dot_Debug
 					$this->tpl->parse('params_block', '');
 				}
 			}
-
 			$totalTime = $profiler->getTotalElapsedSecs();
 			$queryCount = $profiler->getTotalnumQueries();
 			// show aditional information
@@ -240,7 +241,6 @@ class Dot_Debug
 	/**
 	 * Display memory usage 
 	 * @access public
-	 * @param Dot_Template $this->tpl
 	 * @return void
 	 */
 	public function showMemoryUsage ()
@@ -252,7 +252,6 @@ class Dot_Debug
 	/**
 	 * Display ZF Version
 	 * @access public
-	 * @param Dot_Template $this->tpl
 	 * @return void
 	 */
 	public function showZFVersion ()
@@ -263,7 +262,6 @@ class Dot_Debug
 	/**
 	 * Display PHP version
 	 * @access public
-	 * @param Dot_Template $this->tpl
 	 * @return void
 	 */
 	public function showPHPVersion ()
@@ -274,7 +272,6 @@ class Dot_Debug
 	/**
 	 * Display DotKernel version
 	 * @access public
-	 * @param Dot_Template $this->tpl
 	 * @return void
 	 */
 	public function showDotVersion ()

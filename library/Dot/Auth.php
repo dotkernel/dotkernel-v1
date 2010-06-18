@@ -23,7 +23,7 @@ class Dot_Auth
 	 * Check permission to a certain page/content 
 	 * @access public
 	 * @static
-	 * @TODO extension to check user level
+	 * @todo extension to check user level
 	 * @return bool
 	 */
 	public static function checkIdentity($who='user')
@@ -86,7 +86,5 @@ class Dot_Auth
 		{
 			unset($session->$who);
 		}
-	}
-       
+	}      
 }
-

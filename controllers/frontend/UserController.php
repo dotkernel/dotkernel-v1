@@ -39,6 +39,7 @@ switch ($requestAction)
 		}
 	break;
 	case 'authorize':
+		// authorize user login 
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
 		{	
 			// validate the authorization request paramethers 
@@ -78,7 +79,7 @@ switch ($requestAction)
 			
 	break;
 	case 'account':
-		// show My Account page, if he is logged in 
+		// display My Account page, if user is logged in 
 		Dot_Auth::checkIdentity();
 		$data = array();
 		$error = array();
@@ -120,6 +121,7 @@ switch ($requestAction)
 		$userView->details('update',$data);	
 	break;
 	case 'register':
+		// display signup form and allow user to register 
 		$data = array();
 		$error = array();
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
@@ -138,7 +140,7 @@ switch ($requestAction)
 			$valid = $userModel->validateUser($values);
 			$data = $valid['data'];
 			$error = $valid['error'];
-			if(strlen($_POST['recaptcha_response_field']) == 0)
+			if(!isset($_POST['recaptcha_response_field']) || strlen($_POST['recaptcha_response_field']) == 0)
 			{
 				$error['Secure Image'] = $option->errorMessage->captcha;
 			}
@@ -205,6 +207,7 @@ switch ($requestAction)
 		$userView->details('add',$data);
 	break;
 	case 'forgot-password':
+		// send an emai with the forgotten password
 		$data = array();
 		$error = array();
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])

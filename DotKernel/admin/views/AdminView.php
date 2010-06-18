@@ -74,7 +74,7 @@ class Admin_View extends View
 		}
 	}
 	/**
-	 * Display users details. It is using for add and update actions
+	 * Display admin user details. It is used for add and update actions
 	 * @access public
 	 * @param string $templateFile
 	 * @param array $data [optional]

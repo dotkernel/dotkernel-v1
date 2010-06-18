@@ -38,7 +38,7 @@ class Dot_Sessions
 		$resource = Zend_Registry::get('resource');
 		$namespaceName = $resource->session->$module->name;
 		$rememberMe = $resource->session->$module->rememberMeSeconds;
-		
+		//if session is not registered, create it
 		if(!(Zend_Registry::isRegistered('session')))
 		{
 			$session = new Zend_Session_Namespace($namespaceName);

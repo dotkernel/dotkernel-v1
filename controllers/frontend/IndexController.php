@@ -42,7 +42,7 @@ Dot_Settings :: loadControllerFiles($requestModule);
 
 /**
  * Load option(specific configuration file for current dot) file
- * @TODO linking N dots together
+ * @todo linking N dots together
  */
 $option = Dot_Settings::getOptionVariables($requestModule,$requestController);
 $registry->option = $option;
