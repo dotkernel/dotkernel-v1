@@ -23,10 +23,9 @@ $defaultAction = $resource->route->action->$requestModule->$requestController;
 $requestAction     = isset($requestAction) && $requestAction !=''         ? $requestAction     : $defaultAction;
 
 // check admin permission
-if(!Dot_Auth::hasIdentity('admin') && $requestAction != 'authorize')
+if($requestAction != 'login' && $requestAction != 'authorize')
 {
-	$requestController = 'Admin';
-	$requestAction = 'login';
+	Dot_Auth::checkIdentity('admin');
 }
 
 // start the template object, empty for the moment 

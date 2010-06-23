@@ -30,6 +30,9 @@
 			<accountDelete>Account was deleted ! </accountDelete>
 			<noAccountDelete>No account was deleted ! </noAccountDelete>
 		</infoMessage>
+		<warningMessage>
+			<userPermission>You don't have enough credentials to access this url.</userPermission>
+		</warningMessage>
 		<validate>
 			<details>
 				<lengthMin>3</lengthMin>

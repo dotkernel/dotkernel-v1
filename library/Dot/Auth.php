@@ -21,21 +21,49 @@ class Dot_Auth
 {        			
 	/**
 	 * Check permission to a certain page/content 
+	 * Set wanted url if user is not logged
 	 * @access public
 	 * @static
 	 * @todo extension to check user level
 	 * @return bool
 	 */
 	public static function checkIdentity($who='user')
-	{
+	{		
+		$config = Zend_Registry::get('configuration');
 		$session = Zend_Registry::get('session');
 		if(!self::hasIdentity($who))
 		{
-			$option = Zend_Registry::get('option');
-			$config = Zend_Registry::get('configuration');
-			$session->message['txt'] = $option->warningMessage->userPermission;
-			$session->message['type'] = 'warning';
-			header('Location: ' . $config->website->params->url . '/' . $who . '/login');
+			//register wanted url
+			if(!isset($session->wantUrl))
+			{
+				$dotSeo = new Dot_Seo();
+				$session->wantUrl = $dotSeo->createCanonicalUrl();
+			}
+			if(Zend_Registry::isRegistered('option'))
+			{
+				$option = Zend_Registry::get('option');
+				$session->message['txt'] = $option->warningMessage->userPermission;
+				$session->message['type'] = 'warning';
+			}	
+			//create login url	
+			switch ($who) 
+			{
+				case 'admin':
+					$loginUrl = $config->website->params->url . '/admin/admin/login';	
+				break;				
+				default:
+					$loginUrl = $config->website->params->url . '/' . $who . '/login';
+				break;
+			}
+			header('Location: ' . $loginUrl);
+			exit;
+		}
+		//redirect user to wanted url
+		if(isset($session->wantUrl))
+		{
+			$wantUrl = $session->wantUrl;
+			unset($session->wantUrl);
+			header('Location: ' . $wantUrl);
 			exit;
 		}
 		return true;
@@ -56,6 +84,15 @@ class Dot_Auth
 		}
 		return false;
 	}	
+	public static function reguireLogin($who)
+	{
+		$session = Zend_Registry::get('session');
+		if(!isset($session->wantUrl))
+		{
+			$dotSeo = new Dot_Seo();
+			$session->wantUrl = $dotSeo->createCanonicalUrl();
+		}
+	}
 	/**
 	 * Return identity of $who
 	 * @access public
