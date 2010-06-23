@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 17, 2010 at 01:50 AM
+-- Generation Time: Jun 23, 2010 at 11:36 AM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.2
 
@@ -41,6 +41,24 @@ INSERT INTO `admin` (`id`, `username`, `password`, `email`, `firstName`, `lastNa
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `adminLogin`
+--
+
+CREATE TABLE IF NOT EXISTS `adminLogin` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `ip` varchar(16) NOT NULL,
+  `adminId` int(11) unsigned NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `referer` text NOT NULL,
+  `userAgent` text NOT NULL,
+  `dateLogin` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `adminId` (`adminId`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `emailTransporter`
 --
 
@@ -57,11 +75,6 @@ CREATE TABLE IF NOT EXISTS `emailTransporter` (
   `isActive` enum('1','0') NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `emailTransporter`
---
-
 
 -- --------------------------------------------------------
 
@@ -116,7 +129,20 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `user`
+-- Table structure for table `userLogin`
 --
 
+CREATE TABLE IF NOT EXISTS `userLogin` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `ip` varchar(16) NOT NULL,
+  `userId` int(11) unsigned NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `referer` text NOT NULL,
+  `userAgent` text NOT NULL,
+  `dateLogin` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `adminId` (`userId`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
