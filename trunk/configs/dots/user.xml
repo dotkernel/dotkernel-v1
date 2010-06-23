@@ -8,6 +8,7 @@
 				<add>Add User Account</add>
 				<update>Update User Account</update>
 				<delete>Delete User Account</delete>
+				<logins>User Logins</logins>
 			</action>
 		</pageTitle>
 		<validate>

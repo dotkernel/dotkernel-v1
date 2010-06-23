@@ -41,6 +41,11 @@
 				<title>My Account</title>
 				<link>admin/account/</link>
 				<description>Admin user account</description>
+			</subItem>			
+			<subItem>
+				<title>Logins</title>
+				<link>admin/logins/</link>
+				<description>Admin logins</description>
 			</subItem>
 		</subItems>
 	</item>
@@ -58,6 +63,11 @@
 				<title>Add new</title>
 				<link>user/add/</link>
 				<description>Add admin user</description>
+			</subItem>			
+			<subItem>
+				<title>Logins</title>
+				<link>user/logins/</link>
+				<description>User logins</description>
 			</subItem>
 		</subItems>
 	</item>

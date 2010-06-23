@@ -99,6 +99,16 @@ class User
 		$id = $data['id'];
 		unset ($data['id']);
 		$this->db->update('user', $data, 'id = '.$id);
+	}
+	/**
+	 * Register logins data
+	 * @access public
+	 * @param array $data
+	 * @return void
+	 */
+	public function registerLogin($data)
+	{
+		$this->db->insert('userLogin', $data);
 	}	
 	/**
 	 * Validate the data that comes from login form
