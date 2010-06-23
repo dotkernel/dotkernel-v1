@@ -40,6 +40,13 @@ switch ($requestAction)
 			if(!empty($user))
 			{
 				$session->admin = $user[0];
+				//prepare data for register the login
+				$dataLogin = array('ip' => Dot_Kernel::getUserIp(), 
+							  'adminId' => $session->admin['id'], 
+							  'username' => $session->admin['username'], 
+							  'referer' => $_SERVER['HTTP_REFERER'],
+							  'userAgent' => $_SERVER["HTTP_USER_AGENT"]);
+				$adminModel->registerLogin($dataLogin);
 				header('Location: '.$config->website->params->url.'/' . $requestModule );
 				exit;
 			}
@@ -74,7 +81,7 @@ switch ($requestAction)
 		// list admin users
 		$page = (isset($request['page'])) ? $request['page'] : 1;
 		$users = $adminModel->getUserList($page);		
-		$adminView->listUser('list', $users,$page);	
+		$adminView->listUser('list', $users, $page);	
 	break;	
 	case 'add':
 		// display form and add new admin
@@ -213,5 +220,12 @@ switch ($requestAction)
 		$data = $adminModel->getUserBy('id', $request['id']);
 		// delete page confirmation
 		$adminView->details('delete', $data);	
+	break;
+	case 'logins':
+		// list user logins
+		$id = (isset($request['id'])) ? (int)$request['id'] : 0;		
+		$page = (isset($request['page'])) ? $request['page'] : 1;
+		$logins = $adminModel->getLogins($id);
+		$adminView->loginsUser('logins', $logins, $page);
 	break;
 }

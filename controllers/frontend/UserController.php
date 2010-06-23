@@ -52,6 +52,13 @@ switch ($requestAction)
 				{
 					// user is valid and logged in
 					$session->user = $user;
+					//prepare data for register the login
+					$dataLogin = array('ip' => Dot_Kernel::getUserIp(), 
+							  'userId' => $session->user['id'], 
+							  'username' => $session->user['username'], 
+							  'referer' => $_SERVER['HTTP_REFERER'],
+							  'userAgent' => $_SERVER["HTTP_USER_AGENT"]);
+					$userModel->registerLogin($dataLogin);
 					header('location: '.$config->website->params->url.'/user/account');
 					exit;
 				}

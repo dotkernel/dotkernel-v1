@@ -12,6 +12,7 @@
 				<add>Add New Admin User</add>
 				<update>Update Admin User</update>
 				<delete>Delete Admin User</delete>
+				<logins>Admin User Logins</logins>
 			</action>
 		</pageTitle>
 		<errorMessage>			

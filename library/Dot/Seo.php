@@ -12,7 +12,6 @@
 
 /**
 * SEO stuff. MetaKeyword, MetaDescription, Canonical URL, and other stuff related SEO.
-* 
 * @category   DotKernel
 * @package    DotLibrary
 * @author     DotKernel Team <team@dotkernel.com>

@@ -97,4 +97,36 @@ class Admin_View extends View
 		//empty because password is encrypted with md5
 		$this->tpl->setVar('PASSWORD', '');
 	}
+	/**
+	 * Display user logins list
+	 * @access public
+	 * @param string $templateFile
+	 * @param array $list 
+	 * @param int $page
+	 * @return void
+	 */
+	public function loginsUser($templateFile, $list, $page)
+	{
+		$dotGeoip = new Dot_Geoip();
+		$this->tpl->setFile('tpl_main', 'admin/' . $templateFile . '.tpl');
+		$this->tpl->setBlock('tpl_main', 'list', 'list_block');
+		$this->tpl->paginator($list['paginatorAdapter'],$page);
+		$this->tpl->setVar('PAGE', $page);
+		foreach ($list['data'] as $k => $v)
+		{
+			$country = $dotGeoip->getCountryByIp($v['ip']);
+		    $this->tpl->setVar('BG', $k%2+1);
+			$this->tpl->setVar('ID', $k+1);
+			$this->tpl->setVar('ADMINID', $v['adminId']);
+			$this->tpl->setVar('USERNAME', $v['username']);
+			$this->tpl->setVar('IP', $v['ip']);
+			$this->tpl->setVar('COUNTRYIMAGE', strtolower($country[0]));
+			$this->tpl->setVar('COUNTRYNAME', $country[1]);
+			$this->tpl->setVar('REFERER', $v['referer']);
+			$this->tpl->setVar('USERAGENT', $v['userAgent']);
+			$this->tpl->setVar('BROWSERIMAGE', Dot_Kernel::getBrowserIcon($v['userAgent']));
+			$this->tpl->setVar('DATELOGIN', Dot_Kernel::timeFormat($v['dateLogin'], 'long'));
+			$this->tpl->parse('list_block', 'list', true);
+		}
+	}
 }

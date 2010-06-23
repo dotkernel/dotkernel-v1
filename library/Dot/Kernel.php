@@ -117,6 +117,27 @@ class Dot_Kernel
         return $realIp;
     }
 	/**
+	 * Return the name of the browser icon based on User Agent
+	 * @access public
+	 * @static
+	 * @param string $user
+	 * @return array
+	 */
+	public static function getBrowserIcon($agent)
+	{		
+		$browsersArray = array("msie", "netscape", "firebird", "firefox", "go!zilla", "icab", "konqueror", "lynx", "omniweb", "opera", "chrome");
+		$browsersIcons = array("msie", "netscape", "phoenix", "firefox", "gozilla", "icab", "konqueror", "lynx", "omniweb", "opera", "chrome");
+		foreach ($browsersArray as $key => $val)
+		{			
+			if (stripos($agent,$val) !== FALSE)
+			{
+				$icon = $browsersIcons[$key];
+				return $icon;
+			}
+		}
+		return 'unknown';
+	}
+	/**
 	 * Return date formatted fancy
 	 * @access public
 	 * @static

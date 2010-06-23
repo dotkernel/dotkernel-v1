@@ -533,3 +533,50 @@ input.bigger{width: 100%;}
 	width: 400px;
 }
 /*END MESSAGES*/
+/*Dijit Tooltip*/
+
+.dijitBackgroundIframe {
+	
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+.dijitTooltip {
+	position: absolute;
+	z-index: 2000;
+	display: block;
+	
+	left: 50%;
+	top: -10000px;
+	overflow: visible;
+}
+.dijitTooltipContainer {
+	border: solid #183646 2px;
+	background: #1A3D50;
+	color: #D5EFF4;
+	padding: 0 10px;
+	width: 200px;font-size: 14px;
+
+}
+.dijitTooltipBold
+{
+	color: #FDA83A;
+	font-weight: bold;
+	font-size: 14px;
+}
+.dijitTooltipFocusNode {
+	padding: 2px 2px 2px 2px;
+}
+.dijitTooltipConnector {
+	position: absolute;
+}
+.dijitTooltipData {
+	display:none;
+}
+/*END Dijit Tooltip*/

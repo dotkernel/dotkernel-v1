@@ -78,6 +78,7 @@ class View extends Dot_Template
 	{
 		$this->setVar('TEMPLATES_URL', $config->website->params->url . TEMPLATES_DIR);
 		$this->setVar('IMAGES_URL', $config->website->params->url . IMAGES_DIR . '/' .$this->requestModule);
+		$this->setVar('IMAGES_SHORT_URL', $config->website->params->url . IMAGES_DIR);
 		$this->setVar('SITE_URL', $config->website->params->url);
 	}
 	/**

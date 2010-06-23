@@ -7,7 +7,7 @@
 * @package    Admin
 * @copyright  Copyright (c) 2009 DotBoost  Technologies (http://www.dotboost.com)
 * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
-* @version    $Id: User.php 141 2010-06-03 12:20:52Z teo $
+* @version    $Id$
 */
 
 /**
@@ -215,5 +215,29 @@ class User
 	public function activateUser($id, $isActive)
 	{		
         $this->db->update('user', array('isActive' => $isActive), 'id = '.$id);
+	}
+	/**
+	 * Get admin users logins archive list
+	 * @access public
+	 * @param int $id 
+	 * @param int $page [optional]
+	 * @return array(array(), Zend_Paginator_Adapter())
+	 */
+	public function getLogins($id, $page = 1)
+	{
+		$select = $this->db->select()
+					   ->from('userLogin');
+		if ($id > 0) 
+		{
+			$select->where('userId = ?', $id);
+		}
+		$select->order('dateLogin DESC');
+ 		$paginatorAdapter = new Zend_Paginator_Adapter_DbSelect($select);
+		($page == 1) ? 
+			$select->limit($this->settings->resultsPerPage) : 
+			$select->limit($this->settings->resultsPerPage, ($page-1)*$this->settings->resultsPerPage);
+							
+		$data = $this->db->fetchAll($select);
+		return array('data'=> $data,'paginatorAdapter'=> $paginatorAdapter);
 	}	
 }

@@ -26,8 +26,9 @@
 				<img src="{IMAGES_URL}/{ACTIVE_IMG}.png" border='0'></a> </td>
 			<td class="row{BG}">{DATE_CREATED}</td>
 			<td class="row{BG}" > 
-				<a href="{SITE_URL}/admin/admin/update/id/{ID}" title="Edit/Update"><img src="{IMAGES_URL}/edit.png" border='0' align="left"> </a>
-				<a href="{SITE_URL}/admin/admin/delete/id/{ID}" title="Delete"><img src="{IMAGES_URL}/delete.png" border='0' align="right"> </a>
+				<a href="{SITE_URL}/admin/admin/update/id/{ID}" title="Edit/Update"><img src="{IMAGES_URL}/edit.png" border='0' style="margin: 0px 10px;" > </a>
+				<a href="{SITE_URL}/admin/admin/delete/id/{ID}" title="Delete"><img src="{IMAGES_URL}/delete.png" border='0' style="margin: 0px 10px;" > </a>
+				<a href="{SITE_URL}/admin/admin/logins/id/{ID}" title="Admin Logins"><img src="{IMAGES_URL}/userLogins.png" border='0' style="margin: 0px 10px;" > </a>
 			</td>
 		</tr>
 	<!-- END list -->
