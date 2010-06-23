@@ -42,10 +42,10 @@ class Dot_Seo
 	 * Create canonical URL
 	 * This method will be changed when will add URL ReWrite alternative
 	 * @todo improvement of canonical url's
-	 * @access private
+	 * @access public
 	 * @return string 
 	 */
-	private function createCanonicalUrl()
+	public function createCanonicalUrl()
 	{
 		$param = $this->param;
 		$url = $this->config->website->params->url;
