@@ -152,7 +152,8 @@ class Dot_Template
 	 */
 	public static function getInstance($root = '.', $unknowns = 'remove', $fallback='')
 	{
-		if (null === self::$_instance) {
+		if (null === self::$_instance) 
+		{
 			self::$_instance = new self($root, $unknowns, $fallback);			
 		}
 		return self::$_instance;
@@ -185,10 +186,10 @@ class Dot_Template
 	 */
 	private function startTimer()
 	{
-			$mtime = microtime ();
-			$mtime = explode (' ', $mtime);
-			$mtime = $mtime[1] + $mtime[0];
-			return $mtime;
+		$mtime = microtime ();
+		$mtime = explode (' ', $mtime);
+		$mtime = $mtime[1] + $mtime[0];
+		return $mtime;
 	}
 	/**
 	 * Return the end time
@@ -197,12 +198,12 @@ class Dot_Template
 	 */
 	private function endTimer($varname)
 	{
-			$mtime = microtime ();
-			$mtime = explode (' ', $mtime);
-			$mtime = $mtime[1] + $mtime[0];
-			$endtime = $mtime;
-			$totaltime = round(($endtime - $this->start_time[$varname]),2);
-			return $totaltime;
+		$mtime = microtime ();
+		$mtime = explode (' ', $mtime);
+		$mtime = $mtime[1] + $mtime[0];
+		$endtime = $mtime;
+		$totaltime = round(($endtime - $this->start_time[$varname]),2);
+		return $totaltime;
 	}
 	/**
 	 * Sets the policy for dealing with unresolved variable names.
@@ -224,15 +225,18 @@ class Dot_Template
 	 */
 	public function exists($var)
 	{
-			if (is_array($var)) {
-					$isset = true;
-					foreach ($var as $varname) {
-							$isset = $isset & isset($this->varVals[$varname]);
-					}
-					return $isset > 0;
-			} else {
-					return isset($this->varVals[$var]);
-			}
+		if (is_array($var)) 
+		{
+				$isset = true;
+				foreach ($var as $varname) {
+						$isset = $isset & isset($this->varVals[$varname]);
+				}
+				return $isset > 0;
+		} 
+		else 
+		{
+				return isset($this->varVals[$var]);
+		}
 	}
 	/**
 	 * Defines a filename for the initial value of a variable.
@@ -318,7 +322,10 @@ class Dot_Template
 			return false;
 		}
 		$str = preg_replace($reg, '{' . $name . '}', $str);
-		if (isset($m[1][0])) $this->setVar($varname, $m[1][0]);
+		if (isset($m[1][0])) 
+		{
+			$this->setVar($varname, $m[1][0]);
+		}
 		$this->setVar($parent, $str);
 		return true;
 	}
@@ -377,7 +384,10 @@ class Dot_Template
 					{
 						$this->varvals[$k] .= $v;
 					}
-					else 	$this->varvals[$k] = $v;
+					else 	
+					{
+						$this->varvals[$k] = $v;
+					}
 				}
 			}
 		}
@@ -506,7 +516,10 @@ class Dot_Template
 			{
 				$this->setVar($target, $this->getVar($target) . $str);
 			}
-			else  $this->setVar($target, $str);
+			else  
+			{
+				$this->setVar($target, $str);
+			}
 		}
 		else
 		{
@@ -518,7 +531,10 @@ class Dot_Template
 				{
 					$this->setVar($target, $this->getVar($target) . $str);
 				}
-				else  $this->setVar($target, $str);
+				else  
+				{
+					$this->setVar($target, $str);
+				}
 			}
 		}
 		if(isset($this->start_time[$varname]) && $varname===strtolower($varname))
@@ -729,12 +745,12 @@ class Dot_Template
 		{
 			reset($this->fileFallbacks);
 			while (list(,$v) = each($this->fileFallbacks))
+			{
+				if (file_exists($v.basename($filename)))
 				{
-					if (file_exists($v.basename($filename)))
-						{
-							return $v.basename($filename);
-						}
+					return $v.basename($filename);
 				}
+			}
 			$this->halt(sprintf('filename: file %s does not exist in the fallback paths %s.',$filename, implode(',', $this->fileFallbacks)));
 			return false;
 		}

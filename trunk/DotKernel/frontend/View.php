@@ -155,7 +155,7 @@ class View extends Dot_Template
 			{
 				$items = new Zend_Config(array(0=>$child->item));						
 			}			
-			foreach ($items as $key => $val)
+			foreach($items as $key => $val)
 			{						
 				if ((Dot_Auth::hasIdentity('user') && 1 == $val->isLogged) || (!Dot_Auth::hasIdentity('user') && 1 == $val->notLogged))
 				{	// display menus based on user is logged in or not
@@ -233,7 +233,6 @@ class View extends Dot_Template
 								}
 							}
 						}						
-						
 					}
 					if(strpos($child->type,'simple') === FALSE)
 					{

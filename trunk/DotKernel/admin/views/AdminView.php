@@ -83,7 +83,6 @@ class Admin_View extends View
 	public function details($templateFile, $data=array())
 	{
 		$this->tpl->setFile('tpl_main', 'admin/' . $templateFile . '.tpl');
-		// for 'add' template file		
 		$this->tpl->setVar('ACTIVE_1', 'checked');		
 		foreach ($data as $k=>$v)
 		{

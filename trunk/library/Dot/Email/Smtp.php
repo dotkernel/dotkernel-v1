@@ -24,7 +24,10 @@ class Dot_Email_Smtp extends Dot_Email
 	 * Email constructor
 	 * @access public 
 	 * @param string $to [optional]
-	 * @return void
+	 * @param string $fromName [optional]
+	 * @param string $fromEmail [optional]
+	 * @param string $subject [optional]
+	 * @return Dot_Email_Smtp
 	 */
 	public function __construct($to = null, $fromName = null, $fromEmail = null, $subject = null)
 	{
@@ -34,10 +37,10 @@ class Dot_Email_Smtp extends Dot_Email
 		if(!empty($this->smtpData))
 		{
 			$mailConfigs = array('auth' => 'login',
-											'username' => $this->smtpData['smtpUsername'],
-											'password' => $this->smtpData['smtpPassword'],
-											'port' => $this->smtpData['smtpPort'],
-											'ssl' => $this->smtpData['smtpSsl']);
+										   'username' => $this->smtpData['smtpUsername'],
+										   'password' => $this->smtpData['smtpPassword'],
+										   'port' => $this->smtpData['smtpPort'],
+									       'ssl' => $this->smtpData['smtpSsl']);
 			$this->transport = new Zend_Mail_Transport_Smtp($this->smtpData['smtpServer'], $mailConfigs);	
 		}
 	}	

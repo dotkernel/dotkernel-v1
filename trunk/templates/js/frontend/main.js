@@ -18,3 +18,19 @@ function ShowMenuItem(menu, parent_id)
 		document.getElementById(menu + '_' + parent_id).style.display = 'block';
 	}
 }
+/**
+ * Show/Hide div ID
+ * @param {String} id
+ */
+function ShowHideDiv (id)
+{
+	var current_status = document.getElementById(id).style.display;
+	if (current_status == 'none')
+	{
+		document.getElementById(id).style.display = '';
+	}
+	else 
+	{
+		document.getElementById(id).style.display = 'none';
+	}
+}

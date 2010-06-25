@@ -116,9 +116,8 @@ class System_View extends View
 		$parsed = ob_get_contents();
 		ob_end_clean();
 		preg_match( "#<body>(.*)</body>#is" , $parsed, $match1 );
-
+		
 		$phpBody  = $match1[1];
-
 		// PREVENT WRAP: Most cookies	
 		$phpBody  = str_replace( "; " , ";<br />"   , $phpBody );
 		// PREVENT WRAP: Very long string cookies

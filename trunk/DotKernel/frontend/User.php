@@ -84,7 +84,7 @@ class User
 	 */
 	public function addUser($data)
 	{		
-		// if you want to add an inactive user, un-comment the below line
+		// if you want to add an inactive user, un-comment the below line, default: isActive = 1
 		// $data['isActive'] = 0;
 		$this->db->insert('user',$data);		
 	}
@@ -125,11 +125,11 @@ class User
 		if ($send =='on')
 		{
 			$validatorUsername = new Zend_Validate();
-			$validatorUsername->addValidator(new Zend_Validate_StringLength(
+			$validatorUsername->addValidator(new Zend_Validate_Alnum())
+							  ->addValidator(new Zend_Validate_StringLength(
 												$this->option->validate->username->lengthMin, 
 												$this->option->validate->username->lengthMax
-											))   
-							  ->addValidator(new Zend_Validate_Alnum());
+											));
 			if ($validatorUsername->isValid($username))
 			{
 				$login['username'] = $username;
@@ -139,7 +139,6 @@ class User
 				$error['username'] = $this->option->errorMessage->invalidUsername;
 				$login['username'] = '';
 			}
-
 			$validatorPassword = new Zend_Validate();
 			$validatorPassword->addValidator(new Zend_Validate_StringLength(
 												$this->option->validate->password->lengthMin, 
@@ -157,74 +156,84 @@ class User
 		}
 		return array('login'=>$login, 'error'=>$error);
 	}
-	
 	/**
 	 * Validate user input, add or update form
+	 * $values is an array on multiple levels. On first level, the key suggest what validation will be done.
+	 * - details 	- only filter the input
+	 * - username	- validate with Zend_Validate_Alnum, Zend_Validate_StringLength and filter the input
+	 * - email		- validate with Zend_Validate_EmailAddress and filter the input 
+	 * - password	- validate with Zend_Validate_StringLength and filter the input
 	 * @access public
-	 * @param public 
+	 * @param array $values 
 	 * @return array
 	 */
 	public function validateUser($values)
-	{
-		
-		$data = array();
+	{$data = array();
 		$error = array();
-		//validate the input data	
+		//validate the input data - username, password and email will be also filtered
 		$validatorChain = new Zend_Validate();
-		// Only filter the details parameters. Username, password and email will also be validated
-		$validDetails = Dot_Kernel::validateFilter($validatorChain, $values['details']);
-		
-		//validate email
-		$validatorEmail = new Zend_Validate_EmailAddress();		
-		$validEmail = Dot_Kernel::validateFilter($validatorEmail, $values['email']);
-		
-		$data = array_merge($data, $validDetails['data'], $validEmail['data']);
-		$error = array_merge($error, $validDetails['error'], $validEmail['error']);
+		//validate details parameters	
+		if(array_key_exists('details', $values))
+		{
+			$validDetails = Dot_Kernel::validateFilter($validatorChain, $values['details']);
+			$data = array_merge($data, $validDetails['data']);
+			$error = array_merge($error, $validDetails['error']);
+		}		
 		//validate username
 		if(array_key_exists('username', $values))
 		{
 			$validatorChain = new Zend_Validate();
 			$validatorChain->addValidator(new Zend_Validate_Alnum())
-							->addValidator(new Zend_Validate_StringLength(
+						   ->addValidator(new Zend_Validate_StringLength(
 													$this->option->validate->details->lengthMin, 
 													$this->option->validate->details->lengthMax
 												));
 			$validUsername = Dot_Kernel::validateFilter($validatorChain, $values['username']);
-			$data = array_merge($data, $validUsername['data'], $validDetails['data']);
-			$error = array_merge($error, $validUsername['error'], $validDetails['error']);
+			$data = array_merge($data, $validUsername['data']);
+			$error = array_merge($error, $validUsername['error']);
 		}
-		//validate paswword				
-		if($values['password']['password'] == $values['password']['password2'])
+		//validate email
+		if(array_key_exists('email', $values))
 		{
-			unset($values['password']['password2']);
-			$validatorChain = new Zend_Validate();
-			$validatorChain->addValidator(new Zend_Validate_StringLength(
-											   $this->option->validate->username->lengthMin, 
-											   $this->option->validate->username->lengthMax
-										  ));
-			$validPass = Dot_Kernel::validateFilter($validatorChain, $values['password']);
-			$data = array_merge($data, $validPass['data']);
-			$error = array_merge($error, $validPass['error']);	
+			$validatorEmail = new Zend_Validate_EmailAddress();		
+			$validEmail = Dot_Kernel::validateFilter($validatorEmail, $values['email']);
+			$data = array_merge($data, $validEmail['data']);
+			$error = array_merge($error, $validEmail['error']);
+		}	
+		//validate password				
+		if(array_key_exists('password', $values))
+		{			
+			if($values['password']['password'] == $values['password']['password2'])
+			{
+				unset($values['password']['password2']);
+				$validatorChain = new Zend_Validate();
+				$validatorChain->addValidator(new Zend_Validate_StringLength(
+												$this->option->validate->password->lengthMin, 
+												$this->option->validate->password->lengthMax
+											));			
+				$validPass = Dot_Kernel::validateFilter($validatorChain, $values['password']);
+				$data = array_merge($data, $validPass['data']);
+				$error = array_merge($error, $validPass['error']);	
+			}
+			else
+			{
+				$error['password'] = $this->option->errorMessage->passwordTwice;
+			}
 		}
-		else
-		{
-			$error['password'] = $this->option->errorMessage->passwordTwice;
-		}
-		return array('data' => $data, 
-					'error' => $error);
-	}	
+		return array('data' => $data, 'error' => $error);
+	}
 	/**
 	 * Validate email user input
 	 * @access public
-	 * @param public 
+	 * @param string $email
 	 * @return array
 	 */
-	public function validateEmail($value)
+	public function validateEmail($email)
 	{
 		$data = array();
 		$error = array();
 		$validatorEmail = new Zend_Validate_EmailAddress();		
-		$validEmail = Dot_Kernel::validateFilter($validatorEmail, array('email'=>$value));
+		$validEmail = Dot_Kernel::validateFilter($validatorEmail, array('email'=>$email));
 		return $validEmail;
 	}
 	/**
@@ -236,10 +245,7 @@ class User
 	public function forgotPassword($email)
 	{
 		$session = Zend_Registry::get('session');
-		$select = $this->db->select()
-						   ->from('user')
-						   ->where('email = ?',$email);
-		$value = $this->db->fetchRow($select);
+		$value = $this->getUserBy('email', $email)''
 		if(!empty($value))
 		{
 			$dotEmail = new Dot_Email();

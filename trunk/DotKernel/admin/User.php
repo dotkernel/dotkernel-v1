@@ -55,8 +55,8 @@ class User
 	 */
 	public function getUserList($page = 1)
 	{
-		$select = $this->db->select()->from('user');
-				
+		$select = $this->db->select()
+						   ->from('user');				
  		$paginatorAdapter = new Zend_Paginator_Adapter_DbSelect($select);
 		($page == 1) ? 
 			$select->limit($this->settings->resultsPerPage) : 
@@ -73,9 +73,9 @@ class User
 	 */
 	public function addUser($data)
 	{		
-		// if you want to add an inactive user, un-comment the below line
+		// if you want to add an inactive user, un-comment the below line, default: isActive = 1
 		// $data['isActive'] = 0;
-		$this->db->insert('user',$data);		
+		$this->db->insert('user', $data);		
 	}
 	/**
 	 * Update user
@@ -101,7 +101,7 @@ class User
 	/**
 	 * Send forgot password to user
 	 * @acess public
-	 * @param string $email
+	 * @param int id
 	 * @return void
 	 */
 	public function sendPassword($id)
@@ -137,8 +137,14 @@ class User
 	}
 	/**
 	 * Validate user input, add or update form
+	 * $values is an array on multiple levels. On first level, the key suggest what validation will be done.
+	 * - details 	- only filter the input
+	 * - username	- validate with Zend_Validate_Alnum, Zend_Validate_StringLength and filter the input
+	 * - email		- validate with Zend_Validate_EmailAddress and filter the input 
+	 * - enum 		- validate with Zend_Validate_InArray(explode(',', $values['enum'][0])) and filter the input
+	 * - password	- validate with Zend_Validate_StringLength and filter the input
 	 * @access public
-	 * @param public 
+	 * @param array $values 
 	 * @return array
 	 */
 	public function validateUser($values)
@@ -159,7 +165,7 @@ class User
 		{
 			$validatorChain = new Zend_Validate();
 			$validatorChain->addValidator(new Zend_Validate_Alnum())
-							->addValidator(new Zend_Validate_StringLength(
+						   ->addValidator(new Zend_Validate_StringLength(
 													$this->option->validate->details->lengthMin, 
 													$this->option->validate->details->lengthMax
 												));
@@ -185,7 +191,7 @@ class User
 			$error = array_merge($error, $validEnum['error']);
 		}		
 		//validate password				
-		if(array_key_exists('email', $values) && ($values['password']['password'] != '' || $values['password']['password2'] != ''))
+		if(array_key_exists('password', $values) && ($values['password']['password'] != '' || $values['password']['password2'] != ''))
 		{			
 			if($values['password']['password'] == $values['password']['password2'])
 			{
@@ -226,7 +232,7 @@ class User
 	public function getLogins($id, $page = 1)
 	{
 		$select = $this->db->select()
-					   ->from('userLogin');
+					  	   ->from('userLogin');
 		if ($id > 0) 
 		{
 			$select->where('userId = ?', $id);

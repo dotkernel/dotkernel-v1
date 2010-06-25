@@ -11,8 +11,9 @@
 */
 
 /**
-* Rss Module Controller
+* Rss Module - Index Controller
 * Is doing all the job for specific rss control stuff 
 * @author     DotKernel Team <team@dotkernel.com>
 */   
-    echo '<h1>RSS Controller here ::</h1>';
+
+echo '<h1>RSS Controller here ::</h1>';

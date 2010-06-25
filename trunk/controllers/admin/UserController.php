@@ -11,7 +11,7 @@
 */
 
 /**
-* System Controller
+* User Controller
 * @author     DotKernel Team <team@dotkernel.com>
 */
 

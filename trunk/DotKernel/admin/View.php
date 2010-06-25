@@ -101,8 +101,6 @@ class View extends Dot_Template
 	 * Display the specific menu that were declared in configs/menu.xml file
 	 * @access public
 	 * @param Zend_Config_Ini $config
-	 * @param string $requestController
-	 * @param string $requestAction
 	 * @return void
 	 */
 	public function setViewMenu($config)
