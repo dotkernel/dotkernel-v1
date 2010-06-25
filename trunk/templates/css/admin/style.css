@@ -560,15 +560,14 @@ input.bigger{width: 100%;}
 	border: solid #183646 2px;
 	background: #1A3D50;
 	color: #D5EFF4;
-	padding: 0 10px;
-	width: 200px;font-size: 14px;
+	padding: 5 10px;
+	width: 200px;
 
 }
 .dijitTooltipBold
 {
 	color: #FDA83A;
 	font-weight: bold;
-	font-size: 14px;
 }
 .dijitTooltipFocusNode {
 	padding: 2px 2px 2px 2px;
