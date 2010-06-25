@@ -11,7 +11,7 @@
 */
 
 /**
- * Frontend Module Controller
+ * Frontend Module - Index Controller
  * Is doing all the job for specific frontend control stuff
  * @author     DotKernel Team <team@dotkernel.com>
  */ 
@@ -21,6 +21,7 @@ $defaultController = $resource->route->controller->$requestModule;
 $requestController = isset($requestController) && $requestController !='Index' ? $requestController : $defaultController;
 $defaultAction = $resource->route->action->$requestModule->$requestController;
 $requestAction     = isset($requestAction) && $requestAction !=''         ? $requestAction     : $defaultAction;
+
 // start the template object, empty for the moment 
 require(DOTKERNEL_PATH . '/' . $requestModule . '/' . 'View.php');	
 $tpl = View::getInstance(TEMPLATES_PATH . '/' . $requestModule);
@@ -78,5 +79,6 @@ if(TRUE == $config->settings->frontend->debugbar)
 	$debug->startTimer = $startTime;
 	$debug->show();
 }
+
 // parse and print the output
 $tpl->pparse('OUTPUT', 'tpl_index');

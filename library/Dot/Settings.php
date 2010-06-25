@@ -68,7 +68,7 @@ class Dot_Settings
 	 * Require the files according to MVC pattern, and the modules there are in application.ini file
 	 * @access public
 	 * @static
-	 * @param  $requestModule
+	 * @param  string $requestModule
 	 * @return void
 	 */
 	public static function loadControllerFiles($requestModule)

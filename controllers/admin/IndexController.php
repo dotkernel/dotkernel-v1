@@ -11,7 +11,7 @@
 */
 
 /**
-* Admin Module Controller
+* Admin Module - Index Controller
 * Is doing all the job for specific admin control stuff
 * @author     DotKernel Team <team@dotkernel.com>
 */ 

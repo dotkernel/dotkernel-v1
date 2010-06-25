@@ -289,13 +289,14 @@ class Dot_Geoip_Api extends Dot_Geoip
 	 * @access public
 	 * @return Dot_Geoip_Api
 	 */
-	public function __constructor()
+	public function __construct()
 	{	
 	}			
 	/**
 	 * Get the country by IP
 	 * Return an array with : short name, like 'us' and long name, like 'United States'
 	 * @access public
+	 * @param string $path - path to geoip.dat  database file
 	 * @param string $ip
 	 * @return array
 	 */

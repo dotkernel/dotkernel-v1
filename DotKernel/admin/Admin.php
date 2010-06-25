@@ -81,8 +81,8 @@ class Admin
 	 */
 	public function getUserList($page = 1)
 	{
-		$select = $this->db->select()->from('admin');
-				
+		$select = $this->db->select()
+						   ->from('admin');				
  		$paginatorAdapter = new Zend_Paginator_Adapter_DbSelect($select);
 		($page == 1) ? 
 			$select->limit($this->settings->resultsPerPage) : 
@@ -99,10 +99,10 @@ class Admin
 	 */
 	public function addUser($data)
 	{		
-		// if you want to add an inactive user, uncomment the below line
+		// if you want to add an inactive user, un-comment the below line, default: isActive = 1
 		// $data['isActive'] = 0;
 		$data['password'] = md5($data['username'].$this->config->settings->admin->salt.$data['password']);
-		$this->db->insert('admin',$data);		
+		$this->db->insert('admin', $data);		
 	}	
 	/**
 	 * Update user
@@ -202,10 +202,10 @@ class Admin
 		{
 			$validatorChain = new Zend_Validate();
 			$validatorChain->addValidator(new Zend_Validate_Alpha())
-							->addValidator(new Zend_Validate_StringLength(
-													$this->option->validate->details->lengthMin, 
-													$this->option->validate->details->lengthMax
-												));
+						   ->addValidator(new Zend_Validate_StringLength(
+											$this->option->validate->details->lengthMin, 
+											$this->option->validate->details->lengthMax
+										 ));
 			$validUsername = Dot_Kernel::validateFilter($validatorChain, $values['username']);
 			$data = array_merge($data, $validUsername['data']);
 			$error = array_merge($error, $validUsername['error']);

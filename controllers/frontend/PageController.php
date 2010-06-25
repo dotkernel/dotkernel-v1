@@ -25,7 +25,7 @@ switch ($requestAction)
 		// default action is home
 		$pageTitle = $option->pageTitle->action->home;
 	case 'home';
-		// call to view function
+		// call showPage method to view the home page
 		$pageView->showPage('home');
 	break;
 	case 'about':

@@ -1,19 +1,4 @@
 <link rel="stylesheet" href ="{SITE_URL}/templates/css/debugger.css" type="text/css" >
-<script language="JavaScript" type="text/javascript">
-<!--
-function ShowHideDiv (id)
-{
-	var current_status = document.getElementById(id).style.display;
-	if (current_status == 'none')
-	{
-		document.getElementById(id).style.display = '';
-	}
-	else 
-	{
-		document.getElementById(id).style.display = 'none';
-	}
-}
-//-->
 </script>
 <div class="index_debugger clearfix">
 	<!-- BEGIN dot_version -->
