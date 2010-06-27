@@ -3,7 +3,7 @@
 	<body>
 	<variable option="global">
 		<defaultPageTitle>DotKernel</defaultPageTitle>
-		<defaultMetaDescription>Enterprise Level PHP Solutions, based on Zend Framework and DotKernel , build by DotBoost Technologies Inc.</defaultMetaDescription>
+		<defaultMetaDescription>Enterprise Level PHP Solutions, based on DotKernel and Zend Framework, build by DotBoost Technologies Inc.</defaultMetaDescription>
 		<defaultMetaKeywords>DotKernel, PHP, Zend Framework, </defaultMetaKeywords>
 		<siteName>DotKernel</siteName>
 	</variable>
