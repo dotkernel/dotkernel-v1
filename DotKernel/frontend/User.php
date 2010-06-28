@@ -245,7 +245,7 @@ class User
 	public function forgotPassword($email)
 	{
 		$session = Zend_Registry::get('session');
-		$value = $this->getUserBy('email', $email)''
+		$value = $this->getUserBy('email', $email);
 		if(!empty($value))
 		{
 			$dotEmail = new Dot_Email();
