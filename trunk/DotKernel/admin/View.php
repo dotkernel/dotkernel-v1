@@ -103,6 +103,12 @@ class View extends Dot_Template
 	 * @param Zend_Config_Ini $config
 	 * @return void
 	 */
+		/**
+	 * Display the specific menu that were declared in configs/menu.xml file
+	 * @access public
+	 * @param Zend_Config_Ini $config
+	 * @return void
+	 */
 	public function setViewMenu($config)
 	{		
 		if(Dot_Auth::hasIdentity('admin'))
@@ -119,6 +125,7 @@ class View extends Dot_Template
 				//don't display the menu
 				if(0 == $child->display) continue;		
 				$this->setFile('tpl_menu_'.$child->id, 'blocks/menu_'.$child->type.'.tpl');
+				$this->setBlock('tpl_menu_'.$child->id, 'top_normal_sub_menu_item', 'top_normal_sub_menu_item_block');
 				$this->setBlock('tpl_menu_'.$child->id, 'top_sub_menu_item', 'top_sub_menu_item_block');
 				$this->setBlock('tpl_menu_'.$child->id, 'top_normal_menu_item', 'top_normal_menu_item_block');
 				$this->setBlock('tpl_menu_'.$child->id, 'top_menu_item', 'top_menu_item_block');
@@ -130,14 +137,14 @@ class View extends Dot_Template
 									  'TOP_SUB_MENU_LINK', 
 									  'TOP_SUB_MENU_TARGET', 
 									  'TOP_SUB_MENU_TITLE');				
-				$tplBlocks = array('top_menu_item_block', 
-								   'top_menu_block', 
-								   'top_sub_menu_item_block', 
-								   'top_normal_menu_item_block');				
+				$tplBlocks = array('top_menu_block', 
+								   'top_menu_item_block', 
+								   'top_normal_menu_item_block', 
+								   'top_sub_menu_item_block',
+								   'top_normal_submenu_item_block');				
 				//Initialize all the tag variables and blocks
 				$this->initVar($tplVariables,'');			
 				$this->initBlock($tplBlocks,'');
-				
 				$i = 0;					
 				$items = $child->item;
 				// if we have only one menu, Zend_Config_Xml return a simple array, not an array with key 0(zero)
@@ -147,17 +154,15 @@ class View extends Dot_Template
 				}			
 				foreach ($items as $key => $val)
 				{		
-					// display menus based on user is logged in or not
 					$this->setVar('TOP_MENU_ID', $i);
 					$tplVariables = array('TOP_MENU_SEL', 
 					                      'TOP_SUB_MENU_SEL', 
 										  'TOP_SUB_MENU_ITEM_SEL');
-					$this->initVar($tplVariables,'');	
-					if (FALSE !== stripos($val->link, $this->requestController.'/'.$this->requestAction.'/'))
+					$this->initVar($tplVariables,'');
+					if (FALSE !== stripos($val->link, $this->requestController.'/'))
 					{	//if curent menu is the curent viewed page
 						$this->setVar('TOP_MENU_SEL', '_selected');
-						$this->setVar('TOP_SUB_MENU_SEL', '_selected');
-					}			
+					}							
 					$this->setVar('TOP_MENU_TITLE', $val->title);
 					$this->setVar('TOP_MENU_LINK', $config->website->params->url.'/'.$this->requestModule.'/'.$val->link);
 					$this->setVar('TOP_MENU_DESCRIPTION', $val->description);													
@@ -169,23 +174,27 @@ class View extends Dot_Template
 						if(is_null($subItems->{0}))
 						{
 							$subItems = new Zend_Config(array(0=>$subItems));						
-						}							
+						}	
+						$this->parse('top_normal_sub_menu_item_block', '');						
 						foreach ($subItems as $k2 => $v2)
 						{			
+							$this->setVar('TOP_SUB_MENU_SEL', '');
 							$this->setVar('TOP_SUB_MENU_TITLE', $v2->title);
 							$this->setVar('TOP_SUB_MENU_LINK', $config->website->params->url.'/'.$this->requestModule.'/'.$v2->link);
 							$this->setVar('TOP_SUB_MENU_DESCRIPTION', $v2->description);
-							if (FALSE !== stripos($val->link, $this->requestController.'/'))
+							if (FALSE !== stripos($v2->link, $this->requestController.'/'.$this->requestAction.'/'))
 							{	//if curent menu is the curent viewed page
-								$this->parse('top_sub_menu_item_block', 'top_sub_menu_item', true);	
-							}							
+								$this->setVar('TOP_SUB_MENU_SEL', '_selected');
+							}	
+							$this->parse('top_normal_sub_menu_item_block', 'top_normal_sub_menu_item', true);
 						}
+						$this->parse('top_sub_menu_item_block', 'top_sub_menu_item', true);	
 					}
 					$this->parse('top_menu_item_block', 'top_menu_item', true);
-					$this->parse('top_normal_menu_item_block', '');
-																	
+					$this->parse('top_normal_menu_item_block', '');																	
 					$i++;
 				}					
+					$this->parse('top_normal_sub_menu_item_block', 'top_normal_sub_menu_item',true);
 				$this->parse('top_menu_block', 'top_menu', true);
 				$this->parse('MENU_'.$child->id, 'tpl_menu_'.$child->id);
 			}
