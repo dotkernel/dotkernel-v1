@@ -38,3 +38,17 @@ function ShowHideDiv (id)
 		document.getElementById(id).style.display = 'none';
 	}
 }
+/**
+ * Show/Hide submenu items
+ * @param {Int} id
+ */
+function ShowMenuItem(id){
+    for (var i = 0; i < 100; i++) 
+	{
+        if (document.getElementById('submenu_' + i)) 
+		{
+            document.getElementById('submenu_' + i).className = 'submenu';
+        }
+    }
+    document.getElementById('submenu_' + id).className = 'submenu_selected';
+}
