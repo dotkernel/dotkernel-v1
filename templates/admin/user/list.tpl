@@ -17,19 +17,26 @@
 		</tr>
 	<!-- BEGIN list -->
 		<tr>
-			<td class="row{BG}">{ID}</td>
+			<td class="row{BG}" style="text-align: center;">{ID}</td>
 			<td class="row{BG}"> <a href="{SITE_URL}/admin/user/update/id/{ID}">{USERNAME}</a> </td>
 			<td class="row{BG}">{EMAIL}</td>
 			<td class="row{BG}">{FIRSTNAME}</td>
 			<td class="row{BG}">{LASTNAME}</td>
-			<td class="row{BG}" style="text-align: center;"> <a  onclick="javascript: adminList('{SITE_URL}{ACTIVE_URL}',{ID},{ISACTIVE},{PAGE});" style="cursor: pointer;" title="Activate / Inactivate">
-				<img src="{IMAGES_URL}/{ACTIVE_IMG}.png" border='0'></a> </td>
+			<td class="row{BG}" style="vertical-align: middle;"> <a  onclick="javascript: adminList('{SITE_URL}{ACTIVE_URL}',{ID},{ISACTIVE},{PAGE});" style="cursor: pointer;" title="Activate / Inactivate"  class="{ACTIVE_IMG}_state">&nbsp;</a> </td>
 			<td class="row{BG}">{DATE_CREATED}</td>
 			<td class="row{BG}" > 
-				<a href="{SITE_URL}/admin/user/update/id/{ID}" title="Edit/Update"><img src="{IMAGES_URL}/edit.png" border='0'style="margin: 0px 10px;"></a>&nbsp;&nbsp;
-				<a href="{SITE_URL}/admin/user/delete/id/{ID}" title="Delete"><img src="{IMAGES_URL}/delete.png" border='0' style="margin: 0px 10px;"></a>&nbsp;&nbsp;
-				<a href="{SITE_URL}/admin/user/logins/id/{ID}" title="User Logins"><img src="{IMAGES_URL}/userLogins.png" border='0' style="margin: 0px 10px;"></a>&nbsp;&nbsp;
-				<a href="{SITE_URL}/admin/user/send-password/id/{ID}" title="Send User Password"><img src="{IMAGES_URL}/sendPassword.png" border='0'style="margin: 0px 10px;"></a>
+			<table width="100%" class="action_table">
+				<tr>
+					<td width="25%"><a href="{SITE_URL}/admin/user/update/id/{ID}" title="Edit/Update" class="edit_state">&nbsp;</a></td>
+					<td width="25%"><a href="{SITE_URL}/admin/user/delete/id/{ID}" title="Delete" class="delete_state">&nbsp;</a></td>
+					<td width="25%"><a href="{SITE_URL}/admin/user/logins/id/{ID}" title="User Logins" class="logins_state">&nbsp;</a></td>
+					<td width="25%"><a href="{SITE_URL}/admin/user/send-password/id/{ID}" title="Send User Password" class="pass_state">&nbsp;</a></td>
+					</tr>
+			</table>
+				
+				
+				
+				
 			</td>
 		</tr>
 	<!-- END list -->
