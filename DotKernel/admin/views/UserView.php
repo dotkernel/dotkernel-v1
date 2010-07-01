@@ -111,7 +111,10 @@ class User_View extends View
 			$this->tpl->setVar('COUNTRYNAME', $country[1]);
 			$this->tpl->setVar('REFERER', $v['referer']);
 			$this->tpl->setVar('USERAGENT', $v['userAgent']);
-			$this->tpl->setVar('BROWSERIMAGE', Dot_Kernel::getBrowserIcon($v['userAgent']));
+			$this->tpl->setVar('BROWSERIMAGE', Dot_Kernel::getBrowserIcon($v['userAgent']));$os = Dot_Kernel::getOsIcon($v['userAgent']);
+			$this->tpl->setVar('OSIMAGE', strtolower($os['major']));
+			$this->tpl->setVar('OSMAJOR', $os['major']);
+			$this->tpl->setVar('OSMINOR', $os['minor']);
 			$this->tpl->setVar('DATELOGIN', Dot_Kernel::timeFormat($v['dateLogin'], 'long'));
 			$this->tpl->parse('list_block', 'list', true);
 		}

@@ -125,17 +125,52 @@ class Dot_Kernel
 	 */
 	public static function getBrowserIcon($agent)
 	{		
-		$browsersArray = array("msie", "netscape", "firebird", "firefox", "go!zilla", "icab", "konqueror", "lynx", "omniweb", "opera", "chrome");
-		$browsersIcons = array("msie", "netscape", "phoenix", "firefox", "gozilla", "icab", "konqueror", "lynx", "omniweb", "opera", "chrome");
-		foreach ($browsersArray as $key => $val)
+		$xml = new Zend_Config_Xml(CONFIGURATION_PATH.'/browser.xml');
+		$browser = $xml->name->type->toArray();
+		foreach ($browser as $key => $val)
 		{			
-			if (stripos($agent,$val) !== FALSE)
+			if (stripos($agent,$val['uaBrowser']) !== FALSE)
 			{
-				$icon = $browsersIcons[$key];
-				return $icon;
+				return $val['uaIcon'];
 			}
 		}
 		return 'unknown';
+	}
+	/**
+	 * Return the name of the OS icon based on User Agent
+	 * @access public
+	 * @static
+	 * @param string $user
+	 * @return array
+	 */
+	public static function getOsIcon($agent)
+	{
+		$operatingSystem = array();
+		$xml = new Zend_Config_Xml(CONFIGURATION_PATH.'/os.xml');
+		$os = $xml->type->toArray();
+		foreach ($os as $major)
+		{
+			foreach ($major as $osArray)
+			{
+				if(array_key_exists('identify', $osArray))
+				{
+					foreach ($osArray['identify'] as $minor)
+					{
+						$uaStringArray = explode('|',$minor['uaString']);
+						foreach ($uaStringArray as $uaString)
+						{						
+							if ((stripos($agent, $uaString) !== false) && (empty($operatingSystem)))
+				            {
+				                $operatingSystem = array( 'major'=>$osArray['os'], 'minor'=>$minor['osName']);
+								return $operatingSystem;
+				            }
+						}					
+					}
+				}
+					
+			}
+		}
+		return array('major'=>'', 'minor'=>'');
 	}
 	/**
 	 * Return date formatted fancy

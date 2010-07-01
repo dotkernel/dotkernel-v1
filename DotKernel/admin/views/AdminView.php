@@ -28,6 +28,7 @@ class Admin_View extends View
 	public function __construct($tpl)
 	{
 		$this->tpl = $tpl;
+		$this->settings = Zend_Registry::get('settings');
 	}
 	/**
 	 * Display the login form
@@ -122,8 +123,13 @@ class Admin_View extends View
 			$this->tpl->setVar('COUNTRYIMAGE', strtolower($country[0]));
 			$this->tpl->setVar('COUNTRYNAME', $country[1]);
 			$this->tpl->setVar('REFERER', $v['referer']);
+			$this->tpl->setVar('WHOISURL', $this->settings->whoisUrl);
 			$this->tpl->setVar('USERAGENT', $v['userAgent']);
 			$this->tpl->setVar('BROWSERIMAGE', Dot_Kernel::getBrowserIcon($v['userAgent']));
+			$os = Dot_Kernel::getOsIcon($v['userAgent']);
+			$this->tpl->setVar('OSIMAGE', strtolower($os['major']));
+			$this->tpl->setVar('OSMAJOR', $os['major']);
+			$this->tpl->setVar('OSMINOR', $os['minor']);
 			$this->tpl->setVar('DATELOGIN', Dot_Kernel::timeFormat($v['dateLogin'], 'long'));
 			$this->tpl->parse('list_block', 'list', true);
 		}
