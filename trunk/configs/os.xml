@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <os>
+ 	<type>
+ 			<name type="desktop">
+ 				<os>Windows</os>
+				<identify>
+					<osName>Windows 3.11</osName>
+					<uaString>Win16</uaString>
+				</identify>			
+				<identify>
+					<osName>Windows 95</osName>
+					<uaString>Windows 95|Win95|Windows_95</uaString>
+				</identify>
+				<identify>
+					<osName>Windows 98</osName>
+					<uaString>Windows 98|Win98</uaString>
+				</identify>
+				<identify>
+					<osName>Windows 2000</osName>
+					<uaString>Windows NT 5.0|Windows 2000</uaString>
+				</identify>
+				<identify>
+					<osName>Windows XP</osName>
+					<uaString>Windows NT 5.1|Windows XP</uaString>
+				</identify>
+				<identify>
+					<osName>Windows Server 2003</osName>
+					<uaString>Windows NT 5.2</uaString>
+				</identify>
+				<identify>
+					<osName>Windows Vista</osName>
+					<uaString>Windows NT 6.0</uaString>
+				</identify>
+				<identify>
+					<osName>Windows 7</osName>
+					<uaString>Windows NT 7.0</uaString>
+				</identify>
+				<identify>
+					<osName>Windows NT 4.0</osName>
+					<uaString>Windows NT 4.0|WinNT4.0|WinNT|Windows NT</uaString>
+				</identify>
+				<identify>
+					<osName>Windows ME</osName>
+					<uaString>Windows ME</uaString>
+				</identify>
+ 			</name>
+			<name type="desktop">Mac</name>
+			<name type="desktop">Debian</name>
+			<name type="desktop">Fedore</name>
+			<name type="desktop">Mandirva</name>
+			<name type="desktop">Ubuntu</name>
+			<name type="mobile">Android</name>
+			<name type="mobile">Windows Mobile</name>
+			<name type="mobile">Iphone</name>
+			<name type="mobile">Symbian</name>
+ 	</type>
+ </os>
