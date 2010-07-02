@@ -189,7 +189,7 @@ switch ($requestAction)
 		// list user logins
 		$id = (isset($request['id'])) ? (int)$request['id'] : 0;		
 		$page = (isset($request['page'])) ? $request['page'] : 1;
-		$logins = $userModel->getLogins($id);
+		$logins = $userModel->getLogins($id, $page);
 		$userView->loginsUser('logins', $logins, $page);
 	break;
 }

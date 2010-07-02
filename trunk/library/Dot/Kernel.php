@@ -121,7 +121,7 @@ class Dot_Kernel
 	 * @access public
 	 * @static
 	 * @param string $user
-	 * @return array
+	 * @return string
 	 */
 	public static function getBrowserIcon($agent)
 	{		
@@ -144,8 +144,7 @@ class Dot_Kernel
 	 * @return array
 	 */
 	public static function getOsIcon($agent)
-	{
-		$operatingSystem = array();
+	{		
 		$xml = new Zend_Config_Xml(CONFIGURATION_PATH.'/os.xml');
 		$os = $xml->type->toArray();
 		foreach ($os as $major)
@@ -153,21 +152,29 @@ class Dot_Kernel
 			foreach ($major as $osArray)
 			{
 				if(array_key_exists('identify', $osArray))
-				{
+				{//there are minor version
 					foreach ($osArray['identify'] as $minor)
 					{
 						$uaStringArray = explode('|',$minor['uaString']);
 						foreach ($uaStringArray as $uaString)
 						{						
-							if ((stripos($agent, $uaString) !== false) && (empty($operatingSystem)))
+							if ((stripos($agent, $uaString) !== false))
 				            {
-				                $operatingSystem = array( 'major'=>$osArray['os'], 'minor'=>$minor['osName']);
+				                $operatingSystem = array('icon'=>strtolower(str_replace(' ', '_', $osArray['os'])), 'major'=>$osArray['os'], 'minor'=>$minor['osName']);
 								return $operatingSystem;
 				            }
 						}					
 					}
 				}
-					
+				else
+				{//no minor version known for this os
+					if ((stripos($agent, $osArray['os']) !== false))
+		            {
+		                $operatingSystem = array('icon'=>strtolower(str_replace(' ', '_', $osArray['os'])), 'major'=>$osArray['os'], 'minor'=>'');
+						return $operatingSystem;
+		            }
+				}
+									
 			}
 		}
 		return array('major'=>'', 'minor'=>'');

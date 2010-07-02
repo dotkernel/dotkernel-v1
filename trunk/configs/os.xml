@@ -44,14 +44,41 @@
 					<uaString>Windows ME</uaString>
 				</identify>
  			</name>
-			<name type="desktop">Mac</name>
-			<name type="desktop">Debian</name>
-			<name type="desktop">Fedore</name>
-			<name type="desktop">Mandirva</name>
-			<name type="desktop">Ubuntu</name>
-			<name type="mobile">Android</name>
-			<name type="mobile">Windows Mobile</name>
-			<name type="mobile">Iphone</name>
-			<name type="mobile">Symbian</name>
+			<name type="desktop">
+				<os>Apple</os>
+			</name>
+			<name type="desktop">
+				<os>Debian</os>
+			</name>
+			<name type="desktop">
+				<os>Fedora</os>
+			</name>
+			<name type="desktop">
+				<os>Gnome</os>
+			</name>
+			<name type="desktop">
+				<os>Linux</os>
+			</name>
+			<name type="desktop">
+				<os>Mandriva</os>
+			</name>
+			<name type="desktop">
+				<os>Ubuntu</os>
+			</name>
+			<name type="mobile">
+				<os>Android</os>
+			</name>
+			<name type="mobile">
+				<os>Blackberry</os>
+			</name>
+			<name type="mobile">
+				<os>Windows Mobile</os>
+			</name>
+			<name type="mobile">
+				<os>Iphone</os>
+			</name>
+			<name type="mobile">
+				<os>Symbian</os>
+			</name>
  	</type>
  </os>
