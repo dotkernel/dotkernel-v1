@@ -225,7 +225,7 @@ switch ($requestAction)
 		// list user logins
 		$id = (isset($request['id'])) ? (int)$request['id'] : 0;		
 		$page = (isset($request['page'])) ? $request['page'] : 1;
-		$logins = $adminModel->getLogins($id);
+		$logins = $adminModel->getLogins($id, $page);
 		$adminView->loginsUser('logins', $logins, $page);
 	break;
 }

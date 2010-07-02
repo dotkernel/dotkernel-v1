@@ -23,9 +23,9 @@
 			<td class="row{BG}" style="text-align: center;">{ID}</td>
 			<td class="row{BG}"> <a href="{SITE_URL}/admin/user/update/id/{USERID}">{USERNAME}</a> </td>
 			<td class="row{BG}">{REFERER}</td>
-			<td class="row{BG}" style="text-align: center">				
+			<td class="row{BG}" style="width: 150px;">				
 			[ <a href="{WHOISURL}/{IP}" target="_blank">{IP}</a> ]</td>
-			<td class="row{BG}" style="text-align: center">
+			<td class="row{BG}" style="text-align: center; width: 90px;">
 				<img src="{IMAGES_SHORT_URL}/flags/{COUNTRYIMAGE}.png"  border="0" id="ipc{ID}" align="center"/>
 			<script type="text/javascript">
 				 dojo.addOnLoad(function() {
@@ -35,7 +35,7 @@
 					  });
   				 });
 </script></td>
-			<td class="row{BG}" style="text-align: center">
+			<td class="row{BG}" style="text-align: center; width: 90px;">
 				<img src="{IMAGES_SHORT_URL}/browsers/{BROWSERIMAGE}.png" border="0" id="uab{ID}">
 				<script type="text/javascript">
 				 dojo.addOnLoad(function() {
@@ -45,7 +45,7 @@
 					  });
  				 });
 </script></td>
-			<td class="row{BG}" style="text-align: center">
+			<td class="row{BG}" style="text-align: center; width: 40px;">
 				<img src="{IMAGES_SHORT_URL}/os/{OSIMAGE}.png" border="0" id="os{ID}">
 				<script type="text/javascript">
 				 dojo.addOnLoad(function() {
@@ -55,7 +55,7 @@
 					  });
  				 });
 </script></td>
-			<td class="row{BG}">{DATELOGIN}</td>
+			<td class="row{BG}" style="width: 150px;">{DATELOGIN}</td>
 			</td>
 		</tr>
 	<!-- END list -->
