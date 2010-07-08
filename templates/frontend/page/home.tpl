@@ -25,5 +25,11 @@
 		 
 
 		 <p>- you <b>MUST</b>  add in <b>config/application.ini</b> the line:</p>
-		 <p>resources.controllers.frontend.articles = Articles</p>		 
+		 <p>resources.controllers.frontend.articles = Articles</p>		
+		 
+	<h3>Admin Panel Login</h3>
+	 <p><a href="http://v1.dotkernel.net/admin/">http://v1.dotkernel.net/admin/</a></p>
+	 <p>username: admin</p>
+	 <p>password: dot</p>
+ 
 </p>
