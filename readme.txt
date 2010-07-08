@@ -70,4 +70,4 @@ LICENSE
 -------
 
 DotKernel is Open Source, and released under Open Software License (OSL 3.0)
-See license.txt
+See http://v1.dotkernel.net/license.txt
