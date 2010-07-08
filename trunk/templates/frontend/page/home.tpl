@@ -1,9 +1,11 @@
 <p>	
 		<h3>Documentation</h3>
-		<a href=" http://www.dotkernel.com/docs/"> http://www.dotkernel.com/docs/</a>
+		<a href=" http://www.dotkernel.com/docs/"> http://www.dotkernel.com/docs/</a><br /><br />
+		<a href=" http://v1.dotkernel.net/readme.txt" target="_blank">README.TXT</a>
 		
 		<h3>Download latest version</h3>
 		<a href="http://www.dotkernel.com/download/">http://www.dotkernel.com/download/</a>
+		
 		
 	<h3>1. Special Controllers</h3>
 	<p>Backend: <a href="{SITE_URL}/admin/ ">Admin </a></p>
