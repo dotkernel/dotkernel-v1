@@ -111,12 +111,12 @@ while (list($key, $val) = each($requestRaw))
 array_shift($request);
 
 //memory request into param variable and load them into registry
-$param = array();
-$param['module'] = $requestModule;
-$param['controller'] = $requestController;
-$param['action'] = $requestAction;
-$param = array_merge($param, $request);
-$registry->param = $param;
+$route = array();
+$route['module'] = $requestModule;
+$route['controller'] = $requestController;
+$route['action'] = $requestAction;
+$route = array_merge($route, $request);
+$registry->route = $route;
 
 // Start dotKernel object
 $dotKernel = new Dot_Kernel();

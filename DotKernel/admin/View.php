@@ -238,8 +238,8 @@ class View extends Dot_Template
 		$this->setBlock('page_file', 'other_page', 'other_row');		
 		$this->setBlock('page_file', 'pages', 'pages_row');
 
-		$param = Zend_Registry::get('param');
-		$link = (array_key_exists('page',$param)) ?  '' : 'page/';
+		$route = Zend_Registry::get('route');
+		$link = (array_key_exists('page',$route)) ?  '' : 'page/';
 		
 		if ($page->first != $page->current)
 		{

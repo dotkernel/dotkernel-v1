@@ -36,7 +36,7 @@ class Dot_Seo
 		//get the content of dots/seo.xml file into the option variable
 		$this->option = Dot_Settings::getOptionVariables('frontend', 'seo');
 		$this->config = Zend_Registry::get('configuration');
-		$this->param = Zend_Registry::get('param');
+		$this->route = Zend_Registry::get('route');
 	}
 	/**
 	 * Create canonical URL
@@ -47,29 +47,29 @@ class Dot_Seo
 	 */
 	public function createCanonicalUrl()
 	{
-		$param = $this->param;
+		$route = $this->route;
 		$url = $this->config->website->params->url;
 		if( '/' != substr($url, -1, 1))
 		{
 			$url .= '/';
 		}
-		if('frontend' != $param['module'])
+		if('frontend' != $route['module'])
 		{
-			$url .=  $param['module'] . '/';
+			$url .=  $route['module'] . '/';
 		}
-		if( '' != $param['controller'])
+		if( '' != $route['controller'])
 		{
-			$url .= $param['controller'] . '/';
+			$url .= $route['controller'] . '/';
 		}
-		if( '' != $param['action'])
+		if( '' != $route['action'])
 		{
-			$url .= $param['action'] . '/';
+			$url .= $route['action'] . '/';
 		}
-		//unset the request params: module, controller and action
-		unset($param['module']);
-		unset($param['controller']);
-		unset($param['action']);		
-		foreach ($param as $k => $v)
+		//unset the request route: module, controller and action
+		unset($route['module']);
+		unset($route['controller']);
+		unset($route['action']);		
+		foreach ($route as $k => $v)
 		{
 			$url .= $k . '/' . $v . '/';
 		}		
