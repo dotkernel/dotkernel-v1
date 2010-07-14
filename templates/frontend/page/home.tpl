@@ -26,8 +26,8 @@
 		    and the folder <i>templates/frontend/articles/</i> with the necessary template files</p>
 		 
 
-		 <p>- you <b>MUST</b>  add in <b>config/application.ini</b> the line:</p>
-		 <p>resources.controllers.frontend.articles = Articles</p>		
+		 <p>- you <b>MUST</b>  add in <b>config/resource.xml</b> inside the <i>&lt;controller&gt;</i> tag the line:</p>
+		 <p>&lt;frontend&gt;Articles&lt;frontend&gt;</p>		
 		 
 	<h3>Admin Panel Login</h3>
 	 <p><a href="http://v1.dotkernel.net/admin/">http://v1.dotkernel.net/admin/</a></p>
