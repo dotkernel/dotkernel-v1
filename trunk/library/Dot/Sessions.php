@@ -36,19 +36,27 @@ class Dot_Sessions
 	public static function start($module)
 	{
 		$resource = Zend_Registry::get('resource');
-		$namespaceName = $resource->session->$module->name;
-		$rememberMe = $resource->session->$module->rememberMeSeconds;
-		//if session is not registered, create it
-		if(!(Zend_Registry::isRegistered('session')))
+		//check is exists session for the current module
+		if(isset($resource->session->$module))
 		{
-			$session = new Zend_Session_Namespace($namespaceName);
-			if(!isset($session->initialized))
+			$namespaceName = $resource->session->$module->name;
+			$rememberMe = $resource->session->$module->rememberMeSeconds;
+			//if session is not registered, create it
+			if(!(Zend_Registry::isRegistered('session')))
 			{
-				Zend_Session::regenerateId();
-				$session->initialized = TRUE;
-				Zend_Session::rememberMe($rememberMe);
+				$session = new Zend_Session_Namespace($namespaceName);
+				if(!isset($session->initialized))
+				{
+					Zend_Session::regenerateId();
+					$session->initialized = TRUE;
+					Zend_Session::rememberMe($rememberMe);
+				}
+				Zend_Registry::set('session',$session);
 			}
-			Zend_Registry::set('session',$session);
 		}
+		else
+		{
+			Zend_Registry::set('session',NULL);
+		}		
 	}
 }
