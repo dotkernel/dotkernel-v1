@@ -97,6 +97,11 @@ class Dot_Settings
 		{
 			die ('You must define at least one controller for the <b>' . $requestModule . '</b> module');
 		}
+		// convert string to array 
+		if(!is_array($modules))
+		{
+		   $modules = array($modules);
+		}
 		// Now require the files specific for each controller
 		foreach ($modules as $value) 
 		{
