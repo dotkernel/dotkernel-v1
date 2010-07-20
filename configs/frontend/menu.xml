@@ -81,7 +81,7 @@
 		<subItems>
 			<subItem>
 				<title>php.net</title>
-				<link>http://php.net/</link>
+				<link>http://www.php.net/</link>
 				<target>_blank</target>
 				<external>1</external>
 				<isLogged>1</isLogged>
@@ -96,8 +96,8 @@
 				<notLogged>1</notLogged>
 			</subItem>
 			<subItem>
-				<title>Tutorials</title>
-				<link>http://dotboost.net/php/</link>
+				<title>DotKernel Manual</title>
+				<link>http://www.dotkernel.com/docs/</link>
 				<target>_blank</target>
 				<external>1</external>
 				<isLogged>1</isLogged>
