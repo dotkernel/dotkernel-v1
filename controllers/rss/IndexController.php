@@ -16,4 +16,29 @@
 * @author     DotKernel Team <team@dotkernel.com>
 */   
 
-echo '<h1>RSS Controller here ::</h1>';
+// set Module default value
+$defaultController = $resource->route->controller->$requestModule;
+$requestController = isset($requestController) && $requestController !='Index' ? $requestController : $defaultController;
+
+/**
+ * start the template object,
+ * NOTE: the output of this module is XML not HTML
+ * This View class does not inherit from Dpt_Template class
+ */   
+require(DOTKERNEL_PATH . '/' . $requestModule . '/' . 'View.php');
+$view = new View();
+/** 
+ * each Controller  must load its own specific models and views
+ */
+Dot_Settings :: loadControllerFiles($requestModule);
+
+$option = Dot_Settings::getOptionVariables($requestModule,$requestController);
+$registry->option = $option;
+/**
+ * From this point , the control is taken by the Action specific controller
+ * call the Action specific file, but check first if exists 
+ */
+$actionControllerPath = CONTROLLERS_PATH . '/' . $requestModule . '/' . $requestController . 'Controller.php';
+!file_exists($actionControllerPath) ?  $dotKernel->pageNotFound() :  require($actionControllerPath);
+//output the rss content
+$view->output();
