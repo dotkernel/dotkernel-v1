@@ -100,7 +100,7 @@ class User
 	}	
 	/**
 	 * Send forgot password to user
-	 * @acess public
+	 * @access public
 	 * @param int id
 	 * @return void
 	 */

@@ -11,12 +11,8 @@
 */
 
 /**
-* Geo IP API - connect to Geoip.dat database to return the country based on IP address
-* @category   DotKernel
-* @package    DotLibrary
-* @subpackage DotGeoip
-* @author     DotKernel Team <team@dotkernel.com>
-*/
+ * Defined constants used for GeoIp database reading
+ */
 define("GEOIP_COUNTRY_BEGIN", 16776960);
 define("GEOIP_STATE_BEGIN_REV0", 16700000);
 define("GEOIP_STATE_BEGIN_REV1", 16000000);
@@ -50,6 +46,13 @@ define("GEOIP_DIALUP_SPEED", 1);
 define("GEOIP_CABLEDSL_SPEED", 2);
 define("GEOIP_CORPORATE_SPEED", 3);
 
+/**
+* Geo IP API - connect to Geoip.dat database to return the country based on IP address
+* @category   DotKernel
+* @package    DotLibrary
+* @subpackage DotGeoip
+* @author     DotKernel Team <team@dotkernel.com>
+*/
 class Dot_Geoip_Api extends Dot_Geoip
 {
 	/**

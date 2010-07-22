@@ -8,12 +8,14 @@
 		<admin>Admin</admin>
 		<admin>System</admin>
 		<admin>User</admin>
+		<rss>Sample</rss>
 	</controllers>
  	<route>
  		<!-- default controllers for modules -->
 		<controller>
 			<frontend>Page</frontend>
 			<admin>System</admin>
+			<rss>Sample</rss>
 		</controller>
 		<action>
 			<!-- default action for controllers ... -->
@@ -28,7 +30,7 @@
 			</admin>
 		</action>
  	</route>
-	<!-- session stuff -->
+	<!-- session item -->
 	<session>
 		<frontend>
 			<name>frontend</name>
@@ -37,7 +39,6 @@
 		<admin>
 			<name>admin</name>
 			<rememberMeSeconds>864000</rememberMeSeconds>
-		</admin>
-		
+		</admin>		
 	</session>
  </resources>

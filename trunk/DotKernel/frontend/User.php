@@ -238,7 +238,7 @@ class User
 	}
 	/**
 	 * Send forgot password to user
-	 * @acess public
+	 * @access public
 	 * @param string $email
 	 * @return void
 	 */
