@@ -154,10 +154,17 @@ switch ($requestAction)
 			else
 			{
 				// validate secure image code
-				$result = $userView->getRecaptcha()->verify($_POST['recaptcha_challenge_field'],$_POST['recaptcha_response_field']);				
-				if (!$result->isValid()) 
+				try
 				{
-					$error['Secure Image'] = $option->errorMessage->captcha;
+					$result = $userView->getRecaptcha()->verify($_POST['recaptcha_challenge_field'],$_POST['recaptcha_response_field']);
+					if (!$result->isValid()) 
+					{
+						$error['Secure Image'] = $option->errorMessage->captcha;
+					}
+				}
+				catch(Zend_Exception $e)
+				{
+					$error['Secure Image'] = $option->errorMessage->captcha . ' ' . $e->getMessage();
 				}
 			}	
 			if(empty($error))
