@@ -26,7 +26,7 @@ switch ($requestAction)
 	default:
 	case 'list':
 		// list users
-		$page = (isset($request['page'])) ? $request['page'] : 1;
+		$page = (isset($request['page']) && $request['page'] > 0) ? $request['page'] : 1;
 		$users = $userModel->getUserList($page);		
 		$userView->listUser('list', $users, $page);		
 	break;
@@ -188,7 +188,7 @@ switch ($requestAction)
 	case 'logins':
 		// list user logins
 		$id = (isset($request['id'])) ? (int)$request['id'] : 0;		
-		$page = (isset($request['page'])) ? $request['page'] : 1;
+		$page = (isset($request['page']) && $request['page'] > 0) ? $request['page'] : 1;
 		$logins = $userModel->getLogins($id, $page);
 		$userView->loginsUser('logins', $logins, $page);
 	break;

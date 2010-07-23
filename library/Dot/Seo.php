@@ -43,11 +43,12 @@ class Dot_Seo
 	 * This method will be changed when will add URL ReWrite alternative
 	 * @todo improvement of canonical url's
 	 * @access public
+	 * @param array $link [optional]
 	 * @return string 
 	 */
-	public function createCanonicalUrl()
+	public function createCanonicalUrl($link = NULL)
 	{
-		$route = $this->route;
+		$route = ($link == '') ? $this->route : $link;	
 		$url = $this->config->website->params->url;
 		if( '/' != substr($url, -1, 1))
 		{

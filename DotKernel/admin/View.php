@@ -46,18 +46,14 @@ class View extends Dot_Template
 		return self::$_instance;
 	}	
 	/**
-	 * Initalize some parameter
+	 * Initialize some parameter
 	 * @access public
-	 * @param string $requestModule
-	 * @param string $requestController
-	 * @param string $requestAction
 	 * @return void
 	 */
-	public function init($requestModule, $requestController, $requestAction)
+	public function init()
 	{
-		$this->requestModule = $requestModule;
-		$this->requestController = $requestController;
-		$this->requestAction = $requestAction;
+		$this->route = Zend_Registry::get('route');
+		$this->config = Zend_Registry::get('configuration');
 	}
 	/**
 	 * Set the template file
@@ -71,15 +67,14 @@ class View extends Dot_Template
 	/**
 	 * Set different paths url(site, templates, images)
 	 * @access public
-	 * @param Zend_Config_Ini $config
 	 * @return void
 	 */
-	public function setViewPaths($config)
+	public function setViewPaths()
 	{
-		$this->setVar('TEMPLATES_URL', $config->website->params->url . TEMPLATES_DIR);
-		$this->setVar('IMAGES_URL', $config->website->params->url . IMAGES_DIR . '/' .$this->requestModule);
-		$this->setVar('IMAGES_SHORT_URL', $config->website->params->url . IMAGES_DIR);
-		$this->setVar('SITE_URL', $config->website->params->url);
+		$this->setVar('TEMPLATES_URL', $this->config->website->params->url . TEMPLATES_DIR);
+		$this->setVar('IMAGES_URL', $this->config->website->params->url . IMAGES_DIR . '/' .$this->route['module']);
+		$this->setVar('IMAGES_SHORT_URL', $this->config->website->params->url . IMAGES_DIR);
+		$this->setVar('SITE_URL', $this->config->website->params->url);
 	}
 	/**
 	 * Set SEO values
@@ -113,7 +108,7 @@ class View extends Dot_Template
 	{		
 		if(Dot_Auth::hasIdentity('admin'))
 		{
-			$menu_xml = new Zend_Config_Xml(CONFIGURATION_PATH . '/' . $this->requestModule . '/' . 'menu.xml', 'config');
+			$menu_xml = new Zend_Config_Xml(CONFIGURATION_PATH . '/' . $this->route['module'] . '/' . 'menu.xml', 'config');
 			$menu = $menu_xml->menu;
 			// if we have only one menu, Zend_Config_Xml return a simple array, not an array with key 0(zero)
 			if(is_null($menu->{0}))
@@ -159,12 +154,12 @@ class View extends Dot_Template
 					                      'TOP_SUB_MENU_SEL', 
 										  'TOP_SUB_MENU_ITEM_SEL');
 					$this->initVar($tplVariables,'');
-					if (FALSE !== stripos($val->link, $this->requestController.'/'))
+					if (FALSE !== stripos($val->link, $this->route['controller'].'/'))
 					{	//if curent menu is the curent viewed page
 						$this->setVar('TOP_MENU_SEL', '_selected');
 					}							
 					$this->setVar('TOP_MENU_TITLE', $val->title);
-					$this->setVar('TOP_MENU_LINK', $config->website->params->url.'/'.$this->requestModule.'/'.$val->link);
+					$this->setVar('TOP_MENU_LINK', $config->website->params->url.'/'.$this->route['module'].'/'.$val->link);
 					$this->setVar('TOP_MENU_DESCRIPTION', $val->description);													
 					$this->parse('top_normal_menu_item_block', 'top_normal_menu_item', true);
 					if (isset($val->subItems->subItem) && count($val->subItems->subItem) > 0)
@@ -180,9 +175,9 @@ class View extends Dot_Template
 						{			
 							$this->setVar('TOP_SUB_MENU_SEL', '');
 							$this->setVar('TOP_SUB_MENU_TITLE', $v2->title);
-							$this->setVar('TOP_SUB_MENU_LINK', $config->website->params->url.'/'.$this->requestModule.'/'.$v2->link);
+							$this->setVar('TOP_SUB_MENU_LINK', $config->website->params->url.'/'.$this->route['module'].'/'.$v2->link);
 							$this->setVar('TOP_SUB_MENU_DESCRIPTION', $v2->description);
-							if (FALSE !== stripos($v2->link, $this->requestController.'/'.$this->requestAction.'/'))
+							if (FALSE !== stripos($v2->link, $this->route['controller'].'/'.$this->route['action'].'/'))
 							{	//if curent menu is the curent viewed page
 								$this->setVar('TOP_SUB_MENU_SEL', '_selected');
 							}	
@@ -237,9 +232,14 @@ class View extends Dot_Template
 		$this->setBlock('page_file', 'current_page', 'current_row');
 		$this->setBlock('page_file', 'other_page', 'other_row');		
 		$this->setBlock('page_file', 'pages', 'pages_row');
-
-		$route = Zend_Registry::get('route');
-		$link = (array_key_exists('page',$route)) ?  '' : 'page/';
+				
+		$urlArray = $this->route;
+		if(array_key_exists('page',$urlArray))
+		{
+			unset($urlArray['page']);
+		}
+		$seo = new Dot_Seo();
+		$link = $seo->createCanonicalUrl($urlArray).'page/';
 		
 		if ($page->first != $page->current)
 		{

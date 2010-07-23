@@ -79,7 +79,7 @@ switch ($requestAction)
 	break;
 	case 'list':
 		// list admin users
-		$page = (isset($request['page'])) ? $request['page'] : 1;
+		$page = (isset($request['page']) && $request['page'] > 0) ? $request['page'] : 1;
 		$users = $adminModel->getUserList($page);		
 		$adminView->listUser('list', $users, $page);	
 	break;	
@@ -224,7 +224,7 @@ switch ($requestAction)
 	case 'logins':
 		// list user logins
 		$id = (isset($request['id'])) ? (int)$request['id'] : 0;		
-		$page = (isset($request['page'])) ? $request['page'] : 1;
+		$page = (isset($request['page']) && $request['page'] > 0) ? $request['page'] : 1;
 		$logins = $adminModel->getLogins($id, $page);
 		$adminView->loginsUser('logins', $logins, $page);
 	break;
