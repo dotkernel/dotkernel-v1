@@ -31,13 +31,13 @@ if($requestAction != 'login' && $requestAction != 'authorize')
 // start the template object, empty for the moment 
 require(DOTKERNEL_PATH . '/' . $requestModule . '/' . 'View.php');	
 $tpl = View::getInstance(TEMPLATES_PATH . '/' . $requestModule);
-$tpl->init($requestModule, $requestController, $requestAction);
+$tpl->init();
 
 // assign Index Template file
 $tpl->setViewFile();
 
 // set paths in templates
-$tpl->setViewPaths($config);
+$tpl->setViewPaths();
 
 /** 
  * each Controller  must load its own specific models and views
