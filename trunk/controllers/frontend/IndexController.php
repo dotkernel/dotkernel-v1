@@ -25,7 +25,7 @@ $requestAction     = isset($requestAction) && $requestAction !=''         ? $req
 // start the template object, empty for the moment 
 require(DOTKERNEL_PATH . '/' . $requestModule . '/' . 'View.php');	
 $tpl = View::getInstance(TEMPLATES_PATH . '/' . $requestModule);
-$tpl->init($requestModule, $requestController, $requestAction);
+$tpl->init();
 
 // assign Index Template file
 $tpl->setViewFile();

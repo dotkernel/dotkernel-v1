@@ -46,16 +46,12 @@ class View extends Dot_Template
 	/**
 	 * Initalize some parameter
 	 * @access public
-	 * @param string $requestModule
-	 * @param string $requestController
-	 * @param string $requestAction
 	 * @return void
 	 */	
-	public function init($requestModule, $requestController, $requestAction)
+	public function init()
 	{
-		$this->requestModule = $requestModule;
-		$this->requestController = $requestController;
-		$this->requestAction = $requestAction;
+		$this->route = Zend_Registry::get('route');
+		$this->config = Zend_Registry::get('configuration');
 	}
 	/**
 	 * Set the template file
@@ -75,7 +71,7 @@ class View extends Dot_Template
 	public function setViewPaths($config)
 	{
 		$this->setVar('TEMPLATES_URL', $config->website->params->url . TEMPLATES_DIR);
-		$this->setVar('IMAGES_URL', $config->website->params->url . IMAGES_DIR . '/' .$this->requestModule);
+		$this->setVar('IMAGES_URL', $config->website->params->url . IMAGES_DIR . '/' .$this->route['module']);
 		$this->setVar('SITE_URL', $config->website->params->url);
 	}
 	/**
@@ -99,13 +95,11 @@ class View extends Dot_Template
 	 * Display the specific menu that were declared in configs/menu.xml file
 	 * @access public 
 	 * @param Zend_Config_Ini $config
-	 * @param string $requestController
-	 * @param string $requestAction
 	 * @return void
 	 */
 	public function setViewMenu($config)
 	{		
-		$menu_xml = new Zend_Config_Xml(CONFIGURATION_PATH . '/' . $this->requestModule . '/' . 'menu.xml', 'config');
+		$menu_xml = new Zend_Config_Xml(CONFIGURATION_PATH . '/' . $this->route['module'] . '/' . 'menu.xml', 'config');
 		$menu = $menu_xml->menu;
 		// if we have only one menu, Zend_Config_Xml return a simple array, not an array with key 0(zero)
 		if(is_null($menu->{0}))
@@ -164,7 +158,7 @@ class View extends Dot_Template
 					                      'TOP_SUB_MENU_SEL', 
 										  'TOP_SUB_MENU_ITEM_SEL');
 					$this->initVar($tplVariables,'');	
-					if (false !== stripos($val->link, $this->requestController.'/'.$this->requestAction.'/'))
+					if (false !== stripos($val->link, $this->route['controller'].'/'.$this->route['action'].'/'))
 					{	//if current menu is the current viewed page
 						$this->setVar('TOP_MENU_SEL', '_selected');
 						$this->setVar('TOP_SUB_MENU_SEL', '_selected');
@@ -222,7 +216,7 @@ class View extends Dot_Template
 									{
 										$this->setVar('TOP_SUB_MENU_LINK', $config->website->params->url.'/'.$v2->link);
 									}
-									if (FALSE  !==stripos($v2->link, $this->requestController.'/'.$this->requestAction.'/'))
+									if (FALSE  !==stripos($v2->link, $this->route['controller'].'/'.$this->route['action'].'/'))
 									{	//if curent menu is the curent viewed page then parent menu will be selected and sub menu shown
 										$tplVariables = array('TOP_MENU_SEL', 
 										                      'TOP_SUB_MENU_SEL', 
