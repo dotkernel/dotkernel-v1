@@ -24,7 +24,7 @@
 			<td class="row{BG}"> <a href="{SITE_URL}/admin/admin/update/id/{ADMINID}">{USERNAME}</a> </td>
 			<td class="row{BG}">{REFERER}</td>
 			<td class="row{BG}" style="width: 150px;">				
-			[ <a href="{WHOISURL}/{IP}" target="_blank">{IP}</a> ]</td>
+				<a href="{WHOISURL}/{IP}" target="_blank">{IP}</a></td>
 			<td class="row{BG}" style="text-align: center; width: 90px;">
 				<img src="{IMAGES_SHORT_URL}/flags/{COUNTRYIMAGE}.png"  border="0" id="ipc{ID}" align="center"/>
 			<script type="text/javascript">

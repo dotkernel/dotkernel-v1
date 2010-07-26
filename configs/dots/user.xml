@@ -74,8 +74,8 @@
 			<userPermission>You don't have enough credentials to access this url.</userPermission>
 		</warningMessage>
 		<captchaOptions>
-			<recaptchaPublicKey>xxx</recaptchaPublicKey>
-			<recaptchaPrivateKey>xxx</recaptchaPrivateKey>
+			<recaptchaPublicKey>6LeE0ggAAAAAAOCSHbAs4x7xhfl4n7cpo0PA2RDQ</recaptchaPublicKey>
+			<recaptchaPrivateKey>6LeE0ggAAAAAAPZotpKdXVi1ypjFEGlVs-y_kzfx</recaptchaPrivateKey>
 			<linkTitle>Click me</linkTitle>
 			<linkHiddenText>...</linkHiddenText>
 			<theme>white</theme>
