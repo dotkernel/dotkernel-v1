@@ -30,47 +30,54 @@ switch ($requestAction)
 		header('location: '.$config->website->params->url.'/' . $requestModule);
 		exit;
 	break;	
-	case 'authorize':	
-		// validate the authorization request parameters 
-		$validate = $adminModel->validateLogin($_POST['username'], $_POST['password'], $_POST['send']);
-		if(!empty($validate['login']) && empty($validate['error']))
-		{
-			// login info are VALID, we can see if is a valid user now 
-			$user = $adminModel->checkLogin($validate['login']);
-			if(!empty($user))
+	case 'authorize':
+		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'] && 
+			array_key_exists('username', $_POST) || array_key_exists('password', $_POST))
+		{	
+			// else validate the authorization request parameters 
+			$validate = $adminModel->validateLogin($_POST['username'], $_POST['password'], $_POST['send']);
+			if(!empty($validate['login']) && empty($validate['error']))
 			{
-				$session->admin = $user[0];
-				//prepare data for register the login
-				$dataLogin = array('ip' => Dot_Kernel::getUserIp(), 
-							  'adminId' => $session->admin['id'], 
-							  'username' => $session->admin['username'], 
-							  'referer' => $_SERVER['HTTP_REFERER'],
-							  'userAgent' => $_SERVER["HTTP_USER_AGENT"]);
-				$adminModel->registerLogin($dataLogin);
-				header('Location: '.$config->website->params->url.'/' . $requestModule );
-				exit;
+				// login info are VALID, we can see if is a valid user now 
+				$user = $adminModel->checkLogin($validate['login']);
+				if(!empty($user))
+				{
+					$session->admin = $user[0];
+					//prepare data for register the login
+					$dataLogin = array('ip' => Dot_Kernel::getUserIp(), 
+								  'adminId' => $session->admin['id'], 
+								  'username' => $session->admin['username'], 
+								  'referer' => $_SERVER['HTTP_REFERER'],
+								  'userAgent' => $_SERVER["HTTP_USER_AGENT"]);
+					$adminModel->registerLogin($dataLogin);
+					header('Location: '.$config->website->params->url.'/' . $requestModule );
+					exit;
+				}
+				else
+				{
+					unset($session->admin);
+					// check if account is inactive
+					$adminTmp = $adminModel->getUserBy('username',$validate['login']['username']);
+					(1 == $adminTmp['isActive']) ?
+						$session->message['txt'] = $option->errorMessage->wrongCredentials:
+						$session->message['txt'] = $option->errorMessage->inactiveAcount;
+					$session->message['type'] = 'error';
+				}
 			}
 			else
 			{
-				unset($session->admin);
-				// check if account is inactive
-				$adminTmp = $adminModel->getUserBy('username',$validate['login']['username']);
-				(1 == $adminTmp['isActive']) ?
-					$session->message['txt'] = $option->errorMessage->wrongCredentials:
-					$session->message['txt'] = $option->errorMessage->inactiveAcount;
-				$session->message['type'] = 'error';				
-				header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/login');
-				exit;				
-			}
+				// login info are NOT VALID
+				$session->message['txt'] = array($validate['error']['username'], $validate['error']['password']);
+				$session->message['type'] = 'error';
+			}		
 		}
 		else
 		{
-			// login info are NOT VALID
-			$session->message['txt'] = array($validate['error']['username'], $validate['error']['password']);
-			$session->message['type'] = 'error';
-			header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/login');
-			exit;
-		}			
+			$session->message['txt'] = $option->warningMessage->userPermission;
+			$session->message['type'] = 'warning';
+		}		
+		header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/login');
+		exit;		
 	break;
 	case 'account':
 		//display my account form

@@ -40,7 +40,8 @@ switch ($requestAction)
 	break;
 	case 'authorize':
 		// authorize user login 
-		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
+		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'] && 
+			array_key_exists('username', $_POST) || array_key_exists('password', $_POST))
 		{	
 			// validate the authorization request paramethers 
 			$validate = $userModel->validateLogin($_POST['username'], $_POST['password'], $_POST['send']);
@@ -81,9 +82,8 @@ switch ($requestAction)
 			$session->message['txt'] = $option->warningMessage->userPermission;
 			$session->message['type'] = 'warning';
 		}
-		header('Location: '.$config->website->params->url.'/user/login');
-		exit;				
-			
+		header('Location: '.$config->website->params->url. '/' . $requestController. '/login');
+		exit;			
 	break;
 	case 'account':
 		// display My Account page, if user is logged in 
