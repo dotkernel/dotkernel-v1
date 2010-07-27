@@ -28,6 +28,7 @@ class User_View extends View
 	public function __construct($tpl)
 	{
 		$this->tpl = $tpl;
+		$this->settings = Zend_Registry::get('settings');
 	}
 	/**
 	 * List users
@@ -110,6 +111,7 @@ class User_View extends View
 			$this->tpl->setVar('COUNTRYIMAGE', strtolower($country[0]));
 			$this->tpl->setVar('COUNTRYNAME', $country[1]);
 			$this->tpl->setVar('REFERER', $v['referer']);
+			$this->tpl->setVar('WHOISURL', $this->settings->whoisUrl);
 			$this->tpl->setVar('USERAGENT', $v['userAgent']);
 			$this->tpl->setVar('BROWSERIMAGE', Dot_Kernel::getBrowserIcon($v['userAgent']));
 			$os = Dot_Kernel::getOsIcon($v['userAgent']);			
