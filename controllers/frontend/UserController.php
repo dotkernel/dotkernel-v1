@@ -73,7 +73,16 @@ switch ($requestAction)
 			else
 			{
 				// login info are NOT VALID
-				$session->message['txt'] = array($validate['error']['username'], $validate['error']['password']);
+				$txt = array();
+				$field = array('username', 'password');
+				foreach ($field as $v)
+				{
+					if(array_key_exists($v, $validate['error']))
+					{
+						 $txt[] = $validate['error'][$v];
+					}
+				}
+				$session->message['txt'] = $txt;
 				$session->message['type'] = 'error';
 			}		
 		}
