@@ -1,15 +1,15 @@
-Welcome to DotKernel 1.2.0 release
+Welcome to DotKernel @VERSION@ release
 
-DotKernel is an Application PHP Framework, built on top of Zend Framework (ZF)
+DotKernel is a PHP Application Framework, built on top of Zend Framework (ZF)
 	
 	http://www.dotkernel.com/
 
 RELEASE INFORMATION
 -------------------
-DotKernel 1.2.0 – July 2, 2010 (r166)
+DotKernel @VERSION@ – @DATERELEASE@ (r@HEADREVISION@)
 
 For detailed changes, please see 
-	http://www.dotkernel.com/releases/changelog/1.2.0.html
+	http://www.dotkernel.com/changelog/@CHANGELOGVER@
 
 
 SYSTEM REQUIREMENTS
@@ -29,6 +29,8 @@ INSTALLATION
 
 To install DotKernel, follow these steps:
 
+    * Download <http://www.dotkernel.com/download/?did=18> dk-test.php file to 
+      test that your environment meets DotKernel system requirements
     * Download <http://www.dotkernel.com/docs/download/> a copy of DotKernel
     * Unzip the downloaded package. You should have now a DotKernel_[@version] 
       directory
@@ -40,9 +42,9 @@ To install DotKernel, follow these steps:
 
 If you see the Home page, your DotKernel installation is completed!
 For admin module: http://yourdotkernelinstance.com/admin/ use: 
-	username: admin
-	password: dot
-	 
+    username: admin
+    password: dot
+     
 QUESTIONS
 ---------
 
