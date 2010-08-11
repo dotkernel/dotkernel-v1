@@ -1,3 +1,4 @@
+
 <?php
 /**
 * DotBoost Technologies Inc.
@@ -39,6 +40,16 @@ class User_View extends View
 	public function loginForm($templateFile)
 	{
 		$this->tpl->setFile('tpl_main', 'user/' . $templateFile . '.tpl');
+		$session = Zend_Registry::get('session');
+		if(isset($session->validData))
+		{
+			foreach ($session->validData as $k=>$v)
+			{
+				$this->tpl->setVar(strtoupper($k),$v);		
+			}
+		}
+		unset($session->validData);
+			
 	}
 	/**
 	 * Display user's signup form

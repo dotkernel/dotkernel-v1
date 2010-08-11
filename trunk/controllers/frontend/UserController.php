@@ -43,48 +43,9 @@ switch ($requestAction)
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'] && 
 			array_key_exists('username', $_POST) || array_key_exists('password', $_POST))
 		{	
-			// validate the authorization request paramethers 
+			// validate the authorization request parameters 
 			$validate = $userModel->validateLogin($_POST['username'], $_POST['password'], $_POST['send']);
-			if(!empty($validate['login']) && empty($validate['error']))
-			{
-				// login info are VALID, we can see if is a valid user now 
-				$user = $userModel->checkLogin($validate['login']);
-				if(!empty($user))
-				{
-					// user is valid and logged in
-					$session->user = $user;
-					//prepare data for register the login
-					$dataLogin = array('ip' => Dot_Kernel::getUserIp(), 
-							  'userId' => $session->user['id'], 
-							  'username' => $session->user['username'], 
-							  'referer' => $_SERVER['HTTP_REFERER'],
-							  'userAgent' => $_SERVER["HTTP_USER_AGENT"]);
-					$userModel->registerLogin($dataLogin);
-					header('location: '.$config->website->params->url.'/user/account');
-					exit;
-				}
-				else
-				{
-					unset($session->user);
-					$session->message['txt'] = $option->errorMessage->login;
-					$session->message['type'] = 'error';
-				}
-			}
-			else
-			{
-				// login info are NOT VALID
-				$txt = array();
-				$field = array('username', 'password');
-				foreach ($field as $v)
-				{
-					if(array_key_exists($v, $validate['error']))
-					{
-						 $txt[] = $validate['error'][$v];
-					}
-				}
-				$session->message['txt'] = $txt;
-				$session->message['type'] = 'error';
-			}		
+			$userModel->authorizeLogin($validate);
 		}
 		else
 		{
