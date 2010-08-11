@@ -302,6 +302,7 @@ class Admin
 	 */
 	public function authorizeLogin($validate)
 	{
+		$route = Zend_Registry::get('route');
 		$session = Zend_Registry::get('session');
 		if(!empty($validate['login']) && empty($validate['error']))
 		{
@@ -317,7 +318,7 @@ class Admin
 							  'referer' => $_SERVER['HTTP_REFERER'],
 							  'userAgent' => $_SERVER["HTTP_USER_AGENT"]);
 				$this->registerLogin($dataLogin);
-				header('Location: '.$this->config->website->params->url.'/' . $requestModule );
+				header('Location: '.$this->config->website->params->url.'/' .  $route['module'] );
 				exit;
 			}
 			else
