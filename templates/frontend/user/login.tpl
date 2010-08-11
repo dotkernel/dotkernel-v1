@@ -5,11 +5,11 @@
 			<ul class="g_form">
 				<li class="clearfix positioned">
 					<p class="contact_label">Username</p>
-					<input type="text" value="" name="username">
+					<input type="text" value="{USERNAME}" name="username">
 				</li>
 				<li class="clearfix positioned">
 					<p class="contact_label">Password</p>
-					<input type="text" value="" name="password">
+					<input type="password" value="{PASSWORD}" name="password">
 				</li>	
 				<li class="clearfix positioned">
 					<p class="contact_label">&nbsp;</p>

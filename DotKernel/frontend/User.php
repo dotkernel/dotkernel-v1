@@ -29,6 +29,7 @@ class User
 	{		
 		$this->db = Zend_Registry::get('database');
 		$this->option = Zend_Registry::get('option');		
+		$this->config = Zend_Registry::get('configuration');		
 	}
 	/**
 	 * Check to see if user can login
@@ -273,4 +274,55 @@ class User
 			$session->message['type'] = 'error';
 		}		
 	}	
+	/**
+	 * Authorize user login
+	 * @access public
+	 * @param Zend_Validate $validate
+	 * @return void
+	 */
+	public function authorizeLogin($validate)
+	{
+		$session = Zend_Registry::get('session');
+		if(!empty($validate['login']) && empty($validate['error']))
+		{
+			// login info are VALID, we can see if is a valid user now 
+			$user = $this->checkLogin($validate['login']);
+			if(!empty($user))
+			{
+				// user is valid and logged in
+				$session->user = $user;
+				//prepare data for register the login
+				$dataLogin = array('ip' => Dot_Kernel::getUserIp(), 
+						  'userId' => $session->user['id'], 
+						  'username' => $session->user['username'], 
+						  'referer' => $_SERVER['HTTP_REFERER'],
+						  'userAgent' => $_SERVER["HTTP_USER_AGENT"]);
+				$this->registerLogin($dataLogin);
+				header('location: '.$this->config->website->params->url.'/user/account');
+				exit;
+			}
+			else
+			{
+				unset($session->user);
+				$session->message['txt'] = $this->option->errorMessage->login;
+				$session->message['type'] = 'error';
+			}
+		}
+		else
+		{
+			// login info are NOT VALID
+			$txt = array();
+			$field = array('username', 'password');
+			foreach ($field as $v)
+			{
+				if(array_key_exists($v, $validate['error']))
+				{
+					 $txt[] = $validate['error'][$v];
+				}
+			}
+			$session->validData = $validate['login'];
+			$session->message['txt'] = $txt;
+			$session->message['type'] = 'error';
+		}		
+	}
 }

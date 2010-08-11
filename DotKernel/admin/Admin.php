@@ -293,5 +293,58 @@ class Admin
 							
 		$data = $this->db->fetchAll($select);
 		return array('data'=> $data,'paginatorAdapter'=> $paginatorAdapter);
+	}	
+	/**
+	 * Authorize user login
+	 * @access public
+	 * @param Zend_Validate $validate
+	 * @return void
+	 */
+	public function authorizeLogin($validate)
+	{
+		$session = Zend_Registry::get('session');
+		if(!empty($validate['login']) && empty($validate['error']))
+		{
+			// login info are VALID, we can see if is a valid user now 
+			$user = $this->checkLogin($validate['login']);
+			if(!empty($user))
+			{
+				$session->admin = $user[0];
+				//prepare data for register the login
+				$dataLogin = array('ip' => Dot_Kernel::getUserIp(), 
+							  'adminId' => $session->admin['id'], 
+							  'username' => $session->admin['username'], 
+							  'referer' => $_SERVER['HTTP_REFERER'],
+							  'userAgent' => $_SERVER["HTTP_USER_AGENT"]);
+				$this->registerLogin($dataLogin);
+				header('Location: '.$this->config->website->params->url.'/' . $requestModule );
+				exit;
+			}
+			else
+			{
+				unset($session->admin);
+				// check if account is inactive
+				$adminTmp = $this->getUserBy('username',$validate['login']['username']);
+				(1 == $adminTmp['isActive']) ?
+					$session->message['txt'] = $this->option->errorMessage->wrongCredentials:
+					$session->message['txt'] = $this->option->errorMessage->inactiveAcount;
+				$session->message['type'] = 'error';
+			}
+		}
+		else
+		{
+			// login info are NOT VALID
+			$txt = array();
+			$field = array('username', 'password');
+			foreach ($field as $v)
+			{
+				if(array_key_exists($v, $validate['error']))
+				{
+					 $txt[] = $validate['error'][$v];
+				}
+			}
+			$session->message['txt'] = $txt;
+			$session->message['type'] = 'error';
+		}		
 	}
 }
