@@ -295,7 +295,7 @@ class User
 				$dataLogin = array('ip' => Dot_Kernel::getUserIp(), 
 						  'userId' => $session->user['id'], 
 						  'username' => $session->user['username'], 
-						  'referer' => $_SERVER['HTTP_REFERER'],
+						  'referer' => isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '',
 						  'userAgent' => $_SERVER["HTTP_USER_AGENT"]);
 				$this->registerLogin($dataLogin);
 				header('location: '.$this->config->website->params->url.'/user/account');
