@@ -1,22 +1,25 @@
 <?php
 /**
+* This code that was derived from the original PHPLIB Template class is 
+* copyright by Kristian Koehntopp, NetUSE AG and was released under the LGPL.
+*
 * DotBoost Technologies Inc.
 * DotKernel Application Framework
 *
 * @category   DotKernel
-* @package    DotLibrary
+* @package    DotLibrary 
 * @copyright  Copyright (c) 2009-2010 DotBoost Technologies Inc. Canada (http://www.dotboost.com)
-* @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+* @license    http://www.gnu.org/copyleft/lesser.html  LGPL License 2.1
 * @version    $Id$
 */
 
 /**
-* Template engine, based on PHPLIB library
+* Template engine, based on PHPLIB Template class
 * @category   DotKernel
 * @package    DotLibrary
+* @author     Kristian Koehntopp <kris@koehntopp.de>
 * @author     DotKernel Team <team@dotkernel.com>
 */
-
 
 class Dot_Template
 {
