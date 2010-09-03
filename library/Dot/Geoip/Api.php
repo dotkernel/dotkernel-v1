@@ -47,7 +47,7 @@ define("GEOIP_CABLEDSL_SPEED", 2);
 define("GEOIP_CORPORATE_SPEED", 3);
 
 /**
-* Geo IP API - connect to Geoip.dat database to return the country based on IP address
+* Geo IP API - connect to GeoIP.dat database to return the country based on IP address
 * @category   DotKernel
 * @package    DotLibrary
 * @subpackage DotGeoip
@@ -299,14 +299,14 @@ class Dot_Geoip_Api extends Dot_Geoip
 	 * Get the country by IP
 	 * Return an array with : short name, like 'us' and long name, like 'United States'
 	 * @access public
-	 * @param string $path - path to geoip.dat  database file
+	 * @param string $path - path to GeoIP.dat  database file
 	 * @param string $ip
 	 * @return array
 	 */
 	public function getCountryByAddr($path, $ip)
 	{
 		$country = array('unknown','unknown');
-		$filePath = $path.'Geoip.dat';
+		$filePath = $path.'GeoIP.dat';
 		$this->geoipOpen($filePath, GEOIP_STANDARD);
 		$countryCode = $this->geoipCountryCodeByAddr($ip);
 		$this->geoipClose();
