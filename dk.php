@@ -28,9 +28,18 @@ $checkServer['host'] = array('name' => 'Host Name',
 						   'status' => 'pass', 
 						   'value' => $hostName);
 // get APACHE VERSION
+if(function_exists('apache_get_version'))
+{
+	$apacheVersion = apache_get_version();
+}
+else
+{
+	$apacheTmp = explode(" ",$_SERVER["SERVER_SOFTWARE"],3);
+	$apacheVersion = $apacheTmp[0] . " " . $apacheTmp[1];
+}
 $checkServer['apache'] = array('name' => 'Apache Version', 
 							   'status' => 'pass', 
-							   'value' => apache_get_version());
+							   'value' => $apacheVersion);
 // check PHP VERSION
 if(version_compare(PHP_VERSION, '5.2.10', '>='))
 {
