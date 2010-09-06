@@ -275,7 +275,50 @@ function parseHtmlRows($data)
 		font-family: Tahoma, sans-serif;
 		color: #EE6C25;
 		
-	} 
+	}
+	h3{
+		font-size: 15px;
+		font-weight: bold;
+		font-family: Tahoma, sans-serif;
+		color: #EE6C25;
+	}
+	a{
+		color: #0F83C8;
+		text-decoration: none;
+	}
+	a:hover{
+		color: #EE6C25;
+		text-decoration: underline;
+	}
+	p{
+		padding: 0px;
+		margin: 10px 0px;
+	}
+	input,textarea,select{
+		padding: 5px;
+		font-size: 13px;
+		border: 1px solid #A3A3A3;
+		margin: 5px 0px 5px;
+		vertical-align: middle;
+		font-family: Lucida sans unicode, sans-serif;
+	}
+	select{
+		padding: 0px;
+	}
+	input[type=radio] { border: 0px; }
+	input[type=checkbox] { border: 0px; }
+
+	.submit_button{
+		background: #2072AE;
+		padding: 5px 10px 5px 10px;
+		text-align: center;
+		color: #ffffff;
+		font-size: 13px;
+		text-transform: uppercase;
+		border: 0px;
+		vertical-align: middle;
+		cursor: pointer;
+	}
 	.wrap{
 		margin: 0px auto;
 		width: 750px;
@@ -344,7 +387,7 @@ function parseHtmlRows($data)
 		font-weight: bold;
 		font-family: Tahoma, sans-serif;
 		line-height: 29px !important;
-	}	
+	}		
 	.testfailed{
 		margin: 30px 0px 20px 0px;
 		color: #FFFFFF;
@@ -364,8 +407,31 @@ function parseHtmlRows($data)
 		font-family: Tahoma, sans-serif;
 		line-height: 29px !important;
 	}
-	
-
+	.contact_form{
+		list-style-type: none;
+		padding: 0px;
+		margin: 0px;
+	}
+	.contact_form li{
+		padding: 0px;
+		margin: 0px 0px 10px 0px;
+	}
+	.contact_form label{
+		display: block;
+		padding-top:5px;
+		float: left;
+		width: 120px; /* increase or descrease the width in regard to the lenght of the labels*/
+	}
+	.contact_form input{
+		margin: 0px;
+		width: 200px;
+	}
+	.contact_form textarea{
+		width: 400px;
+	}
+	.contact_form .submit_button{
+		width: auto;
+	}
 </style>
 </head>
 
@@ -424,6 +490,64 @@ else
 		</tbody>
 		</table>
 	</fieldset>
+	
+	<hr color='#E6E6E6' width= size=1>
+	<h3>More styles</h3>
+	<p>
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+	</p>
+	<a href="">...read more</a>
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<a href="">...read more</a> 
+	<br>
+	This is a button <input type="button" value="Press here" onclick="" class="submit_button"><br>
+	This is a radio button <input type="radio" name=""> <input type="radio" name=""><br>
+	This is a checkbox <input type="checkbox" name=""> <input type="checkbox" name=""> <input type="checkbox" name=""><br>
+	This is a select 
+	<select name="sfdsfd">
+		<option value="sdfsdfasd" selected>
+		<option value="sdfsdfsdf">
+	</select> <br>
+	
+	This is a field <input type="text" name=""> <br>
+	<hr color='#CACACA' width= size=1>
+	<br>
+	<h3>This is an example for a contact form</h3>
+	
+	  <ul class="contact_form">
+		<li>
+		  <label for="name">Name<em>*</em></label>
+		  <input id="name" />
+		</li>
+		<li>
+		  <label for="address1">Address<em>*</em></label>
+		  <input id="address1" />
+		</li>
+		<li>
+		  <label for="address2">Address 2</label>
+		  <input id="address2" />
+		</li>
+		<li>
+		  <label for="town-city">Town/City</label>
+		  <input id="town-city" />
+		</li>
+		<li>
+		  <label for="county">County<em>*</em></label>
+		  <input id="county" />
+		</li>
+		<li>
+		  <label for="postcode">Postcode<em>*</em></label>
+		  <input id="postcode" />
+		</li>
+		<li>
+		  <label for="postcode">Postcode<em>*</em></label>
+		  <textarea name=""></textarea>
+		</li>
+		<li>
+			 <label for="postcode">&nbsp;</label>
+			<input type="button" value="Press here" onclick="" class="submit_button">
+		</li>
+	  </ul>
+
 </div>
 </body>
 </html>
