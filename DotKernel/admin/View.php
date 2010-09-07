@@ -146,7 +146,7 @@ class View extends Dot_Template
 				if(is_null($items->{0}))
 				{
 					$items = new Zend_Config(array(0=>$child->item));						
-				}			
+				}	
 				foreach ($items as $key => $val)
 				{		
 					$this->setVar('TOP_MENU_ID', $i);
@@ -154,7 +154,8 @@ class View extends Dot_Template
 					                      'TOP_SUB_MENU_SEL', 
 										  'TOP_SUB_MENU_ITEM_SEL');
 					$this->initVar($tplVariables,'');
-					if (FALSE !== stripos($val->link, $this->route['controller'].'/'))
+					$menuCondition = (FALSE !== stripos($val->link, ('' == $this->route['action'])? $this->route['controller'].'/' : $this->route['controller'].'/'.$this->route['action'].'/'));
+                    if ($menuCondition)					
 					{	//if curent menu is the curent viewed page
 						$this->setVar('TOP_MENU_SEL', '_selected');
 					}							
@@ -179,17 +180,22 @@ class View extends Dot_Template
 							$this->setVar('TOP_SUB_MENU_DESCRIPTION', $v2->description);
 							if (FALSE !== stripos($v2->link, $this->route['controller'].'/'.$this->route['action'].'/'))
 							{	//if curent menu is the curent viewed page
+								$this->setVar('TOP_MENU_SEL', '_selected');
 								$this->setVar('TOP_SUB_MENU_SEL', '_selected');
-							}	
+							}
+							elseif (FALSE !== stripos($v2->link, $this->route['controller'].'/'))
+							{
+								$this->setVar('TOP_MENU_SEL', '_selected');								
+							}
 							$this->parse('top_normal_sub_menu_item_block', 'top_normal_sub_menu_item', true);
 						}
 						$this->parse('top_sub_menu_item_block', 'top_sub_menu_item', true);	
-					}
+					}					
 					$this->parse('top_menu_item_block', 'top_menu_item', true);
 					$this->parse('top_normal_menu_item_block', '');																	
 					$i++;
 				}					
-					$this->parse('top_normal_sub_menu_item_block', 'top_normal_sub_menu_item',true);
+				$this->parse('top_normal_sub_menu_item_block', 'top_normal_sub_menu_item',true);
 				$this->parse('top_menu_block', 'top_menu', true);
 				$this->parse('MENU_'.$child->id, 'tpl_menu_'.$child->id);
 			}
