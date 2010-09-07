@@ -114,7 +114,7 @@ else
 }
 
 // check apache module rewrite
-if(in_array('mod_rewrite', apache_get_modules()))
+if(function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules()))
 {
 	$check['apache_mod_rewrite'] = array('name' => 'Apache <i>mod_rewrite</i> module', 
 										 'status' => 'pass', 
@@ -122,10 +122,24 @@ if(in_array('mod_rewrite', apache_get_modules()))
 }
 else
 {
-	$check['apache_mod_rewrite'] = array('name' => 'Apache <i>mod_rewrite</i> module', 
-										 'status' => 'failed', 
-										 'value' => 'DotKernel requires Apache mod_rewrite for htaccess route.');
-	$test = false;
+	ob_start();
+	phpinfo(INFO_MODULES);
+	$contents = ob_get_contents();
+	ob_end_clean();
+	$apacheModule = (strpos($contents, 'mod_rewrite') !== false);
+	if($apacheModule)
+	{
+		$check['apache_mod_rewrite'] = array('name' => 'Apache <i>mod_rewrite</i> module', 
+										 'status' => 'pass', 
+										 'value' => 'OK');	
+	}
+	else
+	{
+		$check['apache_mod_rewrite'] = array('name' => 'Apache <i>mod_rewrite</i> module', 
+											 'status' => 'failed', 
+											 'value' => 'DotKernel requires Apache mod_rewrite for htaccess route.');
+		$test = false;
+	}
 }
 // check ctype	
 if(extension_loaded('ctype'))
