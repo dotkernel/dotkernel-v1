@@ -34,8 +34,6 @@
 	width: 980px;
 	border: 0px;
 	font-size: 11px;
-	padding: 15px;	
-	text-align: center;
 }
 .index_debugger b{
 	float: left;
@@ -89,7 +87,7 @@
 	height: 21px;
 	line-height: 21px;
 	float: left;
-	margin-left: 3px;
+	margin-right: 3px;
 	cursor: pointer;
 	background-color: #ffffff;
 	border: 1px solid #CFCFCF;
@@ -99,7 +97,7 @@
 
 .debugger_db{
 	float: left;
-	margin-left: 3px;
+	margin-right: 3px;
 	background-color: #ffffff;
 	border: 1px solid #CFCFCF;
 	width: 250px;
@@ -110,29 +108,29 @@
 
 .version_zf{
 	float: left;
-	margin-left: 3px;
+	margin-right: 3px;
 	background-color: #ffffff;
 	border: 1px solid #CFCFCF;
 	width: 80px;
 	padding: 6px 4px 6px 4px;
-		height: 21px;
+	height: 21px;
 	line-height: 21px;
 }
 
 .version_php{
 	float: left;
-	margin-left: 3px;
+	margin-right: 3px;
 	background-color: #ffffff;
 	border: 1px solid #CFCFCF;
 	width: 95px;
 	padding: 6px 4px 6px 4px;
-		height: 21px;
+	height: 21px;
 	line-height: 21px;
 }
 
 .total_time{
 	float: left;
-	margin-left: 3px;
+	margin-right: 3px;
 	background-color: #ffffff;
 	border: 1px solid #CFCFCF;
 	width: 205px;
@@ -143,12 +141,12 @@
 
 .memory_usage{
 	float: left;
-	margin-left: 3px;
+	margin-right: 3px;
 	background-color: #ffffff;
 	border: 1px solid #CFCFCF;
 	width: 180px;
 	padding: 6px 4px 6px 4px;
-		height: 21px;
+	height: 21px;
 	line-height: 21px;
 }
 

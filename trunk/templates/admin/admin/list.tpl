@@ -2,9 +2,9 @@
 <script type="text/javascript" src="{TEMPLATES_URL}/js/admin/admin.js"></script>
 <div id="adminList">
 	{PAGINATION}
-	<fieldset style="width: 100%">
+	<fieldset>
 	<legend>List Admins</legend>
-	<table cellpadding="0" cellspacing="1" class="big_table">
+	<table cellpadding="0" cellspacing="1" class="big_table" width="100%">
 		<tr>
 			<td class="table_subhead"><span>#</span></td>
 			<td class="table_subhead"><span>Username</span></td>

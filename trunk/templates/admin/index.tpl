@@ -1,3 +1,5 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
 	<title>Admin - {PAGE_TITLE}</title>
@@ -7,22 +9,20 @@
 	<script type="text/javascript" src="{TEMPLATES_URL}/js/admin/main.js"></script>
 </head>
 <body>
-	<div class="header_bg">
+	<div class="wrapper">
 		<div class="header clearfix">
-			<div class="logo"><a href="{SITE_URL}/admin/">admin panel</a></div>
+			<a href="{SITE_URL}/admin/" id="logo">ADMIN PANEL</a>
 			<div class="top_user_menu clearfix">{INFO_BAR}</div>
+			{MENU_1}
 		</div>
-	</div>
-	{MENU_1}
-	<div class="main">
 		<div class="content">				
 			<h1>{PAGE_CONTENT_TITLE}</h1>
 				{MESSAGE_BLOCK}
 					{MAIN_CONTENT}
 		</div>
-	</div>
-	<div class="footer_bg">
-		<div class="debugger" align="center">{DEBUGGER}</div>
+		<div class="debugger">
+			{DEBUGGER}
+		</div>
 	</div>
 </body>
 </html>
