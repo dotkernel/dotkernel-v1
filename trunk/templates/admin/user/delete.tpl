@@ -2,9 +2,9 @@
 <input type="hidden" name="send" value="on">
 <fieldset style="width: 500px">
 <legend>Delete User Acccount: {USERNAME}</legend>
-	<table cellpadding="0" cellspacing="1" class="big_table">
+	<table cellpadding="0" cellspacing="1" class="big_table" width="100%">
 		<tr>
-			<td class="row2">Are you sure you want to delete this account ?</td>
+			<td class="row2"><b>Are you sure you want to delete this account ?</b></td>
 		</tr>
 		<tr>
 			<td class="row1">
