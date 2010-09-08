@@ -1,8 +1,7 @@
-<div class="paginator clearfix">
-	<div class="emph left"> <span><b>{TOTAL_RECORDS}</b> records </span></div>
-	<div class="emph left"> <span>Pages <b>({TOTAL_PAGES})</b> </span></div>
-	<div class="right"> 
-		<ul class="pagination">
+<div class="pagination clearfix">
+	<span><b>{TOTAL_RECORDS}</b> records | 
+	 <b>({TOTAL_PAGES})</b> pages</span>
+	<ul>
                 <!-- BEGIN previous -->
                 <li>
                     <a href="{PREVIOUS_LINK}">Previous</a>
@@ -25,5 +24,5 @@
                 <a href="{NEXT_LINK}">Next</a>
             </li>
             <!-- END next -->
-            </ul></div>
+    </ul>
 </div>

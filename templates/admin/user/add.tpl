@@ -2,7 +2,7 @@
 <input type="hidden" name="send" value="on">
 <fieldset style="width: 500px">
 <legend>Add New User</legend>
-	<table cellpadding="0" cellspacing="1" class="big_table">
+	<table cellpadding="0" cellspacing="1" class="big_table" width="100%">
 		<tr>
 			<td class="row2" width="150px"><b>Username</b></td>
 			<td class="row1"><input type="text" name="username" value="{USERNAME}"class="bigger"></td>
