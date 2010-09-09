@@ -460,8 +460,8 @@ input.small_btn:hover{
 	text-align: left;
 }
 a.active_state{
- 	width: 27px;
-	height: 24px;
+ 	width: 46px;
+	height: 17px;
 	background: url('images/active.png') top left;
 	display: block;
 	margin: 0px auto;
@@ -473,8 +473,8 @@ a.active_state{
 	
  }
  a.inactive_state{
- 	width: 36px;
-	height: 24px;
+ 	width: 56px;
+	height: 17px;
 	background: url('images/inactive.png') top left;
 	display: block;
 	margin: 0px auto;
@@ -485,8 +485,8 @@ a.active_state{
 	
  }
  a.edit_state{
- 	width: 19px;
-	height: 24px;
+ 	width: 37px;
+	height: 17px;
 	background: url('images/edit.png') top left;
 	display: block;
 	margin: 0px auto;
@@ -498,8 +498,8 @@ a.active_state{
 	
  }
  a.delete_state{
- 	width: 26px;
-	height: 24px;
+ 	width: 43px;
+	height: 17px;
 	background: url('images/delete.png') top left;
 	display: block;
 	margin: 0px auto;
@@ -511,8 +511,8 @@ a.active_state{
 	
  }
  a.logins_state{
- 	width: 29px;
-	height: 24px;
+ 	width: 48px;
+	height: 17px;
 	background: url('images/logins.png') top left;
 	display: block;
 	margin: 0px auto;
@@ -524,8 +524,8 @@ a.active_state{
 	
  }
  a.pass_state{
- 	width: 44px;
-	height: 24px;
+ 	width: 63px;
+	height: 17px;
 	background: url('images/pass.png') top left;
 	display: block;
 	margin: 0px auto;
@@ -535,6 +535,9 @@ a.active_state{
 	background: url('images/pass.png') bottom left;
 	text-decoration:none;
 	
+ }
+ .action_table td{
+ 	padding: 0px;
  }
  /*PHP INFO*/
 .center {text-align: center;}
@@ -635,6 +638,16 @@ input.bigger{width: 100%;}
 	display:none;
 }
 /*END Dijit Tooltip*/
+/* Dojo PieChart*/
+.dojoxLegendNode{
+	padding: 25px;
+	background-color: #ffffff; 
+	height: 300px;
+	width: 200px;
+}
+
+/* END Dojo PieChart*/
+
 
 
 

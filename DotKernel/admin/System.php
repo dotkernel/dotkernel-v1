@@ -110,6 +110,10 @@ class System
 			}
 			$i++;
 		}
+		if(!$data['other']['count'])
+		{
+			unset($data['other']);
+		}
 		return $data;
 	}
 }

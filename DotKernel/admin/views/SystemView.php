@@ -53,9 +53,11 @@ class System_View extends View
 		{
 			$data[] = array('y' => $country['countPercent'], 
 							'text' => $country['name'], 
-							'color' => $color[$i++], 
+							'color' => $color[$i], 
+							'stroke' => $color[$i], 
 							'tooltip' => $country['name'].": ".(string)$country['countPercent']."&#37;"
 							);
+			$i++;
 		}
 		$this->tpl->setVar('PIEDATA', Zend_Json::encode($data));		
 	}

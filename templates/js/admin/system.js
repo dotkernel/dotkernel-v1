@@ -18,18 +18,24 @@ function pieChart(pieData){
         var chartItem = new dc.Chart2D("chartCountryUserLogin");
         chartItem.addPlot("default", {
             type: "Pie",
-            font: "bold 12px Arial,sans-serif",
-            fontColor: 'black',
-            labelOffset: -50,
-            radius: 100,
-        }).addSeries("Pie Chart", pieData);
+            font: "11px Verdana,sans-serif",
+            fontColor: '#787890',
+            labelOffset: -40,
+            radius: 70,
+        }).addSeries("Pie Chart", pieData, {
+            stroke: {
+                color: "blue"
+            },
+            fill: "lightblue"
+        });
         var anim_a = new dc.action2d.MoveSlice(chartItem, "default");
         var anim_b = new dc.action2d.Highlight(chartItem, "default");
         var anim_c = new dc.action2d.Tooltip(chartItem, "default");
         chartItem.render();
         var legendItem = new dojox.charting.widget.Legend({
-            chart: chartItem
-        }, "chartCountryLegend");
+            chart: chartItem,
+			horizontal: false
+			}, "chartCountryLegend");
         
     });
 }
