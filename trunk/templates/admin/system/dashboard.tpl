@@ -20,10 +20,10 @@
  <script type="text/javascript">
  	pieChart({PIEDATA}); 
  </script>
-<fieldset  style="width: 720px;">
+<fieldset style="width: 500px;">
 	<legend>Users Logins By Country</legend>
-	 <div id="chartCountryUserLogin" style="width: 720px; height: 500px;">
-     </div>
-	<div id="chartCountryLegend" style="width: 720px; height: 500px;">		
-	</div>       
+		 <div id="chartCountryUserLogin" style="width: 300px; height: 300px; float: left;">
+	     </div>
+		<div id="chartCountryLegend" >		
+		</div>
 </fieldset>
