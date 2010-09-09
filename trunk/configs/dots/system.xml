@@ -15,6 +15,19 @@
 		<infoMessage>
 			<settingsUpdate>System settings was updated.</settingsUpdate>
 		</infoMessage>
+		<countCountryUserLogin>10</countCountryUserLogin>
+		<colorCharts>
+			<color>#69D2E7</color>
+			<color>#F38630</color>		
+			<color>#D3CE3D</color>	
+			<color>#CC333F</color>		
+			<color>#A7DBD8</color>	
+			<color>#915B2F</color>		
+			<color>#FFC90E</color>	
+			<color>#F597DE</color>
+			<color>#09AB82</color>	
+			<color>#4E431A</color>
+		</colorCharts>
 	</variable>
 	<variable option="frontend">
 	</variable>		

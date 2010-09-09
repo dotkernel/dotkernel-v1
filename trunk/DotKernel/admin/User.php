@@ -238,10 +238,14 @@ class User
 			$select->where('userId = ?', $id);
 		}
 		$select->order('dateLogin DESC');
- 		$paginatorAdapter = new Zend_Paginator_Adapter_DbSelect($select);
-		($page == 1) ? 
-			$select->limit($this->settings->resultsPerPage) : 
-			$select->limit($this->settings->resultsPerPage, ($page-1)*$this->settings->resultsPerPage);
+		$paginatorAdapter = null;
+		if($page > 0)
+		{
+ 			$paginatorAdapter = new Zend_Paginator_Adapter_DbSelect($select);
+			($page == 1) ? 
+				$select->limit($this->settings->resultsPerPage) : 
+				$select->limit($this->settings->resultsPerPage, ($page-1)*$this->settings->resultsPerPage);
+		}
 							
 		$data = $this->db->fetchAll($select);
 		return array('data'=> $data,'paginatorAdapter'=> $paginatorAdapter);
