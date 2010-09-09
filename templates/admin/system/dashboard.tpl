@@ -15,3 +15,15 @@
 		</tr>
 	</table>
 </fieldset>
+<script type="text/javascript" src="http://localhost/DotKernel/externals/dojo/dojo.xd.js"></script>
+<script type="text/javascript" src="http://localhost/DotKernel/templates/js/admin/system.js"></script>
+ <script type="text/javascript">
+ 	pieChart({PIEDATA}); 
+ </script>
+<fieldset  style="width: 720px;">
+	<legend>Users Logins By Country</legend>
+	 <div id="chartCountryUserLogin" style="width: 720px; height: 500px;">
+     </div>
+	<div id="chartCountryLegend">		
+	</div>       
+</fieldset>

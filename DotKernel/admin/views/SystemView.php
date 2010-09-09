@@ -33,18 +33,31 @@ class System_View extends View
 	 * Display dashboard
 	 * @access public
 	 * @param string $templateFile
+	 * @param string $mysqlVersion
+	 * @param array $userCountry
 	 * @return void
 	 */
-	public function dashboard($templateFile)
+	public function dashboard($templateFile, $mysqlVersion, $userCountry)
 	{
 		$this->tpl->setFile('tpl_main', 'system/' . $templateFile . '.tpl');
 		// system overview
-		$db = Zend_Registry::get('database');
-		$t=$db->fetchRow('select version() as ve');
-		$this->tpl->setVar('MYSQL',$t['ve']);
+		$this->tpl->setVar('MYSQL',$mysqlVersion);
 		$this->tpl->setVar('PHP',phpversion());
 		$this->tpl->setVar('PHPAPI',php_sapi_name());
 		$this->tpl->setVar('ZFVERSION', Zend_Version::VERSION);
+		// pie chart
+		$option = Zend_Registry::get('option');
+		$color = $option->colorCharts->color->toArray();
+		$i = 0;
+		foreach ($userCountry as $code => $country)
+		{
+			$data[] = array('y' => $country['countPercent'], 
+							'text' => $country['name'], 
+							'color' => $color[$i++], 
+							'tooltip' => $country['name'].": ".(string)$country['countPercent']."&#37;"
+							);
+		}
+		$this->tpl->setVar('PIEDATA', Zend_Json::encode($data));		
 	}
 	/**
 	 * Display settings

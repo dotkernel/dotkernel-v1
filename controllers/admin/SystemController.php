@@ -22,7 +22,11 @@ $pageTitle = $option->pageTitle->action->{$requestAction};
 switch ($requestAction)
 {
 	case 'dashboard':		
-		$systemView->dashboard('dashboard');
+		$userModel = new User(); 
+		$userLogins = $userModel->getLogins(0,0);
+		$userCountry = $systemModel->getCountryUserLogin($userLogins['data']);
+		$mysqlVersion = $systemModel->getMysqlVersion();
+		$systemView->dashboard('dashboard', $mysqlVersion, $userCountry);
 	break;
 	case 'settings':
 		// list settings values
