@@ -225,6 +225,8 @@ class View extends Dot_Template
 	 */
 	protected function paginator($adapter, $currentPage = 1)
 	{		
+		// get route again here, because ajax may have change it
+		$route = Zend_Registry::get('route');
 		$paginator = new Zend_Paginator($adapter);
 		$paginator->setItemCountPerPage($this->settings->resultsPerPage);
 		$paginator->setCurrentPageNumber($currentPage);
@@ -238,14 +240,13 @@ class View extends Dot_Template
 		$this->setBlock('page_file', 'current_page', 'current_row');
 		$this->setBlock('page_file', 'other_page', 'other_row');		
 		$this->setBlock('page_file', 'pages', 'pages_row');
-				
-		$urlArray = $this->route;
-		if(array_key_exists('page',$urlArray))
+	
+		if(array_key_exists('page',$route))
 		{
-			unset($urlArray['page']);
+			unset($route['page']);
 		}
 		$seo = new Dot_Seo();
-		$link = $seo->createCanonicalUrl($urlArray).'page/';
+		$link = $seo->createCanonicalUrl($route).'page/';
 		
 		if ($page->first != $page->current)
 		{

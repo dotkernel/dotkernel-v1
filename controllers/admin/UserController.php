@@ -142,7 +142,9 @@ switch ($requestAction)
 			$session->message['type'] = 'error';
 		}
 		$users = $userModel->getUserList($page);
-		$session->useAjaxView = true;		
+		$session->useAjaxView = true;	
+		$route['action'] = 'list';
+		$registry->route = $route;
 		$userView->listUser('list', $users, $page, true);
 	break;
 	case 'delete':
