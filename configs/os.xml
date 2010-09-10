@@ -60,6 +60,9 @@
 				<os>Linux</os>
 			</name>
 			<name type="desktop">
+				<os>Macintosh</os>
+			</name>
+			<name type="desktop">
 				<os>Mandriva</os>
 			</name>
 			<name type="desktop">
