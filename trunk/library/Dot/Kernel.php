@@ -29,7 +29,7 @@ class Dot_Kernel
      * Dot Kernel version identification
      * @var string 
      */
-    const VERSION = '1.2.2';    
+    const VERSION = '1.2.3';    
 	/**
 	 * Constructor
 	 * @access public
@@ -76,22 +76,68 @@ class Dot_Kernel
   				 -->';
         exit;
     }
+	/**
+	 * Check if IP is valid. Return FALSE | 'private' | 'public'
+	 * FALSE - $ip is not a valid IP address
+	 * private - $ip is a private network IP address
+	 * public - $ip is a public network IP address
+	 * @access private 
+	 * @param string $ip
+	 * @return mixt [FALSE | 'private' | 'public']
+	 */
+	private function validIp($ip)
+	{
+		$privateIpRange = array(
+					array('10.0.0.0','10.255.255.255'),
+					array('172.16.0.0','172.31.255.255'),
+					array('192.168.0.0','192.168.255.255'),
+					'127.0.0.1'
+					);
+		$validatorIp = new Zend_Validate_Ip();
+		$currentIp = (float)sprintf("%u",ip2long($ip)); 
+		if($validatorIp->isValid($ip))
+		{			
+			foreach ($privateIpRange as $ipRange)
+			{
+				if(is_array($ipRange))
+				{					
+					$shortRangeIp = (float)sprintf("%u",ip2long($ipRange[0]));
+					$longRangeIp = (float)sprintf("%u",ip2long($ipRange[1]));
+					if($currentIp >= $shortRangeIp && $currentIp <= $longRangeIp)
+					{	// it is a private IP
+						return 'private';
+					}
+				}
+				elseif($ip == $ipRange)
+				{	// it is a private IP
+					return 'private';
+				}				
+			}
+		}
+		else
+		{	// Zend_Validate_Ip rejected it
+			return FALSE;
+		}
+		return 'public';
+	}
     /**
-     * Return the user Ip , whatever the server are set
+     * Return the user Ip, even if it is behind a proxy
      * @access public
      * @static
      * @return string
      */
     public static function getUserIp()
     {
-        if (isSet($_SERVER))
-        {
-            if (isSet($_SERVER['HTTP_X_FORWARDED_FOR']))
+    	if (isset($_SERVER))
+        {    
+            if (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $this->validIp($_SERVER['HTTP_X_FORWARDED_FOR']) == 'public')
             {
+            	// check if HTTP_X_FORWARDED_FOR is public network IP	
                 $realIp = $_SERVER['HTTP_X_FORWARDED_FOR'];
-            }
-            elseif (isSet($_SERVER['HTTP_CLIENT_IP']))
-            {
+            }			
+            elseif (isset($_SERVER['HTTP_CLIENT_IP']) && $this->validIp($_SERVER['HTTP_CLIENT_IP']) == 'public')
+            {	
+            	// check if HTTP_CLIENT_IP is public network IP	
                 $realIp = $_SERVER['HTTP_CLIENT_IP'];
             }
             else
@@ -101,12 +147,14 @@ class Dot_Kernel
         }
         else
         {
-            if (getenv('HTTP_X_FORWARDED_FOR'))
+            if (getenv('HTTP_X_FORWARDED_FOR') && $this->validIp(getenv('HTTP_X_FORWARDED_FOR')) == 'public')
             {
+            	// check if HTTP_X_FORWARDED_FOR is public network IP	
                 $realIp = getenv('HTTP_X_FORWARDED_FOR');
             }
-            elseif (getenv('HTTP_CLIENT_IP'))
+            elseif (getenv('HTTP_CLIENT_IP') && $this->validIp(getenv('HTTP_CLIENT_IP')) == 'public')
             {
+            	// check if HTTP_CLIENT_IP is public network IP	
                 $realIp = getenv('HTTP_CLIENT_IP');
             }
             else
