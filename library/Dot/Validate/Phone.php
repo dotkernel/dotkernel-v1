@@ -68,7 +68,6 @@ class Dot_Validate_Phone extends Dot_Validate {
 		{
 			return FALSE;
 		}
-		//$this->options['']
 		$phoneArea = substr($phone, $this->options['areaPositionStart'], $this->options['areaLength']);
 		$phonePrefix = substr($phone, $this->options['prefixPositionStart'], $this->options['prefixLength']);
 		if ($phoneLength > $this->options['phoneLengthMin']) 
