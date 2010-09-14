@@ -48,6 +48,7 @@ class System_View extends View
 		// pie chart
 		$option = Zend_Registry::get('option');
 		$color = $option->colorCharts->color->toArray();
+		$data = array();
 		$i = 0;
 		foreach ($userCountry as $code => $country)
 		{

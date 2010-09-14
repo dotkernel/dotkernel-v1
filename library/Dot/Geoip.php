@@ -22,7 +22,6 @@ class Dot_Geoip
 {
 	/**
 	 * Constructor
-	 * Return an array with : short name, like 'us' and long name, like 'United States'
 	 * @access public
 	 * @return dot_Geoip
 	 */
