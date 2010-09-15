@@ -81,11 +81,12 @@ class Dot_Kernel
 	 * FALSE - $ip is not a valid IP address
 	 * private - $ip is a private network IP address
 	 * public - $ip is a public network IP address
-	 * @access private 
+	 * @access public
+	 * @static 
 	 * @param string $ip
 	 * @return mixt [FALSE | 'private' | 'public']
 	 */
-	private function validIp($ip)
+	 public static function validIp($ip)
 	{
 		$privateIpRange = array(
 					array('10.0.0.0','10.255.255.255'),
@@ -130,12 +131,12 @@ class Dot_Kernel
     {
     	if (isset($_SERVER))
         {    
-            if (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $this->validIp($_SERVER['HTTP_X_FORWARDED_FOR']) == 'public')
+            if (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && self::validIp($_SERVER['HTTP_X_FORWARDED_FOR']) == 'public')
             {
             	// check if HTTP_X_FORWARDED_FOR is public network IP	
                 $realIp = $_SERVER['HTTP_X_FORWARDED_FOR'];
             }			
-            elseif (isset($_SERVER['HTTP_CLIENT_IP']) && $this->validIp($_SERVER['HTTP_CLIENT_IP']) == 'public')
+            elseif (isset($_SERVER['HTTP_CLIENT_IP']) && self::validIp($_SERVER['HTTP_CLIENT_IP']) == 'public')
             {	
             	// check if HTTP_CLIENT_IP is public network IP	
                 $realIp = $_SERVER['HTTP_CLIENT_IP'];
@@ -147,12 +148,12 @@ class Dot_Kernel
         }
         else
         {
-            if (getenv('HTTP_X_FORWARDED_FOR') && $this->validIp(getenv('HTTP_X_FORWARDED_FOR')) == 'public')
+            if (getenv('HTTP_X_FORWARDED_FOR') && self::validIp(getenv('HTTP_X_FORWARDED_FOR')) == 'public')
             {
             	// check if HTTP_X_FORWARDED_FOR is public network IP	
                 $realIp = getenv('HTTP_X_FORWARDED_FOR');
             }
-            elseif (getenv('HTTP_CLIENT_IP') && $this->validIp(getenv('HTTP_CLIENT_IP')) == 'public')
+            elseif (getenv('HTTP_CLIENT_IP') && self::validIp(getenv('HTTP_CLIENT_IP')) == 'public')
             {
             	// check if HTTP_CLIENT_IP is public network IP	
                 $realIp = getenv('HTTP_CLIENT_IP');
