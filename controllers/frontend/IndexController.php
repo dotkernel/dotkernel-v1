@@ -22,6 +22,9 @@ $requestController = isset($requestController) && $requestController !='Index' ?
 $defaultAction = $resource->route->action->$requestModule->$requestController;
 $requestAction     = isset($requestAction) && $requestAction !=''         ? $requestAction     : $defaultAction;
 
+$route['controller'] = $requestController;
+$route['action'] = $requestAction;
+$registry->route = $route;
 // start the template object, empty for the moment 
 require(DOTKERNEL_PATH . '/' . $requestModule . '/' . 'View.php');	
 $tpl = View::getInstance(TEMPLATES_PATH . '/' . $requestModule);
