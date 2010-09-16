@@ -121,6 +121,8 @@ class Dot_Settings
 	}
 	/**
 	 * Get the option variables from an xml file for the current dots
+	 * Used recursively, first take default.xml values. This values are 
+	 * overwritten by the xml of the current dots
 	 * @param string $requestModule
 	 * @param string $requestController
 	 * @return Zend_Config
@@ -128,6 +130,10 @@ class Dot_Settings
 	public static function getOptionVariables($requestModule,$requestController)
 	{		
 		$option = array();	
+		if('default' != $requestController)
+		{ 
+			$option = self::getOptionVariables($requestModule,'default')->toArray();
+		}
 		$dirOption = CONFIGURATION_PATH.'/dots/';
 		$fileOption = strtolower($requestController).'.xml';
 		$validFile = new Zend_Validate_File_Exists();
