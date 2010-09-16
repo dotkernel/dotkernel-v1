@@ -169,7 +169,7 @@ class View extends Dot_Template
 					}
 					foreach ($val as $k => $v) 
 					{	
-						$this->setVar('TOP_MENU_'.strtoupper($k), is_string($v) ? $v : '');
+						$this->setVar('TOP_MENU_'.strtoupper($k), is_string($v) ? trim($v) : '');
 					}	
 					if (1 == $val->external) 
 					{
@@ -206,7 +206,7 @@ class View extends Dot_Template
 									$this->setVar('TOP_SUB_MENU_ITEM_SEL', '');												
 									foreach ($v2 as $k => $v)
 									{
-										$this->setVar('TOP_SUB_MENU_'.strtoupper($k), is_string($v) ? $v : '');
+										$this->setVar('TOP_SUB_MENU_'.strtoupper($k), is_string(trim($v)) ? $v : '');
 									}
 									if (1 == $v2->external) 
 									{
