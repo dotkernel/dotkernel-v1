@@ -22,6 +22,9 @@ $requestController = isset($requestController) && $requestController !='Index' ?
 $defaultAction = $resource->route->action->$requestModule->$requestController;
 $requestAction     = isset($requestAction) && $requestAction !=''         ? $requestAction     : $defaultAction;
 
+$route['controller'] = $requestController;
+$route['action'] = $requestAction;
+$registry->route = $route;
 // check admin permission
 if($requestAction != 'login' && $requestAction != 'authorize')
 {
