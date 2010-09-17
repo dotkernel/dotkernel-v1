@@ -15,11 +15,16 @@
 				<link>system/dashboard/</link>
 				<description>Dashboard admin</description>
 			</subItem>
-			<subItem>
-				<title>Settings</title>
-				<link>system/settings/</link>
-				<description>Admin settings</description>
-			</subItem>
+      <subItem>
+        <title>Settings</title>
+        <link>system/settings/</link>
+        <description>Admin settings</description>
+      </subItem>
+      <subItem>
+        <title>Email Transporter</title>
+        <link>system/transporter-list/</link>
+        <description>Admin settings</description>
+      </subItem>
 		</subItems>
 	</item>
 	<item>

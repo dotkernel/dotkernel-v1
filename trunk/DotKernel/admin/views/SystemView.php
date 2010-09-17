@@ -148,4 +148,77 @@ class System_View extends View
 		$phpBody = preg_replace('#<hr />#', '', $phpBody);
 		$this->tpl->setVar("PHPINFO", $phpBody);
 	}
+	/**
+	 * List the email transporter
+	 * @param string $templateFile
+	 * @param array $list
+	 * @param int $page
+	 * @param bool $ajax [optional] - Using ajax, parse only the list content
+	 * @return void
+	 */
+	public function listEmailTransporter($templateFile, $list, $page, $ajax=false)
+	{
+		$this->tpl->setFile('tpl_main', 'system/' . $templateFile . '.tpl');
+		$this->tpl->setBlock('tpl_main', 'list', 'list_block');
+		$this->tpl->paginator($list['paginatorAdapter'],$page);
+		$this->tpl->setVar('PAGE', $page);
+		$this->tpl->setVar('ACTIVE_URL', '/admin/system/transporter-activate');
+		$this->tpl->setVar('ACTIVE_1', 'checked');
+		$this->tpl->setVar('SSL_TLS', 'checked');		
+		$this->tpl->displayMessage($ajax);
+				
+		foreach ($list["data"] as $k => $v)
+		{
+		  $this->tpl->setVar('BG', $k%2+1);
+		  $this->tpl->setVar('ID', $v["id"]);
+		  $this->tpl->setVar('USER', $v['user']);
+		  $this->tpl->setVar('SERVER', $v['server']);
+		  $this->tpl->setVar('PORT', $v['port']);
+		  $this->tpl->setVar('SSL', $v['ssl']);
+		  $this->tpl->setVar('CAPACITY', $v['capacity']);
+		  $this->tpl->setVar('COUNTER', $v['counter']);
+		  $this->tpl->setVar('DATE_CREATED', Dot_Kernel::timeFormat($v['date']));
+		  $this->tpl->setVar('ACTIVE_IMG', $v['isActive'] == 1 ? 'active' : 'inactive');
+		  $this->tpl->setVar('ISACTIVE', $v['isActive']*(-1)+1);
+		  $this->tpl->parse('list_block', 'list', true);
+		}
+		if($ajax)
+		{
+		  $this->tpl->pparse('AJAX', 'tpl_main');
+		  exit;
+		}
+	}
+	/**
+	 * Display email transporter details. It is used for update actions
+	 * @param object $templateFile
+	 * @param object $data [optional]
+	 * @return void
+	 */
+	public function details($templateFile, $data=array())
+	{
+		$this->tpl->setFile('tpl_main', 'system/' . $templateFile . '.tpl');
+		$this->tpl->setVar('ACTIVE_1', 'checked');
+		$this->tpl->setVar('SSL_TLS', 'checked'); $this->tpl->setVar('SSL_SSL', '');
+		foreach ($data as $k=>$v)
+		{   
+		  $this->tpl->setVar(strtoupper($k), $v);     
+		  if('isActive' == $k)
+		  {
+		    $this->tpl->setVar('ACTIVE_'.$v, 'checked');
+		    $this->tpl->setVar('ACTIVE_'.$v*(-1)+1, '');
+		  }
+		  if('ssl' == $k)
+		  {
+		    if ($v == 'ssl')
+		    {
+		      $this->tpl->setVar('SSL_SSL', 'checked');
+		      $this->tpl->setVar('SSL_TLS', '');
+		    }
+			else{
+		      $this->tpl->setVar('SSL_TLS', 'checked');
+		      $this->tpl->setVar('SSL_SSL', '');
+		    }
+		  }
+		}
+	} 
 }

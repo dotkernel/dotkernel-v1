@@ -289,11 +289,12 @@ class View extends Dot_Template
 	/**
 	 * Display message - error, warning, info
 	 * @access public
+	 * @param bool $ajax [optional] - Using ajax, parse only the list content
 	 * @return void
 	 */
-	public function displayMessage()
+	public function displayMessage($ajax = FALSE)
 	{
-		$session = Zend_Registry::get('session');		
+		$session = Zend_Registry::get('session');	
 		if(isset($session->message))
 		{
 			$this->setFile('tpl_msg', 'blocks/message.tpl');
@@ -312,8 +313,20 @@ class View extends Dot_Template
 				$this->parse('msg_array_row', '');
 				$this->setVar('MESSAGE_STRING', $session->message['txt']);
 			}
+			$ajax == TRUE ? 
+			$this->parse('AJAX_MESSAGE_BLOCK', 'tpl_msg'):
 			$this->parse('MESSAGE_BLOCK', 'tpl_msg');
 			unset($session->message);
 		}		
+	}
+	/**
+	 * Reset the Template root - from where the tpl files should be taken
+	 * @access public
+	 * @param string $root
+	 * @return void
+	 */	
+	public function resetRoot($root)
+	{
+		$this->setRoot($root.'/admin');
 	}
 }
