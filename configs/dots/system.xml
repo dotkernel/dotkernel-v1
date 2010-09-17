@@ -13,8 +13,16 @@
 			</action>
 		</pageTitle>
 		<infoMessage>
-			<settingsUpdate>System settings was updated.</settingsUpdate>
+			<settingsUpdate>System settings have been updated.</settingsUpdate>
+			<transporterDelete>Email transporter has been deleted.</transporterDelete>
+			<noTransporterDelete>No email transporter was deleted.</noTransporterDelete>
+			<transporterUpdate>Email transporter has been updated.</transporterUpdate> 
+			<transporterAdd>Email transporter has been added.</transporterAdd> 
 		</infoMessage>
+		<errorMessage>
+		  <invalidPort>The port must be a number</invalidPort>
+		  <invalidCapacity>The capacity must be a number</invalidCapacity>
+		</errorMessage>
 		<countCountryUserLogin>10</countCountryUserLogin>
 		<colorCharts>
 			<color>#69D2E7</color>

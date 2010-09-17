@@ -53,5 +53,94 @@ switch ($requestAction)
 	case 'phpinfo':
 		// display phpinfo()
 		$systemView->showPHPInfo('phpinfo');
-	break;	
+	break;
+  case 'transporter-list':
+    $page = (isset($request['page']) && $request['page'] > 0) ? $request['page'] : 1;
+    $transporters = $systemModel->getEmailTransporterList($page);    
+    $systemView->listEmailTransporter('transporter-list', $transporters, $page);   
+  break;
+  case 'transporter-activate':
+    $id = (isset($_POST['id'])) ? (int)$_POST['id'] : 0;
+    $isActive = (isset($_POST['isActive'])) ? $_POST['isActive'] : 0;
+    $page = (isset($_POST['page'])) ? (int)$_POST['page'] : 1;
+    $systemModel->activateEmailTransporter($id, $isActive);    
+
+    $transporters = $systemModel->getEmailTransporterList($page);
+    $session->useAjaxView = true; 
+    $route['action'] = 'transporter-list';
+    $registry->route = $route;
+    $systemView->listEmailTransporter('transporter-list', $transporters, $page, true);
+  break;
+  case 'transporter-delete':
+    if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
+    { 
+      if (1 == $_POST['delete'])
+      {
+        $systemModel->deleteEmailTransporter($request['id']);
+        $session->message['txt'] = $option->infoMessage->transporterDelete;
+        $session->message['type'] = 'info';
+      }
+      else
+      {
+        $session->message['txt'] = $option->infoMessage->noTransporterDelete;
+        $session->message['type'] = 'info';
+      }
+	   header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/transporter-list/');
+       exit;   
+    }
+    $data = $systemModel->getEmailTransporterBy('id', $request['id']);
+    // delete page confirmation
+    $systemView->details('transporter-delete', $data);  
+  break;
+  case 'transporter-update':
+    // display form and update user
+    $error = array();
+    if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
+    {       
+      $data=$_POST;
+      unset($data["send"]);
+      
+      $error=$systemModel->validateEmailTransporter($data);
+
+      if(empty($error))
+      {
+        // no error - then update       
+        $data["id"]=$request["id"];        
+        $systemModel->updateEmailTransporter($data);
+        $session->message['txt'] = $option->infoMessage->transporterUpdate;
+        $session->message['type'] = 'info';
+        header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/transporter-list/');
+        exit;       
+      }
+      else
+      {
+        $session->message['txt'] = $error;
+        $session->message['type'] = 'error';
+      }
+    }
+    $data = $systemModel->getEmailTransporterBy('id', $request['id']);
+    $systemView->details('transporter-update',$data); 
+  break;
+  case 'transporter-add':
+    $page = $_POST["page"];
+    unset($_POST["page"]);
+    $data=$_POST;
+    unset($data["send"]);
+
+    $error=$systemModel->validateEmailTransporter($data);
+    
+    if (empty($error))
+    {
+      $systemModel->addEmailTransporter($data);
+	  $session->message['txt'] = $option->infoMessage->transporterAdd;
+				$session->message['type'] = 'info';
+    }
+
+    $transporters = $systemModel->getEmailTransporterList($page);
+    $session->useAjaxView = true; 
+    $route['action'] = 'transporter-list';
+    $registry->route = $route;
+    $systemView->listEmailTransporter('transporter-list', $transporters, $page, true, $error);
+  break;
+
 }

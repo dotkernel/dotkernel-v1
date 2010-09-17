@@ -61,7 +61,8 @@ class User_View extends View
 		}
 		if($ajax)
 		{
-			$this->tpl->pparse('AJAX', 'tpl_main');exit;
+			$this->tpl->pparse('AJAX', 'tpl_main');
+			exit;
 		}
 	}
 	/**

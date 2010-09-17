@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `emailTransporter` (
   `port` int(5) NOT NULL DEFAULT '465',
   `ssl` enum('tls','ssl') NOT NULL DEFAULT 'tls',
   `capacity` int(11) NOT NULL DEFAULT '2000',
-  `date` date NOT NULL DEFAULT '0000-00-00',
+  `date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `counter` int(11) NOT NULL DEFAULT '0',
   `isActive` enum('1','0') NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
