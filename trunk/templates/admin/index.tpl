@@ -11,7 +11,7 @@
 <body>
 	<div class="wrapper">
 		<div class="header clearfix">
-			<a href="{SITE_URL}/admin/" id="logo">ADMIN PANEL</a>
+			<a href="{SITE_URL}/admin/" id="logo">{SITE_NAME}</a>
 			<div class="top_user_menu clearfix">{INFO_BAR}</div>
 			{MENU_1}
 		</div>
@@ -20,6 +20,8 @@
 				{MESSAGE_BLOCK}
 					{MAIN_CONTENT}
 		</div>
+	</div>
+	<div class="footer">
 		<div class="debugger">
 			{DEBUGGER}
 		</div>

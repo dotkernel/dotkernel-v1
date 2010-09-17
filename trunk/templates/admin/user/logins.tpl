@@ -26,7 +26,7 @@
 			<td class="row{BG}" style="width: 150px;">				
 				<a href="{WHOISURL}/{IP}" target="_blank">{IP}</a></td>
 			<td class="row{BG}" style="text-align: center; width: 90px;">
-				<img src="{IMAGES_SHORT_URL}/flags/{COUNTRYIMAGE}.png"  border="0" id="ipc{ID}" align="center"/>
+				<img src="{IMAGES_SHORT_URL}/flags/{COUNTRYIMAGE}.png"  border="0" id="ipc{ID}" align="center" style="margin-top:8px;"/>
 			<script type="text/javascript">
 				 dojo.addOnLoad(function() {
 					  new dijit.Tooltip({
@@ -36,7 +36,7 @@
   				 });
 </script></td>
 			<td class="row{BG}" style="text-align: center; width: 90px;">
-				<img src="{IMAGES_SHORT_URL}/browsers/{BROWSERIMAGE}.png" border="0" id="uab{ID}">
+				<img src="{IMAGES_SHORT_URL}/browsers/{BROWSERIMAGE}.png" border="0" id="uab{ID}" style="margin-top:8px;">
 				<script type="text/javascript">
 				 dojo.addOnLoad(function() {
 					  new dijit.Tooltip({
@@ -46,7 +46,7 @@
  				 });
 </script></td>
 			<td class="row{BG}" style="text-align: center; width: 40px;">
-				<img src="{IMAGES_SHORT_URL}/os/{OSIMAGE}.png" border="0" id="os{ID}">
+				<img src="{IMAGES_SHORT_URL}/os/{OSIMAGE}.png" border="0" id="os{ID}" style="margin-top:8px;">
 				<script type="text/javascript">
 				 dojo.addOnLoad(function() {
 					  new dijit.Tooltip({
