@@ -2,7 +2,7 @@
 <legend>List Settings Variables</legend>
 <form method="post" name="configs" action="{SITE_URL}/admin/system/settings-update">
 <input type="hidden" name='send' value='on'>
-<table cellpadding="0" cellspacing="1" class="big_table" width="100%">
+<table cellpadding="0" cellspacing="0" class="big_table" width="100%">
 	<tr>
 		<td class='table_subhead' width='33%'><span class="table_subheading">Name</span></td>
 		<td class='table_subhead' width='34%'><span class="table_subheading">Value</span></td>

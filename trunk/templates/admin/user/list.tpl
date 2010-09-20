@@ -4,7 +4,7 @@
 	{PAGINATION}
 	<fieldset style="width: 100%">
 	<legend>List Users</legend>
-	<table cellpadding="0" cellspacing="1" class="big_table" width="100%">
+	<table cellpadding="0" cellspacing="0" class="big_table" width="100%">
 		<tr>
 			<td class="table_subhead"><span>#</span></td>
 			<td class="table_subhead"><span>Username</span></td>
