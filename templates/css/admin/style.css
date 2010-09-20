@@ -74,31 +74,26 @@ body{
 	height: 100%;
 }
 h1{
-	font-size:24px;
+	font-size:22px;
 	font-weight: bold;
     padding:10px 0px 5px 0px;
     margin: 10px 0px 5px 0px;
     color:#555555;
-	font-family: Arial,sans-serif;
+	font-family: trebuchet ms, Arial,sans-serif;
 }
 h2{
     padding:10px 0px 5px 0px;
     margin: 10px 0px 5px 0px;
     font-size:18px;
     color: #555555;
-	font-family: Arial,sans-serif;
+	font-family: trebuchet ms, Arial,sans-serif;
 }
 h3{
     padding:10px 0px 5px 0px;
     margin: 10px 0px 5px 0px;
     font-size:16px;
     color:#555555;
-	font-family: Arial,sans-serif;
-}
-h4{
-    font-size:12px;
-    color:#555555;
-	font-family: Arial,sans-serif;
+	font-family: trebuchet ms, Arial,sans-serif;
 }
 a{
     color:#1A7EB5;
@@ -154,7 +149,7 @@ input[type="checkbox"], input[type="radio"]{
   }
 a#logo{
 	font-size:24px;
-	font-family: Arial,sans-serif;
+	font-family: trebuchet ms, Arial,sans-serif;
     color: #e6edf0;
     text-decoration: none;
 }

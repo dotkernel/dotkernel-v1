@@ -1,15 +1,15 @@
 <link rel="stylesheet" href ="{SITE_URL}/templates/css/debugger.css" type="text/css" >
 </script>
 <div class="index_debugger clearfix">
-	<!-- BEGIN dot_version -->
-	<div class="version_zf"><img src="{SITE_URL}/images/debugbar/dotkernel.png" class="debugger_images"><b>{DOT_VERSION}</b></div>
-	<!-- END dot_version -->
-	<!-- BEGIN zf_version -->
-	<div class="version_zf"><img src="{SITE_URL}/images/debugbar/copyright.gif" class="debugger_images"><b>{ZF_VERSION}</b></div>
-	<!-- END zf_version -->
 	<!-- BEGIN php_version -->
 	<div class="version_php"><img src="{SITE_URL}/images/debugbar/php.png" class="debugger_images"><b>{PHP_VERSION}</b></div>
 	<!-- END php_version -->
+	<!-- BEGIN zf_version -->
+	<div class="version_zf"><img src="{SITE_URL}/images/debugbar/copyright.gif" class="debugger_images"><b>{ZF_VERSION}</b></div>
+	<!-- END zf_version -->
+	<!-- BEGIN dot_version -->
+	<div class="version_zf"><img src="{SITE_URL}/images/debugbar/dotkernel.png" class="debugger_images"><b>{DOT_VERSION}</b></div>
+	<!-- END dot_version -->
 	<!-- BEGIN total_time -->
 	<div class="total_time"><img src="{SITE_URL}/images/debugbar/time.png" class="debugger_images"><b><span class="">Page generated in:</span> {TOTAL_GENERAL_TIME} ms</b>  </div>
 	<!-- END total_time -->

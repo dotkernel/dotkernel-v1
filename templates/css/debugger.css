@@ -31,7 +31,6 @@
 	background-color: #E2E2E2;
 }
 .index_debugger{
-	width: 980px;
 	border: 0px;
 	font-size: 11px;
 }
@@ -84,15 +83,7 @@
 }
 
 .details_debugger_db{
-	height: 21px;
-	line-height: 21px;
-	float: left;
-	margin-right: 3px;
 	cursor: pointer;
-	background-color: #ffffff;
-	border: 1px solid #CFCFCF;
-	width: 260px;
-	padding: 6px 4px 6px 4px;
 }
 
 .debugger_db{
@@ -106,47 +97,15 @@
 	line-height: 21px;
 }
 
-.version_zf{
-	float: left;
-	margin-right: 3px;
-	background-color: #ffffff;
-	border: 1px solid #CFCFCF;
-	width: 80px;
-	padding: 6px 4px 6px 4px;
-	height: 21px;
+.version_zf, .version_php{
+	float: right;
+	margin-left: 15px;
 	line-height: 21px;
 }
 
-.version_php{
+.total_time, .memory_usage, .debugger_db, .details_debugger_db{
 	float: left;
-	margin-right: 3px;
-	background-color: #ffffff;
-	border: 1px solid #CFCFCF;
-	width: 95px;
-	padding: 6px 4px 6px 4px;
-	height: 21px;
-	line-height: 21px;
-}
-
-.total_time{
-	float: left;
-	margin-right: 3px;
-	background-color: #ffffff;
-	border: 1px solid #CFCFCF;
-	width: 205px;
-	padding: 6px 4px 6px 4px;
-	height: 21px;
-	line-height: 21px;
-}
-
-.memory_usage{
-	float: left;
-	margin-right: 3px;
-	background-color: #ffffff;
-	border: 1px solid #CFCFCF;
-	width: 180px;
-	padding: 6px 4px 6px 4px;
-	height: 21px;
+	margin-right: 15px;
 	line-height: 21px;
 }
 
