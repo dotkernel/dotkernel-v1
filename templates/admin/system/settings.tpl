@@ -10,7 +10,7 @@
 	</tr>
 	<!-- BEGIN textarea -->
 	<tr>
-		<td class='row2' valign="top"><h4>{NAME}</h4>{EXPLANATION}</td>
+		<td class='row2' valign="top"><b>{NAME}</b><br />{EXPLANATION}</td>
 		<td class='row1'><textarea name="{VARIABLE}" rows="{NR_ROWS}" cols="50">{CURRENT_VALUE}</textarea></td>
 		<td class='row1' valign="top">{DEFAULT}</td>
 	</tr>
@@ -18,7 +18,7 @@
 	<!-- END textarea -->
 	<!-- BEGIN option -->
 	<tr>
-		<td class='row2' valign="top"><h4>{NAME}</h4>{EXPLANATION}</td>
+		<td class='row2' valign="top"><b>{NAME}</b><br />{EXPLANATION}</td>
 		<td class='row1'>
 			<select name="{VARIABLE}" style='min-width: 280px;'>
 				<!-- BEGIN options -->
@@ -31,7 +31,7 @@
 	<!-- END option -->
 	<!-- BEGIN radio -->
 	<tr>
-		<td class='row2'><h4>{NAME}</h4>{EXPLANATION}</td>
+		<td class='row2'><b>{NAME}</b><br />{EXPLANATION}</td>
 		<td class='row1' valign="middle">
 			<!-- BEGIN radios -->
 			<input type="radio"  style="height: auto;" id="{VARIABLE}_{POSIBLE_VALUE}" name="{VARIABLE}" value="{POSIBLE_VALUE}" {CHECKED_OPTION}/><label for="{VARIABLE}_{POSIBLE_VALUE}">{POSIBLE_VALUE_TXT}</label>&nbsp;

@@ -82,7 +82,8 @@ $tpl->displayMessage();
 $tpl->parse('MAIN_CONTENT', 'tpl_main');
 
 // show debugbar 
-if(TRUE == $config->settings->admin->debugbar)
+if(TRUE == $config->settings->admin->debugbar && 
+	($requestModule!= 'admin' && $requestController!='login'))
 {
 	$debug = new Dot_Debug($db, $tpl);
 	$debug->startTimer = $startTime;
