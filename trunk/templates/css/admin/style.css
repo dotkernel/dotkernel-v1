@@ -324,7 +324,9 @@ a#logo{
 	color: #ffffff;
 }
 .big_table{
-    border: 1px solid #c9d1d5;
+    border-left: 1px solid #c9d1d5;
+    border-top: 1px solid #c9d1d5;
+    border-bottom: 1px solid #c9d1d5;
     margin: 5px 0px 0px 0px;
     color:#242321;
     background-color: #e2ecf0;
@@ -346,17 +348,17 @@ a#logo{
     font-weight:bold;
     text-transform:uppercase;
     border-top: 1px solid #ffffff;
-    border-right: 1px solid #dae2e6;
+    border-right: 1px solid #c9d1d5;
 	border-bottom: 1px solid #c9d1d5;
 	font-family: Arial, sans-serif;
 }
 .row1{
     background-color: #FFFFFF;
-	border-right: 1px solid #dae2e6;
+	border-right: 1px solid #c9d1d5;
 }
 .row2{
     background-color: #eaf1f5;
-	border-right: 1px solid #dae2e6;
+	border-right: 1px solid #c9d1d5;
 }
 input.small_btn{
 	margin: 0px;
