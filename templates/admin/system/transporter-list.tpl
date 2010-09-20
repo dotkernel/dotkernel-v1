@@ -9,7 +9,7 @@
 	    <td style="padding-right:20px;">
       	<fieldset style="width: 100%">
       	<legend>List Users</legend>
-      	<table cellpadding="0" cellspacing="1" class="big_table" width="100%">
+      	<table cellpadding="0" cellspacing="0" class="big_table" width="100%">
       		<tr>
       			<td class="table_subhead"><span>#</span></td>
       			<td class="table_subhead"><span>User</span></td>
@@ -50,7 +50,7 @@
         <form id="transporterAdd">
         <fieldset style="width: 100%">
           <legend>Add User</legend>
-            <table cellpadding="0" cellspacing="1" class="big_table" width="100%">
+            <table cellpadding="0" cellspacing="0" class="big_table" width="100%">
               <tr>
                 <td class="row2"><b>User</b></td>
                 <td class="row1"><input type="text" name="user" value="" style="width:100%"></td>

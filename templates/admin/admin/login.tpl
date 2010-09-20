@@ -3,7 +3,7 @@
 <fieldset style="width: 350px;">
 	<legend>Login</legend>
 		<input type="hidden" name="send" value="on">
-		<table cellpadding="0" cellspacing="1" class="big_table" width="100%">
+		<table cellpadding="0" cellspacing="0" class="big_table" width="100%">
 			<tr>
 				<td class="row2" width="40%"><b>Username</b></td>
 				<td class="row1"><input type="text" name="username" class="bigger"></td>
