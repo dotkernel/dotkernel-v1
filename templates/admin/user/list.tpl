@@ -1,5 +1,6 @@
 <script type="text/javascript" src="{SITE_URL}/externals/dojo/dojo.xd.js"></script>
 <script type="text/javascript" src="{TEMPLATES_URL}/js/admin/admin.js"></script>
+<style type="text/css">@import "{TEMPLATES_URL}/css/admin/dojo.css";</style>
 <div id="adminList">
 	{PAGINATION}
 	<fieldset style="width: 100%">

@@ -122,12 +122,19 @@ legend{
 input,select,textarea{
 	font-family: trebuchet ms,lucida sans unicode,sans-serif;
     font-size:11px;
-	border: 1px solid #9ba4a8;
+	padding: 3px 0px 3px 0px;
+	border-top: 1px solid #a2aaac;
+	border-right: 1px solid #d2d6d7;
+	border-bottom: 1px solid #d2d6d7;
+	border-left: 1px solid #a2aaac;
 	vertical-align: middle;
 }
 input[type="checkbox"], input[type="radio"]{
      background: transparent;
      border: 0;
+	 margin-top: 0px;
+	 margin-bottom: 0px;
+	 padding: 0px;
  }
 
 .wrapper{
@@ -360,6 +367,29 @@ a#logo{
     background-color: #eaf1f5;
 	border-right: 1px solid #c9d1d5;
 }
+.row1 label, .row2 label{
+	width: 20%;
+	margin-right: 5%;
+	display: block;
+	float: left;
+}
+.medium{
+	width: 73%;
+	}
+.medium_table{
+    border-left: 1px solid #c9d1d5;
+    border-top: 1px solid #c9d1d5;
+    border-bottom: 1px solid #c9d1d5;
+    margin: 5px 0px 0px 0px;
+    color:#242321;
+    background-color: #e2ecf0;
+}
+.medium_table td{
+    padding: 5px 10px 5px 15px;
+	line-height: 30px;
+    text-align:left;
+    color: #3B3B3B;
+}
 input.small_btn{
 	margin: 0px;
     padding: 0px;
@@ -568,60 +598,7 @@ input.bigger{width: 100%;}
     padding: 5px 5px 5px 20px;
 }
 /*END MESSAGES*/
-/*Dijit Tooltip*/
 
-.dijitBackgroundIframe
-{
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    border: 0;
-    padding: 0;
-    margin: 0;
-}
-.dijitTooltip {
-    position: absolute;
-    z-index: 2000;
-    display: block;
-    left: 50%;
-    top: -10000px;
-    overflow: visible;
-}
-.dijitTooltipContainer {
-    border: solid #183646 2px;
-    background: #1A3D50;
-    color: #D5EFF4;
-    padding: 5px 10px;
-    width: 200px;
-    font-size: 12px;
-    text-align: left;
 
-}
-.dijitTooltipBold
-{
-    color: #FDA83A;
-    font-weight: bold;
-    font-size: 12px;
-}
-.dijitTooltipFocusNode {
-    padding: 2px 2px 2px 2px;
-}
-.dijitTooltipConnector {
-    position: absolute;
-}
-.dijitTooltipData {
-    display:none;
-}
-/*END Dijit Tooltip*/
-/* Dojo PieChart*/
-.dojoxLegendNode{
-    padding: 25px;
-    background-color: #ffffff;
-    height: 300px;
-    width: 200px;
-}
 
-/* END Dojo PieChart*/
+
