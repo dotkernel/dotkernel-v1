@@ -1,4 +1,5 @@
 <script type="text/javascript" src="{SITE_URL}/externals/dojo/dojo.xd.js">  </script>
+<style type="text/css">@import "{TEMPLATES_URL}/css/admin/dojo.css";</style>
  <script>
         dojo.require("dijit.Tooltip");
         dojo.require("dijit.form.Button");
@@ -9,7 +10,7 @@
 	<legend>List logins</legend>
 	<table cellpadding="0" cellspacing="0" class="big_table" width="100%">
 		<tr>
-			<td class="table_subhead"><span>#</span></td>
+			<td class="table_subhead" style="text-align: center;"><span>#</span></td>
 			<td class="table_subhead"><span>Username</span></td>
 			<td class="table_subhead"><span>Referer</span></td>
 			<td class="table_subhead"><span>IP</span></td>

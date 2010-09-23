@@ -94,13 +94,29 @@ class User_View extends View
 	 * @param int $page
 	 * @return void
 	 */
-	public function loginsUser($templateFile, $list, $page)
+	public function loginsUser($templateFile, $list, $page, $browser, $loginDate, $ajax = false)
 	{
 		$dotGeoip = new Dot_Geoip();
 		$this->tpl->setFile('tpl_main', 'user/' . $templateFile . '.tpl');
+		$this->tpl->setBlock('tpl_main', 'browser', 'browser_row');
+		$xml = new Zend_Config_Xml(CONFIGURATION_PATH.'/browser.xml');
+		$browserArray = $xml->name->type->toArray();
+		sort($browserArray);
+		foreach ($browserArray as $key => $val)
+		{
+			$this->tpl->setVar('BROWSERNAME', ucfirst($val['uaBrowser']));
+			ucfirst($val['uaBrowser']) == $browser ?
+				$this->tpl->setVar('BROWSERSEL', 'selected'):
+				$this->tpl->setVar('BROWSERSEL', '');
+			$this->tpl->parse('browser_row', 'browser', true);
+			
+		}
+		$this->tpl->setVar('FILTERDATE', $loginDate);		
+		
 		$this->tpl->setBlock('tpl_main', 'list', 'list_block');
 		$this->tpl->paginator($list['paginatorAdapter'],$page);
 		$this->tpl->setVar('PAGE', $page);
+		$this->tpl->setVar('FILTER_URL', '/admin/user/logins');
 		foreach ($list['data'] as $k => $v)
 		{
 			$country = $dotGeoip->getCountryByIp($v['ip']);
@@ -121,6 +137,11 @@ class User_View extends View
 			$this->tpl->setVar('OSMINOR', $os['minor']);
 			$this->tpl->setVar('DATELOGIN', Dot_Kernel::timeFormat($v['dateLogin'], 'long'));
 			$this->tpl->parse('list_block', 'list', true);
+		}		
+		if($ajax)
+		{
+			$this->tpl->pparse('AJAX', 'tpl_main');
+			exit;
 		}
 	}
 }

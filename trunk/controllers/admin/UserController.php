@@ -191,7 +191,20 @@ switch ($requestAction)
 		// list user logins
 		$id = (isset($request['id'])) ? (int)$request['id'] : 0;		
 		$page = (isset($request['page']) && $request['page'] > 0) ? $request['page'] : 1;
-		$logins = $userModel->getLogins($id, $page);
-		$userView->loginsUser('logins', $logins, $page);
+		$browser = (isset($request['browser'])) ? $request['browser'] : '';
+		$loginDate = (isset($request['loginDate'])) ? $request['loginDate'] : '';
+		$logins = $userModel->getLogins($id, $page, $browser, $loginDate);
+		$userView->loginsUser('logins', $logins, $page, $browser, $loginDate);
 	break;
+	case 'logins-filter':		
+		// this action is called from ajax request dojo.xhrPost()
+		// filter user logins
+		$id = (isset($_POST['id'])) ? (int)$_POST['id'] : 0;		
+		$page = (isset($_POST['page']) && $_POST['page'] > 0) ? $_POST['page'] : 1;
+		$browser = (isset($_POST['browser'])) ? $_POST['browser'] : '';
+		$loginDate = (isset($_POST['loginDate'])) ? $_POST['loginDate'] : '';
+		$loginLink = $config->website->params->url. '/' . $requestModule . '/' . $requestController;
+		$loginLink .= '/logins/page/' . $page . '/browser/' . $browser . '/loginDate/' . $loginDate;
+		header('Location: '.$loginLink);
+		exit;
 }

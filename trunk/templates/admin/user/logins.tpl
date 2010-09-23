@@ -19,7 +19,7 @@
 						<option value="{BROWSERNAME}" {BROWSERSEL}> {BROWSERNAME}
 						<!-- END browser -->
 					</select>
-				  Filter by date:	                      
+				  Filter by date:               
 					<input type="text" name="filterDate" id="filterDate" dojoType="dijit.form.DateTextBox" value="{FILTERDATE}"
 							onchange="javascript: adminLogins('{SITE_URL}{FILTER_URL}',1, dojo.byId('browser').value, this.value);" />
 					<label for="filterDate">

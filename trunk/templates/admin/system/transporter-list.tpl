@@ -1,6 +1,7 @@
 <script type="text/javascript" src="{SITE_URL}/externals/dojo/dojo.xd.js"></script>
 <script type="text/javascript" src="{TEMPLATES_URL}/js/admin/admin.js"></script>
 <script type="text/javascript" src="{TEMPLATES_URL}/js/admin/system.js"></script>
+<style type="text/css">@import "{TEMPLATES_URL}/css/admin/dojo.css";</style>
 <div id="adminList">
 	{AJAX_MESSAGE_BLOCK}
 	{PAGINATION}
@@ -8,10 +9,10 @@
 	  <tr>
 	    <td style="padding-right:20px;">
       	<fieldset style="width: 100%">
-      	<legend>List Users</legend>
+      	<legend>List Email Transporters</legend>
       	<table cellpadding="0" cellspacing="0" class="big_table" width="100%">
       		<tr>
-      			<td class="table_subhead"><span>#</span></td>
+      			<td class="table_subhead" style="text-align: center;"><span>#</span></td>
       			<td class="table_subhead"><span>User</span></td>
       			<td class="table_subhead"><span>Server</span></td>
       			<td class="table_subhead"><span>Port</span></td>
@@ -50,43 +51,36 @@
         <form id="transporterAdd">
         <fieldset style="width: 100%">
           <legend>Add User</legend>
-            <table cellpadding="0" cellspacing="0" class="big_table" width="100%">
+            <table cellpadding="0" cellspacing="0" class="medium_table" width="100%">
               <tr>
-                <td class="row2"><b>User</b></td>
-                <td class="row1"><input type="text" name="user" value="" style="width:100%"></td>
+                <td class="row2"><label>User</label><input type="text" name="user" value="" class="medium"></td>
               </tr>
               <tr>
-                <td class="row2"><b>Pass</b></td>
-                <td class="row1"><input type="text" name="pass" value="" style="width:100%"></td>
+                <td class="row1"><label>Pass</label><input type="text" name="pass" value="" class="medium"></td>
               </tr>
               <tr>
-                <td class="row2"><b>Server</b></td>
-                <td class="row1"><input type="text" name="server" value="" style="width:100%"></td>
+                <td class="row2"><label>Server</label><input type="text" name="server" value="" class="medium"></td>
               </tr>     
               <tr>
-                <td class="row2"><b>Port</b></td>
-                <td class="row1"><input type="text" name="port" value="" style="width:100%"></td>
+                <td class="row1"><label>Port</label><input type="text" name="port" value="" class="medium"></td>
               </tr>   
               <tr>
-                <td class="row2"><b>SSL</b></td>
-                <td class="row1">
-                  TLS <input type="radio" name="ssl" value="tls" style="height: auto;" checked="checked"> 
-                  SSL  <input type="radio" name="ssl" value="ssl" style="height: auto;">
+                <td class="row2"><label>SSL</label>
+                  <span>TLS</span> <input type="radio" name="ssl" value="tls" checked="checked"> 
+                  <span>SSL</span>  <input type="radio" name="ssl" value="ssl">
                 </td>
               </tr>
               <tr>
-                <td class="row2"><b>Capacity</b></td>
-                <td class="row1"><input type="text" name="capacity" value="" style="width:100%"></td>
+                <td class="row1"><label>Capacity</label><input type="text" name="capacity" value="" class="medium"></td>
               </tr>   
               <tr>
-                <td class="row2"><b>Active</b></td>
-                <td class="row1">
-                  Yes <input type="radio" name="isActive" value="1" style="height: auto;" checked="checked"> 
-                  No  <input type="radio" name="isActive" value="0" style="height: auto;">
+                <td class="row2"><label>Active</label>
+                  <span>Yes</span> <input type="radio" name="isActive" value="1" checked="checked"> 
+                  <span>No</span>  <input type="radio" name="isActive" value="0">
                 </td>
               </tr>
               <tr>
-                <td colspan="2" class="row1"  style="text-align: center;">
+                <td class="row1"  style="text-align: center;">
                   <input type="button" onclick="adminAddTransporter('{SITE_URL}/admin/system/transporter-add',{PAGE});" class="small_btn" value="Add"></td>
               </tr>
             </table>

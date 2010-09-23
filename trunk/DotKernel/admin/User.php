@@ -227,15 +227,24 @@ class User
 	 * @access public
 	 * @param int $id 
 	 * @param int $page [optional]
+	 * @param string $browser [optional]
 	 * @return array(array(), Zend_Paginator_Adapter())
 	 */
-	public function getLogins($id, $page = 1)
+	public function getLogins($id, $page = 1, $browser = '', $loginDate = '')
 	{
 		$select = $this->db->select()
 					  	   ->from('userLogin');
 		if ($id > 0) 
 		{
 			$select->where('userId = ?', $id);
+		}
+		if ($browser != '')
+		{
+			$select->where($this->db->quoteInto("userAgent LIKE ? ", '%'.$browser.'%'));
+		}
+		if ($loginDate != '')
+		{
+			$select->where('dateLogin LIKE ?', '%'.$loginDate.'%');
 		}
 		$select->order('dateLogin DESC');
 		$paginatorAdapter = null;
@@ -246,8 +255,33 @@ class User
 				$select->limit($this->settings->resultsPerPage) : 
 				$select->limit($this->settings->resultsPerPage, ($page-1)*$this->settings->resultsPerPage);
 		}
-							
 		$data = $this->db->fetchAll($select);
 		return array('data'=> $data,'paginatorAdapter'=> $paginatorAdapter);
 	}	
+	/**
+	 * Get countryspf login users
+	 * @access public
+	 * @return array
+	 */
+	public function getCountryLogins()
+	{
+		$countryName = array();
+		$dotGeoip = new Dot_Geoip();
+		$logins = $this->getLogins(0,-1);
+		foreach ($logins['data'] as $v)
+		{
+			$country = $dotGeoip->getCountryByIp($v['ip']);
+			if(!array_key_exists($country[0], $countryName))
+			{
+				 $countryName[$country[0]]['name'] = $country[1];
+				 $countryName[$country[0]]['count'] = 1;
+			}
+			else
+			{
+				$countryName[$country[0]]['count']++;				
+			}
+		}
+		asort($countryName);
+		return $countryName;
+	}
 }

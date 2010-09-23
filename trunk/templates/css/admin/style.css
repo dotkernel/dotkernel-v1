@@ -264,7 +264,6 @@ a#logo{
 .g_box{
     width: 100%;
     background-color: #FFFFFF;
-    font-weight:bold;
     margin: 10px 0px 10px 0px;
     vertical-align:middle;
 }
@@ -286,7 +285,6 @@ a#logo{
 }
 .g_box select{
     width: 150px;
-    height: 20px;
     margin-right:10px;
     border: 1px solid #B7B7B7;
     vertical-align:middle;
