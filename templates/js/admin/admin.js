@@ -28,3 +28,20 @@ function adminList(siteUrl, id, isActive, page)
     //Call the asynchronous xhrPost
     var deferred = dojo.xhrPost(xhrArgs);
 }
+/**
+ * Ajax function for filter the logins list
+ * @param {Object} siteUrl
+ * @param {Object} page
+ */
+function adminLogins(siteUrl, page, browser, loginDate)
+{
+	var dateLogin = ''	
+	if (loginDate != null) {
+		dojo.require("dojo.date.locale");
+		dateLogin = dojo.date.locale.format(loginDate, {
+			selector: "date",
+			datePattern: "yyyy-MM-dd"
+		});
+	}	
+	window.location = siteUrl+'/page/1/browser/'+browser+'/loginDate/'+dateLogin;
+}

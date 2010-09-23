@@ -1,7 +1,7 @@
 <form action="{SITE_URL}/admin/admin/update/id/{ID}" method="post" >
 <input type="hidden" name="send" value="on">
 <fieldset style="width: 500px">
-<legend>My Acccount</legend>
+<legend>Admin Acccount</legend>
 	<table cellpadding="0" cellspacing="0" class="medium_table" width="100%">
 		<tr>
 			<td class="row2"><label>Username</label><input type="text" name="username" value="{USERNAME}" class="medium"></td>

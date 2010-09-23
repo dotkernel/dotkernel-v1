@@ -226,7 +226,7 @@ class Dot_Kernel
 									
 			}
 		}
-		return array('major'=>'', 'minor'=>'');
+		return array('icon'=>'unknown', 'major'=>'', 'minor'=>'');
 	}
 	/**
 	 * Return date formatted fancy

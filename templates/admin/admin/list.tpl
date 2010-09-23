@@ -7,7 +7,7 @@
 	<legend>List Admins</legend>
 	<table cellpadding="0" cellspacing="0" class="big_table" width="100%">
 		<tr>
-			<td class="table_subhead"><span>#</span></td>
+			<td class="table_subhead" style="text-align: center;"><span>#</span></td>
 			<td class="table_subhead"><span>Username</span></td>
 			<td class="table_subhead"><span>Email</span></td>
 			<td class="table_subhead"><span>First name</span></td>
