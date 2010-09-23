@@ -2,36 +2,168 @@
  <browser>
  	<name>
  	<type>
- 		<uaBrowser>msie</uaBrowser>
-		<uaIcon>msie</uaIcon>
+ 		<uaBrowser>abrowse</uaBrowser>
+		<uaIcon>abrowse</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>amaya</uaBrowser>
+		<uaIcon>amaya</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>ant</uaBrowser>
+		<uaIcon>ant</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>aol</uaBrowser>
+		<uaIcon>aol</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>avantbrowser</uaBrowser>
+		<uaIcon>avantbrowser</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>avantgo</uaBrowser>
+		<uaIcon>avantgo</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>aweb</uaBrowser>
+		<uaIcon>aweb</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>beonex</uaBrowser>
+		<uaIcon>beonex</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>blazer</uaBrowser>
+		<uaIcon>blazer</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>camino</uaBrowser>
+		<uaIcon>camino</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>chimera</uaBrowser>
+		<uaIcon>chimera</uaIcon>
  	</type>
  	<type>
- 		<uaBrowser>netscape</uaBrowser>
-		<uaIcon>netscape</uaIcon>
+ 		<uaBrowser>chrome</uaBrowser>
+		<uaIcon>chrome</uaIcon>
  	</type>
- 	<type>
+	<type>
+ 		<uaBrowser>crazybrowser</uaBrowser>
+		<uaIcon>crazybrowser</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>curl</uaBrowser>
+		<uaIcon>curl</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>deepnet</uaBrowser>
+		<uaIcon>deepnet</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>dillo</uaBrowser>
+		<uaIcon>dillo</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>doris</uaBrowser>
+		<uaIcon>doris</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>epiphany</uaBrowser>
+		<uaIcon>epiphany</uaIcon>
+ 	</type>	
+	<type>
  		<uaBrowser>firebird</uaBrowser>
-		<uaIcon>phoenix</uaIcon>
- 	</type>
+		<uaIcon>firebird</uaIcon>
+	</type>
  	<type>
  		<uaBrowser>firefox</uaBrowser>
 		<uaIcon>firefox</uaIcon>
  	</type>
- 	<type>
- 		<uaBrowser>go!zilla</uaBrowser>
-		<uaIcon>gozilla</uaIcon>
+	<type>
+ 		<uaBrowser>galeon</uaBrowser>
+		<uaIcon>galeon</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>ibrowse</uaBrowser>
+		<uaIcon>ibrowse</uaIcon>
  	</type>
  	<type>
  		<uaBrowser>icab</uaBrowser>
 		<uaIcon>icab</uaIcon>
  	</type>
+	<type>
+ 		<uaBrowser>ice</uaBrowser>
+		<uaIcon>ice</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>k-meleon</uaBrowser>
+		<uaIcon>k-meleon</uaIcon>
+ 	</type>
  	<type>
  		<uaBrowser>konqueror</uaBrowser>
 		<uaIcon>konqueror</uaIcon>
  	</type>
+	<type>
+ 		<uaBrowser>links</uaBrowser>
+		<uaIcon>links</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>lotus</uaBrowser>
+		<uaIcon>lotus</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>lunascape</uaBrowser>
+		<uaIcon>lunascape</uaIcon>
+ 	</type>
  	<type>
  		<uaBrowser>lynx</uaBrowser>
 		<uaIcon>lynx</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>maxthon</uaBrowser>
+		<uaIcon>maxthon</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>mbrowser</uaBrowser>
+		<uaIcon>mbrowser</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>mosaic</uaBrowser>
+		<uaIcon>mosaic</uaIcon>
+ 	</type>	
+ 	<type>
+ 		<uaBrowser>msie</uaBrowser>
+		<uaIcon>msie</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>multibrowser</uaBrowser>
+		<uaIcon>multibrowser</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>myie2</uaBrowser>
+		<uaIcon>myie2</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>nautilus</uaBrowser>
+		<uaIcon>nautilus</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>netcaptor</uaBrowser>
+		<uaIcon>netcaptor</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>netfront</uaBrowser>
+		<uaIcon>netfront</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>netpositive</uaBrowser>
+		<uaIcon>netpositive</uaIcon>
+ 	</type>
+ 	<type>
+ 		<uaBrowser>netscape</uaBrowser>
+		<uaIcon>netscape</uaIcon>
  	</type>
  	<type>
  		<uaBrowser>omniweb</uaBrowser>
@@ -40,10 +172,62 @@
  	<type>
  		<uaBrowser>opera</uaBrowser>
 		<uaIcon>opera</uaIcon>
+ 	</type>	
+	<type>
+ 		<uaBrowser>oregano</uaBrowser>
+		<uaIcon>oregano</uaIcon>
  	</type>
- 	<type>
- 		<uaBrowser>chrome</uaBrowser>
-		<uaIcon>chrome</uaIcon>
+	<type>
+ 		<uaBrowser>phaseout</uaBrowser>
+		<uaIcon>phaseout</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>phoenix</uaBrowser>
+		<uaIcon>phoenix</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>plink</uaBrowser>
+		<uaIcon>plink</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>safari</uaBrowser>
+		<uaIcon>safari</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>shiira</uaBrowser>
+		<uaIcon>shiira</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>sleipnir</uaBrowser>
+		<uaIcon>sleipnir</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>slimbrowser</uaBrowser>
+		<uaIcon>slimbrowser</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>sunrise</uaBrowser>
+		<uaIcon>sunrise</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>unknown</uaBrowser>
+		<uaIcon>unknown</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>voyager</uaBrowser>
+		<uaIcon>voyager</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>w3m</uaBrowser>
+		<uaIcon>w3m</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>webtv</uaBrowser>
+		<uaIcon>webtv</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>xiino</uaBrowser>
+		<uaIcon>xiino</uaIcon>
  	</type>
 	</name>
  </browser>

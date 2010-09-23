@@ -1,9 +1,34 @@
-<script type="text/javascript" src="{SITE_URL}/externals/dojo/dojo.xd.js"></script>
+<script type="text/javascript" src="{SITE_URL}/externals/dojo/dojo.xd.js" djConfig="parseOnLoad: true"></script>
+<script type="text/javascript" src="{TEMPLATES_URL}/js/admin/admin.js"></script>
+<style type="text/css">@import "{TEMPLATES_URL}/css/admin/dojo.css";</style>
  <script>
         dojo.require("dijit.Tooltip");
-        dojo.require("dijit.form.Button");              
-    </script>
-<div id="adminList">
+        dojo.require("dijit.form.Button");    
+        dojo.require("dijit.form.DateTextBox"); 		             
+</script>
+	
+<div id="adminList">	
+	<table class="g_box" cellpadding="0" cellspacing="1">
+		<tr>
+			<td >
+				<form action="{FORM_ACTION}" method="post" name="logins">
+				  Filter by browser:
+					<select name="browser" id="browser" onchange="javascript: adminLogins('{SITE_URL}{FILTER_URL}',1, this.value, dijit.byId('filterDate').attr('value'));">
+						<option value=""> - no filter - </option>
+						<!-- BEGIN browser -->
+						<option value="{BROWSERNAME}" {BROWSERSEL}> {BROWSERNAME}
+						<!-- END browser -->
+					</select>
+				  Filter by date:	                      
+					<input type="text" name="filterDate" id="filterDate" dojoType="dijit.form.DateTextBox" value="{FILTERDATE}"
+							onchange="javascript: adminLogins('{SITE_URL}{FILTER_URL}',1, dojo.byId('browser').value, this.value);" />
+					<label for="filterDate">
+					    <img src="{IMAGES_URL}/calendar.gif" border='0' />
+					</label>
+				</form>							
+			</td>
+		</tr>
+	</table>
 	{PAGINATION}
 	<fieldset style="width: 100%">
 	<legend>List logins</legend>
