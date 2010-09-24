@@ -8,7 +8,7 @@
 				<td class="row1"><label>Username</label><input type="text" name="username" class="medium"></td>
 			</tr>
 			<tr>
-				<td class="row2"><label>Password</label><input type="password" name="password" class="medium"> </td>
+				<td class="row1"><label>Password</label><input type="password" name="password" class="medium"> </td>
 			</tr>
 			<tr>
 				<td class="row1" style="text-align: center;">
