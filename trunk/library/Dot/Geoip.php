@@ -41,9 +41,19 @@ class Dot_Geoip
 		if(extension_loaded('geoip') == FALSE)
 		{
 			// GeoIp extension is not active
-			$api = new Dot_Geoip_Api();
-			$geoipPath = 'externals/geoip/';
-			$country = $api->getCountryByAddr($geoipPath, $ip);
+			$api = new Dot_Geoip_Country();
+			$geoipPath = 'externals/geoip/GeoIP.dat';
+			if(file_exists($geoipPath))
+			{
+				$country = $api->getCountryByAddr($geoipPath, $ip);
+			}
+			else
+			{
+				die('<b>mod_geoip</b> extension is not installed. 
+				<br /> Check if <b>externals/geoip/GeoIP.dat</b> file exists. <br /> 
+				If not, download it from <a href="http://www.maxmind.com/app/geolitecountry">
+				http://www.maxmind.com/app/geolitecountry</a>');
+			}
 		}
 		else
 		{

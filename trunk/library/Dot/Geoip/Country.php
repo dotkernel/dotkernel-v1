@@ -47,13 +47,13 @@ define("GEOIP_CABLEDSL_SPEED", 2);
 define("GEOIP_CORPORATE_SPEED", 3);
 
 /**
-* Geo IP API - connect to GeoIP.dat database to return the country based on IP address
+* Geo IP Country - connect to GeoIP.dat database to return the country based on IP address
 * @category   DotKernel
 * @package    DotLibrary
 * @subpackage DotGeoip
 * @author     DotKernel Team <team@dotkernel.com>
 */
-class Dot_Geoip_Api extends Dot_Geoip
+class Dot_Geoip_Country extends Dot_Geoip
 {
 	/**
 	 * Flags country code
@@ -290,7 +290,7 @@ class Dot_Geoip_Api extends Dot_Geoip
 	/**
 	 * Constructor
 	 * @access public
-	 * @return Dot_Geoip_Api
+	 * @return Dot_Geoip_Country
 	 */
 	public function __construct()
 	{	
@@ -306,8 +306,7 @@ class Dot_Geoip_Api extends Dot_Geoip
 	public function getCountryByAddr($path, $ip)
 	{
 		$country = array('unknown','unknown');
-		$filePath = $path.'GeoIP.dat';
-		$this->geoipOpen($filePath, GEOIP_STANDARD);
+		$this->geoipOpen($path, GEOIP_STANDARD);
 		$countryCode = $this->geoipCountryCodeByAddr($ip);
 		$this->geoipClose();
 		if($countryCode)
