@@ -101,7 +101,6 @@ class User_View extends View
 		$this->tpl->setBlock('tpl_main', 'browser', 'browser_row');
 		$xml = new Zend_Config_Xml(CONFIGURATION_PATH.'/browser.xml');
 		$browserArray = $xml->name->type->toArray();
-		sort($browserArray);
 		foreach ($browserArray as $key => $val)
 		{
 			$this->tpl->setVar('BROWSERNAME', ucfirst($val['uaBrowser']));
