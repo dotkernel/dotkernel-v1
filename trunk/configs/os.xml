@@ -127,5 +127,12 @@
 					<uaString>Mac OS</uaString>
 				</identify>
 			</name>
+			<name type="desktop">
+				<os>Java</os>
+				<identify>
+					<osName>JVM</osName>
+					<uaString>J2ME|JRE|Java</uaString>
+				</identify>
+			</name>
  	</type>
  </os>
