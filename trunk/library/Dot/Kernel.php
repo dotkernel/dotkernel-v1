@@ -202,14 +202,40 @@ class Dot_Kernel
 			{
 				if(array_key_exists('identify', $osArray))
 				{//there are minor version
-					foreach ($osArray['identify'] as $minor)
-					{
-						$uaStringArray = explode('|',$minor['uaString']);
-						foreach ($uaStringArray as $uaString)
-						{						
-							if ((stripos($agent, $uaString) !== false))
+				// if we have only one menu, Zend_Config_Xml return a simple array, not an array with key 0(zero)
+				if (!array_key_exists('0', $osArray['identify'])) 
+				{					
+					//we create the array with key 0
+					$osIdentify[] = $osArray['identify'];
+				}
+				else
+				{
+					$osIdentify = $osArray['identify'];
+				}
+					foreach ($osIdentify as $minor)
+					{		
+						//check if there are different strings for detecting an operating system							
+						if(strstr($minor['uaString'],'|') !== FALSE)
+						{
+							$uaStringArray = explode('|',$minor['uaString']);	
+							foreach ($uaStringArray as $uaString)
+							{						
+								if ((stripos($agent, $uaString) !== false))
+					            {
+					                $operatingSystem = array('icon'=>strtolower(str_replace(' ', '_', $osArray['os'])), 
+															 'major'=>$osArray['os'], 
+															 'minor'=>$minor['osName']);
+									return $operatingSystem;
+					            }
+							}	
+						}
+						else
+						{	
+							if ((stripos($agent, $minor['uaString']) !== false))
 				            {
-				                $operatingSystem = array('icon'=>strtolower(str_replace(' ', '_', $osArray['os'])), 'major'=>$osArray['os'], 'minor'=>$minor['osName']);
+				                $operatingSystem = array('icon'=>strtolower(str_replace(' ', '_', $osArray['os'])), 
+														 'major'=>$osArray['os'], 
+														 'minor'=>$minor['osName']);
 								return $operatingSystem;
 				            }
 						}					
@@ -219,11 +245,12 @@ class Dot_Kernel
 				{//no minor version known for this os
 					if ((stripos($agent, $osArray['os']) !== false))
 		            {
-		                $operatingSystem = array('icon'=>strtolower(str_replace(' ', '_', $osArray['os'])), 'major'=>$osArray['os'], 'minor'=>'');
+		                $operatingSystem = array('icon'=>strtolower(str_replace(' ', '_', $osArray['os'])), 
+												 'major'=>$osArray['os'], 
+												 'minor'=>'');
 						return $operatingSystem;
 		            }
-				}
-									
+				}				
 			}
 		}
 		return array('icon'=>'unknown', 'major'=>'', 'minor'=>'');

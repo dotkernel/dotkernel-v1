@@ -3,18 +3,38 @@
  	<type> 		
 			<name type="mobile">
 				<os>Android</os>
+				<identify>
+					<osName>Android</osName>
+					<uaString>Android</uaString>
+				</identify>		
 			</name>
 			<name type="mobile">
 				<os>Blackberry</os>
+				<identify>
+					<osName>Blackberry</osName>
+					<uaString>Blackberry</uaString>
+				</identify>		
 			</name>
 			<name type="mobile">
 				<os>Windows Mobile</os>
+				<identify>
+					<osName>Windows Mobile</osName>
+					<uaString>Windows Mobile</uaString>
+				</identify>		
 			</name>
 			<name type="mobile">
-				<os>Iphone</os>
+				<os>iPhone</os>
+				<identify>
+					<osName>iPhone</osName>
+					<uaString>iPhone|iPad</uaString>
+				</identify>		
 			</name>
 			<name type="mobile">
 				<os>Symbian</os>
+				<identify>
+					<osName>Symbian OS</osName>
+					<uaString>SymbOS</uaString>
+				</identify>		
 			</name>
  			<name type="desktop">
  				<os>Windows</os>
@@ -60,28 +80,52 @@
 				</identify>
  			</name>
 			<name type="desktop">
-				<os>Apple</os>
+				<os>Gnome</os>
 			</name>
 			<name type="desktop">
-				<os>Debian</os>
+				<os>Mandriva</os>
+				<identify>
+					<osName>Linux Mandriva</osName>
+					<uaString>Mandriva</uaString>
+				</identify>
 			</name>
 			<name type="desktop">
 				<os>Fedora</os>
+				<identify>
+					<osName>Linux Fedora</osName>
+					<uaString>Fedora</uaString>
+				</identify>
 			</name>
 			<name type="desktop">
-				<os>Gnome</os>
+				<os>Debian</os>
+				<identify>
+					<osName>Linux Debian</osName>
+					<uaString>Debian</uaString>
+				</identify>
 			</name>
 			<name type="desktop">
 				<os>Linux</os>
 			</name>
 			<name type="desktop">
-				<os>Macintosh</os>
-			</name>
-			<name type="desktop">
-				<os>Mandriva</os>
-			</name>
-			<name type="desktop">
 				<os>Ubuntu</os>
+				<identify>
+					<osName>Linux Ubuntu</osName>
+					<uaString>Ubuntu</uaString>
+				</identify>
+			</name>
+			<name type="desktop">
+				<os>Apple</os>
+				<identify>
+					<osName>Mac OS X</osName>
+					<uaString>Mac OS X</uaString>
+				</identify>
+			</name>
+			<name type="desktop">
+				<os>Macintosh</os>
+				<identify>
+					<osName>Mac OS</osName>
+					<uaString>Mac OS</uaString>
+				</identify>
 			</name>
  	</type>
  </os>
