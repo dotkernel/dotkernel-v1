@@ -68,11 +68,11 @@
 				</identify>
 				<identify>
 					<osName>Windows 7</osName>
-					<uaString>Windows NT 7.0</uaString>
+					<uaString>Windows NT 6.1</uaString>
 				</identify>
 				<identify>
-					<osName>Windows NT 4.0</osName>
-					<uaString>Windows NT 4.0|WinNT4.0|WinNT|Windows NT</uaString>
+					<osName>Windows NT</osName>
+					<uaString>Windows NT 4|WinNT4.0|WinNT</uaString>
 				</identify>
 				<identify>
 					<osName>Windows ME</osName>
