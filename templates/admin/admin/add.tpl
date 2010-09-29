@@ -1,10 +1,10 @@
 <form action="{SITE_URL}/admin/admin/add" method="post" >
 <input type="hidden" name="send" value="on">
-<fieldset style="width: 360px">
+<fieldset style="width: 450px">
 <legend>Add New Admin</legend>
 	<table cellpadding="0" cellspacing="0" class="medium_table" width="100%">
 		<tr>
-			<td><label>Username</label><input type="text" name="username" value="{USERNAME}" class="medium"></td>
+			<td class="table_subhead"><label>Username</label><input type="text" name="username" value="{USERNAME}" class="medium"></td>
 		</tr>
 		<tr>
 			<td><label>Password</label><input type="password" name="password" value="{PASSWORD}" class="medium"> </td>
@@ -23,8 +23,8 @@
 		</tr>		
 		<tr>
 			<td><label>Active</label>
-				<span>Yes</span> <input type="radio" name="isActive" value="1"  {ACTIVE_1}> 
-				<span>No</span><input type="radio" name="isActive" value="0"  {ACTIVE_0}>
+			<label for="isactive">Yes </label><input type="radio" name="isActive" value="1"  {ACTIVE_1} id="isactive"/>
+			<label for="noactive">No </label><input type="radio" name="isActive" value="0"  {ACTIVE_0} id="noactive"/>
 			</td>
 		</tr>
 		<tr>

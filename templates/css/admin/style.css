@@ -367,7 +367,7 @@ a#logo{
 	border-right: 1px solid #c9d1d5;
 }
 .medium_table label{
-	width: 30%;
+	width: 40%;
 	margin-right: 5%;
 	display: block;
 	float: left;
@@ -375,9 +375,12 @@ a#logo{
 	padding-top: 3px;
 	text-align: left;
 	font-weight: bold;
+	color: #556266 !important;
+  text-transform:uppercase;
+	font-family: Arial, sans-serif;
 }
-.medium{
-	width: 63%;
+input.medium{
+	width: 53%;
 	}
 .medium_table{
     border: 1px solid #c9d1d5;
@@ -413,7 +416,7 @@ a#logo{
     color: #3B3B3B;
 }
 .button_area{
-	text-align: right !important;
+	text-align: center !important;
 }
 input.reffer_input{
 	width: 100%;
@@ -422,20 +425,20 @@ input.reffer_input{
 }
 input.small_btn{
 	margin: 0px;
-    padding: 0px;
-	width: 89px;
-	min-height: 30px;
-    line-height: 30px;
-    text-align:center;
-    background-image: url('images/button.png');
-    background-repeat: no-repeat;
-    color: #FFFFFF;
-    font-size: 11px;
+  padding: 0px;
+	width: 67px;
+	min-height: 26px;
+  line-height: 26px;
+  text-align:center;
+  background-image: url('images/button.png');
+  background-repeat: no-repeat;
+  color: #FFFFFF;
+  font-size: 11px;
 	font-weight: bold;
-    border: 0px;
-    vertical-align: middle;
-    cursor: pointer;
-    text-transform: uppercase;
+  border: 0px;
+  vertical-align: middle;
+  cursor: pointer;
+  text-transform: uppercase;
 }
 input.small_btn:hover{
     background-image: url('images/button_hover.png');
