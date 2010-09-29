@@ -387,13 +387,24 @@ input.medium{
     margin: 5px 0px 0px 0px;
     color:#242321;
     background-color: #ffffff;
-	padding: 10px 5px;
 }
 .medium_table td{
-    padding: 8px 10px 8px 10px;
+  padding: 8px 10px 8px 10px;
 	line-height: 18px;
-    text-align:left;
-    color: #3B3B3B;
+  text-align:left;
+  color: #3B3B3B;
+}
+.medium_table .row1{
+	border: 0px;
+	}
+.medium_table .row2{
+	border: 0px;
+	font-weight: bold;
+	color: #556266 !important;
+  text-transform: uppercase;
+	font-family: Arial, sans-serif;
+	text-align: right !important;
+	padding: 10px 10px 5px 10px;
 }
 .big_button_area{
 	text-align: right !important; 
