@@ -12,14 +12,14 @@
 		<tr>
 			<td >
 				<form action="{FORM_ACTION}" method="post" name="logins">
-				  Filter by browser:
+				  <b>Filter by browser:</b>
 					<select name="browser" id="browser" onchange="javascript: adminLogins('{SITE_URL}{FILTER_URL}',1, this.value, dijit.byId('filterDate').attr('value'));">
 						<option value=""> - no filter - </option>
 						<!-- BEGIN browser -->
 						<option value="{BROWSERNAME}" {BROWSERSEL}> {BROWSERNAME}
 						<!-- END browser -->
 					</select>
-				  Filter by date:               
+				  <b>Filter by date:     </b>          
 					<input type="text" name="filterDate" id="filterDate" dojoType="dijit.form.DateTextBox" value="{FILTERDATE}"
 							onchange="javascript: adminLogins('{SITE_URL}{FILTER_URL}',1, dojo.byId('browser').value, this.value);" />
 					<label for="filterDate">
@@ -47,11 +47,12 @@
 		<tr>
 			<td class="row{BG}" align="center">{ID}</td>
 			<td class="row{BG}"> <a href="{SITE_URL}/admin/user/update/id/{USERID}">{USERNAME}</a> </td>
-			<td class="row{BG}">{REFERER}</td>
+			<td class="row{BG}" ><input class="reffer_input" type="text" name="htmllink[]" value="{REFERER}" onclick="javascript:this.focus();this.select();" readonly>
+                        </td>
 			<td class="row{BG}">				
 				<a href="{WHOISURL}/{IP}" target="_blank">{IP}</a></td>
 			<td class="row{BG}" style="text-align: center;">
-				<img src="{IMAGES_SHORT_URL}/flags/{COUNTRYIMAGE}.png"  border="0" id="ipc{ID}" align="center" style="margin-top:8px;"/>
+				<img src="{IMAGES_SHORT_URL}/flags/{COUNTRYIMAGE}.png"  border="0" id="ipc{ID}" align="center" style="margin-top:4px;"/>
 				<script type="text/javascript">
 					 dojo.addOnLoad(function() {
 						  new dijit.Tooltip({
@@ -62,7 +63,7 @@
 				</script>
 			</td>
 			<td class="row{BG}" style="text-align: center;">
-				<img src="{IMAGES_SHORT_URL}/browsers/{BROWSERIMAGE}.png" border="0" id="uab{ID}" style="margin-top:8px;">
+				<img src="{IMAGES_SHORT_URL}/browsers/{BROWSERIMAGE}.png" border="0" id="uab{ID}" style="margin-top:4px;">
 				<script type="text/javascript">
 				 dojo.addOnLoad(function() {
 					  new dijit.Tooltip({
@@ -73,7 +74,7 @@
 				</script>
 			</td>
 			<td class="row{BG}" style="text-align: center;">
-				<img src="{IMAGES_SHORT_URL}/os/{OSIMAGE}.png" border="0" id="os{ID}" style="margin-top:8px;">
+				<img src="{IMAGES_SHORT_URL}/os/{OSIMAGE}.png" border="0" id="os{ID}" style="margin-top:3px;">
 				<script type="text/javascript">
 				 dojo.addOnLoad(function() {
 					  new dijit.Tooltip({

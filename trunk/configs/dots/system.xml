@@ -10,6 +10,9 @@
 				<settings>Settings</settings>
 				<settings-update>Update Settings</settings-update>
 				<phpinfo>PHP Info</phpinfo>
+				<transporter-list>List Email Transporter</transporter-list>
+				<transporter-update>Update Email Transporter</transporter-update>
+				<transporter-delete>Delete Email Transporter</transporter-delete>
 			</action>
 		</pageTitle>
 		<infoMessage>
@@ -22,6 +25,7 @@
 		<errorMessage>
 		  <invalidPort>The port must be a number</invalidPort>
 		  <invalidCapacity>The capacity must be a number</invalidCapacity>
+		  <noModGeoip>mod_geoip is not installed</noModGeoip>
 		</errorMessage>
 		<countCountryUserLogin>10</countCountryUserLogin>
 		<colorCharts>

@@ -53,34 +53,34 @@
           <legend>Add User</legend>
             <table cellpadding="0" cellspacing="0" class="medium_table" width="100%">
               <tr>
-                <td class="row2"><label>User</label><input type="text" name="user" value="" class="medium"></td>
+                <td><label>User</label><input type="text" name="user" value="" class="medium"></td>
               </tr>
               <tr>
-                <td class="row1"><label>Pass</label><input type="text" name="pass" value="" class="medium"></td>
+                <td><label>Pass</label><input type="text" name="pass" value="" class="medium"></td>
               </tr>
               <tr>
-                <td class="row2"><label>Server</label><input type="text" name="server" value="" class="medium"></td>
+                <td><label>Server</label><input type="text" name="server" value="" class="medium"></td>
               </tr>     
               <tr>
-                <td class="row1"><label>Port</label><input type="text" name="port" value="" class="medium"></td>
+                <td><label>Port</label><input type="text" name="port" value="" class="medium"></td>
               </tr>   
               <tr>
-                <td class="row2"><label>SSL</label>
+                <td><label>SSL</label>
                   <span>TLS</span> <input type="radio" name="ssl" value="tls" checked="checked"> 
                   <span>SSL</span>  <input type="radio" name="ssl" value="ssl">
                 </td>
               </tr>
               <tr>
-                <td class="row1"><label>Capacity</label><input type="text" name="capacity" value="" class="medium"></td>
+                <td><label>Capacity</label><input type="text" name="capacity" value="" class="medium"></td>
               </tr>   
               <tr>
-                <td class="row2"><label>Active</label>
+                <td><label>Active</label>
                   <span>Yes</span> <input type="radio" name="isActive" value="1" checked="checked"> 
                   <span>No</span>  <input type="radio" name="isActive" value="0">
                 </td>
               </tr>
               <tr>
-                <td class="row1"  style="text-align: center;">
+                <td class="button_area">
                   <input type="button" onclick="adminAddTransporter('{SITE_URL}/admin/system/transporter-add',{PAGE});" class="small_btn" value="Add"></td>
               </tr>
             </table>
