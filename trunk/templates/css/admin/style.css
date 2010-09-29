@@ -70,7 +70,7 @@ html{height:100%;}
 body{
     font-family: trebuchet ms,lucida sans unicode,sans-serif;
     font-size:11px;
-	background: #eff1f2 url('images/body_bg.png') repeat-x left top;
+	background: #F9FAFB url('images/body_bg.png') repeat-x left top;
 	height: 100%;
 }
 h1{
@@ -254,7 +254,7 @@ a#logo{
 	padding: 0px 10px 0px 10px;
 }
 .content {
-    color:#1E1E1E;
+  color:#1E1E1E;
 	padding-bottom: 70px;
 }
 

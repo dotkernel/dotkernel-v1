@@ -5,13 +5,13 @@
 		<input type="hidden" name="send" value="on">
 		<table cellpadding="0" cellspacing="0" class="medium_table" width="100%">
 			<tr>
-				<td class="row1"><label>Username</label><input type="text" name="username" class="medium"></td>
+				<td><label>Username</label><input type="text" name="username" class="medium"></td>
 			</tr>
 			<tr>
-				<td class="row1"><label>Password</label><input type="password" name="password" class="medium"> </td>
+				<td><label>Password</label><input type="password" name="password" class="medium"></td>
 			</tr>
 			<tr>
-				<td class="row1" style="text-align: center;">
+				<td class="button_area">
 					<input type="submit" onclick="" class="small_btn" value="login"></td>
 			</tr>
 		</table>
