@@ -7,7 +7,7 @@
 	<legend>List Admins</legend>
 	<table cellpadding="0" cellspacing="0" class="big_table" width="100%">
 		<tr>
-			<td class="table_subhead" style="text-align: center;"><span>#</span></td>
+			<td class="table_subhead" style="text-align: center; width: 20px;"><span>#</span></td>
 			<td class="table_subhead"><span>Username</span></td>
 			<td class="table_subhead"><span>Email</span></td>
 			<td class="table_subhead"><span>First name</span></td>
@@ -23,7 +23,9 @@
 			<td class="row{BG}">{EMAIL}</td>
 			<td class="row{BG}">{FIRSTNAME}</td>
 			<td class="row{BG}">{LASTNAME}</td>
-			<td class="row{BG}" style="vertical-align: middle;"> <a  onclick="javascript: adminList('{SITE_URL}{ACTIVE_URL}',{ID},{ISACTIVE},{PAGE});" style="cursor: pointer;" title="Activate / Inactivate"  class="{ACTIVE_IMG}_state">&nbsp;</a> </td>
+			<td class="row{BG}" style="vertical-align: middle;">
+				 <a  onclick="javascript: adminList('{SITE_URL}{ACTIVE_URL}',{ID},{ISACTIVE},{PAGE});" style="cursor: pointer;" title="Activate / Inactivate"  
+				 class="{ACTIVE_IMG}_state">&nbsp;</a> </td>
 			<td class="row{BG}">{DATE_CREATED}</td>
 			<td class="row{BG}" > 				
 			<table width="100%" class="action_table">

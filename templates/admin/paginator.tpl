@@ -2,11 +2,11 @@
 	<span><b>{TOTAL_RECORDS}</b> records | 
 	 <b>({TOTAL_PAGES})</b> pages</span>
 	<ul>
-                <!-- BEGIN previous -->
-                <li>
-                    <a href="{PREVIOUS_LINK}">Previous</a>
-                </li>
-                <!-- END previous -->
+			<!-- BEGIN previous -->
+        <li>
+      		<a href="{PREVIOUS_LINK}">Previous</a>
+       </li>
+      <!-- END previous -->
 			<!-- BEGIN pages -->
 				<!-- BEGIN current_page -->
                 <li>

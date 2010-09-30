@@ -10,7 +10,7 @@
 	<legend>List logins</legend>
 	<table cellpadding="0" cellspacing="0" class="big_table" width="100%">
 		<tr>
-			<td class="table_subhead" style="text-align: center;"><span>#</span></td>
+			<td class="table_subhead" style="text-align: center; width: 20px;"><span>#</span></td>
 			<td class="table_subhead"><span>Username</span></td>
 			<td class="table_subhead"><span>Referer</span></td>
 			<td class="table_subhead"><span>IP</span></td>
@@ -32,30 +32,24 @@
 				 dojo.addOnLoad(function() {
 					  new dijit.Tooltip({
 					     connectId: ["ipc{ID}"],
-					     label: "<span class='dijitTooltipBold'>Country:</span><br />{COUNTRYNAME}"
-					  });
-  				 });
-</script></td>
+					     label: "<span class='dijitTooltipBold'>Country:</span><br />{COUNTRYNAME}"});});
+			</script></td>
 			<td class="row{BG}" style="text-align: center; width: 90px;">
 				<img src="{IMAGES_SHORT_URL}/browsers/{BROWSERIMAGE}.png" border="0" id="uab{ID}" style="margin-top:4px;">
 				<script type="text/javascript">
 				 dojo.addOnLoad(function() {
 					  new dijit.Tooltip({
 					     connectId: ["uab{ID}"],
-					     label: "<span class='dijitTooltipBold'>User Agent:</span><br />{USERAGENT}"
-					  });
- 				 });
-</script></td>
+					     label: "<span class='dijitTooltipBold'>User Agent:</span><br />{USERAGENT}"});});
+				</script></td>
 			<td class="row{BG}" style="text-align: center; width: 40px;">
 				<img src="{IMAGES_SHORT_URL}/os/{OSIMAGE}.png" border="0" id="os{ID}" style="margin-top:4px;">
 				<script type="text/javascript">
 				 dojo.addOnLoad(function() {
 					  new dijit.Tooltip({
 					     connectId: ["os{ID}"],
-					     label: "<span class='dijitTooltipBold'>Operating System: {OSMAJOR}</span><br />{OSMINOR}"
-					  });
- 				 });
-</script></td>
+					     label: "<span class='dijitTooltipBold'>Operating System: {OSMAJOR}</span><br />{OSMINOR}"});});
+				</script></td>
 			<td class="row{BG}" style="width: 150px;">{DATELOGIN}</td>
 			</td>
 		</tr>
