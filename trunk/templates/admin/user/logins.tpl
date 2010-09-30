@@ -34,7 +34,7 @@
 	<legend>List logins</legend>
 	<table cellpadding="0" cellspacing="0" class="big_table" width="100%">
 		<tr>
-			<td class="table_subhead"><span>#</span></td>
+			<td class="table_subhead" style="text-align: center; width: 20px;"><span>#</span></td>
 			<td class="table_subhead"><span>Username</span></td>
 			<td class="table_subhead"><span>Referer</span></td>
 			<td class="table_subhead" style="width: 150px;"><span>IP</span></td>
@@ -47,8 +47,9 @@
 		<tr>
 			<td class="row{BG}" align="center">{ID}</td>
 			<td class="row{BG}"> <a href="{SITE_URL}/admin/user/update/id/{USERID}">{USERNAME}</a> </td>
-			<td class="row{BG}" ><input class="reffer_input" type="text" name="htmllink[]" value="{REFERER}" onclick="javascript:this.focus();this.select();" readonly>
-                        </td>
+			<td class="row{BG}">
+				<input class="reffer_input" type="text" name="htmllink[]" value="{REFERER}" onclick="javascript:this.focus();this.select();" readonly>
+      </td>
 			<td class="row{BG}">				
 				<a href="{WHOISURL}/{IP}" target="_blank">{IP}</a></td>
 			<td class="row{BG}" style="text-align: center;">
@@ -57,9 +58,7 @@
 					 dojo.addOnLoad(function() {
 						  new dijit.Tooltip({
 						     connectId: ["ipc{ID}"],
-						     label: "<span class='dijitTooltipBold'>Country:</span><br />{COUNTRYNAME}"
-						  });
-	  				 });
+						     label: "<span class='dijitTooltipBold'>Country:</span><br />{COUNTRYNAME}"});});
 				</script>
 			</td>
 			<td class="row{BG}" style="text-align: center;">
@@ -68,9 +67,7 @@
 				 dojo.addOnLoad(function() {
 					  new dijit.Tooltip({
 					     connectId: ["uab{ID}"],
-					     label: "<span class='dijitTooltipBold'>User Agent:</span><br />{USERAGENT}"
-					  });
- 				 });
+					     label: "<span class='dijitTooltipBold'>User Agent:</span><br />{USERAGENT}"});});
 				</script>
 			</td>
 			<td class="row{BG}" style="text-align: center;">
@@ -79,9 +76,7 @@
 				 dojo.addOnLoad(function() {
 					  new dijit.Tooltip({
 					     connectId: ["os{ID}"],
-					     label: "<span class='dijitTooltipBold'>Operating System: {OSMAJOR}</span><br />{OSMINOR}"
-					  });
- 				 });
+					     label: "<span class='dijitTooltipBold'>Operating System: {OSMAJOR}</span><br />{OSMINOR}"}); });
 				</script>
 			</td>
 			<td class="row{BG}">{DATELOGIN}</td>

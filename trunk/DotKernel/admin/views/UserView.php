@@ -119,8 +119,8 @@ class User_View extends View
 		foreach ($list['data'] as $k => $v)
 		{
 			$country = $dotGeoip->getCountryByIp($v['ip']);
-		    $this->tpl->setVar('BG', $k%2+1);
-			$this->tpl->setVar('ID', $k+1);
+		  $this->tpl->setVar('BG', $k%2+1);
+			$this->tpl->setVar('ID', $v['id']);
 			$this->tpl->setVar('USERID', $v['userId']);
 			$this->tpl->setVar('USERNAME', $v['username']);
 			$this->tpl->setVar('IP', $v['ip']);

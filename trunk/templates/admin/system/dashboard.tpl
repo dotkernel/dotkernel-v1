@@ -1,20 +1,30 @@
-<fieldset style="width: 500px;">
+<fieldset style="width: 450px;">
 	<legend>System Overview</legend>
-	<table cellpadding="0" cellspacing="0" class="big_table" width="100%">
+	<table cellpadding="0" cellspacing="0" class="medium_table" width="100%">
 		<tr>
-			<td valign="top" width="30%" class="row2"><b>SQL VERSION</b></td>
-			<td class="row1"  width="70%">MYSQL {MYSQL}</td>
+			<td class="row2" width="120px"><b>MYSQL</b></td>
+			<td class="row1">MYSQL {MYSQL}</td>
 		</tr>
 		<tr>
-			<td valign="top"  class="row2"><b>PHP Version</b></td>
+			<td class="row2"><b>PHP</b></td>
 			<td class="row1">{PHP} ({PHPAPI}) &nbsp;&nbsp;[ <a href="{SITE_URL}/admin/system/phpinfo">Php Info</a> ]</td>
 		</tr>				
 		<tr>
-			<td valign="top" class="row2"><b>ZF Version</b></td>
+			<td class="row2"><b>Zend Framework</b></td>
 			<td class="row1"> {ZFVERSION}</td>
+		</tr>
+	 <tr>
+			<td class="row2"><b>GEOIP CITY</b></td>
+			<td class="row1"> {GEOIP_CITY_VERSION}</td>
+		</tr>
+				<tr>
+			<td class="row2"><b>GEOIP COUNTRY</b></td>
+			<td class="row1"> {GEOIP_COUNTRY_VERSION}</td>
 		</tr>
 	</table>
 </fieldset>
+
+<!-- piechart with users logins-->
 <script type="text/javascript" src="{SITE_URL}/externals/dojo/dojo.xd.js"></script>
 <script type="text/javascript" src="{SITE_URL}/templates/js/admin/system.js"></script>
 <style type="text/css">@import "{TEMPLATES_URL}/css/admin/dojo.css";</style>
