@@ -111,6 +111,7 @@
 INPUT.dijitTextBox,
 .dijitTextBox INPUT {
 	font-size: 100%;
+	background-color: #FFFFFF !important;
 }
 .dijitTextBox .dijitSpinnerButtonContainer,
 .dijitTextBox .dijitArrowButtonContainer,

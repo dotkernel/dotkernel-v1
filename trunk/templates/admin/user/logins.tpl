@@ -12,14 +12,14 @@
 		<tr>
 			<td >
 				<form action="{FORM_ACTION}" method="post" name="logins">
-				  <b>Filter by browser:</b>
+				  Filter by browser:&nbsp;
 					<select name="browser" id="browser" onchange="javascript: adminLogins('{SITE_URL}{FILTER_URL}',1, this.value, dijit.byId('filterDate').attr('value'));">
 						<option value=""> - no filter - </option>
 						<!-- BEGIN browser -->
 						<option value="{BROWSERNAME}" {BROWSERSEL}> {BROWSERNAME}
 						<!-- END browser -->
 					</select>
-				  <b>Filter by date:     </b>          
+				  Filter by date:&nbsp;         
 					<input type="text" name="filterDate" id="filterDate" dojoType="dijit.form.DateTextBox" value="{FILTERDATE}"
 							onchange="javascript: adminLogins('{SITE_URL}{FILTER_URL}',1, dojo.byId('browser').value, this.value);" />
 					<label for="filterDate">

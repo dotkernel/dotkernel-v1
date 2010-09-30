@@ -263,14 +263,20 @@ a#logo{
 }
 .g_box{
     width: 100%;
-    background-color: #FFFFFF;
+	border: 1px solid #d3d9dc;
+    background-color: #ffffff;
     margin: 10px 0px 10px 0px;
     vertical-align:middle;
 }
-.g_box td{
-    background-color: #ffffff;
+.g_box td{    
     padding:12px 15px 12px 15px;
     vertical-align:middle;
+	color:#556266 !important;
+	font-family:Arial,sans-serif;
+	font-size:11px;
+	font-weight:bold;
+	line-height:20px;
+	text-transform:uppercase;
 }
 .g_box .emph{
     color: #28506C !important;
@@ -316,7 +322,9 @@ a#logo{
     display:block;
     padding: 6px 8px 6px 8px;
 	color: #0887b8;
-	background: #ffffff;
+	background: #e4eef3;
+	border: 1px solid #e4e8e9;
+	font-weight: bold;
 }
 .pagination li a:hover{
     padding: 6px 8px 6px 8px;
@@ -363,25 +371,16 @@ a#logo{
 	border-right: 1px solid #c9d1d5;
 }
 .row2{
-    background-color: #eaf1f5;
+    background-color: #eef5f8;
 	border-right: 1px solid #c9d1d5;
 }
-.medium_table label{
-	width: 40%;
-	margin-right: 5%;
-	display: block;
-	float: left;
-	line-height: 18px;
-	padding-top: 3px;
-	text-align: left;
-	font-weight: bold;
-	color: #556266 !important;
-  text-transform:uppercase;
-	font-family: Arial, sans-serif;
+.medium_table input[type="checkbox"], input[type="radio"]{
+	width: auto !important;
+	vertical-align: middle !important;
 }
-input.medium{
-	width: 53%;
-	}
+.medium_table input{
+	width: 100%;
+}
 .medium_table{
     border: 1px solid #c9d1d5;
     margin: 5px 0px 0px 0px;
@@ -389,8 +388,8 @@ input.medium{
     background-color: #ffffff;
 }
 .medium_table td{
-  padding: 8px 10px 8px 10px;
-	line-height: 18px;
+  padding: 15px 15px 2px 15px;
+  line-height: 22px;
   text-align:left;
   color: #3B3B3B;
 }
@@ -398,19 +397,25 @@ input.medium{
 	border: 0px;
 	}
 .medium_table .row2{
-	border: 0px;
+	border-right: 1px solid #c9d1d5;
 	font-weight: bold;
-	color: #556266 !important;
-  text-transform: uppercase;
+	color: #556266 !important; 
+	background-color: #eef5f8;
+    text-transform: uppercase;
 	font-family: Arial, sans-serif;
 	text-align: right !important;
-	padding: 10px 10px 5px 10px;
+}
+
+.medium_table .last_td{
+	padding-bottom: 13px !important;
 }
 .big_button_area{
-	text-align: right !important; 
 	padding-bottom: 10px !important;
 	background-color: #FFFFFF;
 	border-right: 1px solid #c9d1d5;
+}
+.bordered{
+	border-bottom: 1px solid #c9d1d5;
 }
 .list_table{
 	border-top: 1px solid #c9d1d5;
@@ -425,9 +430,6 @@ input.medium{
 	line-height: 18px;
     text-align:left;
     color: #3B3B3B;
-}
-.button_area{
-	text-align: center !important;
 }
 input.reffer_input{
 	width: 100%;

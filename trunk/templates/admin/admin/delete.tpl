@@ -4,7 +4,7 @@
 <legend>Delete Admin Acccount: {USERNAME}</legend>
 	<table cellpadding="0" cellspacing="0" class="big_table" width="100%">
 		<tr>
-			<td class="row2"><b>Are you sure you want to delete this account ?</b></td>
+			<td class="row2 bordered"><b>Are you sure you want to delete this account ?</b></td>
 		</tr>
 		<tr>
 			<td class="row1">
