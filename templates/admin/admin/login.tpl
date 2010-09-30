@@ -13,8 +13,8 @@
 				<td class="row1"><input type="password" name="password" class="medium"></td>
 			</tr>
 			<tr>
-				<td class="row2"></td>
-				<td class="row1"><input type="submit" onclick="" class="small_btn" value="login"></td>
+				<td class="row2"> </td>
+				<td class="row1 last_td" ><input type="submit" onclick="" class="small_btn" value="login"></td>
 			</tr>
 		</table>
 </fieldset>	

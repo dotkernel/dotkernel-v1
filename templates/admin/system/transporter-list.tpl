@@ -51,39 +51,47 @@
         <form id="transporterAdd">
         <fieldset style="width: 100%">
           <legend>Add User</legend>
-            <table cellpadding="0" cellspacing="0" class="medium_table" width="100%">
-              <tr>
-                <td><label>User</label><input type="text" name="user" value="" class="medium"></td>
-              </tr>
-              <tr>
-                <td><label>Pass</label><input type="text" name="pass" value="" class="medium"></td>
-              </tr>
-              <tr>
-                <td><label>Server</label><input type="text" name="server" value="" class="medium"></td>
-              </tr>     
-              <tr>
-                <td><label>Port</label><input type="text" name="port" value="" class="medium"></td>
-              </tr>   
-              <tr>
-                <td><label>SSL</label>
-                  <span>TLS</span> <input type="radio" name="ssl" value="tls" checked="checked"> 
-                  <span>SSL</span>  <input type="radio" name="ssl" value="ssl">
-                </td>
-              </tr>
-              <tr>
-                <td><label>Capacity</label><input type="text" name="capacity" value="" class="medium"></td>
-              </tr>   
-              <tr>
-                <td><label>Active</label>
-                  <span>Yes</span> <input type="radio" name="isActive" value="1" checked="checked"> 
-                  <span>No</span>  <input type="radio" name="isActive" value="0">
-                </td>
-              </tr>
-              <tr>
-                <td class="button_area">
-                  <input type="button" onclick="adminAddTransporter('{SITE_URL}/admin/system/transporter-add',{PAGE});" class="small_btn" value="Add"></td>
-              </tr>
-            </table>
+           <table cellpadding="0" cellspacing="0" class="medium_table" width="100%">
+		<tr>
+			<td class="row2"><b>User</b></td>
+			<td class="row1"><input type="text" name="user" value="" ></td>
+		</tr>
+		<tr>
+			<td class="row2"><b>Password</b></td>
+			<td class="row1"><input type="text" name="pass" value="" ></td>
+		</tr>
+		<tr>
+			<td class="row2"><b>Server</b></td>
+			<td class="row1"><input type="text" name="server" value="" ></td>
+		</tr>			
+		<tr>
+			<td class="row2"><b>Port</b></td>
+			<td class="row1"><input type="text" name="port" value="" ></td>
+		</tr>		
+		<tr>
+			<td class="row2"><b>Capacity</b></td>
+			<td class="row1"><input type="text" name="capacity" value="" ></td>
+		</tr>		
+	    <tr>
+	      <td class="row2"><b>SSL</b></td>
+	      <td class="row1">
+	         <label for="tsl">TLS</label> <input type="radio" name="ssl" id="tsl" value="tls"  checked> 
+	         <label for="ssl">SSL</label>  <input type="radio" name="ssl" id="ssl" value="ssl" >
+	      </td>
+	    </tr>
+	    <tr>
+	      <td class="row2"><b>Active</b></td>
+	      <td class="row1">
+	       <label for="active1">Yes</label> <input type="radio" id="active1" name="isActive" value="1"  checked> 
+	       <label for="active0">No</label>  <input type="radio" id="active0" name="isActive" value="0"  >
+	      </td>
+	    </tr>
+		<tr>
+			<td class="row2"> </td>
+			<td class="row1 last_td" >
+				<input type="submit" onclick="" class="small_btn" value="update"></td>
+		</tr>
+	</table>
         </fieldset>
         </form>
       </td>
