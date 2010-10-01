@@ -23,7 +23,9 @@
 		<tr>
 			<td class="row{BG}" style="text-align: center;">{ID}</td>
 			<td class="row{BG}"> <a href="{SITE_URL}/admin/admin/update/id/{ADMINID}">{USERNAME}</a> </td>
-			<td class="row{BG}">{REFERER}</td>
+			<td class="row{BG}">
+				<input class="reffer_input" type="text" name="htmllink[]" value="{REFERER}" onclick="javascript:this.focus();this.select();" readonly>
+      		</td>
 			<td class="row{BG}" style="width: 150px;">				
 				<a href="{WHOISURL}/{IP}" target="_blank">{IP}</a></td>
 			<td class="row{BG}" style="text-align: center; width: 90px;">
