@@ -75,7 +75,6 @@ switch ($requestAction)
   case 'transporter-delete':
     if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
     { 
-	Zend_Debug::dump($_POST);exit;
       if ('on' == $_POST['confirm'])
       {
         $systemModel->deleteEmailTransporter($request['id']);
