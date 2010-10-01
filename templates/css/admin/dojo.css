@@ -179,22 +179,20 @@ INPUT.dijitTextBox,
 
 .dijitCalendar {
 	border:solid 1px #b5bcc7;
-	background-color:#d4ebff;
+	background-color:#EAF5FF;
 	background-image:url(images/calendarContainerImages.png);
 	background-position:0px -448px;
 	background-repeat:repeat-x;
 	text-align:center;
 	padding:6px 5px 3px 5px;
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;	
 }
 .dijitCalendar img {
 	border:none;
 }
 .dijitCalendarHover,
 .dijitCalendarActive {
-	background-color: #b7dcff;
-	border:solid 1px #769dc0;
+	background-color: #FDFEFF;
+	border:solid 1px #AABCCA;
 }
 .dijitCalendarMonthContainer th {
 	text-align:center;
@@ -206,8 +204,10 @@ INPUT.dijitTextBox,
 }
 .dijitCalendarMonthLabel {
 	color:#000000;
-	font-size: 1.091em;
+	font-size: 11px;
 	display: block;
+	text-transform: uppercase;
+	font-family: Arial, sans-serif;
 }
 .dijitCalendarIncrementControl {
 	width:18px;
@@ -224,9 +224,10 @@ INPUT.dijitTextBox,
 .dijitCalendarDayLabelTemplate {
 	padding-bottom:0em;
 	text-align:center;
-	border-bottom:1px solid #99B5CD;
+	border-bottom:1px solid #BCC7CD;
 	font-size:0.909em;
 	padding:0 3px 2px;
+	font-family: Arial, sans-serif;
 }
 .dijitCalendarDateTemplate {
 	text-align:center;
@@ -237,7 +238,7 @@ INPUT.dijitTextBox,
 	border-bottom: 1px solid #dadde1;
 	padding-top:0px;
 	font-size:0.909em;
-	font-family: Arial;
+	font-family: Trebuchet ms, sans-serif;
 	font-weight:bold;
 	letter-spacing:.05em;
 	text-align:center;
@@ -271,10 +272,10 @@ INPUT.dijitTextBox,
 .dijitCalendarNextYear,
 .dijitCalendarPreviousYear {
 	padding: 1px 6px 1px 6px;
-	font-size:0.909em;
+	font-size:12px;
 }
 .dijitCalendarSelectedYear {
-	font-size:1.091em;
+	font-size:13px;
 	color:#000;
 }
 .dijitCalendarHoveredDate .dijitCalendarDateLabel{
@@ -308,8 +309,8 @@ INPUT.dijitTextBox,
 }
 .dijitCalendarSelectedDate .dijitCalendarDateLabel {
 	color:#000;
-	background-color:#e7f4ff;
-	border-color:#accfed;
+	background-color:#E1F1FF;
+	border-color:#CBDBE4;
 }
 .dijitCalendarDisabledDate .dijitCalendarDateLabel {
 	text-decoration:line-through;
