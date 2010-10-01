@@ -8,6 +8,13 @@ current xml dots file. -->
 	<variable option="global">
 	</variable>
 	<variable option="admin">
+		<warningModGeoIp>&lt;i&gt;mod_geoip&lt;/i&gt; extension is not installed. 
+				&lt;br /&gt; Check if &lt;i&gt;externals/geoip/GeoIP.dat&lt;/i&gt; file exists. &lt;br /&gt; 
+				If not, download it from &lt;a href="http://www.maxmind.com/app/geolitecountry" target="_blank"&gt;
+				http://www.maxmind.com/app/geolitecountry&lt;/a&gt;</warningModGeoIp>
+		<warningGeoIp>Check if &lt;i&gt; {GEOIPDAT} &lt;/i&gt; file exists.&lt;br /&gt; 
+				If not, download it from &lt;a href="http://www.maxmind.com/app/geolitecountry" target="_blank"&gt;
+				http://www.maxmind.com/app/geolitecountry&lt;/a&gt;</warningGeoIp>
 	</variable>
 	<variable option="frontend">
 		<warningMessage>

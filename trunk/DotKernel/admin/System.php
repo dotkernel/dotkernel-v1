@@ -118,6 +118,30 @@ class System
 		return $data;
 	}
 	/**
+	 * Get GeoIp Version release
+	 * Return an array with keys "country" & "city"
+	 * @access public
+	 * @return array
+	 */
+	public function getGeoIpVersion()
+	{
+		$return = array('country' => '-', 'city' => '-');
+		if(function_exists('geoip_database_info'))
+		{			
+			if(geoip_db_avail(GEOIP_COUNTRY_EDITION))
+			{
+				$info = explode(" ",geoip_database_info(GEOIP_COUNTRY_EDITION));
+				$return['country']  = Dot_Kernel::TimeFormat($info[1]);					
+			}
+			if(geoip_db_avail(GEOIP_CITY_EDITION_REV0))
+			{
+				$info = explode(" ",geoip_database_info(GEOIP_CITY_EDITION_REV0));
+				$return['city'] = Dot_Kernel::TimeFormat($info[1]);
+			}
+		}
+		return $return;
+	}
+	/**
 	 * Get email transporter by field
 	 * @access public
 	 * @param string $field

@@ -26,7 +26,8 @@ switch ($requestAction)
 		$userLogins = $userModel->getLogins(0,0);
 		$userCountry = $systemModel->getCountryUserLogin($userLogins['data']);
 		$mysqlVersion = $systemModel->getMysqlVersion();
-		$systemView->dashboard('dashboard', $mysqlVersion, $userCountry);
+		$geoIpVersion = $systemModel->getGeoIpVersion();
+		$systemView->dashboard('dashboard', $mysqlVersion, $geoIpVersion, $userCountry);
 	break;
 	case 'settings':
 		// list settings values
