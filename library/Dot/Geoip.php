@@ -27,7 +27,7 @@ class Dot_Geoip
 	 */
 	public function __construct()
 	{		
-		$this->config = Zend_Registry::get('configuration');
+		$this->option = Zend_Registry::get('option');
 	}	
 	/**
 	 * Get the country by IP
@@ -38,6 +38,8 @@ class Dot_Geoip
 	 */
 	public function getCountryByIp($ip)
 	{
+		$session = Zend_Registry::get('session');
+		$country = array(0 => 'unknown',1 => 'NA');
 		if(extension_loaded('geoip') == FALSE)
 		{
 			// GeoIp extension is not active
@@ -48,18 +50,42 @@ class Dot_Geoip
 				$country = $api->getCountryByAddr($geoipPath, $ip);
 			}
 			else
+			{				
+				$session->message['txt'] = $this->option->warningModGeoIp;
+				$session->message['type'] = 'warning';
+			}
+		}
+		elseif(geoip_db_avail(GEOIP_COUNTRY_EDITION))
+		{ 
+			//if GeoIP.dat file exists
+			$country[0] = geoip_country_code_by_name ($ip);
+			$country[1] = geoip_country_name_by_name($ip);
+		}		
+		elseif(geoip_db_avail(GEOIP_CITY_EDITION_REV0))
+		{	
+			//if GeoIPCity.dat file exists
+			$record = geoip_record_by_name($ip);
+			if(!empty($record))
 			{
-				die('<b>mod_geoip</b> extension is not installed. 
-				<br /> Check if <b>externals/geoip/GeoIP.dat</b> file exists. <br /> 
-				If not, download it from <a href="http://www.maxmind.com/app/geolitecountry">
-				http://www.maxmind.com/app/geolitecountry</a>');
+				$country[0] = $record['country_code'];
+				$country[1] = $record['country_name'];
 			}
 		}
 		else
 		{
-			$country[0] = geoip_country_code_by_name ($ip);
-			$country[1] = geoip_country_name_by_name($ip);
-		}		
+			// GeoIp extension is not active
+			$api = new Dot_Geoip_Country();
+			$geoipPath = 'externals/geoip/GeoIP.dat';
+			if(file_exists($geoipPath))
+			{
+				$country = $api->getCountryByAddr($geoipPath, $ip);
+			}
+			else
+			{				
+				$session->message['txt'] = $this->option->warningModGeoIp;
+				$session->message['type'] = 'warning';
+			}
+		}
 		return $country;
 	}	
 }

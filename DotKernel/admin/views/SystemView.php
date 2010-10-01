@@ -34,17 +34,26 @@ class System_View extends View
 	 * @access public
 	 * @param string $templateFile
 	 * @param string $mysqlVersion
+	 * @param array $geoIpVersion
 	 * @param array $userCountry
 	 * @return void
 	 */
-	public function dashboard($templateFile, $mysqlVersion, $userCountry)
+	public function dashboard($templateFile, $mysqlVersion, $geoIpVersion, $userCountry)
 	{
 		$this->tpl->setFile('tpl_main', 'system/' . $templateFile . '.tpl');
 		// system overview
 		$this->tpl->setVar('MYSQL',$mysqlVersion);
 		$this->tpl->setVar('PHP',phpversion());
 		$this->tpl->setVar('PHPAPI',php_sapi_name());
-		$this->tpl->setVar('ZFVERSION', Zend_Version::VERSION);
+		$this->tpl->setVar('ZFVERSION', Zend_Version::VERSION);		
+		
+		$this->tpl->setBlock('tpl_main', 'is_geoip', 'is_geoip_row');	
+		if(function_exists('geoip_database_info'))
+		{
+			$this->tpl->setVar('GEOIP_CITY_VERSION', $geoIpVersion['country']);
+			$this->tpl->setVar('GEOIP_COUNTRY_VERSION', $geoIpVersion['city']);
+			$this->tpl->parse('is_geoip_row', 'is_geoip', true);			
+		}		
 		// pie chart
 		$option = Zend_Registry::get('option');
 		$color = $option->colorCharts->color->toArray();

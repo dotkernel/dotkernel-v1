@@ -6,45 +6,51 @@
 * @category   DotKernel
 * @package    DotLibrary
 * @copyright  Copyright (c) 2009-2010 DotBoost Technologies Inc. Canada (http://www.dotboost.com)
-* @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+* @license    http://www.gnu.org/licenses/lgpl.html
 * @version    $Id$
 */
 
 /**
  * Defined constants used for GeoIp database reading
  */
-define("GEOIP_COUNTRY_BEGIN", 16776960);
-define("GEOIP_STATE_BEGIN_REV0", 16700000);
-define("GEOIP_STATE_BEGIN_REV1", 16000000);
-define("GEOIP_STANDARD", 0);
-define("GEOIP_MEMORY_CACHE", 1);
-define("GEOIP_SHARED_MEMORY", 2);
-define("STRUCTURE_INFO_MAX_SIZE", 20);
-define("DATABASE_INFO_MAX_SIZE", 100);
-define("GEOIP_COUNTRY_EDITION", 106);
-define("GEOIP_PROXY_EDITION", 8);
-define("GEOIP_ASNUM_EDITION", 9);
-define("GEOIP_NETSPEED_EDITION", 10);
-define("GEOIP_REGION_EDITION_REV0", 112);
-define("GEOIP_REGION_EDITION_REV1", 3);
-define("GEOIP_CITY_EDITION_REV0", 111);
-define("GEOIP_CITY_EDITION_REV1", 2);
-define("GEOIP_ORG_EDITION", 110);
-define("GEOIP_ISP_EDITION", 4);
-define("SEGMENT_RECORD_LENGTH", 3);
-define("STANDARD_RECORD_LENGTH", 3);
-define("ORG_RECORD_LENGTH", 4);
-define("MAX_RECORD_LENGTH", 4);
-define("MAX_ORG_RECORD_LENGTH", 300);
-define("GEOIP_SHM_KEY", 0x4f415401);
-define("US_OFFSET", 1);
-define("CANADA_OFFSET", 677);
-define("WORLD_OFFSET", 1353);
-define("FIPS_RANGE", 360);
-define("GEOIP_UNKNOWN_SPEED", 0);
-define("GEOIP_DIALUP_SPEED", 1);
-define("GEOIP_CABLEDSL_SPEED", 2);
-define("GEOIP_CORPORATE_SPEED", 3);
+if (!defined("GEOIP_COUNTRY_BEGIN")) define("GEOIP_COUNTRY_BEGIN", 16776960);
+if (!defined("GEOIP_STATE_BEGIN_REV0")) define("GEOIP_STATE_BEGIN_REV0", 16700000);
+if (!defined("GEOIP_STATE_BEGIN_REV1")) define("GEOIP_STATE_BEGIN_REV1", 16000000);
+if (!defined("GEOIP_STANDARD")) define("GEOIP_STANDARD", 0);
+if (!defined("GEOIP_MEMORY_CACHE")) define("GEOIP_MEMORY_CACHE", 1);
+if (!defined("GEOIP_SHARED_MEMORY")) define("GEOIP_SHARED_MEMORY", 2);
+if (!defined("STRUCTURE_INFO_MAX_SIZE")) define("STRUCTURE_INFO_MAX_SIZE", 20);
+if (!defined("DATABASE_INFO_MAX_SIZE")) define("DATABASE_INFO_MAX_SIZE", 100);
+if (!defined("GEOIP_COUNTRY_EDITION")) define("GEOIP_COUNTRY_EDITION", 106);
+if (!defined("GEOIP_PROXY_EDITION")) define("GEOIP_PROXY_EDITION", 8);
+if (!defined("GEOIP_ASNUM_EDITION")) define("GEOIP_ASNUM_EDITION", 9);
+if (!defined("GEOIP_NETSPEED_EDITION")) define("GEOIP_NETSPEED_EDITION", 10);
+if (!defined("GEOIP_REGION_EDITION_REV0")) define("GEOIP_REGION_EDITION_REV0", 112);
+if (!defined("GEOIP_REGION_EDITION_REV1")) define("GEOIP_REGION_EDITION_REV1", 3);
+if (!defined("GEOIP_CITY_EDITION_REV0")) define("GEOIP_CITY_EDITION_REV0", 111);
+if (!defined("GEOIP_CITY_EDITION_REV1")) define("GEOIP_CITY_EDITION_REV1", 2);
+if (!defined("GEOIP_ORG_EDITION")) define("GEOIP_ORG_EDITION", 110);
+if (!defined("GEOIP_ISP_EDITION")) define("GEOIP_ISP_EDITION", 4);
+if (!defined("SEGMENT_RECORD_LENGTH")) define("SEGMENT_RECORD_LENGTH", 3);
+if (!defined("STANDARD_RECORD_LENGTH")) define("STANDARD_RECORD_LENGTH", 3);
+if (!defined("ORG_RECORD_LENGTH")) define("ORG_RECORD_LENGTH", 4);
+if (!defined("MAX_RECORD_LENGTH")) define("MAX_RECORD_LENGTH", 4);
+if (!defined("MAX_ORG_RECORD_LENGTH")) define("MAX_ORG_RECORD_LENGTH", 300);
+if (!defined("GEOIP_SHM_KEY")) define("GEOIP_SHM_KEY", 0x4f415401);
+if (!defined("US_OFFSET")) define("US_OFFSET", 1);
+if (!defined("CANADA_OFFSET")) define("CANADA_OFFSET", 677);
+if (!defined("WORLD_OFFSET")) define("WORLD_OFFSET", 1353);
+if (!defined("FIPS_RANGE")) define("FIPS_RANGE", 360);
+if (!defined("GEOIP_UNKNOWN_SPEED")) define("GEOIP_UNKNOWN_SPEED", 0);
+if (!defined("GEOIP_DIALUP_SPEED")) define("GEOIP_DIALUP_SPEED", 1);
+if (!defined("GEOIP_CABLEDSL_SPEED")) define("GEOIP_CABLEDSL_SPEED", 2);
+if (!defined("GEOIP_CORPORATE_SPEED")) define("GEOIP_CORPORATE_SPEED", 3);
+if (!defined("GEOIP_DOMAIN_EDITION")) define("GEOIP_DOMAIN_EDITION", 11);
+if (!defined("GEOIP_LOCATIONA_EDITION")) define("GEOIP_LOCATIONA_EDITION", 13);
+if (!defined("GEOIP_ACCURACYRADIUS_EDITION")) define("GEOIP_ACCURACYRADIUS_EDITION", 14);
+if (!defined("GEOIP_CITYCOMBINED_EDITION")) define("GEOIP_CITYCOMBINED_EDITION", 15);
+if (!defined("CITYCOMBINED_FIXED_RECORD")) define("CITYCOMBINED_FIXED_RECORD", 7 );
+
 
 /**
 * Geo IP Country - connect to GeoIP.dat database to return the country based on IP address
@@ -178,14 +184,14 @@ class Dot_Geoip_Country extends Dot_Geoip
 	 * @var array
 	 */
     private $GEOIP_COUNTRY_CODES3 = array(
-		"","AP","EU","AND","ARE","AFG","ATG","AIA","ALB","ARM","ANT","AGO","AQ","ARG",
+		"","AP","EU","AND","ARE","AFG","ATG","AIA","ALB","ARM","ANT","AGO","ATA","ARG",
 		"ASM","AUT","AUS","ABW","AZE","BIH","BRB","BGD","BEL","BFA","BGR","BHR","BDI",
-		"BEN","BMU","BRN","BOL","BRA","BHS","BTN","BV","BWA","BLR","BLZ","CAN","CC",
+		"BEN","BMU","BRN","BOL","BRA","BHS","BTN","BVT","BWA","BLR","BLZ","CAN","CCK",
 		"COD","CAF","COG","CHE","CIV","COK","CHL","CMR","CHN","COL","CRI","CUB","CPV",
-		"CX","CYP","CZE","DEU","DJI","DNK","DMA","DOM","DZA","ECU","EST","EGY","ESH",
+		"CXR","CYP","CZE","DEU","DJI","DNK","DMA","DOM","DZA","ECU","EST","EGY","ESH",
 		"ERI","ESP","ETH","FIN","FJI","FLK","FSM","FRO","FRA","FX","GAB","GBR","GRD",
-		"GEO","GUF","GHA","GIB","GRL","GMB","GIN","GLP","GNQ","GRC","GS","GTM","GUM",
-		"GNB","GUY","HKG","HM","HND","HRV","HTI","HUN","IDN","IRL","ISR","IND","IO",
+		"GEO","GUF","GHA","GIB","GRL","GMB","GIN","GLP","GNQ","GRC","SGS","GTM","GUM",
+		"GNB","GUY","HKG","HMD","HND","HRV","HTI","HUN","IDN","IRL","ISR","IND","IOT",
 		"IRQ","IRN","ISL","ITA","JAM","JOR","JPN","KEN","KGZ","KHM","KIR","COM","KNA",
 		"PRK","KOR","KWT","CYM","KAZ","LAO","LBN","LCA","LIE","LKA","LBR","LSO","LTU",
 		"LUX","LVA","LBY","MAR","MCO","MDA","MDG","MHL","MKD","MLI","MMR","MNG","MAC",
@@ -193,10 +199,10 @@ class Dot_Geoip_Country extends Dot_Geoip
 		"NER","NFK","NGA","NIC","NLD","NOR","NPL","NRU","NIU","NZL","OMN","PAN","PER",
 		"PYF","PNG","PHL","PAK","POL","SPM","PCN","PRI","PSE","PRT","PLW","PRY","QAT",
 		"REU","ROU","RUS","RWA","SAU","SLB","SYC","SDN","SWE","SGP","SHN","SVN","SJM",
-		"SVK","SLE","SMR","SEN","SOM","SUR","STP","SLV","SYR","SWZ","TCA","TCD","TF",
+		"SVK","SLE","SMR","SEN","SOM","SUR","STP","SLV","SYR","SWZ","TCA","TCD","ATF",
 		"TGO","THA","TJK","TKL","TLS","TKM","TUN","TON","TUR","TTO","TUV","TWN","TZA",
-		"UKR","UGA","UM","USA","URY","UZB","VAT","VCT","VEN","VGB","VIR","VNM","VUT",
-		"WLF","WSM","YEM","YT","SRB","ZAF","ZMB","MNE","ZWE","A1","A2","O1",
+		"UKR","UGA","UMI","USA","URY","UZB","VAT","VCT","VEN","VGB","VIR","VNM","VUT",
+		"WLF","WSM","YEM","MYT","SRB","ZAF","ZMB","MNE","ZWE","A1","A2","O1",
 		"ALA","GGY","IMN","JEY","BLM","MAF");	
 	/**
 	 * Array with country names
@@ -261,32 +267,32 @@ class Dot_Geoip_Country extends Dot_Geoip
 	 * @var array
 	 */
     private $GEOIP_CONTINENT_CODES = array(
-		"--", "AS", "EU", "EU", "AS", "AS", "SA", "SA", "EU", "AS",
-		"SA", "AF", "AN", "SA", "OC", "EU", "OC", "SA", "AS", "EU",
-		"SA", "AS", "EU", "AF", "EU", "AS", "AF", "AF", "SA", "AS",
-		"SA", "SA", "SA", "AS", "AF", "AF", "EU", "SA", "NA", "AS",
-		"AF", "AF", "AF", "EU", "AF", "OC", "SA", "AF", "AS", "SA",
-		"SA", "SA", "AF", "AS", "AS", "EU", "EU", "AF", "EU", "SA",
-		"SA", "AF", "SA", "EU", "AF", "AF", "AF", "EU", "AF", "EU",
-		"OC", "SA", "OC", "EU", "EU", "EU", "AF", "EU", "SA", "AS",
-		"SA", "AF", "EU", "SA", "AF", "AF", "SA", "AF", "EU", "SA",
-		"SA", "OC", "AF", "SA", "AS", "AF", "SA", "EU", "SA", "EU",
-		"AS", "EU", "AS", "AS", "AS", "AS", "AS", "EU", "EU", "SA",
-		"AS", "AS", "AF", "AS", "AS", "OC", "AF", "SA", "AS", "AS",
-		"AS", "SA", "AS", "AS", "AS", "SA", "EU", "AS", "AF", "AF",
-		"EU", "EU", "EU", "AF", "AF", "EU", "EU", "AF", "OC", "EU",
-		"AF", "AS", "AS", "AS", "OC", "SA", "AF", "SA", "EU", "AF",
-		"AS", "AF", "NA", "AS", "AF", "AF", "OC", "AF", "OC", "AF",
-		"SA", "EU", "EU", "AS", "OC", "OC", "OC", "AS", "SA", "SA",
-		"OC", "OC", "AS", "AS", "EU", "SA", "OC", "SA", "AS", "EU",
-		"OC", "SA", "AS", "AF", "EU", "AS", "AF", "AS", "OC", "AF",
-		"AF", "EU", "AS", "AF", "EU", "EU", "EU", "AF", "EU", "AF",
-		"AF", "SA", "AF", "SA", "AS", "AF", "SA", "AF", "AF", "AF",
-		"AS", "AS", "OC", "AS", "AF", "OC", "AS", "EU", "SA", "OC",
-		"AS", "AF", "EU", "AF", "OC", "NA", "SA", "AS", "EU", "SA",
-		"SA", "SA", "SA", "AS", "OC", "OC", "OC", "AS", "AF", "EU",
-		"AF", "AF", "EU", "AF", "--", "--", "--", "EU", "EU", "EU",
-		"EU", "SA", "SA" );
+		  "--", "AS", "EU", "EU", "AS", "AS", "NA", "NA", "EU", "AS", 
+		  "NA", "AF", "AN", "SA", "OC", "EU", "OC", "NA", "AS", "EU", 
+		  "NA", "AS", "EU", "AF", "EU", "AS", "AF", "AF", "NA", "AS", 
+		  "SA", "SA", "NA", "AS", "AN", "AF", "EU", "NA", "NA", "AS", 
+		  "AF", "AF", "AF", "EU", "AF", "OC", "SA", "AF", "AS", "SA", 
+		  "NA", "NA", "AF", "AS", "AS", "EU", "EU", "AF", "EU", "NA", 
+		  "NA", "AF", "SA", "EU", "AF", "AF", "AF", "EU", "AF", "EU", 
+		  "OC", "SA", "OC", "EU", "EU", "EU", "AF", "EU", "NA", "AS", 
+		  "SA", "AF", "EU", "NA", "AF", "AF", "NA", "AF", "EU", "AN", 
+		  "NA", "OC", "AF", "SA", "AS", "AN", "NA", "EU", "NA", "EU", 
+		  "AS", "EU", "AS", "AS", "AS", "AS", "AS", "EU", "EU", "NA", 
+		  "AS", "AS", "AF", "AS", "AS", "OC", "AF", "NA", "AS", "AS", 
+		  "AS", "NA", "AS", "AS", "AS", "NA", "EU", "AS", "AF", "AF", 
+		  "EU", "EU", "EU", "AF", "AF", "EU", "EU", "AF", "OC", "EU", 
+		  "AF", "AS", "AS", "AS", "OC", "NA", "AF", "NA", "EU", "AF", 
+		  "AS", "AF", "NA", "AS", "AF", "AF", "OC", "AF", "OC", "AF", 
+		  "NA", "EU", "EU", "AS", "OC", "OC", "OC", "AS", "NA", "SA", 
+		  "OC", "OC", "AS", "AS", "EU", "NA", "OC", "NA", "AS", "EU", 
+		  "OC", "SA", "AS", "AF", "EU", "EU", "AF", "AS", "OC", "AF", 
+		  "AF", "EU", "AS", "AF", "EU", "EU", "EU", "AF", "EU", "AF", 
+		  "AF", "SA", "AF", "NA", "AS", "AF", "NA", "AF", "AN", "AF", 
+		  "AS", "AS", "OC", "AS", "AF", "OC", "AS", "EU", "NA", "OC", 
+		  "AS", "AF", "EU", "AF", "OC", "NA", "SA", "AS", "EU", "NA", 
+		  "SA", "NA", "NA", "AS", "OC", "OC", "OC", "AS", "AF", "EU", 
+		  "AF", "AF", "EU", "AF", "--", "--", "--", "EU", "EU", "EU", 
+		  "EU", "NA", "NA");
 	/**
 	 * Constructor
 	 * @access public
@@ -326,21 +332,21 @@ class Dot_Geoip_Country extends Dot_Geoip
 	 */
 	private function geoipOpen($filename, $flags) 
 	{
-	  $this->flags = $flags;
-	  if ($this->flags & GEOIP_SHARED_MEMORY) 
-	  {
-		$this->shmid = @shmop_open (GEOIP_SHM_KEY, "a", 0, 0);
-	  }
-	  else 
-	  {
-	    $this->filehandle = fopen($filename,"rb") or die( "Can not open $filename\n" );
-	    if ($this->flags & GEOIP_MEMORY_CACHE) 
+		$this->flags = $flags;
+		if ($this->flags & GEOIP_SHARED_MEMORY) 
 		{
-			$sArray = fstat($this->filehandle);
-	        $this->memoryBuffer = fread($this->filehandle, $sArray['size']);
-	    }
-	  }	
-	  $this->setupSegments();
+			$this->shmid = @shmop_open (GEOIP_SHM_KEY, "a", 0, 0);
+		}
+		else 
+		{
+			$this->filehandle = fopen($filename,"rb") or die( "Can not open $filename\n" );
+			if ($this->flags & GEOIP_MEMORY_CACHE) 
+			{
+				$sArray = fstat($this->filehandle);
+			    $this->memoryBuffer = fread($this->filehandle, $sArray['size']);
+			}
+		}	
+		$this->setupSegments();
 	}
 	/**
 	 * Close opened file
@@ -349,11 +355,68 @@ class Dot_Geoip_Country extends Dot_Geoip
 	 */
 	private function geoipClose() 
 	{
-	  if ($this->flags & GEOIP_SHARED_MEMORY) 
-	  {
-	    return true;
-	  }	
-	  return fclose($this->filehandle);
+		if ($this->flags & GEOIP_SHARED_MEMORY) 
+		{
+			return true;
+		}	
+		return fclose($this->filehandle);
+	}
+	/**
+	 * Get the country ID by name.
+	 * Return the ID of the country or false if no country found
+	 * @access public
+	 * @param string $name
+	 * @return int
+	 */
+	public function geoipCountryIdByName($name)
+	{
+		$addr = gethostbyname($name);
+		if (!$addr || $addr == $name) 
+		{
+			return false;
+  		}
+  		return $this->geoipCountryIdByAddr($addr);
+	}
+	/**
+	 * Get country code by name
+	 * @access public
+	 * @param string $name
+	 * @return string
+	 */
+	public function geoipCountryCodeByName($name) 
+	{
+		$countryId = $this->geoipCountryIdByName($name);
+		if ($countryId !== false) 
+		{
+			return $this->GEOIP_COUNTRY_CODES[$countryId];
+		}
+		return false;
+	}
+	/**
+	 * Get country name by name
+	 * @access public
+	 * @param string $name
+	 * @return string
+	 */
+	public function geoipCountryNameByName($name)
+	{
+		$countryId = $thisd->geoipCountryIdByName($name);
+		if ($countryId !== false) 
+		{
+		    return $this->GEOIP_COUNTRY_NAMES[$countryId];
+		}
+		return false;
+	}
+	/**
+	 * Get country id based on IP address
+	 * @access private 
+	 * @param string $addr
+	 * @return int
+	 */
+	private function geoipCountryIdByAddr($addr) 
+	{
+	  $ipNum = ip2long($addr);
+	  return $this->geoipSeekCountry($ipNum) - GEOIP_COUNTRY_BEGIN;
 	}
 	/**
 	 * Get country code based on IP address
@@ -382,15 +445,26 @@ class Dot_Geoip_Country extends Dot_Geoip
 	  return false;
 	}
 	/**
-	 * Get country id based on IP address
-	 * @access private 
+	 * Get country name based on IP address
+	 * @access public 
 	 * @param string $addr
-	 * @return int
+	 * @return string
 	 */
-	private function geoipCountryIdByAddr($addr) 
+	public function geoipCountryNameByAddr($addr) 
 	{
-	  $ipNum = ip2long($addr);
-	  return $this->geoipSeekCountry($ipNum) - GEOIP_COUNTRY_BEGIN;
+		if ($this->databaseType == GEOIP_CITY_EDITION_REV1) 
+		{
+			$record = geoip_record_by_addr($gi,$addr);
+			return $record->country_name;
+		} 
+		else {
+			$countryId = $this->geoipCountryIdByAddr($addr);
+			if ($countryId !== false) 
+			{
+		  		return $this->GEOIP_COUNTRY_NAMES[$countryId];
+			}
+		}
+		return false;
 	}
 	/**
 	 * Search the country based on IP address
@@ -422,7 +496,8 @@ class Dot_Geoip_Country extends Dot_Geoip
 	    } 
 		else 
 		{
-	      fseek($this->filehandle, 2 * $this->recordLength * $offset, SEEK_SET) == 0 or die("fseek failed");
+	      fseek($this->filehandle, 2 * $this->recordLength * $offset, SEEK_SET) == 0 
+		  	or die("fseek failed");
 	      $buf = fread($this->filehandle, 2 * $this->recordLength);
 	    }
 	    $x = array(0,0);
@@ -452,6 +527,115 @@ class Dot_Geoip_Country extends Dot_Geoip
 	  }
 	  trigger_error("error traversing database - perhaps it is corrupt?", E_USER_ERROR);
 	  return false;
+	}
+	/**
+	 * Get GeoIP Organization by IP address
+	 * Note: file GeoIPOrg.dat is required 
+	 * @param string $ipnum
+	 * @return string
+	 */
+	private function getOrg($ipnum)
+	{
+		$seekOrg = $this->geoipSeekCountry($ipnum);
+		if ($seekOrg == $this->databaseSegments) 
+		{
+			return NULL;
+		}
+		$recordPointer = $seekOrg + (2 * $this->recordLength - 1) * $this->databaseSegments;
+		if ($this->flags & GEOIP_SHARED_MEMORY) {
+		$orgBuf = @shmop_read ($this->shmid, $recordPointer, MAX_ORG_RECORD_LENGTH);
+		} else {
+		fseek($this->filehandle, $recordPointer, SEEK_SET);
+		$orgBuf = fread($this->filehandle,MAX_ORG_RECORD_LENGTH);
+		}
+		// workaround php's broken substr, strpos, etc handling with
+		// mbstring.func_overload and mbstring.internal_encoding
+		$enc = mb_internal_encoding();
+		mb_internal_encoding('ISO-8859-1'); 
+		$orgBuf = substr($orgBuf, 0, strpos($orgBuf, "\0"));
+		mb_internal_encoding($enc);
+		return $orgBuf;
+	}
+	/**
+	 * Get Orgasnization based on IP address
+	 * @access private
+	 * @param string $addr
+	 * @return string
+	 */
+	public function geoipOrgByAddr ($addr) 
+	{
+	  if ($addr == NULL) 
+	  {
+	    return 0;
+	  }
+	  $ipnum = ip2long($addr);
+	  return $this->getOrg($ipnum);
+	}
+	/**
+	 * Get GeoIp region based on IP address.
+	 * Return an array with country code and region name
+	 * @access private
+	 * @param object $ipnum
+	 * @return array
+	 */
+	private function getRegion($ipnum)
+	{
+		if ($this->databaseType == GEOIP_REGION_EDITION_REV0)
+		{
+			$seekRegion = $this->geoipSeekCountry($ipnum) - GEOIP_STATE_BEGIN_REV0;
+			if ($seekRegion >= 1000)
+			{
+			  $country_code = "US";
+			  $region = chr(($seekRegion - 1000)/26 + 65) . chr(($seekRegion - 1000)%26 + 65);
+			} 
+			else 
+			{
+			  $country_code = $this->GEOIP_COUNTRY_CODES[$seekRegion];
+			  $region = "";
+			}
+			return array ($country_code,$region);
+		}  
+		else if ($this->databaseType == GEOIP_REGION_EDITION_REV1) 
+		{
+			$seekRegion = $this->geoipSeekCountry($ipnum) - GEOIP_STATE_BEGIN_REV1;
+			//print $seek_region;
+			if ($seekRegion < US_OFFSET)
+			{
+			  $country_code = "";
+			  $region = "";  
+			} 
+			elseif ($seekRegion < CANADA_OFFSET) 
+			{
+			  $country_code = "US";
+			  $region = chr(($seekRegion - US_OFFSET)/26 + 65) . chr(($seekRegion - US_OFFSET)%26 + 65);
+			}
+			elseif ($seekRegion < WORLD_OFFSET) 
+			{
+			  $country_code = "CA";
+			  $region = chr(($seekRegion - CANADA_OFFSET)/26 + 65) . chr(($seekRegion - CANADA_OFFSET)%26 + 65);
+			}
+			else 
+			{
+			  $country_code = $this->GEOIP_COUNTRY_CODES[($seekRegion - WORLD_OFFSET) / FIPS_RANGE];
+			  $region = "";
+			}
+			return array ($country_code,$region);
+		}
+	}
+	/**
+	 * Get GeoIp region based on IP address
+	 * @access public
+	 * @param string $addr
+	 * @return array
+	 */
+	public function geoipRegionByAddr ($addr) 
+	{
+		if ($addr == NULL) 
+		{
+			return 0;
+		}
+		$ipnum = ip2long($addr);
+		return $this->getRegion($ipnum);
 	}
 	/**
 	 * Setup segments from GeoIp
@@ -484,7 +668,10 @@ class Dot_Geoip_Country extends Dot_Geoip
 				else if (($this->databaseType == GEOIP_CITY_EDITION_REV0)
 						 || ($this->databaseType == GEOIP_CITY_EDITION_REV1) 
 	                     || ($this->databaseType == GEOIP_ORG_EDITION)
+	                     || ($this->databaseType == GEOIP_DOMAIN_EDITION)
 			    		 || ($this->databaseType == GEOIP_ISP_EDITION)
+			    		 || ($this->databaseType == GEOIP_LOCATIONA_EDITION)
+			    		 || ($this->databaseType == GEOIP_ACCURACYRADIUS_EDITION)
 			    		 || ($this->databaseType == GEOIP_ASNUM_EDITION)
 						)
 				{
@@ -495,6 +682,7 @@ class Dot_Geoip_Country extends Dot_Geoip
 	                    $this->databaseSegments += (ord($buf[$j]) << ($j * 8));
 	                }
 		            if (($this->databaseType == GEOIP_ORG_EDITION) 
+						|| ($this->databaseType == GEOIP_DOMAIN_EDITION)
 						|| ($this->databaseType == GEOIP_ISP_EDITION)
 					   ) 
 					{
@@ -536,9 +724,13 @@ class Dot_Geoip_Country extends Dot_Geoip
 	            }  
 				else if (($this->databaseType == GEOIP_CITY_EDITION_REV0)
 						 || ($this->databaseType == GEOIP_CITY_EDITION_REV1)
-						 || ($this->databaseType == GEOIP_ORG_EDITION) 
-						 || ($this->databaseType == GEOIP_ISP_EDITION) 
-						 || ($this->databaseType == GEOIP_ASNUM_EDITION))
+						 || ($this->databaseType == GEOIP_ORG_EDITION)
+	                     || ($this->databaseType == GEOIP_DOMAIN_EDITION)
+			    		 || ($this->databaseType == GEOIP_ISP_EDITION)
+			    		 || ($this->databaseType == GEOIP_LOCATIONA_EDITION)
+			    		 || ($this->databaseType == GEOIP_ACCURACYRADIUS_EDITION)
+			    		 || ($this->databaseType == GEOIP_ASNUM_EDITION)
+						)
 				{
 	            	$this->databaseSegments = 0;
 	            	$buf = fread($this->filehandle,SEGMENT_RECORD_LENGTH);
@@ -546,7 +738,10 @@ class Dot_Geoip_Country extends Dot_Geoip
 					{
 	            		$this->databaseSegments += (ord($buf[$j]) << ($j * 8));
 	            	}
-		    		if ($this->databaseType == GEOIP_ORG_EDITION || $this->databaseType == GEOIP_ISP_EDITION) 
+		    		if ($this->databaseType == GEOIP_ORG_EDITION 
+						|| $this->databaseType == GEOIP_DOMAIN_EDITION
+						|| $this->databaseType == GEOIP_ISP_EDITION
+						) 
 					{
 		    			$this->recordLength = ORG_RECORD_LENGTH;
 	            	}

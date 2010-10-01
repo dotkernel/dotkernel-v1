@@ -1,8 +1,8 @@
-<fieldset style="width: 450px;">
+<fieldset style="width: 500px;">
 	<legend>System Overview</legend>
 	<table cellpadding="0" cellspacing="0" class="medium_table" width="100%">
 		<tr>
-			<td class="row2" width="120px"><b>MYSQL</b></td>
+			<td class="row2" width="136px"><b>MYSQL</b></td>
 			<td class="row1">MYSQL {MYSQL}</td>
 		</tr>
 		<tr>
@@ -13,7 +13,8 @@
 			<td class="row2"><b>Zend Framework</b></td>
 			<td class="row1"> {ZFVERSION}</td>
 		</tr>
-	 <tr>
+		<!-- BEGIN is_geoip -->
+	 	<tr>
 			<td class="row2"><b>GEOIP CITY</b></td>
 			<td class="row1"> {GEOIP_CITY_VERSION}</td>
 		</tr>
@@ -21,6 +22,7 @@
 			<td class="row2"><b>GEOIP COUNTRY</b></td>
 			<td class="row1"> {GEOIP_COUNTRY_VERSION}</td>
 		</tr>
+		<!-- END is_geoip -->
 	</table>
 </fieldset>
 
