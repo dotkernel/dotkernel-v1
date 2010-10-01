@@ -412,6 +412,9 @@ a#logo{
 	text-align:left;
 	color: #3B3B3B;
 }
+.no_padding td{
+	padding: 0px;
+}
 input.reffer_input{
 	width: 100%;
 	border: 0;

@@ -1,4 +1,4 @@
-<fieldset style="width: 500px;">
+<fieldset style="width: 550px;">
 	<legend>System Overview</legend>
 	<table cellpadding="0" cellspacing="0" class="medium_table" width="100%">
 		<tr>
@@ -10,8 +10,8 @@
 			<td class="row1">{PHP} ({PHPAPI}) &nbsp;&nbsp;[ <a href="{SITE_URL}/admin/system/phpinfo">Php Info</a> ]</td>
 		</tr>				
 		<tr>
-			<td class="row2"><b>Zend Framework</b></td>
-			<td class="row1"> {ZFVERSION}</td>
+			<td class="row2 last_td"><b>Zend Framework</b></td>
+			<td class="row1 last_td"> {ZFVERSION}</td>
 		</tr>
 		<!-- BEGIN is_geoip -->
 	 	<tr>
@@ -19,8 +19,8 @@
 			<td class="row1"> {GEOIP_CITY_VERSION}</td>
 		</tr>
 				<tr>
-			<td class="row2"><b>GEOIP COUNTRY</b></td>
-			<td class="row1"> {GEOIP_COUNTRY_VERSION}</td>
+			<td class="row2 last_td"><b>GEOIP COUNTRY</b></td>
+			<td class="row1 last_td"> {GEOIP_COUNTRY_VERSION}</td>
 		</tr>
 		<!-- END is_geoip -->
 	</table>
@@ -33,10 +33,16 @@
  <script type="text/javascript">
  	pieChart({PIEDATA}); 
  </script>
-<fieldset style="width: 500px;">
+<fieldset style="width: 550px;">
 	<legend>Users Logins By Country</legend>
-		 <div id="chartCountryUserLogin" style="width: 300px; height: 300px; float: left;">
-	     </div>
-		<div id="chartCountryLegend" >		
-		</div>
+	<table cellpadding="0" cellspacing="0" class="medium_table" width="100%">
+	    <tr>
+	        <td class="no_padding">
+	        	<div id="chartCountryUserLogin" style="width: 300px; height: 300px; float: left;">
+			     </div>
+				<div id="chartCountryLegend" >		
+				</div>
+	        </td>
+	    </tr>
+	</table>
 </fieldset>
