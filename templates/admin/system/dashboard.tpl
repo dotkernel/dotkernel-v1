@@ -2,7 +2,7 @@
 	<legend>System Overview</legend>
 	<table cellpadding="0" cellspacing="0" class="medium_table" width="100%">
 		<tr>
-			<td class="row2" width="136px"><b>MYSQL</b></td>
+			<td class="row2" width="120px"><b>MYSQL</b></td>
 			<td class="row1">MYSQL {MYSQL}</td>
 		</tr>
 		<tr>
