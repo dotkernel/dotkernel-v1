@@ -49,7 +49,7 @@
 			<td class="row{BG}"> <a href="{SITE_URL}/admin/user/update/id/{USERID}">{USERNAME}</a> </td>
 			<td class="row{BG}">
 				<input class="reffer_input" type="text" name="htmllink[]" value="{REFERER}" onclick="javascript:this.focus();this.select();" readonly>
-      </td>
+      		</td>
 			<td class="row{BG}">				
 				<a href="{WHOISURL}/{IP}" target="_blank">{IP}</a></td>
 			<td class="row{BG}" style="text-align: center;">
