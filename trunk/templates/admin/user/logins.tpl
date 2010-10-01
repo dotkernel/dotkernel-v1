@@ -23,7 +23,7 @@
 					<input type="text" name="filterDate" id="filterDate" dojoType="dijit.form.DateTextBox" value="{FILTERDATE}"
 							onchange="javascript: adminLogins('{SITE_URL}{FILTER_URL}',1, dojo.byId('browser').value, this.value);" />
 					<label for="filterDate">
-					    <img src="{IMAGES_URL}/calendar.png" border='0' />
+					    <img src="{IMAGES_URL}/calendar.png" border='0' style="margin-top: 1px;"/>
 					</label>
 				</form>							
 			</td>

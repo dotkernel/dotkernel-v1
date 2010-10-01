@@ -174,11 +174,11 @@ switch ($requestAction)
 		$registry->route = $route;		
 		$adminView->listUser('list', $users, $page, true);
 	break;
-	case 'delete':
+	case 'delete':			
 		// display confirmation form and delete admin user
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
 		{	
-			if (1 == $_POST['delete'])
+			if ('on' == $_POST['confirm'])
 			{
 				// delete admin user
 				$adminModel->deleteUser($request['id']);

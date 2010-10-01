@@ -151,7 +151,7 @@ switch ($requestAction)
 		// display confirmation form and delete user account
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
 		{	
-			if (1 == $_POST['delete'])
+			if ('on' == $_POST['confirm'])
 			{
 				// delete user
 				$userModel->deleteUser($request['id']);
