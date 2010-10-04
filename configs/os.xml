@@ -30,6 +30,13 @@
 				</identify>		
 			</name>
 			<name type="mobile">
+				<os>Samsung</os>
+				<identify>
+					<osName>Samsung OS</osName>
+					<uaString>Samsung</uaString>
+				</identify>		
+			</name>
+			<name type="mobile">
 				<os>Symbian</os>
 				<identify>
 					<osName>Symbian OS</osName>
@@ -131,7 +138,7 @@
 				<os>Java</os>
 				<identify>
 					<osName>JVM</osName>
-					<uaString>J2ME|JRE|Java</uaString>
+					<uaString>J2ME|JRE|Java|MIDP</uaString>
 				</identify>
 			</name>
  	</type>
