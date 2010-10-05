@@ -15,7 +15,7 @@
 			<div class="top_user_menu clearfix">{INFO_BAR}</div>
 			{MENU_1}
 		</div>
-		<div class="content">				
+		<div class="content clearfix">				
 			<h1>{PAGE_CONTENT_TITLE}</h1>
 				{MESSAGE_BLOCK}
 					{MAIN_CONTENT}

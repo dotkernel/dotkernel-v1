@@ -661,10 +661,16 @@ input.bigger{width: 100%;}
 /*END Dijit Tooltip*/
 /* Dojo PieChart*/
 .dojoxLegendNode{
-    padding: 25px;
+	display: block;
+	float: left;
+    margin: 30px 20px 20px 20px;
+	padding: 0px 0px 0px 20px;
     background-color: #ffffff;
-    height: 300px;
-    width: 200px;
+    height: auto;
+    width: 140px;
+}
+.dojoxLegendIcon{
+	vertical-align: middle;
 }
 /* END Dojo PieChart*/
 /* Dijit Calendar */
