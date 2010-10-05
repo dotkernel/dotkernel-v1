@@ -13,9 +13,11 @@
 			<td class="row2 last_td"><b>Zend Framework</b></td>
 			<td class="row1 last_td"> {ZFVERSION}</td>
 		</tr>
+	</table>
+	<table cellpadding="0" cellspacing="0" class="medium_table" width="100%">
 		<!-- BEGIN is_geoip -->
 	 	<tr>
-			<td class="row2"><b>GEOIP CITY</b></td>
+			<td class="row2" width="120px"><b>GEOIP CITY</b></td>
 			<td class="row1"> {GEOIP_CITY_VERSION}</td>
 		</tr>
 				<tr>
@@ -29,7 +31,6 @@
 <!-- piechart with users logins-->
 <script type="text/javascript" src="{SITE_URL}/externals/dojo/dojo.xd.js"></script>
 <script type="text/javascript" src="{SITE_URL}/templates/js/admin/system.js"></script>
-<style type="text/css">@import "{TEMPLATES_URL}/css/admin/dojo.css";</style>
  <script type="text/javascript">
  	pieChart({PIEDATA}); 
  </script>

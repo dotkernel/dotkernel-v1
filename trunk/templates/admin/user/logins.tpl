@@ -1,6 +1,5 @@
 <script type="text/javascript" src="{SITE_URL}/externals/dojo/dojo.xd.js" djConfig="parseOnLoad: true"></script>
 <script type="text/javascript" src="{TEMPLATES_URL}/js/admin/admin.js"></script>
-<style type="text/css">@import "{TEMPLATES_URL}/css/admin/dojo.css";</style>
  <script>
         dojo.require("dijit.Tooltip");
         dojo.require("dijit.form.Button");    
@@ -38,9 +37,9 @@
 			<td class="table_subhead"><span>Username</span></td>
 			<td class="table_subhead"><span>Referer</span></td>
 			<td class="table_subhead" style="width: 150px;"><span>IP</span></td>
-			<td class="table_subhead" style="width: 90px;"><span>Country</span></td>
-			<td class="table_subhead" style="width: 90px;"><span>Browser</span></td>
-			<td class="table_subhead" style="width: 40px;"><span>OS</span></td>
+			<td class="table_subhead" style="width: 50px;"><span>Country</span></td>
+			<td class="table_subhead" style="width: 50px;"><span>Browser</span></td>
+			<td class="table_subhead" style="width: 50px;"><span>OS</span></td>
 			<td class="table_subhead" style="width: 150px;"><span>Login Date</span></td>
 		</tr>
 	<!-- BEGIN list -->
