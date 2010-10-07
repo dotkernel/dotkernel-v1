@@ -56,23 +56,23 @@ class Dot_Seo
 		}
 		if('frontend' != $route['module'])
 		{
-			$url .=  $route['module'] . '/';
+			$url .=  urlencode($route['module']) . '/';
 		}
 		if( '' != $route['controller'])
 		{
-			$url .= $route['controller'] . '/';
+			$url .= urlencode($route['controller']) . '/';
 		}
 		if( '' != $route['action'])
 		{
-			$url .= $route['action'] . '/';
+			$url .= urlencode($route['action']) . '/';
 		}
 		//unset the request route: module, controller and action
 		unset($route['module']);
 		unset($route['controller']);
-		unset($route['action']);		
+		unset($route['action']);	
 		foreach ($route as $k => $v)
 		{
-			$url .= $k . '/' . $v . '/';
+			$url .= urlencode($k) . '/' . urlencode($v) . '/';
 		}		
 		return $url;		
 	}
