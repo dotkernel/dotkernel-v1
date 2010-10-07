@@ -98,12 +98,6 @@ class View extends Dot_Template
 	 * @param Zend_Config_Ini $config
 	 * @return void
 	 */
-		/**
-	 * Display the specific menu that were declared in configs/menu.xml file
-	 * @access public
-	 * @param Zend_Config_Ini $config
-	 * @return void
-	 */
 	public function setViewMenu($config)
 	{		
 		if(Dot_Auth::hasIdentity('admin'))
