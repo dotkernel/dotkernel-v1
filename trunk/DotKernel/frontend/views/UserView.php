@@ -1,4 +1,3 @@
-
 <?php
 /**
 * DotBoost Technologies Inc.
