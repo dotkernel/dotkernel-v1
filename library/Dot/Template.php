@@ -21,17 +21,6 @@
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
-function myErrorHandler($errno, $errstr, $errfile, $errline, $context)
-{
-	$f=fopen("logfile", "a");
-	date_default_timezone_set('Europe/Bucharest');
-	$output=date("M j, Y - G:i:s")."\n";
-	$output.=print_r($context['v'], true);
-	$output.="\n-----------\n";
-	fwrite($f, $output);
-	fclose($f);
-}
-
 class Dot_Template
 {
 	/**
@@ -472,12 +461,10 @@ class Dot_Template
 		}
 		// quote the replacement strings to prevent bogus stripping of special chars
 		reset($this->varvals);
-		set_error_handler("myErrorHandler");
 		while(list($k, $v) = each($this->varvals))
 		{
 			$varvals_quoted[$k] = preg_replace(array('/\\\\/', '/\$/'), array('\\\\\\\\', '\\\\$'), $v);
 		}
-		restore_error_handler();
 		$str = $this->getVar($varname);
 		$str = preg_replace($this->varkeys, $varvals_quoted, $str);
 		return $str;
