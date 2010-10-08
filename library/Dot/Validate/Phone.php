@@ -70,36 +70,35 @@ class Dot_Validate_Phone extends Dot_Validate {
 		}
 		$phoneArea = substr($phone, $this->options['areaPositionStart'], $this->options['areaLength']);
 		$phonePrefix = substr($phone, $this->options['prefixPositionStart'], $this->options['prefixLength']);
-		if ($phoneLength > $this->options['phoneLengthMin']) 
+		// internationalPrefix length is compared
+		$intPrefixLength = strlen($this->options['internationalPrefix']);
+		if(substr($phone, 0, $intPrefixLength) != $this->options['internationalPrefix'] && $phoneLength == $this->options['phoneLengthMax'])
 		{
-			// internationalPrefix length is compared
-			$intPrefixLength = strlen($this->options['internationalPrefix']);
-			if(substr($phone, 0, $intPrefixLength) != $this->options['internationalPrefix'])
-			{
-				return FALSE;
-			}
-			$phoneArea = substr($phone, $this->options['areaPositionStart']+$intPrefixLength, $this->options['areaLength']);
-			$phonePrefix = substr($phone, $this->options['prefixPositionStart']+$intPrefixLength, $this->options['prefixLength']);
-			$conditionArea = '';
-			$conditionPrefix = '';
-			if(is_array($this->options['allow']))
-			{
-				$allowKey = key($this->options['allow']);	
-				$conditionArea = ' && '.in_array(${'phone'.ucfirst($allowKey)}, $this->options['allow'][$allowKey]);
-			}
-			if(is_array($this->options['deny']))
-			{
-				$denyKey = key($this->options['deny']);
-				$conditionPrefix = !in_array(${'phone'.ucfirst($denyKey)}, $this->options['deny'][$denyKey]);
-			}
-			if($conditionArea && $conditionPrefix)
-			{
-				return TRUE;
-			}
-			else
-			{
-				return FALSE;
-			}
-		}	
+			return FALSE;
+		}
+		$phoneArea = substr($phone, $this->options['areaPositionStart']+$intPrefixLength, $this->options['areaLength']);
+		$phonePrefix = substr($phone, $this->options['prefixPositionStart']+$intPrefixLength, $this->options['prefixLength']);
+		$conditionArea = '';
+		$conditionPrefix = '';
+		if(is_array($this->options['allow']))
+		{
+			$allowKey = key($this->options['allow']);
+			$phoneAllowVar = 'phone'.ucfirst($allowKey);
+			$conditionArea = ' && '.in_array($$phoneAllowVar, $this->options['allow'][$allowKey]);
+		}
+		if(is_array($this->options['deny']))
+		{
+			$denyKey = key($this->options['deny']);
+			$phoneDenyVar = 'phone'.ucfirst($denyKey);
+			$conditionPrefix = !in_array($$phoneDenyVar, $this->options['deny'][$denyKey]);
+		}
+		if($conditionArea && $conditionPrefix)
+		{
+			return TRUE;
+		}
+		else
+		{
+			return FALSE;
+		}
 	}
 }
