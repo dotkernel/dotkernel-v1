@@ -54,6 +54,7 @@ class View extends Dot_Template
 	{
 		$this->route = Zend_Registry::get('route');
 		$this->config = Zend_Registry::get('configuration');
+		$this->seo = Zend_Registry::get('seo');
 	}
 	/**
 	 * Set the template file
@@ -84,13 +85,12 @@ class View extends Dot_Template
 	 */
 	public function setSeoValues($pageTitle = '')
 	{
-		$seo = new Dot_Seo();
-		$option = $seo->getOption();
-		$this->setVar('PAGE_KEYWORDS', $option->defaultMetaKeywords);
-		$this->setVar('PAGE_DESCRIPTION', $option->defaultMetaDescription);
-		$this->setVar('PAGE_TITLE', $option->defaultPageTitle .  ' | ' . $pageTitle);
+
+		$this->setVar('PAGE_KEYWORDS', $this->seo->defaultMetaKeywords);
+		$this->setVar('PAGE_DESCRIPTION', $this->seo->defaultMetaDescription);
+		$this->setVar('PAGE_TITLE', $this->seo->defaultPageTitle .  ' | ' . $pageTitle);
 		$this->setVar('PAGE_CONTENT_TITLE', $pageTitle);
-		$this->setVar('SITE_NAME', $option->siteName);
+		$this->setVar('SITE_NAME', $this->seo->siteName);
 	}
 	/**
 	 * Display the specific menu that were declared in configs/menu.xml file
@@ -288,7 +288,8 @@ class View extends Dot_Template
 	 */
 	public function displayMessage($ajax = FALSE)
 	{
-		$session = Zend_Registry::get('session');	
+		$session = Zend_Registry::get('session');
+		Zend_Debug::dump($session->message);	
 		if(isset($session->message))
 		{
 			$this->setFile('tpl_msg', 'blocks/message.tpl');

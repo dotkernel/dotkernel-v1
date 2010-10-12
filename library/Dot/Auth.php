@@ -39,11 +39,11 @@ class Dot_Auth
 				$dotSeo = new Dot_Seo();
 				$session->wantUrl = $dotSeo->createCanonicalUrl();
 			}
-			if(Zend_Registry::isRegistered('option'))
-			{
-				$option = Zend_Registry::get('option');
+			$option = Zend_Registry::get('option');
+			if(isset($option->warningMessage->userPermission))
+			{				
 				$session->message['txt'] = $option->warningMessage->userPermission;
-				$session->message['type'] = 'warning';
+				$session->message['type'] = 'warning';			
 			}	
 			//create login url	
 			switch ($who) 

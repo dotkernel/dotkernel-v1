@@ -33,14 +33,14 @@ class Dot_Sessions
 	 * @static
 	 * @return void
 	 */
-	public static function start($module)
+	public static function start()
 	{
-		$resource = Zend_Registry::get('resource');
+		$option = Zend_Registry::get('option');
 		//check is exists session for the current module
-		if(isset($resource->session->$module))
+		if(isset($option->session))
 		{
-			$namespaceName = $resource->session->$module->name;
-			$rememberMe = $resource->session->$module->rememberMeSeconds;
+			$namespaceName = $option->session->name;
+			$rememberMe = $option->session->rememberMeSeconds;
 			//if session is not registered, create it
 			if(!(Zend_Registry::isRegistered('session')))
 			{

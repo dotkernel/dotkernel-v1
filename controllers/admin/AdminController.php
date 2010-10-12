@@ -18,8 +18,8 @@
 $adminView = new Admin_View($tpl);
 $adminModel = new Admin();
 // switch based on the action, NO default action here
-$pageTitle = $option->pageTitle->action->{$requestAction};
-switch ($requestAction)
+$pageTitle = $option->pageTitle->action->{$registry->route['action']};
+switch ($registry->route['action'])
 {
 	case 'login':
 		// show the Login form

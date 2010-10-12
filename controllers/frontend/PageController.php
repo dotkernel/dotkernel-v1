@@ -17,9 +17,8 @@
 
 $pageView = new Page_View($tpl);
 // all actions MUST set  the variable  $pageTitle
-$pageTitle = $option->pageTitle->action->{$requestAction};
-// switch based on the action, don't forget the default action
-switch ($requestAction)
+$pageTitle = $option->pageTitle->action->{$registry->route['action']};
+switch ($registry->route['action'])
 {
 	default:
 		// default action is home
@@ -29,12 +28,12 @@ switch ($requestAction)
 		$pageView->showPage('home');
 	break;
 	case 'about':
-		$pageView->showPage($requestAction);
+		$pageView->showPage($registry->route['action']);
 	break;
 	case 'who-we-are':
-		$pageView->showPage($requestAction);
+		$pageView->showPage($registry->route['action']);
 	break;
 	case 'outbound-links':
-		$pageView->showPage($requestAction);
+		$pageView->showPage($registry->route['action']);
 	break;
 }

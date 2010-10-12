@@ -16,25 +16,16 @@
  * @author     DotKernel Team <team@dotkernel.com>
  */ 
 
-// set Module and Action default values
-$defaultController = $resource->route->controller->$requestModule;
-$requestController = isset($requestController) && $requestController !='Index' ? $requestController : $defaultController;
-$defaultAction = $resource->route->action->$requestModule->$requestController;
-$requestAction     = isset($requestAction) && $requestAction !=''         ? $requestAction     : $defaultAction;
-
-$route['controller'] = $requestController;
-$route['action'] = $requestAction;
-$registry->route = $route;
 // start the template object, empty for the moment 
-require(DOTKERNEL_PATH . '/' . $requestModule . '/' . 'View.php');	
-$tpl = View::getInstance(TEMPLATES_PATH . '/' . $requestModule);
+require(DOTKERNEL_PATH . '/' . $registry->route['module'] . '/' . 'View.php');	
+$tpl = View::getInstance(TEMPLATES_PATH . '/' . $registry->route['module']);
 $tpl->init();
 
 // assign Index Template file
 $tpl->setViewFile();
 
 // set paths in templates
-$tpl->setViewPaths($config);
+$tpl->setViewPaths();
 
 // display login box
 $tpl->setLoginBox();
@@ -42,13 +33,13 @@ $tpl->setLoginBox();
 /** 
  * each Controller  must load its own specific models and views
  */
-Dot_Settings :: loadControllerFiles($requestModule);
+Dot_Settings :: loadControllerFiles($registry->route['module']);
 
 /**
  * Load option(specific configuration file for current dot) file
  * @todo linking N dots together
  */
-$option = Dot_Settings::getOptionVariables($requestModule,$requestController);
+$option = Dot_Settings::getOptionVariables($registry->route['module'],$registry->route['controller']);
 $registry->option = $option;
 
 /**
@@ -60,11 +51,11 @@ $pageTitle = 'Overwrite Me Please !';
  * From this point , the control is taken by the Action specific controller
  * call the Action specific file, but check first if exists 
  */
-$actionControllerPath = CONTROLLERS_PATH . '/' . $requestModule . '/' . $requestController . 'Controller.php';
+$actionControllerPath = CONTROLLERS_PATH . '/' . $registry->route['module'] . '/' . $registry->route['controller'] . 'Controller.php';
 !file_exists($actionControllerPath) ?  $dotKernel->pageNotFound() :  require($actionControllerPath);
 	
 // set menus
-$tpl->setViewMenu($config);
+$tpl->setViewMenu();
 
 // set SEO html tags from dots/seo.xml file
 $tpl->setSeoValues($pageTitle);

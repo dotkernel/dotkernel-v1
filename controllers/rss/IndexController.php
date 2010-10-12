@@ -16,29 +16,25 @@
 * @author     DotKernel Team <team@dotkernel.com>
 */   
 
-// set Module default value
-$defaultController = $resource->route->controller->$requestModule;
-$requestController = isset($requestController) && $requestController !='Index' ? $requestController : $defaultController;
-
 /**
  * start the template object,
  * NOTE: the output of this module is XML not HTML
  * This View class does not inherit from Dpt_Template class
  */   
-require(DOTKERNEL_PATH . '/' . $requestModule . '/' . 'View.php');
+require(DOTKERNEL_PATH . '/' . $registry->route['module'] . '/' . 'View.php');
 $view = new View();
 /** 
  * each Controller  must load its own specific models and views
  */
-Dot_Settings :: loadControllerFiles($requestModule);
+Dot_Settings :: loadControllerFiles($registry->route['module']);
 
-$option = Dot_Settings::getOptionVariables($requestModule,$requestController);
+$option = Dot_Settings::getOptionVariables($registry->route['module'],$registry->route['controller']);
 $registry->option = $option;
 /**
  * From this point , the control is taken by the Action specific controller
  * call the Action specific file, but check first if exists 
  */
-$actionControllerPath = CONTROLLERS_PATH . '/' . $requestModule . '/' . $requestController . 'Controller.php';
+$actionControllerPath = CONTROLLERS_PATH . '/' . $registry->route['module'] . '/' . $registry->route['controller'] . 'Controller.php';
 !file_exists($actionControllerPath) ?  $dotKernel->pageNotFound() :  require($actionControllerPath);
 //output the rss content
 $view->output();

@@ -73,8 +73,8 @@ class Dot_Settings
 	 */
 	public static function loadControllerFiles($requestModule)
 	{
-		$resource = Zend_Registry::get('resource');
-		$modules = $resource->controllers->toArray();		
+		$router = Zend_Registry::get('router');
+		$modules = $router->controllers->toArray();		
 		/**
 		 *  if we are in frontend , we have an empty variable for $requestModule
 		 *  Also, fix with $modulePath for modules path other then frontend
@@ -128,14 +128,17 @@ class Dot_Settings
 	 * @return Zend_Config
 	 */
 	public static function getOptionVariables($requestModule,$requestController)
-	{		
-		$option = array();	
-		if('default' != $requestController)
+	{	$option = array();
+		if('default' == $requestController)
 		{ 
-			$option = self::getOptionVariables($requestModule,'default')->toArray();
+			$dirOption = CONFIGURATION_PATH .'/';
+			$fileOption = 'dots.xml';
 		}
-		$dirOption = CONFIGURATION_PATH.'/dots/';
-		$fileOption = strtolower($requestController).'.xml';
+		else
+		{			
+			$dirOption = CONFIGURATION_PATH.'/dots/';
+			$fileOption = strtolower($requestController).'.xml';
+		}
 		$validFile = new Zend_Validate_File_Exists();
 		$validFile->setDirectory($dirOption);		
 		if($validFile->isValid($fileOption))
@@ -150,8 +153,14 @@ class Dot_Settings
 				}
 			}
 		}
-		// allow that SEO options may be changed - the 2nd param is true(allowModifications)
+		// overwritte the default options from dots.xml with the one of the current dots
 		$option = new Zend_Config($option, true);
+		if (Zend_Registry::isRegistered('option')) 
+		{
+			$optionRegistered = Zend_Registry::get('option');
+			$optionRegistered->merge($option);
+			return $optionRegistered;
+		}
 		return $option;		
 	} 
 }
