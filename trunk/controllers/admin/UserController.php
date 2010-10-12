@@ -19,11 +19,9 @@
 $userModel = new User(); 
 $userView = new User_View($tpl);
 // all actions MUST set  the variable  $pageTitle
-$pageTitle = $option->pageTitle->action->{$requestAction};
-// switch based on the action, don't forget the default action
-switch ($requestAction)
+$pageTitle = $option->pageTitle->action->{$registry->route['action']};
+switch ($registry->route['action'])
 {
-	default:
 	case 'list':
 		// list users
 		$page = (isset($request['page']) && $request['page'] > 0) ? $request['page'] : 1;

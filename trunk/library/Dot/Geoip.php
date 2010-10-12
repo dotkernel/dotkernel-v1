@@ -51,7 +51,7 @@ class Dot_Geoip
 			}
 			else
 			{				
-				$session->message['txt'] = $this->option->warningModGeoIp;
+				$session->message['txt'] = $this->option->warningMessage->modGeoIp;
 				$session->message['type'] = 'warning';
 			}
 		}
@@ -82,7 +82,7 @@ class Dot_Geoip
 			}
 			else
 			{				
-				$session->message['txt'] = $this->option->warningModGeoIp;
+				$session->message['txt'] = $this->option->warningMessage->modGeoIp;;
 				$session->message['type'] = 'warning';
 			}
 		}

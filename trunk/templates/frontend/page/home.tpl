@@ -1,4 +1,3 @@
-<p>	
 		<h3>Documentation</h3>
 		<a href=" http://www.dotkernel.com/docs/"> http://www.dotkernel.com/docs/</a><br /><br />
 		<a href=" http://v1.dotkernel.net/readme.txt" target="_blank">README.TXT</a>
@@ -33,5 +32,3 @@
 	 <p><a href="http://v1.dotkernel.net/admin/">http://v1.dotkernel.net/admin/</a></p>
 	 <p>username: admin</p>
 	 <p>password: dot</p>
- 
-</p>

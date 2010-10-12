@@ -18,8 +18,8 @@
 $systemView = new System_View($tpl);
 $systemModel = new System();
 // switch based on the action, NO default action here
-$pageTitle = $option->pageTitle->action->{$requestAction};
-switch ($requestAction)
+$pageTitle = $option->pageTitle->action->{$registry->route['action']};
+switch ($registry->route['action'])
 {
 	case 'dashboard':		
 		$userModel = new User(); 

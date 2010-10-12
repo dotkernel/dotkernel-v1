@@ -19,9 +19,8 @@
 $userModel = new User(); 
 $userView = new User_View($tpl);
 // all actions MUST set  the variable  $pageTitle
-$pageTitle = $option->pageTitle->action->{$requestAction};
-// switch based on the action, don't forget the default action
-switch ($requestAction)
+$pageTitle = $option->pageTitle->action->{$registry->route['action']};
+switch ($registry->route['action'])
 {
 	default:
 		// default action is login

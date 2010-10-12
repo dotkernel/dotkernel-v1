@@ -21,6 +21,10 @@
  		<uaBrowser>Safari</uaBrowser>
 		<uaIcon>safari</uaIcon>
  	</type>
+    <type>
+            <uaBrowser>UC Browser</uaBrowser>
+            <uaIcon>uc</uaIcon>
+    </type>
  	<type>
  		<uaBrowser>abrowse</uaBrowser>
 		<uaIcon>abrowse</uaIcon>

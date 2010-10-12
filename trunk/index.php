@@ -55,9 +55,9 @@ Zend_Registry::setInstance($registry);
 $config = new Zend_Config_Ini(CONFIGURATION_PATH.'/application.ini', APPLICATION_ENV);
 $registry->configuration = $config;
 
-//Load resource(modules, controllers, actions) settings from resource.ini file and store it in registry
-$resource = new Zend_Config_Xml(CONFIGURATION_PATH.'/resource.xml');
-$registry->resource = $resource;
+//Load routes(modules, controllers, actions) settings from router.xml file and store it in registry
+$router = new Zend_Config_Xml(CONFIGURATION_PATH.'/router.xml');
+$registry->router = $router;
 
 // Create  connection to database, as singleton , and store it in registry
 $db = Zend_Db::factory('Pdo_Mysql', $config->database->params->toArray());
@@ -118,12 +118,21 @@ $route['action'] = $requestAction;
 $route = array_merge($route, $request);
 $registry->route = $route;
 
-// Start dotKernel object
+// start dotKernel object
 $dotKernel = new Dot_Kernel();
 
-//Initialize the session
-Dot_Sessions::start($requestModule);
+// initialize default options for dots that may be overwritten
+$option = Dot_Settings::getOptionVariables($route['module'], 'default');
+$registry->option = $option;
+
+// initialize the session
+Dot_Sessions::start();
 $session = Zend_Registry::get('session');
+
+// set seo routes and initialize seo options
+$seo = new Dot_Seo();
+$seo->routes();
+$registry->seo = $seo->getOption();
 
 /**
 *  From this point , the control is taken by the Front Controller

@@ -34,9 +34,33 @@ class Dot_Seo
 	public function __construct ()
 	{
 		//get the content of dots/seo.xml file into the option variable
-		$this->option = Dot_Settings::getOptionVariables('frontend', 'seo');
+		
 		$this->config = Zend_Registry::get('configuration');
+		$this->router = Zend_Registry::get('router');
 		$this->route = Zend_Registry::get('route');
+		$this->option = Dot_Settings::getOptionVariables($this->route['module'], 'seo');
+	}
+	/**
+	 * Make the route by module/controller/action
+	 * Update the new route
+	 * @access public
+	 * @return void
+	 */
+	public function routes()
+	{
+		// set Module and Action default values
+		$requestModule = $this->route['module'];
+		$requestController = $this->route['controller'];
+		$requestAction = $this->route['action'];
+		
+		$defaultController = $this->router->routes->controller->$requestModule;
+		$requestController = isset($requestController) && $requestController !='Index' ? $requestController : $defaultController;
+		$defaultAction = $this->router->routes->action->$requestModule->$requestController;
+		$requestAction     = isset($requestAction) && $requestAction !='' ? $requestAction : $defaultAction;
+		
+		$this->route['controller'] = $requestController;
+		$this->route['action'] = $requestAction;
+		Zend_Registry::set('route', $this->route);
 	}
 	/**
 	 * Create canonical URL
