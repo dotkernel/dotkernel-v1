@@ -289,7 +289,6 @@ class View extends Dot_Template
 	public function displayMessage($ajax = FALSE)
 	{
 		$session = Zend_Registry::get('session');
-		Zend_Debug::dump($session->message);	
 		if(isset($session->message))
 		{
 			$this->setFile('tpl_msg', 'blocks/message.tpl');
