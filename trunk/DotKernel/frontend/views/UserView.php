@@ -66,7 +66,7 @@ class User_View extends View
 		}
 		if('add' == $templateFile)
 		{
-			$this->tpl->setVar('SECUREIMAGE',$this->getRecaptcha());			
+			$this->tpl->setVar('SECUREIMAGE',$this->getRecaptcha()->getHTML());			
 		}
 	}
 	/**
@@ -80,6 +80,6 @@ class User_View extends View
 		// add secure image using ReCaptcha
 		$recaptcha = new Zend_Service_ReCaptcha($option->captchaOptions->recaptchaPublicKey, $option->captchaOptions->recaptchaPrivateKey);
 		$recaptcha->setOptions($option->captchaOptions->toArray());
-		return $recaptcha->getHTML();
+		return $recaptcha;
 	}
 }
