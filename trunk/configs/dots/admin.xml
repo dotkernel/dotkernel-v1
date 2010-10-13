@@ -1,54 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-	<body>
-	<variable option="global">
-	</variable>
-	<variable option="admin">
-		<pageTitle>
-			<action>
-				<login>Login</login>
-				<account>My Admin Account</account>
-				<list>List Admin Users</list>
-				<add>Add New Admin User</add>
-				<update>Update Admin User</update>
-				<delete>Delete Admin User</delete>
-				<logins>Admin User Logins</logins>
-			</action>
-		</pageTitle>
-		<errorMessage>			
-			<passwordTwice>You didn't enter the same password twice. Please re-enter your it again</passwordTwice>
-			<invalidUsername>Invalid Username !</invalidUsername>
-			<invalidPassword>Invalid Password !</invalidPassword>
-			<wrongCredentials>Wrong Login Credentials !</wrongCredentials>
-			<inactiveAcount>This account is inactive !</inactiveAcount>
-			<userExists> already exists ! </userExists>	
-			<trickUserError>Why are you so smart ? &lt;/br&gt; Don't play with the fire !</trickUserError>		
-		</errorMessage>
-		<infoMessage>
-			<accountAdd>Account created ! </accountAdd>
-			<accountUpdate>Account updated ! </accountUpdate>
-			<accountDelete>Account was deleted ! </accountDelete>
-			<noAccountDelete>No account was deleted ! </noAccountDelete>
-		</infoMessage>
-		<warningMessage>
-			<userPermission>You don't have enough credentials to access this url.</userPermission>
-		</warningMessage>
-		<validate>
-			<details>
-				<lengthMin>3</lengthMin>
-				<lengthMax>255</lengthMax>
-			</details>
-			<password>
-				<lengthMin>3</lengthMin>
-				<lengthMax>20</lengthMax>
-			</password>
-			<username>
-				<lengthMin>3</lengthMin>
-				<lengthMax>255</lengthMax>
-			</username>
-		</validate>	
-	</variable>
-	<variable option="frontend">
-	</variable>		
-	</body>
+	<dots>
+		<variable option="global">
+		</variable>
+		<variable option="admin">
+			<pageTitle>
+				<action>
+					<login>Login</login>
+					<account>My Admin Account</account>
+					<list>List Admin Users</list>
+					<add>Add New Admin User</add>
+					<update>Update Admin User</update>
+					<delete>Delete Admin User</delete>
+					<logins>Admin User Logins</logins>
+				</action>
+			</pageTitle>
+			<errorMessage>			
+				<passwordTwice>You didn't enter the same password twice. Please re-enter your it again</passwordTwice>
+				<invalidUsername>Invalid Username !</invalidUsername>
+				<invalidPassword>Invalid Password !</invalidPassword>
+				<wrongCredentials>Wrong Login Credentials !</wrongCredentials>
+				<inactiveAcount>This account is inactive !</inactiveAcount>
+				<userExists> already exists ! </userExists>	
+				<trickUserError>Why are you so smart ? &lt;/br&gt; Don't play with the fire !</trickUserError>		
+			</errorMessage>
+			<infoMessage>
+				<accountAdd>Account created ! </accountAdd>
+				<accountUpdate>Account updated ! </accountUpdate>
+				<accountDelete>Account was deleted ! </accountDelete>
+				<noAccountDelete>No account was deleted ! </noAccountDelete>
+			</infoMessage>
+			<warningMessage>
+				<userPermission>You don't have enough credentials to access this url.</userPermission>
+			</warningMessage>
+			<validate>
+				<details>
+					<lengthMin>3</lengthMin>
+					<lengthMax>255</lengthMax>
+				</details>
+				<password>
+					<lengthMin>3</lengthMin>
+					<lengthMax>20</lengthMax>
+				</password>
+				<username>
+					<lengthMin>3</lengthMin>
+					<lengthMax>255</lengthMax>
+				</username>
+			</validate>	
+		</variable>
+		<variable option="frontend">
+		</variable>		
+	</dots>
 </config>
