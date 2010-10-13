@@ -75,7 +75,8 @@ class User_View extends View
 	public function details($templateFile, $data=array())
 	{
 		$this->tpl->setFile('tpl_main', 'user/' . $templateFile . '.tpl');
-		$this->tpl->setVar('ACTIVE_1', 'checked');		
+		$this->tpl->setVar('ACTIVE_1', 'checked');
+		Dot_Kernel::addUserToken($this);
 		foreach ($data as $k=>$v)
 		{
 		    $this->tpl->setVar(strtoupper($k), $v);			

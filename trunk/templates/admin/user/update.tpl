@@ -1,5 +1,6 @@
 <form action="{SITE_URL}/admin/user/update/id/{ID}" method="post" >
 <input type="hidden" name="send" value="on">
+<input type="hidden" name="userToken" value="{USERTOKEN}">
 <fieldset style="width: 450px">
 <legend>Update User Account</legend>
 	<table cellpadding="0" cellspacing="0" class="medium_table" width="100%">
