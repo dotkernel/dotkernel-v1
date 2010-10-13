@@ -312,4 +312,46 @@ class Dot_Kernel
 		}
 		return array('data'=>$data,'error'=>$error);
 	}
+	/**
+	 * Generate a token for a user
+	 * @access public
+	 * @static
+	 * @param string $password - the users's password or password hash
+	 * @return array
+	 */
+	public static function generateUserToken($password)
+	{
+		$obj = Zend_Registry::get('configuration');
+		// use the user's password hash and the site database password
+		return sha1($obj->database->params->password.$password);
+	}
+	/**
+	 * Check if a user's token is set and is correct
+	 * @access public
+	 * @static
+	 * @return void
+	 */
+	public static function checkUserToken($type='admin')
+	{
+		$user=Dot_Auth::getIdentity($type);
+		if (!isset($_POST['userToken']) || (Dot_Kernel::generateUserToken($user['password'])!=$_POST['userToken']))
+		{
+			$session->message['txt'] = 'invalid request';
+			$session->message['type'] = 'error';
+			header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/list/');
+			exit;
+		}
+	}
+	/**
+	 * Add the user's token to a template
+	 * @access public
+	 * @static
+	 * @param Dot_Template $obj
+	 * @return array
+	 */
+	public static function addUserToken($obj, $type='admin')
+	{
+		$user=Dot_Auth::getIdentity($type);
+		$obj->tpl->setVar('USERTOKEN', Dot_Kernel::generateUserToken($user['password']));
+	}
 }

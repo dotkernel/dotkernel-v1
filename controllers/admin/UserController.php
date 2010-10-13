@@ -33,7 +33,8 @@ switch ($registry->route['action'])
 		$data = array();
 		$error = array();
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
-		{		
+		{
+			Dot_kernel::checkUserToken();
 			// POST values that will be validated				
 			$values = array('username' => 
 								array('username' => $_POST['username']
@@ -87,6 +88,7 @@ switch ($registry->route['action'])
 		$error = array();
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
 		{				
+			Dot_kernel::checkUserToken();
 			// POST values that will be validated						
 			$values = array('details' => 
 								array('firstName'=>$_POST['firstName'],
@@ -149,6 +151,7 @@ switch ($registry->route['action'])
 		// display confirmation form and delete user account
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
 		{	
+			Dot_kernel::checkUserToken();
 			if ('on' == $_POST['confirm'])
 			{
 				// delete user
