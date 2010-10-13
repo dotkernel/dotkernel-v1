@@ -40,8 +40,10 @@
 	    <tr>
 	        <td>
 	        	<div id="chartCountryUserLogin" style="width: 300px; height: 300px; float: left; margin: 0px 0px 0px 10px;">
-			     </div>
-				<div id="chartCountryLegend" >		
+			    </div>
+			</td>
+			<td>
+				<div id="chartCountryLegend">		
 				</div>
 	        </td>
 	    </tr>
