@@ -338,7 +338,8 @@ class Dot_Kernel
 		{
 			$session->message['txt'] = 'invalid request';
 			$session->message['type'] = 'error';
-			header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/list/');
+			$config = Zend_Registry::get('configuration');
+			header('Location: '.$config->website->params->url);
 			exit;
 		}
 	}
