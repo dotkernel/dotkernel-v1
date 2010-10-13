@@ -99,7 +99,7 @@ class Dot_Seo
 		{
 			$url .= urlencode($k) . '/' . urlencode($v) . '/';
 		}		
-		return $url;		
+		return strtolower($url);		
 	}
 	/**
 	 * Get SEO options
