@@ -79,7 +79,7 @@ $requestRaw = explode('/',
 $requestModule = 'frontend';
 if (in_array($requestRaw['0'], $config->resources->modules->toArray()))
 {
-	$requestModule = basename(stripslashes($requestRaw['0']));
+	$requestModule = strtolower(basename(stripslashes($requestRaw['0'])));
 }
 // if  we are NOT in frontend  module
 if ($requestModule != 'frontend')
@@ -89,21 +89,21 @@ if ($requestModule != 'frontend')
 $requestController = 'Index';
 if (isset($requestRaw['0']) && $requestRaw['0'] != '')
 {
-	$requestController = ucfirst(basename(stripslashes($requestRaw['0'])));
+	$requestController = strtolower(basename(stripslashes($requestRaw['0'])));
 }
 
 // set Action value, default nothing
 $requestAction = '';
 if (isset($requestRaw['1']) && $requestRaw['1'] != '')
 {
-	$requestAction = basename(stripslashes($requestRaw['1']));
+	$requestAction = strtolower(basename(stripslashes($requestRaw['1'])));
 }
 
 // we have extra variables, so we load all in the global array $request
 $request = array();
 while (list($key, $val) = each($requestRaw))
 {
-    $request[$val] = current($requestRaw);
+    $request[$val] = strtolower(current($requestRaw));
     next($requestRaw);
 }
 
