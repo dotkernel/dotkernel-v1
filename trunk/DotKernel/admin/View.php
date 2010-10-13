@@ -76,6 +76,9 @@ class View extends Dot_Template
 		$this->setVar('IMAGES_URL', $this->config->website->params->url . IMAGES_DIR . '/' .$this->route['module']);
 		$this->setVar('IMAGES_SHORT_URL', $this->config->website->params->url . IMAGES_DIR);
 		$this->setVar('SITE_URL', $this->config->website->params->url);
+		$this->setVar('SKIN', $this->config->settings->admin->skin);
+		
+		
 	}
 	/**
 	 * Set SEO values
