@@ -279,14 +279,14 @@ class View extends Dot_Template
 			{			
 				foreach ($session->message['txt'] as $k => $msg)
 				{
-					$this->setVar('MESSAGE_ARRAY', is_string($k) ? $msg = ucfirst($k) . ' - ' . $msg : $msg);
+					$this->setVar('MESSAGE_ARRAY', is_string($k) ? $msg = ucfirst($k) . ' - ' . htmlspecialchars($msg) : htmlspecialchars($msg));
 					$this->parse('msg_array_row', 'msg_array', true);
 				}
 			}
 			else
 			{
 				$this->parse('msg_array_row', '');
-				$this->setVar('MESSAGE_STRING', $session->message['txt']);
+				$this->setVar('MESSAGE_STRING', htmlspecialchars($session->message['txt']));
 			}
 			$this->parse('MESSAGE_BLOCK', 'tpl_msg');
 			unset($session->message);
