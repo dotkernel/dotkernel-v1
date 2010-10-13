@@ -3,30 +3,29 @@
 Always dots.xml will be loaded, and it's value can be overwritten by the 
 current xml dots file. -->
 <config>
-	<body>
-	<variable option="global">
-	</variable>
-	<variable option="admin">
-		<session>
-			<name>admin</name>
-			<rememberMeSeconds>864000</rememberMeSeconds>				
-		</session>
-		<warningMessage>
-			<modGeoIp>&lt;i&gt;mod_geoip&lt;/i&gt; extension is not installed. 
-					&lt;br /&gt; Check if &lt;i&gt;externals/geoip/GeoIP.dat&lt;/i&gt; file exists. &lt;br /&gt; 
-					If not, download it from &lt;a href="http://www.maxmind.com/app/geolitecountry" target="_blank"&gt;
-					http://www.maxmind.com/app/geolitecountry&lt;/a&gt;</modGeoIp>
-		</warningMessage>
-	</variable>
-	<variable option="frontend">
-		<session>
-			<name>frontend</name>
-			<rememberMeSeconds>864000</rememberMeSeconds>				
-		</session>
-		<warningMessage>
-			<userPermission>You don't have enough credentials to access this url.</userPermission>
-		</warningMessage>
-	</variable>		
-	</body>
-	
+	<dots>
+		<variable option="global">
+		</variable>
+		<variable option="admin">
+			<session>
+				<name>admin</name>
+				<rememberMeSeconds>864000</rememberMeSeconds>				
+			</session>
+			<warningMessage>
+				<modGeoIp>&lt;i&gt;mod_geoip&lt;/i&gt; extension is not installed. 
+						&lt;br /&gt; Check if &lt;i&gt;externals/geoip/GeoIP.dat&lt;/i&gt; file exists. &lt;br /&gt; 
+						If not, download it from &lt;a href="http://www.maxmind.com/app/geolitecountry" target="_blank"&gt;
+						http://www.maxmind.com/app/geolitecountry&lt;/a&gt;</modGeoIp>
+			</warningMessage>
+		</variable>
+		<variable option="frontend">
+			<session>
+				<name>frontend</name>
+				<rememberMeSeconds>864000</rememberMeSeconds>				
+			</session>
+			<warningMessage>
+				<userPermission>You don't have enough credentials to access this url.</userPermission>
+			</warningMessage>
+		</variable>		
+	</dots>	
 </config>

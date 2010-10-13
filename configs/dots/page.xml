@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-	<body>
-	<variable option="global">
-	</variable>
-	<variable option="admin">
-	</variable>
-	<variable option="frontend">
-		<pageTitle>
-			<action>
-				<home>Home Page</home>
-				<about>About Us</about>
-				<who-we-are>Who We Are</who-we-are>
-				<outbound-links>Outbound Links</outbound-links>
-			</action>
-		</pageTitle>
-	</variable>		
-	</body>
+	<dots>
+		<variable option="global">
+		</variable>
+		<variable option="admin">
+		</variable>
+		<variable option="frontend">
+			<pageTitle>
+				<action>
+					<home>Home Page</home>
+					<about>About Us</about>
+					<who-we-are>Who We Are</who-we-are>
+					<outbound-links>Outbound Links</outbound-links>
+				</action>
+			</pageTitle>
+		</variable>		
+	</dots>
 </config>

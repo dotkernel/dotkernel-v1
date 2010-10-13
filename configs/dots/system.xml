@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-	<body>
-	<variable option="global">
-	</variable>
-	<variable option="admin">
-		<pageTitle>
-			<action>
-				<dashboard>Dashboard</dashboard>
-				<settings>Settings</settings>
-				<settings-update>Update Settings</settings-update>
-				<phpinfo>PHP Info</phpinfo>
-				<transporter-list>List Email Transporter</transporter-list>
-				<transporter-update>Update Email Transporter</transporter-update>
-				<transporter-delete>Delete Email Transporter</transporter-delete>
-			</action>
-		</pageTitle>
-		<infoMessage>
-			<settingsUpdate>System settings have been updated.</settingsUpdate>
-			<transporterDelete>Email transporter has been deleted.</transporterDelete>
-			<noTransporterDelete>No email transporter was deleted.</noTransporterDelete>
-			<transporterUpdate>Email transporter has been updated.</transporterUpdate> 
-			<transporterAdd>Email transporter has been added.</transporterAdd> 
-		</infoMessage>
-		<errorMessage>
-		  <invalidPort>The port must be a number</invalidPort>
-		  <invalidCapacity>The capacity must be a number</invalidCapacity>
-		  <noModGeoip>mod_geoip is not installed</noModGeoip>
-		</errorMessage>
-		<countCountryUserLogin>10</countCountryUserLogin>
-		<colorCharts>
-			<color>#69D2E7</color>
-			<color>#F38630</color>		
-			<color>#D3CE3D</color>	
-			<color>#CC333F</color>		
-			<color>#A7DBD8</color>	
-			<color>#915B2F</color>		
-			<color>#FFC90E</color>	
-			<color>#F597DE</color>
-			<color>#09AB82</color>	
-			<color>#4E431A</color>
-		</colorCharts>
-	</variable>
-	<variable option="frontend">
-	</variable>		
-	</body>
+	<dots>
+		<variable option="global">
+		</variable>
+		<variable option="admin">
+			<pageTitle>
+				<action>
+					<dashboard>Dashboard</dashboard>
+					<settings>Settings</settings>
+					<settings-update>Update Settings</settings-update>
+					<phpinfo>PHP Info</phpinfo>
+					<transporter-list>List Email Transporter</transporter-list>
+					<transporter-update>Update Email Transporter</transporter-update>
+					<transporter-delete>Delete Email Transporter</transporter-delete>
+				</action>
+			</pageTitle>
+			<infoMessage>
+				<settingsUpdate>System settings have been updated.</settingsUpdate>
+				<transporterDelete>Email transporter has been deleted.</transporterDelete>
+				<noTransporterDelete>No email transporter was deleted.</noTransporterDelete>
+				<transporterUpdate>Email transporter has been updated.</transporterUpdate> 
+				<transporterAdd>Email transporter has been added.</transporterAdd> 
+			</infoMessage>
+			<errorMessage>
+			  <invalidPort>The port must be a number</invalidPort>
+			  <invalidCapacity>The capacity must be a number</invalidCapacity>
+			  <noModGeoip>mod_geoip is not installed</noModGeoip>
+			</errorMessage>
+			<countCountryUserLogin>10</countCountryUserLogin>
+			<colorCharts>
+				<color>#69D2E7</color>
+				<color>#F38630</color>		
+				<color>#D3CE3D</color>	
+				<color>#CC333F</color>		
+				<color>#A7DBD8</color>	
+				<color>#915B2F</color>		
+				<color>#FFC90E</color>	
+				<color>#F597DE</color>
+				<color>#09AB82</color>	
+				<color>#4E431A</color>
+			</colorCharts>
+		</variable>
+		<variable option="frontend">
+		</variable>		
+	</dots>
 </config>

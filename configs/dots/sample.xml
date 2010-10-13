@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-	<body>
-	<variable option="global">
-	</variable>
-	<variable option="rss">
-		<feed>
-			<title>DotKernel Sample Rss</title>
-			<link>/rss/sample/</link>
-			<charset>utf-8</charset>
-			<language>en-us</language>
-		</feed>
-	</variable>	
-	</body>
+	<dots>
+		<variable option="global">
+		</variable>
+		<variable option="rss">
+			<feed>
+				<title>DotKernel Sample Rss</title>
+				<link>/rss/sample/</link>
+				<charset>utf-8</charset>
+				<language>en-us</language>
+			</feed>
+		</variable>	
+	</dots>
 </config>

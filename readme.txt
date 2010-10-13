@@ -44,12 +44,18 @@ If you see the Home page, your DotKernel installation is completed!
 For admin module: http://yourdotkernelinstance.com/admin/ use: 
     username: admin
     password: dot
-     
-QUESTIONS
+   
+DOCUMENTATION
 ---------
 
 Online documentation can be found at 
 	http://www.dotkernel.com/docs/
+     
+QUESTIONS
+---------
+
+If you have any questions about DotKerne, visit our forum:
+	http://www.dotkernel.com/forum/
 	
 FEEDBACK
 --------
@@ -65,7 +71,7 @@ You can grab latest DotKernel copy from:
 	 http://v1.dotkernel.net/svn/trunk/
 
 Browse SVN repository:
-	http://websvn.dotkernel.net/listing.php?repname=DotKernel+ver.+1
+	http://websvn.dotkernel.net/listing.php?repname=DotKernel
 
 
 LICENSE

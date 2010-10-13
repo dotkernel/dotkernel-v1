@@ -143,7 +143,7 @@ class Dot_Settings
 		$validFile->setDirectory($dirOption);		
 		if($validFile->isValid($fileOption))
 		{
-			$xml = new Zend_Config_Xml($dirOption.$fileOption, 'body');
+			$xml = new Zend_Config_Xml($dirOption.$fileOption, 'dots');
 			$arrayOption = $xml->variable->toArray();
 			foreach ($arrayOption as $v)
 			{
