@@ -44,6 +44,7 @@ class User_View extends View
 		$this->tpl->setFile('tpl_main', 'user/' . $templateFile . '.tpl');
 		$this->tpl->setBlock('tpl_main', 'list', 'list_block');
 		$this->tpl->paginator($list['paginatorAdapter'],$page);
+		$this->tpl->addUserToken();
 		$this->tpl->setVar('PAGE', $page);
 		$this->tpl->setVar('ACTIVE_URL', '/admin/user/activate/');
 		foreach ($list['data'] as $k => $v)

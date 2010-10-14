@@ -16,7 +16,8 @@ function adminList(siteUrl, id, isActive, page)
       	 content: {
             id: id,
             isActive: isActive,
-            page: page
+            page: page,
+            userToken: userToken
         },
         load: function(data) {
             targetNode.innerHTML = data;
