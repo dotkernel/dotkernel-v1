@@ -54,7 +54,7 @@ $pageTitle = 'Overwrite Me Please !';
 *  From this point , the control is taken by the Action specific controller
 *  call the Action specific file, but check first if exists 
 */
-$actionControllerPath = CONTROLLERS_PATH . '/' . $registry->route['module'] . '/' . $registry->route['controller'] . 'Controller.php';
+$actionControllerPath = CONTROLLERS_PATH . '/' . $registry->route['module'] . '/' . ucfirst($registry->route['controller']) . 'Controller.php';
 !file_exists($actionControllerPath) ?  $dotKernel->pageNotFound() :  require($actionControllerPath);
 
 // set menus

@@ -89,7 +89,7 @@ if ($requestModule != 'frontend')
 $requestController = 'Index';
 if (isset($requestRaw['0']) && $requestRaw['0'] != '')
 {
-	$requestController = ucfirst(basename(stripslashes($requestRaw['0'])));
+	$requestController = strtolower(basename(stripslashes($requestRaw['0'])));
 }
 
 // set Action value, default nothing
