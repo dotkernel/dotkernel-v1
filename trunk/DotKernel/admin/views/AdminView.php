@@ -84,8 +84,8 @@ class Admin_View extends View
 	public function details($templateFile, $data=array())
 	{
 		$this->tpl->setFile('tpl_main', 'admin/' . $templateFile . '.tpl');
-		$this->tpl->setVar('ACTIVE_1', 'checked');	
-		Dot_Kernel::addUserToken($this);	
+		$this->tpl->setVar('ACTIVE_1', 'checked');
+		$this->tpl->addUserToken();	
 		foreach ($data as $k=>$v)
 		{
 		    $this->tpl->setVar(strtoupper($k), $v);			
