@@ -336,8 +336,6 @@ class Dot_Kernel
 		$user=Dot_Auth::getIdentity($type);
 		if (!isset($_POST['userToken']) || (Dot_Kernel::generateUserToken($user['password'])!=$_POST['userToken']))
 		{
-			$session->message['txt'] = 'invalid request';
-			$session->message['type'] = 'error';
 			$config = Zend_Registry::get('configuration');
 			header('Location: '.$config->website->params->url);
 			exit;
