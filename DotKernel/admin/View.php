@@ -326,4 +326,14 @@ class View extends Dot_Template
 	{
 		$this->setRoot($root.'/admin');
 	}
+	/**
+	 * Add the user's token to the template
+	 * @access public
+	 * @return array
+	 */
+	public function addUserToken()
+	{
+		$user=Dot_Auth::getIdentity('admin');
+		$this->setVar('USERTOKEN', Dot_Kernel::generateUserToken($user['password']));
+	}
 }

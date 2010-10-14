@@ -343,16 +343,4 @@ class Dot_Kernel
 			exit;
 		}
 	}
-	/**
-	 * Add the user's token to a template
-	 * @access public
-	 * @static
-	 * @param Dot_Template $obj
-	 * @return array
-	 */
-	public static function addUserToken($obj, $type='admin')
-	{
-		$user=Dot_Auth::getIdentity($type);
-		$obj->tpl->setVar('USERTOKEN', Dot_Kernel::generateUserToken($user['password']));
-	}
 }
