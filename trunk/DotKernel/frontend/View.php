@@ -151,11 +151,13 @@ class View extends Dot_Template
 			{						
 				if ((Dot_Auth::hasIdentity('user') && 1 == $val['isLogged']) || (!Dot_Auth::hasIdentity('user') && 1 == $val['notLogged']))
 				{	// display menus based on user is logged in or not
+					$tmpMenuRoute = explode('/', $val['link']);
 					$this->setVar('TOP_MENU_ID', $i);
 					$tplVariables = array('TOP_MENU_SEL', 
 					                      'TOP_SUB_MENU_SEL', 
 										  'TOP_SUB_MENU_ITEM_SEL');
-					$this->initVar($tplVariables,'');	
+					$this->initVar($tplVariables,'');
+						
 					if (false !== stripos($val['link'], $this->route['controller'].'/'.$this->route['action'].'/'))
 					{	//if current menu is the current viewed page
 						$this->setVar('TOP_MENU_SEL', '_selected');
@@ -191,16 +193,18 @@ class View extends Dot_Template
 						{
 												
 							$subItems = $val['subItems']['subItem'];
-							// if we have only one menu, Zend_Config_Xml return a simple array, not an array with key 0(zero)
-							if(!is_array($subItems))
+							
+							// if we have only one menu, Zend_Config_Xml return a simple array, not an array with key 0(zero)							
+							if(!is_array($subItems) || (is_array($subItems) && !isset($subItems['0'])))
 							{
 								$subItems = array(0=>$subItems);						
-							}							
+							}
 							foreach ($subItems as $k2 => $v2)
 							{			
 								if ((Dot_Auth::hasIdentity('user') && 1 == $v2['isLogged']) || (!Dot_Auth::hasIdentity('user') && 1 == $v2['notLogged']))
 								{				
-									// display menus based on user is logged in or not		
+									// display menus based on user is logged in or not
+									$tmpSubmenuRoute = explode('/', $v2['link']);				
 									$this->setVar('TOP_SUB_MENU_ITEM_SEL', '');												
 									foreach ($v2 as $k => $v)
 									{
@@ -214,12 +218,18 @@ class View extends Dot_Template
 									{
 										$this->setVar('TOP_SUB_MENU_LINK', $this->config->website->params->url.'/'.$v2['link']);
 									}
-									if (FALSE  !==stripos($v2['link'], $this->route['controller'].'/'.$this->route['action'].'/'))
+									if (FALSE  !==stripos($v2['link'], $this->route['controller'].'/'.$this->route['action'].'/')
+										 && $tmpMenuRoute['0'] == $tmpSubmenuRoute['0'])
 									{	//if curent menu is the curent viewed page then parent menu will be selected and sub menu shown
 										$tplVariables = array('TOP_MENU_SEL', 
 										                      'TOP_SUB_MENU_SEL', 
 															  'TOP_SUB_MENU_ITEM_SEL');
 										$this->initVar($tplVariables,'_selected');											
+									}
+									elseif (FALSE !== stripos($v2['link'], $this->route['controller'].'/')
+									 && $tmpMenuRoute['0'] == $tmpSubmenuRoute['0'])
+									{
+										$this->setVar('TOP_MENU_SEL', '_selected');								
 									}	
 									$this->parse('top_sub_menu_item_block', 'top_sub_menu_item', true);												
 								}
