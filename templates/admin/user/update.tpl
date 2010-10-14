@@ -38,7 +38,7 @@
 		<tr>
 			<td class="row2"> </td>
 			<td class="row1 last_td" >
-				<input type="submit" onclick="" class="small_btn" value="add"></td>
+				<input type="submit" onclick="" class="small_btn" value="update"></td>
 		</tr>
 	</table>
 </fieldset>
