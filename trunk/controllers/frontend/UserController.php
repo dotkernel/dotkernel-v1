@@ -61,6 +61,7 @@ switch ($registry->route['action'])
 		$error = array();
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
 		{				
+			Dot_Kernel::checkUserToken('user');
 			// POST values that will be validated				
 			$values = array('details' => 
 								array('firstName'=>$_POST['firstName'],

@@ -292,4 +292,14 @@ class View extends Dot_Template
 			unset($session->message);
 		}		
 	}
+	/**
+	 * Add the user's token to the template
+	 * @access public
+	 * @return array
+	 */
+	public function addUserToken()
+	{
+		$user=Dot_Auth::getIdentity('user');
+		$this->setVar('USERTOKEN', Dot_Kernel::generateUserToken($user['password']));
+	}
 }

@@ -2,6 +2,7 @@
 <br />
 <form action="{SITE_URL}/user/account/id/{ID}" method="post">
 <input type="hidden" name="send" value="on">
+<input type="hidden" name="userToken" value="{USERTOKEN}">
 <input type="hidden" name="id" value="{ID}">
 <ul class="g_form">
 		<li class="clearfix positioned">
