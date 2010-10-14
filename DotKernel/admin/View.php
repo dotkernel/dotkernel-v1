@@ -146,6 +146,7 @@ class View extends Dot_Template
 				}	
 				foreach ($items as $key => $val)
 				{		
+					$tmpMenuRoute = explode('/', $val['link']);
 					$this->setVar('TOP_MENU_ID', $i);
 					$tplVariables = array('TOP_MENU_SEL', 
 					                      'TOP_SUB_MENU_SEL', 
@@ -170,17 +171,20 @@ class View extends Dot_Template
 							$subItems = array(0=>$subItems);						
 						}											
 						foreach ($subItems as $k2 => $v2)
-						{			
+						{	
+							$tmpSubmenuRoute = explode('/', $v2['link']);		
 							$this->setVar('TOP_SUB_MENU_SEL', '');
 							$this->setVar('TOP_SUB_MENU_TITLE', $v2['title']);
 							$this->setVar('TOP_SUB_MENU_LINK', $this->config->website->params->url.'/'.$this->route['module'].'/'.$v2['link']);
 							$this->setVar('TOP_SUB_MENU_DESCRIPTION', $v2['description']);
-							if (FALSE !== stripos($v2['link'], $this->route['controller'].'/'.$this->route['action'].'/'))
+							if (FALSE !== stripos($v2['link'], $this->route['controller'].'/'.$this->route['action'].'/')
+								 && $tmpMenuRoute['0'] == $tmpSubmenuRoute['0'])
 							{	//if curent menu is the curent viewed page
 								$this->setVar('TOP_MENU_SEL', '_selected');
 								$this->setVar('TOP_SUB_MENU_SEL', '_selected');
 							}
-							elseif (FALSE !== stripos($v2['link'], $this->route['controller'].'/'))
+							elseif (FALSE !== stripos($v2['link'], $this->route['controller'].'/')
+									 && $tmpMenuRoute['0'] == $tmpSubmenuRoute['0'])
 							{
 								$this->setVar('TOP_MENU_SEL', '_selected');								
 							}
