@@ -155,6 +155,7 @@ switch ($registry->route['action'])
 	case 'activate':
 		// this action is called from ajax request dojo.xhrPost()
 		// activate/inactivate admin user
+		Dot_Kernel::checkUserToken();
 		$id = (isset($_POST['id'])) ? (int)$_POST['id'] : 0;
 		$isActive = (isset($_POST['isActive'])) ? $_POST['isActive'] : 0;
 		$page = (isset($_POST['page'])) ? (int)$_POST['page'] : 1;

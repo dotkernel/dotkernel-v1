@@ -1,3 +1,6 @@
+<script>
+	var userToken="{USERTOKEN}";
+</script>
 <script type="text/javascript" src="{SITE_URL}/externals/dojo/dojo.xd.js"></script>
 <script type="text/javascript" src="{TEMPLATES_URL}/js/admin/admin.js"></script>
 <div id="adminList">
