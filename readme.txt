@@ -27,23 +27,20 @@ For more details, please see:
 INSTALLATION
 ------------
 
-To install DotKernel, follow these steps:
+To install DotKernel, follow the steps below.
+Note: It is important to follow the steps in the exact order below (especially steps 9, 10, 11).
 
-    * Download <http://www.dotkernel.com/download/?did=18> dk-test.php file to 
-      test that your environment meets DotKernel system requirements
-    * Download <http://www.dotkernel.com/docs/download/> a copy of DotKernel
-    * Unzip the downloaded package. You should have now a DotKernel_[@version] 
-      directory
-    * Upload the folder content to your web server
-    * Create a MySQL database and import dot_kernel.sql file into it
-    * Edit the configuration file configs/application.ini to reflect the website 
-      url and the connection to the database you created
-    * Test the installation by opening the URL you set as your website
-
-If you see the Home page, your DotKernel installation is completed!
-For admin module: http://yourdotkernelinstance.com/admin/ use: 
-    username: admin
-    password: dot
+   1. Download dk.php file to test that your environment meets DotKernel system requirements
+   2. Download a copy of DotKernel
+   3. Unzip the downloaded package. You should have a DotKernel_[@version] directory
+   4. Upload the folder content to your web server
+   5. Create a MySQL database and import dot_kernel.sql file into it
+   6. Set your environment (production, staging or development) in .htaccess by using the APPLICATION_ENV variable. In DotKernel, the development environment is set by default.
+   7. Depending on your environment, edit the configuration file configs/application.ini to reflect the website url and the connection to the database you created previously
+   8. Test the installation by opening the URL you set as your website. If you see the Home page, your DotKernel installation is completed!
+   9. Login into admin module: http://www.yourdotkernelinstance.com/admin/ with username: admin and password: dot
+  10. Change settings.admin.salt value from application.ini to a random string
+  11. Change your admin password: http://www.yourdotkernelinstance.com/admin/admin/account/ 
    
 DOCUMENTATION
 ---------
