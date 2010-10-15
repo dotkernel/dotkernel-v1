@@ -17,12 +17,12 @@
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
-class Dot_Sessions
+class Dot_Session
 {	
 	/**
 	 * Constructor is private, because this class is static, can't be instantiated
 	 * @access private
-	 * @return Dot_Sessions
+	 * @return Dot_Session
 	 */
 	private function __construct ()
 	{		

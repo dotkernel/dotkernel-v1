@@ -29,7 +29,7 @@ class Dot_Seo
 	/**
 	 * Constructor
 	 * @access public
-	 * @return Dot_Sessions
+	 * @return Dot_Seo
 	 */
 	public function __construct ()
 	{

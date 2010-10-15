@@ -126,7 +126,7 @@ $option = Dot_Settings::getOptionVariables($route['module'], 'default');
 $registry->option = $option;
 
 // initialize the session
-Dot_Sessions::start();
+Dot_Session::start();
 $session = Zend_Registry::get('session');
 
 // set seo routes and initialize seo options
