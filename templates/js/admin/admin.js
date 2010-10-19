@@ -9,6 +9,10 @@ function adminList(siteUrl, id, isActive, page)
 {
     //Look up the node we'll stick the text under.
     var targetNode = dojo.byId("adminList");
+    if ('undefined' === typeof(userToken))
+    {
+    	userToken='';
+    }
     //The parameters to pass to xhrPost, the url, how to handle it, and the callbacks.
     var xhrArgs = {
         url: siteUrl,
