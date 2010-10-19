@@ -28,43 +28,43 @@ class Dot_Template
 	 * @access private
 	 * @var bool
 	 */
-	private $debug = false;
+	private $_debug = false;
 	/**
 	 * If set, echo blocks time parse
 	 * @access private
 	 * @var bool
 	 */
-	private $debugBlock = false;
+	private $_debugBlock = false;
 	/**
 	 * Relative filenames are relative to this pathname
 	 * @access private
 	 * @var string
 	 */
-	private $root = '..';
+	private $_root = '..';
 	/**
 	 * $file[handle] = 'filename';
 	 * @access private
 	 * @var array
 	 */
-	private $file = array();
+	private $_file = array();
 	/**
 	 * fallback paths that should be defined in a child class
 	 * @access private
 	 * @var array
 	 */
-	private $fileFallbacks = array();
+	private $_fileFallbacks = array();
 	/**
 	 * $varkeys[key] = 'key'
 	 * @access private
 	 * @var array
 	 */
-	private $varkeys = array();
+	private $_varkeys = array();
 	/**
 	 * $varvals[key] = 'value';
 	 * @access private
 	 * @var array
 	 */
-	private $varvals = array();
+	private $_varvals = array();
 	/**
 	 * 'remove'  => remove undefined variables
 	 * 'comment' => replace undefined variables with comments
@@ -72,7 +72,7 @@ class Dot_Template
 	 * @access private
 	 * @var string
 	 */
-	private $unknowns = 'remove';
+	private $_unknowns = 'remove';
 	/**
 	 * 'yes' => halt,
 	 * 'report' => report error, continue,
@@ -80,14 +80,14 @@ class Dot_Template
 	 * @access private
 	 * @var string
 	 */
-	private $haltOnError = 'yes';
+	private $_haltOnError = 'yes';
 	/**
 	 * The last error message is retained here
 	 * @access private
 	 * @var string
-	 * @see halt
+	 * @see _halt
 	 */
-	private $lastError = '';
+	private $_lastError = '';
 	/**
 	 * Determines whether Template outputs filename comments.
 	 * false = no filename outputs
@@ -95,7 +95,7 @@ class Dot_Template
 	 * @access private
 	 * @var string
 	 */
-	private $filenameComments = false;
+	private $_filenameComments = false;
 	/**
 	 * Determines the regular expression used to find unknown variable tags.
 	 * 'loose'  = traditional match all curly braces with no whitespace between
@@ -103,19 +103,19 @@ class Dot_Template
 	 * @access private
 	 * @var bool
 	 */
-	private $unknownRegexp = 'loose';
+	private $_unknownRegexp = 'loose';
 	/**
 	 * Start time 
 	 * @access private
 	 * @var array
 	 */
-	private $start_time = array();
+	private $_startTime = array();
 	/**
 	 * End time 
 	 * @access private
 	 * @var array
 	 */
-	private $endTime = array();
+	private $_endTime = array();
 	/**
 	 * Singleton instance
 	 * @access protected
@@ -135,7 +135,7 @@ class Dot_Template
 	{
 		$this->setRoot($root);
 		$this->setUnknowns($unknowns);
-		if (is_array($fallback)) $this->fileFallbacks = $fallback;
+		if (is_array($fallback)) $this->_fileFallbacks = $fallback;
 	}
 	/**
 	 * Singleton pattern implementation makes 'clone' unavailable
@@ -176,10 +176,10 @@ class Dot_Template
 		}
 		if (!is_dir($root))
 		{
-			$this->halt("setRoot: $root is not a directory.");
+			$this->_halt("setRoot: $root is not a directory.");
 			return false;
 		}
-		$this->root = $root;
+		$this->_root = $root;
 		return true;
 	}
 	/**
@@ -187,7 +187,7 @@ class Dot_Template
 	 * @access private
 	 * @return array
 	 */
-	private function startTimer()
+	private function _startTimer()
 	{
 		$mtime = microtime ();
 		$mtime = explode (' ', $mtime);
@@ -199,13 +199,13 @@ class Dot_Template
 	 * @access private
 	 * @return float
 	 */
-	private function endTimer($varname)
+	private function _endTimer($varname)
 	{
 		$mtime = microtime ();
 		$mtime = explode (' ', $mtime);
 		$mtime = $mtime[1] + $mtime[0];
 		$endtime = $mtime;
-		$totaltime = round(($endtime - $this->start_time[$varname]),2);
+		$totaltime = round(($endtime - $this->_startTime[$varname]),2);
 		return $totaltime;
 	}
 	/**
@@ -216,7 +216,7 @@ class Dot_Template
 	 */
 	public function setUnknowns($unknowns = 'remove')
 	{
-		$this->unknowns = $unknowns;
+		$this->_unknowns = $unknowns;
 	}
 	/**
 	 * Inspired From PEAR HTML_Template_PHPLIB 1.4.0
@@ -232,13 +232,13 @@ class Dot_Template
 		{
 				$isset = true;
 				foreach ($var as $varname) {
-						$isset = $isset & isset($this->varVals[$varname]);
+						$isset = $isset & isset($this->_varvals[$varname]);
 				}
 				return $isset > 0;
 		} 
 		else 
 		{
-				return isset($this->varVals[$var]);
+				return isset($this->_varvals[$var]);
 		}
 	}
 	/**
@@ -262,11 +262,11 @@ class Dot_Template
 		{
 			if ($filename == '')
 			{
-				$this->halt('setFile: For varname '.$varname .'filename is empty.');
+				$this->_halt('setFile: For varname '.$varname .'filename is empty.');
 				return false;
 			}
-			$this->file[$varname] = $this->filename($filename);
-			if ($this->file[$varname] === false) {
+			$this->_file[$varname] = $this->_filename($filename);
+			if ($this->_file[$varname] === false) {
 					return false;
 			}
 		}
@@ -277,10 +277,10 @@ class Dot_Template
 			{
 				if ($f == '')
 				{
-					$this->halt('setFile: For varname '.$v.' filename is empty.');
+					$this->_halt('setFile: For varname '.$v.' filename is empty.');
 					return false;
 				}
-				$this->file[$v] = $this->filename($f);
+				$this->_file[$v] = $this->_filename($f);
 			}
 		}
 		return true;
@@ -303,11 +303,11 @@ class Dot_Template
 	 */
 	public function setBlock($parent, $varname, $name = '')
 	{
-		$this->start_time[$varname] = 0;
-		$this->start_time[$varname] = $this->startTimer();
-		if (!$this->loadFile($parent))
+		$this->_startTime[$varname] = 0;
+		$this->_startTime[$varname] = $this->_startTimer();
+		if (!$this->_loadFile($parent))
 		{
-			$this->halt('setBlock: unable to load '.$parent);
+			$this->_halt('setBlock: unable to load '.$parent);
 			return false;
 		}
 		if ($name == '')
@@ -321,7 +321,7 @@ class Dot_Template
 		preg_match_all($reg, $str, $m);
 		if (!isset($m[1][0]))
 		{
-			$this->halt('setBlock: unable to set block '.$varname);
+			$this->_halt('setBlock: unable to set block '.$varname);
 			return false;
 		}
 		$str = preg_replace($reg, '{' . $name . '}', $str);
@@ -359,16 +359,16 @@ class Dot_Template
 		{
 			if (!empty($varname))
 			{
-				if ($this->debug & 1)
+				if ($this->_debug & 1)
 				{
 					printf("<b>setVar:</b> (with scalar) <b>%s</b> = '%s'<br>\n", $varname, htmlentities($value));
 				}
-				$this->varkeys[$varname] = '/'.$this->varname($varname).'/';
-				if ($append && isset($this->varvals[$varname]))
+				$this->_varkeys[$varname] = '/'.$this->_varname($varname).'/';
+				if ($append && isset($this->_varvals[$varname]))
 				{
-					$this->varvals[$varname] .= $value;
+					$this->_varvals[$varname] .= $value;
 				}
-				else 	$this->varvals[$varname] = $value;
+				else 	$this->_varvals[$varname] = $value;
 			}
 		}
 		else
@@ -378,18 +378,18 @@ class Dot_Template
 			{
 				if (!empty($k))
 				{
-					if ($this->debug & 1)
+					if ($this->_debug & 1)
 					{
 						printf("<b>setVar:</b> (with array) <b>%s</b> = '%s'<br>\n", $k, htmlentities($v));
 					}
-					$this->varkeys[$k] = '/'.$this->varname($k).'/';
-					if ($append && isset($this->varvals[$k]))
+					$this->_varkeys[$k] = '/'.$this->_varname($k).'/';
+					if ($append && isset($this->_varvals[$k]))
 					{
-						$this->varvals[$k] .= $v;
+						$this->_varvals[$k] .= $v;
 					}
 					else 	
 					{
-						$this->varvals[$k] = $v;
+						$this->_varvals[$k] = $v;
 					}
 				}
 			}
@@ -415,12 +415,12 @@ class Dot_Template
 		{
 			if (!empty($varname))
 			{
-				if ($this->debug & 1)
+				if ($this->_debug & 1)
 				{
 					printf("<b>unsetVar:</b> (with scalar) <b>%s</b><br>\n", $varname);
 				}
-				unset($this->varkeys[$varname]);
-				unset($this->varvals[$varname]);
+				unset($this->_varkeys[$varname]);
+				unset($this->_varvals[$varname]);
 			}
 		}
 		else
@@ -430,12 +430,12 @@ class Dot_Template
 			{
 				if (!empty($v))
 				{
-					if ($this->debug & 1)
+					if ($this->_debug & 1)
 					{
 						printf("<b>unsetVar:</b> (with array) <b>%s</b><br>\n", $v);
 					}
-					unset($this->varkeys[$v]);
-					unset($this->varvals[$v]);
+					unset($this->_varkeys[$v]);
+					unset($this->_varvals[$v]);
 				}
 			}
 		}
@@ -454,19 +454,19 @@ class Dot_Template
 	public function subst($varname)
 	{
 		$varvals_quoted = array();
-		if (!$this->loadFile($varname))
+		if (!$this->_loadFile($varname))
 		{
-			$this->halt('subst: unable to load '.$varname);
+			$this->_halt('subst: unable to load '.$varname);
 			return false;
 		}
 		// quote the replacement strings to prevent bogus stripping of special chars
-		reset($this->varvals);
-		while(list($k, $v) = each($this->varvals))
+		reset($this->_varvals);
+		while(list($k, $v) = each($this->_varvals))
 		{
 			$varvals_quoted[$k] = preg_replace(array('/\\\\/', '/\$/'), array('\\\\\\\\', '\\\\$'), $v);
 		}
 		$str = $this->getVar($varname);
-		$str = preg_replace($this->varkeys, $varvals_quoted, $str);
+		$str = preg_replace($this->_varkeys, $varvals_quoted, $str);
 		return $str;
 	}
 	/**
@@ -540,9 +540,9 @@ class Dot_Template
 				}
 			}
 		}
-		if(isset($this->start_time[$varname]) && $varname===strtolower($varname))
+		if(isset($this->_startTime[$varname]) && $varname===strtolower($varname))
 		{
-			$this->endTime[$varname] =$this->endTimer($varname);
+			$this->_endTime[$varname] =$this->_endTimer($varname);
 		}
 		return $this->getVar($target);
 	}
@@ -559,13 +559,13 @@ class Dot_Template
 	 */
 	public function pparse($target, $varname, $append = false)
 	{
-		if($target=='OUTPUT' && $this->debugBlock==true)
+		if($target=='OUTPUT' && $this->_debugBlock==true)
 		{
 			$totalTimeBlock = 0;
-			foreach($this->start_time as $ky => $val)
+			foreach($this->_startTime as $ky => $val)
 			{
-				$totalTimeBlock +=$this->endTime[$ky];
-				printf("<b>block:</b>  <b>%s</b> = '%f'<br>\n", $ky,$this->endTime[$ky]);
+				$totalTimeBlock +=$this->_endTime[$ky];
+				printf("<b>block:</b>  <b>%s</b> = '%f'<br>\n", $ky,$this->_endTime[$ky]);
 			}
 			printf("<b>Total time for blocks:</b>  '%f'<br>\n", $totalTimeBlock);
 		}
@@ -575,7 +575,7 @@ class Dot_Template
 	/**
 	 * Returns an associative array of all defined variables with the
 	 * name as the key and the value of the variable as the value.
-	 * This is mostly useful for debugging. Also note that $this->debug can be used
+	 * This is mostly useful for debugging. Also note that $this->_debug can be used
 	 * to echo all variable assignments as they occur and to trace execution.
 	 * USAGE: getVars()
 	 * @access public
@@ -583,8 +583,8 @@ class Dot_Template
 	 */
 	public function getVars()
 	{
-		reset($this->varkeys);
-		while(list($k, $v) = each($this->varkeys))
+		reset($this->_varkeys);
+		while(list($k, $v) = each($this->_varkeys))
 		{
 			$result[$k] = $this->getVar($k);
 		}
@@ -607,8 +607,8 @@ class Dot_Template
 	{
 		if (!is_array($varname))
 		{
-			$str = (isset($this->varvals[$varname]))?  $this->varvals[$varname]: '';
-			if ($this->debug & 2)
+			$str = (isset($this->_varvals[$varname]))?  $this->_varvals[$varname]: '';
+			if ($this->_debug & 2)
 			{
 				printf ("<b>getVar</b> (with scalar) <b>%s</b> = '%s'<br>\n", $varname, htmlentities($str));
 			}
@@ -619,8 +619,8 @@ class Dot_Template
 			reset($varname);
 			while(list($k, $v) = each($varname))
 			{
-				$str = (isset($this->varvals[$v])) ?  $this->varvals[$v]: '';
-				if ($this->debug & 2)
+				$str = (isset($this->_varvals[$v])) ?  $this->_varvals[$v]: '';
+				if ($this->_debug & 2)
 				{
 					printf ("<b>getVar:</b> (with array) <b>%s</b> = '%s'<br>\n", $v, htmlentities($str));
 				}
@@ -639,13 +639,13 @@ class Dot_Template
 	 */
 	public function getUndefined($varname)
 	{
-		if (!$this->loadFile($varname))
+		if (!$this->_loadFile($varname))
 		{
-			$this->halt('getUndefined: unable to load '.$varname);
+			$this->_halt('getUndefined: unable to load '.$varname);
 			return false;
 		}
 		preg_match_all(
-		(('loose' == $this->unknownRegexp) ? "/{([^ \t\r\n}]+)}/" : "/{([_a-zA-Z]\\w+)}/"),
+		(('loose' == $this->_unknownRegexp) ? "/{([^ \t\r\n}]+)}/" : "/{([_a-zA-Z]\\w+)}/"),
 		$this->getVar($varname),
 		$m);
 		$m = $m[1];
@@ -654,7 +654,7 @@ class Dot_Template
 		reset($m);
 		while(list($k, $v) = each($m))
 		{
-			if (!isset($this->varkeys[$v]))
+			if (!isset($this->_varkeys[$v]))
 			{
 				$result[$v] = $v;
 			}
@@ -677,21 +677,21 @@ class Dot_Template
 	 */
 	public function finish($str)
 	{
-		switch ($this->unknowns)
+		switch ($this->_unknowns)
 		{
 			case 'keep':
 			break;
 
 			case 'remove':
 				$str = preg_replace(
-				(('loose' == $this->unknownRegexp) ? "/{([^ \t\r\n}]+)}/" : "/{([_a-zA-Z]\\w+)}/"),
+				(('loose' == $this->_unknownRegexp) ? "/{([^ \t\r\n}]+)}/" : "/{([_a-zA-Z]\\w+)}/"),
 				"",
 				$str);
 			break;
 
 			case 'comment':
 				$str = preg_replace(
-					 (('loose' == $this->unknownRegexp) ? "/{([^ \t\r\n}]+)}/" : "/{([_a-zA-Z]\\w+)}/"),
+					 (('loose' == $this->_unknownRegexp) ? "/{([^ \t\r\n}]+)}/" : "/{([_a-zA-Z]\\w+)}/"),
 					"<!-- Template variable \\1 undefined -->",
 					$str);
 			break;
@@ -722,7 +722,7 @@ class Dot_Template
 	}
 	/**
 	 * When called with a relative pathname, this function will return the pathname
-	 * with $this->root prepended. Absolute pathnames are returned unchanged.
+	 * with $this->_root prepended. Absolute pathnames are returned unchanged.
 	 * RETURNS: a string containing an absolute pathname.
 	 * USAGE: filename(string $filename)
 	 * @access private
@@ -730,7 +730,7 @@ class Dot_Template
 	 * @return string
 	 * @see set_root
 	 */
-	private function filename($filename)
+	private function _filename($filename)
 	{
 		if (substr($filename, 0, 1) != '/'
 				&& substr($filename, 0, 1) != '\\'
@@ -738,23 +738,23 @@ class Dot_Template
 				&& substr($filename, 1, 2) != ':/'
 				)
 		{
-			$filename = $this->root.'/'.$filename;
+			$filename = $this->_root.'/'.$filename;
 		}
 		if (!file_exists($filename))
 		{
-			$this->halt('filename: file '.$filename.' does not exist.');
+			$this->_halt('filename: file '.$filename.' does not exist.');
 		}
-		if (is_array($this->fileFallbacks) && count($this->fileFallbacks) > 0)
+		if (is_array($this->_fileFallbacks) && count($this->_fileFallbacks) > 0)
 		{
-			reset($this->fileFallbacks);
-			while (list(,$v) = each($this->fileFallbacks))
+			reset($this->_fileFallbacks);
+			while (list(,$v) = each($this->_fileFallbacks))
 			{
 				if (file_exists($v.basename($filename)))
 				{
 					return $v.basename($filename);
 				}
 			}
-			$this->halt(sprintf('filename: file %s does not exist in the fallback paths %s.',$filename, implode(',', $this->fileFallbacks)));
+			$this->_halt(sprintf('filename: file %s does not exist in the fallback paths %s.',$filename, implode(',', $this->_fileFallbacks)));
 			return false;
 		}
 		return $filename;
@@ -766,41 +766,41 @@ class Dot_Template
 	 * @param string $varname
 	 * @return string
 	 */
-	private function varname($varname)
+	private function _varname($varname)
 	{
 		return preg_quote('{'.$varname.'}');
 	}
 	/**
 	 * If a variable's value is undefined and the variable has a filename stored in
-	 * $this->file[$varname] then the backing file will be loaded and the file's
+	 * $this->_file[$varname] then the backing file will be loaded and the file's
 	 * contents will be assigned as the variable's value.
 	 * USAGE: loadFile(string $varname)
 	 * @access private
 	 * @param string $varname
 	 * @return bool 
 	 */
-	private function loadFile($varname)
+	private function _loadFile($varname)
 	{
-		if (!isset($this->file[$varname]))
+		if (!isset($this->_file[$varname]))
 		{
 			// $varname does not reference a file so return
 			return true;
 		}
-		if (isset($this->varvals[$varname]))
+		if (isset($this->_varvals[$varname]))
 		{
 			// will only be unset if varname was created with setFile and has never been loaded
 			// $varname has already been loaded so return
 			return true;
 		}
-		$filename = $this->file[$varname];
+		$filename = $this->_file[$varname];
 		//  use @file here to avoid leaking filesystem information if there is an error
 		$str = implode('', @file($filename));
 		if (empty($str))
 		{
-			$this->halt('loadFile: While loading $varname, '.$filename.' does not exist or is empty.');
+			$this->_halt('loadFile: While loading $varname, '.$filename.' does not exist or is empty.');
 			return false;
 		}
-		if ($this->filenameComments)
+		if ($this->_filenameComments)
 		{
 			$str = "<!-- START FILE ".$filename." -->\n$str<!-- END FILE ".$filename." -->\n";
 		}
@@ -809,21 +809,21 @@ class Dot_Template
 	}
 	/**
 	 * Is called whenever an error occurs and will handle the error according
-	 * to the  policy defined in $this->haltOnError. Additionally the	error message will be saved
-	 * in $this->lastError.
-	 * USAGE: halt(string $msg)
+	 * to the  policy defined in $this->_haltOnError. Additionally the	error message will be saved
+	 * in $this->_lastError.
+	 * USAGE: _halt(string $msg)
 	 * @access private
 	 * @param string $msg
 	 * @return bool 
 	 */
-	private function halt($msg)
+	private function _halt($msg)
 	{
-		$this->lastError = $msg;
-		if ($this->haltOnError != 'no')
+		$this->_lastError = $msg;
+		if ($this->_haltOnError != 'no')
 		{
-			$this->haltMsg($msg);
+			$this->_haltMsg($msg);
 		}
-		if ($this->haltOnError == 'yes')
+		if ($this->_haltOnError == 'yes')
 		{
 			die('<b>Halted.</b>');
 		}
@@ -833,12 +833,12 @@ class Dot_Template
 	 * Prints an error message.
 	 * It can be overridden by your subclass of Template. It will be called with an
 	 * error message to display.
-	 * USAGE: haltMsg(string $msg)
+	 * USAGE: _haltMsg(string $msg)
 	 * @access private
 	 * @param string $msg
 	 * @return void 
 	 */
-	private function haltMsg($msg)
+	private function _haltMsg($msg)
 	{
 		$the_error ='';
 		$the_error .= "\n\n ".$msg."\n\n";
@@ -859,11 +859,11 @@ class Dot_Template
 	 */
 	public function getLastError()
 	{
-		if ($this->lastError == '')
+		if ($this->_lastError == '')
 		{
 			return false;
 		}
-		return $this->lastError;
+		return $this->_lastError;
 	}
 	/**
 	 * Initialize the value of a variable.
@@ -910,7 +910,7 @@ class Dot_Template
 				{
 					$this->setVar($k, $v, $append);
 				}
-				elseif ($this->debug & 1)
+				elseif ($this->_debug & 1)
 				{
 					printf("<b>initVar:</b> (with scalar) <b>%s</b> = '%s'<br>\n", $varname, htmlentities($value));
 				}

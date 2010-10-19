@@ -33,7 +33,7 @@ class Sample
 	 * @access private
 	 * @return array
 	 */
-	private function getItems()
+	private function _getItems()
 	{
 		//some sample items used for test
 		$data = array(
@@ -52,7 +52,7 @@ class Sample
 	{
 		$entries = array();
 		//get sample entries
-		$items = $this->getItems();
+		$items = $this->_getItems();
 		foreach ($items as $item)
 		{
 			$entry = array();

@@ -22,10 +22,10 @@ class Dot_Filter
 {	
 	/**
 	 * Filter options
-	 * @access private
+	 * @access protected
 	 * @var array
 	 */
-	private $options = array();
+	protected $_options = array();
 	/**
 	 * Constructor
 	 * @access public
@@ -34,6 +34,6 @@ class Dot_Filter
 	 */
 	public function __construct($options = array())
 	{		
-		$this->options = $options;
+		$this->_options = $options;
 	}
 }

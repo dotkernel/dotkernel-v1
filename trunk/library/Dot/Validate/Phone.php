@@ -24,13 +24,13 @@ class Dot_Validate_Phone extends Dot_Validate {
 	 * @access private
 	 * @var string
 	 */
-	private $countryCode = 'US';
+	private $_countryCode = 'US';
 	/**
 	 * Phone options
 	 * @access private
 	 * @var array
 	 */
-	private $options = array();
+	private $_options = array();
 	/**
 	 * Construct that receive as parameters the phone number and some options as array
 	 * @access public
@@ -41,16 +41,16 @@ class Dot_Validate_Phone extends Dot_Validate {
 	{		
 		if(is_array($options) && array_key_exists('countryCode', $options))
 		{
-			$this->countryCode = $options['countryCode'];
+			$this->_countryCode = $options['countryCode'];
 		}
 		
 		$xml = new Zend_Config_Xml(CONFIGURATION_PATH.'/phone.xml');
 		$phoneOptions = $xml->numbers->country->toArray();
 		foreach ($phoneOptions as $key => $val)
 		{
-			if($val['code'] == $this->countryCode)
+			if($val['code'] == $this->_countryCode)
 			{
-				$this->options = $val;
+				$this->_options = $val;
 				break;
 			}
 		}	
@@ -64,33 +64,33 @@ class Dot_Validate_Phone extends Dot_Validate {
 	public function isValid($phone)
 	{
 		$phoneLength = strlen($phone);
-		if($this->options['phoneLengthMin'] > $phoneLength || $phoneLength > $this->options['phoneLengthMax'])
+		if($this->_options['phoneLengthMin'] > $phoneLength || $phoneLength > $this->_options['phoneLengthMax'])
 		{
 			return FALSE;
 		}
-		$phoneArea = substr($phone, $this->options['areaPositionStart'], $this->options['areaLength']);
-		$phonePrefix = substr($phone, $this->options['prefixPositionStart'], $this->options['prefixLength']);
+		$phoneArea = substr($phone, $this->_options['areaPositionStart'], $this->_options['areaLength']);
+		$phonePrefix = substr($phone, $this->_options['prefixPositionStart'], $this->_options['prefixLength']);
 		// internationalPrefix length is compared
-		$intPrefixLength = strlen($this->options['internationalPrefix']);
-		if(substr($phone, 0, $intPrefixLength) != $this->options['internationalPrefix'] && $phoneLength == $this->options['phoneLengthMax'])
+		$intPrefixLength = strlen($this->_options['internationalPrefix']);
+		if(substr($phone, 0, $intPrefixLength) != $this->_options['internationalPrefix'] && $phoneLength == $this->_options['phoneLengthMax'])
 		{
 			return FALSE;
 		}
-		$phoneArea = substr($phone, $this->options['areaPositionStart']+$intPrefixLength, $this->options['areaLength']);
-		$phonePrefix = substr($phone, $this->options['prefixPositionStart']+$intPrefixLength, $this->options['prefixLength']);
+		$phoneArea = substr($phone, $this->_options['areaPositionStart']+$intPrefixLength, $this->_options['areaLength']);
+		$phonePrefix = substr($phone, $this->_options['prefixPositionStart']+$intPrefixLength, $this->_options['prefixLength']);
 		$conditionArea = '';
 		$conditionPrefix = '';
-		if(is_array($this->options['allow']))
+		if(is_array($this->_options['allow']))
 		{
-			$allowKey = key($this->options['allow']);
+			$allowKey = key($this->_options['allow']);
 			$phoneAllowVar = 'phone'.ucfirst($allowKey);
-			$conditionArea = ' && '.in_array($$phoneAllowVar, $this->options['allow'][$allowKey]);
+			$conditionArea = ' && '.in_array($$phoneAllowVar, $this->_options['allow'][$allowKey]);
 		}
-		if(is_array($this->options['deny']))
+		if(is_array($this->_options['deny']))
 		{
-			$denyKey = key($this->options['deny']);
+			$denyKey = key($this->_options['deny']);
 			$phoneDenyVar = 'phone'.ucfirst($denyKey);
-			$conditionPrefix = !in_array($$phoneDenyVar, $this->options['deny'][$denyKey]);
+			$conditionPrefix = !in_array($$phoneDenyVar, $this->_options['deny'][$denyKey]);
 		}
 		if($conditionArea && $conditionPrefix)
 		{

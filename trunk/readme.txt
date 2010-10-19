@@ -32,7 +32,7 @@ Note: It is important to follow the steps in the exact order below (especially s
 
    1. Download dk.php file to test that your environment meets DotKernel system requirements
    2. Download a copy of DotKernel
-   3. Unzip the downloaded package. You should have a DotKernel_[@version] directory
+   3. Unzip the downloaded package. You should have a DotKernel_@VERSION@ directory
    4. Upload the folder content to your web server
    5. Create a MySQL database and import dot_kernel.sql file into it
    6. Set your environment (production, staging or development) in .htaccess by using the APPLICATION_ENV variable. In DotKernel, the development environment is set by default.
