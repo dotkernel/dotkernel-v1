@@ -74,7 +74,7 @@ $tpl->parse('MAIN_CONTENT', 'tpl_main');
 
 // show debugbar 
 if(TRUE == $config->settings->admin->debugbar &&
-   ($registry->route['controller']!= 'admin' && $registry->route['action']!='login'))
+   !($registry->route['controller']== 'admin' && $registry->route['action']=='login'))
 {
 	$debug = new Dot_Debug($db, $tpl);
 	$debug->startTimer = $startTime;
