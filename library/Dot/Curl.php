@@ -124,7 +124,7 @@ class Dot_Curl
 	 * @param string $referer [optional]
 	 * @return void
 	 */
-	private function setOptions($ch, $url, $referer = '')
+	private function _setOptions($ch, $url, $referer = '')
 	{
 		//if no referer is provided, use the url as the referer
 		if ($referer == '') 
@@ -216,7 +216,7 @@ class Dot_Curl
 			}
 			$obj[$key] = curl_init($url);
 			//set options for each url
-			$this->setOptions($obj[$key], $url, $referer);
+			$this->_setOptions($obj[$key], $url, $referer);
 			//add it to the group
 			curl_multi_add_handle($mh, $obj[$key]);
 		}
@@ -264,7 +264,7 @@ class Dot_Curl
 		$content = '';
 
 		$obj = curl_init($url);
-		$this->setOptions($obj, $url, $referer);
+		$this->_setOptions($obj, $url, $referer);
 		if (count($this->errors) <= 0)
 		{
 			$content = curl_exec($obj);

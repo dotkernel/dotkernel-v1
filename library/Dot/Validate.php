@@ -25,7 +25,7 @@ class Dot_Validate
 	 * @access private
 	 * @var array
 	 */
-	private $options = array();
+	private $_options = array();
 	/**
 	 * Constructor
 	 * @access public
@@ -34,6 +34,6 @@ class Dot_Validate
 	 */
 	public function __construct($options = array())
 	{		
-		$this->options = $options;
+		$this->_options = $options;
 	}
 }

@@ -75,10 +75,10 @@ class Dot_Debug
 	}
 	/**
 	 * Count the end time
-	 * @access public
+	 * @access private
 	 * @return string
 	 */
-	private function endTimer()
+	private function _endTimer()
 	{
 		// format start time 
 		$stime = explode (' ', $this->startTimer);
@@ -92,12 +92,12 @@ class Dot_Debug
 	}
 	/**
 	 * Format the number, show miliseconds
-	 * @access public
+	 * @access private
 	 * @param int $number
 	 * @param bool $miliseconds [optional]
 	 * @return string
 	 */
-	private function numberFormat ($number, $miliseconds = false)
+	private function _numberFormat ($number, $miliseconds = false)
 	{
 		// show miliseconds
 		if ($miliseconds)
@@ -134,7 +134,7 @@ class Dot_Debug
 		// if we need db debuger
 		if ($this->db_debug)
 		{
-			$this->showDbDebug();
+			$this->_showDbDebug();
 		}
 		if ($this->memory_usage)
 		{
@@ -143,18 +143,18 @@ class Dot_Debug
 		// if we need to show total time - put this last so it counts the debug of queries, memory limit, etc
 		if ($this->total_time)
 		{
-			$this->showTotalTime();
+			$this->_showTotalTime();
 		}
 		$this->tpl->parse('DEBUGGER', 'tpl_debugger');		
 	}
 	/**
 	 * Display total time 
-	 * @access public
+	 * @access private
 	 * @return void
 	 */
-	private function showTotalTime ()
+	private function _showTotalTime ()
 	{
-		$this->tpl->setVar('TOTAL_GENERAL_TIME', $this->endTimer());
+		$this->tpl->setVar('TOTAL_GENERAL_TIME', $this->_endTimer());
 		$this->tpl->parse('total_time_block', 'total_time', true);
 	}
 	/**
@@ -162,7 +162,7 @@ class Dot_Debug
 	 * @access private
 	 * @return void
 	 */
-	private function showDbDebug ()
+	private function _showDbDebug ()
 	{
 		$profiler = $this->db->getProfiler();
 		// lets see if we have the profiler active
@@ -188,7 +188,7 @@ class Dot_Debug
 					$bc = ($count % 2) + 1;
 					$this->tpl->setVar('DEBUG_CLASS', 'debugger_'.$bc);
 					$this->tpl->setVar('QUERY_COUNT', $count++);
-					$this->tpl->setVar('QUERY_TIME', $this->numberFormat($query->getElapsedSecs(), true));
+					$this->tpl->setVar('QUERY_TIME', $this->_numberFormat($query->getElapsedSecs(), true));
 					$this->tpl->setVar('QUERY_TEXT', $query->getQuery());
 					if ($query->getElapsedSecs() > $longestTime)
 					{
@@ -221,11 +221,11 @@ class Dot_Debug
 			$queryCount = $profiler->getTotalnumQueries();
 			// show aditional information
 			$this->tpl->setVar('TOTAL_QUERIES', $queryCount);
-			$this->tpl->setVar('TOTAL_TIME', $this->numberFormat($totalTime, true));
-			$this->tpl->setVar('AVERAGE_QUERY_TIME', $this->numberFormat($totalTime / $queryCount, true));
+			$this->tpl->setVar('TOTAL_TIME', $this->_numberFormat($totalTime, true));
+			$this->tpl->setVar('AVERAGE_QUERY_TIME', $this->_numberFormat($totalTime / $queryCount, true));
 			$this->tpl->setVar('QUERIES_PER_SECOND', ceil($queryCount / $totalTime));
 			$this->tpl->setVar('LONGEST_QUERY', $longestQuery);
-			$this->tpl->setVar('LONGEST_QUERY_TIME', $this->numberFormat($longestTime, true));
+			$this->tpl->setVar('LONGEST_QUERY_TIME', $this->_numberFormat($longestTime, true));
 			// parse final blocks
 			if ($this->allow_db_details)
 			{

@@ -25,7 +25,7 @@ class Dot_Seo
 	 * @access private
 	 * @var Zend_Config
 	 */
-	private $option = NULL;
+	private $_option = NULL;
 	/**
 	 * Constructor
 	 * @access public
@@ -38,7 +38,7 @@ class Dot_Seo
 		$this->config = Zend_Registry::get('configuration');
 		$this->router = Zend_Registry::get('router');
 		$this->route = Zend_Registry::get('route');
-		$this->option = Dot_Settings::getOptionVariables($this->route['module'], 'seo');
+		$this->_option = Dot_Settings::getOptionVariables($this->route['module'], 'seo');
 	}
 	/**
 	 * Make the route by module/controller/action
@@ -109,12 +109,12 @@ class Dot_Seo
 	public function getOption()
 	{		
 		//remove 'option' xml atribute
-		$this->option->__unset('option');
-		if(isset($this->option->canonicalUrl))
+		$this->_option->__unset('option');
+		if(isset($this->_option->canonicalUrl))
 		{
 			// add canonical url to the array from dots/seo.xml file
-			$this->option->__set('canonicalUrl',$this->createCanonicalUrl());
+			$this->_option->__set('canonicalUrl',$this->createCanonicalUrl());
 		}		
-		return $this->option;
+		return $this->_option;
 	}		
 }
