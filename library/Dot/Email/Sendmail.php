@@ -28,7 +28,7 @@ class Dot_Email_Sendmail extends Dot_Email
 	 */
 	public function __construct($fromEmail = null)
 	{
-		$this->transport = new Zend_Mail_Transport_Sendmail('-f'.$fromEmail);
+		$this->transport = new Zend_Mail_Transport_Sendmail($fromEmail);
 	}
 	/**
 	 * Return the transporter
