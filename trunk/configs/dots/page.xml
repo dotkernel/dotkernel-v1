@@ -14,6 +14,16 @@
 					<outbound-links>Outbound Links</outbound-links>
 				</action>
 			</pageTitle>
-		</variable>		
+		</variable>
+		<variable option="mobile">
+			<pageTitle>
+				<action>
+					<home>Home Page</home>
+					<about>About Us</about>
+					<who-we-are>Who We Are</who-we-are>
+					<outbound-links>Outbound Links</outbound-links>
+				</action>
+			</pageTitle>
+		</variable>			
 	</dots>
 </config>

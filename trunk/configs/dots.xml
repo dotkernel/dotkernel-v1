@@ -26,6 +26,12 @@ current xml dots file. -->
 			<warningMessage>
 				<userPermission>You don't have enough credentials to access this url.</userPermission>
 			</warningMessage>
-		</variable>		
+		</variable>
+		<variable option="mobile">
+			<session>
+				<name>mobile</name>
+				<rememberMeSeconds>864000</rememberMeSeconds>				
+			</session>
+		</variable>			
 	</dots>	
 </config>
