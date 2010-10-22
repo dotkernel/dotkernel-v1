@@ -11,6 +11,8 @@
 		</variable>
 		<variable option="frontend">
 			<canonicalUrl></canonicalUrl>
-		</variable>		
+		</variable>	
+		<variable option="mobile">
+		</variable>	
 	</dots>
 </config>

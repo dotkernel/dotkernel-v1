@@ -9,6 +9,7 @@
 		<admin>System</admin>
 		<admin>User</admin>
 		<rss>Sample</rss>
+		<mobile>Page</mobile>
 	</controllers>
  	<routes>
  		<!-- default controllers for modules -->
@@ -16,6 +17,7 @@
 			<frontend>Page</frontend>
 			<admin>System</admin>
 			<rss>Sample</rss>
+			<mobile>Page</mobile>
 		</controller>
 		<action>
 			<!-- default action for controllers ... -->
@@ -28,6 +30,9 @@
 				<System>dashboard</System>
 				<User>list</User>
 			</admin>
+			<mobile>
+				<Page>home</Page>
+			</mobile>
 		</action>
  	</routes>
  </router>

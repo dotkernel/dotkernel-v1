@@ -74,13 +74,24 @@ Dot_Settings::setPhpSettings($config->phpSettings->toArray());
 $requestRaw = explode('/', 
 					  trim(substr($_SERVER['REQUEST_URI'], 
 					  strlen(dirname($_SERVER['PHP_SELF']))), '/'));
+					  
 
-// We are in frontend or in other module ? Prebuilt modules: frontend, admin, rss
+// We are in frontend or in other module ? Prebuilt modules: frontend, admin, rss, ...
 $requestModule = 'frontend';
 if (in_array($requestRaw['0'], $config->resources->modules->toArray()))
 {
 	$requestModule = strtolower(basename(stripslashes($requestRaw['0'])));
 }
+
+// Check if mobile module should be requested
+//$_SERVER['REMOTE_ADDR'] = '96.24.251.191';
+$_SERVER['HTTP_USER_AGENT'] = 'Mozilla/5.0 (Linux; U; Android 2.2; en-ro; Desire_A8181 Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1';
+if('mobile' == Dot_Kernel::getDevice()->getType())
+{
+	//register mobile hit will be on mobile/IndexController
+	$requestModule = 'mobile';	
+}
+
 // if  we are NOT in frontend  module
 if ($requestModule != 'frontend')
     array_shift($requestRaw);

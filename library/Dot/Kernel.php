@@ -29,7 +29,7 @@ class Dot_Kernel
      * Dot Kernel version identification
      * @var string 
      */
-    const VERSION = '1.3.0';    
+    const VERSION = '1.3.1';    
 	/**
 	 * Constructor
 	 * @access public
@@ -321,9 +321,9 @@ class Dot_Kernel
 	 */
 	public static function generateUserToken($password)
 	{
-		$obj = Zend_Registry::get('configuration');
+		$config = Zend_Registry::get('configuration');
 		// use the user's password hash and the site database password
-		return sha1($obj->database->params->password.$password);
+		return sha1($config->database->params->password.$password);
 	}
 	/**
 	 * Check if a user's token is set and is correct
@@ -338,5 +338,17 @@ class Dot_Kernel
 		{
 			exit;
 		}
+	}
+	/**
+	 * Get HTTP UserAgent Device.
+	 * Device may be Bot, Checker, Console, Desktop, Email, Feed, Mobile, Offline, Probe, Spam, Text, Validator
+	 * If device is mobile, return will be Zend_Http_UserAgent_Mobile	
+	 * @return Zend_Http_UserAgent_...
+	 */
+	public static function getDevice()
+	{
+		$config = Zend_Registry::get('configuration');
+		$userAgent = new Zend_Http_UserAgent($config->resources->useragent);
+		return $userAgent->getDevice();
 	}
 }
