@@ -29,7 +29,7 @@
 	</wurfl>
 	<persistence>
 		<provider>file</provider>
-		<params>dir=../cache</params>
+		<params>dir=../cache/wurfl/</params>
 	</persistence>
 	
 	<!-- 
