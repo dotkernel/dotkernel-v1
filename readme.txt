@@ -30,6 +30,18 @@ INSTALLATION
 To install DotKernel, follow the steps below.
 Note: It is important to follow the steps in the exact order below (especially steps 9, 10, 11).
 
+<<<<<<< .mine
+    * Download <http://www.dotkernel.com/download/?did=18> dk.php file to 
+      test that your environment meets DotKernel system requirements
+    * Download <http://www.dotkernel.com/docs/download/> a copy of DotKernel
+    * Unzip the downloaded package. You should have now a DotKernel_[@version] 
+      directory
+    * Upload the folder content to your web server
+    * Create a MySQL database and import dot_kernel.sql file into it
+    * Edit the configuration file configs/application.ini to reflect the website 
+      url and the connection to the database you created
+    * Test the installation by opening the URL you set as your website
+=======
    1. Download dk.php file to test that your environment meets DotKernel system requirements
    2. Download a copy of DotKernel
    3. Unzip the downloaded package. You should have a DotKernel_@VERSION@ directory
@@ -44,6 +56,7 @@ Note: It is important to follow the steps in the exact order below (especially s
    
 DOCUMENTATION
 ---------
+>>>>>>> .r307
 
 Online documentation can be found at 
 	http://www.dotkernel.com/docs/
