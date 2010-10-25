@@ -29,7 +29,7 @@
 	</wurfl>
 	<persistence>
 		<provider>file</provider>
-		<params>dir=./var/www/vhosts/v1.dotkernel.net/httpdocs/cache/wurfl/</params>
+		<params>dir=/var/www/vhosts/v1.dotkernel.net/httpdocs/cache/wurfl/</params>
 	</persistence>
 	
 	<!-- 
