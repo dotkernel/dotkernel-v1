@@ -23,6 +23,14 @@ $startTime = microtime();
 defined('APPLICATION_ENV') || 
 	define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 
+// Define application path	
+defined('APPLICATION_PATH')
+    || define('APPLICATION_PATH', realpath(dirname(__FILE__)));
+set_include_path(implode(PATH_SEPARATOR, array(
+    APPLICATION_PATH . '/library',
+    get_include_path(),
+)));
+
 //Set error reporting
 if(APPLICATION_ENV != 'production') error_reporting(-1);
 
@@ -84,8 +92,6 @@ if (in_array($requestRaw['0'], $config->resources->modules->toArray()))
 }
 
 // Check if mobile module should be requested
-//$_SERVER['REMOTE_ADDR'] = '96.24.251.191';
-$_SERVER['HTTP_USER_AGENT'] = 'Mozilla/5.0 (Linux; U; Android 2.2; en-ro; Desire_A8181 Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1';
 if('mobile' == Dot_Kernel::getDevice()->getType())
 {
 	//register mobile hit will be on mobile/IndexController
