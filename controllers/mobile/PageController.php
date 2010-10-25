@@ -27,10 +27,4 @@ switch ($registry->route['action'])
 		// call showPage method to view the home page
 		$pageView->showPage('home');
 	break;
-	case 'about':
-		$pageView->showPage($registry->route['action']);
-	break;
-	case 'who-we-are':
-		$pageView->showPage($registry->route['action']);
-	break;
 }
