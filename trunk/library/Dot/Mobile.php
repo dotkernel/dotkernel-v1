@@ -35,20 +35,45 @@ class Dot_Mobile
 	 */
 	public function registerHit()
 	{
+		// prepare mobileHit data
 		$ip = Dot_Kernel::GetUserIp();
 		
 		$dotGeoip = new Dot_Geoip();
 		$country = $dotGeoip->getCountryByIp($ip);
 		
 		$wurflDetails = Dot_Kernel::getDevice();
+		$device = is_null($wurflDetails->getFeature('brand_name')) ? '' : $wurflDetails->getFeature('brand_name');
+		$deviceModel = is_null($wurflDetails->getFeature('marketing_name')) ? '' : $wurflDetails->getFeature('marketing_name');
+		$userAgent = is_null($wurflDetails->getUserAgent()) ? $_SERVER["HTTP_USER_AGENT"] : $wurflDetails->getUserAgent();
+		
+		//if Wurfl operating system is null, read from configs/os.xml
+		if(is_null($wurflDetails->getFeature('device_os')))
+		{
+			$os = Dot_Kernel::getOsIcon($_SERVER["HTTP_USER_AGENT"]);
+			$operatingSystem = $os['minor'];			
+		}
+		else
+		{
+			$operatingSystem = $wurflDetails->getFeature('device_os');
+		}
+		//if Wurfl browser is null, read from configs/browser.xml
+		if (is_null($wurflDetails->getFeature('browser_name'))) 
+		{
+			$browser = Dot_Kernel::getBrowserIcon($v['userAgent'], 'browser');
+		}
+		else
+		{
+			$browser = $wurflDetails->getFeature('browser_name');
+		}		
+		
 		$mobileHit = array('ip' => $ip,
-							'device' => $wurflDetails->getFeature('brand_name'),
-							'deviceModel' =>  $wurflDetails->getFeature('marketing_name'),
+							'device' => $device ,
+							'deviceModel' =>  $deviceModel,
 							'carrier' => 'unknown',
-							'operatingSystem' => $wurflDetails->getFeature('device_os'),
+							'operatingSystem' => $operatingSystem,
 							'browser' => $wurflDetails->getFeature('browser_name'),
 							'country' => $country[1],
-							'userAgent' =>$wurflDetails->getUserAgent(),
+							'userAgent' => $userAgent,
 							'referer' => isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : ''
 							);
 		$this->db->insert('mobileHit', $mobileHit);
