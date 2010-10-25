@@ -75,7 +75,26 @@ CREATE TABLE IF NOT EXISTS `emailTransporter` (
   `isActive` enum('1','0') NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `mobileHit`
+--
+
+CREATE TABLE IF NOT EXISTS `mobileHit` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `ip` varchar(16) NOT NULL,
+  `device` varchar(255) NOT NULL,
+  `deviceModel` varchar(255) NOT NULL,
+  `carrier` varchar(255) NOT NULL,
+  `operatingSystem` varchar(255) NOT NULL,
+  `browser` varchar(255) NOT NULL,
+  `country` varchar(255) NOT NULL,
+  `userAgent` text NOT NULL,
+  `referer` text NOT NULL,
+  `dateHit` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 -- --------------------------------------------------------
 
 
