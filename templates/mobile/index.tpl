@@ -13,14 +13,12 @@
 <body>
 <div data-role="page" data-theme="e"> 
 	<div data-role="header" data-theme="b">
-		<h1><a href="{SITE_URL}/mobile" data-transition="pop">{SITE_NAME}</a></h1>			
-		<h1><a href="http://jquerymobile.com/test/" target="_blank" >jQuery Docs</a></h1>			
+		<p><a href="{SITE_URL}/mobile" data-transition="pop">{SITE_NAME}</a>		
+		<a href="http://jquerymobile.com/test/" target="_blank" >jQuery Docs</a></p>			
 	</div><!-- /header -->	
 	<div data-role="content">	
 					<h1>{PAGE_CONTENT_TITLE}</h1>
-						{MESSAGE_BLOCK}
 					{MAIN_CONTENT}
-					<br />
 	</div><!-- /content -->
 	<div data-role="footer" data-theme="c">
 		DotKernel Copyright (c) 2009-2010
