@@ -172,15 +172,20 @@ class Dot_Kernel
 	 * @param string $user
 	 * @return string
 	 */
-	public static function getBrowserIcon($agent)
+	public static function getBrowserIcon($agent, $return = 'icon')
 	{		
 		$xml = new Zend_Config_Xml(CONFIGURATION_PATH.'/browser.xml');
 		$browser = $xml->name->type->toArray();
 		foreach ($browser as $key => $val)
 		{			
 			if (stripos($agent,$val['uaBrowser']) !== FALSE)
-			{
+			{				
+				if('browser' == $return) 
+				{
+					return $val['uaBrowser'];
+				}
 				return $val['uaIcon'];
+				
 			}
 		}
 		return 'unknown';
