@@ -13,7 +13,7 @@
 <body>
 <div data-role="page" data-theme="e"> 
 	<div data-role="header" data-theme="b">
-		<p><a href="{SITE_URL}/mobile" data-transition="pop">{SITE_NAME}</a></p>			
+		<p><a href="{SITE_URL}" rel="external">Web {SITE_NAME}</a></p>			
 	</div><!-- /header -->	
 	<div data-role="content">	
 					<h1>{PAGE_CONTENT_TITLE}</h1>

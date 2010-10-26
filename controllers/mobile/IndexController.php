@@ -16,14 +16,6 @@
 * @author     DotKernel Team <team@dotkernel.com>
 */   
 
-// register mobile hits, store in session if hit was register
-if(!isset($session->mobileHit))
-{
-	$dotMobile = new Dot_Mobile();
-	$dotMobile->registerHit();
-	$session->mobileHit = TRUE;
-}
-
 // start the template object, empty for the moment 
 require(DOTKERNEL_PATH . '/' . $registry->route['module'] . '/' . 'View.php');	
 $tpl = View::getInstance(TEMPLATES_PATH . '/' . $registry->route['module']);

@@ -16,6 +16,18 @@
  * @author     DotKernel Team <team@dotkernel.com>
  */ 
 
+//is mobile and session->mobileHit is not set, register it and redirect
+if('mobile' == Dot_Kernel::getDevice()->getType() && !isset($session->mobileHit))
+{
+	// register mobile hits, store in session if hit was register
+	$dotMobile = new Dot_Mobile();
+	$dotMobile->registerHit();
+	$session->mobileHit = TRUE;
+	//redirect to mobile controller
+	header('location: '.$config->website->params->url.'/mobile');
+	exit;
+}
+
 // start the template object, empty for the moment 
 require(DOTKERNEL_PATH . '/' . $registry->route['module'] . '/' . 'View.php');	
 $tpl = View::getInstance(TEMPLATES_PATH . '/' . $registry->route['module']);

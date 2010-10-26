@@ -90,14 +90,6 @@ if (in_array($requestRaw['0'], $config->resources->modules->toArray()))
 {
 	$requestModule = strtolower(basename(stripslashes($requestRaw['0'])));
 }
-
-// Check if mobile module should be requested
-if('mobile' == Dot_Kernel::getDevice()->getType() && !isset($session->mobileHit))
-{
-	//register mobile hit will be on mobile/IndexController
-	$requestModule = 'mobile';	
-}
-
 // if  we are NOT in frontend  module
 if ($requestModule != 'frontend')
     array_shift($requestRaw);
