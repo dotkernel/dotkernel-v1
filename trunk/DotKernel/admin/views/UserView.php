@@ -29,8 +29,6 @@ class User_View extends View
 	{
 		$this->tpl = $tpl;
 		$this->settings = Zend_Registry::get('settings');
-		$this->config = Zend_Registry::get('configuration');
-		$this->route = Zend_Registry::get('route');
 	}
 	/**
 	 * List users
