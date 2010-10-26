@@ -92,7 +92,7 @@ if (in_array($requestRaw['0'], $config->resources->modules->toArray()))
 }
 
 // Check if mobile module should be requested
-if('mobile' == Dot_Kernel::getDevice()->getType())
+if('mobile' == Dot_Kernel::getDevice()->getType() && !isset($session->mobileHit))
 {
 	//register mobile hit will be on mobile/IndexController
 	$requestModule = 'mobile';	
