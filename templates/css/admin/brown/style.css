@@ -518,6 +518,21 @@ a.pass_state:hover{
 	background: url('images/pass.png') bottom left;
 	text-decoration:none; 
 }
+a.sortable{
+	padding-left: 10px;
+	background: url(images/right_arrow.png) no-repeat 0px 2px;
+	color: inherit;
+}
+a.sort_up{
+	padding-left: 15px;
+	background: url(images/up_arrow.png) no-repeat 0px 4px;
+	color: inherit;
+}
+a.sort_down{
+	padding-left: 15px;
+	background: url(images/down_arrow.png) no-repeat 0px 4px;
+	color: inherit;
+}
 .action_table td{
 	padding: 0px;
 	text-align: left;

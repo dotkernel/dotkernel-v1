@@ -195,7 +195,9 @@ switch ($registry->route['action'])
 		$page = (isset($request['page']) && $request['page'] > 0) ? $request['page'] : 1;
 		$browser = (isset($request['browser'])) ? $request['browser'] : '';
 		$loginDate = (isset($request['loginDate'])) ? $request['loginDate'] : '';
-		$logins = $userModel->getLogins($id, $page, $browser, $loginDate);
-		$userView->loginsUser('logins', $logins, $page, $browser, $loginDate);
+		$sortField = (isset($request['sort']) && in_array($request['sort'], array('username', 'dateLogin'))) ? $request['sort'] : 'dateLogin';
+		$orderBy = (isset($request['order']) && in_array($request['order'], array('asc', 'desc'))) ? $request['order'] : 'desc';
+		$logins = $userModel->getLogins($id, $page, $browser, $loginDate, $sortField, $orderBy);
+		$userView->loginsUser('logins', $logins, $page, $browser, $loginDate, $sortField, $orderBy);
 	break;
 }

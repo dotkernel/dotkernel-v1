@@ -29,6 +29,8 @@ class User_View extends View
 	{
 		$this->tpl = $tpl;
 		$this->settings = Zend_Registry::get('settings');
+		$this->config = Zend_Registry::get('configuration');
+		$this->route = Zend_Registry::get('route');
 	}
 	/**
 	 * List users
@@ -96,7 +98,7 @@ class User_View extends View
 	 * @param int $page
 	 * @return void
 	 */
-	public function loginsUser($templateFile, $list, $page, $browser, $loginDate, $ajax = false)
+	public function loginsUser($templateFile, $list, $page, $browser, $loginDate, $sortField, $orderBy)
 	{
 		$dotGeoip = new Dot_Geoip();
 		$this->tpl->setFile('tpl_main', 'user/' . $templateFile . '.tpl');
@@ -112,12 +114,33 @@ class User_View extends View
 			$this->tpl->parse('browser_row', 'browser', true);
 			
 		}
-		$this->tpl->setVar('FILTERDATE', $loginDate);		
-		
+		$this->tpl->setVar('FILTERDATE', $loginDate);				
 		$this->tpl->setBlock('tpl_main', 'list', 'list_block');
 		$this->tpl->paginator($list['paginatorAdapter'],$page);
 		$this->tpl->setVar('PAGE', $page);
 		$this->tpl->setVar('FILTER_URL', '/admin/user/logins');
+
+		$sortableFields = array('username', 'dateLogin');
+		foreach ($sortableFields as $field)
+		{
+			$linkSort = $this->config->website->params->url. '/' . $this->route['module'] . '/' . $this->route['controller']. '/'.$this->route['action'].'/sort/'.$field.'/order/';
+			$linkSort .= ($orderBy == 'asc') ? 'desc' : 'asc';  
+			$this->tpl->setVar('LINK_SORT_'.strtoupper($field), $linkSort);
+			if($field != $sortField)
+			{
+				$sortClass = 'sortable';
+			}
+			elseif($orderBy == 'asc')
+			{
+				$sortClass = 'sort_up';
+			}
+			else
+			{
+				$sortClass = 'sort_down';
+			}
+			$this->tpl->setVar('CLASS_SORT_'.strtoupper($field), $sortClass);			
+		}
+		
 		foreach ($list['data'] as $k => $v)
 		{
 			$country = $dotGeoip->getCountryByIp($v['ip']);
@@ -138,11 +161,6 @@ class User_View extends View
 			$this->tpl->setVar('OSMINOR', $os['minor']);
 			$this->tpl->setVar('DATELOGIN', Dot_Kernel::timeFormat($v['dateLogin'], 'long'));
 			$this->tpl->parse('list_block', 'list', true);
-		}		
-		if($ajax)
-		{
-			$this->tpl->pparse('AJAX', 'tpl_main');
-			exit;
-		}
+		}	
 	}
 }
