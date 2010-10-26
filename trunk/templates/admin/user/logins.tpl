@@ -34,13 +34,13 @@
 	<table cellpadding="0" cellspacing="0" class="big_table" width="100%">
 		<tr>
 			<td class="table_subhead" style="text-align: center; width: 20px;"><span>#</span></td>
-			<td class="table_subhead"><span>Username</span></td>
+			<td class="table_subhead"><span><a href="{LINK_SORT_USERNAME}" class="{CLASS_SORT_USERNAME}">Username</a></span></td>
 			<td class="table_subhead"><span>Referer</span></td>
 			<td class="table_subhead" style="width: 150px;"><span>IP</span></td>
 			<td class="table_subhead" style="width: 50px;"><span>Country</span></td>
 			<td class="table_subhead" style="width: 50px;"><span>Browser</span></td>
 			<td class="table_subhead" style="width: 50px;"><span>OS</span></td>
-			<td class="table_subhead" style="width: 150px;"><span>Login Date</span></td>
+			<td class="table_subhead" style="width: 150px;"><span><a href="{LINK_SORT_DATELOGIN}" class="{CLASS_SORT_DATELOGIN}">Login Date</a></span></td>
 		</tr>
 	<!-- BEGIN list -->
 		<tr>

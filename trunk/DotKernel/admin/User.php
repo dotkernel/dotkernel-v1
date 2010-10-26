@@ -230,7 +230,7 @@ class User
 	 * @param string $browser [optional]
 	 * @return array(array(), Zend_Paginator_Adapter())
 	 */
-	public function getLogins($id, $page = 1, $browser = '', $loginDate = '')
+	public function getLogins($id, $page = 1, $browser = '', $loginDate = '', $sortField = '', $orderBy = '')
 	{
 		$select = $this->db->select()
 					  	   ->from('userLogin');
@@ -246,7 +246,7 @@ class User
 		{
 			$select->where('dateLogin LIKE ?', '%'.$loginDate.'%');
 		}
-		$select->order('dateLogin DESC');
+		$select->order($sortField. ' '.$orderBy);
 		$paginatorAdapter = null;
 		if($page > 0)
 		{

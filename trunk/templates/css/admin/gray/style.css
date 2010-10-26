@@ -517,6 +517,21 @@ a.pass_state:hover{
 	padding: 0px;
 	text-align: left;
 }
+a.sortable{
+	padding-left: 10px;
+	background: url(images/right_arrow.png) no-repeat 0px 2px;
+	color: inherit;
+}
+a.sort_up{
+	padding-left: 15px;
+	background: url(images/up_arrow.png) no-repeat 0px 4px;
+	color: inherit;
+}
+a.sort_down{
+	padding-left: 15px;
+	background: url(images/down_arrow.png) no-repeat 0px 4px;
+	color: inherit;
+}
  /*PHP INFO*/
 .center {text-align: center;}
 .center table { margin-left: auto; margin-right: auto; text-align: left; }
