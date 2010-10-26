@@ -75,7 +75,7 @@ switch ($registry->route['action'])
 			$valid = $userModel->validateUser($values);
 			$data = $valid['data'];
 			$error = $valid['error'];
-			$data['id'] = $request['id'];		
+			$data['id'] = $session->user['id'];		
 			if(empty($error))
 			{				
 				// no error - then update user
