@@ -246,7 +246,9 @@ class User
 		{
 			$select->where('dateLogin LIKE ?', '%'.$loginDate.'%');
 		}
-		$select->order($sortField. ' '.$orderBy);
+		if ($sortField!=""){
+			$select->order($sortField. ' '.$orderBy);
+		}
 		$paginatorAdapter = null;
 		if($page > 0)
 		{
