@@ -7,7 +7,7 @@
 		
 		
 	<h3>1. Special Controllers</h3>
-	<p><b>Mobile: </b><<a href="{SITE_URL}/mobile/ ">Mobile</a></p>
+	<p><b>Mobile: </b><a href="{SITE_URL}/mobile/ ">Mobile</a></p>
 	<p><b>Backend: </b><a href="{SITE_URL}/admin/ ">Admin </a></p>
 	<p><b>RSS: </b><a href="{SITE_URL}/rss/ ">RSS </a></p>
 	<p>Also the above controllers are <b>reserved words</b> so you cannot have an action called
