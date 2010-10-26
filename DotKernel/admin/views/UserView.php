@@ -123,7 +123,7 @@ class User_View extends View
 		$sortableFields = array('username', 'dateLogin');
 		foreach ($sortableFields as $field)
 		{
-			$linkSort = $this->config->website->params->url. '/' . $this->route['module'] . '/' . $this->route['controller']. '/'.$this->route['action'].'/sort/'.$field.'/order/';
+			$linkSort = '/admin/user/logins/sort/'.$field.'/order/';
 			$linkSort .= ($orderBy == 'asc') ? 'desc' : 'asc';  
 			$this->tpl->setVar('LINK_SORT_'.strtoupper($field), $linkSort);
 			if($field != $sortField)
