@@ -144,10 +144,11 @@ class User
 	 * - enum 		- validate with Zend_Validate_InArray(explode(',', $values['enum'][0])) and filter the input
 	 * - password	- validate with Zend_Validate_StringLength and filter the input
 	 * @access public
-	 * @param array $values 
+	 * @param array $values
+	 * @param int $userId 
 	 * @return array
 	 */
-	public function validateUser($values)
+	public function validateUser($values, $userId = 0)
 	{
 		$data = array();
 		$error = array();
@@ -171,7 +172,8 @@ class User
 												));
 			$validUsername = Dot_Kernel::validateFilter($validatorChain, $values['username']);
 			$data = array_merge($data, $validUsername['data']);
-			$error = array_merge($error, $validUsername['error']);
+			$uniqueError = $this->_validateUnique('username', $values['username']['username'], $userId);
+			$error = array_merge($error, $validUsername['error'], $uniqueError);
 		}
 		//validate email
 		if(array_key_exists('email', $values))
@@ -179,7 +181,8 @@ class User
 			$validatorEmail = new Zend_Validate_EmailAddress();		
 			$validEmail = Dot_Kernel::validateFilter($validatorEmail, $values['email']);
 			$data = array_merge($data, $validEmail['data']);
-			$error = array_merge($error, $validEmail['error']);
+			$uniqueError = $this->_validateUnique('email', $values['email']['email'], $userId);
+			$error = array_merge($error, $validEmail['error'], $uniqueError);
 		}			
 		//validate enum
 		if(array_key_exists('enum', $values))
@@ -285,5 +288,33 @@ class User
 		}
 		asort($countryName);
 		return $countryName;
+	}	
+	/**
+	 * Check if user already exists - email, username, and return error
+	 * @access private
+	 * @param string $field
+	 * @param string $value
+	 * @param id $userId
+	 * @return array
+	 */
+	private function _validateUnique($field, $value, $userId)
+	{
+		$error = array();
+		//email is unique, check if exists
+		$exists = $this->getUserBy($field, $value);
+		if($userId > 0)
+		{
+			$currentUser = $this->getUserBy('id', $userId);				
+			$uniqueCondition = (is_array($exists) && $exists[$field] != $currentUser[$field]);
+		}
+		else
+		{
+			$uniqueCondition = (FALSE != $exists);
+		}
+		if($uniqueCondition)
+		{
+			$error[] = $value . $this->option->errorMessage->userExists;
+		}
+		return $error;
 	}
 }

@@ -94,6 +94,7 @@ switch ($registry->route['action'])
 								array('firstName'=>$_POST['firstName'],
 									  'lastName'=>$_POST['lastName']
 									 ),
+							'username' => array('username' => $_POST['username']),
 							'email' => array('email' => $_POST['email']),
 							'enum' => array('0' => '0,1',
 											'isActive' => $_POST['isActive']),
@@ -101,7 +102,7 @@ switch ($registry->route['action'])
 												'password2' =>  $_POST['password2']
 											   )
 						  );
-			$valid = $userModel->validateUser($values);
+			$valid = $userModel->validateUser($values, $request['id']);
 			$data = $valid['data'];
 			$error = $valid['error'];			
 			if(empty($error))
