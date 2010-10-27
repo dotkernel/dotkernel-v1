@@ -181,10 +181,11 @@ class Admin
 	/**
 	 * Validate user input, add or update form
 	 * @access public
-	 * @param public 
+	 * @param array $values
+	 * @param int $userId 
 	 * @return array
 	 */
-	public function validateUser($values)
+	public function validateUser($values, $userId = 0)
 	{
 		$data = array();
 		$error = array();
@@ -208,7 +209,8 @@ class Admin
 										 ));
 			$validUsername = Dot_Kernel::validateFilter($validatorChain, $values['username']);
 			$data = array_merge($data, $validUsername['data']);
-			$error = array_merge($error, $validUsername['error']);
+			$uniqueError = $this->_validateUnique('username', $values['username']['username'], $userId);
+			$error = array_merge($error, $validUsername['error'], $uniqueError);
 		}
 		//validate email
 		if(array_key_exists('email', $values))
@@ -216,7 +218,8 @@ class Admin
 			$validatorEmail = new Zend_Validate_EmailAddress();		
 			$validEmail = Dot_Kernel::validateFilter($validatorEmail, $values['email']);
 			$data = array_merge($data, $validEmail['data']);
-			$error = array_merge($error, $validEmail['error']);
+			$uniqueError = $this->_validateUnique('email', $values['email']['email'], $userId);
+			$error = array_merge($error, $validEmail['error'], $uniqueError);
 		}			
 		//validate enum
 		if(array_key_exists('enum', $values))
@@ -347,5 +350,33 @@ class Admin
 			$session->message['txt'] = $txt;
 			$session->message['type'] = 'error';
 		}		
+	}
+	/**
+	 * Check if user already exists - email, username, and return error
+	 * @access private
+	 * @param string $field
+	 * @param string $value
+	 * @param id $userId
+	 * @return array
+	 */
+	private function _validateUnique($field, $value, $userId)
+	{
+		$error = array();
+		//email is unique, check if exists
+		$exists = $this->getUserBy($field, $value);
+		if($userId > 0)
+		{
+			$currentUser = $this->getUserBy('id', $userId);				
+			$uniqueCondition = (is_array($exists) && $exists[$field] != $currentUser[$field]);
+		}
+		else
+		{
+			$uniqueCondition = (FALSE != $exists);
+		}			
+		if($uniqueCondition)
+		{
+			$error[] = $value . $this->option->errorMessage->userExists;
+		}
+		return $error;
 	}
 }
