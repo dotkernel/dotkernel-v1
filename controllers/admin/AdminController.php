@@ -49,7 +49,7 @@ switch ($registry->route['action'])
 	case 'account':
 		//display my account form
 		$data = $adminModel->getUserBy('id', $session->admin['id']);
-		$adminView->details('update',$data);	
+		$adminView->details('account',$data);	
 	break;
 	case 'list':
 		// list admin users
@@ -124,12 +124,15 @@ switch ($registry->route['action'])
 									  'lastName'=>$_POST['lastName']
 									 ),
 							'email' => array('email' => $_POST['email']),
-							'enum' => array('0' => '0,1',
-											'isActive' => $_POST['isActive']),
+							'enum' => array('0' => '0,1'),
 							'password' => array('password' => $_POST['password'],
 												'password2' =>  $_POST['password2']
 											   )
 						  );
+			if(isset($_POST['isActive']))
+			{
+				$values['enum']['isActive'] =  $_POST['isActive'];
+			}
 			$valid = $adminModel->validateUser($values);
 			$data = $valid['data'];
 			$error = $valid['error'];			
