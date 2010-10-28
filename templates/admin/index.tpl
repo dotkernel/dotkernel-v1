@@ -5,6 +5,7 @@
 	<title>Admin - {PAGE_TITLE}</title>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" >
 	<meta http-equiv="Content-Style-Type" content="text/css" >
+	<link rel="stylesheet" href ="{TEMPLATES_URL}/css/admin/style.css" type="text/css" >
 	<link rel="stylesheet" href ="{TEMPLATES_URL}/css/admin/{SKIN}/style.css" type="text/css" >	
 	<script type="text/javascript" src="{TEMPLATES_URL}/js/admin/main.js"></script>
 </head>
@@ -15,7 +16,7 @@
 			<div class="top_user_menu clearfix">{INFO_BAR}</div>
 			{MENU_1}
 		</div>
-		<div class="content clearfix">				
+		<div class="content clearfix">
 			<h1>{PAGE_CONTENT_TITLE}</h1>
 				{MESSAGE_BLOCK}
 					{MAIN_CONTENT}
