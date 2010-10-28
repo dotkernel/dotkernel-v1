@@ -24,10 +24,10 @@ legend{
 	color: #e8542d;
 }
 input,select,textarea{
-	border-top-color:#B0A08E;
-	border-right-color:#DCD5CD;
-	border-bottom-color:#DCD5CD;
-	border-left-color:#B0A08E;
+	border-top:1px solid #B0A08E;
+	border-right:1px solid #DCD5CD;
+	border-bottom:1px solid #DCD5CD;
+	border-left:1px solid #B0A08E;
 }
 a#logo{
 	color: #E2D8CD;
