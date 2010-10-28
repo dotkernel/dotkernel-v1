@@ -334,9 +334,8 @@ a#logo{
 	border: 0px;
 }
 .medium_table .row2{
-	border-right: 1px solid;
 	font-weight: bold;
-    text-transform: uppercase;
+	text-transform: uppercase;
 	font-family: Arial, sans-serif;
 	text-align: right !important;
 }
