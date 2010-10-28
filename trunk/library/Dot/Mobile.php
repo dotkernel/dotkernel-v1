@@ -69,7 +69,7 @@ class Dot_Mobile
 		$mobileHit = array('ip' => $ip,
 							'device' => $device ,
 							'deviceModel' =>  $deviceModel,
-							'carrier' => 'unknown',
+							'carrier' => $this->_getCarrier(),
 							'operatingSystem' => $operatingSystem,
 							'browser' => $wurflDetails->getFeature('browser_name'),
 							'country' => $country[1],
@@ -77,5 +77,15 @@ class Dot_Mobile
 							'referer' => isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : ''
 							);
 		$this->db->insert('mobileHit', $mobileHit);
+	}
+	/**
+	 * Analise the IP and get the carrier : AT&T, Wifi, etc.
+	 * @todo to be developed
+	 * @access private
+	 * @return string
+	 */
+	private function _getCarrier()
+	{
+		return 'unknown';
 	}
 }
