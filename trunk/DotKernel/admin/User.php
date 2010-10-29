@@ -264,32 +264,6 @@ class User
 		return array('data'=> $data,'paginatorAdapter'=> $paginatorAdapter);
 	}	
 	/**
-	 * Get countryspf login users
-	 * @access public
-	 * @return array
-	 */
-	public function getCountryLogins()
-	{
-		$countryName = array();
-		$dotGeoip = new Dot_Geoip();
-		$logins = $this->getLogins(0,-1);
-		foreach ($logins['data'] as $v)
-		{
-			$country = $dotGeoip->getCountryByIp($v['ip']);
-			if(!array_key_exists($country[0], $countryName))
-			{
-				 $countryName[$country[0]]['name'] = $country[1];
-				 $countryName[$country[0]]['count'] = 1;
-			}
-			else
-			{
-				$countryName[$country[0]]['count']++;				
-			}
-		}
-		asort($countryName);
-		return $countryName;
-	}	
-	/**
 	 * Check if user already exists - email, username, and return error
 	 * @access private
 	 * @param string $field
@@ -316,5 +290,56 @@ class User
 			$error[] = $value . $this->option->errorMessage->userExists;
 		}
 		return $error;
+	}
+	
+	/**
+	 * Get top country user logins as declared in 
+	 * $option->countCountryUserLogin
+	 * @access public
+	 * @return array
+	 */
+	public function getTopCountryLogins($topCount)
+	{
+		$select = $this->db->select()
+					  	   ->from('userLogin');
+		$logins = $this->db->fetchAll($select);
+		$countryName = array();
+		$countryCount = array();
+		foreach ($logins as $v)
+		{
+			if(array_key_exists($v['country'], $countryCount))
+			{
+				$countryCount[$v['country']]++;
+			}
+			else
+			{
+				 $countryCount[$v['country']] = 1;
+			}
+		}
+		arsort($countryCount);
+		$countSum = array_sum($countryCount);
+		$i = 1;
+		$data['Other'] = array('count' => 0, 'countPercent' => 0,'name' => 'Others');
+		foreach ($countryCount as $country => $count)
+		{
+			$countPercent = round($count * 100 / $countSum, 2);
+			if($i >= $topCount)
+			{
+				$data['Other']['countPercent'] += $countPercent; 
+				$data['Other']['count'] += $count; 
+			}
+			else
+			{
+				$data[$country]['countPercent'] = $countPercent; 
+				$data[$country]['count'] = $count; 
+				
+			}
+			$i++;
+		}
+		if(!$data['Other']['count'])
+		{
+			unset($data['other']);
+		}
+		return $data;
 	}
 }

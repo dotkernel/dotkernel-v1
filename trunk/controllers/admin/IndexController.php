@@ -69,6 +69,9 @@ $tpl->setSeoValues($pageTitle);
 // dispaly message (error, warning, info)	
 $tpl->displayMessage();
 
+// display widgets
+$tpl->displayWidgets($option->widgets->content);
+
 // parse the main content block
 $tpl->parse('MAIN_CONTENT', 'tpl_main');
 

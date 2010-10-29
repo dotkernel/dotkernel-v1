@@ -340,4 +340,62 @@ class View extends Dot_Template
 		$user=Dot_Auth::getIdentity('admin');
 		$this->setVar('USERTOKEN', Dot_Kernel::generateUserToken($user['password']));
 	}
+	/**
+	 * Display the widget: User Login Piechart
+	 * @access private
+	 * @param array $widgetOption
+	 * @return void
+	 */
+	private function _displayUserLoginsPiechart($widgetOption)
+	{
+		// pie chart
+		$userModel = new User();
+		$userCountry = $userModel->getTopCountryLogins($widgetOption['countCountryUserLogin']);
+		$color = $widgetOption['colorCharts']['color'];
+		$data = array();
+		$i = 0;
+		foreach ($userCountry as $name => $country)
+		{
+			$data[] = array('y' => $country['countPercent'], 
+							'text' => $name, 
+							'color' => $color[$i], 
+							'stroke' => $color[$i], 
+							'tooltip' => $name.": ".(string)$country['countPercent']."&#37;"
+							);
+			$i++;
+		}
+		$this->setVar('PIEDATA', Zend_Json::encode($data));	
+	}
+	/**
+	 * Display widgets content
+	 * @access public
+	 * @param Zend_Config $value
+	 * @return void
+	 */
+	public function displayWidgets($value)
+	{
+		// if we have only one widget, Zend_Config_Xml return a simple array, not an array with key 0(zero)
+		if(is_null($value->{0}))
+		{
+			$value = new Zend_Config(array(0=>$value));						
+		}
+		$widgets = $value->toArray();		
+		foreach ($widgets as $key =>$val)
+		{
+			if($this->varExists($val['token']))
+			{
+				// initialize the template file where is the widget content
+				$this->setFile('tpl_widget', 'blocks/' . strtolower($val['token']) . '.tpl');
+				switch ($val['token']) 
+				{
+					case 'WIDGET_USER_LOGINS':						
+						$this->_displayUserLoginsPiechart($val);												
+					break;
+				}
+				// parse the widget content
+				$this->parse(strtoupper($val['token']), 'tpl_widget');
+			}
+		}
+		
+	}
 }

@@ -35,10 +35,9 @@ class System_View extends View
 	 * @param string $templateFile
 	 * @param string $mysqlVersion
 	 * @param array $geoIpVersion
-	 * @param array $userCountry
 	 * @return void
 	 */
-	public function dashboard($templateFile, $mysqlVersion, $geoIpVersion, $userCountry)
+	public function dashboard($templateFile, $mysqlVersion, $geoIpVersion)
 	{
 		$this->tpl->setFile('tpl_main', 'system/' . $templateFile . '.tpl');
 		// system overview
@@ -53,23 +52,7 @@ class System_View extends View
 			$this->tpl->setVar('GEOIP_CITY_VERSION', $geoIpVersion['city']);
 			$this->tpl->setVar('GEOIP_COUNTRY_VERSION', $geoIpVersion['country']);
 			$this->tpl->parse('is_geoip_row', 'is_geoip', true);			
-		}		
-		// pie chart
-		$option = Zend_Registry::get('option');
-		$color = $option->colorCharts->color->toArray();
-		$data = array();
-		$i = 0;
-		foreach ($userCountry as $code => $country)
-		{
-			$data[] = array('y' => $country['countPercent'], 
-							'text' => $country['name'], 
-							'color' => $color[$i], 
-							'stroke' => $color[$i], 
-							'tooltip' => $country['name'].": ".(string)$country['countPercent']."&#37;"
-							);
-			$i++;
-		}
-		$this->tpl->setVar('PIEDATA', Zend_Json::encode($data));		
+		}	
 	}
 	/**
 	 * Display settings

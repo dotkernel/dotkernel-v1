@@ -67,57 +67,6 @@ class System
 		}		
 	}
 	/**
-	 * Get top 10 country user logins
-	 * @access public
-	 * @param array $logins
-	 * @return array
-	 */
-	public function getCountryUserLogin($logins)
-	{
-		$countryName = array();
-		$countryCount = array();
-		$dotGeoip = new Dot_Geoip();
-		foreach ($logins as $v)
-		{
-			$country = $dotGeoip->getCountryByIp($v['ip']);
-			if(array_key_exists($country[0], $countryCount))
-			{
-				$countryCount[$country[0]]++;
-			}
-			else
-			{
-				 $countryCount[$country[0]] = 1;
-				 $countryName[$country[0]] = $country[1];
-			}
-		}
-		arsort($countryCount);
-		$countSum = array_sum($countryCount);
-		$i = 1;
-		$data['other'] = array('count' => 0, 'countPercent' => 0,'name' => 'Others');
-		foreach ($countryCount as $code => $count)
-		{
-			$countPercent = round($count * 100 / $countSum, 2);
-			if($i >= $this->option->countCountryUserLogin)
-			{
-				$data['other']['countPercent'] += $countPercent; 
-				$data['other']['count'] += $count; 
-			}
-			else
-			{
-				$data[$code]['countPercent'] = $countPercent; 
-				$data[$code]['count'] = $count; 
-				$data[$code]['name'] = ucfirst($countryName[$code]);
-				
-			}
-			$i++;
-		}
-		if(!$data['other']['count'])
-		{
-			unset($data['other']);
-		}
-		return $data;
-	}
-	/**
 	 * Get GeoIp Version release
 	 * Return an array with keys "country" & "city"
 	 * @access public
