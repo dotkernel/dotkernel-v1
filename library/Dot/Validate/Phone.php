@@ -32,6 +32,18 @@ class Dot_Validate_Phone extends Dot_Validate {
 	 */
 	private $_options = array();
 	/**
+	 * Phone area
+	 * @access private
+	 * @var string
+	 */
+	private $_area = '';
+	/**
+	 * Phone prefix
+	 * @access private
+	 * @var string
+	 */
+	private $_prefix = '';
+	/**
 	 * Construct that receive as parameters the phone number and some options as array
 	 * @access public
 	 * @param array $options [optional]
@@ -68,29 +80,27 @@ class Dot_Validate_Phone extends Dot_Validate {
 		{
 			return FALSE;
 		}
-		$phoneArea = substr($phone, $this->_options['areaPositionStart'], $this->_options['areaLength']);
-		$phonePrefix = substr($phone, $this->_options['prefixPositionStart'], $this->_options['prefixLength']);
 		// internationalPrefix length is compared
 		$intPrefixLength = strlen($this->_options['internationalPrefix']);
 		if(substr($phone, 0, $intPrefixLength) != $this->_options['internationalPrefix'] && $phoneLength == $this->_options['phoneLengthMax'])
 		{
 			return FALSE;
 		}
-		$phoneArea = substr($phone, $this->_options['areaPositionStart']+$intPrefixLength, $this->_options['areaLength']);
-		$phonePrefix = substr($phone, $this->_options['prefixPositionStart']+$intPrefixLength, $this->_options['prefixLength']);
+		$this->_area = substr($phone, $this->_options['areaPositionStart'] + $phoneLength - $this->_options['phoneLengthMin'], $this->_options['areaLength']);
+		$this->_prefix = substr($phone, $this->_options['prefixPositionStart'] + $phoneLength - $this->_options['phoneLengthMin'], $this->_options['prefixLength']);		
 		$conditionArea = '';
 		$conditionPrefix = '';
 		if(is_array($this->_options['allow']))
 		{
 			$allowKey = key($this->_options['allow']);
-			$phoneAllowVar = 'phone'.ucfirst($allowKey);
-			$conditionArea = ' && '.in_array($$phoneAllowVar, $this->_options['allow'][$allowKey]);
+			$phoneAllowVar = '_'.$allowKey; //  "_area" used below as $this->_area
+			$conditionArea = ' && '.in_array($this->$phoneAllowVar, $this->_options['allow'][$allowKey]);
 		}
 		if(is_array($this->_options['deny']))
 		{
 			$denyKey = key($this->_options['deny']);
-			$phoneDenyVar = 'phone'.ucfirst($denyKey);
-			$conditionPrefix = !in_array($$phoneDenyVar, $this->_options['deny'][$denyKey]);
+			$phoneDenyVar = '_'.$denyKey; //  "_prefix" used below as $this->_prefix
+			$conditionPrefix = !in_array($this->$phoneDenyVar, $this->_options['deny'][$denyKey]);
 		}
 		if($conditionArea && $conditionPrefix)
 		{
@@ -100,5 +110,36 @@ class Dot_Validate_Phone extends Dot_Validate {
 		{
 			return FALSE;
 		}
+	}
+	/**
+	 * Return phone area. 
+	 * If no param set when calling this method, get phone area from isValid() method
+	 * @param string $phone [optional]
+	 * @return string
+	 */
+	public function getArea($phone = '')
+	{
+		if($phone != '')
+		{
+			$phoneLength = strlen($phone);
+			$this->_area = substr($phone, $this->_options['areaPositionStart'] + $phoneLength - $this->_options['phoneLengthMin'], $this->_options['areaLength']);
+		}
+		return $this->_area;
+		
+	}
+	/**
+	 * Return phone prefix. 
+	 * If no param set when calling this method, get phone prefix from isValid() method
+	 * @param string $phone [optional]
+	 * @return string
+	 */
+	public function getPrefix($phone = '')
+	{
+		if($phone != '')
+		{
+			$phoneLength = strlen($phone);
+			$this->_prefix = substr($phone, $this->_options['prefixPositionStart'] + $phoneLength - $this->_options['phoneLengthMin'], $this->_options['prefixLength']);	
+		}
+		return $this->_prefix;		
 	}
 }
