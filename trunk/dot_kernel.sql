@@ -161,6 +161,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 CREATE TABLE IF NOT EXISTS `userLogin` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `ip` varchar(16) NOT NULL,
+  `country` varchar(255) NOT NULL,
   `userId` int(11) unsigned NOT NULL,
   `username` varchar(255) NOT NULL,
   `referer` text NOT NULL,
