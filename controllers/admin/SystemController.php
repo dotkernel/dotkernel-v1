@@ -22,12 +22,9 @@ $pageTitle = $option->pageTitle->action->{$registry->route['action']};
 switch ($registry->route['action'])
 {
 	case 'dashboard':		
-		$userModel = new User(); 
-		$userLogins = $userModel->getLogins(0,0);
-		$userCountry = $systemModel->getCountryUserLogin($userLogins['data']);
 		$mysqlVersion = $systemModel->getMysqlVersion();
 		$geoIpVersion = $systemModel->getGeoIpVersion();
-		$systemView->dashboard('dashboard', $mysqlVersion, $geoIpVersion, $userCountry);
+		$systemView->dashboard('dashboard', $mysqlVersion, $geoIpVersion);
 	break;
 	case 'settings':
 		// list settings values

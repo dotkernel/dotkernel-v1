@@ -958,4 +958,24 @@ class Dot_Template
 			}
 		}
 	}
+	/**
+	 * Checks if the given variable exists as token 
+	 * inside the declared variables or files content.
+	 * @since 1.3.1
+	 * @access public 
+	 * @param string $token Variable to check
+	 * @return bool
+	 */
+	public function varExists($token)
+	{
+		foreach ($this->getVars() as $var)
+		{
+			$a = strpos($var, '{'.strtoupper($token).'}');
+			if($a!== FALSE)
+			{
+				return TRUE;
+			}
+		}
+		return FALSE;
+	} 
 }
