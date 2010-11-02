@@ -55,25 +55,29 @@ class Dot_Geoip
 				$session->message['type'] = 'warning';
 			}
 		}
-		elseif(geoip_db_avail(GEOIP_COUNTRY_EDITION))
+		if(function_exists('geoip_db_avail') && geoip_db_avail(GEOIP_COUNTRY_EDITION) && 'unknown' == $country[0])
 		{ 
 			//if GeoIP.dat file exists
-			$country[0] = geoip_country_code_by_name ($ip);
-			$country[1] = geoip_country_name_by_name($ip);
+			$countryCode= geoip_country_code_by_name($ip);
+			$countryName = geoip_country_name_by_name($ip);
+			$country[0] = $countryCode != FALSE  ? $countryCode : 'unknown';
+			$country[1] = $countryName != FALSE  ? $countryName : 'NA';
 		}		
-		elseif(geoip_db_avail(GEOIP_CITY_EDITION_REV0))
+		if(function_exists('geoip_db_avail') && geoip_db_avail(GEOIP_CITY_EDITION_REV0) && 'unknown' == $country[0])
 		{	
 			//if GeoIPCity.dat file exists
 			$record = geoip_record_by_name($ip);
 			if(!empty($record))
 			{
-				$country[0] = $record['country_code'];
-				$country[1] = $record['country_name'];
+				$countryCode = $record['country_code'];
+				$countryName = $record['country_name'];
+				$country[0] = $countryCode != FALSE  ? $countryCode : 'unknown';
+				$country[1] = $countryName != FALSE  ? $countryName : 'NA';
 			}
 		}
-		else
+		if('unknown' == $country[0])
 		{
-			// GeoIp extension is not active
+			// GeoIp extension is active, but .dat files are missing
 			$api = new Dot_Geoip_Country();
 			$geoipPath = 'externals/geoip/GeoIP.dat';
 			if(file_exists($geoipPath))

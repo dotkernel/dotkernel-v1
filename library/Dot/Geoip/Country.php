@@ -311,7 +311,7 @@ class Dot_Geoip_Country extends Dot_Geoip
 	 */
 	public function getCountryByAddr($path, $ip)
 	{
-		$country = array('unknown','unknown');
+		$country = array(0 => 'unknown',1 => 'NA');
 		$this->_geoipOpen($path, GEOIP_STANDARD);
 		$countryCode = $this->_geoipCountryCodeByAddr($ip);
 		$this->_geoipClose();
