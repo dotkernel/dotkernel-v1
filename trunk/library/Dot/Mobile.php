@@ -59,19 +59,18 @@ class Dot_Mobile
 		//if Wurfl browser is null, read from configs/browser.xml
 		if (is_null($wurflDetails->getFeature('browser_name'))) 
 		{
-			$browser = Dot_Kernel::getBrowserIcon($v['userAgent'], 'browser');
+			$browser = Dot_Kernel::getBrowserIcon($userAgent, 'browser');
 		}
 		else
 		{
 			$browser = $wurflDetails->getFeature('browser_name');
 		}		
-		
 		$mobileHit = array('ip' => $ip,
 							'device' => $device ,
 							'deviceModel' =>  $deviceModel,
 							'carrier' => $this->_getCarrier(),
 							'operatingSystem' => $operatingSystem,
-							'browser' => $wurflDetails->getFeature('browser_name'),
+							'browser' => $browser,
 							'country' => $country[1],
 							'userAgent' => $userAgent,
 							'referer' => isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : ''
