@@ -44,14 +44,14 @@ class System_View extends View
 		$this->tpl->setVar('MYSQL',$mysqlVersion);
 		$this->tpl->setVar('PHP',phpversion());
 		$this->tpl->setVar('PHPAPI',php_sapi_name());
-		$this->tpl->setVar('ZFVERSION', Zend_Version::VERSION);		
+		$this->tpl->setVar('ZFVERSION', Zend_Version::VERSION);
 		
-		$this->tpl->setBlock('tpl_main', 'is_geoip', 'is_geoip_row');	
+		$this->tpl->setBlock('tpl_main', 'is_geoip', 'is_geoip_row');
 		if(function_exists('geoip_database_info'))
 		{
 			$this->tpl->setVar('GEOIP_CITY_VERSION', $geoIpVersion['city']);
 			$this->tpl->setVar('GEOIP_COUNTRY_VERSION', $geoIpVersion['country']);
-			$this->tpl->parse('is_geoip_row', 'is_geoip', true);			
+			$this->tpl->parse('is_geoip_row', 'is_geoip', true);
 		}	
 	}
 	/**
@@ -89,7 +89,7 @@ class System_View extends View
 						$this->tpl->setVar('LIST_OPTION', $opt);
 						$optionSelect = ($v['value'] == $opt) ? 'selected' : '';
 						$this->tpl->setVar('SELECTED_OPTION', $optionSelect);
-						$this->tpl->parse('options_row', 'options', true);												
+						$this->tpl->parse('options_row', 'options', true);
 					}
 					$this->tpl->parse('option_row', 'option', true);
 				break;
@@ -103,7 +103,7 @@ class System_View extends View
 						$this->tpl->setVar('POSIBLE_VALUE_TXT', $radioTxt);
 						$radioCheck = ($v['value'] == $val) ? 'checked' : '';
 						$this->tpl->setVar('CHECKED_OPTION', $radioCheck);
-						$this->tpl->parse('radios_row', 'radios', true);												
+						$this->tpl->parse('radios_row', 'radios', true);
 					}
 					$this->tpl->parse('radio_row', 'radio', true);
 				break;
@@ -156,28 +156,56 @@ class System_View extends View
 		$this->tpl->setVar('PAGE', $page);
 		$this->tpl->setVar('ACTIVE_URL', '/admin/system/transporter-activate');
 		$this->tpl->setVar('ACTIVE_1', 'checked');
-		$this->tpl->setVar('SSL_TLS', 'checked');		
+		$this->tpl->setVar('SSL_TLS', 'checked');
 		$this->tpl->displayMessage($ajax);
-				
+		
 		foreach ($list["data"] as $k => $v)
 		{
-		  $this->tpl->setVar('BG', $k%2+1);
-		  $this->tpl->setVar('ID', $v["id"]);
-		  $this->tpl->setVar('USER', $v['user']);
-		  $this->tpl->setVar('SERVER', $v['server']);
-		  $this->tpl->setVar('PORT', $v['port']);
-		  $this->tpl->setVar('SSL', $v['ssl']);
-		  $this->tpl->setVar('CAPACITY', $v['capacity']);
-		  $this->tpl->setVar('COUNTER', $v['counter']);
-		  $this->tpl->setVar('DATE_CREATED', Dot_Kernel::timeFormat($v['date']));
-		  $this->tpl->setVar('ACTIVE_IMG', $v['isActive'] == 1 ? 'active' : 'inactive');
-		  $this->tpl->setVar('ISACTIVE', $v['isActive']*(-1)+1);
-		  $this->tpl->parse('list_block', 'list', true);
+			$this->tpl->setVar('BG', $k%2+1);
+			$this->tpl->setVar('ID', $v["id"]);
+			$this->tpl->setVar('USER', $v['user']);
+			$this->tpl->setVar('SERVER', $v['server']);
+			$this->tpl->setVar('PORT', $v['port']);
+			$this->tpl->setVar('SSL', $v['ssl']);
+			$this->tpl->setVar('CAPACITY', $v['capacity']);
+			$this->tpl->setVar('COUNTER', $v['counter']);
+			$this->tpl->setVar('DATE_CREATED', Dot_Kernel::timeFormat($v['date']));
+			$this->tpl->setVar('ACTIVE_IMG', $v['isActive'] == 1 ? 'active' : 'inactive');
+			$this->tpl->setVar('ISACTIVE', $v['isActive']*(-1)+1);
+			$this->tpl->parse('list_block', 'list', true);
 		}
+		// if we are showing the form after an error, fill the form with the previous values
+		if (isset($list['form']))
+		{
+			$this->tpl->setVar('USER', $list['form']['user']);
+			$this->tpl->setVar('PASS', $list['form']['pass']);
+			$this->tpl->setVar('SERVER', $list['form']['server']);
+			$this->tpl->setVar('PORT', $list['form']['port']);
+			$this->tpl->setVar('CAPACITY', $list['form']['capacity']);
+			
+			$this->tpl->setVar('SSL_SSL', $list['form']['ssl']=='ssl'?'checked':'');
+			$this->tpl->setVar('SSL_TLS', $list['form']['ssl']=='tls'?'checked':'');
+			
+			$this->tpl->setVar('ACTIVE_YES', $list['form']['isActive']==1?'checked':'');
+			$this->tpl->setVar('ACTIVE_NO', $list['form']['isActive']==0?'checked':'');
+		}else{
+			$this->tpl->setVar('USER', '');
+			$this->tpl->setVar('PASS', '');
+			$this->tpl->setVar('SERVER', '');
+			$this->tpl->setVar('PORT', '');
+			$this->tpl->setVar('CAPACITY', '');
+			
+			$this->tpl->setVar('SSL_SSL', '');
+			$this->tpl->setVar('SSL_TLS', 'checked');
+			
+			$this->tpl->setVar('ACTIVE_YES', 'checked');
+			$this->tpl->setVar('ACTIVE_NO', '');
+		}
+		
 		if($ajax)
 		{
-		  $this->tpl->pparse('AJAX', 'tpl_main');
-		  exit;
+			$this->tpl->pparse('AJAX', 'tpl_main');
+			exit;
 		}
 	}
 	/**
@@ -192,25 +220,25 @@ class System_View extends View
 		$this->tpl->setVar('ACTIVE_1', 'checked');
 		$this->tpl->setVar('SSL_TLS', 'checked'); $this->tpl->setVar('SSL_SSL', '');
 		foreach ($data as $k=>$v)
-		{   
-		  $this->tpl->setVar(strtoupper($k), $v);     
-		  if('isActive' == $k)
-		  {
-		    $this->tpl->setVar('ACTIVE_'.$v, 'checked');
-		    $this->tpl->setVar('ACTIVE_'.$v*(-1)+1, '');
-		  }
-		  if('ssl' == $k)
-		  {
-		    if ($v == 'ssl')
-		    {
-		      $this->tpl->setVar('SSL_SSL', 'checked');
-		      $this->tpl->setVar('SSL_TLS', '');
-		    }
+		{
+			$this->tpl->setVar(strtoupper($k), $v);
+			if('isActive' == $k)
+			{
+				$this->tpl->setVar('ACTIVE_'.$v, 'checked');
+				$this->tpl->setVar('ACTIVE_'.$v*(-1)+1, '');
+			}
+			if('ssl' == $k)
+			{
+				if ($v == 'ssl')
+				{
+					$this->tpl->setVar('SSL_SSL', 'checked');
+					$this->tpl->setVar('SSL_TLS', '');
+				}
 			else{
-		      $this->tpl->setVar('SSL_TLS', 'checked');
-		      $this->tpl->setVar('SSL_SSL', '');
-		    }
-		  }
+					$this->tpl->setVar('SSL_TLS', 'checked');
+					$this->tpl->setVar('SSL_SSL', '');
+				}
+			}
 		}
-	} 
+	}
 }
