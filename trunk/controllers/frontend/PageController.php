@@ -21,8 +21,6 @@ $pageTitle = $option->pageTitle->action->{$registry->route['action']};
 switch ($registry->route['action'])
 {
 	default:
-		// default action is home
-		$pageTitle = $option->pageTitle->action->home;
 	case 'home';
 		// call showPage method to view the home page
 		$pageView->showPage('home');

@@ -107,6 +107,10 @@ if (isset($requestRaw['1']) && $requestRaw['1'] != '')
 {
 	$requestAction = strtolower(basename(stripslashes($requestRaw['1'])));
 }
+else
+{	//take the default action from router.xml
+	$requestAction = $registry->router->routes->action->{$requestModule}->{ucfirst($requestController)};
+}
 
 // we have extra variables, so we load all in the global array $request
 $request = array();
