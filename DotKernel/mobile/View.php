@@ -4,7 +4,7 @@
 * DotKernel Application Framework
 *
 * @category   DotKernel
-* @package    Frontend
+* @package    Mobile
 * @copyright  Copyright (c) 2009-2010 DotBoost Technologies Inc. Canada (http://www.dotboost.com)
 * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 * @version    $Id$
@@ -14,7 +14,7 @@
 * View Model
 * abstract over the Dot_Template class
 * @category   DotKernel
-* @package    Frontend
+* @package    Mobile
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
