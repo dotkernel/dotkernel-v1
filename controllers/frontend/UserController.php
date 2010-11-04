@@ -23,8 +23,6 @@ $pageTitle = $option->pageTitle->action->{$registry->route['action']};
 switch ($registry->route['action'])
 {
 	default:
-		// default action is login
-		$pageTitle = $option->pageTitle->action->login;
 	case 'login':
 		if(!isset($session->user))
 		{
