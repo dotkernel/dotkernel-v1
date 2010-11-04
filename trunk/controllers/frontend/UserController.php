@@ -72,7 +72,7 @@ switch ($registry->route['action'])
 												'password2' =>  $_POST['password2']
 											   )
 						  );
-			$valid = $userModel->validateUser($values);
+			$valid = $userModel->validateUser($values, $session->user['id']);
 			$data = $valid['data'];
 			$error = $valid['error'];
 			$data['id'] = $session->user['id'];		
