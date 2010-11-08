@@ -5,32 +5,47 @@ current xml dots file. -->
 <config>
 	<dots>
 		<variable option="global">
+			<privateIpRanges>
+				<range>
+					<start>10.0.0.0</start>
+					<stop>10.255.255.255</stop>
+				</range>
+				<range>
+					<start>172.16.0.0</start>
+					<stop>172.31.255.255</stop>
+				</range>
+				<range>
+					<start>192.168.0.0</start>
+					<stop>192.168.255.255</stop>
+				</range>
+				<range>127.0.0.1</range>
+			</privateIpRanges>
 		</variable>
 		<variable option="admin">
 			<session>
 				<name>admin</name>
-				<rememberMeSeconds>864000</rememberMeSeconds>				
+				<rememberMeSeconds>864000</rememberMeSeconds>
 			</session>
 			<warningMessage>
 				<modGeoIp>&lt;i&gt;mod_geoip&lt;/i&gt; extension is not installed. 
 						&lt;br /&gt; Check if &lt;i&gt;externals/geoip/GeoIP.dat&lt;/i&gt; file exists. &lt;br /&gt; 
 						If not, download it from &lt;a href="http://www.maxmind.com/app/geolitecountry" target="_blank"&gt;
 						http://www.maxmind.com/app/geolitecountry&lt;/a&gt;</modGeoIp>
-			</warningMessage>			
+			</warningMessage>
 			<widgets>
 				<content>
-					<token>WIDGET_USER_LOGINS</token>					
+					<token>WIDGET_USER_LOGINS</token>
 					<countCountryUserLogin>10</countCountryUserLogin>
 					<colorCharts>
 						<color>#69D2E7</color>
-						<color>#F38630</color>		
-						<color>#D3CE3D</color>	
-						<color>#CC333F</color>		
-						<color>#A7DBD8</color>	
-						<color>#915B2F</color>		
-						<color>#FFC90E</color>	
+						<color>#F38630</color>
+						<color>#D3CE3D</color>
+						<color>#CC333F</color>
+						<color>#A7DBD8</color>
+						<color>#915B2F</color>
+						<color>#FFC90E</color>
 						<color>#F597DE</color>
-						<color>#09AB82</color>	
+						<color>#09AB82</color>
 						<color>#4E431A</color>
 					</colorCharts>
 				</content>
@@ -39,7 +54,7 @@ current xml dots file. -->
 		<variable option="frontend">
 			<session>
 				<name>frontend</name>
-				<rememberMeSeconds>864000</rememberMeSeconds>				
+				<rememberMeSeconds>864000</rememberMeSeconds>
 			</session>
 			<warningMessage>
 				<userPermission>You don't have enough credentials to access this url.</userPermission>
@@ -48,8 +63,8 @@ current xml dots file. -->
 		<variable option="mobile">
 			<session>
 				<name>mobile</name>
-				<rememberMeSeconds>864000</rememberMeSeconds>				
+				<rememberMeSeconds>864000</rememberMeSeconds>
 			</session>
-		</variable>			
+		</variable>
 	</dots>	
 </config>

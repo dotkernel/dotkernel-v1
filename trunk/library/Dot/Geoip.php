@@ -40,6 +40,10 @@ class Dot_Geoip
 	{
 		$session = Zend_Registry::get('session');
 		$country = array(0 => 'unknown',1 => 'NA');
+		if (Dot_Kernel::validIp($ip)=="private")
+		{
+			return $country;
+		}
 		if(extension_loaded('geoip') == FALSE)
 		{
 			// GeoIp extension is not active
