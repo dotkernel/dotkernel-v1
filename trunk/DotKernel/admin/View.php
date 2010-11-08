@@ -140,10 +140,10 @@ class View extends Dot_Template
 				$i = 0;					
 				$items = $child['item'];
 				// if we have only one menu, Zend_Config_Xml return a simple array, not an array with key 0(zero)
-				if(!is_array($items))
+				if(!isset($items[0]))
 				{
-					$items = array(0=>$items);						
-				}	
+					$items = array(0 => $items);
+				}
 				foreach ($items as $key => $val)
 				{		
 					$tmpMenuRoute = explode('/', $val['link']);
