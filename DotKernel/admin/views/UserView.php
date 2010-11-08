@@ -106,9 +106,12 @@ class User_View extends View
 		foreach ($browserArray as $key => $val)
 		{
 			$this->tpl->setVar('BROWSERNAME', ucfirst($val['uaBrowser']));
-			ucfirst($val['uaBrowser']) == $browser ?
-				$this->tpl->setVar('BROWSERSEL', 'selected'):
+			if ( strtolower($val['uaBrowser']) == strtolower($browser) )
+			{
+				$this->tpl->setVar('BROWSERSEL', 'selected');
+			}else{
 				$this->tpl->setVar('BROWSERSEL', '');
+			}
 			$this->tpl->parse('browser_row', 'browser', true);
 			
 		}
