@@ -40,7 +40,7 @@ class Dot_Geoip
 	{
 		$session = Zend_Registry::get('session');
 		$country = array(0 => 'unknown',1 => 'NA');
-		if (Dot_Kernel::validIp($ip)=="private")
+		if (Dot_Kernel::validIp($ip)!="public")
 		{
 			return $country;
 		}

@@ -88,18 +88,22 @@ class Dot_Kernel
 	 */
 	public static function validIp($ip)
 	{
-		$option = Zend_Registry::get("option");
-		$privateIpRanges = $option->privateIpRanges->range;
+		$privateIpRange = array(
+					array('10.0.0.0','10.255.255.255'),
+					array('172.16.0.0','172.31.255.255'),
+					array('192.168.0.0','192.168.255.255'),
+					'127.0.0.1'
+					);
 		$validatorIp = new Zend_Validate_Ip();
-		$currentIp = (float)sprintf("%u",ip2long($ip)); 
-		if($validatorIp->isValid($ip))
+		$currentIp = (float)sprintf("%u",ip2long($ip));
+		if($validatorIp->isValid($ip) && $currentIp>0)
 		{
-			foreach ($privateIpRanges as $ipRange)
+			foreach ($privateIpRange as $ipRange)
 			{
-				if(!is_string($ipRange))
+				if(is_array($ipRange))
 				{
-					$shortRangeIp = (float)sprintf("%u",ip2long($ipRange->start));
-					$longRangeIp = (float)sprintf("%u",ip2long($ipRange->stop));
+					$shortRangeIp = (float)sprintf("%u",ip2long($ipRange[0]));
+					$longRangeIp = (float)sprintf("%u",ip2long($ipRange[1]));
 					if($currentIp >= $shortRangeIp && $currentIp <= $longRangeIp)
 					{	// it is a private IP
 						return 'private';
