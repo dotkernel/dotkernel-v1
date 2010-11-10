@@ -5,21 +5,6 @@ current xml dots file. -->
 <config>
 	<dots>
 		<variable option="global">
-			<privateIpRanges>
-				<range>
-					<start>10.0.0.0</start>
-					<stop>10.255.255.255</stop>
-				</range>
-				<range>
-					<start>172.16.0.0</start>
-					<stop>172.31.255.255</stop>
-				</range>
-				<range>
-					<start>192.168.0.0</start>
-					<stop>192.168.255.255</stop>
-				</range>
-				<range>127.0.0.1</range>
-			</privateIpRanges>
 		</variable>
 		<variable option="admin">
 			<session>
