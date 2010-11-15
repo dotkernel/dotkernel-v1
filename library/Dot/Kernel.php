@@ -79,7 +79,7 @@ class Dot_Kernel
 	/**
 	 * Check if IP is valid. Return FALSE | 'private' | 'public'
 	 * FALSE - $ip is not a valid IP address
-	 * private - $ip is a private network IP address
+	 * private - $ip is a private network IP address, loopback address or an IPv6 IP address
 	 * public - $ip is a public network IP address
 	 * @access public
 	 * @static 
@@ -88,38 +88,23 @@ class Dot_Kernel
 	 */
 	public static function validIp($ip)
 	{
-		$privateIpRange = array(
-					array('10.0.0.0','10.255.255.255'),
-					array('172.16.0.0','172.31.255.255'),
-					array('192.168.0.0','192.168.255.255'),
-					'127.0.0.1'
-					);
-		$validatorIp = new Zend_Validate_Ip();
-		$currentIp = (float)sprintf("%u",ip2long($ip));
-		if($validatorIp->isValid($ip) && $currentIp>0)
+		// special cases that return private are the loopback address and IPv6 addresses
+		if ($ip == '127.0.0.1' || filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6))
 		{
-			foreach ($privateIpRange as $ipRange)
+			return 'private';
+		}
+		// check if the ip is valid
+		if (filter_var($ip, FILTER_VALIDATE_IP))
+		{
+			// check wether it's private or not
+			if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE))
 			{
-				if(is_array($ipRange))
-				{
-					$shortRangeIp = (float)sprintf("%u",ip2long($ipRange[0]));
-					$longRangeIp = (float)sprintf("%u",ip2long($ipRange[1]));
-					if($currentIp >= $shortRangeIp && $currentIp <= $longRangeIp)
-					{	// it is a private IP
-						return 'private';
-					}
-				}
-				elseif($ip == $ipRange)
-				{	// it is a private IP
-					return 'private';
-				}
+				return 'public';
 			}
+			return 'private';
 		}
-		else
-		{	// Zend_Validate_Ip rejected it
-			return FALSE;
-		}
-		return 'public';
+		// not a valid ip
+		return false;
 	}
     /**
      * Return the user Ip, even if it is behind a proxy
