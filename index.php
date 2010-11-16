@@ -116,8 +116,8 @@ else
 $request = array();
 while (list($key, $val) = each($requestRaw))
 {
-    $request[$val] = strtolower(current($requestRaw));
-    next($requestRaw);
+	$request[$val] = current($requestRaw);
+	next($requestRaw);
 }
 
 // remove first element of the request array, is module and action in it
