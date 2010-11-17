@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `admin`
@@ -50,13 +50,14 @@ CREATE TABLE IF NOT EXISTS `adminLogin` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `ip` varchar(16) NOT NULL,
   `adminId` int(11) unsigned NOT NULL,
-  `username` varchar(255) NOT NULL,
   `referer` text NOT NULL,
   `userAgent` text NOT NULL,
   `dateLogin` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `adminId` (`adminId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  KEY `adminId` (`adminId`),
+  CONSTRAINT `fk_adminLogin_admin` FOREIGN KEY (`adminId`) REFERENCES `admin` (`id`)
+    ON DELETE CASCADE
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -150,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -163,10 +164,11 @@ CREATE TABLE IF NOT EXISTS `userLogin` (
   `ip` varchar(16) NOT NULL,
   `country` varchar(255) NOT NULL,
   `userId` int(11) unsigned NOT NULL,
-  `username` varchar(255) NOT NULL,
   `referer` text NOT NULL,
   `userAgent` text NOT NULL,
   `dateLogin` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `adminId` (`userId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  KEY `adminId` (`userId`),
+  CONSTRAINT `fk_userLogin_user` FOREIGN KEY (`userId`) REFERENCES `user` (`id`)
+  	ON DELETE CASCADE
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
