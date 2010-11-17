@@ -236,7 +236,12 @@ class User
 	public function getLogins($id, $page = 1, $browser = '', $loginDate = '', $sortField = '', $orderBy = '')
 	{
 		$select = $this->db->select()
-					  	   ->from('userLogin');
+						->from('userLogin')
+						->joinLeft(
+							'user',
+							'userLogin.userId=user.id',
+							'username'
+						);
 		if ($id > 0) 
 		{
 			$select->where('userId = ?', $id);

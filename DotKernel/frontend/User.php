@@ -297,7 +297,6 @@ class User
 				//prepare data for register the login
 				$dataLogin = array('ip' => Dot_Kernel::getUserIp(), 
 						  'userId' => $session->user['id'], 
-						  'username' => $session->user['username'], 
 						  'referer' => isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '',
 						  'userAgent' => $_SERVER["HTTP_USER_AGENT"]);
 				$this->registerLogin($dataLogin);
