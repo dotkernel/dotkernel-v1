@@ -10,12 +10,10 @@
 				<br />
 				<input type="checkbox" name="confirm">Confirm deletion</td>
 			<td class="row1 last_td"  style="vertical-align: middle;">
-				<input type="submit" class="small_btn" value="YES" style="flaot: left; margin-right:10px;">
+				<input type="submit" class="small_btn" value="YES" style="float: left; margin-right:10px;">
 				<input type="button" onclick="window.location = '{SITE_URL}/admin/system/transporter-list'"class="small_btn" value="Cancel">
 			</td>
 		</tr>
 	</table>
 </fieldset>
 </form>
-
-
