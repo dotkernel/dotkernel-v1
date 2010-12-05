@@ -295,10 +295,15 @@ class User
 				// user is valid and logged in
 				$session->user = $user;
 				//prepare data for register the login
-				$dataLogin = array('ip' => Dot_Kernel::getUserIp(), 
-						  'userId' => $session->user['id'], 
-						  'referer' => isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '',
-						  'userAgent' => $_SERVER["HTTP_USER_AGENT"]);
+				$dotGeoip = new Dot_Geoip();
+				$userIp = Dot_Kernel::getUserIp();
+				$userCountry = $dotGeoip->getCountryByIp($userIp);
+				$dataLogin = array( 'ip'        => $userIp, 
+														'userId'    => $session->user['id'], 
+														'referer'   => isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '',
+														'userAgent' => $_SERVER["HTTP_USER_AGENT"],
+														'country'   => $userCountry[1]
+													);
 				$this->registerLogin($dataLogin);
 				header('location: '.$this->config->website->params->url.'/user/account');
 				exit;
