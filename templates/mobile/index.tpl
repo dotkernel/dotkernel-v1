@@ -6,9 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<meta name="keywords" content="{PAGE_KEYWORDS}" >
 	<meta name="description" content="{PAGE_DESCRIPTION}" >
-	<link rel="stylesheet" href="{SITE_URL}/externals/jquery/jquery.mobile-1.0a1.min.css" />
-	<script src="{SITE_URL}/externals/jquery/jquery-1.4.3.min.js"></script>
-	<script src="{SITE_URL}/externals/jquery/jquery.mobile-1.0a1.min.js"></script>
+	<link rel="stylesheet" href="{SITE_URL}/externals/jquery/jquery.mobile-1.0a2.min.css" />
+	<script src="{SITE_URL}/externals/jquery/jquery-1.4.4.min.js"></script>
+	<script src="{SITE_URL}/externals/jquery/jquery.mobile-1.0a2.min.js"></script>
 </head>
 <body>
 <div data-role="page" data-theme="e"> 
