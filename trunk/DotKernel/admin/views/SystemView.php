@@ -41,10 +41,14 @@ class System_View extends View
 	{
 		$this->tpl->setFile('tpl_main', 'system/' . $templateFile . '.tpl');
 		// system overview
+		$this->tpl->setVar('HOSTNAME' , System::getHostname());
 		$this->tpl->setVar('MYSQL',$mysqlVersion);
 		$this->tpl->setVar('PHP',phpversion());
 		$this->tpl->setVar('PHPAPI',php_sapi_name());
 		$this->tpl->setVar('ZFVERSION', Zend_Version::VERSION);
+		
+		// GeoIP section
+		$this->tpl->setVar('GEOIP_COUNTRY_LOCAL', $geoIpVersion['local']);
 		
 		$this->tpl->setBlock('tpl_main', 'is_geoip', 'is_geoip_row');
 		if(function_exists('geoip_database_info'))
@@ -52,7 +56,9 @@ class System_View extends View
 			$this->tpl->setVar('GEOIP_CITY_VERSION', $geoIpVersion['city']);
 			$this->tpl->setVar('GEOIP_COUNTRY_VERSION', $geoIpVersion['country']);
 			$this->tpl->parse('is_geoip_row', 'is_geoip', true);
-		}	
+		}
+	  
+			
 	}
 	/**
 	 * Display settings
@@ -133,10 +139,10 @@ class System_View extends View
 		// PREVENT WRAP: Serialized array string cookies
 		$phpBody  = str_replace( ";i:", ";<br />i:" , $phpBody );
 		$phpBody  = str_replace( ":", ";<br>" , $phpBody );
-		$phpBody = preg_replace('#<table#', '<table class="grey" align="center"', $phpBody);
+		$phpBody = preg_replace('#<table#', '<table class="big_table" align="center"', $phpBody);
 		$phpBody = preg_replace('#<th#', '<th  class="bgmain"', $phpBody);
 		$phpBody = preg_replace('#(\w),(\w)#', '\1, \2', $phpBody);
-		$phpBody = preg_replace('#border="0" cellpadding="3" width="600"#', 'border="0" cellspacing="1" cellpadding="4" width="95%"', 		$phpBody);
+		$phpBody = preg_replace('#border="0" cellpadding="3" width="600"#', 'border="0" cellspacing="1" cellpadding="1" width="100%"', 		$phpBody);
 		$phpBody = preg_replace('#<hr />#', '', $phpBody);
 		$this->tpl->setVar("PHPINFO", $phpBody);
 	}

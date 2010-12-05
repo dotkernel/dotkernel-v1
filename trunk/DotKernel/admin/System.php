@@ -74,7 +74,8 @@ class System
 	 */
 	public function getGeoIpVersion()
 	{
-		$return = array('country' => '-', 'city' => '-');
+		$return = array('country' => '-', 'city' => '-', 'local' => '-');
+		// do we have geoIP server-wide ? 
 		if(function_exists('geoip_database_info'))
 		{			
 			if(geoip_db_avail(GEOIP_COUNTRY_EDITION))
@@ -88,8 +89,33 @@ class System
 				$return['city'] = $info[0].' '.Dot_Kernel::TimeFormat($info[1]);
 			}
 		}
+		// then let's see the version of local .dat file 
+		else
+		{
+#TODO find the version of geoIP.dat file, extending the Dot_Geoip_Country function
+			$geoipPath = 'externals/geoip/GeoIP.dat';
+			$return['local'] = 'Installed';
+		} 
 		return $return;
 	}
+	/**
+	 * Get Hostname
+	 * Return a string
+	 * @access public
+	 * @return string
+	 */
+ public static function getHostname()
+ {
+		if(version_compare(PHP_VERSION, '5.3.0', '>='))
+		{
+			$hostName = gethostname();
+		}
+		else
+		{
+			$hostName = php_uname('n');
+		}
+		return $hostName;
+ }
 	/**
 	 * Get email transporter by field
 	 * @access public
