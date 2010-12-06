@@ -27,7 +27,8 @@ class System
 	{
 		$this->db = Zend_Registry::get('database');
 		$this->option = Zend_Registry::get('option');
-    	$this->settings = Zend_Registry::get('settings');
+    $this->settings = Zend_Registry::get('settings');
+		$this->config = Zend_Registry::get('configuration');
 	}
 	/**
 	 * Get MySQL Version
@@ -75,6 +76,12 @@ class System
 	public function getGeoIpVersion()
 	{
 		$return = array('country' => '-', 'city' => '-', 'local' => '-');
+		
+		// let's see the version of local .dat file 
+		$geoipPath = $this->config->resources->geoip->path;
+		$geoipVersion = explode(" ", Dot_Geoip_Country::geoipDatabaseInfo($geoipPath));
+		$return['local'] = $geoipVersion[0] . ' ' . Dot_Kernel::TimeFormat($geoipVersion[1]);
+	
 		// do we have geoIP server-wide ? 
 		if(function_exists('geoip_database_info'))
 		{			
@@ -89,13 +96,7 @@ class System
 				$return['city'] = $info[0].' '.Dot_Kernel::TimeFormat($info[1]);
 			}
 		}
-		// then let's see the version of local .dat file 
-		else
-		{
-#TODO find the version of geoIP.dat file, extending the Dot_Geoip_Country function
-			$geoipPath = 'externals/geoip/GeoIP.dat';
-			$return['local'] = 'Installed';
-		} 
+
 		return $return;
 	}
 	/**

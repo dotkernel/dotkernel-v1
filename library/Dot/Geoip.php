@@ -28,6 +28,7 @@ class Dot_Geoip
 	public function __construct()
 	{		
 		$this->option = Zend_Registry::get('option');
+		$this->config = Zend_Registry::get('configuration');
 	}	
 	/**
 	 * Get the country by IP
@@ -48,7 +49,7 @@ class Dot_Geoip
 		{
 			// GeoIp extension is not active
 			$api = new Dot_Geoip_Country();
-			$geoipPath = 'externals/geoip/GeoIP.dat';
+			$geoipPath = $this->config->resources->geoip->path;
 			if(file_exists($geoipPath))
 			{
 				$country = $api->getCountryByAddr($geoipPath, $ip);
@@ -83,7 +84,7 @@ class Dot_Geoip
 		{
 			// GeoIp extension is active, but .dat files are missing
 			$api = new Dot_Geoip_Country();
-			$geoipPath = 'externals/geoip/GeoIP.dat';
+			$geoipPath = $this->config->resources->geoip->path;
 			if(file_exists($geoipPath))
 			{
 				$country = $api->getCountryByAddr($geoipPath, $ip);

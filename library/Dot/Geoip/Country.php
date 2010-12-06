@@ -301,6 +301,27 @@ class Dot_Geoip_Country extends Dot_Geoip
 	public function __construct()
 	{	
 	}			
+	 /** Get file version
+	 * Return database name and version
+	 * @access public
+	 * @param string $path - path to GeoIP.dat  database file
+	 * @return string
+	 */
+	public static function geoipDatabaseInfo($path)
+	{
+		$message =  "Missing File";
+		$content = @file_get_contents($path, FILE_BINARY);
+		// if we find  the file
+		if($content)
+	 	{
+	 		$parts = explode("\n", $content);
+			$lastLine = end($parts);
+			$pos1 = stripos($lastLine, 'GEO');
+			$pos2 = stripos($lastLine, 'Build');
+			$message = trim(substr($lastLine, $pos1, $pos2-$pos1));
+	 	}
+		return $message;
+	}	
 	/**
 	 * Get the country by IP
 	 * Return an array with : short name, like 'us' and long name, like 'United States'
