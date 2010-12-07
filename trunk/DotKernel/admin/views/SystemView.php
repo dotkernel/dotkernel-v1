@@ -158,7 +158,7 @@ class System_View extends View
 	{
 		$this->tpl->setFile('tpl_main', 'system/' . $templateFile . '.tpl');
 		$this->tpl->setBlock('tpl_main', 'list', 'list_block');
-		$this->tpl->paginator($list['paginatorAdapter'],$page);
+		$this->tpl->paginator($list['pages']);
 		$this->tpl->setVar('PAGE', $page);
 		$this->tpl->setVar('ACTIVE_URL', '/admin/system/transporter-activate');
 		$this->tpl->setVar('ACTIVE_1', 'checked');

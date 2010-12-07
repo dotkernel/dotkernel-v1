@@ -221,20 +221,14 @@ class View extends Dot_Template
 	 * Create the pagination, based on how many data
 	 * @access public
 	 * @param array $data
-	 * @param int $current_page [optional]
 	 * @return string
 	 */
-	protected function paginator($adapter, $currentPage = 1)
-	{		
+	protected function paginator($page)
+	{			
 		// get route again here, because ajax may have change it
 		$route = Zend_Registry::get('route');
-		$paginator = new Zend_Paginator($adapter);
-		$paginator->setItemCountPerPage($this->settings->resultsPerPage);
-		$paginator->setCurrentPageNumber($currentPage);
-		$paginator->totalItems = $adapter->count();
-		$page = $paginator->getPages();	
 		$this->setFile('page_file', 'paginator.tpl');
-		$this->setVar('TOTAL_RECORDS', $paginator->totalItems);
+		$this->setVar('TOTAL_RECORDS', $page->totalItemCount);
 		$this->setVar('TOTAL_PAGES', $page->pageCount );
 		$this->setBlock('page_file', 'previous', 'previous_row');
 		$this->setBlock('page_file', 'next', 'next_row');
