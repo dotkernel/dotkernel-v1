@@ -83,13 +83,8 @@ class Admin
 	{
 		$select = $this->db->select()
 						   ->from('admin');	
- 		$paginatorAdapter = new Zend_Paginator_Adapter_DbSelect($select);
-		($page == 1) ? 
-			$select->limit($this->settings->resultsPerPage) :
-			$select->limit($this->settings->resultsPerPage, ($page-1)*$this->settings->resultsPerPage);
-			
-		$data = $this->db->fetchAll($select);
-		return array('data'=> $data,'paginatorAdapter'=> $paginatorAdapter);
+ 		$dotPaginator = new Dot_Paginator($select, $page, $this->settings->resultsPerPage);
+		return $dotPaginator->getData();
 	}
 	/**
 	 * Add new user
@@ -294,13 +289,8 @@ class Admin
 			$select->where('adminId = ?', $id);
 		}
 		$select->order('dateLogin DESC');
- 		$paginatorAdapter = new Zend_Paginator_Adapter_DbSelect($select);
-		($page == 1) ? 
-			$select->limit($this->settings->resultsPerPage) : 
-			$select->limit($this->settings->resultsPerPage, ($page-1)*$this->settings->resultsPerPage);
-		
-		$data = $this->db->fetchAll($select);
-		return array('data'=> $data,'paginatorAdapter'=> $paginatorAdapter);
+ 		$dotPaginator = new Dot_Paginator($select, $page, $this->settings->resultsPerPage);
+		return $dotPaginator->getData();
 	}	
 	/**
 	 * Authorize user login

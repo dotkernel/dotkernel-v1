@@ -57,13 +57,8 @@ class User
 	{
 		$select = $this->db->select()
 						   ->from('user');				
- 		$paginatorAdapter = new Zend_Paginator_Adapter_DbSelect($select);
-		($page == 1) ? 
-			$select->limit($this->settings->resultsPerPage) : 
-			$select->limit($this->settings->resultsPerPage, ($page-1)*$this->settings->resultsPerPage);
-							
-		$data = $this->db->fetchAll($select);
-		return array('data'=> $data,'paginatorAdapter'=> $paginatorAdapter);
+ 		$dotPaginator = new Dot_Paginator($select, $page, $this->settings->resultsPerPage);
+		return $dotPaginator->getData();
 	}	
 	/**
 	 * Add new user
@@ -239,7 +234,7 @@ class User
 						->from('userLogin')
 						->joinLeft(
 							'user',
-							'userLogin.userId=user.id',
+							'userLogin.userId = user.id',
 							'username'
 						);
 		if ($id > 0) 
@@ -256,17 +251,10 @@ class User
 		}
 		if ($sortField!=""){
 			$select->order($sortField. ' '.$orderBy);
-		}
-		$paginatorAdapter = null;
-		if($page > 0)
-		{
- 			$paginatorAdapter = new Zend_Paginator_Adapter_DbSelect($select);
-			($page == 1) ? 
-				$select->limit($this->settings->resultsPerPage) : 
-				$select->limit($this->settings->resultsPerPage, ($page-1)*$this->settings->resultsPerPage);
-		}
-		$data = $this->db->fetchAll($select);
-		return array('data'=> $data,'paginatorAdapter'=> $paginatorAdapter);
+		}		
+		$dotPaginator = new Dot_Paginator($select, $page, $this->settings->resultsPerPage);
+		return $dotPaginator->getData();
+		
 	}	
 	/**
 	 * Check if user already exists - email, username, and return error

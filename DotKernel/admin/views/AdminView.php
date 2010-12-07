@@ -53,7 +53,7 @@ class Admin_View extends View
 	{
 		$this->tpl->setFile('tpl_main', 'admin/' . $templateFile . '.tpl');
 		$this->tpl->setBlock('tpl_main', 'list', 'list_block');
-		$this->tpl->paginator($list['paginatorAdapter'],$page);
+		$this->tpl->paginator($list['pages']);
 		$this->tpl->addUserToken();
 		$this->tpl->setVar('PAGE', $page);
 		$this->tpl->setVar('ACTIVE_URL', '/admin/admin/activate/');
@@ -112,7 +112,7 @@ class Admin_View extends View
 		$dotGeoip = new Dot_Geoip();
 		$this->tpl->setFile('tpl_main', 'admin/' . $templateFile . '.tpl');
 		$this->tpl->setBlock('tpl_main', 'list', 'list_block');
-		$this->tpl->paginator($list['paginatorAdapter'],$page);
+		$this->tpl->paginator($list['pages']);
 		$this->tpl->setVar('PAGE', $page);
 		foreach ($list['data'] as $k => $v)
 		{
