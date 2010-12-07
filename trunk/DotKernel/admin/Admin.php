@@ -77,7 +77,7 @@ class Admin
 	 * Get user list
 	 * @access public 
 	 * @param int $page [optional]
-	 * @return array(array(), Zend_Paginator_Adapter())
+	 * @return array
 	 */
 	public function getUserList($page = 1)
 	{
@@ -273,7 +273,7 @@ class Admin
 	 * @access public
 	 * @param int $id 
 	 * @param int $page [optional]
-	 * @return array(array(), Zend_Paginator_Adapter())
+	 * @return array
 	 */
 	public function getLogins($id, $page = 1)
 	{

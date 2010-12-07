@@ -137,7 +137,7 @@ class System
 	 * Get email transporter list
 	 * @access public 
 	 * @param int $page [optional]
-	 * @return array(array(), Zend_Paginator_Adapter())
+	 * @return array
 	 */
 	public function getEmailTransporterList($page = 1)
 	{
