@@ -51,7 +51,7 @@ class User
 	 * Get user list
 	 * @access public 
 	 * @param int $page [optional]
-	 * @return array(array(), Zend_Paginator_Adapter())
+	 * @return array	 
 	 */
 	public function getUserList($page = 1)
 	{
@@ -226,7 +226,7 @@ class User
 	 * @param int $id 
 	 * @param int $page [optional]
 	 * @param string $browser [optional]
-	 * @return array(array(), Zend_Paginator_Adapter())
+	 * @return array
 	 */
 	public function getLogins($id, $page = 1, $browser = '', $loginDate = '', $sortField = '', $orderBy = '')
 	{
