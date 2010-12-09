@@ -52,7 +52,8 @@ class Dot_Paginator
 	 */	
 	public function __construct($select, $page = 0, $resultsPerPage = 0)
 	{		
-		$this->db = Zend_Registry::get('database');	
+		$this->db = Zend_Registry::get('database');
+		$this->_select = $select;	
 		$adapter = new Zend_Paginator_Adapter_DbSelect($select);			
 		$this->_paginator = new Zend_Paginator($adapter);
 		$this->_paginator->totalItems = $adapter->count();
@@ -152,15 +153,13 @@ class Dot_Paginator
 		$data = array();
 		if($this->_currentPage > 0)
 		{ 			
-			$pages = $this->getPages();
 			$data = $this->getCurrentItems();
+			$pages = $this->getPages();
 		}
 		else
 		{
-			$data = $this->db->fetchAll($select);
+			$data = $this->db->fetchAll($this->_select);
 		}
 		return array('data'=> $data, 'pages'=> $pages);
-	}
-	
-	
+	}	
 }
