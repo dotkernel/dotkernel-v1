@@ -44,6 +44,7 @@ class Dot_Paginator
 	private $_currentItems = null;
 	/**
 	 * Dot_Paginator constructor that sets the main parameters
+	 * If $page is 0 (zero), Zend_Paginator will not be called
 	 * @access public 
 	 * @param Zend_Db_Select $select
 	 * @param int $page [optional]
@@ -53,12 +54,15 @@ class Dot_Paginator
 	public function __construct($select, $page = 0, $resultsPerPage = 0)
 	{		
 		$this->db = Zend_Registry::get('database');
-		$this->_select = $select;	
-		$adapter = new Zend_Paginator_Adapter_DbSelect($select);			
-		$this->_paginator = new Zend_Paginator($adapter);
-		$this->_paginator->totalItems = $adapter->count();
+		$this->_select = $select;
 		$this->_currentPage = $page;
 		$this->_itemCountPerPage = $resultsPerPage;
+		if($this->_currentPage > 0)
+		{
+			$adapter = new Zend_Paginator_Adapter_DbSelect($select);			
+			$this->_paginator = new Zend_Paginator($adapter);
+			$this->_paginator->totalItems = $adapter->count();
+		}
 	}
 	/**
 	 * Get current items to display on current page
