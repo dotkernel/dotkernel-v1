@@ -350,13 +350,16 @@ class View extends Dot_Template
 		$i = 0;
 		foreach ($userCountry as $name => $country)
 		{
-			$data[] = array('y' => $country['countPercent'], 
-							'text' => $name, 
-							'color' => $color[$i], 
-							'stroke' => $color[$i], 
-							'tooltip' => $name.": ".(string)$country['countPercent']."&#37;"
-							);
-			$i++;
+			if($country['count'] > 0)
+			{				
+				$data[] = array('y' => $country['countPercent'], 
+								'text' => $name, 
+								'color' => $color[$i], 
+								'stroke' => $color[$i], 
+								'tooltip' => $name.": ".(string)$country['countPercent']."&#37;"
+								);
+				$i++;
+			}
 		}
 		$this->setVar('PIEDATA', Zend_Json::encode($data));	
 	}
