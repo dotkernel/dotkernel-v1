@@ -145,34 +145,34 @@ class View extends Dot_Template
 					$items = array(0 => $items);
 				}
 				foreach ($items as $key => $val)
-				{		
+				{
 					$tmpMenuRoute = explode('/', $val['link']);
 					$this->setVar('TOP_MENU_ID', $i);
-					$tplVariables = array('TOP_MENU_SEL', 
-					                      'TOP_SUB_MENU_SEL', 
-										  'TOP_SUB_MENU_ITEM_SEL');
+					$tplVariables = array('TOP_MENU_SEL',
+					                      'TOP_SUB_MENU_SEL',
+					                      'TOP_SUB_MENU_ITEM_SEL');
 					$this->initVar($tplVariables,'');
 					$menuCondition = (FALSE !== stripos($val['link'], ('' == $this->route['action'])? $this->route['controller'].'/' : $this->route['controller'].'/'.$this->route['action'].'/'));
-                    if ($menuCondition)					
+					if ($menuCondition)
 					{	//if curent menu is the curent viewed page
 						$this->setVar('TOP_MENU_SEL', '_selected');
-					}							
+					}
 					$this->setVar('TOP_MENU_TITLE', $val['title']);
 					$this->setVar('TOP_MENU_LINK', $this->config->website->params->url.'/'.$this->route['module'].'/'.$val['link']);
-					$this->setVar('TOP_MENU_DESCRIPTION', $val['description']);													
+					$this->setVar('TOP_MENU_DESCRIPTION', $val['description']);
 					$this->parse('top_normal_menu_item_block', 'top_normal_menu_item', true);
 					if (isset($val['subItems']['subItem']) && count($val['subItems']['subItem']) > 0)
 					{	
 						$this->parse('top_normal_sub_menu_item_block', '');	
 						$subItems = $val['subItems']['subItem'];
 						// if we have only one menu, Zend_Config_Xml return a simple array, not an array with key 0(zero)
-						if(!is_array($subItems))
+						if(!isset($subItems[0]))
 						{
-							$subItems = array(0=>$subItems);						
-						}											
+							$subItems = array(0=>$subItems);
+						}
 						foreach ($subItems as $k2 => $v2)
 						{	
-							$tmpSubmenuRoute = explode('/', $v2['link']);		
+							$tmpSubmenuRoute = explode('/', $v2['link']);
 							$this->setVar('TOP_SUB_MENU_SEL', '');
 							$this->setVar('TOP_SUB_MENU_TITLE', $v2['title']);
 							$this->setVar('TOP_SUB_MENU_LINK', $this->config->website->params->url.'/'.$this->route['module'].'/'.$v2['link']);
@@ -186,16 +186,16 @@ class View extends Dot_Template
 							elseif (FALSE !== stripos($v2['link'], $this->route['controller'].'/')
 									 && $tmpMenuRoute['0'] == $tmpSubmenuRoute['0'])
 							{
-								$this->setVar('TOP_MENU_SEL', '_selected');								
+								$this->setVar('TOP_MENU_SEL', '_selected');
 							}
 							$this->parse('top_normal_sub_menu_item_block', 'top_normal_sub_menu_item', true);
 						}
 						$this->parse('top_sub_menu_item_block', 'top_sub_menu_item', true);	
-					}					
+					}
 					$this->parse('top_menu_item_block', 'top_menu_item', true);
-					$this->parse('top_normal_menu_item_block', '');																	
+					$this->parse('top_normal_menu_item_block', '');
 					$i++;
-				}					
+				}
 				$this->parse('top_normal_sub_menu_item_block', 'top_normal_sub_menu_item',true);
 				$this->parse('top_menu_block', 'top_menu', true);
 				$this->parse('MENU_'.$child['id'], 'tpl_menu_'.$child['id']);
