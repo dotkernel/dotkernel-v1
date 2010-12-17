@@ -167,23 +167,3 @@ input.small_btn:hover{
 	border-top: 1px solid #b3bbbd;
 	color: #5C717A;
 }
-/*Dijit Tooltip*/
-.dijitCalendar {
-	border:solid 1px #BEBEBE;
-	background-color:#F4F4F4;
-}
-.dijitCalendarPreviousMonth .dijitCalendarDateLabel,
-.dijitCalendarNextMonth .dijitCalendarDateLabel{
-	color:#7A7A7A;
-	border-color:#F2F2F2;
-}
-.dijitCalendarHoveredDate .dijitCalendarDateLabel{
-	background-color:#abd4fb;
-	border:solid 1px #729dc2;
-	color:#000;
-}
-.dijitCalendarSelectedDate .dijitCalendarDateLabel {
-	color:#000;
-	background-color:#E1F1FF;
-	border-color:#CBDBE4;
-}
