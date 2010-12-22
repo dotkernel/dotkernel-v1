@@ -1,7 +1,7 @@
 <form action="{SITE_URL}/admin/system/transporter-update/id/{ID}" method="post" >
 <input type="hidden" name="send" value="on">
 <fieldset style="width: 500px">
-<legend>Update User Account</legend>
+<legend>Update Email Account</legend>
 	<table cellpadding="0" cellspacing="0" class="medium_table" width="100%">
 		<tr>
 			<td class="row2" width="130px"><b>User</b></td>

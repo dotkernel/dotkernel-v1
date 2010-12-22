@@ -478,18 +478,11 @@ a.sort_down{
 .center {text-align: center;}
 .center table { margin-left: auto; margin-right: auto; text-align: left; }
 .center th { text-align: center; }
-.e {background-color: #faf9f8; font-weight: bold;}
-.h {background-color: #FFF; font-weight: bold;}
-.v {background-color: #faf9f8; white-space: normal;}
+
 .explanation{
 	font-style: italic;
 	font-size: 11px;
 	color: #5F5F5F;
-}
-.category_title{
-	font-size: 14px;
-	font-weight: bold;
-	margin: 0px 0px 5px 0px;
 }
 input.bigger{width: 100%;}
 

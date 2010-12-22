@@ -138,12 +138,17 @@ class System_View extends View
 		$phpBody  = str_replace( "%3B", "<br />"    , $phpBody );
 		// PREVENT WRAP: Serialized array string cookies
 		$phpBody  = str_replace( ";i:", ";<br />i:" , $phpBody );
-		$phpBody  = str_replace( ":", ";<br>" , $phpBody );
-		$phpBody = preg_replace('#<table#', '<table class="big_table" align="center"', $phpBody);
-		$phpBody = preg_replace('#<th#', '<th  class="bgmain"', $phpBody);
+		//$phpBody  = str_replace( ":", ";<br>" , $phpBody );
+		$phpBody = preg_replace('#<table#', '<table class="list_table" align="center"', $phpBody);
+		$phpBody = preg_replace('#<th#', '<td  class="table_subhead"', $phpBody);
 		$phpBody = preg_replace('#(\w),(\w)#', '\1, \2', $phpBody);
-		$phpBody = preg_replace('#border="0" cellpadding="3" width="600"#', 'border="0" cellspacing="1" cellpadding="1" width="100%"', 		$phpBody);
+		$phpBody = preg_replace('#border="0" cellpadding="3" width="600"#', 'cellspacing="0" cellpadding="0" width="100%"', 		$phpBody);
 		$phpBody = preg_replace('#<hr />#', '', $phpBody);
+		$phpBody = preg_replace('#<tr class="h"><td>#', '<tr><td class="row1">', $phpBody);
+		$phpBody = preg_replace('#<tr class="v"><td>#', '<tr><td class="row1">', $phpBody);
+		$phpBody = preg_replace('#class="e"#', 'class="row2"', $phpBody);
+		$phpBody = preg_replace('#class="v"#', 'class="row1"', $phpBody);
+
 		$this->tpl->setVar("PHPINFO", $phpBody);
 	}
 	/**
