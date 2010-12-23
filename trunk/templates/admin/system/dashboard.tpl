@@ -1,4 +1,4 @@
-<fieldset style="width: 420px;float: left;margin-right: 50px;">
+<fieldset style="width: 460px;float: left;margin-right: 50px;">
 	<legend>System Overview</legend>
 	<table cellpadding="0" cellspacing="0" class="medium_table" width="100%">
 		<tr>
@@ -33,6 +33,16 @@
 			<td class="row1 last_td"> {GEOIP_COUNTRY_VERSION}</td>
 		</tr>
 		<!-- END is_geoip -->
+	</table>
+	<table cellpadding="0" cellspacing="0" class="medium_table" width="100%">
+		<tr>
+			<td class="row2" width="140px"><b>WURFL Cache Built</b></td>
+			<td class="row1">{WURFLCACHEBUILT} [ <a href="http://adi.dotboost.net/dotkernel/admin/system/build-wurfl-cache">build now</a> ]</td>
+		</tr>
+		<tr>
+			<td class="row2 last_td" width="140px"><b>WURFL Date</b></td>
+			<td class="row1 last_td">{WURFLDATE}</td>
+		</tr>
 	</table>
 </fieldset>
 {WIDGET_USER_LOGINS}

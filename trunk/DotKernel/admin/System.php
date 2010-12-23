@@ -27,7 +27,7 @@ class System
 	{
 		$this->db = Zend_Registry::get('database');
 		$this->option = Zend_Registry::get('option');
-    $this->settings = Zend_Registry::get('settings');
+		$this->settings = Zend_Registry::get('settings');
 		$this->config = Zend_Registry::get('configuration');
 	}
 	/**
@@ -88,7 +88,7 @@ class System
 			if(geoip_db_avail(GEOIP_COUNTRY_EDITION))
 			{
 				$info = explode(" ",geoip_database_info(GEOIP_COUNTRY_EDITION));
-				$return['country']  = $info[0].' '.Dot_Kernel::TimeFormat($info[1]);					
+				$return['country']  = $info[0].' '.Dot_Kernel::TimeFormat($info[1]);
 			}
 			if(geoip_db_avail(GEOIP_CITY_EDITION_REV0))
 			{
@@ -105,18 +105,42 @@ class System
 	 * @access public
 	 * @return string
 	 */
- public static function getHostname()
- {
-		if(version_compare(PHP_VERSION, '5.3.0', '>='))
-		{
-			$hostName = gethostname();
-		}
-		else
-		{
-			$hostName = php_uname('n');
-		}
-		return $hostName;
- }
+	public static function getHostname()
+	{
+			if(version_compare(PHP_VERSION, '5.3.0', '>='))
+			{
+				$hostName = gethostname();
+			}
+			else
+			{
+				$hostName = php_uname('n');
+			}
+			return $hostName;
+	}
+	/**
+	 * Get information about the Wurfl library installed
+	 * Returns an array with the following elements:
+	 *    cacheBuilt: the date the last time the cache was manually built,
+	 *                stored in the setting table
+	 *    date: the last modified date of the wurfl xml file
+	 * 
+	 * @access public
+	 * @return array
+	 */
+	public function getWurflInfo()
+	{
+		$result = array();
+		$result['cacheBuilt'] = $this->settings->wurflCacheBuilt;
+		
+		$wurflConfigFile = $this->config->resources->useragent->wurflapi->wurfl_config_file;
+		$wurflConfig = new Zend_Config_Xml($wurflConfigFile);
+		$wurflConfigArray = $wurflConfig->wurfl->toArray();
+		$wurflZipPath = dirname($wurflConfigFile)."/".$wurflConfigArray['main-file'];
+		$timestamp = filemtime($wurflZipPath);
+		$result['date'] = strftime($this->settings->timeFormatLong,$timestamp);
+		
+		return $result;
+	}
 	/**
 	 * Get email transporter by field
 	 * @access public
@@ -129,7 +153,7 @@ class System
 		$select = $this->db->select()
 		         ->from('emailTransporter')
 		         ->where($field.' = ?', $value)
-		         ->limit(1);  
+		         ->limit(1);
 		$result = $this->db->fetchRow($select);
 		return $result;
 	}	
@@ -143,7 +167,7 @@ class System
 	{
 		$select = $this->db->select()
 		           ->from('emailTransporter')
-		           ->order('id');        
+		           ->order('id');
 		$dotPaginator = new Dot_Paginator($select, $page, $this->settings->resultsPerPage);
 		return $dotPaginator->getData();
 	}
@@ -188,16 +212,16 @@ class System
 	 */
 	public function validateEmailTransporter($data)
 	{
-		$validator = new Zend_Validate_Int();    
-		$errors=array();    
+		$validator = new Zend_Validate_Int();
+		$errors=array();
 		if (!$validator->isValid($data['port']))
 		{
-		  array_push($errors, $this->option->errorMessage->invalidPort);
-		}    
+			array_push($errors, $this->option->errorMessage->invalidPort);
+		}
 		if (!$validator->isValid($data['capacity']))
 		{
-		  array_push($errors, $this->option->errorMessage->invalidCapacity);
-		}    
+			array_push($errors, $this->option->errorMessage->invalidCapacity);
+		}
 		return $errors;
 	}
 	/**
