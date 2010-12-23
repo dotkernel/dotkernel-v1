@@ -37,7 +37,7 @@ class System_View extends View
 	 * @param array $geoIpVersion
 	 * @return void
 	 */
-	public function dashboard($templateFile, $mysqlVersion, $geoIpVersion, $wurflInfo)
+	public function dashboard($templateFile, $mysqlVersion, $geoIpVersion, $wurflInfo, $warnings)
 	{
 		$this->tpl->setFile('tpl_main', 'system/' . $templateFile . '.tpl');
 		// system overview
@@ -49,6 +49,22 @@ class System_View extends View
 		
 		$this->tpl->setVar('WURFLCACHEBUILT', $wurflInfo['cacheBuilt']);
 		$this->tpl->setVar('WURFLDATE', $wurflInfo['date']);
+
+		if (empty($warnings))
+		{
+			$this->tpl->setBlock('tpl_main', 'warnings_table', 'warnings_block');
+			$this->tpl->parse('warnings_block', '', true);
+		}else{
+			$this->tpl->setBlock('tpl_main', 'warnings_list', 'warnings_list_block');
+			$warningCount = count($warnings);
+			for ($i = 0; $i < $warningCount; $i++)
+			{
+				$this->tpl->setVar('WARNING_TYPE', $warnings[$i]['type']);
+				$this->tpl->setVar('WARNING_DESCRIPTION', $warnings[$i]['description']);
+				$this->tpl->setVar('TD_CLASS', ($i==$warningCount-1)?" last_td":"");
+				$this->tpl->parse('warnings_list_block', 'warnings_list', true);
+			}
+		}
 		
 		// GeoIP section
 		$this->tpl->setVar('GEOIP_COUNTRY_LOCAL', $geoIpVersion['local']);

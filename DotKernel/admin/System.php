@@ -142,6 +142,34 @@ class System
 		return $result;
 	}
 	/**
+	 * Get any warnings to display in the dashboard
+	 * Each array element returned is an array with two strings: type and description
+	 * @access public
+	 * @return array
+	 */
+	public function getWarnings()
+	{
+		$warnings = array();
+		
+		// check for files that should be deleted
+		$filesToDelete = array(
+			"dot_kernel.sql",
+			"readme.txt",
+			"dk.php"
+		);
+		foreach ($filesToDelete as $file)
+		{
+			if (file_exists(APPLICATION_PATH."/".$file))
+			{
+				$warnings[] = array('type'=>'please delete', 'description'=>$file);
+			}
+		}
+		
+		// add any other warnings to $warnings here
+		
+		return $warnings;
+	}
+	/**
 	 * Get email transporter by field
 	 * @access public
 	 * @param string $field

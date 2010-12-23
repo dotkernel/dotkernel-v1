@@ -25,7 +25,8 @@ switch ($registry->route['action'])
 		$mysqlVersion = $systemModel->getMysqlVersion();
 		$geoIpVersion = $systemModel->getGeoIpVersion();
 		$wurflInfo = $systemModel->getWurflInfo();
-		$systemView->dashboard('dashboard', $mysqlVersion, $geoIpVersion, $wurflInfo);
+		$warnings = $systemModel->getWarnings();
+		$systemView->dashboard('dashboard', $mysqlVersion, $geoIpVersion, $wurflInfo, $warnings);
 	break;
 	case 'settings':
 		// list settings values
