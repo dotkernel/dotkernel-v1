@@ -37,7 +37,7 @@ class System_View extends View
 	 * @param array $geoIpVersion
 	 * @return void
 	 */
-	public function dashboard($templateFile, $mysqlVersion, $geoIpVersion)
+	public function dashboard($templateFile, $mysqlVersion, $geoIpVersion, $wurflInfo)
 	{
 		$this->tpl->setFile('tpl_main', 'system/' . $templateFile . '.tpl');
 		// system overview
@@ -46,6 +46,9 @@ class System_View extends View
 		$this->tpl->setVar('PHP',phpversion());
 		$this->tpl->setVar('PHPAPI',php_sapi_name());
 		$this->tpl->setVar('ZFVERSION', Zend_Version::VERSION);
+		
+		$this->tpl->setVar('WURFLCACHEBUILT', $wurflInfo['cacheBuilt']);
+		$this->tpl->setVar('WURFLDATE', $wurflInfo['date']);
 		
 		// GeoIP section
 		$this->tpl->setVar('GEOIP_COUNTRY_LOCAL', $geoIpVersion['local']);
@@ -57,8 +60,7 @@ class System_View extends View
 			$this->tpl->setVar('GEOIP_COUNTRY_VERSION', $geoIpVersion['country']);
 			$this->tpl->parse('is_geoip_row', 'is_geoip', true);
 		}
-	  
-			
+	
 	}
 	/**
 	 * Display settings
