@@ -1,5 +1,15 @@
 <fieldset style="width: 460px;float: left;margin-right: 50px;">
 	<legend>System Overview</legend>
+	<!-- BEGIN warnings_table -->
+	<table cellpadding="0" cellspacing="0" class="medium_table warnings" width="100%">
+		<!-- BEGIN warnings_list -->
+		<tr>
+			<td class="row2{TD_CLASS}" width="140px"><b>{WARNING_TYPE}</b></td>
+			<td class="row1{TD_CLASS}"><b>{WARNING_DESCRIPTION}</b></td>
+		</tr>
+		<!-- END warnings_list -->
+	</table>
+	<!-- END warnings_table -->
 	<table cellpadding="0" cellspacing="0" class="medium_table" width="100%">
 		<tr>
 			<td class="row2" width="140px"><b>HOSTNAME</b></td>

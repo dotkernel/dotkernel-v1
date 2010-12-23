@@ -325,6 +325,14 @@ a#logo{
 	border: 1px solid;
 	margin: 5px 0px 0px 0px;
 }
+.medium_table.warnings .row2{
+	background-color:#CC0000;
+	color:#fff !important;
+	text-transform:none
+}
+.medium_table.warnings .row1{
+	background-color:#fff;
+}
 .medium_table td{
 	padding: 15px 15px 2px 15px;
 	line-height: 22px;
