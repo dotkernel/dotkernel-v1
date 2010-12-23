@@ -47,7 +47,7 @@
 	<table cellpadding="0" cellspacing="0" class="medium_table" width="100%">
 		<tr>
 			<td class="row2" width="140px"><b>WURFL Cache Built</b></td>
-			<td class="row1">{WURFLCACHEBUILT} [ <a href="http://adi.dotboost.net/dotkernel/admin/system/build-wurfl-cache">build now</a> ]</td>
+			<td class="row1">{WURFLCACHEBUILT} [ <a href="{SITE_URL}/admin/system/build-wurfl-cache">build now</a> ]</td>
 		</tr>
 		<tr>
 			<td class="row2 last_td" width="140px"><b>WURFL Date</b></td>
