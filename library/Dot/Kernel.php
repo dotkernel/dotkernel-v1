@@ -29,7 +29,7 @@ class Dot_Kernel
      * Dot Kernel version identification
      * @var string 
      */
-    const VERSION = '1.3.2 DEV';    
+    const VERSION = '1.3.2';    
 	/**
 	 * Constructor
 	 * @access public
