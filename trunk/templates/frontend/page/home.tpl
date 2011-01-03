@@ -1,6 +1,6 @@
 		<h3>Documentation</h3>
-		<a href=" http://www.dotkernel.com/docs/"> http://www.dotkernel.com/docs/</a><br /><br />
-		<a href=" http://v1.dotkernel.net/readme.txt" target="_blank">README.TXT</a>
+		<a href="http://www.dotkernel.com/docs/"> http://www.dotkernel.com/docs/</a><br /><br />
+		<a href="{SITE_URL}/readme.txt" target="_blank">README.TXT</a>
 		
 		<h3>Download latest version</h3>
 		<a href="http://www.dotkernel.com/download/">http://www.dotkernel.com/download/</a>
@@ -30,6 +30,6 @@
 		 <p>&lt;frontend&gt;Articles&lt;frontend&gt;</p>		
 		 
 	<h3>Admin Panel Login</h3>
-	 <p><a href="http://v1.dotkernel.net/admin/">http://v1.dotkernel.net/admin/</a></p>
+	 <p><a href="{SITE_URL}/admin/">{SITE_URL}/admin/</a></p>
 	 <p>username: admin</p>
 	 <p>password: dot</p>
