@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <wurfl_patch>
+	<version>
+		<last_updated>January 4, 2011</last_updated>
+	</version>
 	<devices>
 		<!-- Web browsers -->
-		<device user_agent="Mozilla/4.0" fall_back="generic" id="generic_web_browser">
+		<device user_agent="DO_NOT_MATCH_GENERIC_WEB_BROWSER" fall_back="generic" id="generic_web_browser">
 			<group id="product_info">
 				<capability name="brand_name" value="generic web browser"/>
-				<capability name="model_name" value=""/>				
+				<capability name="model_name" value=""/>
+				<capability name="pointing_method" value="mouse"/>
 				<capability name="is_wireless_device" value="false"/>
 			</group>
 			<group id="display">
@@ -15,7 +19,10 @@
 			<group id="markup">
 				<capability name="xhtml_support_level" value="4"/>
 				<capability name="preferred_markup" value="html_web_4_0"/>
-			</group>			
+			</group>
+			<group id="ajax">
+				<capability name="ajax_support_javascript" value="true"/>
+			</group>
 		</device>
 
 		<device id="mozilla_ver5" user_agent="Mozilla/5.0" fall_back="generic_web_browser"/>
@@ -67,12 +74,14 @@
 				<capability name="model_name" value="7" />
 			</group>
 		</device>
+		<device user_agent="Opera 7" fall_back="opera_7" id="opera_7_identify_as" />
 		
 		<device user_agent="Opera/8" fall_back="opera" id="opera_8">
 			<group id="product_info">
 				<capability name="model_name" value="8" />
 			</group>
 		</device>
+		<device user_agent="Opera 8" fall_back="opera_8" id="opera_8_identify_as" />
 		
 				
 		<device user_agent="Opera/9" fall_back="opera" id="opera_9">
@@ -80,12 +89,15 @@
 				<capability name="model_name" value="9" />
 			</group>
 		</device>
+		<device user_agent="Opera 9" fall_back="opera_9" id="opera_9_identify_as" />
 		
 		<device user_agent="Opera/10" fall_back="opera" id="opera_10">
 			<group id="product_info">
 				<capability name="model_name" value="10" />
 			</group>
 		</device>
+		<device user_agent="Opera/9.8" fall_back="opera_10" id="opera_10_2_digit_fix" />
+		<device user_agent="Opera 10" fall_back="opera_10" id="opera_10_identify_as" />
 
 		<!--  Safari -->
 		<device user_agent="Safari/" fall_back="generic_web_browser"
