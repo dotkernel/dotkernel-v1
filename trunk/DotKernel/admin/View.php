@@ -230,8 +230,8 @@ class View extends Dot_Template
 		$this->setFile('page_file', 'paginator.tpl');
 		$this->setVar('TOTAL_RECORDS', $page->totalItemCount);
 		$this->setVar('TOTAL_PAGES', $page->pageCount );
-		$this->setBlock('page_file', 'previous', 'previous_row');
-		$this->setBlock('page_file', 'next', 'next_row');
+		$this->setBlock('page_file', 'first', 'first_row');
+		$this->setBlock('page_file', 'last', 'last_row');
 		$this->setBlock('page_file', 'current_page', 'current_row');
 		$this->setBlock('page_file', 'other_page', 'other_row');		
 		$this->setBlock('page_file', 'pages', 'pages_row');
@@ -243,23 +243,23 @@ class View extends Dot_Template
 		$seo = new Dot_Seo();
 		$link = $seo->createCanonicalUrl($route).'page/';
 		
-		if ($page->first != $page->current)
+		if ($page->current != 1)
 		{
-			$this->setVar('PREVIOUS_LINK',$link.($page->current-1));
-			$this->parse('previous_row', 'previous', TRUE);
+			$this->setVar('FIRST_LINK',$link);
+			$this->parse('first_row', 'first', TRUE);
 		}
 		else
 		{
-			$this->parse('previous_row', '');
+			$this->parse('first_row', '');
 		}
-		if ($page->last>0 && $page->last != $page->current)
+		if ($page->current != $page->last)
 		{
-			$this->setVar('NEXT_LINK',$link.$page->next);
-			$this->parse('next_row', 'next', TRUE);
+			$this->setVar('LAST_LINK',$link.$page->last);
+			$this->parse('last_row', 'last', TRUE);
 		}
 		else
 		{
-			$this->parse('next_row', '');
+			$this->parse('last_row', '');
 		}
 		foreach ($page->pagesInRange as $val)
 		{
