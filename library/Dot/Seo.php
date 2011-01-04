@@ -81,15 +81,15 @@ class Dot_Seo
 		}
 		if('frontend' != $route['module'])
 		{
-			$url .=  urlencode($route['module']) . '/';
+			$url .=  urlencode(strtolower($route['module'])) . '/';
 		}
 		if( '' != $route['controller'])
 		{
-			$url .= urlencode($route['controller']) . '/';
+			$url .= urlencode(strtolower($route['controller'])) . '/';
 		}
 		if( '' != $route['action'])
 		{
-			$url .= urlencode($route['action']) . '/';
+			$url .= urlencode(strtolower($route['action'])) . '/';
 		}
 		//unset the request route: module, controller and action
 		unset($route['module']);
@@ -99,7 +99,7 @@ class Dot_Seo
 		{
 			$url .= urlencode($k) . '/' . urlencode($v) . '/';
 		}		
-		return strtolower($url);		
+		return $url;
 	}
 	/**
 	 * Get SEO options
