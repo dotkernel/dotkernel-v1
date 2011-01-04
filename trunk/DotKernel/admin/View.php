@@ -245,7 +245,7 @@ class View extends Dot_Template
 		
 		if ($page->current != 1)
 		{
-			$this->setVar('FIRST_LINK',$link);
+			$this->setVar('FIRST_LINK',$link."1");
 			$this->parse('first_row', 'first', TRUE);
 		}
 		else
