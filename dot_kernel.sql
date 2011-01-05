@@ -131,7 +131,8 @@ INSERT INTO `setting` (`id`, `key`, `value`, `title`, `comment`, `isEditable`, `
 (6, 'smtpActive', '0', 'Use external SMTP servers', 'If we use or not external SMTP servers.', '1', 'radio', '1;0'),
 (7, 'resultsPerPage', '5', 'Default results per page', 'How many records will be on every page, if is not specified otherwise by a specific configuration value', '1', 'option', '5;10;20;30;40;50'),
 (8, 'whoisUrl', 'http://whois.domaintools.com', '', 'Whois lookup and Domain name search', '0', 'textarea', ''),
-(9, 'wurflCacheBuilt', 'never', '', '', '0', 'textarea', '');
+(9, 'wurflCacheBuilt', 'never', '', '', '0', 'textarea', ''),
+(10, 'paginationStep', '3', 'Pagination Step', 'The maximum number of pages that are shown on either side of the current page in the pagination header.', '1', 'option', '3;4;5;6;7;8;9;10');
 
 
 -- --------------------------------------------------------
