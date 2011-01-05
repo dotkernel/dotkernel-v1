@@ -85,66 +85,66 @@ class Dot_Paginator
 	 * @return object
 	 */
 	public function getPages()
-	{			
+	{
 		$pages = new stdClass();
-        $pageCount = $this->_paginator->count();
-        $pages->pageCount = $pageCount;
-        $pages->itemCountPerPage = $this->_itemCountPerPage;
-        $pages->first = 1;
-        $pages->current = (int)$this->_currentPage;
-        $pages->last = $pageCount;
-
-        // Previous and next
-        if ($this->_currentPage - 1 > 0) 
+		$pageCount = $this->_paginator->count();
+		$pages->pageCount = $pageCount;
+		$pages->itemCountPerPage = $this->_itemCountPerPage;
+		$pages->first = 1;
+		$pages->current = (int)$this->_currentPage;
+		$pages->last = $pageCount;
+		
+		// Previous and next
+		if ($this->_currentPage - 1 > 0) 
 		{
-            $pages->previous = $this->_currentPage - 1;
-        }
-        if ($this->_currentPage + 1 <= $pageCount) 
+			$pages->previous = $this->_currentPage - 1;
+		}
+		if ($this->_currentPage + 1 <= $pageCount) 
 		{
-            $pages->next = $this->_currentPage + 1;
-        }
+			$pages->next = $this->_currentPage + 1;
+		}
 		
 		// Pages in range
 		$pageRange = $this->_paginator->getPageRange();
 		if ($pageRange > $pageCount) 
 		{
-            $pageRange = $pageCount;
-        }		
+			$pageRange = $pageCount;
+		}
 		$delta = ceil($pageRange / 2);
-        if ($this->_currentPage - $delta > $pageCount - $pageRange) 
+		if ($this->_currentPage - $delta > $pageCount - $pageRange)
 		{
-            $lowerBound = $pageCount - $pageRange + 1;
-            $upperBound = $pageCount;
-        } 
+			$lowerBound = $pageCount - $pageRange + 1;
+			$upperBound = $pageCount;
+		}
 		else 
 		{
-	        if ($this->_currentPage - $delta < 0) 
+			if ($this->_currentPage - $delta < 0)
 			{
-	            $delta = $this->_currentPage;
-	        }	
-	        $offset     = $this->_currentPage - $delta;
-	        $lowerBound = $offset + 1;
-	        $upperBound = $offset + $pageRange;
-		}       
-        $pages->pagesInRange     = $this->_paginator->getPagesInRange($lowerBound, $upperBound);
-        $pages->firstPageInRange = min($pages->pagesInRange);
-        $pages->lastPageInRange  = max($pages->pagesInRange);
-        
-		// Item numbers
-        if ($this->_currentItems == null) 
-		{
-        	$this->getCurrentItems();
+				$delta = $this->_currentPage;
+			}
+				$offset     = $this->_currentPage - $delta;
+				$lowerBound = $offset + 1;
+				$upperBound = $offset + $pageRange;
 		}
-        if ($this->_currentItems !== null) 
-		{
-            $pages->currentItemCount = $this->_paginator->getCurrentItemCount();
-            $pages->itemCountPerPage = $this->_paginator->getItemCountPerPage();
-            $pages->totalItemCount   = $this->_paginator->getTotalItemCount();
-            $pages->firstItemNumber  = (($this->_currentPage - 1) * $this->_paginator->getItemCountPerPage()) + 1;
-            $pages->lastItemNumber   = $pages->firstItemNumber + $pages->currentItemCount - 1;
-        }
+		$pages->pagesInRange     = $this->_paginator->getPagesInRange($lowerBound, $upperBound);
+		$pages->firstPageInRange = min($pages->pagesInRange);
+		$pages->lastPageInRange  = max($pages->pagesInRange);
 
-        return $pages;
+		// Item numbers
+		if ($this->_currentItems == null) 
+		{
+			$this->getCurrentItems();
+		}
+			if ($this->_currentItems !== null) 
+		{
+			$pages->currentItemCount = $this->_paginator->getCurrentItemCount();
+			$pages->itemCountPerPage = $this->_paginator->getItemCountPerPage();
+			$pages->totalItemCount   = $this->_paginator->getTotalItemCount();
+			$pages->firstItemNumber  = (($this->_currentPage - 1) * $this->_paginator->getItemCountPerPage()) + 1;
+			$pages->lastItemNumber   = $pages->firstItemNumber + $pages->currentItemCount - 1;
+		}
+
+		return $pages;
 	}
 	/**
 	 * Return a multiple array with data and pages
