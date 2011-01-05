@@ -57,11 +57,14 @@ class Dot_Paginator
 		$this->_select = $select;
 		$this->_currentPage = $page;
 		$this->_itemCountPerPage = $resultsPerPage;
+		$settings = Zend_Registry::get('settings');
 		if($this->_currentPage > 0)
 		{
-			$adapter = new Zend_Paginator_Adapter_DbSelect($select);			
+			$adapter = new Zend_Paginator_Adapter_DbSelect($select);
 			$this->_paginator = new Zend_Paginator($adapter);
 			$this->_paginator->totalItems = $adapter->count();
+			// page range = the pages on the left + the pages on the right + the current page
+			$this->_paginator->setPageRange($settings->paginationStep * 2 + 1);
 		}
 	}
 	/**
@@ -106,7 +109,7 @@ class Dot_Paginator
 		
 		// Pages in range
 		$pageRange = $this->_paginator->getPageRange();
-		if ($pageRange > $pageCount) 
+		if ($pageRange > $pageCount)
 		{
 			$pageRange = $pageCount;
 		}
@@ -116,7 +119,7 @@ class Dot_Paginator
 			$lowerBound = $pageCount - $pageRange + 1;
 			$upperBound = $pageCount;
 		}
-		else 
+		else
 		{
 			if ($this->_currentPage - $delta < 0)
 			{
