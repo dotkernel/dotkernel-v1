@@ -527,7 +527,13 @@ input.bigger{width: 100%;}
 /*Dijit themes tweaks*/
 .tundra .dijitCalendarDateLabel{
 	padding: 3px 5px 3px 4px;
-	font-size:1.3em;
+	font-size:1.2em;
 	font-weight:normal
+}
+.tundra .dijitCalendarCurrentDate{
+	text-decoration:none;
+}
+.tundra .dijitCalendarYearLabel{
+	font-size:13px;
 }
 /*End Dijit Tweaks*/
