@@ -361,6 +361,15 @@ class View extends Dot_Template
 				$i++;
 			}
 		}
+		if(empty($data))
+		{
+			$data[] = array('y' => 1, //must be a number greater then 0
+							'text' => $widgetOption['message']['noUserLogin'], 
+							'color' => $color[0], 
+							'stroke' => $color[0], 
+							'tooltip' => $widgetOption['message']['noUserLogin']
+							);
+		}
 		$this->setVar('PIEDATA', Zend_Json::encode($data));	
 	}
 	/**
