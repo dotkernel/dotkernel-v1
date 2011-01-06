@@ -21,6 +21,9 @@ current xml dots file. -->
 				<content>
 					<token>WIDGET_USER_LOGINS</token>
 					<countCountryUserLogin>10</countCountryUserLogin>
+					<message>
+						<noUserLogin>No user logged in yet!</noUserLogin>
+					</message>					
 					<colorCharts>
 						<color>#69D2E7</color>
 						<color>#F38630</color>
