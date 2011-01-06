@@ -6,7 +6,7 @@
 	<table cellpadding="0" cellspacing="0" class="medium_table" width="100%">
 		<tr>
 			<td class="row2" width="120px"><b>Username</b></td>
-			<td class="row1"><input type="text" name="username" value="{USERNAME}"></td>
+			<td class="row1">{USERNAME}</td>
 		</tr>
 		<tr>
 			<td class="row2"><b>Password</b></td>

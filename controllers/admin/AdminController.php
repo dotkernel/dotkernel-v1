@@ -110,20 +110,19 @@ switch ($registry->route['action'])
 				$session->message['type'] = 'error';
 			}
 		}
-		$adminView->details('add',$data);		
+		$adminView->details('add',$data);
 	break;
 	case 'update':
 		// display form and update admin user
 		$error = array();
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
-		{			
+		{
 			Dot_Kernel::checkUserToken();	
-			// POST values that will be validated						
+			// POST values that will be validated
 			$values = array('details' => 
 								array('firstName'=>$_POST['firstName'],
 									  'lastName'=>$_POST['lastName']
 									 ),
-							'username' => array('username' => $_POST['username']),
 							'email' => array('email' => $_POST['email']),
 							'enum' => array('0' => '0,1'),
 							'password' => array('password' => $_POST['password'],
@@ -136,11 +135,11 @@ switch ($registry->route['action'])
 			}
 			$valid = $adminModel->validateUser($values, $request['id']);
 			$data = $valid['data'];
-			$error = $valid['error'];			
+			$error = $valid['error'];
 			if(empty($error))
 			{
 				// no error - then update admin user
-				$data['id'] = $request['id'];				
+				$data['id'] = $request['id'];
 				$adminModel->updateUser($data);
 				$session->message['txt'] = $option->infoMessage->accountUpdate;
 				$session->message['type'] = 'info';
