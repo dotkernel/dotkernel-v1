@@ -1,0 +1,1 @@
+<a href="{IMAGEFILEOLD}"><img src="{IMAGEFILENEW}"/></a>
