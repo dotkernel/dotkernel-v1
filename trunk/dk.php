@@ -5,7 +5,7 @@
  *
  * @category   DotKernel
  * @package    DotKernel
- * @copyright  Copyright (c) 2009-2010 DotBoost Technologies Inc. Canada (http://www.dotboost.com)
+ * @copyright  Copyright (c) 2009-2011 DotBoost Technologies Inc. Canada (http://www.dotboost.com)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @version    $Id$
  */
@@ -261,17 +261,17 @@ else
 // check gd
 if(extension_loaded('gd'))
 {
-	$checkOptional['php_gd'] = array('name'   => 'PHP <i>gd</i> extension', 
+	$checkOptional['php_gd'] = array('name'   => 'PHP <i>GD</i> extension', 
 																	 'status' => 'pass', 
 																	 'value'  => 'OK');
 }
 else
 {
-	$checkOptional['php_gd'] = array('name'   => 'PHP <i>gd</i> extension', 
+	$checkOptional['php_gd'] = array('name'   => 'PHP <i>GD</i> extension', 
 																	 'status' => 'failed', 
 																	 'value'  => 'DotKernel requires 
-																	             <a href="http://www.php.net/manual/en/book.image.php">gd</a>, 
-																							 used by Zend Framework.');
+																	             <a href="http://www.php.net/manual/en/book.image.php">GD</a>, 
+																							 used by Zend Framework and for image manipulation.');
 }
 // check mbstring
 if(extension_loaded('mbstring'))
