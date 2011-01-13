@@ -34,4 +34,17 @@ switch ($registry->route['action'])
 	case 'outbound-links':
 		$pageView->showPage($registry->route['action']);
 	break;
+	case 'image':
+		$dotImage = new Dot_Image();
+		// set the image that will be manipulated
+		$imagePath = APPLICATION_PATH.'/images/frontend/MVC-structure.png';
+		$imageNewPath = APPLICATION_PATH.'/images/test/MVC-structure_resize.png';
+		$dotImage->setImage($imagePath);
+		$dotImage->setDestinationImage($imageNewPath);
+		// initiate the parameters for resizing the image
+		$resizeOption = array('width' => 140, 'height' => 500, 'measure' => 'px', 'preview' => TRUE);
+		$dotImage->setOption($resizeOption);
+		// resize the image
+		$dotImage->resize();
+		$pageView->showImage($registry->route['action'], $dotImage->getImage(), $dotImage->getImage($imagePath));	
 }

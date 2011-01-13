@@ -15,7 +15,7 @@ current xml dots file. -->
 				<modGeoIp>&lt;i&gt;mod_geoip&lt;/i&gt; extension is not installed. 
 						&lt;br /&gt; Check if &lt;i&gt;externals/geoip/GeoIP.dat&lt;/i&gt; file exists. &lt;br /&gt; 
 						If not, download it from &lt;a href="http://www.maxmind.com/app/geolitecountry" target="_blank"&gt;
-						http://www.maxmind.com/app/geolitecountry&lt;/a&gt;</modGeoIp>
+						http://www.maxmind.com/app/geolitecountry&lt;/a&gt;</modGeoIp>				
 			</warningMessage>
 			<widgets>
 				<content>
@@ -46,6 +46,8 @@ current xml dots file. -->
 			</session>
 			<warningMessage>
 				<userPermission>You don't have enough credentials to access this url.</userPermission>
+				<modGd>GD library is not installed.                                     
+				Check this link: http://www.php.net/manual/en/image.installation.php</modGd>
 			</warningMessage>
 		</variable>
 		<variable option="mobile">

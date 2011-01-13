@@ -29,6 +29,14 @@
 				<isLogged>1</isLogged>
 				<notLogged>1</notLogged>
 			</subItem>
+			<subItem>
+				<title>Image</title>
+				<link>page/image/</link>
+				<target>_self</target>
+				<external>0</external>
+				<isLogged>1</isLogged>
+				<notLogged>1</notLogged>
+			</subItem>
 		</subItems>
 	</item>
 	<item>
