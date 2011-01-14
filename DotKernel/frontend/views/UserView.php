@@ -66,8 +66,11 @@ class User_View extends View
 		}
 		if('add' == $templateFile)
 		{
-			$this->tpl->addUserToken();
 			$this->tpl->setVar('SECUREIMAGE',$this->getRecaptcha()->getHTML());
+		}
+		else
+		{
+			$this->tpl->addUserToken();
 		}
 	}
 	/**
