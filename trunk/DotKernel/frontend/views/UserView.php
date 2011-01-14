@@ -60,14 +60,14 @@ class User_View extends View
 	public function details($templateFile, $data=array())
 	{
 		$this->tpl->setFile('tpl_main', 'user/' . $templateFile . '.tpl');
-		$this->tpl->addUserToken();				
 		foreach ($data as $k=>$v)
 		{
-		    $this->tpl->setVar(strtoupper($k), $v);
+			$this->tpl->setVar(strtoupper($k), $v);
 		}
 		if('add' == $templateFile)
 		{
-			$this->tpl->setVar('SECUREIMAGE',$this->getRecaptcha()->getHTML());			
+			$this->tpl->addUserToken();
+			$this->tpl->setVar('SECUREIMAGE',$this->getRecaptcha()->getHTML());
 		}
 	}
 	/**
