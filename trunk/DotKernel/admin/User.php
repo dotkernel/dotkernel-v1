@@ -131,86 +131,6 @@ class User
 		}		
 	}
 	/**
-	 * Validate user input, add or update form
-	 * $values is an array on multiple levels. On first level, the key suggest what validation will be done.
-	 * - details 	- only filter the input
-	 * - username	- validate with Zend_Validate_Alnum, Zend_Validate_StringLength and filter the input
-	 * - email		- validate with Zend_Validate_EmailAddress and filter the input 
-	 * - enum 		- validate with Zend_Validate_InArray(explode(',', $values['enum'][0])) and filter the input
-	 * - password	- validate with Zend_Validate_StringLength and filter the input
-	 * @access public
-	 * @param array $values
-	 * @param int $userId 
-	 * @return array
-	 */
-	public function validateUser($values, $userId = 0)
-	{
-		$data = array();
-		$error = array();
-		//validate the input data - username, password and email will be also filtered
-		$validatorChain = new Zend_Validate();
-		//validate details parameters	
-		if(array_key_exists('details', $values))
-		{
-			$validDetails = Dot_Kernel::validateFilter($validatorChain, $values['details']);
-			$data = array_merge($data, $validDetails['data']);
-			$error = array_merge($error, $validDetails['error']);
-		}		
-		//validate username
-		if(array_key_exists('username', $values))
-		{
-			$validatorChain = new Zend_Validate();
-			$validatorChain->addValidator(new Zend_Validate_Alnum())
-						   ->addValidator(new Zend_Validate_StringLength(
-													$this->option->validate->details->lengthMin, 
-													$this->option->validate->details->lengthMax
-												));
-			$validUsername = Dot_Kernel::validateFilter($validatorChain, $values['username']);
-			$data = array_merge($data, $validUsername['data']);
-			$uniqueError = $this->_validateUnique('username', $values['username']['username'], $userId);
-			$error = array_merge($error, $validUsername['error'], $uniqueError);
-		}
-		//validate email
-		if(array_key_exists('email', $values))
-		{
-			$validatorEmail = new Zend_Validate_EmailAddress();		
-			$validEmail = Dot_Kernel::validateFilter($validatorEmail, $values['email']);
-			$data = array_merge($data, $validEmail['data']);
-			$uniqueError = $this->_validateUnique('email', $values['email']['email'], $userId);
-			$error = array_merge($error, $validEmail['error'], $uniqueError);
-		}			
-		//validate enum
-		if(array_key_exists('enum', $values))
-		{
-			$validatorEnum = new Zend_Validate_InArray(explode(',', $values['enum'][0]));
-			unset($values['enum'][0]);
-			$validEnum = Dot_Kernel::validateFilter($validatorEnum, $values['enum']);
-			$data = array_merge($data, $validEnum['data']);
-			$error = array_merge($error, $validEnum['error']);
-		}		
-		//validate password				
-		if(array_key_exists('password', $values) && ($values['password']['password'] != '' || $values['password']['password2'] != ''))
-		{			
-			if($values['password']['password'] == $values['password']['password2'])
-			{
-				unset($values['password']['password2']);
-				$validatorChain = new Zend_Validate();
-				$validatorChain->addValidator(new Zend_Validate_StringLength(
-												$this->option->validate->password->lengthMin, 
-												$this->option->validate->password->lengthMax
-											));			
-				$validPass = Dot_Kernel::validateFilter($validatorChain, $values['password']);
-				$data = array_merge($data, $validPass['data']);
-				$error = array_merge($error, $validPass['error']);	
-			}
-			else
-			{
-				$error['password'] = $this->option->errorMessage->passwordTwice;
-			}
-		}
-		return array('data' => $data, 'error' => $error);
-	}
-	/**
 	 * Activate/Inactivate user account
 	 * @param int $id - user ID
 	 * @param int $isActive
@@ -256,35 +176,6 @@ class User
 		return $dotPaginator->getData();
 		
 	}	
-	/**
-	 * Check if user already exists - email, username, and return error
-	 * @access private
-	 * @param string $field
-	 * @param string $value
-	 * @param id $userId
-	 * @return array
-	 */
-	private function _validateUnique($field, $value, $userId)
-	{
-		$error = array();
-		//email is unique, check if exists
-		$exists = $this->getUserBy($field, $value);
-		if($userId > 0)
-		{
-			$currentUser = $this->getUserBy('id', $userId);				
-			$uniqueCondition = (is_array($exists) && $exists[$field] != $currentUser[$field]);
-		}
-		else
-		{
-			$uniqueCondition = (FALSE != $exists);
-		}
-		if($uniqueCondition)
-		{
-			$error[] = $value . $this->option->errorMessage->userExists;
-		}
-		return $error;
-	}
-	
 	/**
 	 * Get top country user logins as declared in 
 	 * $option->countCountryUserLogin

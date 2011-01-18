@@ -309,7 +309,20 @@ class View extends Dot_Template
 	 */
 	public function addUserToken()
 	{
-		$user=Dot_Auth::getIdentity('user');
-		$this->setVar('USERTOKEN', Dot_Kernel::generateUserToken($user['password']));
+		$user = Dot_Auth::getIdentity('user');
+		$this->setVar('USERTOKEN', Dot_Kernel::generateUserToken($user->password));
+	}	
+	/**
+	 * Get captcha display box using Zend_Service_ReCaptcha api
+	 * @access public
+	 * @return Zend_Service_ReCaptcha
+	 */
+	public function getRecaptcha()
+	{
+		$option = Zend_Registry::get('option');
+		// add secure image using ReCaptcha
+		$recaptcha = new Zend_Service_ReCaptcha($option->captchaOptions->recaptchaPublicKey, $option->captchaOptions->recaptchaPrivateKey);
+		$recaptcha->setOptions($option->captchaOptions->toArray());
+		return $recaptcha;
 	}
 }

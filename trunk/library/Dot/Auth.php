@@ -83,15 +83,6 @@ class Dot_Auth
 			return true;
 		}
 		return false;
-	}	
-	public static function reguireLogin($who)
-	{
-		$session = Zend_Registry::get('session');
-		if(!isset($session->wantUrl))
-		{
-			$dotSeo = new Dot_Seo();
-			$session->wantUrl = $dotSeo->createCanonicalUrl();
-		}
 	}
 	/**
 	 * Return identity of $who
@@ -123,5 +114,54 @@ class Dot_Auth
 		{
 			unset($session->$who);
 		}
-	}      
+	} 
+	/**
+	 * Process the authentification with Zend_Auth.
+	 * Return TRUE or FALSE if succedded or not
+	 * @access public
+	 * @static
+	 * @param string $who
+	 * @param array $values
+	 * @return bool
+	 */
+	public static function process($who, $values)
+	{
+		$adapter = self::getAuthAdapter($who);
+		$adapter->setIdentity($values['username']);
+		$adapter->setCredential($values['password']);
+		$adapter->getDbSelect()->where('isActive = ?','1');
+		if('admin' == $who)
+		{
+			$config = Zend_Registry::get('configuration');
+			$password = md5($values['username'].$config->settings->admin->salt.$values['password']);
+			$adapter->setCredential($password);
+		}		
+		$auth = Zend_Auth::getInstance();
+		$result = $auth->authenticate($adapter);
+		if($result->isValid())
+		{
+			$session = Zend_Registry::get('session');
+			$session->$who = $adapter->getResultRowObject();
+			return TRUE;
+		}		
+		return FALSE;
+	}
+	/**
+	 * Get the auth adapter
+	 * @access public
+	 * @static
+	 * @param string $who
+	 * @return Zend_Auth_Adapter_DbTable
+	 */
+	public static function getAuthAdapter($who)
+	{
+		$dbAdapter = Zend_Registry::get('database');	
+		$authAdapter = new Zend_Auth_Adapter_DbTable($dbAdapter);
+		$authAdapter->setTableName($who)
+			->setIdentityColumn('username')
+			->setCredentialColumn('password');					
+		return $authAdapter;
+	}
+	
+	     
 }

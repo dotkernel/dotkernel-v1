@@ -35,8 +35,32 @@ switch ($registry->route['action'])
 			array_key_exists('username', $_POST) || array_key_exists('password', $_POST))
 		{	
 			// else validate the authorization request parameters 
-			$validate = $adminModel->validateLogin($_POST['username'], $_POST['password'], $_POST['send']);
-			$adminModel->authorizeLogin($validate);
+			$values = array('username' => 
+								array('username' => $_POST['username']), 
+							'password' => array('password' => $_POST['password'])
+						  );
+			$dotValidateUser = new Dot_Validate_User(array('who' => 'admin', 'action' => 'login', 'values' => $values));
+			if($dotValidateUser->isValid())
+			{
+				$adminModel->authorizeLogin($dotValidateUser->getData());
+			}
+			else
+			{
+				$error = $dotValidateUser->getError();		
+				// login info are NOT VALID
+				$txt = array();
+				$field = array('username', 'password');
+				foreach ($field as $v)
+				{
+					if(array_key_exists($v, $error))
+					{
+						 $txt[] = $error[$v];
+					}
+				}
+				$session->message['txt'] = $txt;
+				$session->message['type'] = 'error';
+		
+			}
 		}
 		else
 		{
@@ -48,7 +72,7 @@ switch ($registry->route['action'])
 	break;
 	case 'account':
 		//display my account form
-		$data = $adminModel->getUserBy('id', $session->admin['id']);
+		$data = $adminModel->getUserBy('id', $session->admin->id);
 		$adminView->details('account',$data);	
 	break;
 	case 'list':
@@ -78,12 +102,11 @@ switch ($registry->route['action'])
 							'password' => array('password' => $_POST['password'],
 												'password2' =>  $_POST['password2']
 											   )
-						  );
-			$valid = $adminModel->validateUser($values);
-			$data = $valid['data'];
-			$error = $valid['error'];
-			if(empty($error))
-			{	
+						  );			
+			$dotValidateUser = new Dot_Validate_User(array('who' => 'admin', 'action' => 'add', 'values' => $values));
+			if($dotValidateUser->isValid())
+			{
+				$data = $dotValidateUser->getData();
 				// check if admin already exists by $field ('username','email')
 				$checkBy = array('username', 'email');
 				foreach ($checkBy as $field)
@@ -93,19 +116,20 @@ switch ($registry->route['action'])
 					{
 						$error = ucfirst($field) . ' '. $data[$field] . $option->errorMessage->userExists;
 					}
+				}
+				if(empty($error))
+				{
+					// no error - then add admin user
+					$adminModel->addUser($data);				
+					$session->message['txt'] = $option->infoMessage->accountAdd;
+					$session->message['type'] = 'info';
+					header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/list/');
+					exit;					
 				}	
 			}
-			if(empty($error))
-			{
-				// no error - then add admin user
-				$adminModel->addUser($data);				
-				$session->message['txt'] = $option->infoMessage->accountAdd;
-				$session->message['type'] = 'info';
-				header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/list/');
-				exit;					
-			}
-			else
-			{				
+			$error = array_merge($error, $dotValidateUser->getError());
+			if(!empty($error))
+			{						
 				$session->message['txt'] = $error;
 				$session->message['type'] = 'error';
 			}
@@ -124,31 +148,32 @@ switch ($registry->route['action'])
 									  'lastName'=>$_POST['lastName']
 									 ),
 							'email' => array('email' => $_POST['email']),
-							'enum' => array('0' => '0,1'),
-							'password' => array('password' => $_POST['password'],
-												'password2' =>  $_POST['password2']
-											   )
-						  );
+							'enum' => array('0' => '0,1'));
+			if($_POST['password'] != '' || $_POST['password2'] !='' )
+			{
+				$values['password'] = array('password' => $_POST['password'],
+											'password2' =>  $_POST['password2']
+										   );
+			}
 			if(isset($_POST['isActive']))
 			{
 				$values['enum']['isActive'] =  $_POST['isActive'];
 			}
-			$valid = $adminModel->validateUser($values, $request['id']);
-			$data = $valid['data'];
-			$error = $valid['error'];
-			if(empty($error))
+			$dotValidateUser = new Dot_Validate_User(array('who' => 'admin', 'action' => 'update', 'values' => $values, 'userId' => $request['id']));
+			if($dotValidateUser->isValid())
 			{
+				$data = $dotValidateUser->getData();
 				// no error - then update admin user
 				$data['id'] = $request['id'];
 				$adminModel->updateUser($data);
 				$session->message['txt'] = $option->infoMessage->accountUpdate;
 				$session->message['type'] = 'info';
 				header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/list/');
-				exit;				
+				exit;
 			}
 			else
 			{
-				$session->message['txt'] = $error;
+				$session->message['txt'] = $dotValidateUser->getError();
 				$session->message['type'] = 'error';
 			}
 		}
@@ -162,12 +187,13 @@ switch ($registry->route['action'])
 		$id = (isset($_POST['id'])) ? (int)$_POST['id'] : 0;
 		$isActive = (isset($_POST['isActive'])) ? $_POST['isActive'] : 0;
 		$page = (isset($_POST['page'])) ? (int)$_POST['page'] : 1;
-		$values = array('enum' => array('0' => '0,1', 'isActive' => $isActive));
-		$valid = $adminModel->validateUser($values);
-		if(empty($valid['error']))
+		$values = array('enum' => array('0' => '0,1', 'isActive' => $isActive));		
+		$dotValidateUser = new Dot_Validate_User(array('who' => 'admin', 'action' => 'activate', 'values' => $values));
+		if($dotValidateUser->isValid())		
 		{	
+			$data = $dotValidateUser->getData();
 			// no error - then change active value of admin user
-			$adminModel->activateUser($id, $valid['data']['isActive']);		
+			$adminModel->activateUser($id, $data['isActive']);		
 		}
 		else
 		{
