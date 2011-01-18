@@ -41,8 +41,32 @@ switch ($registry->route['action'])
 			array_key_exists('username', $_POST) || array_key_exists('password', $_POST))
 		{	
 			// validate the authorization request parameters 
-			$validate = $userModel->validateLogin($_POST['username'], $_POST['password'], $_POST['send']);
-			$userModel->authorizeLogin($validate);
+			$values = array('username' => array('username' => $_POST['username']), 
+							'password' => array('password' => $_POST['password'])
+						  );
+			$dotValidateUser = new Dot_Validate_User(array('who' => 'user', 'action' => 'login', 'values' => $values));
+			if($dotValidateUser->isValid())
+			{
+				$userModel->authorizeLogin($dotValidateUser->getData());
+			}
+			else
+			{
+				$error = $dotValidateUser->getError();		
+				// login info are NOT VALID
+				$txt = array();
+				$field = array('username', 'password');
+				foreach ($field as $v)
+				{
+					if(array_key_exists($v, $error))
+					{
+						 $txt[] = $error[$v];
+					}
+				}
+				$session->validData = $dotValidateUser->getData();
+				$session->message['txt'] = $txt;
+				$session->message['type'] = 'error';
+		
+			}
 		}
 		else
 		{
@@ -70,29 +94,24 @@ switch ($registry->route['action'])
 												'password2' =>  $_POST['password2']
 											   )
 						  );
-			$valid = $userModel->validateUser($values, $session->user['id']);
-			$data = $valid['data'];
-			$error = $valid['error'];
-			$data['id'] = $session->user['id'];		
-			if(empty($error))
+			$dotValidateUser = new Dot_Validate_User(array('who' => 'user', 'action' => 'update', 'values' => $values, 'userId' => $session->user->id));
+			if($dotValidateUser->isValid())
 			{				
 				// no error - then update user
+				$data = $dotValidateUser->getData();
+				$data['id'] = $session->user->id;
 				$userModel->updateUser($data);
 				$session->message['txt'] = $option->infoMessage->update;
-				$session->message['type'] = 'info';			
-			}
+				$session->message['type'] = 'info';	
+			}	
 			else
 			{
-				$session->message['txt'] = $error;
-				$session->message['type'] = 'error';
-			}			
-			$dataTmp = $userModel->getUserInfo($session->user['id']);
-			$data['username'] = $dataTmp['username'];
+				$data = $dotValidateUser->getData();
+				$session->message['txt'] = $dotValidateUser->getError();
+				$session->message['type'] = 'error';				
+			}
 		}
-		else
-		{			
-			$data = $userModel->getUserInfo($session->user['id']);
-		}
+		$data = $userModel->getUserInfo($session->user->id);
 		$userView->details('update',$data);	
 	break;
 	case 'register':
@@ -110,79 +129,32 @@ switch ($registry->route['action'])
 							'email' => array('email' => $_POST['email']),
 							'password' => array('password' => $_POST['password'],
 												'password2' =>  $_POST['password2']
-											   )
+											   ),
+							'captcha' => array('recaptcha_challenge_field' => $_POST['recaptcha_challenge_field'],
+											   'recaptcha_response_field' => $_POST['recaptcha_response_field'])
 						  );
-			$valid = $userModel->validateUser($values);
-			$data = $valid['data'];
-			$error = $valid['error'];
-			if(!isset($_POST['recaptcha_response_field']) || strlen($_POST['recaptcha_response_field']) == 0)
-			{
-				$error['Secure Image'] = $option->errorMessage->captcha;
-			}
-			else
-			{
-				// validate secure image code
-				try
-				{
-					$result = $userView->getRecaptcha()->verify($_POST['recaptcha_challenge_field'],$_POST['recaptcha_response_field']);
-					if (!$result->isValid()) 
-					{
-						$error['Secure Image'] = $option->errorMessage->captcha;
-					}
-				}
-				catch(Zend_Exception $e)
-				{
-					$error['Secure Image'] = $option->errorMessage->captcha . ' ' . $e->getMessage();
-				}
-			}	
-			if(empty($error))
-			{	
-				//check if user already exists by $field ('username','email')
-				$checkBy = array('username','email');
-				foreach ($checkBy as $field)
-				{					
-				   	$userExists = $userModel->getUserBy($field, $data[$field]);
-					if(!empty($userExists))
-					{
-						$error[$field] = ucfirst($field).$option->errorMessage->userExists;
-					}
-				}	
-			}
-			if(empty($error))
-			{				
+			$dotValidateUser = new Dot_Validate_User(array('who' => 'user', 'action' => 'add', 'values' => $values));			
+			if($dotValidateUser->isValid())
+			{					
 			   	// no error - then add user
+				$data = $dotValidateUser->getData();
 				$userModel->addUser($data);
 				$session->message['txt'] = $option->infoMessage->add;
 				$session->message['type'] = 'info';
-				$validate = $userModel->validateLogin($data['username'], $data['password'], 'on');
-				if(!empty($validate['login']) && empty($validate['error']))
-				{
-					// login info are VALID, we can see if is a valid user now 
-					$user = $userModel->checkLogin($validate['login']);
-					if(!empty($user))
-					{
-						$session->user = $user;
-						$data = array();
-						$error = array();
-					}
-					else
-					{
-						//this else case should never be reach
-						unset($session->user);
-						$error['Error Login'] = $option->errorMessage->login;
-					}
-				}
+				//login user
+				$userModel->authorizeLogin($data);				
 			}
 			else
 			{	
 				if(array_key_exists('password', $data))
 				{ 
 					// do not display password in the add form
+					$data = $dotValidateUser->getData();
 					unset($data['password']);				
 				}							
 			}
 			// add action and validation are made with ajax - dojo.xhrPost, so return json string  
-			echo Zend_Json::encode(array('data'=>$data, 'error'=>$error));
+			echo Zend_Json::encode(array('data'=>$dotValidateUser->getData(), 'error'=>$dotValidateUser->getError()));
 			// return $data and $error as json
 			exit;			
 		}
@@ -194,17 +166,17 @@ switch ($registry->route['action'])
 		$error = array();
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
 		{				
-			$valid = $userModel->validateEmail($_POST['email']);
-			$data = $valid['data'];
-			$error = $valid['error'];
-			if(empty($error))
+			$values = array('email' => array('email' => $_POST['email']));
+			$dotValidateUser = new Dot_Validate_User(array('who' => 'user', 'action' => 'forgot-password', 'values' => $values));
+			if($dotValidateUser->isValid())
 			{	
 				// no error - then send password
+				$data = $dotValidateUser->getData();
 				$userModel->forgotPassword($data['email']);						
 			}
 			else
 			{
-				$session->message['txt'] = $error;
+				$session->message['txt'] = $dotValidateUser->getError();
 				$session->message['type'] = 'error';
 			}			
 		}

@@ -18,7 +18,8 @@
  * @author     DotKernel Team <team@dotkernel.com>
  */
  
-class Dot_Validate_Phone extends Dot_Validate {
+class Dot_Validate_Phone extends Dot_Validate 
+{
 	/**
 	 * Country code for which the phone should be validate
 	 * @access private

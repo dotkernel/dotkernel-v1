@@ -47,8 +47,7 @@ class User_View extends View
 				$this->tpl->setVar(strtoupper($k),$v);		
 			}
 		}
-		unset($session->validData);
-			
+		unset($session->validData);			
 	}
 	/**
 	 * Display user's signup form
@@ -68,22 +67,9 @@ class User_View extends View
 		{
 			$this->tpl->setVar('SECUREIMAGE',$this->getRecaptcha()->getHTML());
 		}
-		else
+		if('update' == $templateFile)
 		{
 			$this->tpl->addUserToken();
 		}
-	}
-	/**
-	 * Get captcha display box using Zend_Service_ReCaptcha api
-	 * @access public
-	 * @return Zend_Service_ReCaptcha
-	 */
-	public function getRecaptcha()
-	{
-		$option = Zend_Registry::get('option');
-		// add secure image using ReCaptcha
-		$recaptcha = new Zend_Service_ReCaptcha($option->captchaOptions->recaptchaPublicKey, $option->captchaOptions->recaptchaPrivateKey);
-		$recaptcha->setOptions($option->captchaOptions->toArray());
-		return $recaptcha;
 	}
 }

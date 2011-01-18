@@ -213,7 +213,7 @@ class View extends Dot_Template
 		{			
 			$this->setFile('tpl_info', 'blocks/info_bar.tpl');
 			$session = Zend_Registry::get('session');
-			$this->setVar('ADMIN_USERNAME', $session->admin['username']);
+			$this->setVar('ADMIN_USERNAME', $session->admin->username);
 			$this->parse('INFO_BAR', 'tpl_info');			
 		}
 	}
@@ -331,8 +331,8 @@ class View extends Dot_Template
 	 */
 	public function addUserToken()
 	{
-		$user=Dot_Auth::getIdentity('admin');
-		$this->setVar('USERTOKEN', Dot_Kernel::generateUserToken($user['password']));
+		$user = Dot_Auth::getIdentity('admin');
+		$this->setVar('USERTOKEN', Dot_Kernel::generateUserToken($user->password));
 	}
 	/**
 	 * Display the widget: User Login Piechart

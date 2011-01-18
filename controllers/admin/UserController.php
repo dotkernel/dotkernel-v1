@@ -31,7 +31,6 @@ switch ($registry->route['action'])
 	case 'add':		
 		// display form and add new user
 		$data = array();
-		$error = array();
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
 		{
 			Dot_Kernel::checkUserToken();
@@ -50,26 +49,11 @@ switch ($registry->route['action'])
 												'password2' =>  $_POST['password2']
 											   )
 						  );
-			$valid = $userModel->validateUser($values);
-			$data = $valid['data'];
-			$error = $valid['error'];
-			if(empty($error))
-			{	
-				// check if user already exists by $field ('username','email')
-				$checkBy = array('username', 'email');
-				foreach ($checkBy as $field)
-				{					
-				   	$userExists = $userModel->getUserBy($field, $data[$field]);
-					if(!empty($userExists))
-					{
-						$error = ucfirst($field) . ' '. $data[$field] . $option->errorMessage->userExists;
-					}
-				}	
-			}
-			if(empty($error))
+			$dotValidateUser = new Dot_Validate_User(array('who' => 'user', 'action' => 'add', 'values' => $values));		
+			if($dotValidateUser->isValid())
 			{
 				// no error - then add user
-				$userModel->addUser($data);				
+				$userModel->addUser($dotValidateUser->getData());				
 				$session->message['txt'] = $option->infoMessage->accountAdd;
 				$session->message['type'] = 'info';
 				header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/list/');
@@ -77,9 +61,10 @@ switch ($registry->route['action'])
 			}
 			else
 			{				
-				$session->message['txt'] = $error;
+				$session->message['txt'] = $dotValidateUser->getError();
 				$session->message['type'] = 'error';
 			}
+			$data = $dotValidateUser->getData();		
 		}
 		$userView->details('add',$data);		
 	break;
@@ -102,12 +87,11 @@ switch ($registry->route['action'])
 												'password2' =>  $_POST['password2']
 											   )
 						  );
-			$valid = $userModel->validateUser($values, $request['id']);
-			$data = $valid['data'];
-			$error = $valid['error'];			
-			if(empty($error))
+			$dotValidateUser = new Dot_Validate_User(array('who' => 'user', 'action' => 'update', 'values' => $values, 'userId' => $request['id']));
+			if($dotValidateUser->isValid())			
 			{
 				// no error - then update user
+				$data = $dotValidateUser->getData();
 				$data['id'] = $request['id'];				
 				$userModel->updateUser($data);
 				$session->message['txt'] = $option->infoMessage->accountUpdate;
@@ -117,7 +101,7 @@ switch ($registry->route['action'])
 			}
 			else
 			{
-				$session->message['txt'] = $error;
+				$session->message['txt'] = $dotValidateUser->getError();
 				$session->message['type'] = 'error';
 			}
 		}
@@ -132,11 +116,12 @@ switch ($registry->route['action'])
 		$isActive = (isset($_POST['isActive'])) ? $_POST['isActive'] : 0;
 		$page = (isset($_POST['page'])) ? (int)$_POST['page'] : 1;
 		$values = array('enum' => array('0' => '0,1', 'isActive' => $isActive));
-		$valid = $userModel->validateUser($values);
-		if(empty($valid['error']))
+		$dotValidateUser = new Dot_Validate_User(array('who' => 'user', 'action' => 'activate', 'values' => $values));
+		if($dotValidateUser->isValid())		
 		{	
+			$data = $dotValidateUser->getData();
 			// no error - then change active value of user
-			$userModel->activateUser($id, $valid['data']['isActive']);		
+			$userModel->activateUser($id, $data['isActive']);		
 		}
 		else
 		{

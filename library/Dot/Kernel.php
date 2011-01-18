@@ -270,39 +270,6 @@ class Dot_Kernel
 		return $times;
 	}
 	/**
-	 * Process that validate and filter the input/output data.
-	 * Return valid and filtered data
-	 * @access public
-	 * @static
-	 * @param Zend_Validate $validator
-	 * @param array $values
-	 * @return array
-	 */
-	public static function validateFilter($validator, $values)
-	{
-		$data = $error = array();
-		$filter = new Zend_Filter();
-        $filter->addFilter(new Zend_Filter_HtmlEntities());
-        $filter->addFilter(new Zend_Filter_StringTrim());
-		foreach ($values as $k=>$v)
-		{
-		    if($validator->isValid($values[$k]))
-			{
-				//filter the input     
-				$data[$k] = $filter->filter($values[$k]); 
-			}
-			else
-			{
-				foreach ($validator->getMessages() as $message)
-				{
-					//filter the output
-					$error[$k] = str_replace($values[$k], $filter->filter($values[$k]), $message);
-				}
-			}
-		}
-		return array('data'=>$data,'error'=>$error);
-	}
-	/**
 	 * Generate a token for a user
 	 * @access public
 	 * @static
@@ -323,8 +290,8 @@ class Dot_Kernel
 	 */
 	public static function checkUserToken($type='admin')
 	{
-		$user=Dot_Auth::getIdentity($type);
-		if (!isset($_POST['userToken']) || (Dot_Kernel::generateUserToken($user['password'])!=$_POST['userToken']))
+		$user = Dot_Auth::getIdentity($type);
+		if (!isset($_POST['userToken']) || (Dot_Kernel::generateUserToken($user->password)!=$_POST['userToken']))
 		{
 			exit;
 		}
