@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <role>
+ 	<type>
+			<null>guest</null> <!-- 'guest' type doesn't inherits permission from no one - its parent is NULL -->
+			<guest>user</guest> <!-- 'user' type inherits permission from 'guest' -->
+			<guest>admin</guest> <!-- 'admin' type inherits permision from 'guest' -->
+			<user>admin</user> <!-- 'admin' type inherits permision from 'user' -->
+	</type>		
+	<permission>
+		<frontend>
+			<allow>
+				<guest>
+					<Page>all</Page><!-- allow 'guest' to access 'Page' controller -->
+					<User>all</User><!-- allow 'guest' to access 'User' controller -->
+				</guest> 				
+				<user>
+					<User>account</User><!-- allow 'user' to access 'User' controller and also 'account' action-->
+				</user> 
+			</allow>
+			<deny>
+				<guest>
+					<User>account</User> <!-- deny 'guest' to access from 'User' controller the 'account' action-->
+				</guest>
+			</deny>
+		</frontend>
+		<admin>			
+			<allow>				
+				<guest>
+					<Admin>login</Admin> <!-- allow 'guest' to access  from 'Admin' controller only 'login' action -->
+					<Admin>authorize</Admin> <!-- allow 'guest' to access  from 'Admin' controller only 'authorize' action -->
+					<System>login</System> <!-- allow 'guest' to access  from 'Admin' controller only 'authorize' action -->
+				</guest>
+				<admin>all</admin> <!-- allow 'admin' to access all the controllers from 'admin' module -->
+			</allow>
+			<deny>
+				<user>all</user>
+			</deny>
+		</admin>
+		<rss>
+			<allow><guest>all</guest></allow> <!-- allow 'guest' to access 'rss' module -->
+		</rss>
+		<mobile>				
+			<allow><guest>all</guest></allow> <!-- allow 'guest' to access 'mobile' module -->
+		</mobile>
+	</permission>
+ </role>

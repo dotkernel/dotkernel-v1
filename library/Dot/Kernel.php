@@ -40,11 +40,13 @@ class Dot_Kernel
     	$this->config = Zend_Registry::get('configuration');
     }
     /**
-     * End the execution of the application, by sending an 404 header and redirecting to home page
+     * End the execution of the application, 
+     * by sending an 404 header and redirecting to home page
      * @access public
+     * @param string $who [optional]
      * @return bool
      */
-    public function pageNotFound()
+    public function pageNotFound($who = '')
     {   	
         // send the 404 header
         header('HTTP/1.0 404 Not Found');
@@ -52,7 +54,7 @@ class Dot_Kernel
         echo '<SCRIPT LANGUAGE=JAVASCRIPT> 
 					function go()
 					{
-						window.location.href="'.$this->config->website->params->url.'" 
+						window.location.href="'.$this->config->website->params->url.'/'.$who.'" 
 						}
 						</SCRIPT>
 					</HEAD>
@@ -290,7 +292,8 @@ class Dot_Kernel
 	 */
 	public static function checkUserToken($type='admin')
 	{
-		$user = Dot_Auth::getIdentity($type);
+		$dotAuth = Dot_Auth::getInstance();
+		$user = $dotAuth->getIdentity($type);
 		if (!isset($_POST['userToken']) || (Dot_Kernel::generateUserToken($user->password)!=$_POST['userToken']))
 		{
 			exit;

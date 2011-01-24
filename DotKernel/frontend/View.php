@@ -148,8 +148,9 @@ class View extends Dot_Template
 				$items = array(0 => $items);
 			}
 			foreach($items as $key => $val)
-			{						
-				if ((Dot_Auth::hasIdentity('user') && 1 == $val['isLogged']) || (!Dot_Auth::hasIdentity('user') && 1 == $val['notLogged']))
+			{			
+				$dotAuth = Dot_Auth::getInstance();
+				if (($dotAuth->hasIdentity('user') && 1 == $val['isLogged']) || (!$dotAuth->hasIdentity('user') && 1 == $val['notLogged']))
 				{	// display menus based on user is logged in or not
 					$tmpMenuRoute = explode('/', $val['link']);
 					$this->setVar('TOP_MENU_ID', $i);
@@ -201,7 +202,7 @@ class View extends Dot_Template
 							}
 							foreach ($subItems as $k2 => $v2)
 							{			
-								if ((Dot_Auth::hasIdentity('user') && 1 == $v2['isLogged']) || (!Dot_Auth::hasIdentity('user') && 1 == $v2['notLogged']))
+								if (($dotAuth->hasIdentity('user') && 1 == $v2['isLogged']) || (!$dotAuth->hasIdentity('user') && 1 == $v2['notLogged']))
 								{				
 									// display menus based on user is logged in or not
 									$tmpSubmenuRoute = explode('/', $v2['link']);				
@@ -262,7 +263,8 @@ class View extends Dot_Template
 	 */
 	public function setLoginBox()
 	{
-		if (!Dot_Auth::hasIdentity('user'))
+		$dotAuth = Dot_Auth::getInstance();
+		if (!$dotAuth->hasIdentity('user'))
 		{
 			$this->setFile('tpl_login', 'blocks/login_box.tpl');
 			$this->parse('LOGIN_BOX', 'tpl_login');
@@ -309,7 +311,8 @@ class View extends Dot_Template
 	 */
 	public function addUserToken()
 	{
-		$user = Dot_Auth::getIdentity('user');
+		$dotAuth = Dot_Auth::getInstance();
+		$user = $dotAuth->getIdentity('user');
 		$this->setVar('USERTOKEN', Dot_Kernel::generateUserToken($user->password));
 	}	
 	/**
