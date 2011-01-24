@@ -155,8 +155,9 @@ class Admin
 	{		
 		$session = Zend_Registry::get('session');
 		unset($session->admin);		
-		// login info are VALID, we can see if is a valid user now			
-		$validAuth = Dot_Auth::process('admin', $validData);
+		// login info are VALID, we can see if is a valid user now	
+		$dotAuth = Dot_Auth::getInstance();
+		$validAuth = $dotAuth->process('admin', $validData);
 		if($validAuth)
 		{
 			//prepare data for register the login

@@ -16,12 +16,6 @@
 * @author     DotKernel Team <team@dotkernel.com>
 */ 
 
-// check admin permission
-if($registry->route['action'] != 'login' && $registry->route['action'] != 'authorize')
-{
-	Dot_Auth::checkIdentity('admin');
-}
-
 // start the template object, empty for the moment 
 require(DOTKERNEL_PATH . '/' . $registry->route['module'] . '/' . 'View.php');	
 $tpl = View::getInstance(TEMPLATES_PATH . '/' . $registry->route['module']);
@@ -55,7 +49,15 @@ $pageTitle = 'Overwrite Me Please !';
 *  call the Action specific file, but check first if exists 
 */
 $actionControllerPath = CONTROLLERS_PATH . '/' . $registry->route['module'] . '/' . ucfirst($registry->route['controller']) . 'Controller.php';
-!file_exists($actionControllerPath) ?  $dotKernel->pageNotFound() :  require($actionControllerPath);
+if(file_exists($actionControllerPath))
+{	
+	$dotAuth->checkIdentity('admin');
+	require($actionControllerPath);
+}
+else
+{	
+	$dotKernel->pageNotFound('admin');
+}
 
 // set menus
 $tpl->setViewMenu();

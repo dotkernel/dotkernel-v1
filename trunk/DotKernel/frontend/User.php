@@ -140,8 +140,10 @@ class User
 	public function authorizeLogin($validData)
 	{
 		$session = Zend_Registry::get('session');
+		unset($session->user);
 		// login info are VALID, we can see if is a valid user now 
-		$validAuth = Dot_Auth::process('user', $validData);
+		$dotAuth = Dot_Auth::getInstance();
+		$validAuth = $dotAuth->process('user', $validData);
 		if($validAuth)
 		{
 			//prepare data for register the login
@@ -155,12 +157,12 @@ class User
 								'country' => $userCountry[1]
 								);
 			$this->registerLogin($dataLogin);
-			header('location: '.$this->config->website->params->url.'/user/account');
+			$link = isset($session->wantUrl) ? $session->wantUrl : $this->config->website->params->url.'/user/account';			
+			header('location: '.$link);
 			exit;
 		}
 		else
-		{
-			unset($session->user);
+		{			
 			$session->message['txt'] = $this->option->errorMessage->login;
 			$session->message['type'] = 'error';
 		}

@@ -125,7 +125,7 @@ class Dot_Template
 	protected static $_instance = null;	
 	/**
 	 * Singleton pattern implementation makes 'new' unavailable
-	 * @access public
+	 * @access protected
 	 * @param string $root     Template root directory
 	 * @param string $unknowns How to handle unknown variables
 	 * @param array  $fallback Fallback paths
@@ -148,6 +148,7 @@ class Dot_Template
 	 * Returns an instance of Dot_View
 	 * Singleton pattern implementation
 	 * @access public
+	 * @static
 	 * @param string $root     Template root directory
 	 * @param string $unknowns How to handle unknown variables
 	 * @param array  $fallback Fallback paths

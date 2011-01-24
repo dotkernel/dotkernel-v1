@@ -102,7 +102,8 @@ class View extends Dot_Template
 	 */
 	public function setViewMenu()
 	{		
-		if(Dot_Auth::hasIdentity('admin'))
+		$dotAuth = Dot_Auth::getInstance();
+		if($dotAuth->hasIdentity('admin'))
 		{
 			$menu_xml = new Zend_Config_Xml(CONFIGURATION_PATH . '/' . $this->route['module'] . '/' . 'menu.xml', 'config');
 			$menu = $menu_xml->menu;
@@ -209,7 +210,8 @@ class View extends Dot_Template
 	 */
 	public function setInfoBar()
 	{		
-		if(Dot_Auth::hasIdentity('admin'))
+		$dotAuth = Dot_Auth::getInstance();
+		if($dotAuth->hasIdentity('admin'))
 		{			
 			$this->setFile('tpl_info', 'blocks/info_bar.tpl');
 			$session = Zend_Registry::get('session');
@@ -331,7 +333,8 @@ class View extends Dot_Template
 	 */
 	public function addUserToken()
 	{
-		$user = Dot_Auth::getIdentity('admin');
+		$dotAuth = Dot_Auth::getInstance();
+		$user = $dotAuth->getIdentity('admin');
 		$this->setVar('USERTOKEN', Dot_Kernel::generateUserToken($user->password));
 	}
 	/**

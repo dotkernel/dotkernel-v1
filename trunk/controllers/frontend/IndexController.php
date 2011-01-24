@@ -39,7 +39,7 @@ $tpl->setViewFile();
 // set paths in templates
 $tpl->setViewPaths();
 
-// display login box
+// display login boxH
 $tpl->setLoginBox();
 
 /** 
@@ -64,7 +64,15 @@ $pageTitle = 'Overwrite Me Please !';
  * call the Action specific file, but check first if exists 
  */
 $actionControllerPath = CONTROLLERS_PATH . '/' . $registry->route['module'] . '/' . ucfirst($registry->route['controller']) . 'Controller.php';
-!file_exists($actionControllerPath) ?  $dotKernel->pageNotFound() :  require($actionControllerPath);
+if(file_exists($actionControllerPath))
+{	
+	$dotAuth->checkIdentity('user');
+	require($actionControllerPath);
+}
+else
+{	
+	$dotKernel->pageNotFound();
+}
 	
 // set menus
 $tpl->setViewMenu();

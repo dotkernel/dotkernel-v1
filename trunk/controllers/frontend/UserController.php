@@ -78,7 +78,7 @@ switch ($registry->route['action'])
 	break;
 	case 'account':
 		// display My Account page, if user is logged in 
-		Dot_Auth::checkIdentity();
+		//Dot_Auth::checkIdentity();
 		$data = array();
 		$error = array();
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
@@ -183,7 +183,8 @@ switch ($registry->route['action'])
 		$userView->details('forgot_password',$data);		
 	break;
 	case 'logout':
-		Dot_Auth::clearIdentity('user');
+		$dotAuth = Dot_Auth::getInstance();
+		$dotAuth->clearIdentity('user');
 		header('location: '.$config->website->params->url);
 		exit;
 	break;	

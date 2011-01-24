@@ -26,7 +26,8 @@ switch ($registry->route['action'])
 		$adminView->loginForm('login');
 	break;	
 	case 'logout':
-		Dot_Auth::clearIdentity('admin');
+		$dotAuth = Dot_Auth::getInstance();
+		$dotAuth->clearIdentity('admin');
 		header('location: '.$config->website->params->url.'/' . $requestModule);
 		exit;
 	break;	

@@ -147,6 +147,13 @@ $seo = new Dot_Seo();
 $seo->routes();
 $registry->seo = $seo->getOption();
 
+// instantiate Dot_Acl used as access control layer
+$dotAcl = new Dot_Acl();
+
+//set the roles for the current module
+$dotAuth = Dot_Auth::getInstance();
+$dotAuth->setRoles($dotAcl->getRoles());
+
 /**
 *  From this point , the control is taken by the Front Controller
 *  call the Front Controller specific file, but check first if exists 
