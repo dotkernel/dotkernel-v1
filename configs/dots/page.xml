@@ -20,8 +20,22 @@
 			<pageTitle>
 				<action>
 					<home>Mobile Version</home>
+					<contact>Mobile Contact Form</contact>
 				</action>
 			</pageTitle>
+			<contactForm>
+				<subject>Mobile Contact Form</subject>
+				<message>
+					From: %EMAIL%
+					%MESSAGE%
+					
+					---
+					Data: %DATA%
+					IP: %IP%
+					User Agent: %USERAGENT%
+				</message>
+				<mailSent>Your message was sent!</mailSent>
+			</contactForm>
 		</variable>			
 	</dots>
 </config>

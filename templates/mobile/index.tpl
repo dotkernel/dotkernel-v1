@@ -8,19 +8,31 @@
 	<meta name="description" content="{PAGE_DESCRIPTION}" >
 	<link rel="stylesheet" href="{SITE_URL}/externals/jquery/jquery.mobile-1.0a2.min.css" />
 	<script src="{SITE_URL}/externals/jquery/jquery-1.4.4.min.js"></script>
+	<!-- for PHP redirect to work properly, add this code here 
+	set ajaxFormsEnabled to false -->
+	<script type="text/javascript">
+            $(document).bind("mobileinit", function(){
+                $.extend(  $.mobile , {
+                    ajaxFormsEnabled: false
+                });
+            });
+
+        </script>
+	<!-- end PHP redirect-->
 	<script src="{SITE_URL}/externals/jquery/jquery.mobile-1.0a2.min.js"></script>
+	<script type="text/javascript" src="{TEMPLATES_URL}/js/mobile/main.js"></script>
 </head>
 <body>
 <div data-role="page" data-theme="e"> 
-	<div data-role="header" data-theme="b">
-		<p><a href="{SITE_URL}" rel="external">Web {SITE_NAME}</a></p>			
+	<div data-role="header" data-theme="b" data-nobackbtn="true"> 
+		<p><a href="{SITE_URL}" rel="external" >Web {SITE_NAME}</a></p>			
 	</div><!-- /header -->	
 	<div data-role="content">	
 					<h1>{PAGE_CONTENT_TITLE}</h1>
 					{MAIN_CONTENT}
 	</div><!-- /content -->
 	<div data-role="footer" data-theme="c">
-		&copy; 2009 - 2010 DotBoost Technologies Inc.
+		&copy; 2009 - 2011 DotBoost Technologies Inc.
 	</div><!-- /footer -->
 
 </div>
