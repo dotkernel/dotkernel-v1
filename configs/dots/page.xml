@@ -26,13 +26,13 @@
 			<contactForm>
 				<subject>Mobile Contact Form</subject>
 				<message>
-					From: %EMAIL%
-					%MESSAGE%
-					
-					---
-					Data: %DATA%
-					IP: %IP%
-					User Agent: %USERAGENT%
+From: %EMAIL%
+%MESSAGE%
+
+---
+Data: %DATA%
+IP: %IP%
+User Agent: %USERAGENT%
 				</message>
 				<mailSent>Your message was sent!</mailSent>
 			</contactForm>
