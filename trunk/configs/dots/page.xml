@@ -34,7 +34,7 @@ From: %EMAIL%
 %MESSAGE%
 
 ---
-Data: %DATA%
+Date: %DATE%
 IP: %IP%
 User Agent: %USERAGENT%
 				</message>

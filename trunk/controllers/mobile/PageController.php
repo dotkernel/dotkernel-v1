@@ -41,7 +41,7 @@ switch ($registry->route['action'])
 				$dotEmail = new Dot_Email();
 				$dotEmail->addTo($settings->siteEmail);
 				$dotEmail->setSubject($registry->seo->siteName . ' - ' . $option->contactForm->subject);
-				$msg = str_replace(array('%EMAIL%', '%MESSAGE%', '%DATA%', '%IP%', '%USERAGENT%'), 
+				$msg = str_replace(array('%EMAIL%', '%MESSAGE%', '%DATE%', '%IP%', '%USERAGENT%'), 
 								   array($data['email'], $data['message'], Dot_Kernel::timeFormat('now'), Dot_Kernel::getUserIp(), $_SERVER['HTTP_USER_AGENT']), 
 					              $option->contactForm->message);
 				$dotEmail->setBodyText($msg);		
