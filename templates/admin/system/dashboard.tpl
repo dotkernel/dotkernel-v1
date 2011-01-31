@@ -17,7 +17,7 @@
 		</tr>
 		<tr>
 			<td class="row2"><b>PHP</b></td>
-			<td class="row1">{PHP} ({PHPAPI}) &nbsp;&nbsp;[ <a href="{SITE_URL}/admin/system/phpinfo">Php Info</a> ]</td>
+			<td class="row1">{PHP} ({PHPAPI}) &nbsp;&nbsp;[ <a href="{SITE_URL}/admin/system/phpinfo">PHP Info</a> ]</td>
 		</tr>	
 		<tr>
 			<td class="row2"><b>MYSQL</b></td>
