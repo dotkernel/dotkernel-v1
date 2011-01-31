@@ -139,6 +139,14 @@ class System
 		$timestamp = filemtime($wurflZipPath);
 		$result['date'] = strftime($this->settings->timeFormatLong,$timestamp);
 		
+		// get the cache directory
+		$params = $wurflConfig->persistence->params;
+		$paramsArray = array(); 
+		foreach (explode(",", $params) as $param) {
+			$paramNameValue = explode("=", $param);
+			$paramsArray[$paramNameValue[0]] = $paramNameValue[1];
+		}
+		$result['cachePath'] = dirname($wurflConfigFile) . "/" . $paramsArray['dir'];
 		return $result;
 	}
 	/**
@@ -147,7 +155,7 @@ class System
 	 * @access public
 	 * @return array
 	 */
-	public function getWarnings()
+	public function getWarnings($wurflInfo)
 	{
 		$warnings = array();
 		
@@ -164,7 +172,18 @@ class System
 				$warnings[] = array('type'=>'please delete', 'description'=>$file);
 			}
 		}
-		
+
+		// check wether the wurfl cache file exists and is writeable
+		if (!file_exists($wurflInfo['cachePath']))
+		{
+			$warnings[] = array('type'=>'please create', 'description'=>'Wurfl Cache Folder ' . $wurflInfo['cachePath']);
+		}else{
+			if (!is_writeable($wurflInfo['cachePath']))
+			{
+				$warnings[] = array('type'=>'not writeable', 'description'=>'Wurfl Cache Folder ' . realpath($wurflInfo['cachePath']));
+			} 
+		}
+				
 		// add any other warnings to $warnings here
 		
 		return $warnings;
