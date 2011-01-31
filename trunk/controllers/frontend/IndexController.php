@@ -16,8 +16,8 @@
  * @author     DotKernel Team <team@dotkernel.com>
  */ 
 
-//is mobile and session->mobileHit is not set, register it and redirect
-if('mobile' == Dot_Kernel::getDevice()->getType() && !isset($session->mobileHit))
+//if automatic redirect is enabled in application.ini and the browser is mobile and session->mobileHit is not set, register it and redirect
+if($config->resources->useragent->wurflapi->redirect && 'mobile' == Dot_Kernel::getDevice()->getType() && !isset($session->mobileHit))
 {
 	// register mobile hits, store in session if hit was register
 	$dotMobile = new Dot_Mobile();
