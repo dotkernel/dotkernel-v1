@@ -26,10 +26,6 @@ switch ($registry->route['action'])
 	case 'home':
 		// call showPage method to view the home page
 		$pageView->showPage('home');
-	break;
-	case 'contact':
-		// call showPage method to view the error page
-		$pageView->showPage('contactForm');
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'] && 
 			array_key_exists('email', $_POST) && array_key_exists('message', $_POST))
 		{	
@@ -39,7 +35,8 @@ switch ($registry->route['action'])
 						  );
 			$dotValidateUser = new Dot_Validate_User(array('who' => 'mobile', 'action' => 'form', 'values' => $values));
 			if($dotValidateUser->isValid())
-			{ //if valid, send a mail
+			{ 
+				//if valid, send a mail
 				$data = $dotValidateUser->getData();
 				$dotEmail = new Dot_Email();
 				$dotEmail->addTo($settings->siteEmail);
@@ -58,7 +55,9 @@ switch ($registry->route['action'])
 			}
 			else
 			{
-				$tpl->setVar('ERROR_MESSAGE', 'error');
+				$session->message['txt'] = $dotValidateUser->getError();
+				$session->message['type'] = 'error';
+				$pageView->showPage('home', $dotValidateUser->getData());
 			}
 		}
 	break;
