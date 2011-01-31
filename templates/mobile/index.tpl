@@ -29,6 +29,7 @@
 	</div><!-- /header -->	
 	<div data-role="content">	
 					<h1>{PAGE_CONTENT_TITLE}</h1>
+					<span style="color: #ff0000;"><h2>{MESSAGE_BLOCK}</h2></span>	
 					{MAIN_CONTENT}
 	</div><!-- /content -->
 	<div data-role="footer" data-theme="c">

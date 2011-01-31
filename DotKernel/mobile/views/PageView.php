@@ -33,11 +33,16 @@ class Page_View extends View
 	 * Show the content of a page item
 	 * @access public
 	 * @param string $templateFile [optional]
+	 * @param array $data [optional]
 	 * @return void
 	 */
-	public function showPage($templateFile = '')
+	public function showPage($templateFile = '', $data = array())
 	{
-		if ($templateFile != '') $this->templateFile = $templateFile;//in some cases we need to overwrite this variable
-		$this->tpl->setFile('tpl_main', 'page/' . $this->templateFile . '.tpl');
-	}	
+		if ($templateFile != '') $this->templateFile = $templateFile; //in some cases we need to overwrite this variable
+		$this->tpl->setFile('tpl_main', 'page/' . $this->templateFile . '.tpl');		
+		foreach ($data as $key => $val)
+		{
+			$this->tpl->setVar(strtoupper($key), $val);
+		}
+	}		
 }

@@ -76,6 +76,7 @@ class Dot_Validate_User extends Dot_Validate
 		//validate details parameters	
 		if(array_key_exists('details', $values))
 		{			
+			$validatorChain->addValidator(new Zend_Validate_StringLength(array('min' => $this->option->validate->details->lengthMin)));
 			$this->_callFilter($validatorChain, $values['details']);
 		}		
 		//validate username

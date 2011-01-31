@@ -52,6 +52,9 @@ $actionControllerPath = CONTROLLERS_PATH . '/' . $registry->route['module'] . '/
 
 // set SEO html tags from dots/seo.xml file
 $tpl->setSeoValues($pageTitle);
+
+// dispaly message (error, warning, info)	
+$tpl->displayMessage();
 	
 // parse the main content block
 $tpl->parse('MAIN_CONTENT', 'tpl_main');

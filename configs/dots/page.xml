@@ -20,9 +20,13 @@
 			<pageTitle>
 				<action>
 					<home>Mobile Version</home>
-					<contact>Mobile Contact Form</contact>
 				</action>
 			</pageTitle>
+			<validate>
+				<details>
+					<lengthMin>3</lengthMin>
+				</details>
+			</validate>	
 			<contactForm>
 				<subject>Mobile Contact Form</subject>
 				<message>
