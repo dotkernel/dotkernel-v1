@@ -31,6 +31,8 @@
 				<subject>Mobile Contact Form</subject>
 				<message>
 From: %EMAIL%
+Phone: %PHONE%
+
 %MESSAGE%
 
 ---

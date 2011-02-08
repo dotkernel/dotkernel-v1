@@ -50,42 +50,7 @@ class Dot_Filter
 		{
 			$this->_options[$key] = $value;
 		}
-	}	
-	/**
-	 * Process that validate and filter the input/output data.
-	 * Return valid and filtered data
-	 * @access public
-	 * @param Zend_Validate $validator
-	 * @param array $values
-	 * @return array
-	 */
-	public function validateFilter($validator, $values)
-	{
-		$this->_data = array();
-		$this->_error = array();
-		$values = $this->_options['values'];
-		$validator = $this->_options['validator'];		
-		$filter = new Zend_Filter();
-        $filter->addFilter(new Zend_Filter_HtmlEntities());
-        $filter->addFilter(new Zend_Filter_StringTrim());
-		foreach ($values as $k=>$v)
-		{
-		    if($validator->isValid($values[$k]))
-			{
-				//filter the input     
-				$data[$k] = $filter->filter($values[$k]); 
-			}
-			else
-			{
-				foreach ($validator->getMessages() as $message)
-				{
-					//filter the output
-					$error[$k] = str_replace($values[$k], $filter->filter($values[$k]), $message);
-				}
-			}
-		}
-		return array('data'=>$data,'error'=>$error);
-	}	
+	}
 	/**
 	 * Filter data that was previously validated (input data)
 	 * If data was not valid, filter the error message that will 

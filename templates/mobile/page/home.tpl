@@ -14,7 +14,13 @@
 	         <input class="ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-c required email" 
 				 name="email" id="email" value="{EMAIL}" type="text">
 			 <br /><span id="emailError"  style="color: #ff0000;"></span>
-			</div>
+		</div>
+		<div class="ui-field-contain ui-body ui-br" data-role="fieldcontain">
+	         <label class="ui-input-text" for="name">Phone (only US country):</label>
+	         <input class="ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-c required email" 
+				 name="phone" id="phone" value="{PHONE}" type="text">
+			 <br />
+		</div>
 
 		<div class="ui-field-contain ui-body ui-br" data-role="fieldcontain">
 			<label class="ui-input-text" for="textarea">Message:</label>
