@@ -27,6 +27,18 @@ class Dot_Filter_Phone extends Dot_Filter
 	 */
 	protected $_options = array();
 	/**
+	 * Valid data after validation
+	 * @var array
+	 * @accesss private
+	 */
+	private $_data = array();
+	/**
+	 * Errors found on validation
+	 * @var array
+	 * @access private
+	 */
+	private $_error = array();
+	/**
 	 * Constructor
 	 * @access public
 	 * @param array $options [optional]
@@ -38,14 +50,13 @@ class Dot_Filter_Phone extends Dot_Filter
 	}		
 	/**
 	 * Filter phone number, only digits will pass
-	 * @access public
-	 * @param string $phone
+	 * @access public	 
 	 * @return string 
 	 */
-	public function filter($phone)
+	public function filter()
 	{		
 		// only pass the digits characters from a phone number
 		$filter = new Zend_Filter_Digits();
-		return $filter->filter($phone);
+		return $filter->filter($this->_options['value']);
 	}
 }

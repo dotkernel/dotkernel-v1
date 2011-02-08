@@ -112,6 +112,22 @@ class Dot_Validate_User extends Dot_Validate
 			$validatorEnum = new Zend_Validate_InArray(explode(',', $values['enum'][0]));
 			unset($values['enum'][0]);
 			$this->_callFilter($validatorEnum, $values['enum']);
+		}						
+		//validate phone
+		if(array_key_exists('phone', $values))
+		{
+			//filter, then valid, so we wont use _callFilter() method
+			$phoneOptions = array('countryCode' => 'US');
+			$phoneOptions['values'] = $values['phone']['phone'];
+			$dotValidatorPhone = new Dot_Validate_Phone($phoneOptions);
+			if($dotValidatorPhone->isValid())
+			{
+				$this->_data = array_merge($this->_data, array('phone' => $dotValidatorPhone->getData()));
+			}
+			else
+			{
+				$this->_error = array_merge($this->_error, array('phone' => $dotValidatorPhone->getError()));
+			}			
 		}		
 		//validate password	
 		if(array_key_exists('password', $values) && isset($values['password']['password']))
