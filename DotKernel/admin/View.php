@@ -189,6 +189,20 @@ class View extends Dot_Template
 							{
 								$this->setVar('TOP_MENU_SEL', '_selected');
 							}
+							#highlight link
+							if (array_key_exists('highlight', $v2) && array_key_exists('link', $v2['highlight']))
+							{
+							    $currentLink = $this->route['controller'].'/'.$this->route['action'].'/';
+							    if (is_array($v2['highlight']['link']) && in_array($currentLink, $v2['highlight']['link']))
+							    {
+							        $this->setVar('TOP_SUB_MENU_SEL', '_selected');
+							    }
+							    elseif ($v2['highlight']['link'] == $currentLink)
+							    {
+							        $this->setVar('TOP_SUB_MENU_SEL', '_selected');
+							    }
+							}
+
 							$this->parse('top_normal_sub_menu_item_block', 'top_normal_sub_menu_item', true);
 						}
 						$this->parse('top_sub_menu_item_block', 'top_sub_menu_item', true);	
