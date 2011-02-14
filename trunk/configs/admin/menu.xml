@@ -1,98 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menus>	
 <config>	
-<menu>
-	<id>1</id>
-	<type>horizontal</type>
-	<display>1</display>
-	<item>
-		<title>Dashboard</title>
-		<link>system/dashboard/</link>
-		<description>Dashboard admin</description>
-		<subItems>
-			<subItem>
-				<title>Home</title>
-				<link>system/dashboard/</link>
-				<description>Dashboard admin</description>
-			</subItem>
-      <subItem>
-        <title>Settings</title>
-        <link>system/settings/</link>
-        <description>Admin settings</description>
-      </subItem>
-      <subItem>
-        <title>Email Transporter</title>
-        <link>system/transporter-list/</link>
-        <description>Admin settings</description>
-      </subItem>
-		</subItems>
-	</item>
-	<item>
-		<title>Admin</title>
-		<link>admin/list/</link>
-		<description>Admin user details</description>
-		<subItems>			
-			<subItem>
-				<title>List</title>
-				<link>admin/list/</link>
-				<description>List admin users</description>
-			</subItem>						
-			<subItem>
-				<title>Add new</title>
-				<link>admin/add/</link>
-				<description>Add admin user</description>
-			</subItem>
-			<subItem>
-				<title>My Account</title>
-				<link>admin/account/</link>
-				<description>Admin user account</description>
-			</subItem>			
-			<subItem>
-				<title>Logins</title>
-				<link>admin/logins/</link>
-				<description>Admin logins</description>
-			</subItem>
-		</subItems>
-	</item>
-	<item>
-		<title>User</title>
-		<link>user/list/</link>
-		<description>User details</description>
-		<subItems>			
-			<subItem>
-				<title>List</title>
-				<link>user/list/</link>
-				<description>List admin users</description>
-			</subItem>						
-			<subItem>
-				<title>Add new</title>
-				<link>user/add/</link>
-				<description>Add admin user</description>
-			</subItem>			
-			<subItem>
-				<title>Logins</title>
-				<link>user/logins/</link>
-				<description>User logins</description>
-			</subItem>
-		</subItems>
-	</item>
-</menu>
-<menu>
-	<id>2</id>
-	<type>vertical</type>
-	<display>0</display>
-	<item>
-		<title>Dashboard</title>
-		<link>system/dashboard/</link>
-		<description>Dashboard admin</description>
-		<subItems>
-			<subItem>
-				<title>Home</title>
-				<link>system/dashboard/</link>
-				<description>Dashboard admin</description>
-			</subItem>
-		</subItems>
-	</item>
-</menu>
+	<menu>
+		<id>1</id>
+		<type>horizontal</type>
+		<display>1</display>
+		<item>
+			<title>Dashboard</title>
+			<link>system/dashboard/</link>
+			<description>Dashboard admin</description>
+			<subItems>
+				<subItem>
+					<title>Home</title>
+					<link>system/dashboard/</link>
+					<description>Dashboard admin</description>
+					<highlight>
+				        <link>system/phpinfo/</link>
+					</highlight>
+				</subItem>
+				<subItem>
+					<title>Settings</title>
+					<link>system/settings/</link>
+					<description>Admin settings</description>
+				</subItem>
+				<subItem>
+					<title>Email Transporter</title>
+					<link>system/transporter-list/</link>
+					<description>Admin settings</description>
+					<highlight>
+				        <link>system/transporter-update/</link>
+				        <link>system/transporter-delete/</link>
+					</highlight>
+				</subItem>
+			</subItems>
+		</item>
+		<item>
+			<title>Admin</title>
+			<link>admin/list/</link>
+			<description>Admin user details</description>
+			<subItems>			
+				<subItem>
+					<title>List</title>
+					<link>admin/list/</link>
+					<description>List admin users</description>
+					<highlight>
+				        <link>admin/update/</link>
+				        <link>admin/delete/</link>
+					</highlight>
+				</subItem>						
+				<subItem>
+					<title>Add new</title>
+					<link>admin/add/</link>
+					<description>Add admin user</description>
+				</subItem>
+				<subItem>
+					<title>My Account</title>
+					<link>admin/account/</link>
+					<description>Admin user account</description>
+				</subItem>			
+				<subItem>
+					<title>Logins</title>
+					<link>admin/logins/</link>
+					<description>Admin logins</description>
+				</subItem>
+			</subItems>
+		</item>
+		<item>
+			<title>User</title>
+			<link>user/list/</link>
+			<description>User details</description>
+			<subItems>			
+				<subItem>
+					<title>List</title>
+					<link>user/list/</link>
+					<description>List admin users</description>
+					<highlight>
+				        <link>user/update/</link>
+				        <link>user/delete/</link>
+					</highlight>
+				</subItem>						
+				<subItem>
+					<title>Add new</title>
+					<link>user/add/</link>
+					<description>Add admin user</description>
+				</subItem>			
+				<subItem>
+					<title>Logins</title>
+					<link>user/logins/</link>
+					<description>User logins</description>
+				</subItem>
+			</subItems>
+		</item>
+	</menu>
 </config>
 </menus>
