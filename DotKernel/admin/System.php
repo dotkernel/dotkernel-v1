@@ -193,10 +193,10 @@ class System
 		}
 		
 		// warning for all folders > 755 	
-		$folderException = $this->config->folders->toArray();	
+		$folderException = $this->config->folders->permission->toArray();	
 		$folders = $this->_listDirectory(APPLICATION_PATH);
 		foreach ($folders as $path)
-		{				
+		{
 			if(!in_array($path,$folderException) && intval(substr(decoct(fileperms($path)),-3)) > 755)
 			{
 				$warnings[] = array('type'=>'change permission to 755', 'description'=>$path);
