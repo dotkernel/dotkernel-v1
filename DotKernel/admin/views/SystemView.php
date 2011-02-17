@@ -54,7 +54,9 @@ class System_View extends View
 		{
 			$this->tpl->setBlock('tpl_main', 'warnings_table', 'warnings_block');
 			$this->tpl->parse('warnings_block', '', true);
-		}else{
+		}
+		else
+		{
 			$this->tpl->setBlock('tpl_main', 'warnings_list', 'warnings_list_block');
 			$warningCount = count($warnings);
 			for ($i = 0; $i < $warningCount; $i++)
