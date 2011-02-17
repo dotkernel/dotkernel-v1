@@ -185,24 +185,27 @@ class System
 				$warnings[] = array('type'=>'not writeable', 'description'=>'Wurfl Cache Folder ' . realpath($wurflInfo['cachePath']));
 			} 
 		}
-		
-		// warning if application.ini is not 644		
-		if(substr(decoct(fileperms(APPLICATION_PATH."/configs/application.ini")),-3) != '644')
-		{//convert the fileperms result from decimal to octal, and take only the last 3 chars
-			$warnings[] = array('type'=>'change permission to 644', 'description'=>'configs/application.ini');
-		}
-		
-		// warning for all folders > 755 	
-		$folderException = $this->config->folders->permission->toArray();	
-		$folders = $this->_listDirectory(APPLICATION_PATH);
-		foreach ($folders as $path)
+		//ignore permission warning if OS is Windows
+		if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') 
 		{
-			if(!in_array($path,$folderException) && intval(substr(decoct(fileperms($path)),-3)) > 755)
+			// warning if application.ini is not 644		
+			if(substr(decoct(fileperms(APPLICATION_PATH."/configs/application.ini")),-3) != '644')
+			{//convert the fileperms result from decimal to octal, and take only the last 3 chars
+				$warnings[] = array('type'=>'change permission to 644', 'description'=>'configs/application.ini');
+			}
+			
+			// warning for all folders > 755 	
+			$folderException = $this->config->folders->permission->toArray();	
+			$folders = $this->_listDirectory(APPLICATION_PATH);
+			foreach ($folders as $path)
 			{
-				$warnings[] = array('type'=>'change permission to 755', 'description'=>$path);
+				if(!in_array($path,$folderException) && intval(substr(decoct(fileperms($path)),-3)) > 755)
+				{
+					$warnings[] = array('type'=>'change permission to 755', 'description'=>$path);
+				}
 			}
 		}
-						
+							
 		// add any other warnings to $warnings here
 		return $warnings;
 	}
