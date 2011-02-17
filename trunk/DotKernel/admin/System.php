@@ -177,16 +177,56 @@ class System
 		if (!file_exists($wurflInfo['cachePath']))
 		{
 			$warnings[] = array('type'=>'please create', 'description'=>'Wurfl Cache Folder ' . $wurflInfo['cachePath']);
-		}else{
-			if (!is_writeable($wurflInfo['cachePath']))
+		}
+		else
+		{
+			if (!is_writable($wurflInfo['cachePath']))
 			{
 				$warnings[] = array('type'=>'not writeable', 'description'=>'Wurfl Cache Folder ' . realpath($wurflInfo['cachePath']));
 			} 
 		}
-				
-		// add any other warnings to $warnings here
 		
+		// warning if application.ini is not 600		
+		if(substr(decoct(fileperms(APPLICATION_PATH."/configs/application.ini")),-3) != '600')
+		{//convert the fileperms result from decimal to octal, and take only the last 3 chars
+			$warnings[] = array('type'=>'change permission to 600', 'description'=>'configs/application.ini');
+		}
+		
+		// warning for all folders > 755 	
+		$folderException = $this->config->folders->toArray();	
+		$folders = $this->_listDirectory(APPLICATION_PATH);
+		foreach ($folders as $path)
+		{				
+			if(!in_array($path,$folderException) && intval(substr(decoct(fileperms($path)),-3)) > 755)
+			{
+				$warnings[] = array('type'=>'change permission to 755', 'description'=>$path);
+			}
+		}
+						
+		// add any other warnings to $warnings here
 		return $warnings;
+	}
+	private function _listDirectory($directory)
+	{
+		$result = array();
+		if ($handle = opendir($directory)) 
+		{
+		   while (false !== ($file = readdir($handle))) 
+		   {
+		       if ($file != "." && $file != ".." && $file != ".svn") 
+			   {	
+			   		$dir = $directory.'/'.$file;
+			   		if(is_dir($dir))
+					{									
+						$result[] = $dir;
+						$list = $this->_listDirectory($dir);
+						$result = array_merge($result, $list);
+					}
+		       }
+		   }
+		   closedir($handle);
+		}
+		return $result;
 	}
 	/**
 	 * Get email transporter by field
