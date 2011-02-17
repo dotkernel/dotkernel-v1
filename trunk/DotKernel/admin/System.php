@@ -186,10 +186,10 @@ class System
 			} 
 		}
 		
-		// warning if application.ini is not 600		
-		if(substr(decoct(fileperms(APPLICATION_PATH."/configs/application.ini")),-3) != '600')
+		// warning if application.ini is not 644		
+		if(substr(decoct(fileperms(APPLICATION_PATH."/configs/application.ini")),-3) != '644')
 		{//convert the fileperms result from decimal to octal, and take only the last 3 chars
-			$warnings[] = array('type'=>'change permission to 600', 'description'=>'configs/application.ini');
+			$warnings[] = array('type'=>'change permission to 644', 'description'=>'configs/application.ini');
 		}
 		
 		// warning for all folders > 755 	
