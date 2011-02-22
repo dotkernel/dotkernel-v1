@@ -188,6 +188,7 @@ class View extends Dot_Template
 									 && $tmpMenuRoute['0'] == $tmpSubmenuRoute['0'])
 							{
 								$this->setVar('TOP_MENU_SEL', '_selected');
+								$this->setVar('CURRENT_MENU_ID', $i);
 							}
 							#highlight link
 							if (array_key_exists('highlight', $v2) && array_key_exists('link', $v2['highlight']))
