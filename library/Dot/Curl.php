@@ -28,7 +28,22 @@ class Dot_Curl
 		'Mozilla/5.0 (Windows; U; Windows NT 5.0; rv:1.7.3) Gecko/20040913 Firefox/0.10',
 		'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)',
 		'Microsoft Internet Explorer/Version (Platform)',
-		'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', 'Googlebot/2.1 (+http://www.googlebot.com/bot.html)',
+		'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/534.21 (KHTML, like Gecko) Chrome/11.0.682.0 Safari/534.21', 
+		'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/534.21 (KHTML, like Gecko) Chrome/11.0.678.0 Safari/534.21', 
+		'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_6; en-US) AppleWebKit/534.20 (KHTML, like Gecko) Chrome/11.0.672.2 Safari/534.20',
+		'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/534.17 (KHTML, like Gecko) Chrome/11.0.655.0 Safari/534.17',
+		'Mozilla/5.0 (Windows; U; Windows NT 6.1; sv-SE) AppleWebKit/533.19.4 (KHTML, like Gecko) Version/5.0.3 Safari/533.19.4',
+		'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-us) AppleWebKit/534.16+ (KHTML, like Gecko) Version/5.0.3 Safari/533.19.4',
+		'Mozilla/9.876 (X11; U; Linux 2.2.12-20 i686, en; rv:2.0) Gecko/25250101 Netscape/5.432b1 (C-MindSpring)'
+	);
+	/**
+	 * Bot user agents, not used yet
+	 * @access public
+	 * @var array
+	 */
+	public $botUserAgents = array(
+		'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', 
+		'Googlebot/2.1 (+http://www.googlebot.com/bot.html)',
 		'msnbot/1.0 (+http://search.msn.com/msnbot.htm)',
 		'Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)'
 	);
@@ -43,7 +58,7 @@ class Dot_Curl
 	 * @access public
 	 * @var bool
 	 */
-	public $useTor = true;
+	public $useTor = false;
 	/**
 	 * Use in case you want to use country proxy feature
 	 * @access public
@@ -61,7 +76,7 @@ class Dot_Curl
 	 * @access public
 	 * @var array
 	 */
-	public $ports = array(9000, 9001, 9002, 9003, 9004, 9005, 9006, 9007, 9008, 9009, 9010, 9011, 9012, 9013, 9014, 9015, 9016, 9017, 9018, 9019, 9020);
+	public $ports = array(9000, 9001, 9002, 9003, 9004, 9005, 9006, 9007, 9008, 9009, 9010);
 	/**
 	 * General settings: sslVerifyPeer
 	 * @access public
@@ -73,7 +88,7 @@ class Dot_Curl
 	 * @access public
 	 * @var bool
 	 */
-	public $header = true;
+	public $header = false;
 	/**
 	 * General settings: returnTransfer
 	 * @access public
@@ -105,17 +120,75 @@ class Dot_Curl
 	 */
 	public $info = array();
 	/**
-	 * Post vars , leave empty if not needed
+	 * Post string, use http_build_query(post array) , leave empty if not needed
+	 * @access public
+	 * @var string
+	 */
+	public $postString = '';
+	/**
+	 * Post strings, use array(http_build_query(post array), http_build_query(post array), ..)
+	 * leave empty if not needed
 	 * @access public
 	 * @var array
 	 */
-	public $postVars = array();
+	public $postStrings = array();
 	/**
 	 * Cookies , leave empty if not needed
 	 * @access public
 	 * @var array
 	 */
 	public $cookies = array();
+	/**
+	 * Cookie file path , example: 'cookies/file.txt'
+	 * @access public
+	 * @var string
+	 */
+	public $cookieFile = '';
+	/**
+	 * Cookie file paths , example: array('cookies/file1.txt', 'cookies/file2.txt', ..)
+	 * @access public
+	 * @var array
+	 */
+	public $cookieFiles = array();
+	/**
+	 * Interface to use (ip) , example: '123.123.123.123'
+	 * @access public
+	 * @var string
+	 */
+	public $interface = '';
+	/**
+	 * Interfaces to use (ip) , example: array('123.123.123.123', '123.123.123.124', ..)
+	 * @access public
+	 * @var array
+	 */
+	public $interfaces = array();
+	/**
+	 * Use $this->writeToFileHandle = fopen(...) to write curl output directly to the file, close files after curl is done
+	 * leave empty if not needed
+	 * @access public
+	 * @var pointer
+	 */
+	public $writeToFileHandle = NULL;
+	/**
+	 * Use $this->writeToFileHandles = array(fopen(...), fopen(...)) to write curl output directly to the files, 
+	 * close files after curl is done , leave empty if not needed
+	 * @access public
+	 * @var array
+	 */
+	public $writeToFileHandles = array();
+	/**
+	 * File size, use it in case connection stopped and file is not complete , leave empty if not needed
+	 * @access public
+	 * @var int
+	 */
+	public $writeToFileRange = 0;
+	/**
+	 * File sizes, use it in case connection stopped and files are not complete , leave empty if not needed
+	 * @access public
+	 * @var int
+	 */
+	public $writeToFileRanges = array();
+	
 	/**
 	 * Set curl options
 	 * @access private
@@ -148,6 +221,11 @@ class Dot_Curl
 		else 
 		{
 			curl_setopt($ch, CURLOPT_USERAGENT, $this->userAgents[rand(0, count($this->userAgents) -1)]);
+		}
+		
+		if ($this->interface != '')
+		{
+			curl_setopt($ch, CURLOPT_INTERFACE, $this->interface);
 		}
 
 		//if useTor is true connection will be done throu tor proxy
@@ -186,12 +264,26 @@ class Dot_Curl
 			foreach($this->cookies as $k=>$v) $cc[] ="$k=$v";
 			curl_setopt ($ch, CURLOPT_COOKIE, implode('; ',$cc));
 		}
-		if(count($this->postVars) > 0)
+		
+		if ($this->cookieFile != '')
+		{
+			curl_setopt ($ch, CURLOPT_COOKIEFILE, $this->cookieFile);
+			curl_setopt ($ch, CURLOPT_COOKIEJAR, $this->cookieFile);
+		}
+		
+		if(trim($this->postString) != '')
 		{
 			curl_setopt ($ch, CURLOPT_POST, 1);
-			curl_setopt ($ch, CURLOPT_POSTFIELDS, $this->postVars);
+			curl_setopt ($ch, CURLOPT_POSTFIELDS, $this->postString);
+		}
+		
+		if($this->writeToFileHandle !== NULL)
+		{
+			if ($this->writeToFileRange != '') curl_setopt ($ch, CURLOPT_RANGE, $this->writeToFileRange);
+			curl_setopt ($ch, CURLOPT_FILE, $this->writeToFileHandle);
 		}
 	}
+	
 	/**
 	 * Fetch multiple urls at once
 	 * @access public
@@ -215,6 +307,11 @@ class Dot_Curl
 				$referer = $referers[$key];
 			}
 			$obj[$key] = curl_init($url);
+			$this->interface = (isset($this->interfaces[$key]))? $this->interfaces[$key] : '';
+			$this->cookieFile = (isset($this->cookieFiles[$key]))? $this->cookieFiles[$key] : '';
+			$this->postString = (isset($this->postStrings[$key]))? $this->postStrings[$key] : '';
+			$this->writeToFileHandle = (isset($this->writeToFileHandles[$key]))? $this->writeToFileHandles[$key] : '';
+			$this->writeToFileRange = (isset($this->writeToFileRanges[$key]))? $this->writeToFileRanges[$key] : '';
 			//set options for each url
 			$this->_setOptions($obj[$key], $url, $referer);
 			//add it to the group
@@ -249,6 +346,7 @@ class Dot_Curl
 		//return the array wth all the results
 		return $htmls;
 	}
+	
 	/**
 	 * Fetch a single url
 	 * @access public
@@ -265,14 +363,12 @@ class Dot_Curl
 
 		$obj = curl_init($url);
 		$this->_setOptions($obj, $url, $referer);
-		if (count($this->errors) <= 0)
+
+		$content = curl_exec($obj);
+		$this->info = curl_getinfo($obj);
+		if (curl_errno($obj) != 0)
 		{
-			$content = curl_exec($obj);
-			$this->info = curl_getinfo($obj);
-			if (curl_errno($obj) != 0)
-			{
-				$this->errors[] = 'Connection problem (DOT CURL ERROR: '.curl_errno($obj).': '.curl_error($obj).')';
-			}
+			$this->errors[] = 'Connection problem (DOT CURL ERROR: '.curl_errno($obj).': '.curl_error($obj).')';
 		}
 		curl_close($obj);
 		return $content;
