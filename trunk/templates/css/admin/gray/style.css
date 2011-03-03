@@ -47,6 +47,7 @@ a#logo{
 .menu_1 li a:hover{
 	color: #DEEEF3;
 	background-color: #6e6e6e;
+	border-bottom: 1px solid #6E6E6E;
 	border-bottom-color: #525252;
 	border-top-color: #888888;
 }
