@@ -46,21 +46,27 @@ a#logo{
 }
 .menu_1 li a:hover{
 	color: #DEEEF3;
-	background-color: #525252;
+	background-color: #6e6e6e;
 	border-bottom-color: #525252;
-	border-top-color: #6d6d6d;
+	border-top-color: #888888;
 }
 .menu_1 .normal_selected a{      
-	color: #ECF5F9;
+	color: #ffffff;
 	background-color: #525252;
 	border-bottom-color: #525252;
 	border-top-color: #6d6d6d;
 }
 .menu2_selected li a{
-	color: #CDCDCD;
+	color: #ffffff;
 }
 .menu2_selected li a:hover{
-	color:#ffffff;
+	color:#B7B7B7;
+}
+.hover1 li a{
+	color:#c0c0c0 !important;
+}
+.hover1 li a:hover{
+	color:#ffffff !important;
 }
 .menu2_selected li.normal_selected a{
 	color: #f6b45e;

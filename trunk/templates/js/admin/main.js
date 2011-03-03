@@ -42,7 +42,7 @@ function ShowHideDiv (id)
  * Show/Hide submenu items
  * @param {Int} id
  */
-function ShowMenuItem(id){
+function ShowMenuItem(id,current){
     for (var i = 0; i < 100; i++) 
 	{
         if (document.getElementById('menu2_' + i)) 
@@ -50,5 +50,13 @@ function ShowMenuItem(id){
             document.getElementById('menu2_' + i).className = 'menu2';
         }
     }
-    document.getElementById('menu2_' + id).className = 'menu2_selected';
+	if(current == '1')
+	{
+		document.getElementById('menu2_' + id).className = 'menu2_selected';
+	}
+	else
+	{
+		document.getElementById('menu2_' + id).className = 'menu2_selected hover1';
+	}
+    
 }
