@@ -29,7 +29,7 @@ class Dot_Filter_Phone extends Dot_Filter
 	/**
 	 * Valid data after validation
 	 * @var array
-	 * @accesss private
+	 * @access private
 	 */
 	private $_data = array();
 	/**

@@ -29,7 +29,7 @@ class Dot_Filter
 	/**
 	 * Filtered data
 	 * @var array
-	 * @accesss private
+	 * @access private
 	 */
 	private $_data = array();
 	/**

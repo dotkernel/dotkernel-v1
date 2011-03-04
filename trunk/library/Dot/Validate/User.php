@@ -37,7 +37,7 @@ class Dot_Validate_User extends Dot_Validate
 	/**
 	 * Valid data after validation
 	 * @var array
-	 * @accesss private
+	 * @access private
 	 */
 	private $_data = array();
 	/**
