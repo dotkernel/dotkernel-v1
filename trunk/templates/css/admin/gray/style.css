@@ -43,6 +43,8 @@ a#logo{
 	background-color: #414141;
 	border-bottom-color: #6d6d6d;
 	border-top-color: #525252;
+	font-size: 12px;
+	text-shadow: #000000 0px 1px;
 }
 .menu_1 li a:hover{
 	color: #DEEEF3;
@@ -58,6 +60,7 @@ a#logo{
 }
 .menu2_selected li a{
 	color: #ffffff;
+	text-transform: uppercase;
 }
 .menu2_selected li a:hover{
 	color:#B7B7B7;

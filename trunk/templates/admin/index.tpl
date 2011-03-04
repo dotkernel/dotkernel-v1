@@ -9,12 +9,14 @@
 	<link rel="stylesheet" href ="{TEMPLATES_URL}/css/admin/style.css" type="text/css" >
 	<link rel="stylesheet" href ="{TEMPLATES_URL}/css/admin/{SKIN}/style.css" type="text/css" >			
 	<script type="text/javascript" src="{SITE_URL}/externals/dojo/dojo.xd.js" parseOnLoad:true, isDebug:false></script>
+	<script type="text/javascript" src="{SITE_URL}/externals/fonts/cufon.js"></script>
+	<script type="text/javascript" src="{SITE_URL}/externals/fonts/Arial_Rounded_MT_Bold_400.font.js"></script>
 	<script type="text/javascript" src="{TEMPLATES_URL}/js/admin/main.js"></script>
 </head>
 <body class="tundra">
 	<div class="wrapper">
 		<div class="header clearfix">
-			<a href="{SITE_URL}/admin/" id="logo">{SITE_NAME}</a>
+			<a href="{SITE_URL}/admin/" id="logo"><h6>{SITE_NAME}</h6></a>
 			<div class="top_user_menu clearfix">{INFO_BAR}</div>
 			{MENU_1}
 		</div>
