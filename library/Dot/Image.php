@@ -22,13 +22,13 @@ class Dot_Image
 {	
 	/**
 	 * Image filename
-	 * @var
+	 * @var string
 	 * @access public	 
 	 */
 	public $source = '';
 	/**
 	 * New image, after transformation
-	 * @var
+	 * @var string
 	 * @access public	 
 	 */
 	public $destination = '';
