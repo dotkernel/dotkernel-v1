@@ -51,10 +51,10 @@ a#logo{
 	border-top: 1px solid #759C70;
 }
 .menu_1 .normal_selected a{
-	color: #FFFFFF;
-	background-color: #537948;
-	border-bottom: 1px solid #537948;
-	border-top: 1px solid #759C70;
+	color: #FFFFFF !important;
+	background-color: #537948 !important;
+	border-bottom: 1px solid #537948 !important;
+	border-top: 1px solid #759C70 !important;
 }
 .menu2_selected li a{
 	color: #f3d498;
