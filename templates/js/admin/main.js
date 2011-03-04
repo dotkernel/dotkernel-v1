@@ -1,40 +1,40 @@
 /**
  * Apply font on logo text that has h6
  */
-Cufon.replace('h6', 
+Cufon.replace('h6',
 	{
-	    hover: true,
-	    hoverables: 
+		hover: true,
+		hoverables:
 		{
-	        h6: true
-	    },
-	    textShadow: '#ffffff 0px -1px, #000000 0px 1px',
+			h6: true
+		},
+		textShadow: '#ffffff 0px -1px, #000000 0px 1px',
 	});
 
 /**
  * Show Tab in admin menu
  * @param {String} id
  */
-function ShowTab (id) 
-{ 
-   var className = document.getElementById(id).className; 
-   if (className != 'selected') 
-   { 
-        document.getElementById(id).className = "hover_list"; 
-   } 
-} 
+function ShowTab (id)
+{
+	var className = document.getElementById(id).className;
+	if (className != 'selected')
+	{
+		document.getElementById(id).className = "hover_list";
+	}
+}
 /**
  * Hide Tab in admin menu
  * @param {String} id
  */
-function HideTab (id) 
-{ 
-   var className = document.getElementById(id).className; 
-   if (className != 'selected') 
-   { 
-        document.getElementById(id).className = "normal"; 
-   } 
-} 
+function HideTab (id)
+{
+	var className = document.getElementById(id).className;
+	if (className != 'selected')
+	{
+		document.getElementById(id).className = "normal";
+	}
+}
 /**
  * Show/Hide div ID
  * @param {String} id
@@ -46,7 +46,7 @@ function ShowHideDiv (id)
 	{
 		document.getElementById(id).style.display = '';
 	}
-	else 
+	else
 	{
 		document.getElementById(id).style.display = 'none';
 	}
@@ -55,15 +55,16 @@ function ShowHideDiv (id)
  * Show/Hide submenu items
  * @param {Int} id
  */
-function ShowMenuItem(id,current){
-    for (var i = 0; i < 100; i++) 
+function ShowMenuItem(id){
+	for (var i = 0; i < 100; i++)
 	{
-        if (document.getElementById('menu2_' + i)) 
+		if (document.getElementById('menu2_' + i))
 		{
-            document.getElementById('menu2_' + i).className = 'menu2';
-        }
-    }
-	if(current == '1')
+			document.getElementById('menu2_' + i).className = 'menu2';
+		}
+	}
+	// don't add the hover class if it's the menu item of the current page
+	if(id == currentMenuId)
 	{
 		document.getElementById('menu2_' + id).className = 'menu2_selected';
 	}
@@ -71,5 +72,4 @@ function ShowMenuItem(id,current){
 	{
 		document.getElementById('menu2_' + id).className = 'menu2_selected hover1';
 	}
-    
 }
