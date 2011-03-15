@@ -50,10 +50,10 @@
 			<failedLogin>
 				<subject>Admin Failed Login !</subject>
 				<message>Someone tried to login in admin with wrong login credentials.
-				Date: %DATE%
-				Country: %COUNTRY%
-				IP: %IP%
-				User Agent: %USERAGENT%
+Date: %DATE%
+Country: %COUNTRY%
+IP: %IP%
+User Agent: %USERAGENT%
 				</message>
 			</failedLogin> 
 		</variable>
