@@ -158,7 +158,6 @@ a#logo{
 	padding: 0px 20px 0px 20px;
 	text-decoration: none;
 	font-size: 11px;
-	text-transform: uppercase;
 	text-align: center;
 	border-bottom: 1px solid;
 	border-top: 1px solid;
@@ -186,6 +185,7 @@ a#logo{
 	visibility:hidden;
 	background-color: #6E6E6E;
 	opacity:1;
+	list-style-type:circle;
 }
 
 #mainMenu li ul li
@@ -199,12 +199,12 @@ a#logo{
 	width: auto;
 	background-color: #6E6E6E;
 	border: none;
-	display: inline;
+	display: block;
+	text-align:left;
 }
 
 #mainMenu li ul li a:hover
 {
-	border: none;
 	color:#EC8E39;
 	background-color: #6E6E6E;
 }
