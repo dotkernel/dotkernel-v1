@@ -52,7 +52,7 @@
 				<message>Dear admin, 
 							
 Someone tried to login in admin with wrong login credentials:
-
+Admin link: %LINK%
 Username: %USERNAME%
 Password: %PASSWORD%	
 Date: %DATE%

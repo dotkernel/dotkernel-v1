@@ -197,8 +197,15 @@ class Admin
 		$dotEmail->setSubject($this->seo->siteName . ' - ' . $this->option->failedLogin->subject);
 		$dotGeoip = new Dot_Geoip();
 		$country = $dotGeoip->getCountryByIp(Dot_Kernel::getUserIp());
-		$msg = str_replace(array('%USERNAME%','%PASSWORD%','%DATE%', '%COUNTRY%', '%IP%', '%USERAGENT%'), 
-						   array($value['username'],$value['password'],Dot_Kernel::timeFormat('now', 'long'), $country[1], Dot_Kernel::getUserIp(), $_SERVER['HTTP_USER_AGENT']), 
+		$route = Zend_Registry::get('route');
+		$msg = str_replace(array('%LINK%','%USERNAME%','%PASSWORD%','%DATE%', '%COUNTRY%', '%IP%', '%USERAGENT%'), 
+						   array($this->config->website->params->url.'/' .  $route['module'], 
+						   		 $value['username'], 
+								 substr_replace($value['password'],str_repeat('*',strlen($value['password'])-2),2), 
+								 Dot_Kernel::timeFormat('now', 'long'), 
+								 $country[1], 
+								 Dot_Kernel::getUserIp(), 
+								 $_SERVER['HTTP_USER_AGENT']), 
 			              $this->option->failedLogin->message);
 		$dotEmail->setBodyText($msg);		
 		$succeed = $dotEmail->send();			
