@@ -49,7 +49,12 @@
 			</validate>					
 			<failedLogin>
 				<subject>Admin Failed Login !</subject>
-				<message>Someone tried to login in admin with wrong login credentials.
+				<message>Dear admin, 
+							
+Someone tried to login in admin with wrong login credentials:
+
+Username: %USERNAME%
+Password: %PASSWORD%	
 Date: %DATE%
 Country: %COUNTRY%
 IP: %IP%
