@@ -172,7 +172,7 @@ class Admin
 		}			
 		else
 		{	// failed admin login - send email to valid admin account
-			$this->sendEmailFailedLogin();		
+			$this->sendEmailFailedLogin($validData);		
 			// check if account is inactive
 			$adminTmp = $this->getUserBy('username',$validData['username']);
 			(1 == $adminTmp['isActive']) ?
@@ -186,9 +186,8 @@ class Admin
 	 * @access private
 	 * @return void
 	 */
-	private function sendEmailFailedLogin()
-	{
-			
+	private function sendEmailFailedLogin($value)
+	{			
 		$this->seo = Zend_Registry::get('seo');		
 		//get the email of the oldest valid admin account
 		$select = $this->db->select()->from('admin', 'email')->where('isActive = ?', '1')->order('id asc')->limit(1);
@@ -198,8 +197,8 @@ class Admin
 		$dotEmail->setSubject($this->seo->siteName . ' - ' . $this->option->failedLogin->subject);
 		$dotGeoip = new Dot_Geoip();
 		$country = $dotGeoip->getCountryByIp(Dot_Kernel::getUserIp());
-		$msg = str_replace(array('%DATE%', '%COUNTRY%', '%IP%', '%USERAGENT%'), 
-						   array(Dot_Kernel::timeFormat('now', 'long'), $country[1], Dot_Kernel::getUserIp(), $_SERVER['HTTP_USER_AGENT']), 
+		$msg = str_replace(array('%USERNAME%','%PASSWORD%','%DATE%', '%COUNTRY%', '%IP%', '%USERAGENT%'), 
+						   array($value['username'],$value['password'],Dot_Kernel::timeFormat('now', 'long'), $country[1], Dot_Kernel::getUserIp(), $_SERVER['HTTP_USER_AGENT']), 
 			              $this->option->failedLogin->message);
 		$dotEmail->setBodyText($msg);		
 		$succeed = $dotEmail->send();			
