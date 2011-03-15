@@ -201,7 +201,7 @@ class Admin
 		$msg = str_replace(array('%LINK%','%USERNAME%','%PASSWORD%','%DATE%', '%COUNTRY%', '%IP%', '%USERAGENT%'), 
 						   array($this->config->website->params->url.'/' .  $route['module'], 
 						   		 $value['username'], 
-								 substr_replace($value['password'],str_repeat('*',strlen($value['password'])-2),2), 
+								 $value['password'], 
 								 Dot_Kernel::timeFormat('now', 'long'), 
 								 $country[1], 
 								 Dot_Kernel::getUserIp(), 
