@@ -38,14 +38,7 @@ a#logo{
 .top_user_menu a{
 	color: #DBDBDB;
 }
-.menu_1 li a{
-	color: #B7B7B7;
-	background-color: #414141;
-	border-bottom-color: #6d6d6d;
-	border-top-color: #525252;
-	font-size: 12px;
-	text-shadow: #000000 0px 1px;
-}
+/*
 .menu_1 li a:hover{
 	color: #DEEEF3;
 	background-color: #6e6e6e;
@@ -74,6 +67,7 @@ a#logo{
 .menu2_selected li.normal_selected a{
 	color: #f6b45e;
 }
+*/
 .content {
 	color:#1E1E1E;
 }

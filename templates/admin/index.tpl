@@ -12,13 +12,14 @@
 	<script type="text/javascript" src="{SITE_URL}/externals/fonts/cufon.js"></script>
 	<script type="text/javascript" src="{SITE_URL}/externals/fonts/Arial_Rounded_MT_Bold_400.font.js"></script>
 	<script type="text/javascript" src="{TEMPLATES_URL}/js/admin/main.js"></script>
+	<script type="text/javascript" src="{SITE_URL}/externals/jquery/jquery-1.5.min.js"></script>
 </head>
 <body class="tundra">
 	<div class="wrapper">
 		<div class="header clearfix">
 			<a href="{SITE_URL}/admin/" id="logo"><h6>{SITE_NAME}</h6></a>
 			<div class="top_user_menu clearfix">{INFO_BAR}</div>
-			{MENU_1}
+			{MENU}
 		</div>
 		<div class="content clearfix">
 			<h1>{PAGE_CONTENT_TITLE}</h1>
