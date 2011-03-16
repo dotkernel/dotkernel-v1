@@ -176,7 +176,7 @@ a#logo{
 }
 
 #mainMenu li a.selected{
-	color: #fff !important;
+	color:#F0A54F !important;
 }
 
 #mainMenu li a:hover, #mainMenu li a.menuHover
@@ -213,7 +213,7 @@ a#logo{
 
 #mainMenu li ul li a
 {
-	color:#ccc !important;
+	color:#fff !important;
 	width: auto;
 	background-color: #777777;
 	border: none;
@@ -224,11 +224,16 @@ a#logo{
 	
 }
 
+#mainMenu li ul li a.selected{
+	color:#F0A54F !important;
+}
+
 #mainMenu li ul li a:hover
 {
 	color:#F0A54F !important;
 	background-color: #777;
 	border:none !important;
+	/*background-image:url('images/breadcrumb_arrow.png') left center no-repeat;*/
 }
 /*** breadcrumbs ***/
 
@@ -244,6 +249,10 @@ a#logo{
 	height: 36px;
 	line-height: 36px;
 	text-align:left;
+}
+
+#breadcrumbs li:first-child a{
+	color:#F0A54F !important;
 }
 
 #breadcrumbs li a
