@@ -2,6 +2,7 @@
 "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
+	<link  href="http://fonts.googleapis.com/css?family=Cabin:bold" rel="stylesheet" type="text/css" >
 	<title>Admin - {PAGE_TITLE}</title>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" >
 	<meta http-equiv="Content-Style-Type" content="text/css" >
@@ -9,10 +10,8 @@
 	<link rel="stylesheet" href ="{TEMPLATES_URL}/css/admin/style.css" type="text/css" >
 	<link rel="stylesheet" href ="{TEMPLATES_URL}/css/admin/{SKIN}/style.css" type="text/css" >			
 	<script type="text/javascript" src="{SITE_URL}/externals/dojo/dojo.xd.js" parseOnLoad:true, isDebug:false></script>
-	<script type="text/javascript" src="{SITE_URL}/externals/fonts/cufon.js"></script>
-	<script type="text/javascript" src="{SITE_URL}/externals/fonts/Myriad_Pro_600.font.js"></script>
-	<script type="text/javascript" src="{TEMPLATES_URL}/js/admin/main.js"></script>
 	<script type="text/javascript" src="{SITE_URL}/externals/jquery/jquery-1.5.min.js"></script>
+	<script type="text/javascript" src="{TEMPLATES_URL}/js/admin/main.js"></script>
 </head>
 <body class="tundra">
 	<div class="wrapper">
