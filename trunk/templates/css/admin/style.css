@@ -12,6 +12,8 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	background: transparent;
 }
 h6{
+	font-family: 'Cabin', serif;
+	font-weight:bolder;
 	font-size:28px;
 }
 body {
