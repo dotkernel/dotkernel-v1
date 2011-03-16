@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href ="{TEMPLATES_URL}/css/admin/{SKIN}/style.css" type="text/css" >			
 	<script type="text/javascript" src="{SITE_URL}/externals/dojo/dojo.xd.js" parseOnLoad:true, isDebug:false></script>
 	<script type="text/javascript" src="{SITE_URL}/externals/fonts/cufon.js"></script>
-	<script type="text/javascript" src="{SITE_URL}/externals/fonts/Arial_Rounded_MT_Bold_400.font.js"></script>
+	<script type="text/javascript" src="{SITE_URL}/externals/fonts/Myriad_Pro_600.font.js"></script>
 	<script type="text/javascript" src="{TEMPLATES_URL}/js/admin/main.js"></script>
 	<script type="text/javascript" src="{SITE_URL}/externals/jquery/jquery-1.5.min.js"></script>
 </head>

@@ -10,6 +10,12 @@
 		</li>
 	<!-- END menu_list -->
 </ul>
+<div class="clearfix"></div>
+<ul id="breadcrumbs">
+	<li><a href="#">Dashboard</a></li>
+	<li><img src="{SITE_URL}/templates/css/admin/images/breadcrumb_arrow.png"/></li>
+	<li><a href="#">Home</a></li>
+</ul>
 <script>
 /*** menu ***/
 (function(){
@@ -20,8 +26,7 @@
 	function closeMenu(){
 		if(ddmenuitem){
 			ddmenuitem.css('visibility', 'hidden');
-			//ddmenuitem.stop().fadeOut(100);
-			ddmenuitem.parent().removeClass('menuHover');
+			ddmenuitem.parent().children().first().removeClass('menuHover');
 		}
 	}
 
@@ -39,8 +44,7 @@
 				cancelTimer();
 				closeMenu();
 				ddmenuitem = $(this).find('ul').eq(0).css('visibility', 'visible');
-				//ddmenuitem = $(this).find('ul').eq(0).stop().fadeIn(100);
-				$(this).addClass('menuHover');
+				$(this).children().first().addClass('menuHover');
 			})
 			.bind('mouseout',  function(){
 				closetimer = window.setTimeout(closeMenu, timeout);
