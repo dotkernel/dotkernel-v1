@@ -4,7 +4,7 @@
 			<a href="{MENU_LINK}" title="{MENU_DESCRIPTION}"{MENU_SELECTED}>{MENU_TITLE}</a>
 			<ul>
 				<!-- BEGIN submenu_list -->
-					<li><a href="{SUBMENU_LINK}" title="{MENU_DESCRIPTION}"{SUBMENU_SELECTED}>{SUBMENU_TITLE}</a></li>
+					<li><a href="{SUBMENU_LINK}" title="{SUBMENU_DESCRIPTION}"{SUBMENU_SELECTED}>{SUBMENU_TITLE}</a></li>
 				<!-- END submenu_list -->				
 			</ul>
 		</li>
