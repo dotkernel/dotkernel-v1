@@ -116,6 +116,8 @@ class View extends Dot_Template
 
 			foreach ($menus as $menu)
 			{
+				// check wether the text following the ">" in the breadcrumb has been set
+				$breadcrumbItem2Set = false;
 				//don't display the menu if display is set to 0, or it doesn't have the ID of 1
 				if(0 == $menu['display']) continue;
 				if(1 != $menu['id']) continue;
@@ -164,6 +166,7 @@ class View extends Dot_Template
 							$this->setVar('BREADCRUMB_TITLE_2', $subMenuItem['title']);
 							$this->setVar('BREADCRUMB_LINK_2', $this->config->website->params->url.'/'.$this->route['module'].'/'.$subMenuItem['link']);
 							$this->setVar('BREADCRUMB_DESCRIPTION_2', $subMenuItem['description']);
+							$breadcrumbItem2Set = true;
 						}else{
 							$this->setVar('SUBMENU_SELECTED', '');
 						}
@@ -173,6 +176,15 @@ class View extends Dot_Template
 					}
 					$this->parse('menu_list_block', 'menu_list',true);
 					$this->parse('submenu_list_block', '');
+				}
+
+				if (!$breadcrumbItem2Set)
+				{
+					// the second segment of the breadcrumb hasn't been set
+					// this means that the action that is requested doesn't exist in menu.xml
+					// in that case use the action name as the text (replace dashes with spaces and use ucwords)
+					$this->setVar('BREADCRUMB_TITLE_2', ucwords(str_replace('-', ' ', $this->route['action'])));
+					$this->setVar('BREADCRUMB_LINK_2', "");
 				}
 			}
 		}
