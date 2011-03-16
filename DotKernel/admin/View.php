@@ -139,6 +139,17 @@ class View extends Dot_Template
 					$this->setVar('MENU_LINK', $this->config->website->params->url.'/'.$this->route['module'].'/'.$menuItem['link']);
 					$this->setVar('MENU_DESCRIPTION', $menuItem['description']);
 
+					if (false !== stripos($menuItem['link'], $this->route['controller'].'/'))
+					{	//if current menu is the current viewed page
+						$this->setVar('MENU_SELECTED', ' class="selected"');
+						$this->setVar('BREADCRUMB_TITLE_1', $menuItem['title']);
+						$this->setVar('BREADCRUMB_LINK_1', $this->config->website->params->url.'/'.$this->route['module'].'/'.$menuItem['link']);
+						$this->setVar('BREADCRUMB_DESCRIPTION_1', $menuItem['description']);
+					}else{
+						$this->setVar('MENU_SELECTED', '');
+					}
+					
+
 					$subItems = $menuItem['subItems']['subItem'];
 
 					foreach ($subItems as $subMenuItem)
@@ -146,6 +157,18 @@ class View extends Dot_Template
 						$this->setVar('SUBMENU_TITLE', $subMenuItem['title']);
 						$this->setVar('SUBMENU_LINK', $this->config->website->params->url.'/'.$this->route['module'].'/'.$subMenuItem['link']);
 						$this->setVar('SUBMENU_DESCRIPTION', $subMenuItem['description']);
+
+						if (false !== stripos($subMenuItem['link'], $this->route['controller'].'/'.$this->route['action'].'/'))
+						{	//if current submenu is the current viewed page
+							$this->setVar('SUBMENU_SELECTED', ' class="selected"');
+							$this->setVar('BREADCRUMB_TITLE_2', $subMenuItem['title']);
+							$this->setVar('BREADCRUMB_LINK_2', $this->config->website->params->url.'/'.$this->route['module'].'/'.$subMenuItem['link']);
+							$this->setVar('BREADCRUMB_DESCRIPTION_2', $subMenuItem['description']);
+						}else{
+							$this->setVar('SUBMENU_SELECTED', '');
+						}
+
+
 						$this->parse('submenu_list_block', 'submenu_list',true);
 					}
 					$this->parse('menu_list_block', 'menu_list',true);
