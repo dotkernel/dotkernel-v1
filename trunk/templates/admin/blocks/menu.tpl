@@ -14,5 +14,5 @@
 <ul id="breadcrumbs">
 	<li><a href="{BREADCRUMB_LINK_1}" title="{BREADCRUMB_DESCRIPTION_1}">{BREADCRUMB_TITLE_1}</a></li>
 	<li><img src="{SITE_URL}/templates/css/admin/images/breadcrumb_arrow.png"/></li>
-	<li><a href="{BREADCRUMB_LINK_1}" title="{BREADCRUMB_DESCRIPTION_1}">{BREADCRUMB_TITLE_2}</a></li>
+	<li><a href="{BREADCRUMB_LINK_2}" title="{BREADCRUMB_DESCRIPTION_2}">{BREADCRUMB_TITLE_2}</a></li>
 </ul>
