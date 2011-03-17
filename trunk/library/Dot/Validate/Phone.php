@@ -129,7 +129,7 @@ class Dot_Validate_Phone extends Dot_Validate
 		{
 			$allowKey = key($this->_options['allow']);
 			$phoneAllowVar = '_'.$allowKey; //  "_area" used below as $this->_area
-			$conditionArea = ' && '.in_array($this->$phoneAllowVar, $this->_options['allow'][$allowKey]);
+			$conditionArea = in_array($this->$phoneAllowVar, $this->_options['allow'][$allowKey]);
 		}
 		if(is_array($this->_options['deny']))
 		{
