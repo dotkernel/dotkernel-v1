@@ -79,10 +79,13 @@ $registry->settings = $settings;
 Dot_Settings::setPhpSettings($config->phpSettings->toArray());
 
 // Start Index Controller
-$requestRaw = explode('/', 
-					  trim(substr($_SERVER['REQUEST_URI'], 
-					  strlen(dirname($_SERVER['PHP_SELF']))), '/'));
-					  
+
+$realRequest = substr($_SERVER['REQUEST_URI'], strlen(dirname($_SERVER['PHP_SELF'])));
+$getRequest = '?' . http_build_query($_GET);
+$tmpRequest = str_replace($getRequest, '', $realRequest);
+// remove the GET param from url - not to take in consideration when spliting the url request
+// into module - controller - action 
+$requestRaw = explode('/', trim($tmpRequest, '/'));
 
 // We are in frontend or in other module ? Prebuilt modules: frontend, admin, rss, ...
 $requestModule = 'frontend';
