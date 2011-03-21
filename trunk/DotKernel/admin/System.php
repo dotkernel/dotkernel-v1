@@ -118,6 +118,21 @@ class System
 			return $hostName;
 	}
 	/**
+	 * Get information about APC
+	 * Returns an array with the following elements:
+	 *    version: a string with the version of APC that is currently installed or an empty string if it's not installed
+	 *    enabled: boolean
+	 * @access public
+	 * @return array
+	 */
+	public function getAPCInfo()
+	{
+		$result = array();
+		$result["version"] = (phpversion('apc')===FALSE) ? "" : phpversion('apc');
+		$result["enabled"] = (function_exists('apc_cache_info') && (@apc_cache_info() !== FALSE));
+		return $result;
+	}
+	/**
 	 * Get information about the Wurfl library installed
 	 * Returns an array with the following elements:
 	 *    cacheBuilt: the date the last time the cache was manually built,

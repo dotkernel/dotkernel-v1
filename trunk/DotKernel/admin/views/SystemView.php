@@ -34,18 +34,26 @@ class System_View extends View
 	 * @access public
 	 * @param string $templateFile
 	 * @param string $mysqlVersion
+	 * @param string $apcInfo
 	 * @param array $geoIpVersion
 	 * @param array $wurflInfo
 	 * @param array $warnings
 	 * @return void
 	 */
-	public function dashboard($templateFile, $mysqlVersion, $geoIpVersion, $wurflInfo, $warnings)
+	public function dashboard($templateFile, $mysqlVersion, $apcInfo, $geoIpVersion, $wurflInfo, $warnings)
 	{
 		$this->tpl->setFile('tpl_main', 'system/' . $templateFile . '.tpl');
 		// system overview
 		$this->tpl->setVar('HOSTNAME' , System::getHostname());
 		$this->tpl->setVar('MYSQL',$mysqlVersion);
 		$this->tpl->setVar('PHP',phpversion());
+		$this->tpl->setVar('APCVERSION', $apcInfo['version']);
+		if ($apcInfo['version'] == TRUE)
+		{
+			$this->tpl->setVar('APCSTATUS', 'enabled');
+		}else{
+			$this->tpl->setVar('APCSTATUS', 'disabled');
+		}
 		$this->tpl->setVar('PHPAPI',php_sapi_name());
 		$this->tpl->setVar('ZFVERSION', Zend_Version::VERSION);
 		
@@ -172,6 +180,15 @@ class System_View extends View
 		$phpBody = preg_replace('#class="v"#', 'class="row1"', $phpBody);
 
 		$this->tpl->setVar("PHPINFO", $phpBody);
+	}
+	/**
+	 * Display the apc.php page
+	 * @access public
+	 * @return void
+	 */
+	public function showAPCInfo()
+	{
+		$this->tpl->setFile('tpl_main', 'system/apcinfo.tpl');
 	}
 	/**
 	 * List the email transporter

@@ -21,12 +21,13 @@ $systemModel = new System();
 $pageTitle = $option->pageTitle->action->{$registry->route['action']};
 switch ($registry->route['action'])
 {
-	case 'dashboard':		
+	case 'dashboard':
 		$mysqlVersion = $systemModel->getMysqlVersion();
 		$geoIpVersion = $systemModel->getGeoIpVersion();
 		$wurflInfo = $systemModel->getWurflInfo();
 		$warnings = $systemModel->getWarnings($wurflInfo);
-		$systemView->dashboard('dashboard', $mysqlVersion, $geoIpVersion, $wurflInfo, $warnings);
+		$apcInfo = $systemModel->getAPCInfo();
+		$systemView->dashboard('dashboard', $mysqlVersion, $apcInfo, $geoIpVersion, $wurflInfo, $warnings);
 	break;
 	case 'settings':
 		// list settings values
@@ -84,6 +85,10 @@ switch ($registry->route['action'])
 	case 'phpinfo':
 		// display phpinfo()
 		$systemView->showPHPInfo('phpinfo');
+	break;
+	case 'apc-info':
+		// display apc.php
+		$systemView->showAPCInfo();
 	break;
 	case 'transporter-list':
 		$page = (isset($request['page']) && $request['page'] > 0) ? $request['page'] : 1;
