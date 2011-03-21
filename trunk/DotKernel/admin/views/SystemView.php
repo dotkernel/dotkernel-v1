@@ -35,6 +35,8 @@ class System_View extends View
 	 * @param string $templateFile
 	 * @param string $mysqlVersion
 	 * @param array $geoIpVersion
+	 * @param array $wurflInfo
+	 * @param array $warnings
 	 * @return void
 	 */
 	public function dashboard($templateFile, $mysqlVersion, $geoIpVersion, $wurflInfo, $warnings)
