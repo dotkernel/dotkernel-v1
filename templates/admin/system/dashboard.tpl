@@ -18,11 +18,15 @@
 		<tr>
 			<td class="row2"><b>PHP</b></td>
 			<td class="row1">{PHP} ({PHPAPI}) &nbsp;&nbsp;[ <a href="{SITE_URL}/admin/system/phpinfo">PHP Info</a> ]</td>
-		</tr>	
+		</tr>
+		<tr>
+			<td class="row2"><b>APC</b></td>
+			<td class="row1">{APCVERSION} ({APCSTATUS}) &nbsp;&nbsp;[ <a href="{SITE_URL}/admin/system/apc-info/">APC Info</a> ]</td>
+		</tr>
 		<tr>
 			<td class="row2"><b>MYSQL</b></td>
 			<td class="row1">MYSQL {MYSQL}</td>
-		</tr>			
+		</tr>
 		<tr>
 			<td class="row2 last_td"><b>Zend Framework</b></td>
 			<td class="row1 last_td"> {ZFVERSION}</td>

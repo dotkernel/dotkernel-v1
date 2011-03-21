@@ -24,6 +24,11 @@
 					<description>Admin settings</description>
 				</subItem>
 				<subItem>
+					<title>APC Info</title>
+					<link>system/apc-info/</link>
+					<description>APC Control Panel</description>
+				</subItem>
+				<subItem>
 					<title>Email Transporter</title>
 					<link>system/transporter-list/</link>
 					<description>Admin settings</description>
