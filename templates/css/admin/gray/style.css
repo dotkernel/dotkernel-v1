@@ -1,6 +1,5 @@
 body{
 	background: #F9F9F9 url('images/body_bg.png') repeat-x left top;
-	
 }
 h1{
 	color: #555555;
@@ -38,36 +37,20 @@ a#logo{
 .top_user_menu a{
 	color: #DBDBDB;
 }
-/*
-.menu_1 li a:hover{
-	color: #DEEEF3;
-	background-color: #6e6e6e;
-	border-bottom: 1px solid #6E6E6E;
-	border-top-color: #888888;
+/*** menu ***/
+#mainMenu li ul li a{
+	background: url('images/dropdown_bullets.png') 10px 13px no-repeat;
 }
-.menu_1 .normal_selected a{      
-	color: #ffffff !important;
-	background-color: #525252 !important;
-	border-bottom-color: #525252 !important;
-	border-top-color: #6d6d6d !important;
+
+#mainMenu li ul li a:hover, #mainMenu li ul li a.selected{
+	background: url('images/dropdown_bullets.png') 10px -27px no-repeat;
 }
-.menu2_selected li a{
-	color: #ffffff;
-	text-transform: uppercase;
+
+/*** breadcrumbs ***/
+#breadcrumbs li:first-child{
+	background:	url('images/breadcrumb_arrow.png') right center no-repeat;
 }
-.menu2_selected li a:hover{
-	color:#B7B7B7;
-}
-.hover1 li a{
-	color:#c0c0c0 !important;
-}
-.hover1 li a:hover{
-	color:#ffffff !important;
-}
-.menu2_selected li.normal_selected a{
-	color: #f6b45e;
-}
-*/
+
 .content {
 	color:#1E1E1E;
 }
