@@ -1,9 +1,9 @@
-<script type="text/javascript" src="{SITE_URL}/externals/dojo/dojo.xd.js" djConfig="parseOnLoad: true"></script>
 <script type="text/javascript" src="{TEMPLATES_URL}/js/admin/admin.js"></script>
  <script>
         dojo.require("dijit.Tooltip");
         dojo.require("dijit.form.Button");    
-        dojo.require("dijit.form.DateTextBox"); 		             
+        dojo.require("dijit.form.DateTextBox");
+        dojo.require("dojo.date.locale"); 		             
 </script>
 	
 <div id="adminList">	
@@ -12,7 +12,7 @@
 			<td >
 				<form action="{FORM_ACTION}" method="post" name="logins">
 				  Filter by browser:&nbsp;
-					<select name="browser" id="browser" onchange="javascript: adminLogins('{SITE_URL}{FILTER_URL}',1, this.value, dijit.byId('filterDate').attr('value'));">
+					<select name="browser" id="browser" onchange="javascript: adminLogins('{SITE_URL}{FILTER_URL}',1, this.value, dijit.byId('filterDate').value);">
 						<option value=""> - no filter - </option>
 						<!-- BEGIN browser -->
 						<option value="{BROWSERNAME}" {BROWSERSEL}> {BROWSERNAME}
