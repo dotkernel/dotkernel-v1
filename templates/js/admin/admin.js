@@ -42,7 +42,6 @@ function adminLogins(siteUrl, page, browser, loginDate)
 {
 	var dateLogin = ''	
 	if (loginDate != null) {
-		dojo.require("dojo.date.locale");
 		dateLogin = dojo.date.locale.format(loginDate, {
 			selector: "date",
 			datePattern: "yyyy-MM-dd"
