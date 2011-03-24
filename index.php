@@ -50,13 +50,14 @@ $zend_loader->registerNamespace('Dot_');
 
 // initialize the DotKernel Enviromnment
 $registry = Dot_Kernel::initialize();
-
+$registry->startTime = $startTime;
 // Pass controll to the controller
-//Dot_kernel::gallop();
-
 /*
- * From this point , the control is taken by the Front Controller
- * call the Front Controller specific file, but check first if it exists 
- */
-$frontControllerPath = CONTROLLERS_PATH.'/'.$requestModule.'/'.'IndexController.php';
-!file_exists($frontControllerPath) ?  Dot_Kernel::pageNotFound() :  require($frontControllerPath);
+                .''
+      ._.-.___.' (`\
+     //(        ( `'
+    '/ )\ ).__. )
+    ' <' `\ ._/'\
+       `   \     \
+*/
+Dot_Kernel::gallop($registry);

@@ -24,7 +24,7 @@ switch ($registry->route['action'])
 {
 	case 'list':
 		// list users
-		$page = (isset($request['page']) && $request['page'] > 0) ? $request['page'] : 1;
+		$page = (isset($registry->request['page']) && $registry->request['page'] > 0) ? $registry->request['page'] : 1;
 		$users = $userModel->getUserList($page);		
 		$userView->listUser('list', $users, $page);		
 	break;
@@ -54,15 +54,15 @@ switch ($registry->route['action'])
 			{
 				// no error - then add user
 				$userModel->addUser($dotValidateUser->getData());				
-				$session->message['txt'] = $option->infoMessage->accountAdd;
-				$session->message['type'] = 'info';
-				header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/list/');
+				$registry->session->message['txt'] = $option->infoMessage->accountAdd;
+				$registry->session->message['type'] = 'info';
+				header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/list/');
 				exit;					
 			}
 			else
 			{				
-				$session->message['txt'] = $dotValidateUser->getError();
-				$session->message['type'] = 'error';
+				$registry->session->message['txt'] = $dotValidateUser->getError();
+				$registry->session->message['type'] = 'error';
 			}
 			$data = $dotValidateUser->getData();		
 		}
@@ -87,25 +87,25 @@ switch ($registry->route['action'])
 												'password2' =>  $_POST['password2']
 											   )
 						  );
-			$dotValidateUser = new Dot_Validate_User(array('who' => 'user', 'action' => 'update', 'values' => $values, 'userId' => $request['id']));
+			$dotValidateUser = new Dot_Validate_User(array('who' => 'user', 'action' => 'update', 'values' => $values, 'userId' => $registry->request['id']));
 			if($dotValidateUser->isValid())			
 			{
 				// no error - then update user
 				$data = $dotValidateUser->getData();
-				$data['id'] = $request['id'];				
+				$data['id'] = $registry->request['id'];				
 				$userModel->updateUser($data);
-				$session->message['txt'] = $option->infoMessage->accountUpdate;
-				$session->message['type'] = 'info';
-				header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/list/');
+				$registry->session->message['txt'] = $option->infoMessage->accountUpdate;
+				$registry->session->message['type'] = 'info';
+				header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/list/');
 				exit;				
 			}
 			else
 			{
-				$session->message['txt'] = $dotValidateUser->getError();
-				$session->message['type'] = 'error';
+				$registry->session->message['txt'] = $dotValidateUser->getError();
+				$registry->session->message['type'] = 'error';
 			}
 		}
-		$data = $userModel->getUserBy('id', $request['id']);
+		$data = $userModel->getUserBy('id', $registry->request['id']);
 		$userView->details('update',$data);	
 	break;
 	case 'activate':
@@ -125,11 +125,11 @@ switch ($registry->route['action'])
 		}
 		else
 		{
-			$session->message['txt'] = $option->errorMessage->trickUserError;
-			$session->message['type'] = 'error';
+			$registry->session->message['txt'] = $option->errorMessage->trickUserError;
+			$registry->session->message['type'] = 'error';
 		}
 		$users = $userModel->getUserList($page);
-		$session->useAjaxView = true;	
+		$registry->session->useAjaxView = true;	
 		$route['action'] = 'list';
 		$registry->route = $route;
 		$userView->listUser('list', $users, $page, true);
@@ -142,19 +142,19 @@ switch ($registry->route['action'])
 			if ('on' == $_POST['confirm'])
 			{
 				// delete user
-				$userModel->deleteUser($request['id']);
-				$session->message['txt'] = $option->infoMessage->accountDelete;
-				$session->message['type'] = 'info';
+				$userModel->deleteUser($registry->request['id']);
+				$registry->session->message['txt'] = $option->infoMessage->accountDelete;
+				$registry->session->message['type'] = 'info';
 			}
 			else
 			{
-				$session->message['txt'] = $option->infoMessage->noAccountDelete;
-				$session->message['type'] = 'info';
+				$registry->session->message['txt'] = $option->infoMessage->noAccountDelete;
+				$registry->session->message['type'] = 'info';
 			}
-			header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/list/');
+			header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/list/');
 			exit;				
 		}
-		$data = $userModel->getUserBy('id', $request['id']);
+		$data = $userModel->getUserBy('id', $registry->request['id']);
 		// delete page confirmation
 		$userView->details('delete', $data);	
 	break;
@@ -162,27 +162,27 @@ switch ($registry->route['action'])
 		// send an email with the password to the selected user
 		$data = array();
 		$error = array();
-		if ($request['id'] > 0)
+		if ($registry->request['id'] > 0)
 		{
 			// send user password 
-			$userModel->sendPassword($request['id']);				
+			$userModel->sendPassword($registry->request['id']);				
 		}
 		else
 		{
-			$session->message['txt'] = $option->errorMessage->emailNotSent;
-			$session->message['type'] = 'error';
+			$registry->session->message['txt'] = $option->errorMessage->emailNotSent;
+			$registry->session->message['type'] = 'error';
 		}
-		header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/list/');
+		header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/list/');
 		exit;		
 	break;
 	case 'logins':
 		// list user logins
-		$id = (isset($request['id'])) ? (int)$request['id'] : 0;		
-		$page = (isset($request['page']) && $request['page'] > 0) ? $request['page'] : 1;
-		$browser = (isset($request['browser'])) ? $request['browser'] : '';
-		$loginDate = (isset($request['loginDate'])) ? $request['loginDate'] : '';
-		$sortField = (isset($request['sort']) && in_array($request['sort'], array('username', 'dateLogin'))) ? $request['sort'] : 'dateLogin';
-		$orderBy = (isset($request['order']) && in_array($request['order'], array('asc', 'desc'))) ? $request['order'] : 'desc';
+		$id = (isset($registry->request['id'])) ? (int)$registry->request['id'] : 0;		
+		$page = (isset($registry->request['page']) && $registry->request['page'] > 0) ? $registry->request['page'] : 1;
+		$browser = (isset($registry->request['browser'])) ? $registry->request['browser'] : '';
+		$loginDate = (isset($registry->request['loginDate'])) ? $registry->request['loginDate'] : '';
+		$sortField = (isset($registry->request['sort']) && in_array($registry->request['sort'], array('username', 'dateLogin'))) ? $registry->request['sort'] : 'dateLogin';
+		$orderBy = (isset($registry->request['order']) && in_array($registry->request['order'], array('asc', 'desc'))) ? $registry->request['order'] : 'desc';
 		$logins = $userModel->getLogins($id, $page, $browser, $loginDate, $sortField, $orderBy);
 		$userView->loginsUser('logins', $logins, $page, $browser, $loginDate, $sortField, $orderBy);
 	break;
