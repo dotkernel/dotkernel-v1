@@ -42,3 +42,20 @@
 	// attatch a click event to the document to close the menu
 	.click(closeMenu);
 })()
+
+/**
+ * Show/Hide div ID
+ * @param {String} id
+ */
+function ShowHideDiv (id)
+{
+	var current_status = document.getElementById(id).style.display;
+	if (current_status == 'none')
+	{
+		document.getElementById(id).style.display = '';
+	}
+	else 
+	{
+		document.getElementById(id).style.display = 'none';
+	}
+}
