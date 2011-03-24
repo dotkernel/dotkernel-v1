@@ -26,10 +26,6 @@ defined('APPLICATION_ENV') ||
 // Define application path	
 defined('APPLICATION_PATH')
     || define('APPLICATION_PATH', realpath(dirname(__FILE__)));
-set_include_path(implode(PATH_SEPARATOR, array(
-    APPLICATION_PATH . '/library',
-    get_include_path(),
-)));
 
 //Set error reporting
 if(APPLICATION_ENV != 'production') error_reporting(-1);
