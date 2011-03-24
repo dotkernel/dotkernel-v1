@@ -49,8 +49,8 @@ $zend_loader = Zend_Loader_Autoloader::getInstance();
 $zend_loader->registerNamespace('Dot_');
 
 // initialize the DotKernel Enviromnment
-$registry = Dot_Kernel::initialize();
-$registry->startTime = $startTime;
+Dot_Kernel::initialize($startTime);
+
 // Pass controll to the controller
 /*
                 .''
@@ -60,4 +60,4 @@ $registry->startTime = $startTime;
     ' <' `\ ._/'\
        `   \     \
 */
-Dot_Kernel::gallop($registry);
+Dot_Kernel::gallop();

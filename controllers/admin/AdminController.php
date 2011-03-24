@@ -47,7 +47,7 @@ switch ($registry->route['action'])
 			}
 			else
 			{
-				$error = $dotValidateUser->getError();		
+				$error = $dotValidateUser->getError();
 				// login info are NOT VALID
 				$txt = array();
 				$field = array('username', 'password');

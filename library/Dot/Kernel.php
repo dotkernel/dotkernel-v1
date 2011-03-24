@@ -25,23 +25,33 @@ class Dot_Kernel
 	 * @var string
 	 */
 	const VERSION = '1.4.0 dev';
-	public static function gallop($registry)
+	/*
+	 * Start DotKernel
+	 * Pass controll to the Front Controller if it exists,
+	 * otherwise throw a 404 error
+	 */
+	public static function gallop()
 	{
-		/*
-		 * From this point , the control is taken by the Front Controller
-		 * call the Front Controller specific file, but check first if it exists 
-		 */
+		$registry = Zend_Registry::getInstance();
+
 		$frontControllerPath = CONTROLLERS_PATH.'/' . $registry->route['module'] . '/' . 'IndexController.php';
-		!file_exists($frontControllerPath) ? Dot_Kernel::pageNotFound() : require($frontControllerPath);
+		if (file_exists($frontControllerPath))
+		{
+			require($frontControllerPath);
+		}else{
+			Dot_Kernel::pageNotFound();
+		} 
 	}
 	/**
 	 * Initialize the global variables 
 	 */
-	public static function initialize()
+	public static function initialize($startTime)
 	{
 		// Create registry object, as read-only object to store there config, settings, and database
 		$registry = new Zend_Registry(array(), ArrayObject::ARRAY_AS_PROPS);
 		Zend_Registry::setInstance($registry);
+
+		$registry->startTime = $startTime;
 
 		//Load configuration settings from application.ini file and store it in registry
 		$config = new Zend_Config_Ini(CONFIGURATION_PATH.'/application.ini', APPLICATION_ENV);
