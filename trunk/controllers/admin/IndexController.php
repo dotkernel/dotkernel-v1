@@ -16,7 +16,7 @@
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
-// start the template object, empty for the moment 
+// start the template object, empty for the moment
 require(DOTKERNEL_PATH . '/' . $registry->route['module'] . '/' . 'View.php');	
 $tpl = View::getInstance(TEMPLATES_PATH . '/' . $registry->route['module']);
 $tpl->init();
