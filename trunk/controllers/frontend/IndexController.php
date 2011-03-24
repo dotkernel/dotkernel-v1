@@ -17,14 +17,14 @@
  */ 
 
 //if automatic redirect is enabled in application.ini and the browser is mobile and session->mobileHit is not set, register it and redirect
-if($config->resources->useragent->wurflapi->redirect && 'mobile' == Dot_Kernel::getDevice()->getType() && !isset($session->mobileHit))
+if($registry->configuration->resources->useragent->wurflapi->redirect && 'mobile' == Dot_Kernel::getDevice()->getType() && !isset($session->mobileHit))
 {
 	// register mobile hits, store in session if hit was register
 	$dotMobile = new Dot_Mobile();
 	$dotMobile->registerHit();
 	$session->mobileHit = TRUE;
 	//redirect to mobile controller
-	header('location: '.$config->website->params->url.'/mobile');
+	header('location: '.$registry->configuration->website->params->url.'/mobile');
 	exit;
 }
 
@@ -66,7 +66,7 @@ $pageTitle = 'Overwrite Me Please !';
 $actionControllerPath = CONTROLLERS_PATH . '/' . $registry->route['module'] . '/' . ucfirst($registry->route['controller']) . 'Controller.php';
 if(file_exists($actionControllerPath))
 {
-	$dotAuth->checkIdentity('user');
+	$registry->auth->checkIdentity('user');
 	require($actionControllerPath);
 }
 else
@@ -87,9 +87,9 @@ $tpl->displayMessage();
 $tpl->parse('MAIN_CONTENT', 'tpl_main');
 
 // show debugbar 
-if(TRUE == $config->settings->frontend->debugbar)
+if(TRUE == $registry->configuration->settings->frontend->debugbar)
 {
-	$debug = new Dot_Debug($db, $tpl, $config);
+	$debug = new Dot_Debug($db, $tpl, $registry->configuration);
 	$debug->startTimer = $startTime;
 	$debug->show();
 }

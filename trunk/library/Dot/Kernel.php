@@ -25,25 +25,20 @@ class Dot_Kernel
 	 * @var string
 	 */
 	const VERSION = '1.4.0 dev';
-	public static function gallop()
+	public static function gallop($registry)
 	{
-		// these variables need to be accessible outside of this function, so they need to be global
-		global $registry, $requestModule, $config, $dotAuth, $db, $startTime;
 		/*
 		 * From this point , the control is taken by the Front Controller
 		 * call the Front Controller specific file, but check first if it exists 
 		 */
-		$frontControllerPath = CONTROLLERS_PATH.'/'.$requestModule.'/'.'IndexController.php';
-		!file_exists($frontControllerPath) ?  Dot_Kernel::pageNotFound() :  require($frontControllerPath);
+		$frontControllerPath = CONTROLLERS_PATH.'/' . $registry->route['module'] . '/' . 'IndexController.php';
+		!file_exists($frontControllerPath) ? Dot_Kernel::pageNotFound() : require($frontControllerPath);
 	}
 	/**
 	 * Initialize the global variables 
 	 */
 	public static function initialize()
 	{
-		// these variables need to be accessible outside of this function, so they need to be global
-		global $requestModule, $requestAction, $requestController, $config, $dotAuth, $db, $request, $session;
-
 		// Create registry object, as read-only object to store there config, settings, and database
 		$registry = new Zend_Registry(array(), ArrayObject::ARRAY_AS_PROPS);
 		Zend_Registry::setInstance($registry);
@@ -117,13 +112,12 @@ class Dot_Kernel
 
 		// remove first element of the request array, is module and action in it
 		array_shift($request);
-
 		//memory request into param variable and load them into registry
 		$route = array();
 		$route['module'] = $requestModule;
 		$route['controller'] = $requestController;
 		$route['action'] = $requestAction;
-		$route = array_merge($route, $request);
+		$registry->request = $request;
 		$registry->route = $route;
 
 		// initialize default options for dots that may be overwritten

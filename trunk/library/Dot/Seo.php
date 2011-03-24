@@ -38,6 +38,7 @@ class Dot_Seo
 		$this->config = Zend_Registry::get('configuration');
 		$this->router = Zend_Registry::get('router');
 		$this->route = Zend_Registry::get('route');
+		$this->request = Zend_Registry::get('request');
 		$this->_option = Dot_Settings::getOptionVariables($this->route['module'], 'seo');
 	}
 	/**
@@ -91,11 +92,7 @@ class Dot_Seo
 		{
 			$url .= urlencode(strtolower($route['action'])) . '/';
 		}
-		//unset the request route: module, controller and action
-		unset($route['module']);
-		unset($route['controller']);
-		unset($route['action']);	
-		foreach ($route as $k => $v)
+		foreach ($this->request as $k => $v)
 		{
 			$url .= urlencode($k) . '/' . urlencode($v) . '/';
 		}		

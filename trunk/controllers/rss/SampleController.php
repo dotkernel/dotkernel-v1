@@ -21,7 +21,7 @@ $sampleView = new Sample_View();
 //prepare feed
 $feed = array(
 			'title' => $option->feed->title,
-			'link' => $config->website->params->url.$option->feed->link,
+			'link' => $registry->configuration->website->params->url.$option->feed->link,
 			'charset' => $option->feed->charset,
 			'language' => $option->feed->language
 			);

@@ -28,7 +28,7 @@ switch ($registry->route['action'])
 	case 'logout':
 		$dotAuth = Dot_Auth::getInstance();
 		$dotAuth->clearIdentity('admin');
-		header('location: '.$config->website->params->url.'/' . $requestModule);
+		header('location: '.$registry->configuration->website->params->url.'/' . $registry->route['module']);
 		exit;
 	break;	
 	case 'authorize':
@@ -58,27 +58,27 @@ switch ($registry->route['action'])
 						 $txt[] = $error[$v];
 					}
 				}
-				$session->message['txt'] = $txt;
-				$session->message['type'] = 'error';
+				$registry->session->message['txt'] = $txt;
+				$registry->session->message['type'] = 'error';
 		
 			}
 		}
 		else
 		{
-			$session->message['txt'] = $option->warningMessage->userPermission;
-			$session->message['type'] = 'warning';
+			$registry->session->message['txt'] = $option->warningMessage->userPermission;
+			$registry->session->message['type'] = 'warning';
 		}		
-		header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/login');
+		header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/login');
 		exit;		
 	break;
 	case 'account':
 		//display my account form
-		$data = $adminModel->getUserBy('id', $session->admin->id);
+		$data = $adminModel->getUserBy('id', $registry->session->admin->id);
 		$adminView->details('account',$data);	
 	break;
 	case 'list':
 		// list admin users
-		$page = (isset($request['page']) && $request['page'] > 0) ? $request['page'] : 1;
+		$page = (isset($registry->request['page']) && $registry->request['page'] > 0) ? $registry->request['page'] : 1;
 		$users = $adminModel->getUserList($page);		
 		$adminView->listUser('list', $users, $page);	
 	break;	
@@ -122,17 +122,17 @@ switch ($registry->route['action'])
 				{
 					// no error - then add admin user
 					$adminModel->addUser($data);				
-					$session->message['txt'] = $option->infoMessage->accountAdd;
-					$session->message['type'] = 'info';
-					header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/list/');
+					$registry->session->message['txt'] = $option->infoMessage->accountAdd;
+					$registry->session->message['type'] = 'info';
+					header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/list/');
 					exit;					
 				}	
 			}
 			$error = array_merge($error, $dotValidateUser->getError());
 			if(!empty($error))
 			{						
-				$session->message['txt'] = $error;
-				$session->message['type'] = 'error';
+				$registry->session->message['txt'] = $error;
+				$registry->session->message['type'] = 'error';
 			}
 		}
 		$adminView->details('add',$data);
@@ -160,25 +160,25 @@ switch ($registry->route['action'])
 			{
 				$values['enum']['isActive'] =  $_POST['isActive'];
 			}
-			$dotValidateUser = new Dot_Validate_User(array('who' => 'admin', 'action' => 'update', 'values' => $values, 'userId' => $request['id']));
+			$dotValidateUser = new Dot_Validate_User(array('who' => 'admin', 'action' => 'update', 'values' => $values, 'userId' => $registry->request['id']));
 			if($dotValidateUser->isValid())
 			{
 				$data = $dotValidateUser->getData();
 				// no error - then update admin user
-				$data['id'] = $request['id'];
+				$data['id'] = $registry->request['id'];
 				$adminModel->updateUser($data);
-				$session->message['txt'] = $option->infoMessage->accountUpdate;
-				$session->message['type'] = 'info';
-				header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/list/');
+				$registry->session->message['txt'] = $option->infoMessage->accountUpdate;
+				$registry->session->message['type'] = 'info';
+				header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/list/');
 				exit;
 			}
 			else
 			{
-				$session->message['txt'] = $dotValidateUser->getError();
-				$session->message['type'] = 'error';
+				$registry->session->message['txt'] = $dotValidateUser->getError();
+				$registry->session->message['type'] = 'error';
 			}
 		}
-		$data = $adminModel->getUserBy('id', $request['id']);
+		$data = $adminModel->getUserBy('id', $registry->request['id']);
 		$adminView->details('update',$data);	
 	break;
 	case 'activate':
@@ -198,11 +198,11 @@ switch ($registry->route['action'])
 		}
 		else
 		{
-			$session->message['txt'] = $option->errorMessage->trickUserError;
-			$session->message['type'] = 'error';
+			$registry->session->message['txt'] = $option->errorMessage->trickUserError;
+			$registry->session->message['type'] = 'error';
 		}
 		$users = $adminModel->getUserList($page);
-		$session->useAjaxView = true;			
+		$registry->session->useAjaxView = true;			
 		$route['action'] = 'list';
 		$registry->route = $route;		
 		$adminView->listUser('list', $users, $page, true);
@@ -215,26 +215,26 @@ switch ($registry->route['action'])
 			if ('on' == $_POST['confirm'])
 			{
 				// delete admin user
-				$adminModel->deleteUser($request['id']);
-				$session->message['txt'] = $option->infoMessage->accountDelete;
-				$session->message['type'] = 'info';
+				$adminModel->deleteUser($registry->request['id']);
+				$registry->session->message['txt'] = $option->infoMessage->accountDelete;
+				$registry->session->message['type'] = 'info';
 			}
 			else
 			{
-				$session->message['txt'] = $option->infoMessage->noAccountDelete;
-				$session->message['type'] = 'info';
+				$registry->session->message['txt'] = $option->infoMessage->noAccountDelete;
+				$registry->session->message['type'] = 'info';
 			}
-			header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/list/');
+			header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/list/');
 			exit;				
 		}
-		$data = $adminModel->getUserBy('id', $request['id']);
+		$data = $adminModel->getUserBy('id', $registry->request['id']);
 		// delete page confirmation
 		$adminView->details('delete', $data);	
 	break;
 	case 'logins':
 		// list user logins
-		$id = (isset($request['id'])) ? (int)$request['id'] : 0;		
-		$page = (isset($request['page']) && $request['page'] > 0) ? $request['page'] : 1;
+		$id = (isset($registry->request['id'])) ? (int)$registry->request['id'] : 0;		
+		$page = (isset($registry->request['page']) && $registry->request['page'] > 0) ? $registry->request['page'] : 1;
 		$logins = $adminModel->getLogins($id, $page);
 		$adminView->loginsUser('logins', $logins, $page);
 	break;

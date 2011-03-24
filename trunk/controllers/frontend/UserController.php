@@ -31,7 +31,7 @@ switch ($registry->route['action'])
 		}
 		else
 		{			
-			header('Location: '.$config->website->params->url.'/user/account');
+			header('Location: '.$registry->configuration->website->params->url.'/user/account');
 			exit;
 		}
 	break;
@@ -73,7 +73,7 @@ switch ($registry->route['action'])
 			$session->message['txt'] = $option->warningMessage->userPermission;
 			$session->message['type'] = 'warning';
 		}
-		header('Location: '.$config->website->params->url. '/' . $requestController. '/login');
+		header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['controller']. '/login');
 		exit;			
 	break;
 	case 'account':
@@ -185,7 +185,7 @@ switch ($registry->route['action'])
 	case 'logout':
 		$dotAuth = Dot_Auth::getInstance();
 		$dotAuth->clearIdentity('user');
-		header('location: '.$config->website->params->url);
+		header('location: '.$registry->configuration->website->params->url);
 		exit;
 	break;	
 }

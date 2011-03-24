@@ -32,10 +32,10 @@ switch ($registry->route['action'])
 	case 'settings':
 		// list settings values
 		$data = $systemModel->getSettings();	
-		if(isset($request['update']) && $request['update'] == 'done')
+		if(isset($registry->request['update']) && $registry->request['update'] == 'done')
 		{			
-				$session->message['txt'] = $option->infoMessage->settingsUpdate;
-				$session->message['type'] = 'info';
+				$registry->session->message['txt'] = $option->infoMessage->settingsUpdate;
+				$registry->session->message['type'] = 'info';
 		}
 		$systemView->displaySettings('settings', $data);
 	break;
@@ -47,7 +47,7 @@ switch ($registry->route['action'])
 		{
 			unset($_POST['send']);
 			$systemModel->updateSettings($_POST);
-			header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/settings/update/done');
+			header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/settings/update/done');
 			exit;
 		}
 	break;
@@ -73,13 +73,13 @@ switch ($registry->route['action'])
 
 		foreach ($userAgents as $ua)
 		{
-			$device = new Zend_Http_UserAgent($config->resources->useragent);
+			$device = new Zend_Http_UserAgent($registry->configuration->resources->useragent);
 			$device->setUserAgent($ua);
 			$d=$device->getDevice();
 		}
 		$settings = Zend_Registry::get('settings');
 		$systemModel->updateSettings(array('wurflCacheBuilt'=>strftime($settings->timeFormatLong)));
-		header('Location: '.$config->website->params->url. '/admin');
+		header('Location: '.$registry->configuration->website->params->url. '/admin');
 		exit();
 	break;
 	case 'phpinfo':
@@ -91,7 +91,7 @@ switch ($registry->route['action'])
 		$systemView->showAPCInfo();
 	break;
 	case 'transporter-list':
-		$page = (isset($request['page']) && $request['page'] > 0) ? $request['page'] : 1;
+		$page = (isset($registry->request['page']) && $registry->request['page'] > 0) ? $registry->request['page'] : 1;
 		$transporters = $systemModel->getEmailTransporterList($page);		
 		$systemView->listEmailTransporter('transporter-list', $transporters, $page);	 
 	break;
@@ -102,7 +102,7 @@ switch ($registry->route['action'])
 		$systemModel->activateEmailTransporter($id, $isActive);		
 
 		$transporters = $systemModel->getEmailTransporterList($page);
-		$session->useAjaxView = true; 
+		$registry->session->useAjaxView = true; 
 		$route['action'] = 'transporter-list';
 		$registry->route = $route;
 		$systemView->listEmailTransporter('transporter-list', $transporters, $page, true);
@@ -112,19 +112,19 @@ switch ($registry->route['action'])
 		{ 
 			if ('on' == $_POST['confirm'])
 			{
-				$systemModel->deleteEmailTransporter($request['id']);
-				$session->message['txt'] = $option->infoMessage->transporterDelete;
-				$session->message['type'] = 'info';
+				$systemModel->deleteEmailTransporter($registry->request['id']);
+				$registry->session->message['txt'] = $option->infoMessage->transporterDelete;
+				$registry->session->message['type'] = 'info';
 			}
 			else
 			{
-				$session->message['txt'] = $option->infoMessage->noTransporterDelete;
-				$session->message['type'] = 'info';
+				$registry->session->message['txt'] = $option->infoMessage->noTransporterDelete;
+				$registry->session->message['type'] = 'info';
 			}
-		 header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/transporter-list/');
+		 header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/transporter-list/');
 			 exit;	 
 		}
-		$data = $systemModel->getEmailTransporterBy('id', $request['id']);
+		$data = $systemModel->getEmailTransporterBy('id', $registry->request['id']);
 		// delete page confirmation
 		$systemView->details('transporter-delete', $data);	
 	break;
@@ -141,20 +141,20 @@ switch ($registry->route['action'])
 			if(empty($error))
 			{
 				// no error - then update
-				$data["id"]=$request["id"];
+				$data["id"]=$registry->request["id"];
 				$systemModel->updateEmailTransporter($data);
-				$session->message['txt'] = $option->infoMessage->transporterUpdate;
-				$session->message['type'] = 'info';
-				header('Location: '.$config->website->params->url. '/' . $requestModule . '/' . $requestController. '/transporter-list/');
+				$registry->session->message['txt'] = $option->infoMessage->transporterUpdate;
+				$registry->session->message['type'] = 'info';
+				header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/transporter-list/');
 				exit;
 			}
 			else
 			{
-				$session->message['txt'] = $error;
-				$session->message['type'] = 'error';
+				$registry->session->message['txt'] = $error;
+				$registry->session->message['type'] = 'error';
 			}
 		}
-		$data = $systemModel->getEmailTransporterBy('id', $request['id']);
+		$data = $systemModel->getEmailTransporterBy('id', $registry->request['id']);
 		$systemView->details('transporter-update',$data); 
 	break;
 	case 'transporter-add':
@@ -168,17 +168,17 @@ switch ($registry->route['action'])
 		if (empty($error))
 		{
 			$systemModel->addEmailTransporter($data);
-			$session->message['txt'] = $option->infoMessage->transporterAdd;
-			$session->message['type'] = 'info';
+			$registry->session->message['txt'] = $option->infoMessage->transporterAdd;
+			$registry->session->message['type'] = 'info';
 			$data=null;
 		}else{
-			$session->message['txt'] = $error;
-			$session->message['type'] = 'error';
+			$registry->session->message['txt'] = $error;
+			$registry->session->message['type'] = 'error';
 		}
 
 		$transporters = $systemModel->getEmailTransporterList($page);
 		$transporters['form']=$data;
-		$session->useAjaxView = true; 
+		$registry->session->useAjaxView = true; 
 		$route['action'] = 'transporter-list';
 		$registry->route = $route;
 		$systemView->listEmailTransporter('transporter-list', $transporters, $page, true, $error);
