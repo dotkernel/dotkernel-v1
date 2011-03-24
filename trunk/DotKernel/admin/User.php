@@ -17,7 +17,7 @@
 * @package    Admin 
 * @author     DotKernel Team <team@dotkernel.com>
 */
-class User
+class User extends Dot_Model_User
 {
 	/**
 	 * Constructor
@@ -25,28 +25,11 @@ class User
 	 */
 	public function __construct()
 	{
-		$this->db = Zend_Registry::get('database');				
-		$this->option = Zend_Registry::get('option');	
+		parent::__construct();
 		$this->settings = Zend_Registry::get('settings');			
 		$seo = new Dot_Seo();
 		$this->seoOption = $seo->getOption();	
 	}	
-	/**
-	 * Get user by field
-	 * @access public
-	 * @param string $field
-	 * @param string $value
-	 * @return array
-	 */
-	public function getUserBy($field = '', $value = '')
-	{	
-		$select = $this->db->select()
-					   ->from('user')
-					   ->where($field.' = ?', $value)
-					   ->limit(1);	
-		$result = $this->db->fetchRow($select);
-		return $result;
-	}		
 	/**
 	 * Get user list
 	 * @access public 
@@ -59,30 +42,6 @@ class User
 						   ->from('user');				
  		$dotPaginator = new Dot_Paginator($select, $page, $this->settings->resultsPerPage);
 		return $dotPaginator->getData();
-	}	
-	/**
-	 * Add new user
-	 * @access public
-	 * @param array $data
-	 * @return void
-	 */
-	public function addUser($data)
-	{		
-		// if you want to add an inactive user, un-comment the below line, default: isActive = 1
-		// $data['isActive'] = 0;
-		$this->db->insert('user', $data);		
-	}
-	/**
-	 * Update user
-	 * @access public
-	 * @param array $data
-	 * @return void
-	 */
-	public function updateUser($data)
-	{
-		$id = $data['id'];
-		unset ($data['id']);
-		$this->db->update('user', $data, 'id = '.$id);
 	}	
 	/**
 	 * Delete user
