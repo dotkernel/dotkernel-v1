@@ -130,9 +130,6 @@ $route['action'] = $requestAction;
 $route = array_merge($route, $request);
 $registry->route = $route;
 
-// start dotKernel object
-$dotKernel = new Dot_Kernel();
-
 // initialize default options for dots that may be overwritten
 $option = Dot_Settings::getOptionVariables($route['module'], 'default');
 $registry->option = $option;
@@ -160,4 +157,4 @@ $dotAuth->setRoles($dotAcl->getRoles());
 
 $frontControllerPath = CONTROLLERS_PATH.'/'.$requestModule.'/'.'IndexController.php';
 
-!file_exists($frontControllerPath) ?  $dotKernel->pageNotFound() :  require($frontControllerPath);
+!file_exists($frontControllerPath) ?  Dot_Kernel::pageNotFound() :  require($frontControllerPath);

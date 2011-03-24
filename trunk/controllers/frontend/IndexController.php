@@ -29,7 +29,7 @@ if($config->resources->useragent->wurflapi->redirect && 'mobile' == Dot_Kernel::
 }
 
 // start the template object, empty for the moment 
-require(DOTKERNEL_PATH . '/' . $registry->route['module'] . '/' . 'View.php');	
+require(DOTKERNEL_PATH . '/' . $registry->route['module'] . '/' . 'View.php');
 $tpl = View::getInstance(TEMPLATES_PATH . '/' . $registry->route['module']);
 $tpl->init();
 
@@ -65,15 +65,15 @@ $pageTitle = 'Overwrite Me Please !';
  */
 $actionControllerPath = CONTROLLERS_PATH . '/' . $registry->route['module'] . '/' . ucfirst($registry->route['controller']) . 'Controller.php';
 if(file_exists($actionControllerPath))
-{	
+{
 	$dotAuth->checkIdentity('user');
 	require($actionControllerPath);
 }
 else
-{	
-	$dotKernel->pageNotFound();
+{
+	Dot_Kernel::pageNotFound();
 }
-	
+
 // set menus
 $tpl->setViewMenu();
 
