@@ -14,13 +14,13 @@
 * Rss Module - Index Controller
 * Is doing all the job for specific rss control stuff 
 * @author     DotKernel Team <team@dotkernel.com>
-*/   
+*/
 
 /**
  * start the template object,
  * NOTE: the output of this module is XML not HTML
  * This View class does not inherit from Dpt_Template class
- */   
+ */
 require(DOTKERNEL_PATH . '/' . $registry->route['module'] . '/' . 'View.php');
 $view = new View();
 /** 
@@ -32,9 +32,9 @@ $option = Dot_Settings::getOptionVariables($registry->route['module'],$registry-
 $registry->option = $option;
 /**
  * From this point , the control is taken by the Action specific controller
- * call the Action specific file, but check first if exists 
+ * call the Action specific file, but check first if exists
  */
 $actionControllerPath = CONTROLLERS_PATH . '/' . $registry->route['module'] . '/' . ucfirst($registry->route['controller']) . 'Controller.php';
-!file_exists($actionControllerPath) ?  $dotKernel->pageNotFound() :  require($actionControllerPath);
+!file_exists($actionControllerPath) ?  Dot_Kernel::pageNotFound() : require($actionControllerPath);
 //output the rss content
 $view->output();

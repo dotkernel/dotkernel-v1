@@ -14,7 +14,7 @@
 * Admin Module - Index Controller
 * Is doing all the job for specific admin control stuff
 * @author     DotKernel Team <team@dotkernel.com>
-*/ 
+*/
 
 // start the template object, empty for the moment 
 require(DOTKERNEL_PATH . '/' . $registry->route['module'] . '/' . 'View.php');	
@@ -50,13 +50,13 @@ $pageTitle = 'Overwrite Me Please !';
 */
 $actionControllerPath = CONTROLLERS_PATH . '/' . $registry->route['module'] . '/' . ucfirst($registry->route['controller']) . 'Controller.php';
 if(file_exists($actionControllerPath))
-{	
+{
 	$dotAuth->checkIdentity('admin');
 	require($actionControllerPath);
 }
 else
-{	
-	$dotKernel->pageNotFound('admin');
+{
+	Dot_Kernel::pageNotFound('admin');
 }
 
 // set menus

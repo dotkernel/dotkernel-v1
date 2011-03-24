@@ -17,7 +17,7 @@
 */   
 
 // start the template object, empty for the moment 
-require(DOTKERNEL_PATH . '/' . $registry->route['module'] . '/' . 'View.php');	
+require(DOTKERNEL_PATH . '/' . $registry->route['module'] . '/' . 'View.php');
 $tpl = View::getInstance(TEMPLATES_PATH . '/' . $registry->route['module']);
 $tpl->init();
 
@@ -48,7 +48,7 @@ $pageTitle = 'Overwrite Me Please !';
  * call the Action specific file, but check first if exists 
  */
 $actionControllerPath = CONTROLLERS_PATH . '/' . $registry->route['module'] . '/' . ucfirst($registry->route['controller']) . 'Controller.php';
-!file_exists($actionControllerPath) ?  $dotKernel->pageNotFound() :  require($actionControllerPath);
+!file_exists($actionControllerPath) ?  Dot_Kernel::pageNotFound() : require($actionControllerPath);
 
 // set SEO html tags from dots/seo.xml file
 $tpl->setSeoValues($pageTitle);
