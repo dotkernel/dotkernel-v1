@@ -66,7 +66,8 @@ $pageTitle = 'Overwrite Me Please !';
 $actionControllerPath = CONTROLLERS_PATH . '/' . $registry->route['module'] . '/' . ucfirst($registry->route['controller']) . 'Controller.php';
 if(file_exists($actionControllerPath))
 {
-	$registry->auth->checkIdentity('user');
+	$dotAuth = Dot_Auth::getInstance();
+	$dotAuth->checkIdentity('user');
 	require($actionControllerPath);
 }
 else
@@ -89,8 +90,8 @@ $tpl->parse('MAIN_CONTENT', 'tpl_main');
 // show debugbar 
 if(TRUE == $registry->configuration->settings->frontend->debugbar)
 {
-	$debug = new Dot_Debug($db, $tpl, $registry->configuration);
-	$debug->startTimer = $startTime;
+	$debug = new Dot_Debug($registry->database, $tpl, $registry->configuration);
+	$debug->startTimer = $registry->startTime;
 	$debug->show();
 }
 
