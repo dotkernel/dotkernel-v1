@@ -108,11 +108,11 @@ switch ($registry->route['action'])
 			{
 				$data = $dotValidateUser->getData();
 				$session->message['txt'] = $dotValidateUser->getError();
-				$session->message['type'] = 'error';				
+				$session->message['type'] = 'error';
 			}
 		}
-		$data = $userModel->getUserInfo($session->user->id);
-		$userView->details('update',$data);	
+		$data = $userModel->getUserInfo($registry->session->user->id);
+		$userView->details('update',$data);
 	break;
 	case 'register':
 		// display signup form and allow user to register 
