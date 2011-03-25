@@ -18,14 +18,14 @@
 */
 
 class Dot_Auth
-{    
+{
 	/**
 	 * Singleton instance
 	 * @access protected
 	 * @static
 	 * @var Dot_Auth
 	 */
-	protected static $_instance = null;	
+	protected static $_instance = null;
 	/**
 	 * Singleton pattern implementation makes 'new' unavailable
 	 * @access protected
@@ -33,7 +33,9 @@ class Dot_Auth
 	 */
 	protected function __construct()
 	{
-		$this->_identity = NULL;		
+		$this->_identity = NULL;
+		$this->acl = new Dot_Acl();
+		$this->setRoles($this->acl->getRoles());
 	}
 	/**
 	 * Singleton pattern implementation makes 'clone' unavailable
@@ -51,12 +53,12 @@ class Dot_Auth
 	 */
 	public static function getInstance()
 	{
-		if (null === self::$_instance) 
+		if (null === self::$_instance)
 		{
-			self::$_instance = new self();			
+			self::$_instance = new self();
 		}
 		return self::$_instance;
-	}	
+	}
 	/**
 	 * Set the roles for authentification
 	 * @access public
@@ -67,7 +69,7 @@ class Dot_Auth
 	{
 		krsort($roles);
 		$this->_roles = $roles;
-	}    			
+	}
 	/**
 	 * Check permission based on the ACL roles
 	 * Set wanted url if user is not logged
@@ -77,21 +79,20 @@ class Dot_Auth
 	 * @return bool
 	 */
 	public function checkIdentity($who)
-	{		
-		$dotAcl = new Dot_Acl();
+	{
 		$role = 'guest';
 		if($this->hasIdentity())
 		{
-            $user = $this->getIdentity();
-            if(is_object($user))
+			$user = $this->getIdentity();
+			if(is_object($user))
 			{
-                $role = $user->role;
-            }
-        }	
-		$config = Zend_Registry::get('configuration');				
+				$role = $user->role;
+			}
+		}
+		$config = Zend_Registry::get('configuration');
 		$session = Zend_Registry::get('session');
-		if(!$dotAcl->isAllowed($role))
-		{			
+		if(!$this->acl->isAllowed($role))
+		{
 			//register wanted url
 			if(!isset($session->wantUrl))
 			{
@@ -100,24 +101,24 @@ class Dot_Auth
 			}
 			$option = Zend_Registry::get('option');
 			if(isset($option->warningMessage->userPermission))
-			{				
+			{
 				$session->message['txt'] = $option->warningMessage->userPermission;
-				$session->message['type'] = 'warning';			
-			}	
+				$session->message['type'] = 'warning';
+			}
 			//create login url	to which will be redirect
-			switch ($who) 
+			switch ($who)
 			{
 				case 'admin':
-					$loginUrl = $config->website->params->url . '/admin/admin/login';	
-				break;				
+					$loginUrl = $config->website->params->url . '/admin/admin/login';
+				break;
 				default:
 					$loginUrl = $config->website->params->url . '/' . $who . '/login';
 				break;
 			}
 			header('Location: ' . $loginUrl);
 			exit;
-		}		
-		
+		}
+
 		//if user is allowed, redirect him to wanted url
 		if($role == 'admin' && isset($session->wantUrl))
 		{
@@ -132,14 +133,14 @@ class Dot_Auth
 	 * Check to see if identity exists - is log in
 	 * @access public
 	 * @return bool
-	 */	
+	 */
 	public function hasIdentity()
 	{
 		$session = Zend_Registry::get('session');
 		foreach ($this->_roles as $who)
 		{
 			if(isset($session->$who) && !empty($session->$who))
-			{				
+			{
 				$session->$who->role = $who;
 				$this->_identity = $session->$who;
 				return TRUE;
@@ -148,7 +149,7 @@ class Dot_Auth
 		return FALSE;
 	}
 	/**
-	 * Return identity 
+	 * Return identity
 	 * @access public
 	 * @return object
 	 */
@@ -172,7 +173,7 @@ class Dot_Auth
 			$this->_identity = NULL;
 			unset($session->wantUrl);
 		}
-	} 
+	}
 	/**
 	 * Process the authentification with Zend_Auth.
 	 * Return TRUE or FALSE if succedded or not
@@ -193,7 +194,7 @@ class Dot_Auth
 			$config = Zend_Registry::get('configuration');
 			$password = md5($values['username'].$config->settings->admin->salt.$values['password']);
 			$adapter->setCredential($password);
-		}		
+		}
 		$auth = Zend_Auth::getInstance();
 		$result = $auth->authenticate($adapter);
 		if($result->isValid())
@@ -201,22 +202,22 @@ class Dot_Auth
 			$session = Zend_Registry::get('session');
 			$session->$who = $adapter->getResultRowObject();
 			return TRUE;
-		}		
+		}
 		return FALSE;
 	}
 	/**
 	 * Get the auth adapter
-	 * @access private	 
+	 * @access private
 	 * @param string $who
 	 * @return Zend_Auth_Adapter_DbTable
 	 */
 	private function _getAuthAdapter($who)
 	{
-		$dbAdapter = Zend_Registry::get('database');	
+		$dbAdapter = Zend_Registry::get('database');
 		$authAdapter = new Zend_Auth_Adapter_DbTable($dbAdapter);
 		$authAdapter->setTableName($who)
 			->setIdentityColumn('username')
-			->setCredentialColumn('password');					
+			->setCredentialColumn('password');
 		return $authAdapter;
-	}	     
+	}
 }
