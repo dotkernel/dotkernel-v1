@@ -28,7 +28,7 @@ if($registry->configuration->resources->useragent->wurflapi->redirect && 'mobile
 	exit;
 }
 
-// start the template object, empty for the moment 
+// start the template object, empty for the moment
 require(DOTKERNEL_PATH . '/' . $registry->route['module'] . '/' . 'View.php');
 $tpl = View::getInstance(TEMPLATES_PATH . '/' . $registry->route['module']);
 $tpl->init();
@@ -90,7 +90,7 @@ $tpl->parse('MAIN_CONTENT', 'tpl_main');
 // show debugbar 
 if(TRUE == $registry->configuration->settings->frontend->debugbar)
 {
-	$debug = new Dot_Debug($registry->database, $tpl, $registry->configuration);
+	$debug = new Dot_Debug($tpl);
 	$debug->startTimer = $registry->startTime;
 	$debug->show();
 }

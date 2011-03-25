@@ -57,9 +57,9 @@ class Dot_Debug
 	 * @param Dot_Template $tpl
 	 * @return Dot_Debug
 	 */
-	public function __construct($db, $tpl)
+	public function __construct($tpl)
 	{
-		$this->db = $db;
+		$this->db = Zend_Registry::get('database');
 		$this->tpl = $tpl;		
 	}	
 	/**

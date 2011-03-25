@@ -17,7 +17,7 @@
 */
 
 // start the template object, empty for the moment
-require(DOTKERNEL_PATH . '/' . $registry->route['module'] . '/' . 'View.php');	
+require(DOTKERNEL_PATH . '/' . $registry->route['module'] . '/' . 'View.php');
 $tpl = View::getInstance(TEMPLATES_PATH . '/' . $registry->route['module']);
 $tpl->init();
 
@@ -29,11 +29,11 @@ $tpl->setViewPaths();
 
 /** 
  * each Controller  must load its own specific models and views
-*/
+ */
 Dot_Settings :: loadControllerFiles($registry->route['module']);
 
 /**
- * Load options(specific configuration file for current dot) file
+ * Load option(specific configuration file for current dot) file
  * @todo linking N dots together
  */
 $option = Dot_Settings::getOptionVariables($registry->route['module'],$registry->route['controller']);
@@ -41,13 +41,13 @@ $registry->option = $option;
 
 /**
  * Start the variable for Page Title, this will be used as H1 tag too 
-*/
+ */
 $pageTitle = 'Overwrite Me Please !';
 
 /**
-*  From this point , the control is taken by the Action specific controller
-*  call the Action specific file, but check first if exists 
-*/
+ * From this point , the control is taken by the Action specific controller
+ * call the Action specific file, but check first if exists 
+ */
 $actionControllerPath = CONTROLLERS_PATH . '/' . $registry->route['module'] . '/' . ucfirst($registry->route['controller']) . 'Controller.php';
 if(file_exists($actionControllerPath))
 {
@@ -79,12 +79,16 @@ $tpl->displayWidgets($option->widgets->content);
 $tpl->parse('MAIN_CONTENT', 'tpl_main');
 
 // show debugbar 
-if(TRUE == $registry->configuration->settings->admin->debugbar &&
-   !($registry->route['controller']== 'admin' && $registry->route['action']=='login'))
+if(
+	$registry->configuration->settings->admin->debugbar == TRUE &&
+	$registry->route['controller'] !== 'admin' &&
+	$registry->route['action'] ==='login'
+	)
 {
-	$debug = new Dot_Debug($registry->database, $tpl);
+	$debug = new Dot_Debug($tpl);
 	$debug->startTimer = $registry->startTime;
 	$debug->show();
 }
+
 // parse and print the output
 $tpl->pparse('OUTPUT', 'tpl_index');
