@@ -51,7 +51,7 @@ $zend_loader->registerNamespace('Dot_');
 // initialize the DotKernel Enviromnment
 Dot_Kernel::initialize($startTime);
 
-// Pass controll to the controller
+// Pass control to the controller
 /*
                 .''
       ._.-.___.' (`\
