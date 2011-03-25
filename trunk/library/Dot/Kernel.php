@@ -143,13 +143,6 @@ class Dot_Kernel
 		$seo->routes();
 		$registry->seo = $seo->getOption();
 
-		// instantiate Dot_Acl used as access control layer
-		$dotAcl = new Dot_Acl();
-
-		//set the roles for the current module
-		$dotAuth = Dot_Auth::getInstance();
-		$dotAuth->setRoles($dotAcl->getRoles());
-
 		return $registry;
 	}
 	/**
