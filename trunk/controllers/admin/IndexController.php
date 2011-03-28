@@ -81,8 +81,7 @@ $tpl->parse('MAIN_CONTENT', 'tpl_main');
 // show debugbar 
 if(
 	$registry->configuration->settings->admin->debugbar == TRUE &&
-	$registry->route['controller'] !== 'admin' &&
-	$registry->route['action'] ==='login'
+	!($registry->route['controller'] !== 'admin' && $registry->route['action'] ==='login')
 	)
 {
 	$debug = new Dot_Debug($tpl);
