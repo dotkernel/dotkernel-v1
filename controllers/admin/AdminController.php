@@ -84,7 +84,7 @@ switch ($registry->route['action'])
 	break;	
 	case 'add':
 		// display form and add new admin
-		$data = array();
+		$data = $_POST;
 		$error = array();
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
 		{		
@@ -92,10 +92,6 @@ switch ($registry->route['action'])
 			// POST values that will be validated				
 			$values = array('username' => 
 								array('username' => $_POST['username']
-									 ),
-							'details' => 
-								array('firstName' => $_POST['firstName'],
-									  'lastName' => $_POST['lastName']
 									 ),
 							'email' => array('email' => $_POST['email']),
 							'enum' => array('0' => '0,1',
@@ -144,10 +140,7 @@ switch ($registry->route['action'])
 		{
 			Dot_Kernel::checkUserToken();	
 			// POST values that will be validated
-			$values = array('details' => 
-								array('firstName'=>$_POST['firstName'],
-									  'lastName'=>$_POST['lastName']
-									 ),
+			$values = array(
 							'email' => array('email' => $_POST['email']),
 							'enum' => array('0' => '0,1'));
 			if($_POST['password'] != '' || $_POST['password2'] !='' )
