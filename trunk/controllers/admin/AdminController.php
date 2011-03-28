@@ -195,9 +195,10 @@ switch ($registry->route['action'])
 			$registry->session->message['type'] = 'error';
 		}
 		$users = $adminModel->getUserList($page);
-		$registry->session->useAjaxView = true;			
+		$registry->session->useAjaxView = true;
+		$route = $registry->route;
 		$route['action'] = 'list';
-		$registry->route = $route;		
+		$registry->route = $route;
 		$adminView->listUser('list', $users, $page, true);
 	break;
 	case 'delete':			

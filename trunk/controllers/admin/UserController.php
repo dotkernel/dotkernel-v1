@@ -28,19 +28,15 @@ switch ($registry->route['action'])
 		$users = $userModel->getUserList($page);		
 		$userView->listUser('list', $users, $page);		
 	break;
-	case 'add':		
+	case 'add':
 		// display form and add new user
-		$data = array();
+		$data = $_POST;
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
 		{
 			Dot_Kernel::checkUserToken();
-			// POST values that will be validated				
+			// POST values that will be validated
 			$values = array('username' => 
 								array('username' => $_POST['username']
-									 ),
-							'details' => 
-								array('firstName' => $_POST['firstName'],
-									  'lastName' => $_POST['lastName']
 									 ),
 							'email' => array('email' => $_POST['email']),
 							'enum' => array('0' => '0,1',
@@ -129,7 +125,8 @@ switch ($registry->route['action'])
 			$registry->session->message['type'] = 'error';
 		}
 		$users = $userModel->getUserList($page);
-		$registry->session->useAjaxView = true;	
+		$registry->session->useAjaxView = true;
+		$route = $registry->route;
 		$route['action'] = 'list';
 		$registry->route = $route;
 		$userView->listUser('list', $users, $page, true);
