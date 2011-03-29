@@ -190,7 +190,7 @@ class Admin
 	{			
 		$this->seo = Zend_Registry::get('seo');		
 		//get the email of the oldest valid admin account
-		$select = $this->db->select()->from('admin', 'email')->where('isActive = ?', '1')->order('id asc')->limit(1);
+		$select = $this->db->select()->from('admin', 'email')->where('isActive = ?', '1')->order('dateCreated asc')->limit(1);
 		$emailAdmin = $this->db->fetchOne($select);
 		$dotEmail = new Dot_Email();
 		$dotEmail->addTo($emailAdmin);
