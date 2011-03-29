@@ -30,6 +30,6 @@
 		 <p>&lt;frontend&gt;Articles&lt;frontend&gt;</p>		
 		 
 	<h3>Admin Panel Login</h3>
-	 <p><a href="{SITE_URL}/admin/">{SITE_URL}/admin/</a></p>
+	 <p style="font-weight:bold">www.your-site.com/admin</p>
 	 <p>username: admin</p>
 	 <p>password: dot</p>
