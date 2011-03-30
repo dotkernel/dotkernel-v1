@@ -172,7 +172,9 @@ switch ($registry->route['action'])
 			}
 		}
 		$data = $adminModel->getUserBy('id', $registry->request['id']);
-		$adminView->details('update',$data);	
+		$adminView->setExtraBreadcrumb($data['username']);
+		$pageTitle .= ' "' . $data['username'] . '"';
+		$adminView->details('update',$data);
 	break;
 	case 'activate':
 		// this action is called from ajax request dojo.xhrPost()
@@ -222,6 +224,8 @@ switch ($registry->route['action'])
 			exit;				
 		}
 		$data = $adminModel->getUserBy('id', $registry->request['id']);
+		$adminView->setExtraBreadcrumb($data['username']);
+		$pageTitle .= ' "' . $data['username'] . '"';
 		// delete page confirmation
 		$adminView->details('delete', $data);	
 	break;

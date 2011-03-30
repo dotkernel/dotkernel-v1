@@ -102,6 +102,8 @@ switch ($registry->route['action'])
 			}
 		}
 		$data = $userModel->getUserBy('id', $registry->request['id']);
+		$userView->setExtraBreadcrumb($data['username']);
+		$pageTitle .= ' "' . $data['username'] . '"';
 		$userView->details('update',$data);	
 	break;
 	case 'activate':
@@ -152,6 +154,8 @@ switch ($registry->route['action'])
 			exit;				
 		}
 		$data = $userModel->getUserBy('id', $registry->request['id']);
+		$userView->setExtraBreadcrumb($data['username']);
+		$pageTitle .= ' "' . $data['username'] . '"';
 		// delete page confirmation
 		$userView->details('delete', $data);	
 	break;
