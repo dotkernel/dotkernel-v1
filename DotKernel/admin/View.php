@@ -19,7 +19,7 @@
 */
 
 class View extends Dot_Template
-{	
+{
 	/**
 	 * Singleton instance
 	 * @access protected
@@ -393,5 +393,29 @@ class View extends Dot_Template
 			}
 		}
 		
+	}
+
+	/*
+	 * Sets extra breadcrumbs beyond the controller and action that are set as default
+	 * If $breadcrumb is an array, a breadcrumb will be added for each element. The content of the tag
+	 * will be the key of the element, and the href will be the value. You probabily want to leave the value
+	 * empty for the last element of the array 
+	 * @access pulbic
+	 * @param string/array $breadcrumb
+	 * @return void
+	 */
+	public function setExtraBreadcrumb($breadcrumb)
+	{
+		if (is_array($breadcrumb))
+		{
+			$html = "";
+			foreach ($breadcrumb as $key=>$value)
+			{
+				$html .= "<li><a href=\"" . $value . "\">" . $key . "</a></li>";
+			}
+			$this->tpl->setVar('EXTRA_BREADCRUMB', $html);
+		}else{
+			$this->tpl->setVar('EXTRA_BREADCRUMB', "<li><a>" . $breadcrumb . "</a></li>");
+		}
 	}
 }
