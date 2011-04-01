@@ -50,7 +50,7 @@ a#logo{
 	color:#2c2c2c !important;
 	background:#F39243 url('images/menu_1_arrow.png') right -17px no-repeat;
 }
-#mainMenu li ul{
+#mainMenu li ul li{
 	background-color: #EEEEEE;
 }
 #mainMenu li ul li a{
@@ -58,18 +58,21 @@ a#logo{
 	background-color: transparent;
 	background-image: none;
 	border-top: 1px solid #CACACA;
+	margin: 0 10px;
+	padding: 3px;
 }
 
 #mainMenu li ul li a.selected{
 	color: #656565 !important;
-	background-color: #EEEEEE;
 	background-image: none;
+	background-color: transparent;
 }
 
 #mainMenu li ul li a:hover{
 	color: #f26f06 !important;
-	background-color: #EEEEEE;
+	background-color: transparent;
 	background-image: none;
+	padding: 3px;
 }
 #mainMenu li ul li:first-child a{
 	border-top:none !important;
@@ -86,11 +89,15 @@ a#logo{
 
 #breadcrumbs li a
 {
-	color:#3894ba !important;
+	color:#3894ba;
 }
 
-#breadcrumbs li a:hover, #breadcrumbs li:last-child a{
-	color:#f26f06 !important;
+#breadcrumbs li a:hover{
+	color: #f26f06 !important;
+}
+
+#breadcrumbs li:last-child a{
+	color: #656565;
 }
 /*** end breadcrumbs ***/
 
