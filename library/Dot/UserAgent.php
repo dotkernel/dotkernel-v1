@@ -104,6 +104,7 @@ class Dot_UserAgent
 	#TODO store in session 	only when is necessary, in Controller
 	#TODO Dk articles about that strange experience 
 	#TODO move here function getDevice from Dot_Kernel.php and everywhere where is called
+	# [9] => object(WURFL_Xml_ModelDevice)#130 (7) that's the one 
 	/*
 	 * buildWurflPersistence()  // build the persistance for wurfl, saving the parsed wurf devices
 	 */

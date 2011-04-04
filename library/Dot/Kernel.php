@@ -415,8 +415,9 @@ class Dot_Kernel
 	 */
 	public static function getDevice()
 	{
-		$config = Zend_Registry::get('configuration');
-		$userAgent = new Zend_Http_UserAgent($config->resources->useragent);
-		return $userAgent->getDevice();
+		#TODO function to be moved to Dot_UserAgent
+		//$config = Zend_Registry::get('configuration');
+		//$userAgent = new Zend_Http_UserAgent($config->resources->useragent);
+		return object;
 	}
 }
