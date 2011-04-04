@@ -145,6 +145,7 @@ class System
 	public function getWurflInfo()
 	{
 		$result = array();
+		/*
 		$result['cacheBuilt'] = $this->settings->wurflCacheBuilt;
 		
 		$wurflConfigFile = $this->config->resources->useragent->wurflapi->wurfl_config_file;
@@ -162,6 +163,12 @@ class System
 			$paramsArray[$paramNameValue[0]] = $paramNameValue[1];
 		}
 		$result['cachePath'] = dirname($wurflConfigFile) . "/" . $paramsArray['dir'];
+		*/
+		#TODO rebuild nicely 
+		$wurfl = new Dot_UserAgent(); 
+		$wurflInfo = $wurfl->getWurflVersion();
+		$result['date'] = $wurflInfo['version'];
+		$result['cacheBuilt'] = 'TO BE EXTENDED';
 		return $result;
 	}
 	/**
@@ -170,7 +177,7 @@ class System
 	 * @access public
 	 * @return array
 	 */
-	public function getWarnings($wurflInfo)
+	public function getWarnings()
 	{
 		$warnings = array();
 		
@@ -188,18 +195,6 @@ class System
 			}
 		}
 
-		// check wether the wurfl cache file exists and is writeable
-		if (!file_exists($wurflInfo['cachePath']))
-		{
-			$warnings[] = array('type'=>'please create', 'description'=>'Wurfl Cache Folder ' . $wurflInfo['cachePath']);
-		}
-		else
-		{
-			if (!is_writable($wurflInfo['cachePath']))
-			{
-				$warnings[] = array('type'=>'not writeable', 'description'=>'Wurfl Cache Folder ' . realpath($wurflInfo['cachePath']));
-			} 
-		}
 		//ignore permission warning if OS is Windows
 		if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') 
 		{

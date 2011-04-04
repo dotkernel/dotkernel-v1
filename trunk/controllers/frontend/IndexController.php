@@ -21,12 +21,12 @@ $wurfl = new Dot_UserAgent();
 // clean the persistent storage
 //$wurflInfo = $wurfl->removeWurflFactory();
 // get the wurfl version
-$wurflInfo = $wurfl->getWurflVersion();
-Zend_Debug::dump($wurflInfo, $label = null, $echo = true);
+//$wurflInfo = $wurfl->getWurflVersion();
+//Zend_Debug::dump($wurflInfo, $label = null, $echo = true);
 //$device = $wurfl->getDeviceForHttpRequest($_SERVER);
-$device = $wurfl->getDeviceForUserAgent($_SERVER["HTTP_USER_AGENT"]);
-Zend_Debug::dump($device, $label = null, $echo = true);
-exit;
+//$device = $wurfl->getDeviceForUserAgent($_SERVER["HTTP_USER_AGENT"]);
+//Zend_Debug::dump($device, $label = null, $echo = true);
+//exit;
 //if automatic redirect is enabled in application.ini and the browser is mobile and session->mobileHit is not set, register it and redirect
 if($registry->configuration->resources->useragent->wurflapi->redirect && 'mobile' == Dot_Kernel::getDevice()->getType() && !isset($session->mobileHit))
 {
