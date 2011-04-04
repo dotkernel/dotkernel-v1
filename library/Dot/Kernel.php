@@ -38,7 +38,9 @@ class Dot_Kernel
 		if (file_exists($frontControllerPath))
 		{
 			require($frontControllerPath);
-		}else{
+		}
+		else
+		{
 			Dot_Kernel::pageNotFound();
 		} 
 	}
