@@ -175,9 +175,10 @@ a#logo{
 	padding: 0;
 	position: absolute;
 	visibility:hidden;
-	-moz-box-shadow: 0px 3px 3px #CACACA;
-	-webkit-box-shadow: 0px 3px 3px #CACACA;
-	box-shadow: 0px 3px 3px #CACACA;
+	-moz-box-shadow: 0px 2px 2px #999;
+	-webkit-box-shadow: 0px 2px 2px #999;
+	box-shadow: 0px 2px 2px #999;
+	min-width:130px;
 }
 
 #mainMenu li ul li
@@ -185,6 +186,8 @@ a#logo{
 	float:none;
 	padding: 2px 0;
 	margin: 0;
+	height:29px;
+	line-height:29px;
 }
 
 #mainMenu li ul li a
@@ -193,8 +196,8 @@ a#logo{
 	display: block;
 	text-align:left;
 	text-transform:none;
-	padding-left: 20px;
-	padding-top: 3px;
+	padding: 3px 10px 0 20px !important;
+	margin:0 4px !important;
 	background-image:none;
 }
 /*** breadcrumbs ***/
@@ -208,8 +211,7 @@ a#logo{
 {
 	float:left;
 	margin-top: 4px;
-	height: 36px;
-	line-height: 36px;
+	line-height: 40px;
 	text-align:left;
 	font-weight:bold;
 	

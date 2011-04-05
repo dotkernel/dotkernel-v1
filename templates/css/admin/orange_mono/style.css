@@ -44,11 +44,11 @@ a#logo{
 }
 #mainMenu li a:hover, #mainMenu li a.menuHover{
 	color: #2c2c2c;
-	background:#EEEEEE url('images/menu_1_arrow.png') right -17px no-repeat;
+	background:#EEEEEE url('images/menu_1_arrow.png') right -24px no-repeat;
 }
 #mainMenu li a.selected{
 	color:#2c2c2c !important;
-	background:#F39243 url('images/menu_1_arrow.png') right -17px no-repeat;
+	background:#F39243 url('images/menu_1_arrow.png') right -24px no-repeat;
 }
 #mainMenu li ul li{
 	background-color: #EEEEEE;
@@ -56,22 +56,26 @@ a#logo{
 #mainMenu li ul li a{
 	color: #3894ba;
 	background-color: transparent;
-	background-image: none;
+	background:url('images/breadcrumb_arrow.png') no-repeat 8px 11px;
 	border-top: 1px solid #CACACA;
 	margin: 0 10px;
 	padding: 3px;
+	/*-moz-transition: color 0.3s ease-out;
+	-o-transition: color 0.3s ease-out;
+	-webkit-transition: color 0.3s ease-out;
+	transition: color 0.3s ease-out;*/
 }
 
 #mainMenu li ul li a.selected{
 	color: #656565 !important;
-	background-image: none;
+	background:url('images/breadcrumb_arrow.png') no-repeat 8px 11px;
 	background-color: transparent;
 }
 
 #mainMenu li ul li a:hover{
 	color: #f26f06 !important;
 	background-color: transparent;
-	background-image: none;
+	background:url('images/breadcrumb_arrow.png') no-repeat 8px 11px;
 	padding: 3px;
 }
 #mainMenu li ul li:first-child a{
