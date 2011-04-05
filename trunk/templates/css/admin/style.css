@@ -175,6 +175,9 @@ a#logo{
 	padding: 0;
 	position: absolute;
 	visibility:hidden;
+	-moz-box-shadow: 0px 3px 3px #CACACA;
+	-webkit-box-shadow: 0px 3px 3px #CACACA;
+	box-shadow: 0px 3px 3px #CACACA;
 }
 
 #mainMenu li ul li
