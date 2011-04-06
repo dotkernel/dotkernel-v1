@@ -15,7 +15,7 @@
  * Is doing all the job for specific frontend control stuff
  * @author     DotKernel Team <team@dotkernel.com>
  */ 
-$wurfl = new Dot_UserAgent();
+//$wurfl = new Dot_UserAgent();
 // create the persistent storage
 //$wurflInfo = $wurfl->createWurflFactory();
 // clean the persistent storage
