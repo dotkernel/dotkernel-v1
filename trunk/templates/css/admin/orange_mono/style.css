@@ -38,6 +38,9 @@ a#logo{
 	color: #DBDBDB;
 }
 /*** menu ***/
+#mainMenu li{
+	border-bottom: 1px solid #FFB57A;	
+}
 #mainMenu li a{
 	color: #dadada;
 	background:#4D4D4D url('images/menu_1_arrow.png') right 16px no-repeat;
@@ -49,34 +52,42 @@ a#logo{
 #mainMenu li a.selected{
 	color:#2c2c2c !important;
 	background:#F39243 url('images/menu_1_arrow.png') right -24px no-repeat;
+	border: 1px solid #FFB57A;
+	border-bottom: 1px solid #F49243;
+	height: 35px;
 }
+#mainMenu li a.selected:hover, #mainMenu li a.selected.menuHover{
+	color: #2c2c2c;
+	background:#EEEEEE url('images/menu_1_arrow.png') right -24px no-repeat;
+	border:1px solid #EEEEEE;
+	border-bottom:none;
+}
+
 #mainMenu li ul li{
 	background-color: #EEEEEE;
+	border-bottom: none;
 }
 #mainMenu li ul li a{
-	color: #3894ba;
+	color: #1A7EB5;
 	background-color: transparent;
 	background:url('images/breadcrumb_arrow.png') no-repeat 8px 11px;
-	border-top: 1px solid #CACACA;
+	border-top: 1px solid #DDD;
 	margin: 0 10px;
-	padding: 3px;
-	/*-moz-transition: color 0.3s ease-out;
-	-o-transition: color 0.3s ease-out;
-	-webkit-transition: color 0.3s ease-out;
-	transition: color 0.3s ease-out;*/
 }
 
 #mainMenu li ul li a.selected{
 	color: #656565 !important;
 	background:url('images/breadcrumb_arrow.png') no-repeat 8px 11px;
 	background-color: transparent;
+	border:none;
 }
 
-#mainMenu li ul li a:hover{
+#mainMenu li ul li a.selected:hover, #mainMenu li ul li a:hover{
 	color: #f26f06 !important;
 	background-color: transparent;
 	background:url('images/breadcrumb_arrow.png') no-repeat 8px 11px;
-	padding: 3px;
+	border-left:none;
+	border-right:none;
 }
 #mainMenu li ul li:first-child a{
 	border-top:none !important;
@@ -93,7 +104,7 @@ a#logo{
 
 #breadcrumbs li a
 {
-	color:#3894ba;
+	color:#1A7EB5;
 }
 
 #breadcrumbs li a:hover{

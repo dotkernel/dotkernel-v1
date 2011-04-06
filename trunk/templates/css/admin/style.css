@@ -12,7 +12,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	background: transparent;
 }
 h6{
-	font-family: 'Cabin', serif;
+	font-family: 'Cabin', sans-serif;
 	font-weight:bolder;
 	font-size:28px;
 	display:inline;
@@ -101,7 +101,7 @@ legend{
 	line-height: 14px;
 	font-weight: bold;
 	text-transform: uppercase;
-	font-family: Arial,sans-serif;
+	font-family: 'Cabin', sans-serif, Arial;
 	vertical-align: middle;
 }
 input,select,textarea{
@@ -149,7 +149,7 @@ a#logo{
 }
 #mainMenu li
 {
-	height: 36px;
+	height: 35px;
 	margin:0px;
 	line-height:36px;
 	float: left;
@@ -157,6 +157,7 @@ a#logo{
 	margin: 0px 1px 0px 0px;
 	float:left;
 	font-weight:bold;
+	position:relative;
 }
 #mainMenu li a
 {
@@ -171,14 +172,19 @@ a#logo{
 
 #mainMenu li ul
 {
+	position:absolute;
 	margin: 0;
 	padding: 0;
-	position: absolute;
 	visibility:hidden;
-	-moz-box-shadow: 0px 2px 2px #999;
-	-webkit-box-shadow: 0px 2px 2px #999;
-	box-shadow: 0px 2px 2px #999;
-	min-width:130px;
+	-moz-box-shadow: 0px 1px 1px #bbb;
+	-webkit-box-shadow: 0px 1px 1px #bbb;
+	box-shadow: 0px 1px 1px #bbb;
+	/*
+	border-left:1px solid #bbb;
+	border-right:1px solid #bbb;
+	border-bottom:1px solid #999;
+	border-top:none;*/
+	min-width:150px;
 }
 
 #mainMenu li ul li
@@ -196,7 +202,7 @@ a#logo{
 	display: block;
 	text-align:left;
 	text-transform:none;
-	padding: 3px 10px 0 20px !important;
+	padding: 1px 10px 0 20px !important;
 	margin:0 4px !important;
 	background-image:none;
 }
