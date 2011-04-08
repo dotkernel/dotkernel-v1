@@ -175,10 +175,23 @@ else
 	}
 	else
 	{
-		$check['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i> module', 
+		// if we don't have mod_php, only cgi-fastcgi
+		$cgi = (!strpos($contents, 'mod_php') !== false);
+		if($cgi)
+		{
+			 $check['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i> module', 
+											                   'status' => 'pass', 
+											                   'value'  => 'You are running Apache with cgi-fastcgi, <br> presence of 
+																				 mod_rewrite cannot be determined.');
+		}
+		else
+		{
+			$check['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i> module', 
 											                   'status' => 'failed', 
 											                   'value'  => 'DotKernel requires Apache mod_rewrite for htaccess route.');
-		$test = false;
+			$test = false;
+		}
+
 	}
 }
 // check ctype	
@@ -241,6 +254,20 @@ else
 													  'value'  => 'DotKernel requires <a href="http://www.php.net/manual/en/book.spl.php">SPL</a>,
 														             used by Zend Framework. ');
 	$test = false;
+}
+
+// check APC
+if((function_exists('apc_cache_info') && (@apc_cache_info() !== FALSE)))
+{
+	$checkOptional['php_apc'] = array('name'   => 'PHP <i>APC</i> extension', 
+																	   'status' => 'pass', 
+																	   'value'  => 'OK');
+}
+else
+{
+	$checkOptional['php_apc'] = array('name'   => 'PHP <i>APC</i> extension', 
+																	   'status' => 'failed', 
+																	   'value'  => 'DotKernel recommend the use of APC extension for opcode caching. ');
 }
 
 // check cURL
