@@ -26,7 +26,7 @@ class Dot_Kernel
 	 */
 	const VERSION = '1.5.0 dev';
 	/*
-	 * Start DotKernel
+ 	 * Start DotKernel
 	 * Pass controll to the Front Controller if it exists,
 	 * otherwise throw a 404 error
 	 */
@@ -144,9 +144,10 @@ class Dot_Kernel
 		$seo = new Dot_Seo();
 		$seo->routes();
 		$registry->seo = $seo->getOption();
-
+		
 		return $registry;
 	}
+	
 	/**
 	 * End the execution of the application,
 	 * by sending an 404 header and redirecting to home page

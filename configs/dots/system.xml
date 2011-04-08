@@ -10,7 +10,7 @@
 					<settings>Settings</settings>
 					<settings-update>Update Settings</settings-update>
 					<phpinfo>PHP Info</phpinfo>
-					<apc-info>ACP Info</apc-info>
+					<apc-info>APC Info</apc-info>
 					<transporter-list>List Email Transporter</transporter-list>
 					<transporter-update>Update Email Transporter</transporter-update>
 					<transporter-delete>Delete Email Transporter</transporter-delete>

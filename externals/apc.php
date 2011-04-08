@@ -191,8 +191,9 @@ if ($AUTHENTICATED && !empty($MYREQUEST['DU'])) {
 	apc_delete($MYREQUEST['DU']);
 }
 
+
 if(!function_exists('apc_cache_info') || !($cache=@apc_cache_info($cache_mode))) {
-	echo "No cache info available.  APC does not appear to be running.";
+	echo "<H3>No cache info available.  APC does not appear to be running.</H3>";
   exit;
 }
 
