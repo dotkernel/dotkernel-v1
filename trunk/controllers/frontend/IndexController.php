@@ -16,6 +16,11 @@
  * @author     DotKernel Team <team@dotkernel.com>
  */ 
 $wurfl = new Dot_UserAgent();
+//echo $_SERVER["HTTP_USER_AGENT"];
+//echo '<hr>';
+//$xxx = $wurfl->getDevice($_SERVER["HTTP_USER_AGENT"]);
+//Zend_Debug::dump($xxx, $label = null, $echo = true);
+//exit;
 //if automatic redirect is enabled in application.ini and the browser is mobile and session->mobileHit is not set, register it and redirect
 if($registry->configuration->resources->useragent->wurflapi->redirect && 'mobile' == Dot_Kernel::getDevice()->getType() && !isset($session->mobileHit))
 {
