@@ -109,7 +109,7 @@ class Dot_UserAgent
 	 * @access private , we don't want to be called within controller, is too expensive
 	 * @return object
 	 */
-	private function _getDeviceForUserAgent($userAgent)
+	public function _getDeviceForUserAgent($userAgent)
 	{
 		$wurflManager = $this->wurflManagerFactory->create(true);
 		return $wurflManager->getDeviceForUserAgent($userAgent);
@@ -177,10 +177,9 @@ class Dot_UserAgent
 		$device['modelName']       = $deviceCapabilities['model_name'];
 		$device['browserName']     = $deviceCapabilities['mobile_browser'];
 		$device['browserVersion']  = $deviceCapabilities['mobile_browser_version']; 
-		$device['device']          = '';
-		$device['deviceOsName']    = $deviceCapabilities['device_os'];
+		$device['device']          = '';  // THIS IS THE SAME AS brandName, to be removed !!!!
 		$device['deviceTokenName'] = '';
-		$device['deviceOs']        = '';
+		$device['deviceOs']        = $deviceCapabilities['device_os'];
 		$device['deviceOsVersion'] = $deviceCapabilities['device_os_version']; 
 		$device['isTablet']        = is_null($deviceCapabilities['is_tablet']) ? '1' : '0';; 
 		$device['isDesktop']       = is_null($deviceCapabilities['mobile_browser'])? '1' : '0';
@@ -280,6 +279,7 @@ class Dot_UserAgent
 		return $isBlackberry;
 	}
 	
+	#TODO isSOMETHING functions must return boulean 
 	#TODO write only once the data in Storage, and only from admin 
 	#TODO data in Storage must be very summary, only strictly necessary informations, and presented as a Big Array
 	#TODO data Storage in cache/wurfl folder , as 1 or 2 files, and moved when necessary in APC or memcached
