@@ -126,7 +126,8 @@ class Dot_UserAgent
 		return $this->_getDeviceForUserAgent($userAgent)->getAllCapabilities();
 	}
 	
-	/** get from WURFL huge object only few interesting params
+	/** 
+	 * get from WURFL huge object only few interesting params
 	 * @access public
 	 * @param object $userAgent
 	 * @return array with short summary related to device 
@@ -164,28 +165,31 @@ class Dot_UserAgent
 	 * Core function. Prepare the device short info
 	 * @access private
 	 * @param object $userAgent
-	 * @return array
+	 * @return object
 	 */
 	private function _prepareDeviceInfo($userAgent)
 	{
-		// prepare the array with device info
+		// prepare the object with device info
 		$deviceCapabilities = $this->getDeviceCapabilities($userAgent);
-		
-		$device['fallBack']       = $this->getDeviceFallBack($userAgent);
-		$device['brandName']       = $deviceCapabilities['brand_name'];
-		$device['productName']     = $deviceCapabilities['marketing_name']; // THIS IS STRANGE !!!!
-		$device['modelName']       = $deviceCapabilities['model_name'];
-		$device['browserName']     = $deviceCapabilities['mobile_browser'];
-		$device['browserVersion']  = $deviceCapabilities['mobile_browser_version']; 
-		$device['deviceOs']        = $deviceCapabilities['device_os'];
-		$device['deviceOsVersion'] = $deviceCapabilities['device_os_version']; 
-		$device['isTablet']        = is_null($deviceCapabilities['is_tablet']) ? '1' : '0';; 
-		$device['isDesktop']       = is_null($deviceCapabilities['mobile_browser'])? '1' : '0';
-		$device['isMobile']        = is_null($deviceCapabilities['mobile_browser'])? '0' : '1';
-		$device['isSmartphone']    = $this->isSmartphone();
-		$device['isIphone']        = $this->_isIphone($device['fallBack']);
-		$device['isAndroid']       = $this->_isAndroid($device['deviceOs']);
-		$device['isBlackberry']    = $this->_isBlackberry($device['fallBack']);	
+
+		$device = new stdClass();
+		$device->fallBack        = $this->getDeviceFallBack($userAgent);
+		$device->brandName       = $deviceCapabilities['brand_name'];
+		$device->modelName       = $deviceCapabilities['model_name'];
+		$device->browserName     = $deviceCapabilities['mobile_browser'];
+		$device->browserVersion  = $deviceCapabilities['mobile_browser_version']; 
+		$device->deviceOs        = $deviceCapabilities['device_os'];
+		$device->deviceOsVersion = $deviceCapabilities['device_os_version']; 
+		$device->screenWidth     = $deviceCapabilities["resolution_width"];
+		$device->screenHeight    = $deviceCapabilities["resolution_height"];
+		$device->isTablet        = ($deviceCapabilities['is_tablet'] == 'true') ? TRUE : FALSE;
+		$device->isMobile        = empty($deviceCapabilities['mobile_browser'])? FALSE : TRUE;
+		$device->isSmartphone    = $this->_isSmartphone($deviceCapabilities, $device->isMobile);
+		$device->isIphone        = $this->_isIphone($device->fallBack);
+		$device->isAndroid       = $this->_isAndroid($device->deviceOs);
+		$device->isBlackberry    = $this->_isBlackberry($device->fallBack);
+		$device->isSymbian       = $this->_isSymbian($device->deviceOs);
+		$device->isWindowsMobile = $this->_isWindowsMobile($device->deviceOs, $device->isMobile);	
 		return $device;		
 	}
 	
@@ -225,12 +229,30 @@ class Dot_UserAgent
 	{
 		$this->_cache->save($device, $cacheToken);
 	}
-	public function getDeviceType($userAgent)
-	{
-	 //return 'mobile', 'desktop', 'bot', 'console', 'email', 'feed', 'offline', 'probe', 'spam'
-	}
 	
-	function isSmartphone() {}
+	/**
+	 * Check device capabilities for screen size. We assume that a screen size lower then 320x240 is not a real 
+	 * smartphone, but more something that you can shove it up your ass ( a.k.a "feature phone")
+	 * @param array $deviceCapabilities
+	 * @param bool $isMobile
+	 * @access private
+	 * @return bool
+	 */
+	private function _isSmartphone($deviceCapabilities, $isMobile) 
+	{
+		$isSmartphone =  FALSE;
+		// if is not a mobile device , we will have surprises here :-)
+		if($isMobile)
+		{		
+			$screenWidth  = $deviceCapabilities["resolution_width"];
+			$screenHeight = $deviceCapabilities["resolution_height"];
+			if($screenWidth >= 320  && $screenHeight >= 240)
+			{
+				$isSmartphone =  TRUE;
+			}
+		}
+		return $isSmartphone;
+	}
 	
 	/**
 	 * Check again device fallBack the string iphone
@@ -239,10 +261,10 @@ class Dot_UserAgent
 	 */
 	private function _isIphone($deviceFallBack)
 	{
-		$isIphone = 0;
+		$isIphone = FALSE;
 		if(stripos($deviceFallBack, 'iphone') !== FALSE)
 		{
-			$isIphone = '1';	
+			$isIphone = TRUE;	
 		}
 		return $isIphone;
 	}
@@ -254,10 +276,10 @@ class Dot_UserAgent
 	 */
 	private function _isAndroid($deviceOsName)
 	{
-		$isAndroid = 0;
+		$isAndroid = FALSE;
 		if(stripos($deviceOsName, 'Android') !== FALSE)
 		{
-			$isAndroid = '1';	
+			$isAndroid = TRUE;	
 		}
 		return $isAndroid;
 	}
@@ -269,15 +291,44 @@ class Dot_UserAgent
 	 */
 	private function _isBlackberry($deviceFallBack) 
 	{
-		$isBlackberry = 0;
+		$isBlackberry = FALSE;
 		if(stripos($deviceFallBack, 'Blackberry') !== FALSE)
 		{
-			$isBlackberry = '1';	
+			$isBlackberry = TRUE;	
 		}
 		return $isBlackberry;
 	}
+
+	/**
+	 * Check if is a Symbian device
+	 * @param object $deviceOsName
+	 * @return bool
+	 */
+	private function _isSymbian($deviceOsName)
+	{
+		$isSymbian = FALSE;
+		if(stripos($deviceOsName, 'Symbian') !== FALSE)
+		{
+			$isSymbian = TRUE;	
+		}
+		return $isSymbian;
+	}	
 	
-	#TODO isSOMETHING functions must return boulean 
+	/**
+	 * Check if is an Windows Mobile device 
+	 * @param object $deviceOsName
+	 * @param object $isMobile
+	 * @return bool
+	 */
+	private function _isWindowsMobile($deviceOsName, $isMobile)
+	{
+		$isWindows = FALSE;
+		if(stripos($deviceOsName, 'Windows') !== FALSE && $isMobile == TRUE)
+		{
+			$isWindows = TRUE;	
+		}
+		return $isWindows;
+	}
 	#TODO write only once the data in Storage, and only from admin 
 	#TODO data in Storage must be very summary, only strictly necessary informations, and presented as a Big Array
 	#TODO data Storage in cache/wurfl folder , as 1 or 2 files, and moved when necessary in APC or memcached
