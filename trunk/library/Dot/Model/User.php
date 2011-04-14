@@ -11,7 +11,7 @@
 */
 
 /**
-* Alternate SMTP server mail() class 
+* Use Model Class 
 * @category   DotKernel
 * @package    DotLibrary
 * @subpackage DotModel
