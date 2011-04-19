@@ -154,6 +154,11 @@ class View extends Dot_Template
 
 					$subItems = $menuItem['subItems']['subItem'];
 
+					if(!isset($subItems[0]))
+					{
+						$subItems = array(0 => $subItems);
+					}
+
 					foreach ($subItems as $subMenuItem)
 					{
 						$this->setVar('SUBMENU_TITLE', $subMenuItem['title']);
