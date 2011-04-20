@@ -145,13 +145,13 @@ a#logo{
 }
 /*** menu ***/
 #mainMenu{
-	margin-top: 11px;
+	margin-top: 15px;
 }
 #mainMenu li
 {
-	height: 35px;
+	height: 30px;
 	margin:0px;
-	line-height:36px;
+	line-height:30px;
 	float: left;
 	list-style: none;
 	margin: 0px 1px 0px 0px;

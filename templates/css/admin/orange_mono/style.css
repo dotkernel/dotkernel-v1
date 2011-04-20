@@ -43,22 +43,20 @@ a#logo{
 }
 #mainMenu li a{
 	color: #dadada;
-	background:#4D4D4D url('images/menu_1_arrow.png') right 16px no-repeat;
+	background: transparent url('images/menu_1_arrows.png') right 12px no-repeat;
 }
 #mainMenu li a:hover, #mainMenu li a.menuHover{
 	color: #2c2c2c;
-	background:#EEEEEE url('images/menu_1_arrow.png') right -24px no-repeat;
+	background:#EEEEEE url('images/menu_1_arrows.png') right -47px no-repeat !important;
 }
 #mainMenu li a.selected{
 	color:#2c2c2c !important;
-	background:#F39243 url('images/menu_1_arrow.png') right -24px no-repeat;
-	border: 1px solid #FFB57A;
-	border-bottom: 1px solid #F49243;
-	height: 35px;
+	background:#f49243 url('images/menu_1_arrows.png') right -17px no-repeat;
+	border: 1px solid #ffb57a;
+	border-bottom: 1px solid #f49243;
 }
 #mainMenu li a.selected:hover, #mainMenu li a.selected.menuHover{
 	color: #2c2c2c;
-	background:#EEEEEE url('images/menu_1_arrow.png') right -24px no-repeat;
 	border:1px solid #EEEEEE;
 	border-bottom:none;
 }
@@ -70,14 +68,14 @@ a#logo{
 #mainMenu li ul li a{
 	color: #1A7EB5;
 	background-color: transparent;
-	background:url('images/breadcrumb_arrow.png') no-repeat 8px 11px;
-	border-top: 1px solid #DDD;
+	background:url('images/drop_bread_arrows.png') no-repeat 8px -57px;
+	border-top: 1px solid #E7E7E7;
 	margin: 0 10px;
 }
 
 #mainMenu li ul li a.selected{
 	color: #656565 !important;
-	background:url('images/breadcrumb_arrow.png') no-repeat 8px 11px;
+	background:url('images/drop_bread_arrows.png') no-repeat 8px -23px;
 	background-color: transparent;
 	border:none;
 }
@@ -85,7 +83,7 @@ a#logo{
 #mainMenu li ul li a.selected:hover, #mainMenu li ul li a:hover{
 	color: #f26f06 !important;
 	background-color: transparent;
-	background:url('images/breadcrumb_arrow.png') no-repeat 8px 11px;
+	background:url('images/drop_bread_arrows.png') no-repeat 8px 9px !important;
 	border-left:none;
 	border-right:none;
 }
@@ -95,7 +93,7 @@ a#logo{
 
 /*** breadcrumbs ***/
 #breadcrumbs li{
-	background:	url('images/breadcrumb_arrow.png') right center no-repeat;
+	background:	url('images/drop_bread_arrows.png') right -52px no-repeat;
 }
 
 #breadcrumbs li:last-child{
