@@ -179,11 +179,6 @@ a#logo{
 	-moz-box-shadow: 0px 1px 1px #bbb;
 	-webkit-box-shadow: 0px 1px 1px #bbb;
 	box-shadow: 0px 1px 1px #bbb;
-	/*
-	border-left:1px solid #bbb;
-	border-right:1px solid #bbb;
-	border-bottom:1px solid #999;
-	border-top:none;*/
 	min-width:150px;
 }
 
@@ -198,6 +193,7 @@ a#logo{
 
 #mainMenu li ul li a
 {
+	line-height:35px;
 	width: auto;
 	display: block;
 	text-align:left;
@@ -208,15 +204,10 @@ a#logo{
 }
 /*** breadcrumbs ***/
 
-#breadcrumbs img
-{
-	margin-top:13px;
-}
-
 #breadcrumbs li
 {
 	float:left;
-	margin-top: 4px;
+	margin-top: 0;
 	line-height: 40px;
 	text-align:left;
 	font-weight:bold;

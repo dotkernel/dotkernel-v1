@@ -47,7 +47,7 @@ a#logo{
 }
 #mainMenu li a:hover, #mainMenu li a.menuHover{
 	color: #2c2c2c;
-	background:#EEEEEE url('images/menu_1_arrows.png') right -47px no-repeat !important;
+	background:#FFF url('images/menu_1_arrows.png') right -47px no-repeat !important;
 }
 #mainMenu li a.selected{
 	color:#2c2c2c !important;
@@ -62,20 +62,19 @@ a#logo{
 }
 
 #mainMenu li ul li{
-	background-color: #EEEEEE;
+	background-color: #FFF;
 	border-bottom: none;
 }
 #mainMenu li ul li a{
 	color: #1A7EB5;
 	background-color: transparent;
-	background:url('images/drop_bread_arrows.png') no-repeat 8px -57px;
+	background:url('images/drop_bread_arrows.png') no-repeat 8px -54px;
 	border-top: 1px solid #E7E7E7;
-	margin: 0 10px;
 }
 
 #mainMenu li ul li a.selected{
 	color: #656565 !important;
-	background:url('images/drop_bread_arrows.png') no-repeat 8px -23px;
+	background:url('images/drop_bread_arrows.png') no-repeat 8px -20px;
 	background-color: transparent;
 	border:none;
 }
@@ -83,7 +82,7 @@ a#logo{
 #mainMenu li ul li a.selected:hover, #mainMenu li ul li a:hover{
 	color: #f26f06 !important;
 	background-color: transparent;
-	background:url('images/drop_bread_arrows.png') no-repeat 8px 9px !important;
+	background:url('images/drop_bread_arrows.png') no-repeat 8px 12px !important;
 	border-left:none;
 	border-right:none;
 }
