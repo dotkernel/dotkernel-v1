@@ -68,13 +68,13 @@ a#logo{
 #mainMenu li ul li a{
 	color: #1A7EB5;
 	background-color: transparent;
-	background:url('images/drop_bread_arrows.png') no-repeat 8px -54px;
+	background:url('images/drop_bread_arrows.png') no-repeat 8px -53px;
 	border-top: 1px solid #E7E7E7;
 }
 
 #mainMenu li ul li a.selected{
 	color: #656565 !important;
-	background:url('images/drop_bread_arrows.png') no-repeat 8px -20px;
+	background:url('images/drop_bread_arrows.png') no-repeat 8px -19px;
 	background-color: transparent;
 	border:none;
 }
@@ -82,12 +82,11 @@ a#logo{
 #mainMenu li ul li a.selected:hover, #mainMenu li ul li a:hover{
 	color: #f26f06 !important;
 	background-color: transparent;
-	background:url('images/drop_bread_arrows.png') no-repeat 8px 12px !important;
-	border-left:none;
-	border-right:none;
+	background:url('images/drop_bread_arrows.png') no-repeat 8px 13px !important;
 }
+
 #mainMenu li ul li:first-child a{
-	border-top:none !important;
+	border-top:1px solid #fff !important;
 }
 
 /*** breadcrumbs ***/
