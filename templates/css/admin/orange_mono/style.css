@@ -76,13 +76,20 @@ a#logo{
 	color: #656565 !important;
 	background:url('images/drop_bread_arrows.png') no-repeat 8px -19px;
 	background-color: transparent;
-	border:none;
+	border-top: 1px solid #E7E7E7;
+	border-left:none !important;
+	border-right:none !important;
+	border-bottom:none !important;
 }
 
 #mainMenu li ul li a.selected:hover, #mainMenu li ul li a:hover{
 	color: #f26f06 !important;
 	background-color: transparent;
 	background:url('images/drop_bread_arrows.png') no-repeat 8px 13px !important;
+	border-top: 1px solid #E7E7E7;
+	border-left:none !important;
+	border-right:none !important;
+	border-bottom:none !important;
 }
 
 #mainMenu li ul li:first-child a{
