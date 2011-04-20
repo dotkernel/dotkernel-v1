@@ -193,7 +193,7 @@ a#logo{
 
 #mainMenu li ul li a
 {
-	line-height:35px;
+	line-height:32px;
 	width: auto;
 	display: block;
 	text-align:left;
@@ -208,7 +208,7 @@ a#logo{
 {
 	float:left;
 	margin-top: 0;
-	line-height: 40px;
+	line-height: 38px;
 	text-align:left;
 	font-weight:bold;
 	
