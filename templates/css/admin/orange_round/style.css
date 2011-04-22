@@ -186,7 +186,7 @@ a#logo{
 
 #mainMenu li ul li a
 {
-	color:#1A7EB5;
+	color:#2c2c2c;
 	line-height:32px;
 	width: auto;
 	display: block;
@@ -208,7 +208,7 @@ a#logo{
 	background-color:transparent;
 	font-weight:bold;
 	background-image:none;
-	color: #656565;
+	color: #1A7EB5;
 }
 
 /*** breadcrumbs ***/
