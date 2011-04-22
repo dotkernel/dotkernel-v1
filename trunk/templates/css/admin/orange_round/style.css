@@ -129,6 +129,8 @@ a#logo{
 	border-bottom:none;
 	
 	text-transform:none;
+
+	cursor:pointer;
 }
 
 #mainMenu li a.selected{

@@ -1,7 +1,7 @@
 <ul id="mainMenu">
 	<!-- BEGIN menu_list -->
 		<li>
-			<a href="{MENU_LINK}"{MENU_SELECTED}>{MENU_TITLE}</a>
+			<a{MENU_SELECTED}>{MENU_TITLE}</a>
 			<ul>
 				<!-- BEGIN submenu_list -->
 					<li><a href="{SUBMENU_LINK}"{SUBMENU_SELECTED}>{SUBMENU_TITLE}</a></li>
