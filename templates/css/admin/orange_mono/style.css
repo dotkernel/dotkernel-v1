@@ -12,6 +12,7 @@ h3{
 }
 a{
 	color: #1A7EB5;
+	text-shadow: #fff 1px 1px 1px;
 }
 a:hover{
 	color: #1A7EB5;
