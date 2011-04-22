@@ -99,6 +99,7 @@ a#logo{
 /*** menu ***/
 #mainMenu{
 	height:30px;
+	margin-top:8px;
 }
 #mainMenu li
 {
@@ -112,28 +113,18 @@ a#logo{
 }
 #mainMenu li a
 {
-	background: transparent url('images/menu_1_arrows.png') right 10px no-repeat;
+	background: transparent url('images/menu_1_arrows.png') right 14px no-repeat;
 	text-shadow: 1px 1px 3px #000;
 	color:#fff;
 	display: block;
-	height:24px;
-	line-height:27px;
+	height:31px;
+	line-height:32px;
 	margin-top:5px;
 	padding: 0px 28px 0 15px;
 	text-decoration: none;
 	text-align: center;
 	font-size: 12px;
 	
-	-webkit-border-top-left-radius: 8px;
-	-webkit-border-top-right-radius: 8px;
-	-moz-border-radius-topleft: 8px;
-	-moz-border-radius-topright: 8px;
-	border-top-left-radius: 8px;
-	border-top-right-radius: 8px;
-
-	/* useful if you don't want a bg color from leaking outside the border: */        
-	-moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box; 
-
 	border:1px solid transparent;
 	border-bottom:none;
 	
@@ -148,29 +139,15 @@ a#logo{
 	color:#0A172B;
 	text-shadow:none;
 	
-	background:#EAEAEA url('images/menu_1_arrows.png') right -20px no-repeat;
-
-	-webkit-border-top-left-radius: 8px;
-	-webkit-border-top-right-radius: 8px;
-	-moz-border-radius-topleft: 8px;
-	-moz-border-radius-topright: 8px;
-	border-top-left-radius: 8px;
-	border-top-right-radius: 8px;
+	background:#F3F3F3 url('images/menu_1_arrows.png') right -16px no-repeat;
 }
 
 #mainMenu li a.menuHover, #mainMenu li a.selected.menuHover
 {
-	-webkit-border-bottom-left-radius: 0px;
-	-webkit-border-bottom-right-radius: 0px;
-	-moz-border-radius-bottomleft: 0px;
-	-moz-border-radius-bottomright: 0px;
-	border-bottom-left-radius: 0px;
-	border-bottom-right-radius: 0px;
-
 	border:1px solid #B4B4B4;
 	border-bottom:none;
 
-	background:#EAEAEA url('images/menu_1_arrows.png') right -50px no-repeat !important;
+	background:#F3F3F3 url('images/menu_1_arrows.png') right -46px no-repeat !important;
 	color:#0A172B;
 	text-shadow:none;
 }
@@ -185,21 +162,15 @@ a#logo{
 	-webkit-box-shadow: 0px 1px 1px #bbb;
 	box-shadow: 0px 1px 1px #bbb;
 	min-width:150px;
-	background-color: #EAEAEA;
-	background-image: -moz-linear-gradient(top, #EAEAEA, #CBCBCB); /* FF3.6 */
-	background-image: -ms-linear-gradient(top, #EAEAEA, #CBCBCB); /* IE10 */
-	background-image: -o-linear-gradient(top, #EAEAEA, #CBCBCB); /* Opera 11.10+ */
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#EAEAEA), to(#CBCBCB)); /* Saf4+, Chrome */
-	background-image: -webkit-linear-gradient(top, #EAEAEA, #CBCBCB); /* Chrome 10+, Saf5.1+ */
-	background-image: linear-gradient(top, #EAEAEA, #CBCBCB);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#EAEAEA', EndColorStr='#CBCBCB'); /* IE6–IE9 */
+	background-color: #F3F3F3;
+	background-image: -moz-linear-gradient(top, #F3F3F3, #D6D6D6); /* FF3.6 */
+	background-image: -ms-linear-gradient(top, #F3F3F3, #D6D6D6); /* IE10 */
+	background-image: -o-linear-gradient(top, #F3F3F3, #D6D6D6); /* Opera 11.10+ */
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#F3F3F3), to(#D6D6D6)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient(top, #F3F3F3, #D6D6D6); /* Chrome 10+, Saf5.1+ */
+	background-image: linear-gradient(top, #F3F3F3, #D6D6D6);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#F3F3F3', EndColorStr='#D6D6D6'); /* IE6–IE9 */
 
-	-webkit-border-radius: 6px;
-	-webkit-border-top-left-radius: 0;
-	-moz-border-radius: 6px;
-	-moz-border-radius-topleft: 0;
-	border-radius: 6px;
-	border-top-left-radius: 0;
 	border:1px solid #B4B4B4;
 	border-top:none;
 }
@@ -215,54 +186,35 @@ a#logo{
 
 #mainMenu li ul li a
 {
-	/*color:#0A172B;*/
-	color:#656565;
+	color:#1A7EB5;
 	line-height:32px;
 	width: auto;
 	display: block;
 	text-align:left;
 	text-transform:none;
-	padding: 1px 10px 0 20px !important;
+	padding: 0px 10px 0 20px !important;
 	margin:0 !important;
 	background-image:none;
-	/*text-shadow: #FFF 0px 0px 4px;*/
 	text-shadow: #fff 1px 1px 3px;
 	border:1px solid transparent;
 	height:30px;
-	/*line-height:30px;*/
 }
-#mainMenu li ul li a:hover, #mainMenu li ul li a.selected 
+#mainMenu li ul li a:hover, #mainMenu li ul li a.selected:hover
 {
-	border-radius: 0px;
-	border-top:1px solid #B4B4B4;
-	border-bottom:1px solid #B4B4B4;
-
-	border-left:1px solid transparent;
-	border-right:1px solid transparent;
-	background-color:#EAEAEA;
-	-moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box; 
+	color:#f26f06;
 }
 #mainMenu li ul li a.selected{
+	border:none;
+	background-color:transparent;
 	font-weight:bold;
 	background-image:none;
+	color: #656565;
 }
 
-#mainMenu li ul li:first-child a
-{
-	-webkit-border-top-right-radius: 6px;
-	-moz-border-radius-topright: 6px;
-	border-top-right-radius: 6px;
-}
-#mainMenu li ul li:last-child a
-{
-	-webkit-border-bottom-right-radius: 10px;
-	-webkit-border-bottom-left-radius: 10px;
-	-moz-border-radius-bottomright: 10px;
-	-moz-border-radius-bottomleft: 10px;
-	border-bottom-right-radius: 10px;
-	border-bottom-left-radius: 10px;
-}
 /*** breadcrumbs ***/
+#breadcrumbs{
+	margin-top:8px;
+}
 #breadcrumbs li{
 	background:	url('images/drop_bread_arrows.png') right -52px no-repeat;
 }
