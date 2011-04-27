@@ -209,7 +209,16 @@ class System
 			$folders = $this->_listDirectory(APPLICATION_PATH);
 			foreach ($folders as $path)
 			{
-				if(!in_array($path,$folderException) && intval(substr(decoct(fileperms($path)),-3)) > 755)
+				$skip = false;
+				foreach($folderException as $exception)
+				{
+					if (strpos($path, $exception) !== false)
+					{
+						$skip = true;
+						break;
+					}
+				}
+				if(!$skip && intval(substr(decoct(fileperms($path)),-3)) > 755)
 				{
 					$warnings[] = array('type'=>'change permission to 755', 'description'=>$path);
 				}
