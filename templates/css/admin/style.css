@@ -233,6 +233,7 @@ a#logo{
 	position: absolute;
 	right: 0px;
 	top: 15px;
+	text-shadow: 0 0 1px #AAA;
 }
 
 .content {
