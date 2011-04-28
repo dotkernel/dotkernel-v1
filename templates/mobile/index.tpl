@@ -6,8 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<meta name="keywords" content="{PAGE_KEYWORDS}" >
 	<meta name="description" content="{PAGE_DESCRIPTION}" >
-	<link rel="stylesheet" href="{SITE_URL}/externals/jquery/jquery.mobile-1.0a4.min.css" />
-	<script src="{SITE_URL}/externals/jquery/jquery-1.5.min.js"></script>
+	<link rel="stylesheet" href="{SITE_URL}/externals/jquery/jquery.mobile-1.0a4.1.min.css" />
+	<script src="{SITE_URL}/externals/jquery/jquery-1.5.2.min.js"></script>
 	<!-- for PHP redirect to work properly, add this code here 
 	set ajaxFormsEnabled to false -->
 	<script type="text/javascript">
@@ -19,7 +19,7 @@
 
         </script>
 	<!-- end PHP redirect-->
-	<script src="{SITE_URL}/externals/jquery/jquery.mobile-1.0a4.min.js"></script>
+	<script src="{SITE_URL}/externals/jquery/jquery.mobile-1.0a4.1.min.js"></script>
 	<script type="text/javascript" src="{TEMPLATES_URL}/js/mobile/main.js"></script>
 </head>
 <body>
