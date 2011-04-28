@@ -49,7 +49,7 @@ class Admin_View extends View
 	 * @param bool $ajax - Using ajax, parse only the list content
 	 * @return void
 	 */
-	public function listUser($templateFile, $list, $page, $ajax = false)
+	public function listUser($templateFile, $list, $page)
 	{
 		$this->tpl->setFile('tpl_main', 'admin/' . $templateFile . '.tpl');
 		$this->tpl->setBlock('tpl_main', 'list', 'list_block');
@@ -66,13 +66,9 @@ class Admin_View extends View
 			$this->tpl->setVar('FIRSTNAME', $v['firstName']);
 			$this->tpl->setVar('LASTNAME', $v['lastName']);
 			$this->tpl->setVar('DATE_CREATED', Dot_Kernel::timeFormat($v['dateCreated'], 'long'));
-			$this->tpl->setVar('ISACTIVE', $v['isActive']*(-1)+1);
+			$this->tpl->setVar('ISACTIVE', $v['isActive']);
 			$this->tpl->setVar('ACTIVE_IMG', $v['isActive'] == 1 ? 'active' : 'inactive');
 			$this->tpl->parse('list_block', 'list', true);
-		}
-		if($ajax)
-		{
-			$this->tpl->pparse('AJAX', 'tpl_main');exit;
 		}
 	}
 	/**

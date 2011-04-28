@@ -1,8 +1,10 @@
 <script>
-	var userToken="{USERTOKEN}";
+	var userToken = "{USERTOKEN}",
+		SITE_URL = "{SITE_URL}",
+		ACTIVATE_URL = SITE_URL + "/admin/user/activate/";
+
+	enableActiveInactive(ACTIVATE_URL);
 </script>
-<script type="text/javascript" src="{SITE_URL}/externals/dojo/dojo.xd.js"></script>
-<script type="text/javascript" src="{TEMPLATES_URL}/js/admin/admin.js"></script>
 <div id="adminList">
 	{PAGINATION}
 	<fieldset style="width: 100%">
@@ -26,8 +28,9 @@
 			<td class="row{BG}">{FIRSTNAME}</td>
 			<td class="row{BG}">{LASTNAME}</td>
 			<td class="row{BG}" style="vertical-align: middle;">
-			 <a  onclick="javascript: adminList('{SITE_URL}{ACTIVE_URL}',{ID},{ISACTIVE},{PAGE});" style="cursor: pointer;" 
-			 	title="Activate / Inactivate"  class="{ACTIVE_IMG}_state">&nbsp;</a> </td>
+				<a style="cursor: pointer;" title="Activate / Deactivate" class="{ACTIVE_IMG}_state activeButton"
+					id="row_{ID}" data-id="{ID}" data-active="{ISACTIVE}">&nbsp;</a>
+			</td>
 			<td class="row{BG}">{DATE_CREATED}</td>
 			<td class="row{BG}" > 
 				<table width="100%" class="action_table">
