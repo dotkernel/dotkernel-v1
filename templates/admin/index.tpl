@@ -16,7 +16,7 @@
 <body class="tundra">
 	<div class="wrapper">
 		<div class="header clearfix">
-			<a href="{SITE_URL}/admin/" id="logo"><h6>{SITE_NAME}</h6></a>
+			<a href="{SITE_URL}/admin/" id="logo">{SITE_NAME}</a>
 			<div class="top_user_menu clearfix">{INFO_BAR}</div>
 			{MENU}
 		</div>
