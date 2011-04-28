@@ -107,31 +107,31 @@ switch ($registry->route['action'])
 		$userView->details('update',$data);	
 	break;
 	case 'activate':
-		// activate/inactivate user account
-		// this action is called from ajax request dojo.xhrPost()
+		// activate/deactivate user account
+		// this action is called via Ajax
 		Dot_Kernel::checkUserToken();
 		$id = (isset($_POST['id'])) ? (int)$_POST['id'] : 0;
 		$isActive = (isset($_POST['isActive'])) ? $_POST['isActive'] : 0;
-		$page = (isset($_POST['page'])) ? (int)$_POST['page'] : 1;
 		$values = array('enum' => array('0' => '0,1', 'isActive' => $isActive));
 		$dotValidateUser = new Dot_Validate_User(array('who' => 'user', 'action' => 'activate', 'values' => $values));
-		if($dotValidateUser->isValid())		
+
+		if($dotValidateUser->isValid())
 		{	
 			$data = $dotValidateUser->getData();
 			// no error - then change active value of user
 			$userModel->activateUser($id, $data['isActive']);		
+			$result = array(
+				"success" => true,
+				"id" => $id,
+				"isActive" => intval($data["isActive"])
+			);
 		}
 		else
 		{
-			$registry->session->message['txt'] = $option->errorMessage->trickUserError;
-			$registry->session->message['type'] = 'error';
+			$result = array("success" => false, "message" => "An error occured");
 		}
-		$users = $userModel->getUserList($page);
-		$registry->session->useAjaxView = true;
-		$route = $registry->route;
-		$route['action'] = 'list';
-		$registry->route = $route;
-		$userView->listUser('list', $users, $page, true);
+		echo Zend_Json::encode($result);
+		exit;
 	break;
 	case 'delete':
 		// display confirmation form and delete user account

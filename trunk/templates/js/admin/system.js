@@ -3,6 +3,7 @@
  * @param {Array} pieData - Data to be displayed in the pie
  */
 function pieChart(pieData){
+	return;
     dojo.require("dojox.charting.Chart2D");
     dojo.require("dojox.charting.plot2d.Pie");
     dojo.require("dojox.charting.action2d.Highlight");

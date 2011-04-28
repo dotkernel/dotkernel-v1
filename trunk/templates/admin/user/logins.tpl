@@ -1,10 +1,4 @@
 <script type="text/javascript" src="{TEMPLATES_URL}/js/admin/admin.js"></script>
- <script>
-        dojo.require("dijit.Tooltip");
-        dojo.require("dijit.form.Button");    
-        dojo.require("dijit.form.DateTextBox");
-        dojo.require("dojo.date.locale"); 		             
-</script>
 	
 <div id="adminList">	
 	<table class="g_box" cellpadding="0" cellspacing="1">
@@ -54,28 +48,28 @@
 			<td class="row{BG}" style="text-align: center;">
 				<img src="{IMAGES_SHORT_URL}/flags/{COUNTRYIMAGE}.png"  border="0" id="ipc{ID}" align="center" style="margin-top:4px;"/>
 				<script type="text/javascript">
-					 dojo.addOnLoad(function() {
-						  new dijit.Tooltip({
+				/*
 						     connectId: ["ipc{ID}"],
 						     label: "<span class='dijitTooltipBold'>Country:</span><br />{COUNTRYNAME}"});});
+				*/
 				</script>
 			</td>
 			<td class="row{BG}" style="text-align: center;">
 				<img src="{IMAGES_SHORT_URL}/browsers/{BROWSERIMAGE}.png" border="0" id="uab{ID}" style="margin-top:4px;">
 				<script type="text/javascript">
-				 dojo.addOnLoad(function() {
-					  new dijit.Tooltip({
+				/*
 					     connectId: ["uab{ID}"],
 					     label: "<span class='dijitTooltipBold'>User Agent:</span><br />{USERAGENT}"});});
+				*/
 				</script>
 			</td>
 			<td class="row{BG}" style="text-align: center;">
 				<img src="{IMAGES_SHORT_URL}/os/{OSIMAGE}.png" border="0" id="os{ID}" style="margin-top:3px;">
 				<script type="text/javascript">
-				 dojo.addOnLoad(function() {
-					  new dijit.Tooltip({
+				/*
 					     connectId: ["os{ID}"],
 					     label: "<span class='dijitTooltipBold'>Operating System: {OSMAJOR}</span><br />{OSMINOR}"}); });
+				*/
 				</script>
 			</td>
 			<td class="row{BG}">{DATELOGIN}</td>

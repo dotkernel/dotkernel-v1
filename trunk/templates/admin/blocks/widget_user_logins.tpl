@@ -1,5 +1,4 @@
 <!-- piechart with users logins-->
-<script type="text/javascript" src="{SITE_URL}/externals/dojo/dojo.xd.js"></script>
 <script type="text/javascript" src="{SITE_URL}/templates/js/admin/system.js"></script>
  <script type="text/javascript">
  	pieChart({PIEDATA}); 

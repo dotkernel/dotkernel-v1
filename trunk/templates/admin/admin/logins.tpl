@@ -1,8 +1,3 @@
-<script type="text/javascript" src="{SITE_URL}/externals/dojo/dojo.xd.js">  </script>
- <script>
-        dojo.require("dijit.Tooltip");
-        dojo.require("dijit.form.Button");
-    </script>
 <div id="adminList">
 	{PAGINATION}
 	<fieldset style="width: 100%">
