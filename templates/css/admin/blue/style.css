@@ -1,0 +1,23 @@
+body{
+	background: #F9F9F9 url('images/body_bg.png') repeat-x left top;
+}
+
+#breadcrumbs li{
+	background:	url('images/breadcrumb_arrows.png') right -52px no-repeat;
+}
+
+/*** menu ***/
+#mainMenu li a
+{
+	background: transparent url('images/menu_arrows.png') right 14px no-repeat;
+}
+
+#mainMenu li a.selected{
+	background:#F3F3F3 url('images/menu_arrows.png') right -16px no-repeat;
+}
+
+#mainMenu li a.menuHover, #mainMenu li a.selected.menuHover
+{
+	background:#F3F3F3 url('images/menu_arrows.png') right -46px no-repeat !important;
+}
+/*** end menu ***/
