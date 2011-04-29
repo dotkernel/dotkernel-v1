@@ -1,27 +1,53 @@
-<script type="text/javascript" src="{TEMPLATES_URL}/js/admin/admin.js"></script>
-	
+<script>
+	var SITE_URL = "{SITE_URL}",
+		FILTER_URL = "{FILTER_URL}";
+
+	function updateFilters(){
+		var date = $.datepicker.formatDate("yy-mm-dd", $($("#filterDate")).datepicker("getDate")),
+			browser = $("#browser").val();
+			url = SITE_URL + FILTER_URL;
+		
+		if (date !== ""){
+			url += '/loginDate/' + date;
+		}
+		
+		if (browser !== ""){
+			url += '/browser/' + browser;
+		}
+		window.location = url;
+	}
+
+	$(document).ready(function(){
+		$("#filterDate").datepicker({
+			showOn: "both",
+			dateFormat: 'yy-mm-dd',
+			buttonImage: "{IMAGES_URL}/calendar.png",
+			buttonImageOnly: true,
+			onSelect: updateFilters
+		});
+		
+		$("#browser").change(updateFilters);
+	});
+</script>
 <div id="adminList">	
 	<table class="g_box" cellpadding="0" cellspacing="1">
 		<tr>
 			<td >
 				<form action="{FORM_ACTION}" method="post" name="logins">
 				  Filter by browser:&nbsp;
-					<select name="browser" id="browser" onchange="javascript: adminLogins('{SITE_URL}{FILTER_URL}',1, this.value, dijit.byId('filterDate').value);">
+					<select name="browser" id="browser">
 						<option value=""> - no filter - </option>
 						<!-- BEGIN browser -->
-						<option value="{BROWSERNAME}" {BROWSERSEL}> {BROWSERNAME}
+						<option value="{BROWSERNAME}" {BROWSERSEL}> {BROWSERNAME} </option>
 						<!-- END browser -->
 					</select>
-				  Filter by date:&nbsp;         
-					<input type="text" name="filterDate" id="filterDate" dojoType="dijit.form.DateTextBox" value="{FILTERDATE}"
-							onchange="javascript: adminLogins('{SITE_URL}{FILTER_URL}',1, dojo.byId('browser').value, this.value);" />
-					<label for="filterDate">
-					    <img src="{IMAGES_URL}/calendar.png" border='0' style="margin-top: 1px;"/>
-					</label>
-				</form>							
+					Filter by date:&nbsp;
+					<input type="text" id="filterDate" value="{FILTERDATE}">
+				</form>
 			</td>
 		</tr>
 	</table>
+	
 	{PAGINATION}
 	<fieldset style="width: 100%">
 	<legend>List logins</legend>

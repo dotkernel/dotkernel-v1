@@ -180,7 +180,7 @@ switch ($registry->route['action'])
 		// list user logins
 		$id = (isset($registry->request['id'])) ? (int)$registry->request['id'] : 0;		
 		$page = (isset($registry->request['page']) && $registry->request['page'] > 0) ? $registry->request['page'] : 1;
-		$browser = (isset($registry->request['browser'])) ? $registry->request['browser'] : '';
+		$browser = (isset($registry->request['browser'])) ? urldecode($registry->request['browser']) : '';
 		$loginDate = (isset($registry->request['loginDate'])) ? $registry->request['loginDate'] : '';
 		$sortField = (isset($registry->request['sort']) && in_array($registry->request['sort'], array('username', 'dateLogin'))) ? $registry->request['sort'] : 'dateLogin';
 		$orderBy = (isset($registry->request['order']) && in_array($registry->request['order'], array('asc', 'desc'))) ? $registry->request['order'] : 'desc';
