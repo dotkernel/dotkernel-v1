@@ -33,7 +33,42 @@
 				<os>Samsung</os>
 				<identify>
 					<osName>Samsung OS</osName>
-					<uaString>Samsung</uaString>
+					<uaString>Samsung|sam-r|SCH|SGH</uaString>
+				</identify>		
+			</name>
+			<name type="mobile">
+				<os>Huawei</os>
+				<identify>
+					<osName>Huawei</osName>
+					<uaString>huawei</uaString>
+				</identify>		
+			</name>
+			<name type="mobile">
+				<os>LG</os>
+				<identify>
+					<osName>LG OS</osName>
+					<uaString>LG</uaString>
+				</identify>		
+			</name>
+			<name type="mobile">
+				<os>Motorola</os>
+				<identify>
+					<osName>Motorola</osName>
+					<uaString>Cricket</uaString>
+				</identify>		
+			</name>
+			<name type="mobile">
+				<os>PlayStation Portable</os>
+				<identify>
+					<osName>PlayStation Portable</osName>
+					<uaString>PlayStation Portable</uaString>
+				</identify>
+			</name>
+			<name type="mobile">
+				<os>Kyocera</os>
+				<identify>
+					<osName>Kyocera</osName>
+					<uaString>KWC</uaString>
 				</identify>		
 			</name>
 			<name type="mobile">
