@@ -465,14 +465,13 @@ input[type="checkbox"], input[type="radio"]{
 .medium_table input[type="checkbox"], input[type="radio"]{
 	width: auto !important;
 	vertical-align: middle !important;
-	border: 1px solid #CFCFCF;
-	background-color: #ffffff;
 }
 .medium_table input{
 	width: 100%;
 }
 .medium_table{
-	border: 1px solid;
+	border: 1px solid #CFCFCF;
+	background-color: #ffffff;
 	margin: 5px 0px 0px 0px;
 }
 .medium_table.warnings .row2{
