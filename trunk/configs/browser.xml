@@ -10,9 +10,13 @@
 		<uaIcon>msie</uaIcon>
  	</type>
  	<type>
+ 		<uaBrowser>Chromium</uaBrowser>
+		<uaIcon>chromium</uaIcon>
+ 	</type>
+ 	<type>
  		<uaBrowser>Chrome</uaBrowser>
 		<uaIcon>chrome</uaIcon>
- 	</type>	
+ 	</type>
  	<type>
  		<uaBrowser>Opera</uaBrowser>
 		<uaIcon>opera</uaIcon>
@@ -34,81 +38,21 @@
 		<uaIcon>amaya</uaIcon>
  	</type>
 	<type>
- 		<uaBrowser>aol</uaBrowser>
-		<uaIcon>aol</uaIcon>
- 	</type>
-	<type>
  		<uaBrowser>Avant Browser</uaBrowser>
 		<uaIcon>avantbrowser</uaIcon>
- 	</type>
-	<type>
- 		<uaBrowser>AvantGo</uaBrowser>
-		<uaIcon>avantgo</uaIcon>
- 	</type>
-	<type>
- 		<uaBrowser>Amiga-AWeb</uaBrowser>
-		<uaIcon>aweb</uaIcon>
- 	</type>
-	<type>
- 		<uaBrowser>beonex</uaBrowser>
-		<uaIcon>beonex</uaIcon>
- 	</type>
-	<type>
- 		<uaBrowser>Blazer</uaBrowser>
-		<uaIcon>blazer</uaIcon>
  	</type>
 	<type>
  		<uaBrowser>camino</uaBrowser>
 		<uaIcon>camino</uaIcon>
  	</type>
 	<type>
- 		<uaBrowser>chimera</uaBrowser>
-		<uaIcon>chimera</uaIcon>
- 	</type>
-	<type>
- 		<uaBrowser>Crazy Browser</uaBrowser>
-		<uaIcon>crazybrowser</uaIcon>
- 	</type>
-	<type>
  		<uaBrowser>curl</uaBrowser>
 		<uaIcon>curl</uaIcon>
- 	</type>
-	<type>
- 		<uaBrowser>Deepnet Explorer</uaBrowser>
-		<uaIcon>deepnet</uaIcon>
- 	</type>
-	<type>
- 		<uaBrowser>Dillo</uaBrowser>
-		<uaIcon>dillo</uaIcon>
- 	</type>
-	<type>
- 		<uaBrowser>Doris</uaBrowser>
-		<uaIcon>doris</uaIcon>
  	</type>
 	<type>
  		<uaBrowser>Epiphany</uaBrowser>
 		<uaIcon>epiphany</uaIcon>
  	</type>	
-	<type>
- 		<uaBrowser>Firebird</uaBrowser>
-		<uaIcon>firebird</uaIcon>
-	</type>
-	<type>
- 		<uaBrowser>Galeon</uaBrowser>
-		<uaIcon>galeon</uaIcon>
- 	</type>
-	<type>
- 		<uaBrowser>IBrowse</uaBrowser>
-		<uaIcon>ibrowse</uaIcon>
- 	</type>
- 	<type>
- 		<uaBrowser>iCab</uaBrowser>
-		<uaIcon>icab</uaIcon>
- 	</type>
-	<type>
- 		<uaBrowser>ICE Browser</uaBrowser>
-		<uaIcon>ice</uaIcon>
- 	</type>
 	<type>
  		<uaBrowser>K-Meleon</uaBrowser>
 		<uaIcon>k-meleon</uaIcon>
@@ -146,16 +90,8 @@
 		<uaIcon>nautilus</uaIcon>
  	</type>
 	<type>
- 		<uaBrowser>NetCaptor</uaBrowser>
-		<uaIcon>netcaptor</uaIcon>
- 	</type>
-	<type>
  		<uaBrowser>NetFront</uaBrowser>
 		<uaIcon>netfront</uaIcon>
- 	</type>
-	<type>
- 		<uaBrowser>NetPositive</uaBrowser>
-		<uaIcon>netpositive</uaIcon>
  	</type>
  	<type>
  		<uaBrowser>Netscape</uaBrowser>
@@ -164,22 +100,6 @@
  	<type>
  		<uaBrowser>OmniWeb</uaBrowser>
 		<uaIcon>omniweb</uaIcon>
- 	</type>
-	<type>
- 		<uaBrowser>Oregano</uaBrowser>
-		<uaIcon>oregano</uaIcon>
- 	</type>
-	<type>
- 		<uaBrowser>PhaseOut</uaBrowser>
-		<uaIcon>phaseout</uaIcon>
- 	</type>
-	<type>
- 		<uaBrowser>Phoenix</uaBrowser>
-		<uaIcon>phoenix</uaIcon>
- 	</type>
-	<type>
- 		<uaBrowser>Samsung</uaBrowser>
-		<uaIcon>Samsung</uaIcon>
  	</type>
 	<type>
  		<uaBrowser>Shiira</uaBrowser>
@@ -202,12 +122,28 @@
 		<uaIcon>unknown</uaIcon>
  	</type>
 	<type>
- 		<uaBrowser>AmigaVoyager</uaBrowser>
-		<uaIcon>voyager</uaIcon>
- 	</type>
-	<type>
  		<uaBrowser>w3m</uaBrowser>
 		<uaIcon>w3m</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>UP.Browser</uaBrowser>
+		<uaIcon>up-openwave</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>PlayStation Portable</uaBrowser>
+		<uaIcon>up-openwave</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>Polaris</uaBrowser>
+		<uaIcon>polaris</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>Teleca</uaBrowser>
+		<uaIcon>teleca</uaIcon>
+ 	</type>
+	<type>
+ 		<uaBrowser>BlackBerry</uaBrowser>
+		<uaIcon>blackBerry</uaIcon>
  	</type>
 	</name>
  </browser>
