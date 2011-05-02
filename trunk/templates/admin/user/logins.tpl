@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{SITE_URL}/externals/jquery/jquery.ui.tooltip.css">
+<script src="{SITE_URL}/externals/jquery/jquery.ui.tooltip.js"></script>
 <script>
 	var SITE_URL = "{SITE_URL}",
 		FILTER_URL = "{FILTER_URL}";
@@ -27,6 +29,11 @@
 		});
 		
 		$("#browser").change(updateFilters);
+
+		//// tooltips
+
+		$(".icon[title]").tooltip();
+
 	});
 </script>
 <div id="adminList">	
@@ -72,31 +79,13 @@
 			<td class="row{BG}">				
 				<a href="{WHOISURL}/{IP}" target="_blank">{IP}</a></td>
 			<td class="row{BG}" style="text-align: center;">
-				<img src="{IMAGES_SHORT_URL}/flags/{COUNTRYIMAGE}.png"  border="0" id="ipc{ID}" align="center" style="margin-top:4px;"/>
-				<script type="text/javascript">
-				/*
-						     connectId: ["ipc{ID}"],
-						     label: "<span class='dijitTooltipBold'>Country:</span><br />{COUNTRYNAME}"});});
-				*/
-				</script>
+				<img src="{IMAGES_SHORT_URL}/flags/{COUNTRYIMAGE}.png"  border="0" id="ipc{ID}" style="margin-top:4px;" title="{COUNTRYNAME}" class="icon"/>
 			</td>
 			<td class="row{BG}" style="text-align: center;">
-				<img src="{IMAGES_SHORT_URL}/browsers/{BROWSERIMAGE}.png" border="0" id="uab{ID}" style="margin-top:4px;">
-				<script type="text/javascript">
-				/*
-					     connectId: ["uab{ID}"],
-					     label: "<span class='dijitTooltipBold'>User Agent:</span><br />{USERAGENT}"});});
-				*/
-				</script>
+				<img src="{IMAGES_SHORT_URL}/browsers/{BROWSERIMAGE}.png" border="0" id="uab{ID}" style="cursor:pointer;margin-top:3px;" title="{USERAGENT}" class="icon">
 			</td>
 			<td class="row{BG}" style="text-align: center;">
-				<img src="{IMAGES_SHORT_URL}/os/{OSIMAGE}.png" border="0" id="os{ID}" style="margin-top:3px;">
-				<script type="text/javascript">
-				/*
-					     connectId: ["os{ID}"],
-					     label: "<span class='dijitTooltipBold'>Operating System: {OSMAJOR}</span><br />{OSMINOR}"}); });
-				*/
-				</script>
+				<img src="{IMAGES_SHORT_URL}/os/{OSIMAGE}.png" border="0" id="os{ID}" style="margin-top:3px;" class="icon" title="{OSMAJOR} {OSMINOR}">
 			</td>
 			<td class="row{BG}">{DATELOGIN}</td>
 		</tr>
