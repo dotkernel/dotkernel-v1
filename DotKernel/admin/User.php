@@ -136,53 +136,46 @@ class User extends Dot_Model_User
 		
 	}	
 	/**
-	 * Get top country user logins as declared in 
-	 * $option->countCountryUserLogin
+	 * Get top <topCount> logins by country
+	 * If there are more countries returned than <topCountry>, the sum of the remainder
+	 * will be added to $result['Other']
+	 * @param topCount - the number of countries to return  
 	 * @access public
 	 * @return array
 	 */
 	public function getTopCountryLogins($topCount)
 	{
 		$select = $this->db->select()
-					  	   ->from('userLogin');
+					  	   ->from(
+					  	   		'userLogin',
+					  	   		array('country', 'cnt'=>'COUNT(country)')
+					  	   )
+					  	   ->group('country')
+					  	   ->order('cnt DESC');
 		$logins = $this->db->fetchAll($select);
-		$countryName = array();
-		$countryCount = array();
-		foreach ($logins as $v)
+		$data = array();
+		foreach($logins as $login)
 		{
-			if(array_key_exists($v['country'], $countryCount))
-			{
-				$countryCount[$v['country']]++;
-			}
-			else
-			{
-				 $countryCount[$v['country']] = 1;
-			}
+			$data[] = array(
+				'label' => $login['country'],
+				'data' =>  intval($login['cnt'])
+			);
 		}
-		arsort($countryCount);
-		$countSum = array_sum($countryCount);
-		$i = 1;
-		$data['Other'] = array('count' => 0, 'countPercent' => 0,'name' => 'Others');
-		foreach ($countryCount as $country => $count)
+
+		if (count($data) > $topCount)
 		{
-			$countPercent = round($count * 100 / $countSum, 2);
-			if($i >= $topCount)
+			$others = array_splice($data, $topCount);
+			$otherCount = 0;
+			foreach ($others as $other)
 			{
-				$data['Other']['countPercent'] += $countPercent; 
-				$data['Other']['count'] += $count; 
+				$otherCount += $other['data'];
 			}
-			else
-			{
-				$data[$country]['countPercent'] = $countPercent; 
-				$data[$country]['count'] = $count; 
-				
-			}
-			$i++;
+			$data[] = array(
+				'label' => 'Other',
+				'data' => $otherCount 
+			);
 		}
-		if(!$data['Other']['count'])
-		{
-			unset($data['other']);
-		}
+		
 		return $data;
 	}
 }
