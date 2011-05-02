@@ -1,3 +1,10 @@
+<link rel="stylesheet" href="{SITE_URL}/externals/jquery/jquery.ui.tooltip.css">
+<script src="{SITE_URL}/externals/jquery/jquery.ui.tooltip.js"></script>
+<script>
+	$(document).ready(function(){
+		$(".icon[title]").tooltip();
+	});
+</script>
 <div id="adminList">
 	{PAGINATION}
 	<fieldset style="width: 100%">
@@ -23,31 +30,15 @@
 			<td class="row{BG}">				
 				<a href="{WHOISURL}/{IP}" target="_blank">{IP}</a></td>
 			<td class="row{BG}" style="text-align: center;">
-				<img src="{IMAGES_SHORT_URL}/flags/{COUNTRYIMAGE}.png"  border="0" id="ipc{ID}" align="center" style="margin-top:4px;"/>
-			<script type="text/javascript">
-				 dojo.addOnLoad(function() {
-					  new dijit.Tooltip({
-					     connectId: ["ipc{ID}"],
-					     label: "<span class='dijitTooltipBold'>Country:</span><br />{COUNTRYNAME}"});});
-			</script></td>
-			<td class="row{BG}" style="text-align: center;">
-				<img src="{IMAGES_SHORT_URL}/browsers/{BROWSERIMAGE}.png" border="0" id="uab{ID}" style="margin-top:4px;">
-				<script type="text/javascript">
-				 dojo.addOnLoad(function() {
-					  new dijit.Tooltip({
-					     connectId: ["uab{ID}"],
-					     label: "<span class='dijitTooltipBold'>User Agent:</span><br />{USERAGENT}"});});
-				</script></td>
-			<td class="row{BG}" style="text-align: center;">
-				<img src="{IMAGES_SHORT_URL}/os/{OSIMAGE}.png" border="0" id="os{ID}" style="margin-top:4px;">
-				<script type="text/javascript">
-				 dojo.addOnLoad(function() {
-					  new dijit.Tooltip({
-					     connectId: ["os{ID}"],
-					     label: "<span class='dijitTooltipBold'>Operating System: {OSMAJOR}</span><br />{OSMINOR}"});});
-				</script></td>
-			<td class="row{BG}" style="width: 150px;">{DATELOGIN}</td>
+				<img src="{IMAGES_SHORT_URL}/flags/{COUNTRYIMAGE}.png"  border="0" id="ipc{ID}" style="margin-top:4px;" title="{COUNTRYNAME}" class="icon"/>
 			</td>
+			<td class="row{BG}" style="text-align: center;">
+				<img src="{IMAGES_SHORT_URL}/browsers/{BROWSERIMAGE}.png" border="0" id="uab{ID}" style="margin-top:4px;" title="{USERAGENT} ({BROWSERIMAGE})" class="icon">
+			</td>
+			<td class="row{BG}" style="text-align: center;">
+				<img src="{IMAGES_SHORT_URL}/os/{OSIMAGE}.png" border="0" id="os{ID}" style="margin-top:4px;" title="{OSMAJOR} {OSMINOR}" class="icon">
+			</td>
+			<td class="row{BG}" style="width: 150px;">{DATELOGIN}</td>
 		</tr>
 	<!-- END list -->
 	</table>
