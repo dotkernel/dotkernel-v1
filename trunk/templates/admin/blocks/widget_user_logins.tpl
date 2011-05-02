@@ -1,9 +1,17 @@
-<!-- piechart with users logins-->
+<!-- piechart for users logins-->
 <script type="text/javascript" src="{SITE_URL}/externals/jquery/jquery.flot.pie.min.js"></script>
 <script type="text/javascript">
-	var data = {PIEDATA};
+	var userLogins = {PIEDATA};
 	$(document).ready(function(){
-		$.plot($("#userLoginsChart"), data, {
+		var total = 0;
+		for (var i in userLogins){
+			total += userLogins[i].data
+		}
+		$.map(userLogins, function(element, index){
+			element.label += " (" + Math.round(element.data/total*10000) / 100 + "%)";
+			return element;
+		});
+		$.plot($("#userLoginsChart"), userLogins, {
 			series: {
 				pie: { 
 					show: true,
