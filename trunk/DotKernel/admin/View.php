@@ -340,32 +340,9 @@ class View extends Dot_Template
 		// pie chart
 		$userModel = new User();
 		$userCountry = $userModel->getTopCountryLogins($widgetOption['countCountryUserLogin']);
-		$color = $widgetOption['colorCharts']['color'];
-		$data = array();
-		$i = 0;
-		foreach ($userCountry as $name => $country)
-		{
-			if($country['count'] > 0)
-			{				
-				$data[] = array('y' => $country['countPercent'], 
-								'text' => $name, 
-								'color' => $color[$i], 
-								'stroke' => $color[$i], 
-								'tooltip' => $name.": ".(string)$country['countPercent']."&#37;"
-								);
-				$i++;
-			}
-		}
-		if(empty($data))
-		{
-			$data[] = array('y' => 1, //must be a number greater then 0
-							'text' => $widgetOption['message']['noUserLogin'], 
-							'color' => $color[0], 
-							'stroke' => $color[0], 
-							'tooltip' => $widgetOption['message']['noUserLogin']
-							);
-		}
-		$this->setVar('PIEDATA', Zend_Json::encode($data));	
+		$jsonString = Zend_Json::encode($userCountry);
+		$jsonString = preg_replace('/\{/', '{ ', $jsonString);
+		$this->setVar('PIEDATA', $jsonString);
 	}
 	/**
 	 * Display widgets content
@@ -405,7 +382,7 @@ class View extends Dot_Template
 	 * If $breadcrumb is an array, a breadcrumb will be added for each element. The content of the tag
 	 * will be the key of the element, and the href will be the value. You probabily want to leave the value
 	 * empty for the last element of the array 
-	 * @access pulbic
+	 * @access public
 	 * @param string/array $breadcrumb
 	 * @return void
 	 */
