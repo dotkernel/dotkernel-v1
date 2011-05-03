@@ -1,4 +1,12 @@
 <!-- piechart for users logins-->
+<style>
+	.legendColorBox{
+		vertical-align:middle;
+	}
+	.legendLabel{
+		font-size:11px;
+	}
+</style>
 <script type="text/javascript" src="{SITE_URL}/externals/jquery/jquery.flot.pie.min.js"></script>
 <script type="text/javascript">
 	var userLogins = {PIEDATA};
@@ -22,10 +30,30 @@
 				}
 			},
 			grid: {
-				hoverable: true,
-				clickable: true
+				hoverable: true
 			}
 		});
+
+		$("#userLoginsChart").bind("plothover", pieHover);
+
+		var $legendItems = $("#userLoginsChart .legend table tbody").children();
+
+		function pieHover(event, pos, obj) 
+		{
+			var selectedIndex = (obj!==null ? obj.seriesIndex : null);
+			if (selectedIndex === null){
+				$legendItems.stop().fadeTo(100, 1);
+			}else{
+				$legendItems.each(function(index, element){
+					if (index == selectedIndex){
+						$(this).stop().fadeTo(100, 1)
+					}else{
+						$(this).stop().fadeTo(100, 0.5)
+					}
+				});
+			}
+		}
+
 	})
 </script>
 <fieldset style="width: 500px;float: left;margin-right: 50px;">
