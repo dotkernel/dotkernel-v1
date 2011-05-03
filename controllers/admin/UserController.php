@@ -88,12 +88,12 @@ switch ($registry->route['action'])
 			{
 				// no error - then update user
 				$data = $dotValidateUser->getData();
-				$data['id'] = $registry->request['id'];				
+				$data['id'] = $registry->request['id'];
 				$userModel->updateUser($data);
 				$registry->session->message['txt'] = $option->infoMessage->accountUpdate;
 				$registry->session->message['type'] = 'info';
 				header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/list/');
-				exit;				
+				exit;
 			}
 			else
 			{
@@ -104,7 +104,7 @@ switch ($registry->route['action'])
 		$data = $userModel->getUserBy('id', $registry->request['id']);
 		$userView->setExtraBreadcrumb($data['username']);
 		$pageTitle .= ' "' . $data['username'] . '"';
-		$userView->details('update',$data);	
+		$userView->details('update',$data);
 	break;
 	case 'activate':
 		// activate/deactivate user account
@@ -119,7 +119,7 @@ switch ($registry->route['action'])
 		{	
 			$data = $dotValidateUser->getData();
 			// no error - then change active value of user
-			$userModel->activateUser($id, $data['isActive']);		
+			$userModel->activateUser($id, $data['isActive']);
 			$result = array(
 				"success" => true,
 				"id" => $id,
@@ -128,7 +128,7 @@ switch ($registry->route['action'])
 		}
 		else
 		{
-			$result = array("success" => false, "message" => "An error occured");
+			$result = array("success" => false, "message" => "An error occured, please try again.");
 		}
 		echo Zend_Json::encode($result);
 		exit;

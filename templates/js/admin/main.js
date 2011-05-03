@@ -1,7 +1,5 @@
 /*** menu ***/
-var debug = false;		// set to true to disable menu closing
-// prevent pollution of the global scope, wrap everything inside a function
-(function(){
+$(document).ready(function(){
 	var timeout = 500,	// ms before the menu is closed
 		closeTimer,			// timer that closes the popup
 		selectedItem;		// the popup that is currently being shown
@@ -33,76 +31,90 @@ var debug = false;		// set to true to disable menu closing
 			})
 
 			.bind('mouseout',  function(){
-				if (!debug)
-				{
-					// when the mouse leaves the menu, wait <timeout> milliseconds
-					// and then close it automatically 
-					closeTimer = window.setTimeout(closeMenu, timeout);
-				}
+				closeTimer = window.setTimeout(closeMenu, timeout);
 			});
 	})
 	// attatch a click event to the document to close the menu
 	.click(closeMenu);
-})()
+});
 
 /*** end menu ***/
 
 /*** activate/deactivate rows ***/
 
 /**
- * A generic function used to toggle the active state of objects in a listing (eg.: users)
+ * A jQuery plugin used to toggle the active state of objects in a listing (eg.: users)
  * 
- * This function will bind a click event to all elements that have the class "activeButton"
- * When the button is clicked, a XHR post request is made to "postUrl" with the paramters:
+ * This plugin will bind a click event to all elements passed to it by the jQuery selector
+ * When the button is clicked, a XHR post request is made to "targetUrl" with the paramters:
  *  - userToken - to prevent CSRF, taken from the global userTokan javascript variable
  *  - id - taken from the "id" data atribute of the clicked element
  *  - isActive - the value of the "active" data attribute is first toggled (0 becomes 1 and 1 becomes 0) before sending
  *
  * The result from the XHR request is treated as JSON and converted to a javascript object and should have the following elements:
- * 	- success - boolean
+ *  - success - boolean
  *  - message [optional] - if success is false, this message will be shown to the user
  *  - id - the id of the object
  *  - isActive - the active status of the object
- * First result.success is checked, and if it false, the message in result.message is shown to the user.
- * Otherwise, the clicked element is found (#row_<id>) its active data attribute and its classes are updated
- * TODO:
- * 	- can be made more genereric to allow multiple such listings on the same page
- *  - better error message
+ * First result.success is checked, and if it is false, the message in result.message is shown to the user using a jQUery UI dialog
+ * Otherwise, the clicked element's active data attribute and its classes are updated
  * 
+ * Usage:
+ *   $(selector).activeFlags(options)
+ * 
+ * Options:
+ *   targetUrl - the url to which a POST request is made
+ *   classActive, classInactive - the classes for the different button states. Default to active_state and inactive_state
+ *   onError - the error handler function. By default, a dialog will be shown using jQuery UI
  * @param {String} postUrl
  */
-function enableActiveInactive(postUrl){
-	$(document).ready(function(){
-		$(".activeButton").click(function(){
-			var data = $(this).data();
+
+(function($){
+	$.fn.activeFlags = function( options ) {
+		var settings = {
+			targetUrl : null,
+			classActive : 'active_state',
+			classInactive : 'inactive_state',
+			onError : function(message){
+				$('<div title="Error"><br/><br/>' + message + '</div>').dialog({
+					modal: true
+				});
+			}
+		};
+		$.extend(settings, options);
+		if (settings.targetUrl === null){
+			return;
+		}
+
+		this.click(function(){
+			var $targetElement = $(this),
+				data = $targetElement.data();
 			$.post(
-				postUrl,
+				settings.targetUrl,
 				{
 					userToken: userToken,
-					id: data['id'],
-					isActive: data['active']*(-1) + 1	//toggle between 0 and 1
+					id: data.id,
+					isActive: data.active*(-1) + 1	//toggle between 0 and 1
 				},
 				function(result){
-					if (result['success']){
-						var $targetElement = $('#row_'+result['id']);
-
-						$targetElement.data('active', result['isActive']);
-
-						if (result['isActive'] === 1){
-							$targetElement.removeClass('inactive_state').addClass('active_state');
+					if (result.success){
+						$targetElement.data('active', result.isActive);
+						if (result.isActive === 1){
+							$targetElement.removeClass(settings.classInactive).addClass(settings.classActive);
 						}else{
-							$targetElement.removeClass('active_state').addClass('inactive_state');
+							$targetElement.removeClass(settings.classActive).addClass(settings.classInactive);
 						}
 					}else{
-						// todo: use something better
-						alert(result['message']);
+						settings.onError(result.message);
 					}
 				},
 				"json"
 			);
 		});
-	});
-};
+
+		return this;
+	};
+}(jQuery));
 
 /*** end activate/deactivate rows ***/
 
@@ -113,7 +125,7 @@ function enableActiveInactive(postUrl){
 function ShowHideDiv (id)
 {
 	var current_status = document.getElementById(id).style.display;
-	if (current_status == 'none')
+	if (current_status === 'none')
 	{
 		document.getElementById(id).style.display = '';
 	}
