@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href ="{SITE_URL}/externals/jquery/jquery-ui-1.8.12.min.css" type="text/css" >
 	<link rel="stylesheet" href ="{TEMPLATES_URL}/css/admin/style.css" type="text/css" >
 	<link rel="stylesheet" href ="{TEMPLATES_URL}/css/admin/{SKIN}/style.css" type="text/css" >			
-	<script src="{SITE_URL}/externals/jquery/jquery-1.5.2.min.js"></script>
+	<script src="{SITE_URL}/externals/jquery/jquery-1.6.min.js"></script>
 	<script src="{SITE_URL}/externals/jquery/jquery-ui-1.8.12.min.js"></script>
 	<script src="{TEMPLATES_URL}/js/admin/main.js"></script>
 </head>
