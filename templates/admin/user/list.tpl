@@ -2,11 +2,12 @@
 	var userToken = "{USERTOKEN}",
 		SITE_URL = "{SITE_URL}",
 		FLAG_TOGGLE_URL = SITE_URL + "/admin/user/activate/";
-$(document).ready(function(){
-	$(".activeButton").activeFlags({
-		targetUrl:FLAG_TOGGLE_URL,
-	});
-})
+
+	$(document).ready(function(){
+		$(".activeButton").activeFlags({
+			targetUrl:FLAG_TOGGLE_URL,
+		});
+	})
 </script>
 <div id="adminList">
 	{PAGINATION}
