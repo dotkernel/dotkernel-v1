@@ -13,7 +13,7 @@ body{
 }
 
 #mainMenu li a.selected{
-	background:#F3F3F3 url('images/menu_arrows.png') right -16px no-repeat;
+	background:#FFFFFF url('images/menu_arrows.png') right -17px no-repeat;
 }
 
 #mainMenu li a.menuHover, #mainMenu li a.selected.menuHover
