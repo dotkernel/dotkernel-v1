@@ -675,3 +675,7 @@ input.bigger{width: 100%;}
 	padding: 5px 5px 5px 20px;
 }
 /*END MESSAGES*/
+/* jquery ui */
+.ui-tooltip-content{
+	font-size:10px;
+}
