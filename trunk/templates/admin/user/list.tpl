@@ -1,9 +1,12 @@
 <script>
 	var userToken = "{USERTOKEN}",
 		SITE_URL = "{SITE_URL}",
-		ACTIVATE_URL = SITE_URL + "/admin/user/activate/";
-
-	enableActiveInactive(ACTIVATE_URL);
+		FLAG_TOGGLE_URL = SITE_URL + "/admin/user/activate/";
+$(document).ready(function(){
+	$(".activeButton").activeFlags({
+		targetUrl:FLAG_TOGGLE_URL,
+	});
+})
 </script>
 <div id="adminList">
 	{PAGINATION}
@@ -28,8 +31,7 @@
 			<td class="row{BG}">{FIRSTNAME}</td>
 			<td class="row{BG}">{LASTNAME}</td>
 			<td class="row{BG}" style="vertical-align: middle;">
-				<a style="cursor: pointer;" title="Activate / Deactivate" class="{ACTIVE_IMG}_state activeButton"
-					id="row_{ID}" data-id="{ID}" data-active="{ISACTIVE}">&nbsp;</a>
+				<a style="cursor: pointer;" title="Activate / Deactivate" class="{ACTIVE_IMG}_state activeButton" data-id="{ID}" data-active="{ISACTIVE}">&nbsp;</a>
 			</td>
 			<td class="row{BG}">{DATE_CREATED}</td>
 			<td class="row{BG}" > 
