@@ -427,6 +427,7 @@ input[type="checkbox"], input[type="radio"]{
 	cell-padding:0;
 	border-spacing:0;	/* to replace cellspacing */
 	width:100%;
+	margin-top:5px;
 }
 .big_table td{
 	padding: 6px 10px 6px 10px;
@@ -438,12 +439,12 @@ input[type="checkbox"], input[type="radio"]{
 thead tr{
 	height:34px;
 }
-thead th{
+.big_table th, .medium_table th, .list_table th{
 	padding: 6px 10px 6px 10px !important;
 	margin-top:10px;
 	height: 18px;
 	line-height: 18px;
-	font-size:11px;
+	font-size:12px;
 	font-weight:bold;
 	text-transform:uppercase;
 	text-align:left;
@@ -515,6 +516,7 @@ table.medium_table td:first-child{
 	color:#222222;
 	background-color: #E8E8E8;
 	border-spacing:0;
+	margin-top:5px;
 }
 .list_table td{
 	border-bottom: 1px solid #c9d1d5;
