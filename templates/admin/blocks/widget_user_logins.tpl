@@ -63,7 +63,7 @@
 </script>
 <fieldset style="width: 500px;float: left;margin-right: 50px;">
 	<legend>Users Logins By Country</legend>
-	<table class="chartTable" width="100%">
+	<table class="chart_table" width="100%">
 	    <tr>
 	        <td>
 	        	<div style="width:100%;height:300px" id="userLoginsChart"></div>
