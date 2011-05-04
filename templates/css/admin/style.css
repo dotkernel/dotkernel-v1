@@ -105,10 +105,9 @@ a:hover{
 	color: #1A7EB5;
 }
 fieldset{
-	border-top: 2px solid;
+	border-top: 2px solid #F19F56;
 	margin: 20px 0px 20px 0px;
 	padding: 0px;
-	border-top-color: #F19F56;
 }
 legend{
 	padding: 0px 5px 0px 0px;
@@ -265,6 +264,7 @@ input[type="checkbox"], input[type="radio"]{
 	font-weight:bold;
 	background-image:none;
 	color: #1A7EB5;
+	text-shadow:none;
 }
 /*** breadcrumbs ***/
 
@@ -479,7 +479,7 @@ table.medium_table td:first-child{
 .medium_table input{
 	width: 100%;
 }
-.medium_table{
+.medium_table, .chart_table{
 	border: 1px solid #CFCFCF;
 	background-color: #ffffff;
 	margin: 5px 0px 0px 0px;

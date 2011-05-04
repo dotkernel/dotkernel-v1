@@ -1,0 +1,59 @@
+body{
+	background: #F9F9F9 url('images/body_bg.png') repeat-x left top;
+}
+
+#logo{
+	text-shadow: 0px 1px 1px black;
+}
+
+#breadcrumbs li{
+	background:	url('images/breadcrumbs_arrow.png') right 14px no-repeat;
+}
+
+/*** menu ***/
+#mainMenu li a
+{
+	background: transparent url('images/menu_arrows.png') right 14px no-repeat;
+	height:32px;
+}
+
+#mainMenu li a.selected{
+	background:#BD8353 url('images/menu_arrows.png') right -17px no-repeat;
+	border-color: #D29C6E;
+	color:#fff;
+	text-shadow: 0px 1px 1px #4F3818;
+}
+
+#mainMenu li ul{
+	background-image: -webkit-linear-gradient(top, #F3F3F3, #E0DFD3); /* Chrome 10+, Saf5.1+ */
+}
+
+#mainMenu li a.menuHover, #mainMenu li ul{
+	border-color: #D9D5BD;
+}
+
+#mainMenu li a.menuHover, #mainMenu li a.selected.menuHover
+{
+	background:#F3F3F3 url('images/menu_arrows.png') right -46px no-repeat !important;
+}
+/*** end menu ***/
+
+/*** fieldsets and legends ***/
+fieldset{
+	border-color: #BD8353;
+}
+legend{
+	color: #BD8353;
+}
+
+/*** tables ***/
+.medium_table,
+.chart_table{
+	border-color: #D9D4B8;
+}
+table.big_table tbody tr:nth-child(even) td,
+table.medium_table td:first-child,
+.medium_table td:first-child
+{
+	background-color: #F4F3ED;
+}
