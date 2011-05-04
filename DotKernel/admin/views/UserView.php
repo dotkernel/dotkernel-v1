@@ -49,7 +49,6 @@ class User_View extends View
 		$this->tpl->setVar('ACTIVE_URL', '/admin/user/activate/');
 		foreach ($list['data'] as $k => $v)
 		{
-		    $this->tpl->setVar('BG', $k%2+1);
 			$this->tpl->setVar('ID', $v['id']);
 			$this->tpl->setVar('USERNAME', $v['username']);
 			$this->tpl->setVar('EMAIL', $v['email']);
@@ -140,7 +139,6 @@ class User_View extends View
 		foreach ($list['data'] as $k => $v)
 		{
 			$country = $dotGeoip->getCountryByIp($v['ip']);
-		  $this->tpl->setVar('BG', $k%2+1);
 			$this->tpl->setVar('ID', $v['id']);
 			$this->tpl->setVar('USERID', $v['userId']);
 			$this->tpl->setVar('USERNAME', $v['username']);

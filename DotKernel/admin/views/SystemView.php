@@ -211,7 +211,6 @@ class System_View extends View
 		
 		foreach ($list["data"] as $k => $v)
 		{
-			$this->tpl->setVar('BG', $k%2+1);
 			$this->tpl->setVar('ID', $v["id"]);
 			$this->tpl->setVar('USER', $v['user']);
 			$this->tpl->setVar('SERVER', $v['server']);
