@@ -43,6 +43,7 @@ body{
 #mainMenu li a.menuHover, #mainMenu li a.selected.menuHover
 {
 	background:#F3F3F3 url('images/menu_arrows.png') right -46px no-repeat !important;
+	border-color: #D9D5BD;
 }
 /*** end menu ***/
 
