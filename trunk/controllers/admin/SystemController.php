@@ -92,14 +92,14 @@ switch ($registry->route['action'])
 	break;
 	case 'transporter-list':
 		$page = (isset($registry->request['page']) && $registry->request['page'] > 0) ? $registry->request['page'] : 1;
-		$transporters = $systemModel->getEmailTransporterList($page);		
-		$systemView->listEmailTransporter('transporter-list', $transporters, $page);	 
+		$transporters = $systemModel->getEmailTransporterList($page);
+		$systemView->listEmailTransporter('transporter-list', $transporters, $page);
 	break;
 	case 'transporter-activate':
 		$id = (isset($_POST['id'])) ? (int)$_POST['id'] : 0;
 		$isActive = (isset($_POST['isActive'])) ? $_POST['isActive'] : 0;
 		$page = (isset($_POST['page'])) ? (int)$_POST['page'] : 1;
-		$systemModel->activateEmailTransporter($id, $isActive);		
+		$systemModel->activateEmailTransporter($id, $isActive);
 
 		$transporters = $systemModel->getEmailTransporterList($page);
 		$registry->session->useAjaxView = true; 
@@ -121,12 +121,12 @@ switch ($registry->route['action'])
 				$registry->session->message['txt'] = $option->infoMessage->noTransporterDelete;
 				$registry->session->message['type'] = 'info';
 			}
-		 header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/transporter-list/');
-			 exit;	 
+		header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/transporter-list/');
+			 exit;
 		}
 		$data = $systemModel->getEmailTransporterBy('id', $registry->request['id']);
 		// delete page confirmation
-		$systemView->details('transporter-delete', $data);	
+		$systemView->details('transporter-delete', $data);
 	break;
 	case 'transporter-update':
 		// display form and update user

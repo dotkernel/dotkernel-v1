@@ -35,7 +35,7 @@ del {
 	text-decoration: line-through;
 }
 strong, b{
-	font-weight:bold;
+	font-weight:bolder;
 }
 em, i{
 	font-style:italic;
@@ -314,6 +314,7 @@ input[type="checkbox"], input[type="radio"]{
 
 /*** end breadcrumbs ***/
 
+/*** top user menu ***/
 .top_user_menu{
 	position: absolute;
 	right: 0px;
@@ -324,11 +325,13 @@ input[type="checkbox"], input[type="radio"]{
 .top_user_menu a{
 	color: #DBDBDB;
 }
+/*** end top user menu ***/
 
 .content {
 	padding-bottom: 70px;
 	color:#1E1E1E;
 }
+/*** g_box ***/
 .g_box{
 	width: 100%;
 	border: 1px solid;
@@ -369,6 +372,8 @@ input[type="checkbox"], input[type="radio"]{
 	vertical-align:middle;
 	border: 1px solid #B7B7B7;
 }
+/*** end g_box ***/
+/*** pagination ***/
 .pagination{
 	margin: 10px 0px 10px 0px;
 	padding: 0px 0px 8px 0px;
@@ -410,12 +415,18 @@ input[type="checkbox"], input[type="radio"]{
 	background-color: #ffa95a;
 	color: #ffffff;
 }
+/*** end pagination ***/
+/*** tables ***/
 .big_table{
 	border-left: 1px solid #CFCFCF;
 	border-top: 1px solid #CFCFCF;
 	border-bottom: 1px solid #CFCFCF;
 	color:#222222;
 	background-color: #E8E8E8;
+	cell-spacing:0;
+	cell-padding:0;
+	border-spacing:0;	/* to replace cellspacing */
+	width:100%;
 }
 .big_table td{
 	padding: 6px 10px 6px 10px;
@@ -424,17 +435,18 @@ input[type="checkbox"], input[type="radio"]{
 	vertical-align: middle;
 	color: #3B3B3B;
 }
-.table_subhead{
+thead tr{
+	height:34px;
+}
+thead th{
 	padding: 6px 10px 6px 10px !important;
 	margin-top:10px;
-	height: 20px;
-	line-height: 20px;
+	height: 18px;
+	line-height: 18px;
 	font-size:11px;
 	font-weight:bold;
 	text-transform:uppercase;
-	border-top: 1px solid;
-	border-right: 1px solid;
-	border-bottom: 1px solid;
+	text-align:left;
 	font-family: Arial, sans-serif;
 	color: #5D5D5D !important;
 	border-top: 1px solid #ffffff;
@@ -451,14 +463,12 @@ input[type="checkbox"], input[type="radio"]{
 .table_container{
 	border-color: #E2E2E2;
 }
-.row1, .row2{
-	border-right: 1px solid;
-}
-.row1{
+table.big_table tbody tr:nth-child(odd) td{
 	background-color: #FFFFFF;
 	border-right: 1px solid #CFCFCF;
 }
-.row2{
+table.big_table tbody tr:nth-child(even) td,
+table.medium_table td:first-child{
 	background-color: #F3F3F3;
 	border-right: 1px solid #CFCFCF;
 }
@@ -473,13 +483,14 @@ input[type="checkbox"], input[type="radio"]{
 	border: 1px solid #CFCFCF;
 	background-color: #ffffff;
 	margin: 5px 0px 0px 0px;
+	border-spacing:0;	/* to replace cellspacing */
 }
-.medium_table.warnings .row2{
+.medium_table.warnings td:first-child{
 	background-color:#CC0000;
 	color:#fff !important;
-	text-transform:none
+	text-transform:none;
 }
-.medium_table.warnings .row1{
+.medium_table.warnings td:last-child{
 	background-color:#fff;
 }
 .medium_table td{
@@ -488,18 +499,14 @@ input[type="checkbox"], input[type="radio"]{
 	text-align:left;
 	color: #3B3B3B;
 }
-.medium_table .row1{
-	border: 0px;
-}
-.medium_table .row2{
+.medium_table td:first-child{
 	font-weight: bold;
 	text-transform: uppercase;
 	font-family: Arial, sans-serif;
 	text-align: right !important;
-	color: #556266 !important; 
-	background-color: #F3F3F3;
+	color: #556266 !important;	
 }
-.medium_table .last_td{
+.medium_table tr:last-child td{
 	padding-bottom: 13px !important;
 }
 .list_table{
@@ -507,13 +514,18 @@ input[type="checkbox"], input[type="radio"]{
 	border-left: 1px solid #CFCFCF;	
 	color:#222222;
 	background-color: #E8E8E8;
+	border-spacing:0;
 }
 .list_table td{
 	border-bottom: 1px solid #c9d1d5;
+	background-color:#FFF;
 	color: #3B3B3B;
 	padding: 10px;
 	line-height: 18px;
 	text-align:left;
+}
+.list_table tbody td{
+	border-right: 1px solid #CFCFCF;
 }
 .no_padding td{
 	padding: 0px;
@@ -629,9 +641,13 @@ a.sort_down{
 	background: url('images/down_arrow.png') no-repeat 0px 4px;
 	color: inherit;
 }
+.action_table tr{
+	background-color:transparent !important;
+}
 .action_table td{
 	padding: 0px;
 	text-align: left;
+	border-right: none !important;
 }
  /*PHP INFO*/
 .center {text-align: center;}
