@@ -38,7 +38,7 @@
 					 <a style="cursor: pointer;" title="Activate / Inactivate" class="{ACTIVE_IMG}_state activeButton"
 					 	id="row_{ID}" data-id="{ID}" data-active="{ISACTIVE}">&nbsp;</a> </td>
 				<td>{DATE_CREATED}</td>
-				<td >
+				<td>
 				<table width="100%" class="action_table">
 					<tr>
 						<td width="25%"><a href="{SITE_URL}/admin/admin/update/id/{ID}" title="Edit/Update" class="edit_state">&nbsp;</a></td>
