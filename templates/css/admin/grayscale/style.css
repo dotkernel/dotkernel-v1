@@ -31,8 +31,17 @@ body{
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#F3F3F3', EndColorStr='#E0E0E0'); /* IE6–IE9 */
 }
 
-#mainMenu li a.menuHover, #mainMenu li a.selected.menuHover, #mainMenu li ul{
+#mainMenu li a.menuHover,
+#mainMenu li a.selected.menuHover,
+#mainMenu li ul{
 	border-color: #DCDCDC;
+}
+
+#mainMenu li ul li a:hover,
+#mainMenu li ul li a.selected:hover,
+#breadcrumbs li a:hover
+{
+	color: #7D7D7D !important;
 }
 
 /*** end menu ***/
