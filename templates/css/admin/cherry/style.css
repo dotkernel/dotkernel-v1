@@ -16,7 +16,8 @@ body{
 
 #mainMenu li a.selected{
 	background-image:url('images/menu_arrows.png');
-	background-color:#BF5954
+	background-position-y:14px;
+	background-color:#BF5954;
 	border-color: #CF7871;
 }
 
