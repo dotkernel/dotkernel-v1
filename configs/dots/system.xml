@@ -26,6 +26,7 @@
 			<errorMessage>
 			  <invalidPort>The port must be a number</invalidPort>
 			  <invalidCapacity>The capacity must be a number</invalidCapacity>
+			  <emptyFields>All fields are mandatory</emptyFields>>
 			</errorMessage>
 		</variable>
 		<variable option="frontend">

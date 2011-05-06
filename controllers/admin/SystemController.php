@@ -101,11 +101,14 @@ switch ($registry->route['action'])
 		$page = (isset($_POST['page'])) ? (int)$_POST['page'] : 1;
 		$systemModel->activateEmailTransporter($id, $isActive);
 
-		$transporters = $systemModel->getEmailTransporterList($page);
-		$registry->session->useAjaxView = true; 
-		$route['action'] = 'transporter-list';
-		$registry->route = $route;
-		$systemView->listEmailTransporter('transporter-list', $transporters, $page, true);
+		$result = array(
+			"success" => true,
+			"id" => $id,
+			"isActive" => intval($isActive)
+		);
+		
+		echo Zend_Json::encode($result);
+		exit;
 	break;
 	case 'transporter-delete':
 		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
@@ -158,29 +161,25 @@ switch ($registry->route['action'])
 		$systemView->details('transporter-update',$data); 
 	break;
 	case 'transporter-add':
-		$page = $_POST["page"];
-		unset($_POST["page"]);
-		$data=$_POST;
-		unset($data["send"]);
-
+		$data = $_POST;
 		$error=$systemModel->validateEmailTransporter($data);
-		
+
+		$result = array();
+
 		if (empty($error))
 		{
-			$systemModel->addEmailTransporter($data);
-			$registry->session->message['txt'] = $option->infoMessage->transporterAdd;
-			$registry->session->message['type'] = 'info';
-			$data=null;
+			$id = $systemModel->addEmailTransporter($data);
+			$data = $systemModel->getEmailTransporterBy('id', $id);
+			$result['data'] = $data;
+			$result['success'] = true;
+			$result['message'] = array($option->infoMessage->transporterAdd);
+			$result['row'] = $systemView->getTransporterRow($data);
 		}else{
-			$registry->session->message['txt'] = $error;
-			$registry->session->message['type'] = 'error';
+			$result['success'] = false;
+			$result['message'] = $error;
 		}
-
-		$transporters = $systemModel->getEmailTransporterList($page);
-		$transporters['form']=$data;
-		$registry->session->useAjaxView = true; 
-		$route['action'] = 'transporter-list';
-		$registry->route = $route;
-		$systemView->listEmailTransporter('transporter-list', $transporters, $page, true, $error);
+		
+		echo Zend_Json::encode($result);
+		exit();
 	break;
 }

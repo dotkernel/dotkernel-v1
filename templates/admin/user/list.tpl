@@ -29,16 +29,16 @@
 		<tbody>
 		<!-- BEGIN list -->
 			<tr>
-				<td class="row{BG}" style="text-align: center;">{ID}</td>
-				<td class="row{BG}"> <a href="{SITE_URL}/admin/user/update/id/{ID}">{USERNAME}</a> </td>
-				<td class="row{BG}">{EMAIL}</td>
-				<td class="row{BG}">{FIRSTNAME}</td>
-				<td class="row{BG}">{LASTNAME}</td>
-				<td class="row{BG}" style="vertical-align: middle;">
+				<td style="text-align: center;">{ID}</td>
+				<td><a href="{SITE_URL}/admin/user/update/id/{ID}">{USERNAME}</a> </td>
+				<td>{EMAIL}</td>
+				<td>{FIRSTNAME}</td>
+				<td>{LASTNAME}</td>
+				<td style="vertical-align: middle;">
 					<a style="cursor: pointer;" title="Activate / Deactivate" class="{ACTIVE_IMG}_state activeButton" data-id="{ID}" data-active="{ISACTIVE}">&nbsp;</a>
 				</td>
-				<td class="row{BG}">{DATE_CREATED}</td>
-				<td class="row{BG}" >
+				<td>{DATE_CREATED}</td>
+				<td>
 					<table width="100%" class="action_table">
 						<tr>
 							<td width="25%"><a href="{SITE_URL}/admin/user/update/id/{ID}" title="Edit/Update" class="edit_state">&nbsp;</a></td>

@@ -198,16 +198,16 @@ class System_View extends View
 	 * @param bool $ajax [optional] - Using ajax, parse only the list content
 	 * @return void
 	 */
-	public function listEmailTransporter($templateFile, $list, $page, $ajax=false)
+	public function listEmailTransporter($templateFile, $list, $page)
 	{
 		$this->tpl->setFile('tpl_main', 'system/' . $templateFile . '.tpl');
-		$this->tpl->setBlock('tpl_main', 'list', 'list_block');
+		$this->tpl->setFile('tpl_row', 'system/transporter-row-block.tpl');
+		$this->tpl->setBlock('tpl_row', 'list', 'list_block');
 		$this->tpl->paginator($list['pages']);
 		$this->tpl->setVar('PAGE', $page);
 		$this->tpl->setVar('ACTIVE_URL', '/admin/system/transporter-activate');
 		$this->tpl->setVar('ACTIVE_1', 'checked');
 		$this->tpl->setVar('SSL_TLS', 'checked');
-		$this->tpl->displayMessage($ajax);
 		
 		foreach ($list["data"] as $k => $v)
 		{
@@ -220,42 +220,30 @@ class System_View extends View
 			$this->tpl->setVar('COUNTER', $v['counter']);
 			$this->tpl->setVar('DATE_CREATED', Dot_Kernel::timeFormat($v['date']));
 			$this->tpl->setVar('ACTIVE_IMG', $v['isActive'] == 1 ? 'active' : 'inactive');
-			$this->tpl->setVar('ISACTIVE', $v['isActive']*(-1)+1);
+			$this->tpl->setVar('ISACTIVE', $v['isActive']);
 			$this->tpl->parse('list_block', 'list', true);
 		}
-		// if we are showing the form after an error, fill the form with the previous values
-		if (isset($list['form']))
-		{
-			$this->tpl->setVar('USER', $list['form']['user']);
-			$this->tpl->setVar('PASS', $list['form']['pass']);
-			$this->tpl->setVar('SERVER', $list['form']['server']);
-			$this->tpl->setVar('PORT', $list['form']['port']);
-			$this->tpl->setVar('CAPACITY', $list['form']['capacity']);
-			
-			$this->tpl->setVar('SSL_SSL', $list['form']['ssl']=='ssl'?'checked':'');
-			$this->tpl->setVar('SSL_TLS', $list['form']['ssl']=='tls'?'checked':'');
-			
-			$this->tpl->setVar('ACTIVE_YES', $list['form']['isActive']==1?'checked':'');
-			$this->tpl->setVar('ACTIVE_NO', $list['form']['isActive']==0?'checked':'');
-		}else{
-			$this->tpl->setVar('USER', '');
-			$this->tpl->setVar('PASS', '');
-			$this->tpl->setVar('SERVER', '');
-			$this->tpl->setVar('PORT', '');
-			$this->tpl->setVar('CAPACITY', '');
-			
-			$this->tpl->setVar('SSL_SSL', '');
-			$this->tpl->setVar('SSL_TLS', 'checked');
-			
-			$this->tpl->setVar('ACTIVE_YES', 'checked');
-			$this->tpl->setVar('ACTIVE_NO', '');
-		}
+		$this->tpl->parse('TRANSPORTER_ROW', 'tpl_row');
+	}
+	public function getTransporterRow($data)
+	{
+		$this->tpl->setFile('tpl_row', 'system/transporter-row-block.tpl');
+		$this->tpl->setBlock('tpl_row', 'list', 'list_block');
 		
-		if($ajax)
-		{
-			$this->tpl->pparse('AJAX', 'tpl_main');
-			exit;
-		}
+		$this->tpl->setVar('ID', $data["id"]);
+		$this->tpl->setVar('USER', $data['user']);
+		$this->tpl->setVar('SERVER', $data['server']);
+		$this->tpl->setVar('PORT', $data['port']);
+		$this->tpl->setVar('SSL', $data['ssl']);
+		$this->tpl->setVar('CAPACITY', $data['capacity']);
+		$this->tpl->setVar('COUNTER', $data['counter']);
+		$this->tpl->setVar('DATE_CREATED', Dot_Kernel::timeFormat($data['date']));
+		$this->tpl->setVar('ACTIVE_IMG', $data['isActive'] == 1 ? 'active' : 'inactive');
+		$this->tpl->setVar('ISACTIVE', $data['isActive']);
+		$this->tpl->parse('list_block', 'list', true);
+
+		$this->tpl->parse('TRANSPORTER_ROW', 'tpl_row');
+		return $this->tpl->get('TRANSPORTER_ROW');
 	}
 	/**
 	 * Display email transporter details. It is used for update actions

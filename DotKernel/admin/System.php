@@ -316,31 +316,38 @@ class System
 	/**
 	 * Validate transporter
 	 * @access public
-	 * @param array $values 
+	 * @param array $data 
 	 * @return array
 	 */
 	public function validateEmailTransporter($data)
 	{
-		$validator = new Zend_Validate_Int();
+		$integerValidator = new Zend_Validate_Int();
 		$errors=array();
-		if (!$validator->isValid($data['port']))
+		if (!$integerValidator->isValid($data['port']))
 		{
 			array_push($errors, $this->option->errorMessage->invalidPort);
 		}
-		if (!$validator->isValid($data['capacity']))
+		if (!$integerValidator->isValid($data['capacity']))
 		{
 			array_push($errors, $this->option->errorMessage->invalidCapacity);
 		}
+		
+		if (empty($data['user']) || empty($data['pass']) || empty($data['server']))
+		{
+			array_push($errors, $this->option->errorMessage->emptyFields);
+		}
+		
 		return $errors;
 	}
 	/**
 	 * Add email transporter
 	 * @access public
 	 * @param array $data
-	 * @return void
+	 * @return id - last insert ID
 	 */
 	public function addEmailTransporter($data)
 	{
 		$this->db->insert('emailTransporter', $data);
+		return $this->db->lastInsertId();
 	}
 }
