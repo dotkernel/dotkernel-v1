@@ -86,7 +86,7 @@ $(document).ready(function(){
 			return;
 		}
 
-		this.click(function(){
+		this.live("click", function(){
 			var $targetElement = $(this),
 				data = $targetElement.data();
 			$.post(
