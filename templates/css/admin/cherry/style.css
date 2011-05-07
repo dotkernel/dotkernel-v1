@@ -51,7 +51,7 @@ table.big_table tbody tr:nth-child(even) td,
 table.medium_table td:first-child,
 .medium_table td:first-child
 {
-	background-color: #FAF7ED;
+	background-color: #F2EFE6;
 }
 
 /*** pagination ***/
