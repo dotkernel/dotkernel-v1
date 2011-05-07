@@ -111,15 +111,15 @@
 				<tr>
 					<td>SSL</td>
 					<td>
-						<label>TLS<input type="radio" name="ssl" id="tsl" value="tls" {SSL_TLS}></label>
-						<label>SSL<input type="radio" name="ssl" id="ssl" value="ssl" {SSL_SSL}></label>
+						<label>TLS<input type="radio" name="ssl" id="tsl" value="tls" checked></label>
+						<label>SSL<input type="radio" name="ssl" id="ssl" value="ssl"></label>
 					</td>
 				</tr>
 				<tr>
 					<td>Active</td>
 					<td>
-					<label>Yes<input type="radio" id="active1" name="isActive" value="1" {ACTIVE_YES}></label>
-					<label>No<input type="radio" id="active0" name="isActive" value="0" {ACTIVE_NO}></label>
+					<label>Yes<input type="radio" id="active1" name="isActive" value="1" checked></label>
+					<label>No<input type="radio" id="active0" name="isActive" value="0"></label>
 					</td>
 				</tr>
 			<tr>
