@@ -11,23 +11,25 @@
 */
 
 /**
-* Bunch of miscelaneous  functions, used in all DotKernel Applications
+* Mobile Devices related functions
 * @category   DotKernel
 * @package    DotLibrary
+* @subpackage DotUserAgent
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
-class Dot_Mobile
+class Dot_UserAgent_Mobile extends Dot_UserAgent
 {
 	/**
 	 * Constructor
 	 * @access public
 	 * @return Dot_Kernel
 	 */
-    public function __construct()
-    {
-    	$this->db = Zend_Registry::get('database');
-    }	
+  public function __construct()
+	{
+		$this->db = Zend_Registry::get('database');
+	}	
+	
 	/**
 	 * Register mobile hits, insert into mobileHit table
 	 * @access public
@@ -41,7 +43,7 @@ class Dot_Mobile
 		$dotGeoip = new Dot_Geoip();
 		$country = $dotGeoip->getCountryByIp($ip);
 		
-		$wurflDetails = Dot_Kernel::getDevice();
+		$wurflDetails = parent::getDevice();
 		$device = is_null($wurflDetails->getFeature('brand_name')) ? '' : $wurflDetails->getFeature('brand_name');
 		$deviceModel = is_null($wurflDetails->getFeature('marketing_name')) ? '' : $wurflDetails->getFeature('marketing_name');
 		$userAgent = is_null($wurflDetails->getUserAgent()) ? $_SERVER["HTTP_USER_AGENT"] : $wurflDetails->getUserAgent();
@@ -49,7 +51,7 @@ class Dot_Mobile
 		//if Wurfl operating system is null, read from configs/os.xml
 		if(is_null($wurflDetails->getFeature('device_os')))
 		{
-			$os = Dot_Kernel::getOsIcon($_SERVER["HTTP_USER_AGENT"]);
+			$os = parent::getOsIcon($_SERVER["HTTP_USER_AGENT"]);
 			$operatingSystem = $os['minor'];			
 		}
 		else
@@ -59,7 +61,7 @@ class Dot_Mobile
 		//if Wurfl browser is null, read from configs/browser.xml
 		if (is_null($wurflDetails->getFeature('browser_name'))) 
 		{
-			$browser = Dot_Kernel::getBrowserIcon($userAgent, 'browser');
+			$browser = parent::getBrowserIcon($userAgent, 'browser');
 		}
 		else
 		{
@@ -77,6 +79,7 @@ class Dot_Mobile
 							);
 		$this->db->insert('mobileHit', $mobileHit);
 	}
+	
 	/**
 	 * Analise the IP and get the carrier : AT&T, Wifi, etc.
 	 * @todo to be developed

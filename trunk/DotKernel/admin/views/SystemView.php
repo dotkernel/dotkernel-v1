@@ -57,8 +57,8 @@ class System_View extends View
 		$this->tpl->setVar('PHPAPI',php_sapi_name());
 		$this->tpl->setVar('ZFVERSION', Zend_Version::VERSION);
 		
-		$this->tpl->setVar('WURFLCACHEBUILT', $wurflInfo['cacheBuilt']);
-		$this->tpl->setVar('WURFLDATE', $wurflInfo['date']);
+		$this->tpl->setVar('WURFLCACHEBUILT', $wurflInfo['cacheDate']);
+		$this->tpl->setVar('WURFLDATE', $wurflInfo['xmlFileDate']);
 
 		if (empty($warnings))
 		{

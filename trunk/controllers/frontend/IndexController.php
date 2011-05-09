@@ -15,19 +15,29 @@
  * Is doing all the job for specific frontend control stuff
  * @author     DotKernel Team <team@dotkernel.com>
  */ 
-$wurfl = new Dot_UserAgent();
-//if automatic redirect is enabled in application.ini and the browser is mobile and session->mobileHit is not set, register it and redirect
-if($registry->configuration->resources->useragent->wurflapi->redirect && 'mobile' == Dot_Kernel::getDevice()->getType() && !isset($session->mobileHit))
-{
-	// register mobile hits, store in session if hit was register
-	$dotMobile = new Dot_Mobile();
-	$dotMobile->registerHit();
-	$session->mobileHit = TRUE;
-	//redirect to mobile controller
-	header('location: '.$registry->configuration->website->params->url.'/mobile');
-	exit;
-}
 
+/**
+ *  Customize for your own needs. By default, if wurfl  module is active,
+ *  then record the mobile hit , and eventually redirect 
+ */
+if($registry->configuration->resources->useragent->wurflapi->active)
+{
+	$deviceInfo = Dot_UserAgent :: getDeviceInfo($_SERVER["HTTP_USER_AGENT"]); 
+	// the browser is mobile and session->mobileHit is not set, register it and maybe redirect
+	if($deviceInfo->isMobile  && !($registry->session->mobileHit))
+	{
+		$dotMobile = new Dot_UserAgent_Mobile();
+		#TODO Dot_Mobile need a refactor
+		//$dotMobile->registerHit();
+		$registry->session->mobileHit = TRUE;
+		//redirect to mobile controller
+		if($registry->configuration->resources->useragent->wurflapi->redirect)
+		{
+			header('location: '.$registry->configuration->website->params->url.'/mobile');
+			exit;
+		}
+	}
+}
 // start the template object, empty for the moment
 require(DOTKERNEL_PATH . '/' . $registry->route['module'] . '/' . 'View.php');
 $tpl = View::getInstance(TEMPLATES_PATH . '/' . $registry->route['module']);
@@ -39,7 +49,7 @@ $tpl->setViewFile();
 // set paths in templates
 $tpl->setViewPaths();
 
-// display login boxH
+// display login box
 $tpl->setLoginBox();
 
 /** 
