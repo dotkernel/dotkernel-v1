@@ -50,11 +50,12 @@
 	</table>
 	<table cellpadding="0" cellspacing="0" class="medium_table" width="100%">
 		<tr>
-			<td width="150px">WURFL Cache Built</td>
-			<td>{WURFLCACHEBUILT} [ <a href="{SITE_URL}/admin/system/build-wurfl-cache">build now</a> ]</td>
+			<td width="150px">WURFL Cache DATE</td>
+			<td>{WURFLCACHEBUILT}     [ <a href="{SITE_URL}/admin/system/build-wurfl-cache">rebuild</a> ]
+					[ <a href="{SITE_URL}/admin/system/empty-wurfl-cache">empty</a> ]</td>
 		</tr>
 		<tr>
-			<td>WURFL Date</td>
+			<td>WURFL XML FILE</td>
 			<td>{WURFLDATE}</td>
 		</tr>
 	</table>

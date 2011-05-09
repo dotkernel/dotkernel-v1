@@ -165,10 +165,10 @@ class System
 		$result['cachePath'] = dirname($wurflConfigFile) . "/" . $paramsArray['dir'];
 		*/
 		#TODO rebuild nicely 
-		$wurfl = new Dot_UserAgent(); 
-		$wurflInfo = $wurfl->getWurflVersion();
-		$result['date'] = $wurflInfo['version'];
-		$result['cacheBuilt'] = 'TO BE EXTENDED';
+		//$wurfl = new Dot_UserAgent(); 
+		//$wurflInfo = $wurfl->getWurflVersion();
+		$result['xmlFileDate']    = 'TO BE EXTENDED';
+		$result['cacheDate']      = 'TO BE EXTENDED';
 		return $result;
 	}
 	/**
