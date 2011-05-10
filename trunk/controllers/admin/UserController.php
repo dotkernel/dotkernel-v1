@@ -16,7 +16,7 @@
 */
 
 // instantiate classes related to User module: model & view
-$userModel = new User(); 
+$userModel = new User();
 $userView = new User_View($tpl);
 // all actions MUST set  the variable  $pageTitle
 $pageTitle = $option->pageTitle->action->{$registry->route['action']};

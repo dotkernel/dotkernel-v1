@@ -17,7 +17,7 @@
 * @package    Admin 
 * @author     DotKernel Team <team@dotkernel.com>
 */
-class System
+class System extends Dot_Model
 {
 	/**
 	 * Constructor
@@ -25,10 +25,7 @@ class System
 	 */
 	public function __construct()
 	{
-		$this->db = Zend_Registry::get('database');
-		$this->option = Zend_Registry::get('option');
-		$this->settings = Zend_Registry::get('settings');
-		$this->config = Zend_Registry::get('configuration');
+		parent::__construct();
 	}
 	/**
 	 * Get MySQL Version

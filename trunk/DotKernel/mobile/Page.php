@@ -12,13 +12,13 @@
 
 /**
 * Page Model
-* Dummy class, is not doing anything
+* Dummy class, doesn't do anything yet
 * @category   Mobile
 * @package    Frontend 
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
-class Page
+class Page extends Dot_Model
 {
 	/**
 	 * Constructor
@@ -26,6 +26,7 @@ class Page
 	 * @return Frontend_Page 
 	 */
 	public function __construct()
-	{		
-	}	
+	{
+		parent::__construct();
+	}
 }

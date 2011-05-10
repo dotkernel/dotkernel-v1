@@ -26,7 +26,6 @@ class User extends Dot_Model_User
 	public function __construct()
 	{
 		parent::__construct();
-		$this->settings = Zend_Registry::get('settings');			
 		$seo = new Dot_Seo();
 		$this->seoOption = $seo->getOption();	
 	}	
