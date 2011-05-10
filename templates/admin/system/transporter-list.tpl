@@ -13,38 +13,55 @@
 	}
 </style>
 <script>
+	// define constants
 	var SITE_URL = "{SITE_URL}",
 		userToken = "{USERTOKEN}",
-		ADD_URL = SITE_URL + "/admin/system/transporter-add/"
+		ADD_URL = SITE_URL + "/admin/system/transporter-add/",
 		FLAG_TOGGLE_URL = SITE_URL + "/admin/system/transporter-activate/";
-	
+</style>
+<script>
+	// active/inactive flags
 	$(document).ready(function(){
 		$(".activeButton").activeFlags({
 			targetUrl:FLAG_TOGGLE_URL,
 		});
-
+	});
+</style>
+<script>
+	// submit the form
+	$(document).ready(function(){
 		$("#transporterAddSubmit").click(function(){
+			// clear any messages that might still be shown
 			$("#messages").fadeOut(100);
+			// post the form
 			$.post(
 				ADD_URL,
 				$("#transporterAdd").serialize(),
 				function(result){
-					var content;
-					content = "<ul><li>" + result.message.join("</li><li>") + "</li></ul>";
-					console.log(result.data);
 					if (result.success){
-						//$("#messages").removeClass().addClass("message_info").html(content).fadeIn();
+						// the transporter was added
 						$("#form-dialog").dialog("close");
+						// add the new row
 						$("#transporterTable").append(result.row);
+						// clear the form
 						$("#transporterAdd input[type=text]").val('');
 					}else{
+						// something went wrong
+						var content;
+						// generate the content for the error box
+						content = "<ul><li>" + result.message.join("</li><li>") + "</li></ul>";
+						// show the error
 						$("#messages").removeClass().addClass("message_error").html(content).fadeIn();
 					}
 				},
 				"json"
 			)
 		});
-
+	}):
+</style>
+<script>
+	// show a dialog then the add new transporter button is clicked
+	$(document).ready(function(){
 		$("#dialogButton").click(function(){
 			$("#form-dialog").dialog({
 				modal: true
