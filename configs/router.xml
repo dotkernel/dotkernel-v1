@@ -33,6 +33,9 @@
 			<mobile>
 				<Page>home</Page>
 			</mobile>
+			<rss>
+				<Sample>home</Sample>
+			</rss>
 		</action>
  	</routes>
  </router>
