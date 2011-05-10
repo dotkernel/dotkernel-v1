@@ -17,7 +17,7 @@
 * @package    Rss
 * @author     DotKernel Team <team@dotkernel.com>
 */
-class Sample
+class Sample extends Dot_Model
 {
 	/**
 	 * Constructor
@@ -26,7 +26,7 @@ class Sample
 	 */
 	public function __construct()
 	{
-		$this->config = Zend_Registry::get('configuration');		
+		parent::__construct();	
 	}
 	/**
 	 * Get sample items
@@ -35,7 +35,7 @@ class Sample
 	 */
 	private function _getItems()
 	{
-		//some sample items used for test
+		//some sample items used for the test
 		$data = array(
 					array('title' => 'About Us', 'link' => '/page/about/', 'content' =>'This is a Sample description for About Us page'),
 					array('title' => 'Who we are', 'link' => '/page/who-we-are/', 'content' =>'This is a description for Who we are Sample page')

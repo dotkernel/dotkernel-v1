@@ -28,7 +28,6 @@ class User extends Dot_Model_User
 	public function __construct()
 	{
 		parent::__construct();
-		$this->config = Zend_Registry::get('configuration');
 	}
 	/**
 	 * Get user info

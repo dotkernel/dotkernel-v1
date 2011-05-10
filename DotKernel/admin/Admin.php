@@ -18,18 +18,15 @@
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
-class Admin
+class Admin extends Dot_Model
 {	
 	/**
 	 * Constructor
 	 * @access public
 	 */
 	public function __construct()
-	{		
-		$this->db = Zend_Registry::get('database');
-		$this->config = Zend_Registry::get('configuration');
-		$this->settings = Zend_Registry::get('settings');
-		$this->option = Zend_Registry::get('option');	
+	{
+		parent::__construct();
 	}		
 	/**
 	 * Get admin by field
