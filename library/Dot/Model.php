@@ -11,8 +11,7 @@
 */
 
 /**
-* Control user access in DotKernel application
-* access control list (ACL)
+* Will be extended by all models
 * @category   DotKernel
 * @package    DotLibrary
 * @author     DotKernel Team <team@dotkernel.com>
