@@ -22,8 +22,10 @@ class Dot_UserAgent_Wurfl
 {
 	// hold an instance of the class
 	static $_instance;
-	private $_cache;
+	static  $wurflConfig;
+	private $_cacheApc;
 	private $_wurflManagerFactory;
+	private $_versionFile;
 	
 	/**
 	 * private constructor, set the WURFL configuration paramethers
@@ -35,23 +37,20 @@ class Dot_UserAgent_Wurfl
 		// load WURFL library and configuration XML file
 		require_once $this->config->resources->useragent->wurflapi->lib_dir . 'Application.php';
 		$wurflConfig = new WURFL_Configuration_XmlConfig($this->config->resources->useragent->wurflapi->config_file);
-		// load the confiuration object in a class available variable 
-		$this->wurflConfig = $wurflConfig;
+		self::$wurflConfig = $wurflConfig;
 		
 		// if we have APC enabled, start the cache object too 
 		if(TRUE == $this->config->resources->useragent->wurflapi->cache && 
 		    function_exists('apc_cache_info') && (@apc_cache_info() !== FALSE) )
 		{			
-			// start the cache factory
 			$frontendOptions = array('lifetime' => $this->config->resources->useragent->wurflapi->cache_lifetime ,               
 											 				  'automatic_serialization' => TRUE );
 			$cache = Zend_Cache :: factory('Core', 'APC', $frontendOptions);
-			$this->_cache = $cache;
+			$this->_cacheApc = $cache;
 		}	
 		
-		// start the WURLF object
-		$wurflManagerFactory = new WURFL_WURFLManagerFactory($wurflConfig);
-		$this->_wurflManagerFactory = $wurflManagerFactory;
+		// Now is time to start the factory, if is a must ...
+		if($this->_cacheExist()) $this->_buildFactory();
 	}
 	
 	/**
@@ -68,13 +67,42 @@ class Dot_UserAgent_Wurfl
 	}
 
 	/**
+	 * Start the WURFL library Factory Manager
+	 * @return void 
+	 */
+	private function _buildFactory()
+	{
+		$wurflManagerFactory = new WURFL_WURFLManagerFactory(self::$wurflConfig);
+		$this->_wurflManagerFactory = $wurflManagerFactory;
+	}
+	
+	/**
+	 * Important function, Decision if is allowed to start the wurflfactory object or not. 
+	 * Is checking for version.txt file which is supposed to not be there if there is no cache 
+	 * @return bool 
+	 */
+	private function _cacheExist()
+	{
+		$this->_versionFile = self::$wurflConfig->persistence['params']['dir'] . '/version.txt';
+		return is_file($this->_versionFile);
+	}
+	
+	/**
 	 * Create the WURFL object and store the content. Use with precaution !!! As will load a lot of files
 	 * @access public
 	 * @return void
 	 */
 	public  function createWurflFactory()
 	{
-		$this->_wurflManagerFactory->create(true);
+		if(!$this->_cacheExist())
+		{
+			$this->_buildFactory();
+			$wurflManager = $this->_wurflManagerFactory->create(true);
+			$info = $wurflManager->getWURFLInfo();
+			$wurflInfo['version']     = $info->version;
+			$this->_saveWurflVersion($wurflInfo['version']);
+		}
+
 	}
 	
 	/**
@@ -88,32 +116,42 @@ class Dot_UserAgent_Wurfl
 	}
 	
 	/**
-	 * Get information about WURFL  
+	 * Get information about WURFL  previously saved in version.txt file
 	 * @access public
-	 * @return bidimensional array, with version and lastUpdated
+	 * @return bidimensional array, with xmlFile and cache created date
 	 */
 	public function getWurflVersion()
 	{
-		//We need to try to create it again, but if already exists , is not created again 
-		$wurflManager = $this->_wurflManagerFactory->create(true);
-		
-		// alternate load ( WURFL_Xml_Info::PERSISTENCE_KEY )
-		//  const PERSISTENCE_KEY = "WURFL_XML_INFO";
-		
-		$info = $wurflManager->getWURFLInfo();
-		$wurflInfo['version']     = $info->version;
-		$wurflInfo['lastUpdated'] = $info->lastUpdated;
-		return $wurflInfo; 
+		if($this->_cacheExist())
+		{
+			$readFile = file($this->_versionFile);
+			$result['xmlFileDate']    = $readFile['0'];
+			$result['cacheDate']      = $readFile['1'];
+		}
+		else
+		{
+			$result['xmlFileDate']    = 'EMPTY CACHE';
+			$result['cacheDate']      = 'EMPTY CACHE';
+		}
+		return $result;
 	}
 	
 	/**
-	 * Generate a special XML file with 2 tags:
-	 *  write the xml file with build date, (YYYY-MM-DD, HH:ss) and xml file date (eg. 2011-04-24)
+	 * Generate a special file with 2 tags:  build date, (YYYY-MM-DD, HH:ss) and xml file date (eg. 2011-04-24)
+	 * @access private
 	 * @return void
 	 */
-	private function _saveWurflVersion()
+	private function _saveWurflVersion($xmlFileDate)
 	{
-		
+		if(!$this->_cacheExist())
+		{
+			$writer = new Zend_Log_Writer_Stream($this->_versionFile);
+			$formatter = new Zend_Log_Formatter_Simple('%message%' . PHP_EOL);
+			$writer->setFormatter($formatter);
+			$logger = new Zend_Log($writer);
+			$logger->info($xmlFileDate);
+			$logger->info(date("F j, Y, H:i"));   
+		}
 	}
 	
 	/**
@@ -129,15 +167,18 @@ class Dot_UserAgent_Wurfl
 	}
 	
 	/**
-	 * Return a huge un-usable object . Use it with precaution !
+	 * Return a huge un-usable object . But only when cache exists. Use it with precaution !
 	 * @param string UserAgent, usually $_SERVER["HTTP_USER_AGENT"]
 	 * @access private , we don't want to be called within controller, is too expensive
 	 * @return object
 	 */
 	private function _getDeviceForUserAgent($userAgent)
 	{
-		$wurflManager = $this->_wurflManagerFactory->create(true);
-		return $wurflManager->getDeviceForUserAgent($userAgent);
+		if($this->_cacheExist())
+		{
+			$wurflManager = $this->_wurflManagerFactory->create(true);
+			return $wurflManager->getDeviceForUserAgent($userAgent);
+		}
 	}
 	
 	/** 
@@ -148,7 +189,10 @@ class Dot_UserAgent_Wurfl
 	 */
 	public function getDeviceCapabilities($userAgent)
 	{
-		return $this->_getDeviceForUserAgent($userAgent)->getAllCapabilities();
+		if($this->_cacheExist())
+		{
+			return $this->_getDeviceForUserAgent($userAgent)->getAllCapabilities();
+		}
 	}
 	
 	/** 
@@ -160,7 +204,7 @@ class Dot_UserAgent_Wurfl
 	public function getDevice($userAgent)
 	{
 		// if cache is enabled in application.ini and APC is enabled 
-		if($this->_cache)
+		if($this->_cacheApc)
 		{
 			$cacheToken = $this->config->resources->useragent->wurflapi->cache_namespace . '_' . md5($userAgent);						
 			//check if we have the info there in cache 
@@ -172,7 +216,7 @@ class Dot_UserAgent_Wurfl
 			else
 			{
 				// prepare the array 
-			 	$device = $this->_prepareDeviceInfo($userAgent);
+			 	$device = ($this->_cacheExist()) ? $this->_prepareDeviceInfo($userAgent) : new StdClass();
 			 	//save the array in cache 
 				$this->_saveDeviceToCache($device, $cacheToken);
 				return $device;
@@ -182,7 +226,8 @@ class Dot_UserAgent_Wurfl
 		// No APC cache available
 		else
 		{
-			return $this->_prepareDeviceInfo($userAgent);
+			$object = ($this->_cacheExist()) ? $this->_prepareDeviceInfo($userAgent) : new StdClass();
+			return $object;
 		}		
 	}
 	
@@ -238,9 +283,9 @@ class Dot_UserAgent_Wurfl
 	{
 		$device = FALSE;
 		// check if we have a that cache piece 
-		if($this->_cache->test($cacheToken))
+		if($this->_cacheApc->test($cacheToken))
 		{
-			$device = $this->_cache->load($cacheToken);
+			$device = $this->_cacheApc->load($cacheToken);
 		}		
 		return $device;
 	} 
@@ -252,7 +297,7 @@ class Dot_UserAgent_Wurfl
 	 */
 	private function _saveDeviceToCache($device, $cacheToken)
 	{
-		$this->_cache->save($device, $cacheToken);
+		$this->_cacheApc->save($device, $cacheToken);
 	}
 	
 	/**
@@ -365,20 +410,4 @@ class Dot_UserAgent_Wurfl
 	{
 		trigger_error('Clone is not allowed.', E_USER_ERROR);
 	} 
-
-	#TODO write only once the data in Storage, and only from admin 
-	#TODO data in Storage must be very summary, only strictly necessary informations, and presented as a Big Array
-	#TODO data Storage in cache/wurfl folder , as 1 or 2 files, and moved when necessary in APC or memcached
-	#TODO read-only  data by the other functions and controllers
-		
-	
-	#TODO constructor
-	# singleton, if there isnt , must return false . Do NOT create factory
-	#TODO create
-	# must be called only from admin ,
-	# call the getwurflversion original
-	# save an xml file directly in wurfl folder with info from previous call 
-	#TODO remove // must be called only from admin 
-	#TODO getwurflversion 
-	 // read the xml file from wurfl folder, if is not there , call the setwurflversion 	
 }

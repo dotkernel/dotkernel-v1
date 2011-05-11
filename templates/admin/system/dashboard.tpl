@@ -50,6 +50,10 @@
 	</table>
 	<table cellpadding="0" cellspacing="0" class="medium_table" width="100%">
 		<tr>
+			<td>WURFL API VERSION</td>
+			<td>{WURFLAPIVERSION}</td>
+		</tr>
+		<tr>
 			<td width="150px">WURFL Cache DATE</td>
 			<td>{WURFLCACHEBUILT}     [ <a href="{SITE_URL}/admin/system/build-wurfl-cache">rebuild</a> ]
 					[ <a href="{SITE_URL}/admin/system/empty-wurfl-cache">empty</a> ]</td>

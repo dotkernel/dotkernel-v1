@@ -59,6 +59,7 @@ class System_View extends View
 		
 		$this->tpl->setVar('WURFLCACHEBUILT', $wurflInfo['cacheDate']);
 		$this->tpl->setVar('WURFLDATE', $wurflInfo['xmlFileDate']);
+		$this->tpl->setVar('WURFLAPIVERSION', $wurflInfo['apiVersion']);
 
 		if (empty($warnings))
 		{
