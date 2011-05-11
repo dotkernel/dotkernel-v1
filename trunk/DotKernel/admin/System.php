@@ -142,30 +142,11 @@ class System extends Dot_Model
 	public function getWurflInfo()
 	{
 		$result = array();
-		/*
-		$result['cacheBuilt'] = $this->settings->wurflCacheBuilt;
-		
-		$wurflConfigFile = $this->config->resources->useragent->wurflapi->wurfl_config_file;
-		$wurflConfig = new Zend_Config_Xml($wurflConfigFile);
-		$wurflConfigArray = $wurflConfig->wurfl->toArray();
-		$wurflZipPath = dirname($wurflConfigFile)."/".$wurflConfigArray['main-file'];
-		$timestamp = filemtime($wurflZipPath);
-		$result['date'] = strftime($this->settings->timeFormatLong,$timestamp);
-		
-		// get the cache directory
-		$params = $wurflConfig->persistence->params;
-		$paramsArray = array(); 
-		foreach (explode(",", $params) as $param) {
-			$paramNameValue = explode("=", $param);
-			$paramsArray[$paramNameValue[0]] = $paramNameValue[1];
-		}
-		$result['cachePath'] = dirname($wurflConfigFile) . "/" . $paramsArray['dir'];
-		*/
-		#TODO rebuild nicely 
-		//$wurfl = new Dot_UserAgent(); 
-		//$wurflInfo = $wurfl->getWurflVersion();
-		$result['xmlFileDate']    = 'TO BE EXTENDED';
-		$result['cacheDate']      = 'TO BE EXTENDED';
+		$wurfl = Dot_UserAgent_Wurfl::getInstance();
+		$wurflInfo = $wurfl->getWurflVersion();
+		$result['xmlFileDate']    = $wurflInfo['xmlFileDate'];
+		$result['cacheDate']      = $wurflInfo['cacheDate'];
+		$result['apiVersion']     = $this->config->resources->useragent->wurflapi->api_version;
 		return $result;
 	}
 	/**
