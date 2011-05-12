@@ -18,7 +18,7 @@
 		userToken = "{USERTOKEN}",
 		ADD_URL = SITE_URL + "/admin/system/transporter-add/",
 		FLAG_TOGGLE_URL = SITE_URL + "/admin/system/transporter-activate/";
-</style>
+</script>
 <script>
 	// active/inactive flags
 	$(document).ready(function(){
@@ -26,7 +26,7 @@
 			targetUrl:FLAG_TOGGLE_URL,
 		});
 	});
-</style>
+</script>
 <script>
 	// submit the form
 	$(document).ready(function(){
@@ -57,8 +57,8 @@
 				"json"
 			)
 		});
-	}):
-</style>
+	});
+</script>
 <script>
 	// show a dialog then the add new transporter button is clicked
 	$(document).ready(function(){
@@ -141,8 +141,8 @@
 				</tr>
 			<tr>
 				<td></td>
-				<td class="row1 last_td">
-					<input type="button" class="small_btn" value="Add" id="transporterAddSubmit">
+				<td>
+					<input type="button" class="button" value="Add" id="transporterAddSubmit">
 				</td>
 			</tr>
 		</table>

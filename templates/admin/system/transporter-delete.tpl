@@ -1,17 +1,17 @@
 <form action="{SITE_URL}/admin/system/transporter-delete/id/{ID}" method="post" >
 <input type="hidden" name="send" value="on">
 <fieldset style="width: 600px">
-<legend>Delete Transporter: {USER}  /  {SERVER}</legend>
-	<table cellpadding="0" cellspacing="0" class="medium_table" width="100%">
+<legend>Delete Transporter: {USER} / {SERVER}</legend>
+	<table class="medium_table" width="100%">
 		<tr>
 			<td>
-				<b>Are you sure you want to delete this transporter ?</b>
-				<br />{USER}  /  {SERVER} 
-				<br />
+				<strong>Are you sure you want to delete this transporter ?</strong>
+				<br/>{USER} / {SERVER}
+				<br/>
 				<input type="checkbox" name="confirm">Confirm deletion</td>
 			<td style="vertical-align: middle;">
-				<input type="submit" class="small_btn" value="YES" style="float: left; margin-right:10px;">
-				<input type="button" onclick="window.location = '{SITE_URL}/admin/system/transporter-list'"class="small_btn" value="Cancel">
+				<input type="submit" class="button" value="YES" style="float: left; margin-right:10px;">
+				<input type="button" onclick="window.location = '{SITE_URL}/admin/system/transporter-list'" class="button" value="Cancel">
 			</td>
 		</tr>
 	</table>

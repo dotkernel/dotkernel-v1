@@ -328,6 +328,36 @@ input[type="checkbox"], input[type="radio"]{
 	padding-bottom: 70px;
 	color:#1E1E1E;
 }
+.button{
+	display:inline-block;
+	margin: 0px auto;
+	padding: 0px 20px;
+	height: 26px;
+	line-height:26px;
+	text-align:center;
+	font-size: 11px !important;
+	font-weight: bold;
+	border: 0px;
+	vertical-align: middle;
+	cursor: pointer;
+	text-transform: uppercase;
+	width:auto !important;
+
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+
+	box-shadow: 1px 1px 1px #555;
+}
+.button:hover{
+	text-decoration:none;
+}
+.button, .button:hover{
+	color:#fff;
+}
 /*** g_box ***/
 .g_box{
 	width: 100%;
@@ -337,7 +367,7 @@ input[type="checkbox"], input[type="radio"]{
 	border-color: #D7D7D7;
 	background-color: #ffffff;
 }
-.g_box td{    
+.g_box td{
 	padding:12px 15px 12px 15px;
 	vertical-align:middle;
 	font-family:Arial,sans-serif;
@@ -533,26 +563,6 @@ input.reffer_input{
 	width: 100%;
 	border: 0;
 	background: transparent;
-}
-input.small_btn{
-	margin: 0px;
-	padding: 0px;
-	width: 67px;
-	min-height: 26px;
-	line-height: 26px;
-	text-align:center;
-	background-repeat: no-repeat;
-	font-size: 11px;
-	font-weight: bold;
-	border: 0px;
-	vertical-align: middle;
-	cursor: pointer;
-	text-transform: uppercase;
-	background-image: url('images/button.png');
-	color: #FFFFFF;
-}
-input.small_btn:hover{
-	background-image: url('images/button_hover.png');
 }
 .footer{
 	margin: -55px auto 0;
