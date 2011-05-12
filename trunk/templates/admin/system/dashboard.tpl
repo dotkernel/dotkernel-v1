@@ -1,15 +1,11 @@
+<script>
+	$(document).ready(function(){
+		$("#jqueryVersion").text($().jquery);
+		$("#jqueryUiVersion").text($.ui.version);
+	});
+</script>
 <fieldset style="width: 460px;float: left;margin-right: 50px;">
 	<legend>System Overview</legend>
-	<!-- BEGIN warnings_table -->
-	<table class="medium_table warnings" width="100%">
-		<!-- BEGIN warnings_list -->
-		<tr>
-			<td class="{TD_CLASS}" width="150px">{WARNING_TYPE}</td>
-			<td class="{TD_CLASS}">{WARNING_DESCRIPTION}</td>
-		</tr>
-		<!-- END warnings_list -->
-	</table>
-	<!-- END warnings_table -->
 	<table class="medium_table" width="100%">
 		<tr>
 			<td width="150px">HOSTNAME</td>
@@ -63,5 +59,27 @@
 			<td>{WURFLDATE}</td>
 		</tr>
 	</table>
+	<table class="medium_table" width="100%">
+		<tr>
+			<td width="150px">jQuery Version</td>
+			<td id="jqueryVersion"></td>
+		</tr>
+		<tr>
+			<td>jQuery UI Version</td>
+			<td id="jqueryUiVersion"></td>
+		</tr>
+	</table>
 </fieldset>
-{WIDGET_USER_LOGINS}
+<fieldset style="width: 500px;float: left;margin-right: 50px;">
+	{WIDGET_USER_LOGINS}
+	<!-- BEGIN warnings_table -->
+	<table class="medium_table warnings" width="100%">
+		<!-- BEGIN warnings_list -->
+		<tr>
+			<td class="{TD_CLASS}" width="150px">{WARNING_TYPE}</td>
+			<td class="{TD_CLASS}">{WARNING_DESCRIPTION}</td>
+		</tr>
+		<!-- END warnings_list -->
+	</table>
+	<!-- END warnings_table -->
+</fieldset>
