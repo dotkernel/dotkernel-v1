@@ -1,6 +1,9 @@
+<script>
+	var SITE_URL = '{SITE_URL}';
+</script>
 <script type="text/javascript" src="{TEMPLATES_URL}/js/frontend/user.js"></script>
 <span style="color: #ff0000;" id="msgError">{ERROR}</span>
-<br />
+<br/>
 <form id="userRegister" action="" method="post">
 <input type="hidden" name="send" value="on">
 
@@ -35,7 +38,7 @@
 		</li>
 		<li class="clearfix positioned">
 			<p class="contact_label">&nbsp;</p>
-			<input type="button" class="btn" value="register" onclick="formSubmit('userRegister', 'msgError', '{SITE_URL}/user/account');">
+			<input type="submit" class="btn" value="register">
 		</li>
 	</ul>
 </form>

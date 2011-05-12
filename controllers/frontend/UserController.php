@@ -142,7 +142,7 @@ switch ($registry->route['action'])
 				$session->message['txt'] = $option->infoMessage->add;
 				$session->message['type'] = 'info';
 				//login user
-				$userModel->authorizeLogin($data);				
+				$userModel->authorizeLogin($data);
 			}
 			else
 			{	
@@ -153,7 +153,8 @@ switch ($registry->route['action'])
 					unset($data['password']);				
 				}							
 			}
-			// add action and validation are made with ajax - dojo.xhrPost, so return json string  
+			// add action and validation are made with ajax, so return json string
+			header('Content-type: application/json');  
 			echo Zend_Json::encode(array('data'=>$dotValidateUser->getData(), 'error'=>$dotValidateUser->getError()));
 			// return $data and $error as json
 			exit;			
