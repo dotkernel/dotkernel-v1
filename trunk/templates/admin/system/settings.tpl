@@ -45,6 +45,6 @@
 	</tbody>
 </table>
 <br/>
-<center><input type="submit" value="Update " class="small_btn"></center>
+<input type="submit" value="Update" class="button">
 </form>
 </fieldset>

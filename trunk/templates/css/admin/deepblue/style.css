@@ -70,3 +70,25 @@ table.medium_table td:first-child,
 .pagination li p{
 	background-color: #3178A2;
 }
+
+/*** buttons ***/
+.button{
+	background-color: #E46E04;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#E46E04), to(#D46604));
+	background-image: -webkit-linear-gradient(top, #E46E04, #D46604);
+	background-image:    -moz-linear-gradient(top, #E46E04, #D46604);
+	background-image:     -ms-linear-gradient(top, #E46E04, #D46604);
+	background-image:      -o-linear-gradient(top, #E46E04, #D46604);
+	background-image:         linear-gradient(top, #E46E04, #D46604);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#E46E04', EndColorStr='#D46604');
+}
+.button:hover{
+    background-color: #D46604;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#D46604), to(#E46E04));
+    background-image: -webkit-linear-gradient(top, #D46604, #E46E04);
+    background-image:    -moz-linear-gradient(top, #D46604, #E46E04);
+    background-image:     -ms-linear-gradient(top, #D46604, #E46E04);
+    background-image:      -o-linear-gradient(top, #D46604, #E46E04);
+    background-image:         linear-gradient(top, #D46604, #E46E04);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#D46604', EndColorStr='#E46E04');
+}

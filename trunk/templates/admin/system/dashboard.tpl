@@ -38,7 +38,7 @@
 			<td>{GEOIP_COUNTRY_LOCAL}</td>
 		</tr>
 		<!-- BEGIN is_geoip -->
-	 	<tr>
+		<tr>
 			<td>GEOIP CITY</td>
 			<td>{GEOIP_CITY_VERSION}</td>
 		</tr>
@@ -48,7 +48,7 @@
 		</tr>
 		<!-- END is_geoip -->
 	</table>
-	<table cellpadding="0" cellspacing="0" class="medium_table" width="100%">
+	<table class="medium_table" width="100%">
 		<tr>
 			<td>WURFL API VERSION</td>
 			<td>{WURFLAPIVERSION}</td>

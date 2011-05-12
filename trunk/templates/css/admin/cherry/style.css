@@ -58,3 +58,24 @@ table.medium_table td:first-child,
 .pagination li p{
 	background-color: #BF5954;
 }
+
+.button{
+	background-color: #63201A;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#63201A), to(#471712));
+	background-image: -webkit-linear-gradient(top, #63201A, #471712);
+	background-image:    -moz-linear-gradient(top, #63201A, #471712);
+	background-image:     -ms-linear-gradient(top, #63201A, #471712);
+	background-image:      -o-linear-gradient(top, #63201A, #471712);
+	background-image:         linear-gradient(top, #63201A, #471712);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#63201A', EndColorStr='#471712');
+}
+.button:hover{
+    background-color: #471712;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#471712), to(#63201A));
+    background-image: -webkit-linear-gradient(top, #471712, #63201A);
+    background-image:    -moz-linear-gradient(top, #471712, #63201A);
+    background-image:     -ms-linear-gradient(top, #471712, #63201A);
+    background-image:      -o-linear-gradient(top, #471712, #63201A);
+    background-image:         linear-gradient(top, #471712, #63201A);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#471712', EndColorStr='#63201A');
+}
