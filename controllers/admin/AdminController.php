@@ -90,7 +90,11 @@ switch ($registry->route['action'])
 		{		
 			Dot_Kernel::checkUserToken();
 			// POST values that will be validated				
-			$values = array('username' => 
+			$values = array('details' => 
+								array('firstName'=>$_POST['firstName'],
+									  'lastName'=>$_POST['lastName']
+									 ),
+							'username' => 
 								array('username' => $_POST['username']
 									 ),
 							'email' => array('email' => $_POST['email']),
@@ -125,6 +129,7 @@ switch ($registry->route['action'])
 				}	
 			}
 			$error = array_merge($error, $dotValidateUser->getError());
+			$data = $dotValidateUser->getData();
 			if(!empty($error))
 			{						
 				$registry->session->message['txt'] = $error;
@@ -140,7 +145,10 @@ switch ($registry->route['action'])
 		{
 			Dot_Kernel::checkUserToken();	
 			// POST values that will be validated
-			$values = array(
+			$values = array('details' => 
+								array('firstName'=>$_POST['firstName'],
+									  'lastName'=>$_POST['lastName']
+							),
 							'email' => array('email' => $_POST['email']),
 							'enum' => array('0' => '0,1'));
 			if($_POST['password'] != '' || $_POST['password2'] !='' )

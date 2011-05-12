@@ -35,7 +35,11 @@ switch ($registry->route['action'])
 		{
 			Dot_Kernel::checkUserToken();
 			// POST values that will be validated
-			$values = array('username' => 
+			$values = array('details' => 
+								array('firstName'=>$_POST['firstName'],
+									  'lastName'=>$_POST['lastName']
+									 ),
+							'username' => 
 								array('username' => $_POST['username']
 									 ),
 							'email' => array('email' => $_POST['email']),

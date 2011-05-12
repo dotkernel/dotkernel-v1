@@ -35,7 +35,7 @@
 			</warningMessage>
 			<validate>
 				<details>
-					<lengthMin>3</lengthMin>
+					<lengthMin>0</lengthMin>
 					<lengthMax>255</lengthMax>
 				</details>
 				<password>
