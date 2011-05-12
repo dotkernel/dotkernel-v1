@@ -2,13 +2,13 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<link  href="http://fonts.googleapis.com/css?family=Cabin:bold" rel="stylesheet" type="text/css" >
+	<link href="http://fonts.googleapis.com/css?family=Cabin:bold" rel="stylesheet" type="text/css" >
 	<title>Admin - {PAGE_TITLE}</title>
-	<link rel="stylesheet" href ="{SITE_URL}/externals/jquery/jquery-ui-1.8.12.min.css" type="text/css" >
 	<link rel="stylesheet" href ="{TEMPLATES_URL}/css/admin/style.css" type="text/css" >
 	<link rel="stylesheet" href ="{TEMPLATES_URL}/css/admin/{SKIN}/style.css" type="text/css" >			
 	<script src="{SITE_URL}/externals/jquery/jquery-1.6.min.js"></script>
 	<script src="{SITE_URL}/externals/jquery/jquery-ui-1.8.12.min.js"></script>
+	<link rel="stylesheet" href ="{SITE_URL}/externals/jquery/jquery-ui-1.8.12.min.css" type="text/css" >
 	<script src="{TEMPLATES_URL}/js/admin/main.js"></script>
 </head>
 <body>
