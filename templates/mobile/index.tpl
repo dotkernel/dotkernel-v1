@@ -1,13 +1,13 @@
-<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.1//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!doctype html>
+<html>
 <head>
+	<meta charset="utf-8">
 	<title>{PAGE_TITLE}</title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<meta name="keywords" content="{PAGE_KEYWORDS}" >
 	<meta name="description" content="{PAGE_DESCRIPTION}" >
-	<link rel="stylesheet" href="{SITE_URL}/externals/jquery/jquery.mobile-1.0a4.1.min.css" />
-	<script src="{SITE_URL}/externals/jquery/jquery-1.5.2.min.js"></script>
+	<script src="{SITE_URL}/externals/jquery/jquery.min.js"></script>
+	<link rel="stylesheet" href="{SITE_URL}/externals/jquery/mobile/jquery.mobile.min.css" />
 	<!-- for PHP redirect to work properly, add this code here 
 	set ajaxFormsEnabled to false -->
 	<script type="text/javascript">
@@ -19,7 +19,7 @@
 
         </script>
 	<!-- end PHP redirect-->
-	<script src="{SITE_URL}/externals/jquery/jquery.mobile-1.0a4.1.min.js"></script>
+	<script src="{SITE_URL}/externals/jquery/mobile/jquery.mobile.min.js"></script>
 	<script type="text/javascript" src="{TEMPLATES_URL}/js/mobile/main.js"></script>
 </head>
 <body>

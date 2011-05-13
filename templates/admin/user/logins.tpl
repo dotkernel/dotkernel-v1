@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="{SITE_URL}/externals/jquery/jquery.ui.tooltip.css">
-<script src="{SITE_URL}/externals/jquery/jquery.ui.tooltip.js"></script>
+<link rel="stylesheet" href="{SITE_URL}/externals/jquery/ui/jquery.ui.tooltip.css">
+<script src="{SITE_URL}/externals/jquery/ui/jquery.ui.tooltip.js"></script>
 <script>
 	var SITE_URL = "{SITE_URL}",
 		FILTER_URL = "{FILTER_URL}";
