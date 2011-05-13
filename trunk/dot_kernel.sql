@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `admin`
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `adminLogin` (
   KEY `adminId` (`adminId`),
   CONSTRAINT `fk_adminLogin_admin` FOREIGN KEY (`adminId`) REFERENCES `admin` (`id`)
     ON DELETE CASCADE
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -79,25 +79,34 @@ CREATE TABLE IF NOT EXISTS `emailTransporter` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 -- --------------------------------------------------------
-
 --
--- Table structure for table `mobileHit`
+-- Table structure for table `logVisit`
 --
 
-CREATE TABLE IF NOT EXISTS `mobileHit` (
+CREATE TABLE IF NOT EXISTS `logVisit` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `ip` varchar(16) NOT NULL,
-  `device` varchar(255) NOT NULL,
-  `deviceModel` varchar(255) NOT NULL,
+  `proxyIp` varchar(255) NOT NULL,
+  `device` varchar(255) DEFAULT NULL,
+  `deviceModel` varchar(255) DEFAULT NULL,
   `carrier` varchar(255) NOT NULL,
-  `operatingSystem` varchar(255) NOT NULL,
-  `browser` varchar(255) NOT NULL,
+  `operatingSystem` varchar(255) DEFAULT NULL,
+  `browser` varchar(255) DEFAULT NULL,
   `country` varchar(255) NOT NULL,
+  `accept` text NOT NULL,
+  `acceptLanguage` text NOT NULL,
+  `acceptEncoding` text NOT NULL,
+  `acceptCharset` text NOT NULL,
   `userAgent` text NOT NULL,
+  `cacheControl` text NOT NULL,
+  `cookie` text NOT NULL,
+  `xForwardedFor` text NOT NULL,
+  `xForwardedHost` text NOT NULL,
+  `xForwardedServer` text NOT NULL,
   `referer` text NOT NULL,
   `dateHit` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 -- --------------------------------------------------------
 
 
@@ -116,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `setting` (
   `possibleValues` text NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `key` (`key`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `setting`
@@ -152,7 +161,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -172,4 +181,4 @@ CREATE TABLE IF NOT EXISTS `userLogin` (
   KEY `adminId` (`userId`),
   CONSTRAINT `fk_userLogin_user` FOREIGN KEY (`userId`) REFERENCES `user` (`id`)
   	ON DELETE CASCADE
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
