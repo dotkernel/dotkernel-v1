@@ -215,9 +215,8 @@ class Dot_UserAgent_Wurfl
 			}
 			else
 			{
-				// prepare the array 
+				// prepare the array and save it in cache 
 			 	$device = ($this->_cacheExist()) ? $this->_prepareDeviceInfo($userAgent) : new StdClass();
-			 	//save the array in cache 
 				$this->_saveDeviceToCache($device, $cacheToken);
 				return $device;
 			}
@@ -250,8 +249,8 @@ class Dot_UserAgent_Wurfl
 		$device->browserVersion  = $deviceCapabilities['mobile_browser_version']; 
 		$device->deviceOs        = $deviceCapabilities['device_os'];
 		$device->deviceOsVersion = $deviceCapabilities['device_os_version']; 
-		$device->screenWidth     = $deviceCapabilities["resolution_width"];
-		$device->screenHeight    = $deviceCapabilities["resolution_height"];
+		$device->screenWidth     = $deviceCapabilities['resolution_width'];
+		$device->screenHeight    = $deviceCapabilities['resolution_height'];
 		$device->isTablet        = ($deviceCapabilities['is_tablet'] == 'true') ? TRUE : FALSE;
 		$device->isMobile        = empty($deviceCapabilities['mobile_browser'])? FALSE : TRUE;
 		$device->isSmartphone    = $this->_isSmartphone($deviceCapabilities, $device->isMobile, $device->deviceOs);
@@ -400,7 +399,6 @@ class Dot_UserAgent_Wurfl
 		}
 		return $isWindows;
 	}
-
 	
 	/**
 	 * Prevent user to clone the instance 

@@ -54,8 +54,11 @@ class Dot_Seo
 		$requestController = $this->route['controller'];
 		$requestAction = $this->route['action'];
 		
-		$defaultController = isset($this->router->routes->controller->$requestModule) ? $this->router->routes->controller->$requestModule : '';
-		$requestController = isset($requestController) && $requestController !='Index' ? $requestController : $defaultController;
+		$defaultController = isset($this->router->routes->controller->$requestModule) ?
+																 $this->router->routes->controller->$requestModule : '';
+																 
+		$requestController = isset($requestController) && $requestController !='Index' ? 
+																	$requestController : $defaultController;
 		
 		$defaultAction = isset($this->router->routes->action->$requestModule->$requestController) ? $this->router->routes->action->$requestModule->$requestController: '';
 		$requestAction     = isset($requestAction) && $requestAction !='' ? $requestAction : $defaultAction;
