@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="{SITE_URL}/externals/jquery/jquery.ui.tooltip.css">
-<script src="{SITE_URL}/externals/jquery/jquery.ui.tooltip.js"></script>
+<link rel="stylesheet" href="{SITE_URL}/externals/jquery/ui/jquery.ui.tooltip.css">
+<script src="{SITE_URL}/externals/jquery/ui/jquery.ui.tooltip.js"></script>
 <script>
 	$(document).ready(function(){
 		$(".icon[title]").tooltip();
