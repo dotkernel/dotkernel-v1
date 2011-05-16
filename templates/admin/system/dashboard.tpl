@@ -73,11 +73,11 @@
 <fieldset style="width: 500px;float: left;margin-right: 50px;">
 	{WIDGET_USER_LOGINS}
 	<!-- BEGIN warnings_table -->
-	<table class="medium_table warnings" width="100%">
+	<table class="message_error" style="width:100%;margin-top:10px;">
 		<!-- BEGIN warnings_list -->
 		<tr>
-			<td class="{TD_CLASS}" width="150px">{WARNING_TYPE}</td>
-			<td class="{TD_CLASS}">{WARNING_DESCRIPTION}</td>
+			<td width="150px">{WARNING_TYPE}</td>
+			<td>{WARNING_DESCRIPTION}</td>
 		</tr>
 		<!-- END warnings_list -->
 	</table>

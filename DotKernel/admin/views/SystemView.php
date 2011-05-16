@@ -74,7 +74,6 @@ class System_View extends View
 			{
 				$this->tpl->setVar('WARNING_TYPE', $warnings[$i]['type']);
 				$this->tpl->setVar('WARNING_DESCRIPTION', $warnings[$i]['description']);
-				$this->tpl->setVar('TD_CLASS', ($i==$warningCount-1)?" last_td":"");
 				$this->tpl->parse('warnings_list_block', 'warnings_list', true);
 			}
 		}
