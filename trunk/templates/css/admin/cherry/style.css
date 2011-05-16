@@ -36,10 +36,10 @@ body{
 
 /*** fieldsets and legends ***/
 fieldset{
-	border-color: #63201A;
+	border-color: #3d7a85;
 }
 legend{
-	color: #63201A;
+	color: #3d7a85;
 }
 
 /*** tables ***/
@@ -60,22 +60,22 @@ table.medium_table td:first-child,
 }
 
 .button{
-	background-color: #63201A;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#63201A), to(#471712));
-	background-image: -webkit-linear-gradient(top, #63201A, #471712);
-	background-image:    -moz-linear-gradient(top, #63201A, #471712);
-	background-image:     -ms-linear-gradient(top, #63201A, #471712);
-	background-image:      -o-linear-gradient(top, #63201A, #471712);
-	background-image:         linear-gradient(top, #63201A, #471712);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#63201A', EndColorStr='#471712');
+	background-color: #3d7a85;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#3d7a85), to(#306069));
+	background-image: -webkit-linear-gradient(top, #3d7a85, #306069);
+	background-image:    -moz-linear-gradient(top, #3d7a85, #306069);
+	background-image:     -ms-linear-gradient(top, #3d7a85, #306069);
+	background-image:      -o-linear-gradient(top, #3d7a85, #306069);
+	background-image:         linear-gradient(top, #3d7a85, #306069);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#3d7a85', EndColorStr='#306069');
 }
 .button:hover{
-    background-color: #471712;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#471712), to(#63201A));
-    background-image: -webkit-linear-gradient(top, #471712, #63201A);
-    background-image:    -moz-linear-gradient(top, #471712, #63201A);
-    background-image:     -ms-linear-gradient(top, #471712, #63201A);
-    background-image:      -o-linear-gradient(top, #471712, #63201A);
-    background-image:         linear-gradient(top, #471712, #63201A);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#471712', EndColorStr='#63201A');
+    background-color: #306069;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#306069), to(#3d7a85));
+    background-image: -webkit-linear-gradient(top, #306069, #3d7a85);
+    background-image:    -moz-linear-gradient(top, #306069, #3d7a85);
+    background-image:     -ms-linear-gradient(top, #306069, #3d7a85);
+    background-image:      -o-linear-gradient(top, #306069, #3d7a85);
+    background-image:         linear-gradient(top, #306069, #3d7a85);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#306069', EndColorStr='#3d7a85');
 }
