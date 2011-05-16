@@ -116,5 +116,24 @@ class Dot_Seo
 			$this->_option->__set('canonicalUrl',$this->createCanonicalUrl());
 		}		
 		return $this->_option;
-	}		
+	}
+	/**
+	 * Process controller
+	 * Formats a controller name (eg: admin -> Admin, store-product > StoreProduct
+	 * Should be moved to Dot_Route
+	 * @access pubic
+	 * @param $controllerName - string
+	 * @return string
+	 */
+	public static function processController($controllerName)
+	{
+		$controllerName = basename(stripslashes($controllerName));
+		$segments = explode('-', $controllerName);
+		$result = '';
+		foreach ($segments as $segment)
+		{
+			$result .= ucfirst($segment);
+		}
+		return $result;
+	}
 }

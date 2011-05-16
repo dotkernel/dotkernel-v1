@@ -166,8 +166,8 @@ class Dot_Acl
 	 * @return bool
 	 */
 	public function isAllowed($role)
-	{		
-		$resource = ucfirst($this->route['controller']);
+	{
+		$resource = $this->route['controller'];
 		$privillege = $this->route['action'];
 		if(!$this->acl->has($resource))
 		{

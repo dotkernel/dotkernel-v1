@@ -106,17 +106,17 @@ class Dot_Settings
 		foreach ($modules as $value) 
 		{
 			// MODEL class
-			if(file_exists(DOTKERNEL_PATH . '/' . $modulePath . ucfirst($value) . '.php'))
+			if(file_exists(DOTKERNEL_PATH . '/' . $modulePath . $value . '.php'))
 			{
-				require_once(DOTKERNEL_PATH . '/' . $modulePath . ucfirst($value) . '.php');
+				require_once(DOTKERNEL_PATH . '/' . $modulePath . $value . '.php');
 			} 
-			else die ('The file: ' . DOTKERNEL_PATH . '/' . $modulePath . ucfirst($value) . '.php' . ' does NOT exist');  
+			else die ('The file: ' . DOTKERNEL_PATH . '/' . $modulePath . $value . '.php' . ' does NOT exist');  
 			// VIEW class
-			if(file_exists(DOTKERNEL_PATH . '/' . $modulePath . 'views/' . ucfirst($value) . 'View.php'))
+			if(file_exists(DOTKERNEL_PATH . '/' . $modulePath . 'views/' . $value . 'View.php'))
 			{
-				require_once(DOTKERNEL_PATH . '/' . $modulePath . 'views/' . ucfirst($value) . 'View.php');		
+				require_once(DOTKERNEL_PATH . '/' . $modulePath . 'views/' . $value . 'View.php');		
 			} 
-			else die ('The file: ' . DOTKERNEL_PATH . '/' . $modulePath . 'views/' . ucfirst($value) . 'View.php' . ' does NOT exist');  
+			else die ('The file: ' . DOTKERNEL_PATH . '/' . $modulePath . 'views/' . $value . 'View.php' . ' does NOT exist');  
 		}
 	}
 	/**
