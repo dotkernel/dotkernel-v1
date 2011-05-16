@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `emailTransporter` (
 -- Table structure for table `logVisit`
 --
 
-CREATE TABLE IF NOT EXISTS `logVisit` (
+CREATE TABLE IF NOT EXISTS `statisticVisit` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `ip` varchar(16) NOT NULL,
   `proxyIp` varchar(255) NOT NULL,

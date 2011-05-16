@@ -14,11 +14,11 @@
 * Log site visits
 * @category   DotKernel
 * @package    DotLibrary
-* @subpackage DotLog
+* @subpackage DotStatistic
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
-class Dot_Log_Visit extends Dot_Log
+class Dot_Statistic_Visit extends Dot_Statistic
 {
 	/**
 	 * Constructor
@@ -108,8 +108,8 @@ class Dot_Log_Visit extends Dot_Log
 							    'referer'          => array_key_exists("HTTP_REFERER", $_SERVER) ?
 									                       $_SERVER['HTTP_REFERER'] : ''
 							   );
-		$db->insert('logVisit', $logVisit);
-    $session->logVisitId = $db->lastInsertId();
+		$db->insert('statisticVisit', $logVisit);
+    $session->visitId = $db->lastInsertId();
 		return;
 		//$registry->session->logVisitId = last insert id
 	}
