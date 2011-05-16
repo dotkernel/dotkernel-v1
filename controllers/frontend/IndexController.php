@@ -37,7 +37,7 @@ if($registry->configuration->resources->useragent->wurflapi->active)
  * Example of usage of LogVisit. We may want to record every site visits, in order to maybe find new mobile device that 
  * are not listed in WURFL xml file.
  */
-if(!$registry->session->logVisitId) Dot_Log_Visit::recordVisit($deviceInfo);
+if(!$registry->session->visitId) Dot_Statistic_Visit::recordVisit($deviceInfo);
 
 // start the template object, empty for the moment
 require(DOTKERNEL_PATH . '/' . $registry->route['module'] . '/' . 'View.php');

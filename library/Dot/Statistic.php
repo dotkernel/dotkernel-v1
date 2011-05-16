@@ -11,14 +11,14 @@
 */
 
 /**
-* General Log class. Interaction with Zend_log and with application specific log actions
+* General Statistics class. Interaction with Zend_Log and with application specific statistic actions
 * @category   DotKernel
 * @package    DotLibrary
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
 
-class Dot_Log
+class Dot_Statistic
 {
 	/**
 	 * Constructor
