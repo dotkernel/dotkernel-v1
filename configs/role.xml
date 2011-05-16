@@ -26,8 +26,8 @@
 		<admin>			
 			<allow>				
 				<guest>
-					<Admin>login</Admin> <!-- allow 'guest' to access  from 'Admin' controller only 'login' action -->
-					<Admin>authorize</Admin> <!-- allow 'guest' to access  from 'Admin' controller only 'authorize' action -->
+					<Admin>login</Admin> <!-- allow 'guest' to access the 'login' action from the 'Admin' controller  -->
+					<Admin>authorize</Admin> <!-- allow 'guest' to access the 'authorize' action from the 'Admin' controller-->
 					<System>login</System> <!-- allow 'guest' to access  from 'Admin' controller only 'authorize' action -->
 				</guest>
 				<admin>all</admin> <!-- allow 'admin' to access all the controllers from 'admin' module -->

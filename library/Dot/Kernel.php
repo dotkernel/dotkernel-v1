@@ -99,7 +99,7 @@ class Dot_Kernel
 		$requestController = 'Index';
 		if (isset($requestRaw['0']) && $requestRaw['0'] != '')
 		{
-			$requestController = strtolower(basename(stripslashes($requestRaw['0'])));
+			$requestController = Dot_Seo::processController($requestRaw['0']);
 		}
 
 		// set Action value, default nothing
