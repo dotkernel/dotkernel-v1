@@ -118,6 +118,64 @@ $(document).ready(function(){
 
 /*** end activate/deactivate rows ***/
 
+/*** pie chart ***/
+function pieChart(elementId, data, noDataMessage){
+	var total = 0;
+	
+	if (noDataMessage === undefined){
+		noDataMessage = "No Data"
+	}
+	
+	if (data.length === 0){
+		$("#" + elementId).append($("<div style='width:100%;padding-top:100px;color:#ddd;font-size:30px;text-align:center'>"+noDataMessage+"</div>"));
+		return;
+	}
+	
+	for (var i in data){
+		total += data[i].data
+	}
+	$.map(data, function(el, index){
+		el.label += " (" + Math.round(el.data/total*10000) / 100 + "%)";
+		return el;
+	});
+	$.plot($("#" + elementId), data, {
+		series: {
+			pie: { 
+				show: true,
+				radius: 0.8,
+				highlight: {
+					opacity:0.25
+				}
+			}
+		},
+		grid: {
+			hoverable: true
+		}
+	});
+
+	$("#" + elementId).bind("plothover", pieHover);
+
+	var $legendItems = $("#" + elementId + " .legend table tbody").children();
+
+	function pieHover(event, pos, obj) 
+	{
+		var selectedIndex = (obj!==null ? obj.seriesIndex : null);
+		if (selectedIndex === null){
+			$legendItems.stop().fadeTo(100, 1);
+		}else{
+			$legendItems.each(function(index, element){
+				if (index == selectedIndex){
+					$(this).stop().fadeTo(100, 1)
+				}else{
+					$(this).stop().fadeTo(100, 0.5)
+				}
+			});
+		}
+	}
+}
+
+/*** end pie chart ***/
+
 /**
  * Show/Hide div ID
  * @param {String} id
