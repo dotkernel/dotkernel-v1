@@ -43,8 +43,8 @@ $zend_loader->registerNamespace('Console_');
 try
 {
 	$opts = new Zend_Console_Getopt(array(
-		'environment|e=w'	=> 'environment parameter, defaults to production',
-		'action|a=s'		=> 'the action that will be executed, defaults to NULL'
+		'action|a=s'		=> 'the action that will be executed',
+		'environment|e=w'	=> '[optional] environment parameter, defaults to production'
 	));
 	$opts->parse();
 }
@@ -90,5 +90,11 @@ Dot_Settings::setPhpSettings($config->phpSettings->toArray());
 // Get the action and the other command line arguments
 $registry->action = $opts->getOption('action');
 $registry->arguments = $opts->getRemainingArgs();
+
+if ($registry->action === NULL)
+{
+	echo $opts->getUsageMessage();
+	exit;
+}
 
 include('Controller.php');
