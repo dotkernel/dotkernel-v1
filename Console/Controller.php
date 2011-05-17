@@ -3,7 +3,7 @@
 switch ($registry->action)
 {
 	case NULL:
-		echo 'no action set\n';
+		echo "no action set\n";
 		break;
 
 	case 'count-users':
