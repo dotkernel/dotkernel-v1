@@ -26,7 +26,7 @@ switch ($registry->route['action'])
 	case 'home':
 		// call showPage method to view the home page
 		$pageView->showPage('home');
-		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'] && 
+		if($_SERVER['REQUEST_METHOD'] === "POST" && 
 			array_key_exists('phone', $_POST) && array_key_exists('phone', $_POST) &&
 			array_key_exists('email', $_POST) && array_key_exists('message', $_POST))
 		{	
@@ -43,20 +43,19 @@ switch ($registry->route['action'])
 			if($dotValidateUser->isValid())
 			{ 
 				//if valid, send a mail
-				$data = $dotValidateUser->getData();		
+				$data = $dotValidateUser->getData();
 				$dotEmail = new Dot_Email();
 				$dotEmail->addTo($settings->siteEmail);
 				$dotEmail->setSubject($registry->seo->siteName . ' - ' . $option->contactForm->subject);
 				$msg = str_replace(array('%EMAIL%', '%PHONE%','%MESSAGE%', '%DATE%', '%IP%', '%USERAGENT%'), 
 								   array($data['email'], isset($data['phone'])? $data['phone'] : '' , $data['message'], Dot_Kernel::timeFormat('now'), Dot_Kernel::getUserIp(), $_SERVER['HTTP_USER_AGENT']), 
 					              $option->contactForm->message);
-				$dotEmail->setBodyText($msg);	
-				$dotEmail->send();		
+				$dotEmail->setBodyText($msg);
+				$dotEmail->send();
 				/** If you want to redirect to a link, 
 				 *  uncomment the 2 lines below to display a message
 				 */ 
-				#header('Location: http://www.dotkernel.com/');				
-				#exit;	
+
 				$tpl->setVar('ERROR_MESSAGE', $option->contactForm->mailSent);
 			}
 			else

@@ -30,16 +30,15 @@ switch ($registry->route['action'])
 			$userView->loginForm('login');
 		}
 		else
-		{			
+		{
 			header('Location: '.$registry->configuration->website->params->url.'/user/account');
 			exit;
 		}
 	break;
 	case 'authorize':
-		// authorize user login 
-		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'] && 
-			array_key_exists('username', $_POST) || array_key_exists('password', $_POST))
-		{	
+		// authorize user login
+		if (array_key_exists('username', $_POST) && array_key_exists('password', $_POST))
+		{
 			// validate the authorization request parameters 
 			$values = array('username' => array('username' => $_POST['username']), 
 							'password' => array('password' => $_POST['password'])
@@ -51,7 +50,7 @@ switch ($registry->route['action'])
 			}
 			else
 			{
-				$error = $dotValidateUser->getError();		
+				$error = $dotValidateUser->getError();
 				// login info are NOT VALID
 				$txt = array();
 				$field = array('username', 'password');
@@ -74,17 +73,17 @@ switch ($registry->route['action'])
 			$session->message['type'] = 'warning';
 		}
 		header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['controller']. '/login');
-		exit;			
+		exit;
 	break;
 	case 'account':
 		// display My Account page, if user is logged in 
 		//Dot_Auth::checkIdentity();
 		$data = array();
 		$error = array();
-		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
-		{				
+		if($_SERVER['REQUEST_METHOD'] === "POST")
+		{
 			Dot_Kernel::checkUserToken('user');
-			// POST values that will be validated				
+			// POST values that will be validated
 			$values = array('details' => 
 								array('firstName'=>$_POST['firstName'],
 									  'lastName'=>$_POST['lastName']
@@ -94,16 +93,21 @@ switch ($registry->route['action'])
 												'password2' =>  $_POST['password2']
 											   )
 						  );
-			$dotValidateUser = new Dot_Validate_User(array('who' => 'user', 'action' => 'update', 'values' => $values, 'userId' => $session->user->id));
+			$dotValidateUser = new Dot_Validate_User(array(
+				'who' => 'user',
+				'action' => 'update',
+				'values' => $values,
+				'userId' => $registry->session->user->id
+			));
 			if($dotValidateUser->isValid())
-			{				
+			{
 				// no error - then update user
 				$data = $dotValidateUser->getData();
-				$data['id'] = $session->user->id;
+				$data['id'] = $registry->session->user->id;
 				$userModel->updateUser($data);
 				$session->message['txt'] = $option->infoMessage->update;
-				$session->message['type'] = 'info';	
-			}	
+				$session->message['type'] = 'info';
+			}
 			else
 			{
 				$data = $dotValidateUser->getData();
@@ -115,12 +119,12 @@ switch ($registry->route['action'])
 		$userView->details('update',$data);
 	break;
 	case 'register':
-		// display signup form and allow user to register 
+		// display signup form and allow user to register
 		$data = array();
 		$error = array();
-		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
-		{		
-			// POST values that will be validated				
+		if ($_SERVER['REQUEST_METHOD'] === "POST")
+		{
+			// POST values that will be validated
 			$values = array('details' => 
 								array('firstName'=>$_POST['firstName'],
 									  'lastName'=>$_POST['lastName']
@@ -133,10 +137,10 @@ switch ($registry->route['action'])
 							'captcha' => array('recaptcha_challenge_field' => $_POST['recaptcha_challenge_field'],
 											   'recaptcha_response_field' => $_POST['recaptcha_response_field'])
 						  );
-			$dotValidateUser = new Dot_Validate_User(array('who' => 'user', 'action' => 'add', 'values' => $values));			
+			$dotValidateUser = new Dot_Validate_User(array('who' => 'user', 'action' => 'add', 'values' => $values));
 			if($dotValidateUser->isValid())
-			{					
-			   	// no error - then add user
+			{
+				// no error - then add user
 				$data = $dotValidateUser->getData();
 				$userModel->addUser($data);
 				$session->message['txt'] = $option->infoMessage->add;
@@ -145,19 +149,19 @@ switch ($registry->route['action'])
 				$userModel->authorizeLogin($data);
 			}
 			else
-			{	
+			{
 				if(array_key_exists('password', $data))
 				{ 
 					// do not display password in the add form
 					$data = $dotValidateUser->getData();
-					unset($data['password']);				
-				}							
+					unset($data['password']);
+				}
 			}
 			// add action and validation are made with ajax, so return json string
 			header('Content-type: application/json');  
 			echo Zend_Json::encode(array('data'=>$dotValidateUser->getData(), 'error'=>$dotValidateUser->getError()));
 			// return $data and $error as json
-			exit;			
+			exit;
 		}
 		$userView->details('add',$data);
 	break;
@@ -165,15 +169,15 @@ switch ($registry->route['action'])
 		// send an emai with the forgotten password
 		$data = array();
 		$error = array();
-		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
-		{				
+		if($_SERVER['REQUEST_METHOD'] === "POST")
+		{
 			$values = array('email' => array('email' => $_POST['email']));
 			$dotValidateUser = new Dot_Validate_User(array('who' => 'user', 'action' => 'forgot-password', 'values' => $values));
 			if($dotValidateUser->isValid())
-			{	
+			{
 				// no error - then send password
 				$data = $dotValidateUser->getData();
-				$userModel->forgotPassword($data['email']);						
+				$userModel->forgotPassword($data['email']);
 			}
 			else
 			{

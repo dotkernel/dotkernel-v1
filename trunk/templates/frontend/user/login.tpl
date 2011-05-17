@@ -1,7 +1,6 @@
 <span style="color: #ff0000;">{ERROR}</span>
 	<div class="login_big">
 		<form action="{SITE_URL}/user/authorize" method="post" >
-			<input type="hidden" name="send" value="on">
 			<ul class="g_form">
 				<li class="clearfix positioned">
 					<p class="contact_label">Username</p>

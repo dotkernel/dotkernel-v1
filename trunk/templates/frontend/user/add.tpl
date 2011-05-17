@@ -5,9 +5,7 @@
 <span style="color: #ff0000;" id="msgError">{ERROR}</span>
 <br/>
 <form id="userRegister" action="" method="post">
-<input type="hidden" name="send" value="on">
-
-<ul class="g_form">
+	<ul class="g_form">
 		<li class="clearfix positioned">
 			<p class="contact_label">Username:</p>
 			<input id="username" type="text" name="username" value="{USERNAME}" />
@@ -15,7 +13,7 @@
 		<li class="clearfix positioned">
 			<p class="contact_label">Password:</p>
 			<input type="password" name="password" value="{PASSWORD}" id="password" />
-		</li>	
+		</li>
 		<li class="clearfix positioned">
 			<p class="contact_label">Re-type Password:</p>
 			<input type="password" name="password2" value="{PASSWORD}" id="password2" />

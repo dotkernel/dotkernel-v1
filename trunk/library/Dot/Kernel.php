@@ -298,7 +298,7 @@ class Dot_Kernel
 	{
 		$config = Zend_Registry::get('configuration');
 		// use the user's password hash and the site database password
-		return sha1($config->database->params->password.$password);
+		return sha1($config->database->params->password . $password);
 	}
 	/**
 	 * Check if a user's token is set and is correct
@@ -310,7 +310,7 @@ class Dot_Kernel
 	{
 		$dotAuth = Dot_Auth::getInstance();
 		$user = $dotAuth->getIdentity($type);
-		if (!isset($_POST['userToken']) || (Dot_Kernel::generateUserToken($user->password)!=$_POST['userToken']))
+		if (!isset($_POST['userToken']) || (Dot_Kernel::generateUserToken($user->password) != $_POST['userToken']))
 		{
 			exit;
 		}

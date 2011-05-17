@@ -31,7 +31,7 @@ switch ($registry->route['action'])
 	case 'add':
 		// display form and add new user
 		$data = $_POST;
-		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
+		if($_SERVER['REQUEST_METHOD'] === "POST")
 		{
 			Dot_Kernel::checkUserToken();
 			// POST values that will be validated
@@ -49,32 +49,32 @@ switch ($registry->route['action'])
 												'password2' =>  $_POST['password2']
 											   )
 						  );
-			$dotValidateUser = new Dot_Validate_User(array('who' => 'user', 'action' => 'add', 'values' => $values));		
+			$dotValidateUser = new Dot_Validate_User(array('who' => 'user', 'action' => 'add', 'values' => $values));
 			if($dotValidateUser->isValid())
 			{
 				// no error - then add user
-				$userModel->addUser($dotValidateUser->getData());				
+				$userModel->addUser($dotValidateUser->getData());
 				$registry->session->message['txt'] = $option->infoMessage->accountAdd;
 				$registry->session->message['type'] = 'info';
 				header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/list/');
-				exit;					
+				exit;
 			}
 			else
-			{				
+			{
 				$registry->session->message['txt'] = $dotValidateUser->getError();
 				$registry->session->message['type'] = 'error';
 			}
-			$data = $dotValidateUser->getData();		
+			$data = $dotValidateUser->getData();
 		}
-		$userView->details('add',$data);		
+		$userView->details('add',$data);
 	break;
 	case 'update':
 		// display form and update user
 		$error = array();
-		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
-		{				
+		if($_SERVER['REQUEST_METHOD'] === "POST")
+		{
 			Dot_Kernel::checkUserToken();
-			// POST values that will be validated						
+			// POST values that will be validated
 			$values = array('details' => 
 								array('firstName'=>$_POST['firstName'],
 									  'lastName'=>$_POST['lastName']
@@ -88,7 +88,7 @@ switch ($registry->route['action'])
 											   )
 						  );
 			$dotValidateUser = new Dot_Validate_User(array('who' => 'user', 'action' => 'update', 'values' => $values, 'userId' => $registry->request['id']));
-			if($dotValidateUser->isValid())			
+			if($dotValidateUser->isValid())
 			{
 				// no error - then update user
 				$data = $dotValidateUser->getData();
@@ -139,8 +139,8 @@ switch ($registry->route['action'])
 	break;
 	case 'delete':
 		// display confirmation form and delete user account
-		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
-		{	
+		if($_SERVER['REQUEST_METHOD'] === "POST")
+		{
 			Dot_Kernel::checkUserToken();
 			if ('on' == $_POST['confirm'])
 			{
@@ -155,7 +155,7 @@ switch ($registry->route['action'])
 				$registry->session->message['type'] = 'info';
 			}
 			header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/list/');
-			exit;				
+			exit;
 		}
 		$data = $userModel->getUserBy('id', $registry->request['id']);
 		$userView->setExtraBreadcrumb($data['username']);
@@ -170,7 +170,7 @@ switch ($registry->route['action'])
 		if ($registry->request['id'] > 0)
 		{
 			// send user password 
-			$userModel->sendPassword($registry->request['id']);				
+			$userModel->sendPassword($registry->request['id']);
 		}
 		else
 		{
@@ -178,7 +178,7 @@ switch ($registry->route['action'])
 			$registry->session->message['type'] = 'error';
 		}
 		header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/list/');
-		exit;		
+		exit;
 	break;
 	case 'logins':
 		// list user logins
