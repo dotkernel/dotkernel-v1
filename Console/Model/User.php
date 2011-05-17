@@ -18,7 +18,7 @@
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
-class Console_User extends Dot_Model_User
+class Console_Model_User extends Dot_Model_User
 {
 	/**
 	 * Email constructor

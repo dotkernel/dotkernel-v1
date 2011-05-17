@@ -23,7 +23,7 @@ switch ($registry->action)
 			exit;
 		}
 		$newsletterName = $registry->arguments[0];
-		$newsletterModel = new Console_Newsletter();
+		$newsletterModel = new Console_Model_Newsletter();
 		
 		echo "sending newsletter '" . $newsletterName ."'\n";
 
