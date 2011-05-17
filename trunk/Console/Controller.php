@@ -8,7 +8,7 @@ switch ($registry->action)
 		 * /var/www/vhosts/example.com/httpdocs/cli/index.php -e staging -a count-users
 		 */
 		
-		$userModel = new Console_User();
+		$userModel = new Console_Model_User();
 		echo "There are " . $userModel->countUsers() . " user(s) currently registered\n";
 		break;
 
