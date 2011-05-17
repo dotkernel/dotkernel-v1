@@ -2,10 +2,6 @@
 
 switch ($registry->action)
 {
-	case NULL:
-		echo "no action set\n";
-		break;
-
 	case 'count-users':
 		/**
 		 *  example usage
@@ -21,6 +17,11 @@ switch ($registry->action)
 		 *  example usage
 		 * /var/www/vhosts/example.com/httpdocs/cli/index.php -e staging -a send-newsletter "test newsletter"
 		 */
+		if (!isset($registry->arguments[0]))
+		{
+			echo "Please specify a newsletter\n";
+			exit;
+		}
 		$newsletterName = $registry->arguments[0];
 		$newsletterModel = new Console_Newsletter();
 		
