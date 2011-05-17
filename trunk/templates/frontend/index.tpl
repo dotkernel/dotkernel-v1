@@ -2,7 +2,6 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<link href="http://fonts.googleapis.com/css?family=Cabin:bold" rel="stylesheet" type="text/css" >
 	<title>{PAGE_TITLE}</title>
 	<meta name="keywords" content="{PAGE_KEYWORDS}" >
 	<meta name="description" content="{PAGE_DESCRIPTION}" >
