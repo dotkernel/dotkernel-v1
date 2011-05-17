@@ -1,7 +1,7 @@
 <fieldset style="width: 100%">
 <legend>List Settings Variables</legend>
 <form method="post" name="configs" action="{SITE_URL}/admin/system/settings-update">
-<input type="hidden" name='send' value='on'>
+<input type="hidden" name="userToken" value="{USERTOKEN}">
 <table class="list_table" width="100%">
 	<thead>
 		<tr>

@@ -30,11 +30,10 @@ switch ($registry->route['action'])
 		$dotAuth->clearIdentity('admin');
 		header('location: '.$registry->configuration->website->params->url.'/' . $registry->route['module']);
 		exit;
-	break;	
+	break;
 	case 'authorize':
-		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'] && 
-			array_key_exists('username', $_POST) || array_key_exists('password', $_POST))
-		{	
+		if(array_key_exists('username', $_POST) && array_key_exists('password', $_POST))
+		{
 			// else validate the authorization request parameters 
 			$values = array('username' => 
 								array('username' => $_POST['username']), 
@@ -67,29 +66,29 @@ switch ($registry->route['action'])
 		{
 			$registry->session->message['txt'] = $option->warningMessage->userPermission;
 			$registry->session->message['type'] = 'warning';
-		}		
+		}
 		header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/login');
-		exit;		
+		exit;
 	break;
 	case 'account':
 		//display my account form
 		$data = $adminModel->getUserBy('id', $registry->session->admin->id);
-		$adminView->details('account',$data);	
+		$adminView->details('account',$data);
 	break;
 	case 'list':
 		// list admin users
 		$page = (isset($registry->request['page']) && $registry->request['page'] > 0) ? $registry->request['page'] : 1;
-		$users = $adminModel->getUserList($page);		
-		$adminView->listUser('list', $users, $page);	
-	break;	
+		$users = $adminModel->getUserList($page);
+		$adminView->listUser('list', $users, $page);
+	break;
 	case 'add':
 		// display form and add new admin
 		$data = $_POST;
 		$error = array();
-		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
-		{		
+		if($_SERVER['REQUEST_METHOD'] === "POST")
+		{
 			Dot_Kernel::checkUserToken();
-			// POST values that will be validated				
+			// POST values that will be validated
 			$values = array('details' => 
 								array('firstName'=>$_POST['firstName'],
 									  'lastName'=>$_POST['lastName']
@@ -103,7 +102,7 @@ switch ($registry->route['action'])
 							'password' => array('password' => $_POST['password'],
 												'password2' =>  $_POST['password2']
 											   )
-						  );			
+						);
 			$dotValidateUser = new Dot_Validate_User(array('who' => 'admin', 'action' => 'add', 'values' => $values));
 			if($dotValidateUser->isValid())
 			{
@@ -111,8 +110,8 @@ switch ($registry->route['action'])
 				// check if admin already exists by $field ('username','email')
 				$checkBy = array('username', 'email');
 				foreach ($checkBy as $field)
-				{					
-				   	$adminExists = $adminModel->getUserBy($field, $data[$field]);
+				{
+					$adminExists = $adminModel->getUserBy($field, $data[$field]);
 					if(!empty($adminExists))
 					{
 						$error = ucfirst($field) . ' '. $data[$field] . $option->errorMessage->userExists;
@@ -121,17 +120,17 @@ switch ($registry->route['action'])
 				if(empty($error))
 				{
 					// no error - then add admin user
-					$adminModel->addUser($data);				
+					$adminModel->addUser($data);
 					$registry->session->message['txt'] = $option->infoMessage->accountAdd;
 					$registry->session->message['type'] = 'info';
 					header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/list/');
-					exit;					
-				}	
+					exit;
+				}
 			}
 			$error = array_merge($error, $dotValidateUser->getError());
 			$data = $dotValidateUser->getData();
-			if(!empty($error))
-			{						
+			if (!empty($error))
+			{
 				$registry->session->message['txt'] = $error;
 				$registry->session->message['type'] = 'error';
 			}
@@ -141,9 +140,9 @@ switch ($registry->route['action'])
 	case 'update':
 		// display form and update admin user
 		$error = array();
-		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
+		if($_SERVER['REQUEST_METHOD'] === "POST")
 		{
-			Dot_Kernel::checkUserToken();	
+			Dot_Kernel::checkUserToken();
 			// POST values that will be validated
 			$values = array('details' => 
 								array('firstName'=>$_POST['firstName'],
@@ -211,10 +210,10 @@ switch ($registry->route['action'])
 		echo Zend_Json::encode($result);
 		exit;
 	break;
-	case 'delete':			
+	case 'delete':
 		// display confirmation form and delete admin user
-		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
-		{	
+		if($_SERVER['REQUEST_METHOD'] === "POST")
+		{
 			Dot_Kernel::checkUserToken();
 			if ('on' == $_POST['confirm'])
 			{

@@ -31,11 +31,11 @@ switch ($registry->route['action'])
 	break;
 	case 'settings':
 		// list settings values
-		$data = $systemModel->getSettings();	
+		$data = $systemModel->getSettings();
 		if(isset($registry->request['update']) && $registry->request['update'] == 'done')
-		{			
-				$registry->session->message['txt'] = $option->infoMessage->settingsUpdate;
-				$registry->session->message['type'] = 'info';
+		{
+			$registry->session->message['txt'] = $option->infoMessage->settingsUpdate;
+			$registry->session->message['type'] = 'info';
 		}
 		$systemView->displaySettings('settings', $data);
 	break;
@@ -43,9 +43,9 @@ switch ($registry->route['action'])
 		// update settings value
 		$data = array();
 		$error = array();
-		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
+		if($_SERVER['REQUEST_METHOD'] === "POST")
 		{
-			unset($_POST['send']);
+			Dot_Kernel::checkUserToken();
 			$systemModel->updateSettings($_POST);
 			header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/settings/update/done');
 			exit;
@@ -92,7 +92,7 @@ switch ($registry->route['action'])
 		exit;
 	break;
 	case 'transporter-delete':
-		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
+		if($_SERVER['REQUEST_METHOD'] === "POST")
 		{ 
 			if ('on' == $_POST['confirm'])
 			{
@@ -115,7 +115,7 @@ switch ($registry->route['action'])
 	case 'transporter-update':
 		// display form and update user
 		$error = array();
-		if(array_key_exists('send', $_POST) && 'on' == $_POST['send'])
+		if($_SERVER['REQUEST_METHOD'] === "POST")
 		{
 			$data=$_POST;
 			unset($data["send"]);

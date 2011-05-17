@@ -105,6 +105,7 @@ class System_View extends View
 		$this->tpl->setBlock('tpl_main', 'option', 'option_row');
 		$this->tpl->setBlock('tpl_main', 'radios', 'radios_row');
 		$this->tpl->setBlock('tpl_main', 'radio', 'radio_row');
+		$this->tpl->addUserToken();
 		foreach ($data as $v)
 		{			
 			$this->tpl->setVar('NAME', $v['title']);

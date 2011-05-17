@@ -81,10 +81,10 @@ class Admin_View extends View
 	{
 		$this->tpl->setFile('tpl_main', 'admin/' . $templateFile . '.tpl');
 		$this->tpl->setVar('ACTIVE_1', 'checked');
-		$this->tpl->addUserToken();	
+		$this->tpl->addUserToken();
 		foreach ($data as $k=>$v)
 		{
-		    $this->tpl->setVar(strtoupper($k), $v);			
+			$this->tpl->setVar(strtoupper($k), $v);
 			if('isActive' == $k)
 			{
 				$this->tpl->setVar('ACTIVE_'.$v, 'checked');
