@@ -7,7 +7,7 @@
 	<display>1</display>
 	<item>
 		<title>Home</title>
-		<link>page/home/</link>
+		<link>{SITE_URL}</link>
 		<target>_self</target>
 		<external>0</external>
 		<isLogged>1</isLogged>

@@ -178,7 +178,15 @@ class View extends Dot_Template
 					}
 					else
 					{
-						$this->setVar('TOP_MENU_LINK', $this->config->website->params->url.'/'.$val['link']);	
+						if ($val['link'] === "{SITE_URL}")
+						{
+							$link = '';
+						}
+						else
+						{
+							$link = $val['link'];
+						}
+						$this->setVar('TOP_MENU_LINK', $this->config->website->params->url.'/'.$link);	
 					} 
 					if(FALSE === strpos($child['type'],'simple'))
 					{														
