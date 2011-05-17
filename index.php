@@ -12,7 +12,7 @@
  
  /**
  * Main public executable wrapper.
- * Setup environment, setup index controllers , and  load module to run
+ * Setup environment, setup index controllers, and load modules to run
  * @author     DotKernel Team <team@dotkernel.com>
  */
 
