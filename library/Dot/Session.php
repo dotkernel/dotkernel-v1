@@ -36,7 +36,7 @@ class Dot_Session
 	public static function start()
 	{
 		$option = Zend_Registry::get('option');
-		//check is exists session for the current module
+		//check is a session exists for the current module
 		if(isset($option->session))
 		{
 			$namespaceName = $option->session->name;
