@@ -16,6 +16,10 @@
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
+// initialize the session
+// if you don't use the session object in this module, feel free to remove this line
+Dot_Session::start();
+
 // start the template object, empty for the moment
 require(DOTKERNEL_PATH . '/' . $registry->route['module'] . '/' . 'View.php');
 $tpl = View::getInstance(TEMPLATES_PATH . '/' . $registry->route['module']);

@@ -33,6 +33,10 @@ if($registry->configuration->resources->useragent->wurflapi->active)
 	}
 }
 
+// initialize the session
+// if you don't use the session object in this module, feel free to remove this line
+Dot_Session::start();
+
 /**
  * Example of usage of LogVisit. We may want to record every site visits, in order to maybe find new mobile device that 
  * are not listed in WURFL xml file.
