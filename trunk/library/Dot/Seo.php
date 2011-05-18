@@ -41,6 +41,73 @@ class Dot_Seo
 		$this->request = Zend_Registry::get('request');
 		$this->_option = Dot_Settings::getOptionVariables($this->route['module'], 'seo');
 	}
+
+	/**
+	 * Parses the request URI
+	 * Gets the module, action, controller and request parameters
+	 * from the request URI
+	 */
+	public static function parseUri()
+	{
+		$registry = Zend_Registry::getInstance();
+		
+		$realRequest = substr($_SERVER['REQUEST_URI'], strlen(dirname($_SERVER['PHP_SELF'])));
+		$getRequest = '?' . http_build_query($_GET);
+		$tmpRequest = str_replace($getRequest, '', $realRequest);
+		// remove the GET param from url - not to take in consideration when spliting the url request
+		// into module - controller - action
+		$requestRaw = explode('/', trim($tmpRequest, '/'));
+
+		// We are in frontend or in other module ? Prebuilt modules: frontend, admin, rss, ...
+		$requestModule = 'frontend';
+		if (in_array($requestRaw['0'], $registry->configuration->resources->modules->toArray()))
+		{
+			$requestModule = strtolower(basename(stripslashes($requestRaw['0'])));
+		}
+		// if we are NOT in the frontend  module
+		if ($requestModule != 'frontend')
+		{
+			array_shift($requestRaw);
+		}
+
+		// set Controller and Action value, default Index
+		$requestController = 'Index';
+		if (isset($requestRaw['0']) && $requestRaw['0'] != '')
+		{
+			$requestController = Dot_Seo::processController($requestRaw['0']);
+		}
+
+		// set Action value, default nothing
+		$requestAction = '';
+		if (isset($requestRaw['1']) && $requestRaw['1'] != '')
+		{
+			$requestAction = strtolower(basename(stripslashes($requestRaw['1'])));
+		}
+		else
+		{
+			//take the default action from router.xml
+			$requestAction = $registry->router->routes->action->{$requestModule}->{ucfirst($requestController)};
+		}
+
+		// we have extra variables, so we load all in the global array $request
+		$request = array();
+		while (list($key, $val) = each($requestRaw))
+		{
+			$request[$val] = current($requestRaw);
+			next($requestRaw);
+		}
+
+		// remove first element of the request array, is module and action in it
+		array_shift($request);
+		//memory request into param variable and load them into registry
+		$route = array();
+		$route['module'] = $requestModule;
+		$route['controller'] = $requestController;
+		$route['action'] = $requestAction;
+		$registry->request = $request;
+		$registry->route = $route;
+	}
+
 	/**
 	 * Make the route by module/controller/action
 	 * Update the new route
@@ -55,12 +122,14 @@ class Dot_Seo
 		$requestAction = $this->route['action'];
 		
 		$defaultController = isset($this->router->routes->controller->$requestModule) ?
-																 $this->router->routes->controller->$requestModule : '';
-																 
-		$requestController = isset($requestController) && $requestController !='Index' ? 
-																	$requestController : $defaultController;
+		                           $this->router->routes->controller->$requestModule : '';
 		
-		$defaultAction = isset($this->router->routes->action->$requestModule->$requestController) ? $this->router->routes->action->$requestModule->$requestController: '';
+		$requestController = isset($requestController) && $requestController !='Index' ? 
+		                           $requestController : $defaultController;
+		
+		$defaultAction = isset($this->router->routes->action->$requestModule->$requestController) ? 
+		                           $this->router->routes->action->$requestModule->$requestController: '';
+		
 		$requestAction     = isset($requestAction) && $requestAction !='' ? $requestAction : $defaultAction;
 		
 		$this->route['controller'] = $requestController;
