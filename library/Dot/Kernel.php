@@ -74,75 +74,16 @@ class Dot_Kernel
 		//Set PHP configuration settings from application.ini file
 		Dot_Settings::setPhpSettings($config->phpSettings->toArray());
 
-		// Start Index Controller
-
-		$realRequest = substr($_SERVER['REQUEST_URI'], strlen(dirname($_SERVER['PHP_SELF'])));
-		$getRequest = '?' . http_build_query($_GET);
-		$tmpRequest = str_replace($getRequest, '', $realRequest);
-		// remove the GET param from url - not to take in consideration when spliting the url request
-		// into module - controller - action
-		$requestRaw = explode('/', trim($tmpRequest, '/'));
-
-		// We are in frontend or in other module ? Prebuilt modules: frontend, admin, rss, ...
-		$requestModule = 'frontend';
-		if (in_array($requestRaw['0'], $config->resources->modules->toArray()))
-		{
-			$requestModule = strtolower(basename(stripslashes($requestRaw['0'])));
-		}
-		// if we are NOT in the frontend  module
-		if ($requestModule != 'frontend')
-		{
-			array_shift($requestRaw);
-		}
-
-		// set Controller and Action value, default Index
-		$requestController = 'Index';
-		if (isset($requestRaw['0']) && $requestRaw['0'] != '')
-		{
-			$requestController = Dot_Seo::processController($requestRaw['0']);
-		}
-
-		// set Action value, default nothing
-		$requestAction = '';
-		if (isset($requestRaw['1']) && $requestRaw['1'] != '')
-		{
-			$requestAction = strtolower(basename(stripslashes($requestRaw['1'])));
-		}
-		else
-		{
-			//take the default action from router.xml
-			$requestAction = $registry->router->routes->action->{$requestModule}->{ucfirst($requestController)};
-		}
-
-		// we have extra variables, so we load all in the global array $request
-		$request = array();
-		while (list($key, $val) = each($requestRaw))
-		{
-			$request[$val] = current($requestRaw);
-			next($requestRaw);
-		}
-
-		// remove first element of the request array, is module and action in it
-		array_shift($request);
-		//memory request into param variable and load them into registry
-		$route = array();
-		$route['module'] = $requestModule;
-		$route['controller'] = $requestController;
-		$route['action'] = $requestAction;
-		$registry->request = $request;
-		$registry->route = $route;
-
-		// initialize default options for dots that may be overwritten
-		$option = Dot_Settings::getOptionVariables($route['module'], 'default');
-		$registry->option = $option;
-
 		// set seo routes and
 		// initialize seo options
+		Dot_Seo::parseUri();
 		$seo = new Dot_Seo();
 		$seo->routes();
 		$registry->seo = $seo->getOption();
-		
-		return $registry;
+
+		// initialize default options for dots that may be overwritten
+		$option = Dot_Settings::getOptionVariables($registry->route['module'], 'default');
+		$registry->option = $option;
 	}
 	
 	/**
