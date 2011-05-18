@@ -20,26 +20,26 @@
 $startTime = microtime();
 
 // Define application environment
-defined('APPLICATION_ENV') || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
+define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 
 // Define application path	
-defined('APPLICATION_PATH') || define('APPLICATION_PATH', realpath(dirname(__FILE__)));
+define('APPLICATION_PATH', realpath(dirname(__FILE__)));
 
 //Set error reporting
 if(APPLICATION_ENV != 'production') error_reporting(-1);
 
 //Set include  path to library directory
-set_include_path(implode(PATH_SEPARATOR, array(realpath(dirname(__FILE__).'/library'), get_include_path())));
+set_include_path(implode(PATH_SEPARATOR, array(APPLICATION_PATH . '/library', get_include_path())));
 
 // Define PATH's (absolute paths)  to configuration, controllers, DotKernel, templates  directories
-defined('CONFIGURATION_PATH') || define('CONFIGURATION_PATH', realpath(dirname(__FILE__).'/configs'));
-defined('CONTROLLERS_PATH') || define('CONTROLLERS_PATH', realpath(dirname(__FILE__).'/controllers'));
-defined('DOTKERNEL_PATH') || define('DOTKERNEL_PATH', realpath(dirname(__FILE__).'/DotKernel'));
-defined('TEMPLATES_PATH') || define('TEMPLATES_PATH', realpath(dirname(__FILE__).'/templates'));
+define('CONFIGURATION_PATH', APPLICATION_PATH . '/configs');
+define('CONTROLLERS_PATH', APPLICATION_PATH . '/controllers');
+define('DOTKERNEL_PATH', APPLICATION_PATH . '/DotKernel');
+define('TEMPLATES_PATH', APPLICATION_PATH . '/templates');
 
 // Define DIRECTORIES  ( relative paths)
-defined('TEMPLATES_DIR') || define('TEMPLATES_DIR', '/templates');
-defined('IMAGES_DIR') || define('IMAGES_DIR', '/images');
+define('TEMPLATES_DIR', '/templates');
+define('IMAGES_DIR', '/images');
 
 // Load Zend Framework
 require_once 'Zend/Loader/Autoloader.php';
