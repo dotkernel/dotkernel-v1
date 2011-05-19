@@ -61,7 +61,7 @@ if(file_exists($actionControllerPath))
 }
 else
 {
-	Dot_Routes::pageNotFound('admin');
+	Dot_Route::pageNotFound('admin');
 }
 
 // set menus

@@ -96,7 +96,7 @@ class Dot_Auth
 			//register wanted url
 			if(!isset($session->wantUrl))
 			{
-				$session->wantUrl = Dot_Routes::createCanonicalUrl();
+				$session->wantUrl = Dot_Route::createCanonicalUrl();
 			}
 			$option = Zend_Registry::get('option');
 			if(isset($option->warningMessage->userPermission))

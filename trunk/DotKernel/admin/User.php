@@ -26,7 +26,7 @@ class User extends Dot_Model_User
 	public function __construct()
 	{
 		parent::__construct();
-		$this->seoOption = Dot_Routes::getOption();
+		$this->seoOption = Dot_Route::getOption();
 	}	
 	/**
 	 * Get user list
