@@ -234,9 +234,9 @@ class View extends Dot_Template
 		{
 			unset($route['page']);
 		}
-		$seo = new Dot_Seo();
-		$link = $seo->createCanonicalUrl($route).'page/';
-		
+
+		$link = Dot_Routes::createCanonicalUrl($route);
+
 		if ($page->current != 1)
 		{
 			$this->setVar('FIRST_LINK',$link."1");
@@ -270,10 +270,10 @@ class View extends Dot_Template
 				$this->setVar('PAGE_LINK', $link.$val);
 				//$this->parse('current_row','');
 				$this->parse('other_row','other_page', TRUE);
-			}				
+			}
 			$this->parse('pages_row', 'pages', TRUE);
 		}
-		$this->parse('PAGINATION', 'page_file');				
+		$this->parse('PAGINATION', 'page_file');
 	}
 	/**
 	 * Display message - error, warning, info

@@ -87,7 +87,7 @@ if(file_exists($actionControllerPath))
 }
 else
 {
-	Dot_Kernel::pageNotFound();
+	Dot_Routes::pageNotFound();
 }
 
 // set menus
