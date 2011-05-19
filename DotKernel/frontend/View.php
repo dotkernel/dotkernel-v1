@@ -321,7 +321,7 @@ class View extends Dot_Template
 	{
 		$dotAuth = Dot_Auth::getInstance();
 		$user = $dotAuth->getIdentity('user');
-		$this->setVar('USERTOKEN', Dot_Kernel::generateUserToken($user->password));
+		$this->setVar('USERTOKEN', Dot_Auth::generateUserToken($user->password));
 	}	
 	/**
 	 * Get captcha display box using Zend_Service_ReCaptcha api

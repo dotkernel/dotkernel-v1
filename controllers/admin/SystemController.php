@@ -45,7 +45,7 @@ switch ($registry->route['action'])
 		$error = array();
 		if($_SERVER['REQUEST_METHOD'] === "POST")
 		{
-			Dot_Kernel::checkUserToken();
+			Dot_Auth::checkUserToken();
 			$systemModel->updateSettings($_POST);
 			header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/settings/update/done');
 			exit;

@@ -33,13 +33,6 @@ class Dot_Routes
 	 */
 	private function __construct ()
 	{
-		/*
-		$this->config = Zend_Registry::get('configuration');
-		$this->router = Zend_Registry::get('router');
-		$this->route = Zend_Registry::get('route');
-		$this->request = Zend_Registry::get('request');
-		$this->_option = Dot_Settings::getOptionVariables($this->route['module'], 'seo');
-		*/
 	}
 
 	/**

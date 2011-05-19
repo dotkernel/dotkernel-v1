@@ -64,7 +64,6 @@ switch ($registry->route['action'])
 				$session->validData = $dotValidateUser->getData();
 				$session->message['txt'] = $txt;
 				$session->message['type'] = 'error';
-		
 			}
 		}
 		else
@@ -82,7 +81,7 @@ switch ($registry->route['action'])
 		$error = array();
 		if($_SERVER['REQUEST_METHOD'] === "POST")
 		{
-			Dot_Kernel::checkUserToken('user');
+			Dot_Auth::checkUserToken('user');
 			// POST values that will be validated
 			$values = array('details' => 
 								array('firstName'=>$_POST['firstName'],

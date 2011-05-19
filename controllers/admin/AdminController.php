@@ -87,7 +87,7 @@ switch ($registry->route['action'])
 		$error = array();
 		if($_SERVER['REQUEST_METHOD'] === "POST")
 		{
-			Dot_Kernel::checkUserToken();
+			Dot_Auth::checkUserToken();
 			// POST values that will be validated
 			$values = array('details' => 
 								array('firstName'=>$_POST['firstName'],
@@ -142,7 +142,7 @@ switch ($registry->route['action'])
 		$error = array();
 		if($_SERVER['REQUEST_METHOD'] === "POST")
 		{
-			Dot_Kernel::checkUserToken();
+			Dot_Auth::checkUserToken();
 			// POST values that will be validated
 			$values = array('details' => 
 								array('firstName'=>$_POST['firstName'],
@@ -186,7 +186,7 @@ switch ($registry->route['action'])
 	case 'activate':
 		// activate/deactivate admin user
 		// this action is called via Ajax
-		Dot_Kernel::checkUserToken();
+		Dot_Auth::checkUserToken();
 		$id = (isset($_POST['id'])) ? (int)$_POST['id'] : 0;
 		$isActive = (isset($_POST['isActive'])) ? $_POST['isActive'] : 0;
 		$values = array('enum' => array('0' => '0,1', 'isActive' => $isActive));		
@@ -214,7 +214,7 @@ switch ($registry->route['action'])
 		// display confirmation form and delete admin user
 		if($_SERVER['REQUEST_METHOD'] === "POST")
 		{
-			Dot_Kernel::checkUserToken();
+			Dot_Auth::checkUserToken();
 			if ('on' == $_POST['confirm'])
 			{
 				// delete admin user
@@ -228,13 +228,13 @@ switch ($registry->route['action'])
 				$registry->session->message['type'] = 'info';
 			}
 			header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/list/');
-			exit;				
+			exit;
 		}
 		$data = $adminModel->getUserBy('id', $registry->request['id']);
 		$adminView->setExtraBreadcrumb($data['username']);
 		$pageTitle .= ' "' . $data['username'] . '"';
 		// delete page confirmation
-		$adminView->details('delete', $data);	
+		$adminView->details('delete', $data);
 	break;
 	case 'logins':
 		// list user logins
