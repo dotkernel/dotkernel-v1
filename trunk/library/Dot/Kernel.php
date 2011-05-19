@@ -41,7 +41,7 @@ class Dot_Kernel
 		}
 		else
 		{
-			Dot_Kernel::pageNotFound();
+			Dot_Routes::pageNotFound();
 		} 
 	}
 	/**
@@ -74,58 +74,17 @@ class Dot_Kernel
 		//Set PHP configuration settings from application.ini file
 		Dot_Settings::setPhpSettings($config->phpSettings->toArray());
 
-		// set seo routes and
+		// Extract the route from the URI
+		Dot_Routes::setRoute();
+
 		// initialize seo options
-		Dot_Seo::parseUri();
-		$seo = new Dot_Seo();
-		$seo->routes();
-		$registry->seo = $seo->getOption();
+		$registry->seo = Dot_Routes::getOption();
 
 		// initialize default options for dots that may be overwritten
 		$option = Dot_Settings::getOptionVariables($registry->route['module'], 'default');
 		$registry->option = $option;
 	}
 	
-	/**
-	 * End the execution of the application,
-	 * by sending an 404 header and redirecting to home page
-	 * @access public
-	 * @param string $who [optional]
-	 * @return bool
-	 */
-	public static function pageNotFound($who = '')
-	{
-		$config = Zend_Registry::get('configuration');
-		// send the 404 header
-		header('HTTP/1.0 404 Not Found');
-		// redirect to 404 page
-		echo '<SCRIPT LANGUAGE=JAVASCRIPT>
-					function go()
-					{
-						window.location.href="'.$config->website->params->url.'/'.$who.'"
-						}
-						</SCRIPT>
-					</HEAD>
-					<BODY onLoad="go()">
-					<!--
-					- Unfortunately, Microsoft has added a clever new
-					- \"feature\" to Internet Explorer. If the text of
-					- an error\'s message is \"too small\", specifically
-					- less than 512 bytes, Internet Explorer returns
-					- its own error message. You can turn that off,
-					- but it\'s pretty tricky to find switch called
-					- \"smart error messages\". That means, of course,
-					- that short error messages are censored by default.
-					- IIS always returns error messages that are long
-					- enough to make Internet Explorer happy. The
-					- workaround is pretty simple: pad the error
-					- message with a big comment like this to push it
-					- over the five hundred and twelve bytes minimum.
-					- Of course, that\'s exactly what you\'re reading
-					- right now.
-					 -->';
-		exit;
-	}
 	/**
 	 * Check if IP is valid. Return FALSE | 'private' | 'public'
 	 * FALSE - $ip is not a valid IP address

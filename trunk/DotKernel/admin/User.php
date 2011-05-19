@@ -26,8 +26,7 @@ class User extends Dot_Model_User
 	public function __construct()
 	{
 		parent::__construct();
-		$seo = new Dot_Seo();
-		$this->seoOption = $seo->getOption();	
+		$this->seoOption = Dot_Routes::getOption();
 	}	
 	/**
 	 * Get user list
@@ -38,10 +37,10 @@ class User extends Dot_Model_User
 	public function getUserList($page = 1)
 	{
 		$select = $this->db->select()
-						   ->from('user');				
+						   ->from('user');
  		$dotPaginator = new Dot_Paginator($select, $page, $this->settings->resultsPerPage);
 		return $dotPaginator->getData();
-	}	
+	}
 	/**
 	 * Delete user
 	 * @param int $id
