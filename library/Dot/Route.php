@@ -18,12 +18,12 @@
 * @todo		  URL Rewrite
 */
 
-class Dot_Routes
+class Dot_Route
 {
 	/**
 	 * Constructor
 	 * @access public
-	 * @return Dot_Routes
+	 * @return Dot_Route
 	 */
 	private function __construct ()
 	{
@@ -61,7 +61,7 @@ class Dot_Routes
 		$requestController = 'Index';
 		if (isset($requestRaw['0']) && $requestRaw['0'] != '')
 		{
-			$requestController = Dot_Routes::processController($requestRaw['0']);
+			$requestController = Dot_Route::processController($requestRaw['0']);
 		}
 
 		// set Action value, default nothing
@@ -94,7 +94,7 @@ class Dot_Routes
 		$registry->request = $request;
 		$registry->route = $route;
 		
-		Dot_Routes::__setDefaultRoues();
+		Dot_Route::__setDefaultRoutes();
 	}
 
 	/**
@@ -103,7 +103,7 @@ class Dot_Routes
 	 * @access public
 	 * @return void
 	 */
-	private static function __setDefaultRoues()
+	private static function __setDefaultRoutes()
 	{
 		$route = Zend_Registry::get('route');
 		$router = Zend_Registry::get('router');
@@ -176,7 +176,7 @@ class Dot_Routes
 
 		$option->__unset('option');
 
-		$option->__set('canonicalUrl',Dot_Routes::createCanonicalUrl());
+		$option->__set('canonicalUrl',Dot_Route::createCanonicalUrl());
 
 		return $option;
 	}

@@ -35,6 +35,6 @@ $registry->option = $option;
  * call the Action specific file, but check first if exists
  */
 $actionControllerPath = CONTROLLERS_PATH . '/' . $registry->route['module'] . '/' . $registry->route['controller'] . 'Controller.php';
-!file_exists($actionControllerPath) ?  Dot_Routes::pageNotFound() : require($actionControllerPath);
+!file_exists($actionControllerPath) ?  Dot_Route::pageNotFound() : require($actionControllerPath);
 //output the rss content
 $view->output();

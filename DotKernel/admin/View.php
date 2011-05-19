@@ -235,7 +235,7 @@ class View extends Dot_Template
 			unset($route['page']);
 		}
 
-		$link = Dot_Routes::createCanonicalUrl($route);
+		$link = Dot_Route::createCanonicalUrl($route);
 
 		if ($page->current != 1)
 		{

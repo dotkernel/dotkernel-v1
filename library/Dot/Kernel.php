@@ -41,7 +41,7 @@ class Dot_Kernel
 		}
 		else
 		{
-			Dot_Routes::pageNotFound();
+			Dot_Route::pageNotFound();
 		} 
 	}
 	/**
@@ -75,10 +75,10 @@ class Dot_Kernel
 		Dot_Settings::setPhpSettings($config->phpSettings->toArray());
 
 		// Extract the route from the URI
-		Dot_Routes::setRoute();
+		Dot_Route::setRoute();
 
 		// initialize seo options
-		$registry->seo = Dot_Routes::getOption();
+		$registry->seo = Dot_Route::getOption();
 
 		// initialize default options for dots that may be overwritten
 		$option = Dot_Settings::getOptionVariables($registry->route['module'], 'default');
