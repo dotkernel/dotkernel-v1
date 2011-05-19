@@ -327,7 +327,7 @@ class View extends Dot_Template
 	{
 		$dotAuth = Dot_Auth::getInstance();
 		$user = $dotAuth->getIdentity('admin');
-		$this->setVar('USERTOKEN', Dot_Kernel::generateUserToken($user->password));
+		$this->setVar('USERTOKEN', Dot_Auth::generateUserToken($user->password));
 	}
 	/**
 	 * Display the widget: User Login Piechart

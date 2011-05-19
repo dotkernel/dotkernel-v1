@@ -33,7 +33,7 @@ switch ($registry->route['action'])
 		$data = $_POST;
 		if($_SERVER['REQUEST_METHOD'] === "POST")
 		{
-			Dot_Kernel::checkUserToken();
+			Dot_Auth::checkUserToken();
 			// POST values that will be validated
 			$values = array('details' => 
 								array('firstName'=>$_POST['firstName'],
@@ -73,7 +73,7 @@ switch ($registry->route['action'])
 		$error = array();
 		if($_SERVER['REQUEST_METHOD'] === "POST")
 		{
-			Dot_Kernel::checkUserToken();
+			Dot_Auth::checkUserToken();
 			// POST values that will be validated
 			$values = array('details' => 
 								array('firstName'=>$_POST['firstName'],
@@ -113,7 +113,7 @@ switch ($registry->route['action'])
 	case 'activate':
 		// activate/deactivate user account
 		// this action is called via Ajax
-		Dot_Kernel::checkUserToken();
+		Dot_Auth::checkUserToken();
 		$id = (isset($_POST['id'])) ? (int)$_POST['id'] : 0;
 		$isActive = (isset($_POST['isActive'])) ? $_POST['isActive'] : 0;
 		$values = array('enum' => array('0' => '0,1', 'isActive' => $isActive));
@@ -141,7 +141,7 @@ switch ($registry->route['action'])
 		// display confirmation form and delete user account
 		if($_SERVER['REQUEST_METHOD'] === "POST")
 		{
-			Dot_Kernel::checkUserToken();
+			Dot_Auth::checkUserToken();
 			if ('on' == $_POST['confirm'])
 			{
 				// delete user
