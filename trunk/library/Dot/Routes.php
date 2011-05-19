@@ -19,13 +19,7 @@
 */
 
 class Dot_Routes
-{	
-	/**
-	 * Option variable from dots/seo.xml file
-	 * @access private
-	 * @var Zend_Config
-	 */
-	private $_option = NULL;
+{
 	/**
 	 * Constructor
 	 * @access public
