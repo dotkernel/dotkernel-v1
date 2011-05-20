@@ -50,6 +50,11 @@ class Dot_Debug
 	 * @var bool
 	 */	
 	public $memory_usage = true;
+	
+	private $__startTime;
+	
+	private $__module;
+	
 	/**
 	 * Constructor
 	 * @access public
@@ -59,9 +64,13 @@ class Dot_Debug
 	 */
 	public function __construct($tpl)
 	{
-		$this->db = Zend_Registry::get('database');
-		$this->tpl = $tpl;		
-	}	
+		$registry = Zend_Registry::getInstance();
+		$this->db = $registry['database'];
+		$this->config = $registry['configuration'];
+		$this->tpl = $tpl;
+		$this->__startTime = $registry['startTime'];
+		$this->__module = $registry['route']['module'];
+	}
 	/**
 	 * Set magic method
 	 * @access public
@@ -81,7 +90,7 @@ class Dot_Debug
 	private function _endTimer()
 	{
 		// format start time 
-		$stime = explode (' ', $this->startTimer);
+		$stime = explode (' ', $this->__startTime);
 		$startTime = $stime[1] + $stime[0];
 		//format end time
 		$mtime = microtime ();
@@ -113,6 +122,11 @@ class Dot_Debug
 	 */
 	public function show ()
 	{
+		if ($this->config->settings->{$this->__module}->debugbar != TRUE)
+		{
+			// if we don't have to show the debugbar for this module, stop here
+			return;
+		}
 		$this->tpl->setFile('tpl_debugger', '../debugger.tpl');
 		$this->tpl->setBlock('tpl_debugger', 'zf_version', 'zf_version_block');
 		$this->tpl->setBlock('tpl_debugger', 'php_version', 'php_version_block');

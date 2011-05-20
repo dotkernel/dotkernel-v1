@@ -82,14 +82,10 @@ $tpl->displayWidgets($option->widgets->content);
 // parse the main content block
 $tpl->parse('MAIN_CONTENT', 'tpl_main');
 
-// show debugbar 
-if(
-	$registry->configuration->settings->admin->debugbar == TRUE &&
-	!($registry->route['controller'] !== 'admin' && $registry->route['action'] ==='login')
-	)
+// show debugbar, only for logged in users
+if (isset($_SESSION['admin']['admin']))
 {
 	$debug = new Dot_Debug($tpl);
-	$debug->startTimer = $registry->startTime;
 	$debug->show();
 }
 
