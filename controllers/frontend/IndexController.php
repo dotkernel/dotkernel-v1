@@ -103,12 +103,8 @@ $tpl->displayMessage();
 $tpl->parse('MAIN_CONTENT', 'tpl_main');
 
 // show debugbar 
-if(TRUE == $registry->configuration->settings->frontend->debugbar)
-{
-	$debug = new Dot_Debug($tpl);
-	$debug->startTimer = $registry->startTime;
-	$debug->show();
-}
+$debug = new Dot_Debug($tpl);
+$debug->show();
 
 // parse and print the output
 $tpl->pparse('OUTPUT', 'tpl_index');
