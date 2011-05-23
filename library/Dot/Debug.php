@@ -212,11 +212,13 @@ class Dot_Debug
 
 					// show query params
 					$queryParams = $query->getQueryParams();
+					// a filter to prevent XSS
+					$tagFilter = new Zend_Filter_StripTags();
 					if (count($queryParams) > 0)
 					{
 						foreach ($queryParams as $key => $val)
 						{
-							$this->tpl->setVar('QUERY_PARAMS', $val);
+							$this->tpl->setVar('QUERY_PARAMS', $tagFilter->filter($val));
 							$this->tpl->parse('params_block', 'params', true);
 						}
 						$this->tpl->parse('if_params_block', 'if_params', true);
