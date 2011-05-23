@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.3.2
+-- version 3.4.1
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 23, 2010 at 11:36 AM
--- Server version: 5.1.36
--- PHP Version: 5.3.2
+-- Generation Time: May 23, 2011 at 04:33 AM
+-- Server version: 5.1.50
+-- PHP Version: 5.3.5
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -79,19 +79,16 @@ CREATE TABLE IF NOT EXISTS `emailTransporter` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 -- --------------------------------------------------------
+
 --
--- Table structure for table `logVisit`
+-- Table structure for table `statisticVisit`
 --
 
 CREATE TABLE IF NOT EXISTS `statisticVisit` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `ip` varchar(16) NOT NULL,
   `proxyIp` varchar(255) NOT NULL,
-  `device` varchar(255) DEFAULT NULL,
-  `deviceModel` varchar(255) DEFAULT NULL,
   `carrier` varchar(255) NOT NULL,
-  `operatingSystem` varchar(255) DEFAULT NULL,
-  `browser` varchar(255) DEFAULT NULL,
   `country` varchar(255) NOT NULL,
   `accept` text NOT NULL,
   `acceptLanguage` text NOT NULL,
@@ -100,13 +97,58 @@ CREATE TABLE IF NOT EXISTS `statisticVisit` (
   `userAgent` text NOT NULL,
   `cacheControl` text NOT NULL,
   `cookie` text NOT NULL,
+  `xWapProfile` text NOT NULL,
   `xForwardedFor` text NOT NULL,
   `xForwardedHost` text NOT NULL,
   `xForwardedServer` text NOT NULL,
   `referer` text NOT NULL,
   `dateHit` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `statisticVisitMobile`
+--
+
+CREATE TABLE IF NOT EXISTS `statisticVisitMobile` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `visitId` int(11) unsigned NOT NULL,
+  `fallBack` varchar(100) NOT NULL,
+  `brandName` varchar(100) NOT NULL,
+  `modelName` varchar(100) NOT NULL,
+  `browserName` varchar(100) NOT NULL,
+  `browserVersion` varchar(100) NOT NULL,
+  `deviceOs` varchar(100) NOT NULL,
+  `deviceOsVersion` varchar(100) NOT NULL,
+  `screenWidth` int(6) NOT NULL,
+  `screenHeight` int(6) NOT NULL,
+  `isTablet` enum('0','1') NOT NULL DEFAULT '0',
+  `isMobile` enum('0','1') NOT NULL DEFAULT '0',
+  `isSmartphone` enum('0','1') NOT NULL DEFAULT '0',
+  `isIphone` enum('0','1') NOT NULL DEFAULT '0',
+  `isAndroid` enum('0','1') NOT NULL DEFAULT '0',
+  `isBlackberry` enum('0','1') NOT NULL DEFAULT '0',
+  `isSymbian` enum('0','1') NOT NULL DEFAULT '0',
+  `isWindowsMobile` enum('0','1') NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `visitId` (`visitId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- RELATIONS FOR TABLE `statisticVisitMobile`:
+--   `visitId`
+--       `statisticvisit` -> `id`
+
+--
+-- Constraints for table `statisticVisitMobile`
+--
+ALTER TABLE `statisticVisitMobile`
+  ADD CONSTRAINT `statisticVisitMobile_ibfk_1` FOREIGN KEY (`visitId`) REFERENCES `statisticVisit` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
 -- --------------------------------------------------------
 
 
