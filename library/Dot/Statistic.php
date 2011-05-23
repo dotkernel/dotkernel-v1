@@ -22,11 +22,33 @@ class Dot_Statistic
 {
 	/**
 	 * Constructor
-	 * @access public
+	 * @access private
 	 * @return object
 	 */
-	function __construct()
+	private function __construct()
 	{
-		$this->db = Zend_Registry::get('database');
 	}	
+	
+	/**
+	 * call the function to record the visit
+	 * @access public
+	 * @return integer
+	 */
+	public static function registerVisit()
+	{
+		$visitId = Dot_Statistic_Visit::recordVisit();
+		return $visitId;
+	}
+	
+	/**
+	 * Record device info in statisticVisitMobile table
+	 * @param object $visitId
+	 * @param object $device [optional]
+	 * @return bool
+	 */
+	public static function registerMobileDetails($visitId, $device)
+	{
+		Dot_Statistic_Visit::recordMobileVisit($visitId, $device);
+		return TRUE;
+	}
 }

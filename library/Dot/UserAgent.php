@@ -30,7 +30,7 @@ class Dot_UserAgent
 	}
 	
 	/**
-	 * Get HTTP UserAgent Device.
+	 * Get HTTP UserAgent Device Info from WURFL file
 	 * Device may be Bot, Checker, Console, Desktop, Email, Feed, Mobile, Offline, Probe, Spam, Text, Validator
 	 * @return object
 	 */
@@ -45,16 +45,16 @@ class Dot_UserAgent
 	 * Return the name of the browser icon based on User Agent
 	 * @access public
 	 * @static
-	 * @param string $user
+	 * @param string $userAgent
 	 * @return string
 	 */
-	public static function getBrowserIcon($agent, $return = 'icon')
+	public static function getBrowserIcon($userAgent, $return = 'icon')
 	{
 		$xml = new Zend_Config_Xml(CONFIGURATION_PATH.'/browser.xml');
 		$browser = $xml->name->type->toArray();
 		foreach ($browser as $key => $val)
 		{
-			if (stripos($agent,$val['uaBrowser']) !== FALSE)
+			if (stripos($userAgent,$val['uaBrowser']) !== FALSE)
 			{
 				if('browser' == $return)
 				{
@@ -70,10 +70,10 @@ class Dot_UserAgent
 	 * Return the name of the OS icon based on User Agent
 	 * @access public
 	 * @static
-	 * @param string $user
+	 * @param string $userAgent
 	 * @return array
 	 */
-	public static function getOsIcon($agent)
+	public static function getOsIcon($userAgent)
 	{
 		$xml = new Zend_Config_Xml(CONFIGURATION_PATH.'/os.xml');
 		$os = $xml->type->toArray();
@@ -103,20 +103,20 @@ class Dot_UserAgent
 							{
 								if ((stripos($agent, $uaString) !== false))
 								{
-									$operatingSystem = array('icon'=>strtolower(str_replace(' ', '_', $osArray['os'])),
-															 'major'=>$osArray['os'],
-															 'minor'=>$minor['osName']);
+									$operatingSystem = array( 'icon'=>strtolower(str_replace(' ', '_', $osArray['os'])),
+																						'major'=>$osArray['os'],
+																						'minor'=>$minor['osName']);
 									return $operatingSystem;
 								}
 							}
 						}
 						else
 						{
-							if ((stripos($agent, $minor['uaString']) !== false))
+							if ((stripos($userAgent, $minor['uaString']) !== false))
 							{
-								$operatingSystem = array('icon'=>strtolower(str_replace(' ', '_', $osArray['os'])),
-											'major'=>$osArray['os'],
-											'minor'=>$minor['osName']);
+								$operatingSystem = array( 'icon'=>strtolower(str_replace(' ', '_', $osArray['os'])),
+																					'major'=>$osArray['os'],
+																					'minor'=>$minor['osName']);
 								return $operatingSystem;
 							}
 						}
@@ -124,11 +124,11 @@ class Dot_UserAgent
 				}
 				else
 				{//no minor version known for this os
-					if ((stripos($agent, $osArray['os']) !== false))
+					if ((stripos($userAgent, $osArray['os']) !== false))
 					{
-						$operatingSystem = array('icon'=>strtolower(str_replace(' ', '_', $osArray['os'])),
-									'major'=>$osArray['os'],
-									'minor'=>'');
+						$operatingSystem = array( 'icon'=>strtolower(str_replace(' ', '_', $osArray['os'])),
+																			'major'=>$osArray['os'],
+																			'minor'=>'');
 						return $operatingSystem;
 					}
 				}

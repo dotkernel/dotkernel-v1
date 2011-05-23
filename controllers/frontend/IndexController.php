@@ -16,14 +16,33 @@
  * @author     DotKernel Team <team@dotkernel.com>
  */ 
 
+// initialize the session
+// if you don't use the session object in this module, feel free to remove this line
+Dot_Session::start();
+
 /**
- *  Customize for your own needs. By default, if wurfl  module is active, eventually redirect 
+ * Example of usage of Statistic class. We may want to record every site visits, in order to find new mobile device
+ * that are not listed in WURFL xml file. Record in session the visitId for later usage.
+ */
+if(!$registry->session->visitId)
+{
+	$registry->session->visitId = Dot_Statistic::registerVisit();
+}
+
+/**
+ *  Example of usage for WURFL API integration. If wurfl  module is active, you can redirect to /mobile controller 
  */
 if($registry->configuration->resources->useragent->wurflapi->active)
 {
 	$deviceInfo = Dot_UserAgent :: getDeviceInfo($_SERVER["HTTP_USER_AGENT"]); 
 	if( (0 < count((array)$deviceInfo)) && $deviceInfo->isMobile)
 	{
+		// if the Statistic module is integrate, record the deviceInfo too, and record TRUE in $session->mobile 
+		if(!$registry->session->mobile)
+		{
+			$registry->session->mobile = Dot_Statistic::registerMobileDetails($registry->session->visitId, $deviceInfo);
+		}
+
 		//redirect to mobile controller
 		if($registry->configuration->resources->useragent->wurflapi->redirect)
 		{
@@ -32,16 +51,6 @@ if($registry->configuration->resources->useragent->wurflapi->active)
 		}
 	}
 }
-
-// initialize the session
-// if you don't use the session object in this module, feel free to remove this line
-Dot_Session::start();
-
-/**
- * Example of usage of LogVisit. We may want to record every site visits, in order to maybe find new mobile device that 
- * are not listed in WURFL xml file.
- */
-if(!$registry->session->visitId) Dot_Statistic_Visit::recordVisit($deviceInfo);
 
 // start the template object, empty for the moment
 require(DOTKERNEL_PATH . '/' . $registry->route['module'] . '/' . 'View.php');
