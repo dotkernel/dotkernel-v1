@@ -1,15 +1,19 @@
-		<h3>Documentation</h3>
-		<a href="http://www.dotkernel.com/docs/"> http://www.dotkernel.com/docs/</a><br /><br />
-		<a href="{SITE_URL}/readme.txt" target="_blank">README.TXT</a>
-		
-		<h3>Download latest version</h3>
-		<a href="http://www.dotkernel.com/download/">http://www.dotkernel.com/download/</a>
-		
-		
+	<ul>
+		<li><b>Download latest version:</b>
+					<a href="http://www.dotkernel.com/download/">http://www.dotkernel.com/download/</a></li>
+		<li><b>Documentation:</b> 
+					<a href="http://www.dotkernel.com/docs/"  target="_blank"> http://www.dotkernel.com/docs/</a></li>
+		<li><b>Readme file: </b>
+					<a href="{SITE_URL}/readme.txt" target="_blank">README.TXT</a></li>
+		<li><b>Code Documentation:</b> 
+					<a href="http://www.dotkernel.com/phpdoc/" target="_blank">DocBlox</a></li>
+	</ul>
+
 	<h3>1. Special Controllers</h3>
 	<p><b>Mobile: </b><a href="{SITE_URL}/mobile/ ">Mobile</a></p>
 	<p><b>Backend: </b><a href="{SITE_URL}/admin/ ">Admin </a></p>
 	<p><b>RSS: </b><a href="{SITE_URL}/rss/ ">RSS </a></p>
+	<p><b>Console: </b><a href="{SITE_URL}/Console/ ">call this only from command line</a></p>
 	<p>Also the above controllers are <b>reserved words</b> so you cannot have an action called
 	<b>admin</b> or <b>rss</b> in frontend</p>
 

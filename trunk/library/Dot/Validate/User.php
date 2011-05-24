@@ -31,9 +31,9 @@ class Dot_Validate_User extends Dot_Validate
 	 * @access private
 	 */
 	private $_options = array('who' => 'user',
-							  'action' => '', 
-							  'values' => array(), 
-							  'userId' => 0);
+														'action' => '', 
+														'values' => array(), 
+														'userId' => 0);
 	/**
 	 * Valid data after validation
 	 * @var array
@@ -84,10 +84,8 @@ class Dot_Validate_User extends Dot_Validate
 		{
 			$validatorChain = new Zend_Validate();
 			$validatorChain->addValidator(new Zend_Validate_Alnum())
-						   ->addValidator(new Zend_Validate_StringLength(
-											$this->option->validate->details->lengthMin, 
-											$this->option->validate->details->lengthMax
-										 ));
+											->addValidator(new Zend_Validate_StringLength($this->option->validate->details->lengthMin, 
+																																		$this->option->validate->details->lengthMax));
 			$this->_callFilter($validatorChain, $values['username']);
 			if(in_array($this->_options['action'], array('add', 'update')))
 			{				
@@ -98,7 +96,7 @@ class Dot_Validate_User extends Dot_Validate
 		//validate email
 		if(array_key_exists('email', $values))
 		{
-			$validatorEmail = new Zend_Validate_EmailAddress();		
+			$validatorEmail = new Zend_Validate_EmailAddress();
 			$this->_callFilter($validatorEmail, $values['email']);
 			if(in_array($this->_options['action'], array('add', 'update')))
 			{				
@@ -152,9 +150,10 @@ class Dot_Validate_User extends Dot_Validate
 		// validate captcha
 		if(array_key_exists('captcha', $values))
 		{
-			if(!array_key_exists('recaptcha_response_field', $values['captcha']) || strlen($values['captcha']['recaptcha_response_field']) == 0)
-			{				
-				$this->_error = array_merge($this->_error, array('Secure Image' => $this->option->errorMessage->captcha));	
+			if(!array_key_exists('recaptcha_response_field', $values['captcha'])
+					 || strlen($values['captcha']['recaptcha_response_field']) == 0)
+			{
+				$this->_error = array_merge($this->_error, array('Secure Image' => $this->option->errorMessage->captcha));
 			}
 			else
 			{
@@ -164,17 +163,19 @@ class Dot_Validate_User extends Dot_Validate
 					// just in frontend is recaptcha included. 
 					// if you want it in other modules, add getRecaptcha() method from frontend/View.php in others View.php of the modules
 					$view = View::getInstance();
-					$result = $view->getRecaptcha()->verify($values['captcha']['recaptcha_challenge_field'], $values['captcha']['recaptcha_response_field']);	
+					$result = $view->getRecaptcha()->verify($values['captcha']['recaptcha_challenge_field'], 
+																										$values['captcha']['recaptcha_response_field']);
 					if (!$result->isValid()) 
 					{
-						$this->_error = array_merge($this->_error, array('Secure Image' => $this->option->errorMessage->captcha));	
+						$this->_error = array_merge($this->_error, array('Secure Image' => $this->option->errorMessage->captcha));
 					}
 				}
 				catch(Zend_Exception $e)
 				{
-					$this->_error = array_merge($this->_error, array('Secure Image' => $this->option->errorMessage->captcha. ' ' . $e->getMessage()));
+					$this->_error = array_merge($this->_error, array('Secure Image' => $this->option->errorMessage->captcha. ' ' 
+																			. $e->getMessage()));
 				}
-			}	
+			}
 		}
 		if(empty($this->_error))
 		{
@@ -217,7 +218,7 @@ class Dot_Validate_User extends Dot_Validate
 		$exists = $this->_getUserBy($field, $value);
 		if($this->_options['userId'] > 0)
 		{
-			$currentUser = $this->_getUserBy('id', $this->_options['userId']);				
+			$currentUser = $this->_getUserBy('id', $this->_options['userId']);
 			$uniqueCondition = (is_array($exists) && $exists[$field] != $currentUser[$field]);
 		}
 		else
@@ -241,9 +242,9 @@ class Dot_Validate_User extends Dot_Validate
 	{		
 		$db = Zend_Registry::get('database');
 		$select = $db->select()
-					   ->from($this->_options['who'])
-					   ->where($field.' = ?', $value)
-					   ->limit(1);					   
+									->from($this->_options['who'])
+									->where($field.' = ?', $value)
+									->limit(1);
 		$result = $db->fetchRow($select);
 		return $result;
 	}
@@ -254,7 +255,7 @@ class Dot_Validate_User extends Dot_Validate
 	 * @param array $values
 	 * @return void
 	 */
-	public function _callFilter($validator, $values)
+	private function _callFilter($validator, $values)
 	{
 		$dotFilter = new Dot_Filter(array('validator' => $validator, 'values' => $values));
 		$dotFilter->filter();
