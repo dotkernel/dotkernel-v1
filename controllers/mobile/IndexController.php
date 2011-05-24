@@ -36,8 +36,7 @@ $tpl->setViewPaths();
 Dot_Settings :: loadControllerFiles($registry->route['module']);
 
 /**
- * Load option(specific configuration file for current dot) file
- * @todo linking N dots together
+ * Load option(specific configuration file for current dot file
  */
 $option = Dot_Settings::getOptionVariables($registry->route['module'],$registry->route['controller']);
 $registry->option = $option;

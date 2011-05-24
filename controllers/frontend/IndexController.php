@@ -41,13 +41,14 @@ if($registry->configuration->resources->useragent->wurflapi->active)
 		if(!$registry->session->mobile)
 		{
 			$registry->session->mobile = Dot_Statistic::registerMobileDetails($registry->session->visitId, $deviceInfo);
-		}
-
-		//redirect to mobile controller
-		if($registry->configuration->resources->useragent->wurflapi->redirect)
-		{
-			header('location: '.$registry->configuration->website->params->url.'/mobile');
-			exit;
+			
+			//redirect to mobile controller , only if the session is not set. 
+			//Otherwise will trap the user in mobile controller
+			if($registry->configuration->resources->useragent->wurflapi->redirect)
+			{
+				header('location: '.$registry->configuration->website->params->url.'/mobile');
+				exit;
+			}
 		}
 	}
 }
@@ -73,7 +74,6 @@ Dot_Settings :: loadControllerFiles($registry->route['module']);
 
 /**
  * Load option(specific configuration file for current dot) file
- * @todo linking N dots together
  */
 $option = Dot_Settings::getOptionVariables($registry->route['module'],$registry->route['controller']);
 $registry->option = $option;

@@ -38,14 +38,14 @@ class Dot_Validate_Phone extends Dot_Validate
 	 * @var array
 	 */
 	private $_options = array('code' => '',
-							  'internationalPrefix' => 0,
-							  'phoneLengthMin' => 0,
-							  'phoneLengthMax' => 0,
-							  'areaPositionStart' => 0,
-							  'areaLength' => 0,
-							  'prefixPositionStart' => 0,
-							  'prefixLength' => 0
-							  );
+														'internationalPrefix' => 0,
+														'phoneLengthMin' => 0,
+														'phoneLengthMax' => 0,
+														'areaPositionStart' => 0,
+														'areaLength' => 0,
+														'prefixPositionStart' => 0,
+														'prefixLength' => 0
+														);
 	/**
 	 * Phone area
 	 * @access private
@@ -111,18 +111,23 @@ class Dot_Validate_Phone extends Dot_Validate
 		$phoneLength = strlen($this->phone);
 		if($this->_options['phoneLengthMin'] > $phoneLength || $phoneLength > $this->_options['phoneLengthMax'])
 		{
-			$this->_error = "'".$this->phone."'".' length is not between '.$this->_options['phoneLengthMin'].' and '.$this->_options['phoneLengthMax'].' characters like in '.$this->_countryCode.' country';
+			$this->_error = "'".$this->phone."'".' length is not between '.$this->_options['phoneLengthMin'].' and '.
+			$this->_options['phoneLengthMax'].' characters like in '.$this->_countryCode.' country';
 			return FALSE;
 		}
 		// internationalPrefix length is compared
 		$intPrefixLength = strlen($this->_options['internationalPrefix']);
-		if(substr($this->phone, 0, $intPrefixLength) != $this->_options['internationalPrefix'] && $phoneLength == $this->_options['phoneLengthMax'])
+		if(substr($this->phone, 0, $intPrefixLength) != $this->_options['internationalPrefix'] 
+					&& $phoneLength == $this->_options['phoneLengthMax'])
 		{
-			$this->_error =  "'".$this->phone."'".' length is not correct like in '.$this->_countryCode.' country. Tip: check the international prefix !';
+			$this->_error =  "'" . $this->phone . "'" . ' length is not correct like in ' . $this->_countryCode . 
+			' country. Tip: check the international prefix !';
 			return FALSE;
 		}
-		$this->_area = substr($this->phone, $this->_options['areaPositionStart'] + $phoneLength - $this->_options['phoneLengthMin'], $this->_options['areaLength']);
-		$this->_prefix = substr($this->phone, $this->_options['prefixPositionStart'] + $phoneLength - $this->_options['phoneLengthMin'], $this->_options['prefixLength']);		
+		$this->_area = substr($this->phone, $this->_options['areaPositionStart'] + $phoneLength - $this->_options['phoneLengthMin'],
+													 $this->_options['areaLength']);
+		$this->_prefix = substr($this->phone, $this->_options['prefixPositionStart'] + $phoneLength - $this->_options['phoneLengthMin'], 
+															$this->_options['prefixLength']);		
 		$conditionArea = '';
 		$conditionPrefix = '';
 		if(is_array($this->_options['allow']))
@@ -143,7 +148,8 @@ class Dot_Validate_Phone extends Dot_Validate
 		}
 		else
 		{
-			$this->_error =  "'".$this->phone."'".' area and prefix does not match for  like in '.$this->_countryCode.' country';
+			$this->_error =  "'" . $this->phone . "'" . ' area and prefix does not match for  like in ' .
+											 $this->_countryCode . ' country';
 			return FALSE;
 		}
 	}	
@@ -176,7 +182,8 @@ class Dot_Validate_Phone extends Dot_Validate
 		if($phone != '')
 		{
 			$phoneLength = strlen($phone);
-			$this->_area = substr($phone, $this->_options['areaPositionStart'] + $phoneLength - $this->_options['phoneLengthMin'], $this->_options['areaLength']);
+			$this->_area = substr($phone, $this->_options['areaPositionStart'] + $phoneLength - $this->_options['phoneLengthMin'],
+															$this->_options['areaLength']);
 		}
 		return $this->_area;
 		
@@ -192,7 +199,8 @@ class Dot_Validate_Phone extends Dot_Validate
 		if($phone != '')
 		{
 			$phoneLength = strlen($phone);
-			$this->_prefix = substr($phone, $this->_options['prefixPositionStart'] + $phoneLength - $this->_options['phoneLengthMin'], $this->_options['prefixLength']);	
+			$this->_prefix = substr($phone, $this->_options['prefixPositionStart'] + $phoneLength - $this->_options['phoneLengthMin'], 
+																$this->_options['prefixLength']);	
 		}
 		return $this->_prefix;		
 	}

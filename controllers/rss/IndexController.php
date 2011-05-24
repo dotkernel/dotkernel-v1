@@ -19,7 +19,7 @@
 /**
  * start the template object,
  * NOTE: the output of this module is XML not HTML
- * This View class does not inherit from Dpt_Template class
+ * This View class does not inherit from Dot_Template class
  */
 require(DOTKERNEL_PATH . '/' . $registry->route['module'] . '/' . 'View.php');
 $view = new View();
