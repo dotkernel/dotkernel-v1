@@ -84,12 +84,12 @@ switch ($registry->route['action'])
 			Dot_Auth::checkUserToken('user');
 			// POST values that will be validated
 			$values = array('details' => 
-								array('firstName'=>$_POST['firstName'],
-									  'lastName'=>$_POST['lastName']
+								array('firstName'=>(isset($_POST['firstName']) ? $_POST['firstName'] : ''),
+									  'lastName'=>(isset($_POST['lastName']) ? $_POST['lastName'] : '')
 									 ),
-							'email' => array('email' => $_POST['email']),
-							'password' => array('password' => $_POST['password'],
-												'password2' =>  $_POST['password2']
+							'email' => array('email' => (isset($_POST['email']) ? $_POST['email'] : '')),
+							'password' => array('password' => (isset($_POST['password']) ? $_POST['password'] : ''),
+												'password2' =>  (isset($_POST['password2']) ? $_POST['password'] : '')
 											   )
 						  );
 			$dotValidateUser = new Dot_Validate_User(array(
@@ -125,16 +125,16 @@ switch ($registry->route['action'])
 		{
 			// POST values that will be validated
 			$values = array('details' => 
-								array('firstName'=>$_POST['firstName'],
-									  'lastName'=>$_POST['lastName']
+								array('firstName'=>(isset($_POST['firstName']) ? $_POST['firstName'] : ''),
+									  'lastName'=>(isset($_POST['lastName'])? $_POST['lastName'] : ''),
 									 ),
-							'username' => array('username'=>$_POST['username']),
-							'email' => array('email' => $_POST['email']),
-							'password' => array('password' => $_POST['password'],
-												'password2' =>  $_POST['password2']
+							'username' => array('username'=>(isset($_POST['username']) ? $_POST['username'] : '')),
+							'email' => array('email' => (isset($_POST['email']) ? $_POST['email'] : '')),
+							'password' => array('password' => (isset($_POST['password']) ? $_POST['password'] : ''),
+												'password2' =>  (isset($_POST['password2']) ? $_POST['password2'] : '')
 											   ),
-							'captcha' => array('recaptcha_challenge_field' => $_POST['recaptcha_challenge_field'],
-											   'recaptcha_response_field' => $_POST['recaptcha_response_field'])
+							'captcha' => array('recaptcha_challenge_field' => (isset($_POST['recaptcha_challenge_field']) ? $_POST['recaptcha_challenge_field'] : ''),
+											   'recaptcha_response_field' => (isset($_POST['recaptcha_response_field']) ? $_POST['recaptcha_response_field'] : ''))
 						  );
 			$dotValidateUser = new Dot_Validate_User(array('who' => 'user', 'action' => 'add', 'values' => $values));
 			if($dotValidateUser->isValid())
@@ -150,7 +150,7 @@ switch ($registry->route['action'])
 			else
 			{
 				if(array_key_exists('password', $data))
-				{ 
+				{
 					// do not display password in the add form
 					$data = $dotValidateUser->getData();
 					unset($data['password']);
@@ -170,7 +170,7 @@ switch ($registry->route['action'])
 		$error = array();
 		if($_SERVER['REQUEST_METHOD'] === "POST")
 		{
-			$values = array('email' => array('email' => $_POST['email']));
+			$values = array('email' => array('email' => (isset($_POST['email']) ? $_POST['email'] : '' )));
 			$dotValidateUser = new Dot_Validate_User(array('who' => 'user', 'action' => 'forgot-password', 'values' => $values));
 			if($dotValidateUser->isValid())
 			{
@@ -182,14 +182,14 @@ switch ($registry->route['action'])
 			{
 				$session->message['txt'] = $dotValidateUser->getError();
 				$session->message['type'] = 'error';
-			}			
+			}
 		}
-		$userView->details('forgot_password',$data);		
+		$userView->details('forgot_password',$data);
 	break;
 	case 'logout':
 		$dotAuth = Dot_Auth::getInstance();
 		$dotAuth->clearIdentity('user');
 		header('location: '.$registry->configuration->website->params->url);
 		exit;
-	break;	
+	break;
 }

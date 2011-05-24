@@ -296,7 +296,7 @@ class View extends Dot_Template
 			$this->setBlock('tpl_msg', 'msg_array', 'msg_array_row');
 			$this->setVar('MESSAGE_TYPE', $session->message['type']);
 			if(is_array($session->message['txt']))
-			{			
+			{
 				foreach ($session->message['txt'] as $k => $msg)
 				{
 					$this->setVar('MESSAGE_ARRAY', is_string($k) ? $msg = ucfirst($k) . ' - ' . htmlspecialchars($msg) : htmlspecialchars($msg));
