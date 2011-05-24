@@ -1,6 +1,6 @@
 <span style="color: #ff0000;">{ERROR}</span>
 <br/>
-<form action="{SITE_URL}/user/account/id/{ID}" method="post">
+<form action="{SITE_URL}/user/account/" method="post">
 <input type="hidden" name="userToken" value="{USERTOKEN}">
 <ul class="g_form">
 		<li class="clearfix positioned">
