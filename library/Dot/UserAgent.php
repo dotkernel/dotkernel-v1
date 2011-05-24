@@ -101,7 +101,7 @@ class Dot_UserAgent
 							$uaStringArray = explode('|',$minor['uaString']);
 							foreach ($uaStringArray as $uaString)
 							{
-								if ((stripos($agent, $uaString) !== false))
+								if ((stripos($userAgent, $uaString) !== false))
 								{
 									$operatingSystem = array( 'icon'=>strtolower(str_replace(' ', '_', $osArray['os'])),
 																						'major'=>$osArray['os'],
