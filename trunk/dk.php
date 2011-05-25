@@ -478,9 +478,9 @@ if($test)
 		<p>Your enviroment passed all the requirements needed to run DotKernel.</p>
 		You can now delete or rename the <i>dk.php</i> file.</div>
 	<?php
-/*} 
+} 
 else
-{*/
+{
 	?>
 	<div class="testfailed">
 		<p>The test has failed.</p>
