@@ -195,7 +195,7 @@ class Dot_Route
 		$result = '';
 		foreach ($segments as $segment)
 		{
-			$result .= ucfirst($segment);
+			$result .= ucfirst(strtolower($segment));
 		}
 		return $result;
 	}
