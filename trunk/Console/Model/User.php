@@ -8,7 +8,7 @@
 * @subpackage User
 * @copyright  Copyright (c) 2009-2011 DotBoost Technologies Inc. Canada (http://www.dotboost.com)
 * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
-* @version    $Id: Smtp.php 397 2011-01-13 12:56:27Z teo $
+* @version    $Id$
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
