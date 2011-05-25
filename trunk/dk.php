@@ -333,135 +333,90 @@ else
 
 function parseHtmlRows($data)
 {
-	$bg = 0;
+	echo "<tr>";
 	foreach($data as $ky => $val)
 	{
 		?>
-			<tr class="row<?php echo ($bg++)%2+1?>">
-				<td width="30%"> <?php echo $val['name'];?> </td>
-				<td width="70%" class="<?php echo $val['status']; ?>"><?php echo $val['value']; ?> </td>
-			</tr>
+				<td class="result">
+					<strong><?php echo $val['name'];?></strong>
+					<br/><br/>
+					<span class="<?php echo $val['status']; ?>"><?php echo $val['value']; ?></span>
+				</td>
 		<?php
 	}
+	echo "</tr>";
 }
 ?>
 
 <!-- Start to parse the installation requirements HTML format-->
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
-"http://www.w3.org/TR/html4/strict.dtd">
+<!doctype html> 
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 <!-- Start to parse the installation requirements HTML format-->
-
 	<title>DotKernel System Requirements Check</title>
-
 <style type="text/css">
-	body{
-		text-align: center;
-		background-color: #0D2129;
-		font-family: Lucida sans unicode, sans-serif;
-		font-size: 13px;
-		padding: 0px;
-		margin: 20px 0px;
-	}
-	h1{
-		font-size: 28px;
-		font-weight: bold;
-		font-family: Tahoma, sans-serif;
-		color: #EE6C25;
-		
-	}
-	h2{
-		font-size: 17px;
-		font-weight: bold;
-		font-family: Tahoma, sans-serif;
-		color: #EE6C25;
-		
-	}
-	h3{
-		font-size: 15px;
-		font-weight: bold;
-		font-family: Tahoma, sans-serif;
-		color: #EE6C25;
-	}
-	a{
-		color: #0F83C8;
-		text-decoration: none;
-	}
-	a:hover{
-		color: #EE6C25;
-		text-decoration: underline;
-	}
-	p{
-		padding: 0px;
-		margin: 10px 0px;
-	}
-	input,textarea,select{
-		padding: 5px;
-		font-size: 13px;
-		border: 1px solid #A3A3A3;
-		margin: 5px 0px 5px;
-		vertical-align: middle;
-		font-family: Lucida sans unicode, sans-serif;
-	}
-	select{
-		padding: 0px;
-	}
-	input[type=radio] { border: 0px; }
-	input[type=checkbox] { border: 0px; }
-
-	.submit_button{
-		background: #2072AE;
-		padding: 5px 10px 5px 10px;
-		text-align: center;
-		color: #ffffff;
-		font-size: 13px;
-		text-transform: uppercase;
-		border: 0px;
-		vertical-align: middle;
-		cursor: pointer;
-	}
-	.wrap{
-		margin: 0px auto;
-		width: 750px;
-		padding: 5px 35px 35px 35px;
-		border: 1px solid #000000;
-		background: #FCFCFC;
-		text-align: left;
-	}
-	.intro{
-		margin: 0px 0px 30px 0px;
-		font-size: 16px;
-		line-height: 24px;
-		padding: 15px 20px;
-		background-color: #F8F1E4;
-		color: #603E28;
-	}
-	fieldset{
-		padding: 0px;
-		margin: 30px 0px 0px 0px;
-		border: 0px;
-		border-top: 2px solid #F58625;
+	html, body{
+		padding:0;
+		margin:0;
+		color:#404D79;
 	}
 	legend{
-		font-size: 19px;
-		font-weight: bold;
-		font-family: Tahoma, sans-serif;
-		color: #EE6C25;
-		padding: 0px 10px 0px 0px;
-		margin: 0px 0px 3px 0px;
+		font-size:25px;
+		padding: 2px 0px;
+	}
+	h1{
+		margin-top:40px;
+		margin-bottom:0px;
+	}
+	.intro{
+		margin-top:5px;
+	}
+	fieldset{
+		border-color:#404D79;
+		border-bottom:none;
+		border-left:none;
+		border-right:none;
+		padding:0;
+	}
+	#header{
+		width:100%;
+		background-color:#161B2D;
+		background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAIAAABLixI0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA55JREFUeNpUlUmSHDcMRUkCzKFbLdsR3vgIvv+5JC2kroED6P+BLDvctehMkpgePpj6519/2xwrmchuNs1GWpaLqm5zNFtTdU8pj/5IaeGn28HXgde0be+jP806VlLOupbRPqWZ2nZ82OxprVwEK3CNXXiUuu/nb6PfRTfsjtFglDMODLhea0d40UMR6vW34By2OFcQyN3BwHfgwXxrYikzidjI1/paZZkWUezgRURRiMccZdVaT60bci5FYdnbzWZjIvUoUnE+M5yyxtkYDr5Ed8lMB4Xcf30jrFwijW3/mLOBHeq0+QljLyKXUmWvbh9Z8x/gKANaZ159QwpIF+5wHpb323fGkB3WLBnrbjrHA+zgtO7vdMR6kXpRz24ioOW+H7+Ldd8uvm54nNZVjuPtj9FvIhtW2VOmspz9mdJJ9nXXQAiIjhitY46lSLCPPQ/XbQyPny/w3oG1ZrAnPNSVlO0QrRPs+xPboOvsqTg8w6o/fyEL4KvbGezhDeCQI0QTAnL2rGfigeyZPdsK9nX/gnMIBi84CiLuAvS0bJF1+U9Qc2h7/IS4Q58IOGfPbCXrgmvWKxXkg70XZb3d53jCvm5vrO5in5WYoXWmttAX8WfamDkTeBi5nuf5tbdP1QPgfJ5ia8JdUFMwodMCQV32/2PvjP0hIRH0bwZw7PrYZRF4sensM9gDbZaL/Qjdgzc0/wb8zp69RlJUrItApAajYG8T9WZnL1sSJoSu3duPdNVP8SBtNC7Y+zAHaeal8fxa8fNTG5o9kfAaDX6he4tZw+/++Y35vnRPSbsRx5a6TxiyVxsjAKfPlgsV7FFy9HRdw5ZtjVpOXEeQmLLqEexdOgNyW+uAB9TuugdLXjgFCU6/m6hh3h+YSiugiayhyWgL5V3Mq0NIzgOvUvYOddXCLGB/iZhjARfU/mGc7YqjYO9dHjW/Fdmu0cs6BrTWAAwuAVGpS/ZxH+0epcd9JPXIfuckczH7wIf64C4eQqUxKhqDxku1iMix0hOMUS/OPKD75Lov6t2cyeccM/ti/yVmjvEzmwvdr7gl6n6WIc6++OTx8qMaVPbjA9MGwKyT7HPMc4wRplH3d412whMAofLJeyLYV4bhHc3d1m5k35bnWMzrChP/dDE07omLPb4xvT18hiARllyp1YEDONmfN/9iIRFx9jFeOvvFHvcK9CVZCnMpUNb9RZTws/JmwQGc/Jd0NDAG62rm9U1K/wgwAMuu+WwaAQZSAAAAAElFTkSuQmCC');
+		height:70px;
+	}
+	#header div{
+		color:#fff;
+		line-height:65px;
+		font-size:20px;
+		padding-top:8px;
+		margin: 0 auto;
+		width:1200px;
+		height:70px;
+	}
+	#header div, h1, legend{
+		font-family: Arial, sans-serif;
+	}
+	#wrap{
+		font-family:"Lucida Sans Unicode","Lucida Grande",Garuda,sans-serif;
+		margin: 0px auto;
+		width: 1200px;
+		padding: 5px 35px 35px 35px;
 	}
 	table{
-		margin: 10px 0px 0px 0px;
-		background: #D8E0E7;
-		line-height: 24px;
-		color: #4A4A4A;
-		}
-	table td{
-		padding: 4px 10px 4px 10px;
-		background: #FBFCFD;
-		line-height: 24px;
+		border-spacing:5px;
+	}
+	td.result{
+		font-family:"Lucida Sans Unicode","Lucida Grande",Garuda,sans-serif;
+		font-size:13px;
+		padding: 30px 10px;
+		text-align:center;
+		background-color:#F1F2F6;
+	}
+	td.result strong{
+		font-size:16px;
+		font-family: Arial, sans-serif;
+		font-weight: bold;
 	}
 	.pass {
 		color: #12A30E;
@@ -471,32 +426,21 @@ function parseHtmlRows($data)
 		color: #B8250C;
 		font-weight: bold;
 	}
-	.note{
-		margin: 5px 0px 0px 0px;
-		color: #747474;
-	}
 	.testpass{
 		margin: 30px 0px 20px 0px;
-		color: #5F704B;
-		background: #DBF3D8;
-		padding: 20px;
-		font-size: 14px;
+		font-size: 15px;
 	}
 	.testpass p{
 		margin: 0px 0px 10px 0px;
 		padding: 0px;
-		font-size: 22px;
+		font-size: 24px;
 		color: #1B7A0A;
 		font-weight: bold;
-		font-family: Tahoma, sans-serif;
 		line-height: 29px !important;
 	}		
 	.testfailed{
 		margin: 30px 0px 20px 0px;
-		color: #FFFFFF;
-		background: #B8250C;
-		padding: 20px;
-		font-size: 14px;
+		font-size: 15px;
 	}
 	.testfailed a{
 		color: #3300FF;
@@ -504,47 +448,43 @@ function parseHtmlRows($data)
 	.testfailed p{
 		margin: 0px 0px 10px 0px;
 		padding: 0px;
-		font-size: 22px;
-		color: #FFFFFF;
+		font-size: 24px;
+		color: #FF0000;
 		font-weight: bold;
-		font-family: Tahoma, sans-serif;
 		line-height: 29px !important;
-	}
-	.contact_form{
-		list-style-type: none;
-		padding: 0px;
-		margin: 0px;
-	}
-	.contact_form li{
-		padding: 0px;
-		margin: 0px 0px 10px 0px;
-	}
-	.contact_form label{
-		display: block;
-		padding-top:5px;
-		float: left;
-		width: 120px; /* increase or descrease the width in regard to the lenght of the labels*/
-	}
-	.contact_form input{
-		margin: 0px;
-		width: 200px;
-	}
-	.contact_form textarea{
-		width: 400px;
-	}
-	.contact_form .submit_button{
-		width: auto;
 	}
 </style>
 </head>
 
 <body>
-<div class="wrap">
+<div id="header"><div><img alt="DotKernel" src="data:image/png;base64,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" /></div></div>
+<div id="wrap">
 	<h1>DotKernel  System Requirements Check</h1>
 	<p class="intro">
-		We have run the below tests to determine if DotKernel will work in your
-	 environment. If any of the tests have failed, consult the <a href="http://www.dotkernel.com/docs/system-requirements/">system requirements</a> page for more information. 
+		We have run the below tests to determine if DotKernel will work in your environment.<br/>
+		If any of the tests have failed, consult the <a href="http://www.dotkernel.com/docs/system-requirements/">system requirements</a> page for more information. 
 	</p>
+	
+<?php
+if($test)
+{
+	?>
+	<div class="testpass">
+		<p>Your enviroment passed all the requirements needed to run DotKernel.</p>
+		You can now delete or rename the <i>dk.php</i> file.</div>
+	<?php
+/*} 
+else
+{*/
+	?>
+	<div class="testfailed">
+		<p>The test has failed.</p>
+		Check <a href="http://www.dotkernel.com/docs/system-requirements/">system requirements</a> page for more information.
+	</div>
+	<?php
+}
+?>
+	
 	<fieldset>
 		<legend>Enviroment Test</legend>
 		<table width="100%" cellpadding="5" cellspacing="1">
@@ -555,6 +495,7 @@ function parseHtmlRows($data)
 		</tbody>
 		</table>
 	</fieldset>
+	<br/>
 	<fieldset>
 		<legend>Extensions Test</legend>
 		<table width="100%" cellpadding="5" cellspacing="1">
@@ -565,22 +506,7 @@ function parseHtmlRows($data)
 		</tbody>
 		</table>
 	</fieldset>
-<?php
-if($test)
-{
-	?>
-	<div class="testpass"><p>Your enviroment passed all the requirements needed to run DotKernel.</p>
-	You can now delete or rename the <i>dk.php</i> file.</div>
-	<?php
-} 
-else
-{
-	?>
-	<div class="testfailed"><p>The test has failed. </p>
-	Check <a href="http://www.dotkernel.com/docs/system-requirements/">system requirements</a> page for more information. </div>
-	<?php
-}
-?>
+
 <fieldset>
 		<legend>Optional Extensions Test</legend>
 
@@ -593,64 +519,6 @@ else
 		</tbody>
 		</table>
 	</fieldset>
-	
-	<hr color='#E6E6E6' width= size=1>
-	<h3>More styles</h3>
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-	</p>
-	<a href="">...read more</a>
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<a href="">...read more</a> 
-	<br>
-	This is a button <input type="button" value="Press here" onclick="" class="submit_button"><br>
-	This is a radio button <input type="radio" name=""> <input type="radio" name=""><br>
-	This is a checkbox <input type="checkbox" name=""> <input type="checkbox" name=""> <input type="checkbox" name=""><br>
-	This is a select 
-	<select name="sfdsfd">
-		<option value="sdfsdfasd" selected>
-		<option value="sdfsdfsdf">
-	</select> <br>
-	
-	This is a field <input type="text" name=""> <br>
-	<hr color='#CACACA' width= size=1>
-	<br>
-	<h3>This is an example for a contact form</h3>
-	
-	  <ul class="contact_form">
-		<li>
-		  <label for="name">Name<em>*</em></label>
-		  <input id="name" />
-		</li>
-		<li>
-		  <label for="address1">Address<em>*</em></label>
-		  <input id="address1" />
-		</li>
-		<li>
-		  <label for="address2">Address 2</label>
-		  <input id="address2" />
-		</li>
-		<li>
-		  <label for="town-city">Town/City</label>
-		  <input id="town-city" />
-		</li>
-		<li>
-		  <label for="county">County<em>*</em></label>
-		  <input id="county" />
-		</li>
-		<li>
-		  <label for="postcode">Postcode<em>*</em></label>
-		  <input id="postcode" />
-		</li>
-		<li>
-		  <label for="postcode">Postcode<em>*</em></label>
-		  <textarea name=""></textarea>
-		</li>
-		<li>
-			 <label for="postcode">&nbsp;</label>
-			<input type="button" value="Press here" onclick="" class="submit_button">
-		</li>
-	  </ul>
-
 </div>
 </body>
 </html>
