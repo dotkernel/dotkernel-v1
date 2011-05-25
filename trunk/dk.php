@@ -446,6 +446,10 @@ function parseHtmlRows($data)
 		margin: 30px 0px 20px 0px;
 		font-size: 15px;
 	}
+	.note{
+		margin: 5px 0px 0px 0px;
+		font-size: 13px;
+	}
 	a{
 		color: #137dd7;
 	}
