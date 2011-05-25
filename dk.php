@@ -346,10 +346,8 @@ function parseHtmlRows($data)
 	}
 	echo "</tr>";
 }
-?>
-
-<!-- Start to parse the installation requirements HTML format-->
-<!doctype html> 
+// Start to parse the installation requirements HTML format
+?><!doctype html> 
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
@@ -362,6 +360,7 @@ function parseHtmlRows($data)
 		margin:0;
 		color:#404D79;
 		background-color:#fff;
+		width:100%;
 	}
 	legend{
 		font-size:25px;
