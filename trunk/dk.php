@@ -353,6 +353,7 @@ function parseHtmlRows($data)
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="X-UA-Compatible" content="IE=9">
 <!-- Start to parse the installation requirements HTML format-->
 	<title>DotKernel System Requirements Check</title>
 <style type="text/css">
@@ -360,10 +361,11 @@ function parseHtmlRows($data)
 		padding:0;
 		margin:0;
 		color:#404D79;
+		background-color:#fff;
 	}
 	legend{
 		font-size:25px;
-		padding: 2px 0px;
+		padding: 2px 5px 2px 0;
 	}
 	h1{
 		margin-top:40px;
@@ -371,6 +373,7 @@ function parseHtmlRows($data)
 	}
 	.intro{
 		margin-top:5px;
+		font-size:17px;
 	}
 	fieldset{
 		border-color:#404D79;
@@ -378,6 +381,7 @@ function parseHtmlRows($data)
 		border-left:none;
 		border-right:none;
 		padding:0;
+		margin-bottom:50px;
 	}
 	#header{
 		width:100%;
@@ -437,13 +441,14 @@ function parseHtmlRows($data)
 		color: #1B7A0A;
 		font-weight: bold;
 		line-height: 29px !important;
+		font-family: Arial, sans-serif;
 	}		
 	.testfailed{
 		margin: 30px 0px 20px 0px;
 		font-size: 15px;
 	}
-	.testfailed a{
-		color: #3300FF;
+	a{
+		color: #137dd7;
 	}
 	.testfailed p{
 		margin: 0px 0px 10px 0px;
@@ -452,6 +457,7 @@ function parseHtmlRows($data)
 		color: #FF0000;
 		font-weight: bold;
 		line-height: 29px !important;
+		font-family: Arial, sans-serif;
 	}
 </style>
 </head>
@@ -495,7 +501,6 @@ else
 		</tbody>
 		</table>
 	</fieldset>
-	<br/>
 	<fieldset>
 		<legend>Extensions Test</legend>
 		<table width="100%" cellpadding="5" cellspacing="1">
@@ -506,8 +511,7 @@ else
 		</tbody>
 		</table>
 	</fieldset>
-
-<fieldset>
+	<fieldset>
 		<legend>Optional Extensions Test</legend>
 
 		<p class="note">The following extensions are optional for DotKernel, but if used can provide access to more classes. </p>
