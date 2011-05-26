@@ -1,24 +1,22 @@
 <span style="color: #ff0000;">{ERROR}</span>
-	<div class="login_big">
-		<form action="{SITE_URL}/user/authorize" method="post" >
-			<ul class="g_form">
-				<li class="clearfix positioned">
-					<p class="contact_label">Username</p>
-					<input type="text" value="{USERNAME}" name="username">
-				</li>
-				<li class="clearfix positioned">
-					<p class="contact_label">Password</p>
-					<input type="password" value="{PASSWORD}" name="password">
-				</li>	
-				<li class="clearfix positioned">
-					<p class="contact_label">&nbsp;</p>
-					<input type="submit" onclick="" class="btn" value="login">
-				</li>
-				<li class="clearfix positioned">
-					<p class="contact_label">&nbsp;</p>
-					<a href="{SITE_URL}/user/forgot-password">Password Recovery</a>
-				</li>
-			</ul>
-		</form>
-		
-	</div>
+
+<form action="{SITE_URL}/user/authorize" method="post" >
+	<table class="form">
+		<tr>
+			<td><label for="username">Username:</label></td>
+			<td><input id="username" type="text" value="{USERNAME}" name="username"></td>
+		</tr>
+		<tr>
+			<td><label for="password">Password:</label></td>
+			<td><input id="password" type="password" value="{PASSWORD}" name="password"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><input type="submit" onclick="" class="button" value="Login"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="{SITE_URL}/user/forgot-password" style="font-size:smaller">Password Recovery</a> </td>
+		</tr>
+	</table>
+</form>
