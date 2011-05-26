@@ -13,7 +13,7 @@
 		<!-- END top_menu_item -->
 	</ul>
 </div>
-<div class="menu_2">
+<div class="menu_2" style="display:none">
 	<!-- BEGIN top_sub_menu -->
 	<ul class="top_sub_menu{TOP_SUB_MENU_SEL}" id="top_sub_menu_{TOP_MENU_ID}">
 		<!-- BEGIN top_sub_menu_item -->

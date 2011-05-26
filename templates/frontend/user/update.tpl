@@ -1,34 +1,33 @@
-<span style="color: #ff0000;">{ERROR}</span>
-<br/>
 <form action="{SITE_URL}/user/account/" method="post">
 <input type="hidden" name="userToken" value="{USERTOKEN}">
-<ul class="g_form">
-		<li class="clearfix positioned">
-			<p class="contact_label">Username:</p><div style="padding-top: 10px;font-weight:bold">{USERNAME}</div>
-		</li>
-		<li class="clearfix positioned">
-			<p class="contact_label">Password:</p>
-			<input type="password" name="password" value="{PASSWORD}" id="password" />
-		</li>	
-		<li class="clearfix positioned">
-			<p class="contact_label">Re-type Password:</p>
-			<input type="password" name="password2" value="{PASSWORD}" id="password2" />
-		</li>
-		<li class="clearfix positioned">
-			<p class="contact_label">Email:</p>
-			<input id="email" type="text" name="email" value="{EMAIL}" />
-		</li>
-		<li class="clearfix positioned">
-			<p class="contact_label">First Name:</p>
-			<input type="text" name="firstName" value="{FIRSTNAME}" id="firstName" />
-		</li>
-		<li class="clearfix positioned">
-			<p class="contact_label">Last Name:</p>
-			<input type="text" name="lastName" value="{LASTNAME}" id="lastName" />
-		</li>
-		<li class="clearfix positioned">
-			<p class="contact_label">&nbsp;</p>
-			<input type="submit" class="btn" value="Update" />
-		</li>
-	</ul>
+	<table class="form">
+		<tr>
+			<td><label>Username:</label></td>
+			<td style="line-height:36px"><strong>{USERNAME}</strong></td>
+		</tr>
+		<tr>
+			<td><label for="password">Password:</label></td>
+			<td><input type="password" name="password" value="{PASSWORD}" id="password" /></td>
+		</tr>
+		<tr>
+			<td><label for="password2">Re-Type Password:</label></td>
+			<td><input type="password" name="password2" value="{PASSWORD}" id="password2" /></td>
+		</tr>
+		<tr>
+			<td><label for="email">Email:</label></td>
+			<td><input id="email" type="text" name="email" value="{EMAIL}" /></td>
+		</tr>
+		<tr>
+			<td><label for="firstName">First Name:</label></td>
+			<td><input type="text" name="firstName" value="{FIRSTNAME}" id="firstName" /></td>
+		</tr>
+		<tr>
+			<td><label for="lastName">Last Name:</label></td>
+			<td><input type="text" name="lastName" value="{LASTNAME}" id="lastName" /></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><input type="submit" class="button" value="Update" /></td>
+		</tr>
+	</table>
 </form>

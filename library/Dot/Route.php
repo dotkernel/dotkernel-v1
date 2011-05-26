@@ -158,7 +158,8 @@ class Dot_Route
 		}
 		foreach (Zend_Registry::get('request') as $k => $v)
 		{
-			$url .= urlencode($k) . '/' . urlencode($v) . '/';
+			if ($k !== "page")
+				$url .= urlencode($k) . '/' . urlencode($v) . '/';
 		}
 		return $url;
 	}

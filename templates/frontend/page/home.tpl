@@ -1,39 +1,74 @@
-	<ul>
-		<li><b>Download latest version:</b>
-					<a href="http://www.dotkernel.com/download/">http://www.dotkernel.com/download/</a></li>
-		<li><b>Documentation:</b> 
-					<a href="http://www.dotkernel.com/docs/"  target="_blank"> http://www.dotkernel.com/docs/</a></li>
-		<li><b>Readme file: </b>
-					<a href="{SITE_URL}/readme.txt" target="_blank">README.TXT</a></li>
-		<li><b>Code Documentation:</b> 
-					<a href="http://www.dotkernel.com/phpdoc/" target="_blank">DocBlox</a></li>
-	</ul>
+	<style>
+		.info{
+			width:100%;
+			margin:20px auto;
+			background-color:#EEF2F5;
+			padding:15px;
+			line-height:25px;
 
-	<h3>1. Special Controllers</h3>
-	<p><b>Mobile: </b><a href="{SITE_URL}/mobile/ ">Mobile</a></p>
-	<p><b>Backend: </b><a href="{SITE_URL}/admin/ ">Admin </a></p>
-	<p><b>RSS: </b><a href="{SITE_URL}/rss/ ">RSS </a></p>
-	<p><b>Console: </b><a href="{SITE_URL}/Console/ ">call this only from command line</a></p>
-	<p>Also the above controllers are <b>reserved words</b> so you cannot have an action called
-	<b>admin</b> or <b>rss</b> in frontend</p>
+			-moz-border-radius: 12px;
+			-webkit-border-radius: 12px;
+			border-radius: 12px;
+			-moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box; 
+		}
+		#documentation{
+			float:left;
+			width:47%;
+		}
+		#download{
+			float:right;
+			width:47%;
+		}
+		</style>
+	<div class="info">
+		<div id="documentation">
+			<h2>Documentation</h2>
+			<a href="http://www.dotkernel.com/docs/">www.dotkernel.com/docs</a>
+			<br/>
+			<a href="http://www.dotkernel.com/phpdoc/">www.dotkernel.com/phpdoc</a>
+			<br/>
+			<a href="http://v1.dotkernel.net/readme.txt">README.TXT</a>
+		</div>
+		<div id="download">
+			<h2>Download latest version</h2>
+			<a href="http://www.dotkernel.com/download/">www.dotkernel.com/download</a>
+		</div>
+		<div class="clear"></div>
+	</div>
+	
+	<h2>1. Special Controllers</h2>
+	<strong>Mobile: </strong><a href="http://v1.dotkernel.net/mobile/ ">Mobile</a><br/> 
+	<strong>Backend: </strong><a href="http://v1.dotkernel.net/admin/ ">Admin </a><br/> 
+	<strong>RSS: </strong><a href="http://v1.dotkernel.net/rss/ ">RSS </a><br/>
+	<strong>Console: </strong>Call this only from command line<br/> 
+	<p>
+		Also the above controllers are <strong>reserved words</strong> so you cannot have an action called
+		<strong>admin</strong> or <strong>rss</strong> in frontend
+	</p> 
 
-	<h3>2. URL pattern</h3>
-	 <p>-  <b>for default module frontend, all url's will be like:</b> </p>
-	  <p><i>/controller/action/var1/value-of-var1/var2/value-of-var2/</i></p>
-   <p>-  <b>and for admin will be:</b></p>
-	 <p><i>/admin/controller/action/var1/value-of-var1/var2/value-of-var2/</i></p>
-
-	 <h3>3. Adding a new Controller, called <i>Articles</i> , for instance, in frontend, you need to add 3 files </h3>
-	 		<p>- <b>CONTROLLER</b>: <i>controllers/frontend/articlesController.php</i> , which contain the switch </p>
-	   <p>- <b>MODEL</b>:      <i>DotKernel/frontend/Articles.php</i>, which contain class Articles </p>
-		 <p>- <b>VIEW</b>:       <i>DotKernel/frontend/views/articlesView.php</i> , which contain class Articles_View<br />
-		    and the folder <i>templates/frontend/articles/</i> with the necessary template files</p>
+	<h2>2. URL Pattern</h2>
+	<p>
+		<strong>The default module is frontend, so the URL's will be in the form:</strong><br/> 
+		<em>/controller/action/var1/value-of-var1/var2/value-of-var2/</em>
+		<br/><br/>
+		<strong>and in the admin the URL's will be:</strong><br/>
+		<em>/admin/controller/action/var1/value-of-var1/var2/value-of-var2/</em>
+	</p> 
+ 
+	<h2>3. Adding a new Controller</h2>
+	<p>
+		To add a controller called Articles in the frontend, you need to add 3 files:
+		<ul>
+			<li><strong>CONTROLLER</strong>: <em>controllers/frontend/articlesController.php</em> , which contains the switch</li>
+			<li><strong>MODEL</strong>: <em>DotKernel/frontend/Articles.php</em>, which contains the class Articles</li>
+			<li><strong>VIEW</strong>: <em>DotKernel/frontend/views/articlesView.php</em>, which contains the class Articles_View</li>
+		</ul>
+		<br/>
+		As well as the folder <em>templates/frontend/articles/</em> with the necessary template files.<br/>
+		In config/router.xml, inside the &lt;controller&gt; tag, add: <strong>&lt;frontend&gt;Articles&lt;frontend&gt;</strong>
+	</p>
 		 
-
-		 <p>- you <b>MUST</b>  add in <b>config/router.xml</b> inside the <i>&lt;controller&gt;</i> tag the line:</p>
-		 <p>&lt;frontend&gt;Articles&lt;frontend&gt;</p>		
-		 
-	<h3>Admin Panel Login</h3>
-	 <p style="font-weight:bold">www.your-site.com/admin</p>
-	 <p>username: admin</p>
-	 <p>password: dot</p>
+	<h2>Admin Panel Login</h2>
+	<strong>www.your-site.com/admin</strong><br/> 
+	username: admin<br/> 
+	password: dot<br/> 

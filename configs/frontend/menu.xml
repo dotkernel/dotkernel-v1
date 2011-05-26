@@ -7,7 +7,7 @@
 	<display>1</display>
 	<item>
 		<title>Home</title>
-		<link>{SITE_URL}</link>
+		<link>page/home</link>
 		<target>_self</target>
 		<external>0</external>
 		<isLogged>1</isLogged>
@@ -125,24 +125,22 @@
 		<external>0</external>
 		<isLogged>1</isLogged>
 		<notLogged>1</notLogged>
-		<subItems>
-			<subItem>
-				<title>About Us</title>
-				<link>page/about/</link>
-				<target>_self</target>
-				<external>0</external>
-				<isLogged>1</isLogged>
-				<notLogged>1</notLogged>
-			</subItem>
-			<subItem>
-				<title>Who We Are</title>
-				<link>page/who-we-are/</link>
-				<target>_self</target>
-				<external>0</external>
-				<isLogged>1</isLogged>
-				<notLogged>1</notLogged>
-			</subItem>
-		</subItems>
+	</item>
+	<item>
+		<title>About Us</title>
+		<link>page/about/</link>
+		<target>_self</target>
+		<external>0</external>
+		<isLogged>1</isLogged>
+		<notLogged>1</notLogged>
+	</item>
+	<item>
+		<title>Who We Are</title>
+		<link>page/who-we-are/</link>
+		<target>_self</target>
+		<external>0</external>
+		<isLogged>1</isLogged>
+		<notLogged>1</notLogged>
 	</item>
 	<item>
 		<title>Login</title>

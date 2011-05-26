@@ -164,7 +164,7 @@ class View extends Dot_Template
 						$this->setVar('TOP_MENU_SEL', '_selected');
 						$this->setVar('TOP_SUB_MENU_SEL', '_selected');
 					}
-					elseif('vertical' == $child['type'] && FALSE === strpos($child['type'],'simple'))
+					else //if('vertical' == $child['type'] && FALSE === strpos($child['type'],'simple'))
 					{
 						$this->parse('top_sub_menu_block', '');
 					}
@@ -178,6 +178,7 @@ class View extends Dot_Template
 					}
 					else
 					{
+						/*
 						if ($val['link'] === "{SITE_URL}")
 						{
 							$link = '';
@@ -186,7 +187,9 @@ class View extends Dot_Template
 						{
 							$link = $val['link'];
 						}
-						$this->setVar('TOP_MENU_LINK', $this->config->website->params->url.'/'.$link);	
+						$this->setVar('TOP_MENU_LINK', $this->config->website->params->url.'/'.$link);
+						*/
+						$this->setVar('TOP_MENU_LINK', $this->config->website->params->url.'/'.$val['link']);	
 					} 
 					if(FALSE === strpos($child['type'],'simple'))
 					{														
