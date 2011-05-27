@@ -73,7 +73,7 @@ class View extends Dot_Template
 	public function setViewPaths()
 	{
 		$this->setVar('TEMPLATES_URL', $this->config->website->params->url . TEMPLATES_DIR);
-		$this->setVar('IMAGES_URL', $this->config->website->params->url . IMAGES_DIR . '/' .$this->requestController);
+		$this->setVar('IMAGES_URL', $this->config->website->params->url . IMAGES_DIR . '/' .$this->requestModule);
 		$this->setVar('SITE_URL', $this->config->website->params->url);
 	}
 	/**

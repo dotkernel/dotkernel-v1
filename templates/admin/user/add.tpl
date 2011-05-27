@@ -1,22 +1,22 @@
 <form action="{SITE_URL}/admin/user/add" method="post" >
 <input type="hidden" name="userToken" value="{USERTOKEN}">
-<fieldset style="width: 450px">
+<fieldset style="width: 500px">
 <legend>Add New User</legend>
 	<table class="medium_table" width="100%">
 		<tr>
-			<td width="120px"><b>Username</b></td>
+			<td width="140px"><b>Username</b><span class="required">*</span></td>
 			<td><input type="text" name="username" value="{USERNAME}"></td>
 		</tr>
 		<tr>
-			<td><b>Password</b></td>
+			<td><b>Password</b><span class="required">*</span></td>
 			<td><input type="password" name="password" value="{PASSWORD}" ></td>
 		</tr>
 		<tr>
-			<td><b>Confirm Password</b></td>
+			<td><b>Confirm Password</b><span class="required">*</span></td>
 			<td><input type="password" name="password2" value="{PASSWORD}" ></td>
 		</tr>
 		<tr>
-			<td><b>Email</b></td>
+			<td><b>Email</b><span class="required">*</span></td>
 			<td><input type="text" name="email" value="{EMAIL}" ></td>
 		</tr>
 		<tr>
