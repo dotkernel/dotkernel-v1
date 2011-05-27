@@ -34,7 +34,7 @@ class Dot_Kernel
 	{
 		$registry = Zend_Registry::getInstance();
 
-		$frontControllerPath = CONTROLLERS_PATH.'/' . $registry->route['module'] . '/' . 'IndexController.php';
+		$frontControllerPath = CONTROLLERS_PATH.'/' . $registry->requestModule . '/' . 'IndexController.php';
 		if (file_exists($frontControllerPath))
 		{
 			require($frontControllerPath);
@@ -81,7 +81,7 @@ class Dot_Kernel
 		$registry->seo = Dot_Route::getOption();
 
 		// initialize default options for dots that may be overwritten
-		$option = Dot_Settings::getOptionVariables($registry->route['module'], 'default');
+		$option = Dot_Settings::getOptionVariables($registry->requestModule, 'default');
 		$registry->option = $option;
 	}
 	

@@ -31,14 +31,17 @@ class Dot_Acl
 	{		
 		$router = new Zend_Config_Xml(CONFIGURATION_PATH.'/router.xml');
 		$role = new Zend_Config_Xml(CONFIGURATION_PATH.'/role.xml');
-		$this->route = Zend_Registry::get('route');
+
+		$this->requestModule = Zend_Registry::get('requestModule');
+		$this->requestController = Zend_Registry::get('requestController');
+		$this->requestAction = Zend_Registry::get('requestAction');
 		
 		// instantiate Zend_Acl
 		$this->acl = new Zend_Acl();
 		//get resource(controllers) only for the curent module
-		$this->_resource = $router->controllers->{$this->route['module']};
+		$this->_resource = $router->controllers->{$this->requestModule};
 		//get permission only for current module
-		$this->_permission = $role->permission->{$this->route['module']};
+		$this->_permission = $role->permission->{$this->requestModule};
 		$this->_role = $role->type;
 		
 		$this->_addRoles();
@@ -167,8 +170,8 @@ class Dot_Acl
 	 */
 	public function isAllowed($role)
 	{
-		$resource = $this->route['controller'];
-		$privillege = $this->route['action'];
+		$resource = $this->requestController;
+		$privillege = $this->requestAction;
 		if(!$this->acl->has($resource))
 		{
 			return FALSE;	

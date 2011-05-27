@@ -163,8 +163,7 @@ class Admin extends Dot_Model
 							   'referer' => isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '',
 							   'userAgent' => $_SERVER["HTTP_USER_AGENT"]);
 			$this->registerLogin($dataLogin);
-			$route = Zend_Registry::get('route');
-			header('Location: '.$this->config->website->params->url.'/' .  $route['module'] );
+			header('Location: '.$this->config->website->params->url.'/' .  Zend_Registry::get('requestModule') );
 			exit;
 		}			
 		else
@@ -194,9 +193,8 @@ class Admin extends Dot_Model
 		$dotEmail->setSubject($this->seo->siteName . ' - ' . $this->option->failedLogin->subject);
 		$dotGeoip = new Dot_Geoip();
 		$country = $dotGeoip->getCountryByIp(Dot_Kernel::getUserIp());
-		$route = Zend_Registry::get('route');
 		$msg = str_replace(array('%LINK%','%USERNAME%','%PASSWORD%','%DATE%', '%COUNTRY%', '%IP%', '%USERAGENT%'), 
-						   array($this->config->website->params->url.'/' .  $route['module'], 
+						   array($this->config->website->params->url.'/' .  Zend_Registry::get('requestModule'), 
 						   		 $value['username'], 
 								 $value['password'], 
 								 Dot_Kernel::timeFormat('now', 'long'), 

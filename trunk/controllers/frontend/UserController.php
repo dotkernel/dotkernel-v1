@@ -19,8 +19,8 @@
 $userModel = new User(); 
 $userView = new User_View($tpl);
 // all actions MUST set  the variable  $pageTitle
-$pageTitle = $option->pageTitle->action->{$registry->route['action']};
-switch ($registry->route['action'])
+$pageTitle = $option->pageTitle->action->{$registry->requestAction};
+switch ($registry->requestAction)
 {
 	default:
 	case 'login':
@@ -71,7 +71,7 @@ switch ($registry->route['action'])
 			$session->message['txt'] = $option->warningMessage->userPermission;
 			$session->message['type'] = 'warning';
 		}
-		header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['controller']. '/login');
+		header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestController. '/login');
 		exit;
 	break;
 	case 'account':

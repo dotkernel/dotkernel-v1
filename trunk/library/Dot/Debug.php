@@ -69,7 +69,7 @@ class Dot_Debug
 		$this->config = $registry['configuration'];
 		$this->tpl = $tpl;
 		$this->__startTime = $registry['startTime'];
-		$this->__module = $registry['route']['module'];
+		$this->__module = $registry->requestModule;
 	}
 	/**
 	 * Set magic method

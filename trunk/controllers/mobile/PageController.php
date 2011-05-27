@@ -17,8 +17,8 @@
 
 $pageView = new Page_View($tpl);
 // all actions MUST set  the variable  $pageTitle
-$pageTitle = $option->pageTitle->action->{$registry->route['action']};
-switch ($registry->route['action'])
+$pageTitle = $option->pageTitle->action->{$registry->requestAction};
+switch ($registry->requestAction)
 {
 	default:
 		// default action is home

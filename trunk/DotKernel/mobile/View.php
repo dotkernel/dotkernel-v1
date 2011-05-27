@@ -50,7 +50,9 @@ class View extends Dot_Template
 	 */	
 	public function init()
 	{
-		$this->route = Zend_Registry::get('route');
+		$this->requestModule = Zend_Registry::get('requestModule');
+		$this->requestController = Zend_Registry::get('requestController');
+		$this->requestAction = Zend_Registry::get('requestAction');
 		$this->config = Zend_Registry::get('configuration');
 		$this->seo = Zend_Registry::get('seo');
 	}
@@ -71,7 +73,7 @@ class View extends Dot_Template
 	public function setViewPaths()
 	{
 		$this->setVar('TEMPLATES_URL', $this->config->website->params->url . TEMPLATES_DIR);
-		$this->setVar('IMAGES_URL', $this->config->website->params->url . IMAGES_DIR . '/' .$this->route['module']);
+		$this->setVar('IMAGES_URL', $this->config->website->params->url . IMAGES_DIR . '/' .$this->requestController);
 		$this->setVar('SITE_URL', $this->config->website->params->url);
 	}
 	/**

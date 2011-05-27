@@ -18,8 +18,8 @@
 $adminView = new Admin_View($tpl);
 $adminModel = new Admin();
 // switch based on the action, NO default action here
-$pageTitle = $option->pageTitle->action->{$registry->route['action']};
-switch ($registry->route['action'])
+$pageTitle = $option->pageTitle->action->{$registry->requestAction};
+switch ($registry->requestAction)
 {
 	case 'login':
 		// show the Login form
@@ -28,7 +28,7 @@ switch ($registry->route['action'])
 	case 'logout':
 		$dotAuth = Dot_Auth::getInstance();
 		$dotAuth->clearIdentity('admin');
-		header('location: '.$registry->configuration->website->params->url.'/' . $registry->route['module']);
+		header('location: '.$registry->configuration->website->params->url.'/' . $registry->requestModule);
 		exit;
 	break;
 	case 'authorize':
@@ -67,7 +67,7 @@ switch ($registry->route['action'])
 			$registry->session->message['txt'] = $option->warningMessage->userPermission;
 			$registry->session->message['type'] = 'warning';
 		}
-		header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/login');
+		header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestModule . '/' . $registry->requestController. '/login');
 		exit;
 	break;
 	case 'account':
@@ -123,7 +123,7 @@ switch ($registry->route['action'])
 					$adminModel->addUser($data);
 					$registry->session->message['txt'] = $option->infoMessage->accountAdd;
 					$registry->session->message['type'] = 'info';
-					header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/list/');
+					header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestModule . '/' . $registry->requestController. '/list/');
 					exit;
 				}
 			}
@@ -169,7 +169,7 @@ switch ($registry->route['action'])
 				$adminModel->updateUser($data);
 				$registry->session->message['txt'] = $option->infoMessage->accountUpdate;
 				$registry->session->message['type'] = 'info';
-				header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/list/');
+				header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestModule . '/' . $registry->requestController. '/list/');
 				exit;
 			}
 			else
@@ -227,7 +227,7 @@ switch ($registry->route['action'])
 				$registry->session->message['txt'] = $option->infoMessage->noAccountDelete;
 				$registry->session->message['type'] = 'info';
 			}
-			header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/list/');
+			header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestModule . '/' . $registry->requestController. '/list/');
 			exit;
 		}
 		$data = $adminModel->getUserBy('id', $registry->request['id']);
