@@ -2,7 +2,7 @@
 	var SITE_URL = '{SITE_URL}';
 </script>
 <script type="text/javascript" src="{TEMPLATES_URL}/js/frontend/user.js"></script>
-<span style="color: #ff0000;" id="msgError">{ERROR}</span>
+<div class="message_error" style="display:none" id="msgError"></div>
 <br/>
 <form id="userRegister" action="" method="post">
 	<table class="form">
@@ -39,16 +39,4 @@
 			<td><input type="submit" class="button" value="Register"></td>
 		</tr>
 	</table>
-<!-- 
-	<ul class="g_form">
-		<li class="clearfix positioned">
-			<p class="contact_label">Secure Image:</p>
-			{SECUREIMAGE}<div id="secure_image"></div>
-		</li>
-		<li class="clearfix positioned">
-			<p class="contact_label">&nbsp;</p>
-			<input type="submit" class="btn" value="register">
-		</li>
-	</ul>
- -->
 </form>

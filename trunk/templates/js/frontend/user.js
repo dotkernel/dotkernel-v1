@@ -11,11 +11,11 @@ $(document).ready(function(){
 					var errorText = "<ul>";
 					for (var i in result.error){
 						if (result.error.hasOwnProperty(i)){
-							errorText += "<li><strong>" + i + "</strong>: " + result.error[i] +"</li>";
+							errorText += "<strong>" + i + "</strong>: " + result.error[i] +"<br/>";
 						}
 					}
 					errorText += "</li></ul>";
-					$("#msgError").html(errorText);
+					$("#msgError").html(errorText).show();
 				}else{
 					// the result isn't an object, so it's probably the contents of
 					// user/account, we should redirect
