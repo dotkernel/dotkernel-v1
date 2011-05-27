@@ -41,10 +41,10 @@
 				<td>
 					<table width="100%" class="action_table">
 						<tr>
-							<td width="25%"><a href="{SITE_URL}/admin/user/update/id/{ID}" title="Edit/Update" class="edit_state">&nbsp;</a></td>
-							<td width="25%"><a href="{SITE_URL}/admin/user/delete/id/{ID}" title="Delete" class="delete_state">&nbsp;</a></td>
-							<td width="25%"><a href="{SITE_URL}/admin/user/logins/id/{ID}" title="User Logins" class="logins_state">&nbsp;</a></td>
-							<td width="25%"><a href="{SITE_URL}/admin/user/send-password/id/{ID}" title="Send User Password" class="pass_state">&nbsp;</a></td>
+							<td width="25%"><a href="{SITE_URL}/admin/user/update/id/{ID}/" title="Edit/Update" class="edit_state">&nbsp;</a></td>
+							<td width="25%"><a href="{SITE_URL}/admin/user/delete/id/{ID}/" title="Delete" class="delete_state">&nbsp;</a></td>
+							<td width="25%"><a href="{SITE_URL}/admin/user/logins/id/{ID}/" title="User Logins" class="logins_state">&nbsp;</a></td>
+							<td width="25%"><a href="{SITE_URL}/admin/user/send-password/id/{ID}/" title="Send User Password" class="pass_state">&nbsp;</a></td>
 							</tr>
 					</table>
 				</td>
