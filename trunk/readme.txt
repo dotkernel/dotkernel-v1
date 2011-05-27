@@ -1,4 +1,4 @@
-Welcome to the DotKernel 1.5.0 RC release
+Welcome to the DotKernel @VERSION@ release
 
 DotKernel is a PHP Application Framework, built on top of Zend Framework (ZF)
 	
@@ -6,10 +6,10 @@ DotKernel is a PHP Application Framework, built on top of Zend Framework (ZF)
 
 RELEASE INFORMATION
 -------------------
-DotKernel 1.5.0 RC - May 27, 2010 (r619)
+DotKernel @VERSION@ - @DATERELEASE@ (r@HEADREVISION@)
 
 For detailed changes, please see 
-	http://www.dotkernel.com/changelog/1.5.0-RC
+	http://www.dotkernel.com/changelog/@CHANGELOGVER@
 
 
 SYSTEM REQUIREMENTS
@@ -32,7 +32,7 @@ Note: It is important to follow the steps in the exact order below (especially s
 
    1. Download dk.php file to test that your environment meets DotKernel system requirements
    2. Download a copy of DotKernel
-   3. Unzip the downloaded package. You should have a DotKernel-1.5.0-RC directory
+   3. Unzip the downloaded package. You should have a DotKernel-@VERSION@ directory
    4. Upload the folder content to your web server
    5. Create a MySQL database and import dot_kernel.sql file into it
    6. Set your environment (production, staging or development) in .htaccess by using the APPLICATION_ENV variable. In DotKernel, the development environment is set by default.
