@@ -15,6 +15,8 @@
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
+$session = Zend_Registry::get('session');
+
 // instantiate classes related to User module: model & view
 $userModel = new User(); 
 $userView = new User_View($tpl);

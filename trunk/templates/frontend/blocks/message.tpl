@@ -1,6 +1,6 @@
 <div class="message_{MESSAGE_TYPE}">
 	{MESSAGE_STRING}
 	<!-- BEGIN msg_array -->
-	<li>{MESSAGE_ARRAY}</li>
+	{MESSAGE_ARRAY}<br/>
 	<!-- END msg_array -->
 </div>

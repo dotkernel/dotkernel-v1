@@ -76,7 +76,7 @@ class View extends Dot_Template
 	public function setViewPaths()
 	{
 		$this->setVar('TEMPLATES_URL', $this->config->website->params->url . TEMPLATES_DIR);
-		$this->setVar('IMAGES_URL', $this->config->website->params->url . IMAGES_DIR . '/' .$this->requestController);
+		$this->setVar('IMAGES_URL', $this->config->website->params->url . IMAGES_DIR . '/' .$this->requestModule);
 		$this->setVar('IMAGES_SHORT_URL', $this->config->website->params->url . IMAGES_DIR);
 		$this->setVar('SITE_URL', $this->config->website->params->url);
 		$this->setVar('SKIN', $this->config->settings->admin->skin);
@@ -172,7 +172,7 @@ class View extends Dot_Template
 						{	//if current submenu is the current viewed page
 							$this->setVar('SUBMENU_SELECTED', ' class="selected"');
 							$this->setVar('BREADCRUMB_TITLE_2', $subMenuItem['title']);
-							$this->setVar('BREADCRUMB_LINK_2', $this->config->website->params->url.'/'.$this->requestController.'/'.$subMenuItem['link']);
+							$this->setVar('BREADCRUMB_LINK_2', $this->config->website->params->url.'/'.$this->requestModule.'/'.$subMenuItem['link']);
 							$this->setVar('BREADCRUMB_DESCRIPTION_2', $subMenuItem['description']);
 							$breadcrumbItem2Set = true;
 						}else{

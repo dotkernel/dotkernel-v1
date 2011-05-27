@@ -388,6 +388,10 @@ input[type="checkbox"], input[type="radio"]{
 	font-weight:bold;
 	color:#756859;
 }
+.g_box input,
+.g_box select{
+	margin-top:-2px;  
+}
 .g_box select{
 	width: 150px;
 	margin-right:10px;
@@ -670,6 +674,10 @@ a.sort_down{
 }
 input.bigger{width: 100%;}
 
+.required{
+	color:red;
+	padding-left:4px;
+}
 /*MESSAGES ERROR AND INFO*/
 .message_info{
 	background-color: #DDFFEE;

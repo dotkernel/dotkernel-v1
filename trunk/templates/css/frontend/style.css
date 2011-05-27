@@ -37,6 +37,8 @@ body { font:13px/1.231 sans-serif; *font-size:small; }
 select, input, textarea, button { font:99% sans-serif; }
 pre, code, kbd, samp { font-family: monospace, sans-serif; }
 
+html { overflow-y: scroll; }
+
 a:hover, a:active { outline: none; }
 ul, ol { margin-left: 2em; }
 ol { list-style-type: decimal; }
@@ -169,8 +171,9 @@ nav#sidebar ul.menu_sidebar li a{
 	padding-bottom: 10px;
 	padding-top: 10px;
 }
-nav#sidebar ul.menu_sidebar li.selected{
+nav#sidebar ul.menu_sidebar li.selected a{
 	font-weight:bold;
+	font-size:14.5px;
 }
 /****** Content ****/
 div#content{
@@ -236,7 +239,7 @@ table.form{
 	border-spacing:15px;
 	border-collapse: separate;
 	font-size:16px;
-	width: 550px;
+	width: 600px;
 }
 table.form label{
 	line-height:36px;
