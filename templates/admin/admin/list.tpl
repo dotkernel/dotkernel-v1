@@ -41,9 +41,9 @@
 				<td>
 				<table width="100%" class="action_table">
 					<tr>
-						<td width="25%"><a href="{SITE_URL}/admin/admin/update/id/{ID}" title="Edit/Update" class="edit_state">&nbsp;</a></td>
-						<td width="25%"><a href="{SITE_URL}/admin/admin/delete/id/{ID}" title="Delete" class="delete_state">&nbsp;</a></td>
-						<td width="25%"><a href="{SITE_URL}/admin/admin/logins/id/{ID}" title="User Logins" class="logins_state">&nbsp;</a></td>
+						<td width="25%"><a href="{SITE_URL}/admin/admin/update/id/{ID}/" title="Edit/Update" class="edit_state">&nbsp;</a></td>
+						<td width="25%"><a href="{SITE_URL}/admin/admin/delete/id/{ID}/" title="Delete" class="delete_state">&nbsp;</a></td>
+						<td width="25%"><a href="{SITE_URL}/admin/admin/logins/id/{ID}/" title="User Logins" class="logins_state">&nbsp;</a></td>
 					</tr>
 				</table>
 				</td>

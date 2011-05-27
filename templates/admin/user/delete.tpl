@@ -1,6 +1,6 @@
 <form action="{SITE_URL}/admin/user/delete/id/{ID}" method="post" >
 <input type="hidden" name="userToken" value="{USERTOKEN}">
-<fieldset style="width: 540px">
+<fieldset style="width: 600px">
 <legend>Delete User Acccount: {USERNAME}</legend>
 	<table class="medium_table" width="100%">
 		<tr>

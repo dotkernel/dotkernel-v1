@@ -157,6 +157,11 @@ switch ($registry->requestAction)
 			header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestModule . '/' . $registry->requestController. '/list/');
 			exit;
 		}
+		if (!$registry->request['id'])
+		{
+			header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestModule . '/' . $registry->requestController. '/list/');
+			exit;
+		}
 		$data = $userModel->getUserBy('id', $registry->request['id']);
 		$userView->setExtraBreadcrumb($data['username']);
 		$pageTitle .= ' "' . $data['username'] . '"';
