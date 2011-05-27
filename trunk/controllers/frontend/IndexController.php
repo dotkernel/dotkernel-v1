@@ -64,9 +64,6 @@ $tpl->setViewFile();
 // set paths in templates
 $tpl->setViewPaths();
 
-// display login box
-$tpl->setLoginBox();
-
 /** 
  * each Controller  must load its own specific models and views
  */
@@ -100,7 +97,7 @@ else
 }
 
 // set menus
-$tpl->setViewMenu();
+$tpl->setMenu();
 
 // set SEO html tags from dots/seo.xml file
 $tpl->setSeoValues($pageTitle);
