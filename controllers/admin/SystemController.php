@@ -18,8 +18,8 @@
 $systemView = new System_View($tpl);
 $systemModel = new System();
 // switch based on the action, NO default action here
-$pageTitle = $option->pageTitle->action->{$registry->route['action']};
-switch ($registry->route['action'])
+$pageTitle = $option->pageTitle->action->{$registry->requestAction};
+switch ($registry->requestAction)
 {
 	case 'dashboard':
 		$mysqlVersion = $systemModel->getMysqlVersion();
@@ -47,7 +47,7 @@ switch ($registry->route['action'])
 		{
 			Dot_Auth::checkUserToken();
 			$systemModel->updateSettings($_POST);
-			header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/settings/update/done');
+			header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestModule . '/' . $registry->requestController. '/settings/update/done');
 			exit;
 		}
 	break;
@@ -105,7 +105,7 @@ switch ($registry->route['action'])
 				$registry->session->message['txt'] = $option->infoMessage->noTransporterDelete;
 				$registry->session->message['type'] = 'info';
 			}
-		header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/transporter-list/');
+		header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestModule . '/' . $registry->requestController. '/transporter-list/');
 			 exit;
 		}
 		$data = $systemModel->getEmailTransporterBy('id', $registry->request['id']);
@@ -129,7 +129,7 @@ switch ($registry->route['action'])
 				$systemModel->updateEmailTransporter($data);
 				$registry->session->message['txt'] = $option->infoMessage->transporterUpdate;
 				$registry->session->message['type'] = 'info';
-				header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/transporter-list/');
+				header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestModule . '/' . $registry->requestController. '/transporter-list/');
 				exit;
 			}
 			else

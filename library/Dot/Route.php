@@ -86,13 +86,11 @@ class Dot_Route
 
 		// remove first element of the request array, is module and action in it
 		array_shift($request);
-		//memory request into param variable and load them into registry
-		$route = array();
-		$route['module'] = $requestModule;
-		$route['controller'] = $requestController;
-		$route['action'] = $requestAction;
+
 		$registry->request = $request;
-		$registry->route = $route;
+		$registry->requestModule = $requestModule;
+		$registry->requestController = $requestController;
+		$registry->requestAction = $requestAction;
 		
 		Dot_Route::__setDefaultRoutes();
 	}
@@ -105,12 +103,11 @@ class Dot_Route
 	 */
 	private static function __setDefaultRoutes()
 	{
-		$route = Zend_Registry::get('route');
 		$router = Zend_Registry::get('router');
 		// set Module and Action default values
-		$requestModule = $route['module'];
-		$requestController = $route['controller'];
-		$requestAction = $route['action'];
+		$requestModule = Zend_Registry::get('requestModule');
+		$requestController = Zend_Registry::get('requestController');
+		$requestAction = Zend_Registry::get('requestAction');
 		
 		$defaultController = isset($router->routes->controller->$requestModule) ?
 		                           $router->routes->controller->$requestModule : '';
@@ -122,11 +119,9 @@ class Dot_Route
 		                           $router->routes->action->$requestModule->$requestController: '';
 		
 		$requestAction = isset($requestAction) && $requestAction !='' ? $requestAction : $defaultAction;
-		
-		$route['controller'] = $requestController;
-		$route['action'] = $requestAction;
 
-		Zend_Registry::set('route', $route);
+		Zend_Registry::set('requestController', $requestController);
+		Zend_Registry::set('requestAction', $requestAction);
 	}
 	/**
 	 * Create canonical URL
@@ -138,7 +133,14 @@ class Dot_Route
 	 */
 	public static function createCanonicalUrl($link = NULL)
 	{
-		$route = ($link == '') ? Zend_Registry::get('route') : $link;
+		$registry = Zend_Registry::getInstance();
+		$route = array(
+			'module' => $registry->requestModule,
+			'controller' => $registry->requestController,
+			'action' => $registry->requestAction
+		);
+		$route = ($link == '') ? $route : $link;
+
 		$url = Zend_Registry::get('configuration')->website->params->url;
 		if( '/' != substr($url, -1, 1))
 		{
@@ -171,7 +173,7 @@ class Dot_Route
 	public static function getOption()
 	{
 		$registry = Zend_Registry::getInstance();
-		$option = Dot_Settings::getOptionVariables($registry->route['module'], 'seo');
+		$option = Dot_Settings::getOptionVariables($registry->requestModule, 'seo');
 
 		//remove the 'option' xml atribute
 

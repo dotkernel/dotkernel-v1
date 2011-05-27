@@ -21,8 +21,8 @@
 Dot_Session::start();
 
 // start the template object, empty for the moment 
-require(DOTKERNEL_PATH . '/' . $registry->route['module'] . '/' . 'View.php');
-$tpl = View::getInstance(TEMPLATES_PATH . '/' . $registry->route['module']);
+require(DOTKERNEL_PATH . '/' . $registry->requestModule . '/' . 'View.php');
+$tpl = View::getInstance(TEMPLATES_PATH . '/' . $registry->requestModule);
 $tpl->init();
 
 // assign Index Template file
@@ -33,12 +33,12 @@ $tpl->setViewPaths();
 /** 
  * each Controller  must load its own specific models and views
  */
-Dot_Settings :: loadControllerFiles($registry->route['module']);
+Dot_Settings :: loadControllerFiles($registry->requestModule);
 
 /**
  * Load option(specific configuration file for current dot file
  */
-$option = Dot_Settings::getOptionVariables($registry->route['module'],$registry->route['controller']);
+$option = Dot_Settings::getOptionVariables($registry->requestModule,$registry->requestController);
 $registry->option = $option;
 
 /**
@@ -50,7 +50,7 @@ $pageTitle = 'Overwrite Me Please !';
  * From this point , the control is taken by the Action specific controller
  * call the Action specific file, but check first if exists 
  */
-$actionControllerPath = CONTROLLERS_PATH . '/' . $registry->route['module'] . '/' . $registry->route['controller'] . 'Controller.php';
+$actionControllerPath = CONTROLLERS_PATH . '/' . $registry->requestModule . '/' . $registry->requestController . 'Controller.php';
 !file_exists($actionControllerPath) ?  Dot_Route::pageNotFound() : require($actionControllerPath);
 
 // set SEO html tags from dots/seo.xml file

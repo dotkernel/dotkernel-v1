@@ -52,7 +52,10 @@ class View extends Dot_Template
 	 */
 	public function init()
 	{
-		$this->route = Zend_Registry::get('route');
+		$this->requestModule = Zend_Registry::get('requestModule');
+		$this->requestController = Zend_Registry::get('requestController');
+		$this->requestAction = Zend_Registry::get('requestAction');
+		$this->request = Zend_Registry::get('request');
 		$this->config = Zend_Registry::get('configuration');
 		$this->seo = Zend_Registry::get('seo');
 	}
@@ -73,7 +76,7 @@ class View extends Dot_Template
 	public function setViewPaths()
 	{
 		$this->setVar('TEMPLATES_URL', $this->config->website->params->url . TEMPLATES_DIR);
-		$this->setVar('IMAGES_URL', $this->config->website->params->url . IMAGES_DIR . '/' .$this->route['module']);
+		$this->setVar('IMAGES_URL', $this->config->website->params->url . IMAGES_DIR . '/' .$this->requestController);
 		$this->setVar('IMAGES_SHORT_URL', $this->config->website->params->url . IMAGES_DIR);
 		$this->setVar('SITE_URL', $this->config->website->params->url);
 		$this->setVar('SKIN', $this->config->settings->admin->skin);
@@ -101,11 +104,11 @@ class View extends Dot_Template
 	 * @return void
 	 */
 	public function setViewMenu()
-	{		
+	{
 		$dotAuth = Dot_Auth::getInstance();
 		if($dotAuth->hasIdentity('admin'))
 		{
-			$menu_xml = new Zend_Config_Xml(CONFIGURATION_PATH . '/' . $this->route['module'] . '/' . 'menu.xml', 'config');
+			$menu_xml = new Zend_Config_Xml(CONFIGURATION_PATH . '/' . $this->requestModule . '/' . 'menu.xml', 'config');
 			$menus = $menu_xml->menu;
 			// if we have only one menu, Zend_Config_Xml return a simple array, not an array with key 0(zero)
 			if(is_null($menus->{0}))
@@ -138,14 +141,14 @@ class View extends Dot_Template
 				foreach ($items as $menuItem)
 				{
 					$this->setVar('MENU_TITLE', $menuItem['title']);
-					$this->setVar('MENU_LINK', $this->config->website->params->url.'/'.$this->route['module'].'/'.$menuItem['link']);
+					$this->setVar('MENU_LINK', $this->config->website->params->url.'/'.$this->requestModule.'/'.$menuItem['link']);
 					$this->setVar('MENU_DESCRIPTION', $menuItem['description']);
 
-					if (false !== stripos($menuItem['link'], $this->route['controller'].'/'))
+					if (false !== stripos($menuItem['link'], $this->requestController.'/'))
 					{	//if current menu is the current viewed page
 						$this->setVar('MENU_SELECTED', ' class="selected"');
 						$this->setVar('BREADCRUMB_TITLE_1', $menuItem['title']);
-						$this->setVar('BREADCRUMB_LINK_1', $this->config->website->params->url.'/'.$this->route['module'].'/'.$menuItem['link']);
+						$this->setVar('BREADCRUMB_LINK_1', $this->config->website->params->url.'/'.$this->requestModule.'/'.$menuItem['link']);
 						$this->setVar('BREADCRUMB_DESCRIPTION_1', $menuItem['description']);
 					}else{
 						$this->setVar('MENU_SELECTED', '');
@@ -162,14 +165,14 @@ class View extends Dot_Template
 					foreach ($subItems as $subMenuItem)
 					{
 						$this->setVar('SUBMENU_TITLE', $subMenuItem['title']);
-						$this->setVar('SUBMENU_LINK', $this->config->website->params->url.'/'.$this->route['module'].'/'.$subMenuItem['link']);
+						$this->setVar('SUBMENU_LINK', $this->config->website->params->url.'/'.$this->requestModule.'/'.$subMenuItem['link']);
 						$this->setVar('SUBMENU_DESCRIPTION', $subMenuItem['description']);
 
-						if (false !== stripos($subMenuItem['link'], $this->route['controller'].'/'.$this->route['action'].'/'))
+						if (false !== stripos($subMenuItem['link'], $this->requestController.'/'.$this->requestAction.'/'))
 						{	//if current submenu is the current viewed page
 							$this->setVar('SUBMENU_SELECTED', ' class="selected"');
 							$this->setVar('BREADCRUMB_TITLE_2', $subMenuItem['title']);
-							$this->setVar('BREADCRUMB_LINK_2', $this->config->website->params->url.'/'.$this->route['module'].'/'.$subMenuItem['link']);
+							$this->setVar('BREADCRUMB_LINK_2', $this->config->website->params->url.'/'.$this->requestController.'/'.$subMenuItem['link']);
 							$this->setVar('BREADCRUMB_DESCRIPTION_2', $subMenuItem['description']);
 							$breadcrumbItem2Set = true;
 						}else{
@@ -188,7 +191,7 @@ class View extends Dot_Template
 					// the second segment of the breadcrumb hasn't been set
 					// this means that the action that is requested doesn't exist in menu.xml
 					// in that case use the action name as the text (replace dashes with spaces and use ucwords)
-					$this->setVar('BREADCRUMB_TITLE_2', ucwords(str_replace('-', ' ', $this->route['action'])));
+					$this->setVar('BREADCRUMB_TITLE_2', ucwords(str_replace('-', ' ', $this->requestAction)));
 					$this->setVar('BREADCRUMB_LINK_2', "");
 				}
 			}
@@ -220,7 +223,7 @@ class View extends Dot_Template
 	protected function paginator($page)
 	{			
 		// get route again here, because ajax may have change it
-		$route = Zend_Registry::get('route');
+		//$route = Zend_Registry::get('route');
 		$request = Zend_Registry::get('request');
 		$this->setFile('page_file', 'paginator.tpl');
 		$this->setVar('TOTAL_RECORDS', $page->totalItemCount);
@@ -236,7 +239,7 @@ class View extends Dot_Template
 			unset($request['page']);
 		}
 
-		$link = Dot_Route::createCanonicalUrl($route) .'page/';
+		$link = Dot_Route::createCanonicalUrl() .'page/';
 
 		if ($page->current != 1)
 		{
@@ -264,12 +267,10 @@ class View extends Dot_Template
 			if($val == $page->current)
 			{
 				$this->parse('current_row','current_page', TRUE);
-				//$this->parse('other_row','');
 			}
 			else
 			{
 				$this->setVar('PAGE_LINK', $link.$val);
-				//$this->parse('current_row','');
 				$this->parse('other_row','other_page', TRUE);
 			}
 			$this->parse('pages_row', 'pages', TRUE);

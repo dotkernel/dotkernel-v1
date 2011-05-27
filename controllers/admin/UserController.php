@@ -19,8 +19,8 @@
 $userModel = new User();
 $userView = new User_View($tpl);
 // all actions MUST set  the variable  $pageTitle
-$pageTitle = $option->pageTitle->action->{$registry->route['action']};
-switch ($registry->route['action'])
+$pageTitle = $option->pageTitle->action->{$registry->requestAction};
+switch ($registry->requestAction)
 {
 	case 'list':
 		// list users
@@ -56,7 +56,7 @@ switch ($registry->route['action'])
 				$userModel->addUser($dotValidateUser->getData());
 				$registry->session->message['txt'] = $option->infoMessage->accountAdd;
 				$registry->session->message['type'] = 'info';
-				header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/list/');
+				header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestModule . '/' . $registry->requestController. '/list/');
 				exit;
 			}
 			else
@@ -96,7 +96,7 @@ switch ($registry->route['action'])
 				$userModel->updateUser($data);
 				$registry->session->message['txt'] = $option->infoMessage->accountUpdate;
 				$registry->session->message['type'] = 'info';
-				header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/list/');
+				header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestModule . '/' . $registry->requestController. '/list/');
 				exit;
 			}
 			else
@@ -154,7 +154,7 @@ switch ($registry->route['action'])
 				$registry->session->message['txt'] = $option->infoMessage->noAccountDelete;
 				$registry->session->message['type'] = 'info';
 			}
-			header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/list/');
+			header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestModule . '/' . $registry->requestController. '/list/');
 			exit;
 		}
 		$data = $userModel->getUserBy('id', $registry->request['id']);
@@ -177,7 +177,7 @@ switch ($registry->route['action'])
 			$registry->session->message['txt'] = $option->errorMessage->emailNotSent;
 			$registry->session->message['type'] = 'error';
 		}
-		header('Location: '.$registry->configuration->website->params->url. '/' . $registry->route['module'] . '/' . $registry->route['controller']. '/list/');
+		header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestModule . '/' . $registry->requestController. '/list/');
 		exit;
 	break;
 	case 'logins':

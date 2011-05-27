@@ -17,8 +17,8 @@
 
 $pageView = new Page_View($tpl);
 // all actions MUST set  the variable  $pageTitle
-$pageTitle = $option->pageTitle->action->{$registry->route['action']};
-switch ($registry->route['action'])
+$pageTitle = $option->pageTitle->action->{$registry->requestAction};
+switch ($registry->requestAction)
 {
 	default:
 	case 'home';
@@ -26,13 +26,13 @@ switch ($registry->route['action'])
 		$pageView->showPage('home');
 	break;
 	case 'about':
-		$pageView->showPage($registry->route['action']);
+		$pageView->showPage($registry->requestAction);
 	break;
 	case 'who-we-are':
-		$pageView->showPage($registry->route['action']);
+		$pageView->showPage($registry->requestAction);
 	break;
 	case 'outbound-links':
-		$pageView->showPage($registry->route['action']);
+		$pageView->showPage($registry->requestAction);
 	break;
 	case 'image':
 		$dotImage = new Dot_Image();
@@ -51,5 +51,5 @@ switch ($registry->route['action'])
 			$session->message['txt'] = $imageError;
 			$session->message['type'] = 'error';
 		}		
-		$pageView->showImage($registry->route['action'], $dotImage->getImage(), $dotImage->getImage($imagePath));	
+		$pageView->showImage($registry->requestAction, $dotImage->getImage(), $dotImage->getImage($imagePath));	
 }
