@@ -90,200 +90,56 @@ class View extends Dot_Template
 		$this->setVar('CANONICAL_URL', $this->seo->canonicalUrl);
 	}
 	/**
-	 * Display the specific menu that were declared in configs/menu.xml file
+	 * Display the menus
 	 * @access public 
 	 * @return void
 	 */
-	public function setViewMenu()
-	{		
-		$menu_xml = new Zend_Config_Xml(CONFIGURATION_PATH . '/' . $this->route['module'] . '/' . 'menu.xml', 'config');
-		$menu = $menu_xml->menu;
-		// if we have only one menu, Zend_Config_Xml return a simple array, not an array with key 0(zero)
-		if(is_null($menu->{0}))
-		{
-			$menu = new Zend_Config(array(0=>$menu_xml->menu));						
-		}
-		$menu = $menu->toArray();
-		foreach ($menu as $child)
-		{
-			//don't display the menu
-			if(0 == $child['display']) continue;		
-			$this->setFile('tpl_menu_'.$child['id'], 'blocks/menu_'.$child['type'].'.tpl');
-			//is not simple menu, so let's set the submenu blocks and variables
-			if(strpos($child['type'],'simple') === FALSE)
-			{				
-				$this->setBlock('tpl_menu_'.$child['id'], 'top_sub_menu_item', 'top_sub_menu_item_block');
-				$this->setBlock('tpl_menu_'.$child['id'], 'top_sub_menu', 'top_sub_menu_block');
-				$this->setBlock('tpl_menu_'.$child['id'], 'top_normal_menu_item', 'top_normal_menu_item_block');
-				$this->setBlock('tpl_menu_'.$child['id'], 'top_parent_menu_item', 'top_parent_menu_item_block');
-				$tplVariables1 = array('TOP_MENU_ID', 
-									   'TOP_SUB_MENU_SEL', 
-									   'TOP_SUB_MENU_ITEM_SEL', 
-									   'TOP_SUB_MENU_LINK', 
-									   'TOP_SUB_MENU_TARGET', 
-									   'TOP_SUB_MENU_TITLE');				
-				$tplBlocks1 = array('top_sub_menu_item_block', 
-									'top_sub_menu_block', 
-									'top_normal_menu_item_block', 
-									'top_parent_menu_item_block');
-			}			
-			$this->setBlock('tpl_menu_'.$child['id'], 'top_menu_item', 'top_menu_item_block');
-			$this->setBlock('tpl_menu_'.$child['id'], 'top_menu', 'top_menu_block');
-			
-			$tplVariables2 = array('TOP_MENU_SEL', 
-								   'TOP_MENU_LINK', 
-								   'TOP_MENU_TARGET', 
-								   'TOP_MENU_TITLE');
-			$tplBlocks2 = array('top_menu_item_block', 'top_menu_block');
-			
-			//Initialize all the tag variables and blocks
-			$this->initVar(array_merge($tplVariables1,$tplVariables2),'');			
-			$this->initBlock(array_merge($tplBlocks1,$tplBlocks2),'');
-			
-			$i = 0;					
-			$items = $child['item'];
-			// if we have only one menu, Zend_Config_Xml return a simple array, not an array with key 0(zero)
-			if(!isset($items[0]))
-			{
-				$items = array(0 => $items);
-			}
-			foreach($items as $key => $val)
-			{			
-				$dotAuth = Dot_Auth::getInstance();
-				if (($dotAuth->hasIdentity('user') && 1 == $val['isLogged']) || (!$dotAuth->hasIdentity('user') && 1 == $val['notLogged']))
-				{	// display menus based on user is logged in or not
-					$tmpMenuRoute = explode('/', $val['link']);
-					$this->setVar('TOP_MENU_ID', $i);
-					$tplVariables = array('TOP_MENU_SEL', 
-					                      'TOP_SUB_MENU_SEL', 
-										  'TOP_SUB_MENU_ITEM_SEL');
-					$this->initVar($tplVariables,'');
-						
-					if (false !== stripos($val['link'], $this->route['controller'].'/'.$this->route['action'].'/'))
-					{	//if current menu is the current viewed page
-						$this->setVar('TOP_MENU_SEL', '_selected');
-						$this->setVar('TOP_SUB_MENU_SEL', '_selected');
-					}
-					else //if('vertical' == $child['type'] && FALSE === strpos($child['type'],'simple'))
-					{
-						$this->parse('top_sub_menu_block', '');
-					}
-					foreach ($val as $k => $v) 
-					{	
-						$this->setVar('TOP_MENU_'.strtoupper($k), is_string($v) ? trim($v) : '');
-					}	
-					if (1 == $val['external']) 
-					{
-						$this->setVar('TOP_MENU_LINK', $val['link']);
-					}
-					else
-					{
-						/*
-						if ($val['link'] === "{SITE_URL}")
-						{
-							$link = '';
-						}
-						else
-						{
-							$link = $val['link'];
-						}
-						$this->setVar('TOP_MENU_LINK', $this->config->website->params->url.'/'.$link);
-						*/
-						$this->setVar('TOP_MENU_LINK', $this->config->website->params->url.'/'.$val['link']);	
-					} 
-					if(FALSE === strpos($child['type'],'simple'))
-					{														
-						if ((string)$val['link'] != '')
-						{
-							$this->parse('top_normal_menu_item_block', 'top_normal_menu_item', true);
-						} 								
-						else
-						{
-							$this->parse('top_parent_menu_item_block', 'top_parent_menu_item', true);
-						} 
-						if (isset($val['subItems']['subItem']) && count($val['subItems']['subItem']) > 0)
-						{
-												
-							$subItems = $val['subItems']['subItem'];
-							
-							// if we have only one menu, Zend_Config_Xml return a simple array, not an array with key 0(zero)							
-							if(!is_array($subItems) || (is_array($subItems) && !isset($subItems['0'])))
-							{
-								$subItems = array(0=>$subItems);						
-							}
-							foreach ($subItems as $k2 => $v2)
-							{			
-								if (($dotAuth->hasIdentity('user') && 1 == $v2['isLogged']) || (!$dotAuth->hasIdentity('user') && 1 == $v2['notLogged']))
-								{				
-									// display menus based on user is logged in or not
-									$tmpSubmenuRoute = explode('/', $v2['link']);				
-									$this->setVar('TOP_SUB_MENU_ITEM_SEL', '');												
-									foreach ($v2 as $k => $v)
-									{
-										$this->setVar('TOP_SUB_MENU_'.strtoupper($k), is_string(trim($v)) ? $v : '');
-									}
-									if (1 == $v2['external']) 
-									{
-										$this->setVar('TOP_SUB_MENU_LINK', $v2['link']);
-									}
-									else 
-									{
-										$this->setVar('TOP_SUB_MENU_LINK', $this->config->website->params->url.'/'.$v2['link']);
-									}
-									if (FALSE  !==stripos($v2['link'], $this->route['controller'].'/'.$this->route['action'].'/')
-										 && $tmpMenuRoute['0'] == $tmpSubmenuRoute['0'])
-									{	//if curent menu is the curent viewed page then parent menu will be selected and sub menu shown
-										$tplVariables = array('TOP_MENU_SEL', 
-										                      'TOP_SUB_MENU_SEL', 
-															  'TOP_SUB_MENU_ITEM_SEL');
-										$this->initVar($tplVariables,'_selected');											
-									}
-									elseif (FALSE !== stripos($v2['link'], $this->route['controller'].'/')
-									 && $tmpMenuRoute['0'] == $tmpSubmenuRoute['0'])
-									{
-										$this->setVar('TOP_MENU_SEL', '_selected');								
-									}	
-									$this->parse('top_sub_menu_item_block', 'top_sub_menu_item', true);												
-								}
-							}
-						}						
-					}
-					if(strpos($child['type'],'simple') === FALSE)
-					{
-						$this->parse('top_sub_menu_block', 'top_sub_menu', true);
-						$this->parse('top_sub_menu_item_block', '');	
-					}
-					$this->parse('top_menu_item_block', 'top_menu_item', true);	
-					if(strpos($child['type'],'simple') === FALSE)
-					{
-						$this->parse('top_normal_menu_item_block', '');
-						$this->parse('top_parent_menu_item_block', '');
-					}												
-					$i++;				
-				}	
-			}					
-			$this->parse('top_menu_block', 'top_menu', true);
-			$this->parse('top_menu_item_block', '');
-			$this->parse('MENU_'.$child['id'], 'tpl_menu_'.$child['id']);
-		}
-	}
-	/**
-	 * Display login box if user is not logged
-	 * @access public
-	 * @return void
-	 */
-	public function setLoginBox()
+	public function setMenu()
 	{
 		$dotAuth = Dot_Auth::getInstance();
-		if (!$dotAuth->hasIdentity('user'))
-		{
-			$this->setFile('tpl_login', 'blocks/login_box.tpl');
-			$this->parse('LOGIN_BOX', 'tpl_login');
+		$registry = Zend_Registry::getInstance();
+		
+		$selectedItem = "SEL_" . strtoupper($registry->route['controller'] . "_" . $registry->route['action']);
+		
+		// top menu
+		$this->setFile('tpl_menu_top', 'blocks/menu_top.tpl');
+		$this->setBlock('tpl_menu_top', 'top_menu_not_logged', 'top_menu_not_logged_block');
+		$this->setBlock('tpl_menu_top', 'top_menu_logged', 'top_menu_logged_block');
+
+		// add selected to the correct menu item
+		$this->setVar($selectedItem, 'selected');
+		
+		
+		if ($dotAuth->hasIdentity('user')){
+			$this->parse('top_menu_logged_block', 'top_menu_logged', true);
+			$this->parse('top_menu_not_logged_block', '');		
+		}else{
+			$this->parse('top_menu_not_logged_block', 'top_menu_not_logged', true);
+			$this->parse('top_menu_logged_block', '');		
 		}
-		else
-		{
-			$this->setVar('LOGIN_BOX', '');
+		$this->parse('MENU_TOP', 'tpl_menu_top');
+		
+		// sidebar menu
+		$this->setFile('tpl_menu_sidebar', 'blocks/menu_sidebar.tpl');
+		$this->setBlock('tpl_menu_sidebar', 'sidebar_menu_logged', 'sidebar_menu_logged_block');
+
+		// add selected to the correct menu item
+		$this->setVar($selectedItem, 'selected');
+		
+		if ($dotAuth->hasIdentity('user')){
+			$this->parse('sidebar_menu_logged_block', 'sidebar_menu_logged', true);
+		}else{
+			$this->parse('sidebar_menu_logged_block', '');
 		}
+		$this->parse('MENU_SIDEBAR', 'tpl_menu_sidebar');
+
+		// footer menu
+		$this->setFile('tpl_menu_footer', 'blocks/menu_footer.tpl');
+
+		// add selected to the correct menu item
+		$this->setVar($selectedItem, 'selected');
+		
+		$this->parse('MENU_FOOTER', 'tpl_menu_footer');
 	}
 	/**
 	 * Display message - error, warning, info

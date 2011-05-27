@@ -70,13 +70,18 @@ a:hover { color: #D7134F; }
 /********************/
 /****** Layout ******/
 
+body, html{
+	height:100%;
+}
 body{
-    background-color: #EEF2F5;
+    background-color: #FFF;
 }
 header{
     height: 140px;
+	width:100%;
+	background-color: #EEF2F5;
 }
-header, footer, #body{
+#header-content, #footer-content, #body{
     width: 1000px;
     margin:0 auto;
 }
@@ -87,6 +92,17 @@ header, footer, #body{
 #wrapper{
     width: 100%;
     background-color: white;
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -100px;
+}
+#push, footer{
+	height:100px;
+}
+footer{
+	background-color:#EEF2F5;
+	width:100%;
 }
 
 /****** Logo *********/
@@ -101,11 +117,11 @@ header, footer, #body{
 }
 
 /****** Top Menu *********/
-.menu_1{
+ul.menu_top{
     float:right;
     margin-top:55px;
 }
-.menu_1 li{
+ul.menu_top li{
 	padding: 0px 0px 0 40px;
 	float: left;
 	list-style: none;
@@ -113,19 +129,20 @@ header, footer, #body{
 	background-repeat: no-repeat;
 	background-position: 12px 2px;
 }
-.menu_1 li:first-child{
+ul.menu_top li:first-child{
 	background-image:none;
 	padding-left:none;
 }
-.menu_1 li a{
-    color: #666;
+ul.menu_top li a{
+    color: #464A53;
     font-size:15px;
     text-transform: uppercase;
     text-decoration:none;
     text-shadow: white 1px 1px 3px;
 }
-.menu_1 li.top_menu_selected a{
+ul.menu_top li.selected a{
     color:#000;
+	font-weight:bold;
 }
 
 /***** Sidebar ******/
@@ -133,17 +150,17 @@ nav#sidebar{
 	width:260px;
 	float:left;
 }
-nav#sidebar div.left_head{
+nav#sidebar h3{
 	color: #3F4C76;
 	font-size:16px;
 }
-.vertical_menu1 ul{
+nav#sidebar ul.menu_sidebar{
 	padding: 15px 0 15px 15px;
 }
-.vertical_menu1 li{
+nav#sidebar ul.menu_sidebar li{
 	list-style-image: url('images/sidebar_menu_arrow.png');
 }
-.vertical_menu1 li a{
+nav#sidebar ul.menu_sidebar li a{
 	text-decoration:none;
 	color: #464A53;
 	font-size:14px;
@@ -152,7 +169,7 @@ nav#sidebar div.left_head{
 	padding-bottom: 10px;
 	padding-top: 10px;
 }
-.top_menu_selected{
+nav#sidebar ul.menu_sidebar li.selected{
 	font-weight:bold;
 }
 /****** Content ****/
@@ -175,7 +192,7 @@ h2{
 }
 /****** Footer ******/
 footer ul{
-	padding:15px 0 40px;
+	padding:25px 0 35px;
 	margin-left:0;
 }
 footer ul li{
@@ -184,7 +201,13 @@ footer ul li{
 	padding: 0px 40px 0 0;
 }
 footer ul li a{
-	color:#464A53 !important;
+	font-size:13px;
+	color:#525355 !important;
+	text-shadow: white 1px 1px 3px;
+}
+footer ul li.selected a{
+	color: black !important;
+	font-weight:bold;
 }
 /***** Misc ******/
 div.clear{
@@ -196,8 +219,10 @@ div.clear{
 	color: #fff;
 	border: none;
 	font-size: 16px;
-	padding: 3px 15px;
-	height:28px;
+	font-weight: bold;
+	padding: 0px 17px 0;
+	line-height: 34px;
+	height: 33px;
 
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
@@ -208,7 +233,7 @@ input:focus{
 	outline: none;
 }
 table.form{
-	border-spacing:10px;
+	border-spacing:15px;
 	border-collapse: separate;
 	font-size:16px;
 	width: 550px;
@@ -233,6 +258,9 @@ table.form input[type="password"]{
 }
 
 /***** Fonts ******/
+body{
+	font-family:"Lucida Sans Unicode","Lucida Grande",Garuda,sans-serif;
+}
 h1{
 	font-family: 'CartoGothicStdBook';
 	font-size: 36px;
@@ -241,9 +269,16 @@ h2{
 	font-family: 'CartoGothicStdBold';
 	font-size: 24px;
 }
-.menu_1 li a{
-	font-family: 'CartoGothicStdBold';
+.menu_top li a{
+	font-family: 'CartoGothicStdBook';
 	font-size: 14px;
+}
+input, select, textarea{
+	font-family: "Lucida Sans Unicode","Lucida Grande",Garuda,sans-serif;
+	font-size: 13px;
+}
+.button{
+	font-family: 'CartoGothicStdBold';
 }
 /**** Message ****/
 .message_info{

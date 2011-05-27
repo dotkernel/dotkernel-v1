@@ -470,7 +470,7 @@ function parseHtmlRows($data)
 <div id="wrap">
 	<h1>DotKernel  System Requirements Check</h1>
 	<p class="intro">
-		We have run the below tests to determine if DotKernel will work in your environment.<br/>
+		We have run the tests below to determine if DotKernel will work in your environment.<br/>
 		If any of the tests have failed, consult the <a href="http://www.dotkernel.com/docs/system-requirements/">system requirements</a> page for more information. 
 	</p>
 	
