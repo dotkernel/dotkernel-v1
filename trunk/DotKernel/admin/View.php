@@ -250,7 +250,7 @@ class View extends Dot_Template
 		{
 			$this->parse('first_row', '');
 		}
-		if ($page->current != $page->last)
+		if ($page->current != $page->last && $page->last > $page->current)
 		{
 			$this->setVar('LAST_LINK',$link.$page->last);
 			$this->parse('last_row', 'last', TRUE);
