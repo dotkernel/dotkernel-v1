@@ -106,13 +106,16 @@ class Dot_UserAgent_Wurfl
 	}
 	
 	/**
-	 * Remove the content from the persistent storage 
+	 * Remove the content from the persistent storage, only if the cache exist 
 	 * @access public
 	 * @return void
 	 */
 	public function removeWurflFactory()
 	{
-		$this->_wurflManagerFactory->remove();
+		if($this->_cacheExist())
+		{
+			$this->_wurflManagerFactory->remove();
+		}
 	}
 	
 	/**
