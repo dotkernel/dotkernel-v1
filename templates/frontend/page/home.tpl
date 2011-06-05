@@ -37,9 +37,9 @@
 	</div>
 	
 	<h2>1. Special Controllers</h2>
-	<strong>Mobile: </strong><a href="http://v1.dotkernel.net/mobile/ ">Mobile</a><br/> 
-	<strong>Backend: </strong><a href="http://v1.dotkernel.net/admin/ ">Admin </a><br/> 
-	<strong>RSS: </strong><a href="http://v1.dotkernel.net/rss/ ">RSS </a><br/>
+	<strong>Mobile: </strong><a href="{SITE_URL}/mobile/ ">Mobile</a><br/> 
+	<strong>Backend: </strong><a href="{SITE_URL}/admin/ ">Admin </a><br/> 
+	<strong>RSS: </strong><a href="{SITE_URL}/rss/ ">RSS </a><br/>
 	<strong>Console: </strong>Call this only from command line<br/> 
 	<p>
 		Also the above controllers are <strong>reserved words</strong> so you cannot have an action called
