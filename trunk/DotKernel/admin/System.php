@@ -157,7 +157,8 @@ class System extends Dot_Model
 	 */
 	public function getWarnings()
 	{
-		$warnings = array();
+		// warning "categories"
+		$warnings = array('Delete'=>array(), 'Make Writable'=>array(), 'Make Unwritable'=>array());
 		
 		// check for files that should be deleted
 		$filesToDelete = array(
@@ -169,17 +170,17 @@ class System extends Dot_Model
 		{
 			if (file_exists(APPLICATION_PATH."/".$file))
 			{
-				$warnings[] = array('type'=>'please delete', 'description'=>$file);
+				$warnings['Delete'][] = $file;
 			}
 		}
 
 		//ignore permission warning if OS is Windows
 		if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') 
 		{
-			// warning if application.ini is not 644		
-			if(substr(decoct(fileperms(APPLICATION_PATH."/configs/application.ini")),-3) != '644')
-			{//convert the fileperms result from decimal to octal, and take only the last 3 chars
-				$warnings[] = array('type'=>'change permission to 644', 'description'=>'configs/application.ini');
+			// warning if application.ini is not writable
+			if (is_writable(APPLICATION_PATH."/configs/application.ini"))
+			{
+				$warnings["Make Unwritable"][] = 'configs/application.ini';
 			}
 			
 			// only the folders set in application.ini (folders.perimssion[]) should be writable 	
@@ -202,14 +203,14 @@ class System extends Dot_Model
 				{
 					if (!is_writable($path))
 					{
-						$warnings[] = array('type'=>'make writable', 'description'=>$path);
+						$warnings["Make Writable"][] = $path;
 					}
 				}
 				else
 				{
 					if (is_writable($path))
 					{
-						$warnings[] = array('type'=>'change permission to 755', 'description'=>$path);
+						$warnings["Make Unwritable"][] = $path;
 					}
 				}
 			}
