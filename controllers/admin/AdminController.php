@@ -22,6 +22,13 @@ $pageTitle = $option->pageTitle->action->{$registry->requestAction};
 switch ($registry->requestAction)
 {
 	case 'login':
+		$session = Zend_Registry::get("session");
+		if ($session->admin !== NULL)
+		{
+			header('location: '.$registry->configuration->website->params->url.'/admin');
+			exit();
+		}
+		
 		// show the Login form
 		$adminView->loginForm('login');
 	break;	
