@@ -182,23 +182,35 @@ class System extends Dot_Model
 				$warnings[] = array('type'=>'change permission to 644', 'description'=>'configs/application.ini');
 			}
 			
-			// warning for all folders > 755 	
-			$folderException = $this->config->folders->permission->toArray();	
+			// only the folders set in application.ini (folders.perimssion[]) should be writable 	
+			$folderException = $this->config->folders->permission->toArray();
+			// go through all folders in the tree
 			$folders = $this->_listDirectory(APPLICATION_PATH);
 			foreach ($folders as $path)
 			{
-				$skip = false;
+				// exceptions are configured in application.ini. they should be writable
+				$isException = false;
 				foreach($folderException as $exception)
 				{
 					if (strpos($path, $exception) !== false)
 					{
-						$skip = true;
+						$isException = true;
 						break;
 					}
 				}
-				if(!$skip && intval(substr(decoct(fileperms($path)),-3)) > 755)
+				if ($isException)
 				{
-					$warnings[] = array('type'=>'change permission to 755', 'description'=>$path);
+					if (!is_writable($path))
+					{
+						$warnings[] = array('type'=>'make writable', 'description'=>$path);
+					}
+				}
+				else
+				{
+					if (is_writable($path))
+					{
+						$warnings[] = array('type'=>'change permission to 755', 'description'=>$path);
+					}
 				}
 			}
 		}
