@@ -14,9 +14,9 @@
 -->
 <wurfl-config>
     <wurfl>
-        <main-file>../externals/wurfl/wurfl.zip</main-file>
+        <main-file>./externals/wurfl/wurfl.zip</main-file>
         <patches>
-            <patch>../externals/wurfl/web_browsers_patch.xml</patch>
+            <patch>./externals/wurfl/web_browsers_patch.xml</patch>
         </patches>
     </wurfl>
     <allow-reload>true</allow-reload>
@@ -30,7 +30,7 @@
     <persistence>
          <!-- It is used for saving the parsed wurf devices, possible values are: file, memcache, apc -->
         <provider>file</provider>
-        <params>dir=../cache/wurfl/</params>
+        <params>dir=./cache/wurfl/</params>
     </persistence>
     <!-- 
     <persistence>
