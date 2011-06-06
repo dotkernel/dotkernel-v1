@@ -50,7 +50,7 @@ class Dot_UserAgent
 	 */
 	public static function getBrowserIcon($userAgent, $return = 'icon')
 	{
-		$xml = new Zend_Config_Xml(CONFIGURATION_PATH.'/browser.xml');
+		$xml = new Zend_Config_Xml(CONFIGURATION_PATH.'/useragent/browser.xml');
 		$browser = $xml->name->type->toArray();
 		foreach ($browser as $key => $val)
 		{
@@ -75,7 +75,7 @@ class Dot_UserAgent
 	 */
 	public static function getOsIcon($userAgent)
 	{
-		$xml = new Zend_Config_Xml(CONFIGURATION_PATH.'/os.xml');
+		$xml = new Zend_Config_Xml(CONFIGURATION_PATH.'/useragent/os.xml');
 		$os = $xml->type->toArray();
 		foreach ($os as $major)
 		{

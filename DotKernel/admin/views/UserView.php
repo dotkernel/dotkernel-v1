@@ -95,7 +95,7 @@ class User_View extends View
 		$dotGeoip = new Dot_Geoip();
 		$this->tpl->setFile('tpl_main', 'user/' . $templateFile . '.tpl');
 		$this->tpl->setBlock('tpl_main', 'browser', 'browser_row');
-		$xml = new Zend_Config_Xml(CONFIGURATION_PATH.'/browser.xml');
+		$xml = new Zend_Config_Xml(CONFIGURATION_PATH.'/useragent/browser.xml');
 		$browserArray = $xml->name->type->toArray();
 		foreach ($browserArray as $key => $val)
 		{
