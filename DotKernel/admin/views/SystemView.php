@@ -51,7 +51,9 @@ class System_View extends View
 		if ($apcInfo['version'] == TRUE)
 		{
 			$this->tpl->setVar('APCSTATUS', 'enabled');
-		}else{
+		}
+		else
+		{
 			$this->tpl->setVar('APCSTATUS', 'disabled');
 		}
 		$this->tpl->setVar('PHPAPI',php_sapi_name());
@@ -61,22 +63,28 @@ class System_View extends View
 		$this->tpl->setVar('WURFLDATE', $wurflInfo['xmlFileDate']);
 		$this->tpl->setVar('WURFLAPIVERSION', $wurflInfo['apiVersion']);
 
-		if (empty($warnings))
+		// show warnigns
+		$this->tpl->setBlock('tpl_main', 'warning_item', 'warning_item_block');
+		$this->tpl->setBlock('tpl_main', 'warnings', 'warnings_block');
+		foreach($warnings as $warningType => $warningItems)
 		{
-			$this->tpl->setBlock('tpl_main', 'warnings_table', 'warnings_block');
-			$this->tpl->parse('warnings_block', '', true);
-		}
-		else
-		{
-			$this->tpl->setBlock('tpl_main', 'warnings_list', 'warnings_list_block');
-			$warningCount = count($warnings);
-			for ($i = 0; $i < $warningCount; $i++)
+			if (empty($warningItems))
 			{
-				$this->tpl->setVar('WARNING_TYPE', $warnings[$i]['type']);
-				$this->tpl->setVar('WARNING_DESCRIPTION', $warnings[$i]['description']);
-				$this->tpl->parse('warnings_list_block', 'warnings_list', true);
+				$this->tpl->parse('warnings_block', '', true);
+			}
+			else
+			{
+				$this->tpl->setVar('WARNING_TYPE', $warningType);
+				foreach($warningItems as $warningItem)
+				{
+					$this->tpl->setVar('WARNING_DESCRIPTION', $warningItem);
+					$this->tpl->parse('warning_item_block', 'warning_item', true);
+				}
+				$this->tpl->parse('warnings_block', 'warnings', true);
+				$this->tpl->parse('warning_item_block', '');
 			}
 		}
+
 		
 		// GeoIP section
 		$this->tpl->setVar('GEOIP_COUNTRY_LOCAL', $geoIpVersion['local']);

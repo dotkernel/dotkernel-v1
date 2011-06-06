@@ -1,5 +1,6 @@
 <script>
 	$(document).ready(function(){
+		// update jQuery and jQuery UI versions
 		$("#jqueryVersion").text($().jquery);
 		$("#jqueryUiVersion").text($.ui.version);
 	});
@@ -72,14 +73,14 @@
 </fieldset>
 <fieldset style="width: 500px;float: left;margin-right: 50px;">
 	{WIDGET_USER_LOGINS}
-	<!-- BEGIN warnings_table -->
-	<table class="message_error" style="width:100%;margin-top:10px;">
-		<!-- BEGIN warnings_list -->
-		<tr>
-			<td width="150px">{WARNING_TYPE}</td>
-			<td>{WARNING_DESCRIPTION}</td>
-		</tr>
-		<!-- END warnings_list -->
-	</table>
-	<!-- END warnings_table -->
+	<!-- BEGIN warnings -->
+	<div class="message_error" style="width:480px;margin-top:10px;padding:10px">
+		<strong style="font-size:13px">{WARNING_TYPE}</strong>
+		<ul style="padding:3px 15px;color:#666;font-size:11px">
+			<!-- BEGIN warning_item -->
+			<li>{WARNING_DESCRIPTION}</li>
+			<!-- END warning_item -->
+		</ul>
+	</div>
+	<!-- END warnings -->
 </fieldset>
