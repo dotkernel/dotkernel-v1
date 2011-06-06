@@ -30,7 +30,7 @@ class Dot_Acl
 	public function __construct()
 	{		
 		$router = new Zend_Config_Xml(CONFIGURATION_PATH.'/router.xml');
-		$role = new Zend_Config_Xml(CONFIGURATION_PATH.'/role.xml');
+		$role = new Zend_Config_Xml(CONFIGURATION_PATH.'/acl/role.xml');
 
 		$this->requestModule = Zend_Registry::get('requestModule');
 		$this->requestController = Zend_Registry::get('requestController');
