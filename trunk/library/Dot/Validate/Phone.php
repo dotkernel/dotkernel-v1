@@ -87,7 +87,7 @@ class Dot_Validate_Phone extends Dot_Validate
 			$this->_value = $options['values'];
 		}
 		
-		$xml = new Zend_Config_Xml(CONFIGURATION_PATH.'/phone.xml');
+		$xml = new Zend_Config_Xml(CONFIGURATION_PATH.'/validate/phone.xml');
 		$phoneOptions = $xml->numbers->country->toArray();
 		foreach ($phoneOptions as $key => $val)
 		{
