@@ -26,7 +26,6 @@ class User extends Dot_Model_User
 	public function __construct()
 	{
 		parent::__construct();
-		$this->seoOption = Dot_Route::getOption();
 	}	
 	/**
 	 * Get user list
@@ -59,12 +58,13 @@ class User extends Dot_Model_User
 	public function sendPassword($id)
 	{
 		$session = Zend_Registry::get('session');
+		$seoOption = Zend_Registry::get('seo');
 		$value = $this->getUserBy('id', $id);
 		if(!empty($value))
 		{
 			$dotEmail = new Dot_Email();
 			$dotEmail->addTo($value['email']);
-			$dotEmail->setSubject($this->seoOption->siteName . ' - ' . $this->option->forgotPassword->subject);
+			$dotEmail->setSubject($seoOption->siteName . ' - ' . $this->option->forgotPassword->subject);
 			$msg = str_replace(array('%FIRSTNAME%', '%PASSWORD%'), 
 							   array($value['firstName'], $value['password']), 
 				              $this->option->forgotPassword->message);
