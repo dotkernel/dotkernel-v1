@@ -36,7 +36,7 @@ class Dot_Email extends Zend_Mail
 		$this->settings = Zend_Registry::get('settings');
 		$this->db = Zend_Registry::get('database');
 		$this->addHeader('X-Mailer', $this->xmailer);
-		$this->seoOption = Dot_Route::getOption();
+		$this->seoOption = Zend_Registry::get('seo');
 	}
 	/**
 	 * Set content

@@ -62,7 +62,7 @@ class Dot_Kernel
 		//Load routes(modules, controllers, actions) settings from router.xml file and store it in registry
 		$router = new Zend_Config_Xml(CONFIGURATION_PATH.'/router.xml');
 		$registry->router = $router;
-
+		
 		// Create  connection to database, as singleton , and store it in registry
 		$db = Zend_Db::factory('Pdo_Mysql', $config->database->params->toArray());
 		$registry->database = $db;
@@ -77,6 +77,8 @@ class Dot_Kernel
 		// Extract the route from the URI
 		Dot_Route::setRoute();
 
+		$seo = new Zend_Config_Xml(CONFIGURATION_PATH.'/dots/seo.xml');
+		
 		// initialize seo options
 		$registry->seo = Dot_Route::getOption();
 
