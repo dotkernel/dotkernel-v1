@@ -180,9 +180,9 @@ else
 		if($cgi)
 		{
 			 $check['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i> module', 
-											                   'status' => 'pass', 
-											                   'value'  => 'You are running Apache with cgi-fastcgi, <br> presence of 
-																				 mod_rewrite cannot be determined.');
+																						'status' => 'pass', 
+																						'value'  => 'You are running Apache with <br> cgi-fastcgi. <br> Presence of 
+																												mod_rewrite <br>cannot be determined.');
 		}
 		else
 		{
@@ -197,138 +197,184 @@ else
 // check ctype	
 if(extension_loaded('ctype'))
 {
-	$check['php_ctype'] = array('name'   => 'PHP <i>Ctype</i> extension', 
+	$check['php_ctype'] = array('name'   => 'PHP <i>Ctype</i>', 
 															'status' => 'pass', 
 															'value'  => 'OK');
 }
 else
 {
-	$check['php_ctype'] = array('name'   => 'PHP <i>Ctype</i> extension', 
+	$check['php_ctype'] = array('name'   => 'PHP <i>Ctype</i>', 
 														  'status' => 'failed', 
 															'value'  => 'DotKernel requires <a href="http://www.php.net/manual/en/book.ctype.php">
-															             Ctype</a>, used by Zend Framework.');
+															             Ctype</a> extension.');
 	$test = false;
 }
 // check PDO MySQL
 if(extension_loaded('pdo_mysql'))
 {
-	$check['php_pdo_mysql'] = array('name'   => 'PHP <i>PDO_MySQL</i> extension', 
+	$check['php_pdo_mysql'] = array('name'   => 'PHP <i>PDO_MySQL</i>', 
 																	'status' => 'pass', 
 																	'value'  => 'OK');
 }
 else
 {
-	$check['php_pdo_mysql'] = array('name'   => 'PHP <i>PDO_MySQL</i> extension', 
+	$check['php_pdo_mysql'] = array('name'   => 'PHP <i>PDO_MySQL</i>', 
 																	'status' => 'failed', 
-																	'value'  => 'DotKernel requires 
+																	'value'  => 'By default, DotKernel use  <br />
 																	             <a href="http://www.php.net/manual/en/ref.pdo-mysql.php">PDO MySQL</a> 
-																							 for database connection. ');
+																							 driver. ');
 	$test = false;
 }
 // check session
 if(extension_loaded('session'))
 {
-	$check['php_session'] = array('name'   => 'PHP <i>session</i> extension', 
+	$check['php_session'] = array('name'   => 'PHP <i>session</i>', 
 															  'status' => 'pass', 
 															  'value'  => 'OK');
 }
 else
 {
-	$check['php_session'] = array('name'   => 'PHP <i>session</i> extension', 
-															  'status' => 'failed', 
-															  'value'  => 'DotKernel requires <a href="http://www.php.net/manual/en/book.session.php">
-																             session</a>, used by Zend Framework. ');
+	$check['php_session'] = array('name'   => 'PHP <i>session</i>', 
+																'status' => 'failed', 
+																'value'  => 'DotKernel requires <a href="http://www.php.net/manual/en/book.session.php">
+																						 <br />Session Handling</a>. ');
 	$test = false;
 }
 // check SPL
 if(function_exists('spl_autoload_register'))
 {
-	$check['php_spl'] = array('name'   => 'PHP <i>SPL</i> extension', 
+	$check['php_spl'] = array('name'   => 'PHP <i>SPL</i>', 
 													  'status' => 'pass', 
 													  'value'  => 'OK');
 }
 else
 {
-	$check['php_spl'] = array('name'   => 'PHP <i>SPL</i> extension', 
-													  'status' => 'failed', 
-													  'value'  => 'DotKernel requires <a href="http://www.php.net/manual/en/book.spl.php">SPL</a>,
-														             used by Zend Framework. ');
+	$check['php_spl'] = array('name'   => 'PHP <i>SPL</i>', 
+														'status' => 'failed', 
+														'value'  => 'DotKernel requires <br />
+																					<a href="http://www.php.net/manual/en/book.spl.php">SPL</a> library. ');
+	$test = false;
+}
+// check JSON
+if(function_exists('json_decode'))
+{
+	$check['php_json'] = array('name'   => 'PHP <i>JSON</i>', 
+													  'status' => 'pass', 
+													  'value'  => 'OK');
+}
+else
+{
+	$check['php_json'] = array('name'   => 'PHP <i>JSON</i>', 
+														'status' => 'failed', 
+														'value'  => 'DotKernel requires 
+																					<a href="http://www.php.net/manual/en/book.json.php">JSON</a> library. ');
 	$test = false;
 }
 
 // check APC
 if((function_exists('apc_cache_info') && (@apc_cache_info() !== FALSE)))
 {
-	$checkOptional['php_apc'] = array('name'   => 'PHP <i>APC</i> extension', 
+	$checkOptional['php_apc'] = array('name'   => 'PHP <i>APC</i>', 
 																	   'status' => 'pass', 
 																	   'value'  => 'OK');
 }
 else
 {
-	$checkOptional['php_apc'] = array('name'   => 'PHP <i>APC</i> extension', 
-																	   'status' => 'failed', 
-																	   'value'  => 'DotKernel recommend the use of APC extension for opcode caching. ');
+	$checkOptional['php_apc'] = array('name'   => 'PHP <i>APC</i>', 
+																		'status' => 'failed', 
+																		'value'  => 'DotKernel recommend the use <br /> 
+																		 							of APC extension for opcode caching. ');
 }
 
 // check cURL
 if(extension_loaded('curl'))
 {
-	$checkOptional['php_curl'] = array('name'   => 'PHP <i>cURL</i> extension', 
+	$checkOptional['php_curl'] = array('name'   => 'PHP <i>cURL</i>', 
 																	   'status' => 'pass', 
 																	   'value'  => 'OK');
 }
 else
 {
-	$checkOptional['php_curl'] = array('name'   => 'PHP <i>cURL</i> extension', 
+	$checkOptional['php_curl'] = array('name'   => 'PHP <i>cURL</i>', 
 																	   'status' => 'failed', 
-																	   'value'  => 'DotKernel requires 
-																		              <a href="http://www.php.net/manual/en/book.curl.php">cURL</a> for the
-																									 Dot_Curl class.');
+																	   'value'  => 'DotKernel requires <br>
+																									<a href="http://www.php.net/manual/en/book.curl.php">Client URL</a> 
+																									 library.');
 }
 // check gd
 if(extension_loaded('gd'))
 {
-	$checkOptional['php_gd'] = array('name'   => 'PHP <i>GD</i> extension', 
+	$checkOptional['php_gd'] = array('name'   => 'PHP <i>GD</i>', 
 																	 'status' => 'pass', 
 																	 'value'  => 'OK');
 }
 else
 {
-	$checkOptional['php_gd'] = array('name'   => 'PHP <i>GD</i> extension', 
+	$checkOptional['php_gd'] = array('name'   => 'PHP <i>GD</i>', 
 																	 'status' => 'failed', 
 																	 'value'  => 'DotKernel requires 
-																	             <a href="http://www.php.net/manual/en/book.image.php">GD</a>, 
-																							 used by Zend Framework and for image manipulation.');
+																								<a href="http://www.php.net/manual/en/book.image.php">GD</a> library,
+																								<br>for image manipulation.');
 }
 // check mbstring
 if(extension_loaded('mbstring'))
 {
-	$checkOptional['php_mbstring'] = array('name'   => 'PHP <i>mbstring</i> extension', 
+	$checkOptional['php_mbstring'] = array('name'   => 'PHP <i>mbstring</i>', 
 																			   'status' => 'pass', 
 																			   'value'  => 'OK');
 }
 else
 {
-	$checkOptional['php_mbstring'] = array('name'   => 'PHP <i>mbstring</i> extension', 
-																			   'status' => 'failed', 
-																			   'value'  => 'DotKernel requires 
-																				              <a href="http://www.php.net/manual/en/book.mbstring.php">mbstring
-																											</a>, used by Zend Framework.');
+	$checkOptional['php_mbstring'] = array('name'   => 'PHP <i>mbstring</i>', 
+																				 'status' => 'failed', 
+																					'value'  => 'DotKernel requires 
+																											<a href="http://www.php.net/manual/en/book.mbstring.php">mbstring
+																											</a> extension, <br>used by Zend Framework.');
+}
+// check ssh2 extension
+if(extension_loaded('ssh2'))
+{
+	$checkOptional['php_ssh2'] = array('name'   => 'PHP <i>ssh2</i>', 
+																			   'status' => 'pass', 
+																			   'value'  => 'OK');
+}
+else
+{
+	$checkOptional['php_ssh2'] = array('name'   => 'PHP <i>ssh2</i>', 
+																				 'status' => 'failed', 
+																					'value'  => 'DotKernel recommend <br />
+																											<a href="http://www.php.net/manual/en/book.ssh2.php">ssh2</a>
+																											extension.');
+}
+// check zip extension
+if(extension_loaded('zip'))
+{
+	$checkOptional['php_zip'] = array('name'   => 'PHP <i>zip</i>', 
+																			   'status' => 'pass', 
+																			   'value'  => 'OK');
+}
+else
+{
+	$checkOptional['php_zip'] = array('name'   => 'PHP <i>zip</i>', 
+																				 'status' => 'failed', 
+																					'value'  => 'DotKernel recommend <br />
+																											<a href="http://www.php.net/manual/en/book.zip.php">Zip</a>
+																											extension.');
 }
 //check GeoIp
 if(extension_loaded('geoip'))
 {
-	$checkOptional['php_geoip'] = array('name'   => 'PHP <i>GeoIP</i> extension', 
+	$checkOptional['php_geoip'] = array('name'   => 'PHP <i>GeoIP</i>', 
 																			'status' => 'pass', 
 																			'value'  => 'OK');
 }
 else
 {
-	$checkOptional['php_geoip'] = array('name'   => 'PHP <i>GeoIP</i> extension', 
+	$checkOptional['php_geoip'] = array('name'   => 'PHP <i>GeoIP</i>', 
 																			'status' => 'failed', 
 																			'value'  => 'DotKernel requires 
-																			            <a href="http://www.php.net/manual/en/book.geoip.php">GeoIP</a> used
-																									 by the Dot_GeoIP class for faster compilation.');
+																									<a href="http://www.php.net/manual/en/book.geoip.php">GeoIP</a><br />
+																									 used by the  Dot_GeoIP <br> class for faster compilation.');
 }
 
 function parseHtmlRows($data)
