@@ -332,18 +332,18 @@ else
 																											</a> extension, <br>used by Zend Framework.');
 }
 // check ssh2 extension
-if(extension_loaded('ssh2'))
+if(extension_loaded('ftp'))
 {
-	$checkOptional['php_ssh2'] = array('name'   => 'PHP <i>ssh2</i>', 
+	$checkOptional['php_ftp'] = array('name'   => 'PHP <i>ftp</i>', 
 																			   'status' => 'pass', 
 																			   'value'  => 'OK');
 }
 else
 {
-	$checkOptional['php_ssh2'] = array('name'   => 'PHP <i>ssh2</i>', 
+	$checkOptional['php_ftp'] = array('name'   => 'PHP <i>ftp</i>', 
 																				 'status' => 'failed', 
 																					'value'  => 'DotKernel recommend <br />
-																											<a href="http://www.php.net/manual/en/book.ssh2.php">ssh2</a>
+																											<a href="http://www.php.net/manual/en/book.ftp.php">ftp</a>
 																											extension.');
 }
 // check zip extension
