@@ -64,14 +64,21 @@ class WURFL_DeviceRepositoryBuilder {
 		if (!$this->isRepositoryBuilt()) {
 			set_time_limit(300);
 			$fp = fopen($this->lockFile, "r");
-			if (flock($fp, LOCK_EX) && !$this->isRepositoryBuilt()) {
+			/**
+			 * On Solaris ,  a file has to be open for writing (or read/writing) to place an exclusive lock on it.
+			 * That's why the condition at line 67 will always evaluate as false.
+			 * Original line 72: if (flock($fp, LOCK_EX) && !$this->isRepositoryBuilt()) {
+			 * Uncomment line 81 as well
+			 * DotKernel modification at June 7th, 2011 
+			 */
+			if (!$this->isRepositoryBuilt()) {
 				$infoIterator = new WURFL_Xml_VersionIterator($wurflFile);
 				$deviceIterator = new WURFL_Xml_DeviceIterator($wurflFile, $capabilitiesToUse);
 				$patchIterators = $this->toPatchIterators($wurflPatches , $capabilitiesToUse);
 			
 				$this->buildRepository($infoIterator, $deviceIterator, $patchIterators);
 				$this->setRepositoryBuilt();	
-				flock($fp, LOCK_UN);
+				//flock($fp, LOCK_UN);
 			}
 		}
 		$deviceClassificationNames = $this->deviceClassificationNames();
