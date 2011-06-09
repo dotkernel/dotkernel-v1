@@ -5,9 +5,6 @@
 		$("#jqueryUiVersion").text($.ui.version);
 	});
 </script>
-
-<img src="http://localhost/DotKernel/blahblah.jpg" alt="" width="20" height="20"/>
-<script src="{SITE_URL}/externals/jqueryssss/ui/jquery-ui.minssss.js"></script>
 <fieldset style="width: 460px;float: left;margin-right: 50px;">
 	<legend>System Overview</legend>
 	<table class="medium_table" width="100%">
