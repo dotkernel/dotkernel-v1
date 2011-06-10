@@ -61,9 +61,9 @@ class Dot_Route
 		$requestController = 'Index';
 		if (isset($requestRaw['0']) && $requestRaw['0'] != '')
 		{
-			$requestController = Dot_Route::processController($requestRaw['0']);
+			$requestController = $requestRaw['0'];
 		}
-
+		
 		// set Action value, default nothing
 		$requestAction = '';
 		if (isset($requestRaw['1']) && $requestRaw['1'] != '')
@@ -120,6 +120,10 @@ class Dot_Route
 		
 		$requestAction = isset($requestAction) && $requestAction !='' ? $requestAction : $defaultAction;
 
+		// processed controller, eg BlogArticle
+		$requestControllerProcessed = Dot_Route::processController($requestController);
+		
+		Zend_Registry::set('requestControllerProcessed', $requestControllerProcessed);
 		Zend_Registry::set('requestController', $requestController);
 		Zend_Registry::set('requestAction', $requestAction);
 	}

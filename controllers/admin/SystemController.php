@@ -105,8 +105,8 @@ switch ($registry->requestAction)
 				$registry->session->message['txt'] = $option->infoMessage->noTransporterDelete;
 				$registry->session->message['type'] = 'info';
 			}
-		header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestModule . '/' . $registry->requestController. '/transporter-list/');
-			 exit;
+			header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestModule . '/' . $registry->requestController. '/transporter-list/');
+			exit;
 		}
 		$data = $systemModel->getEmailTransporterBy('id', $registry->request['id']);
 		// delete page confirmation

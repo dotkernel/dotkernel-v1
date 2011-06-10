@@ -34,6 +34,7 @@ class Dot_Acl
 
 		$this->requestModule = Zend_Registry::get('requestModule');
 		$this->requestController = Zend_Registry::get('requestController');
+		$this->requestControllerProcessed = Zend_Registry::get('requestControllerProcessed');
 		$this->requestAction = Zend_Registry::get('requestAction');
 		
 		// instantiate Zend_Acl
@@ -170,7 +171,7 @@ class Dot_Acl
 	 */
 	public function isAllowed($role)
 	{
-		$resource = $this->requestController;
+		$resource = $this->requestControllerProcessed;
 		$privillege = $this->requestAction;
 		if(!$this->acl->has($resource))
 		{
