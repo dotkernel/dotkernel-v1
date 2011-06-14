@@ -30,12 +30,12 @@ class WURFL_DeviceRepositoryBuilder {
 		$this->persistenceProvider = $persistenceProvider;
 		$this->userAgentHandlerChain = $userAgentHandlerChain;
 		$this->devicePatcher = $devicePatcher;
-		$this->lockFile = dirname(__FILE__) . "/" . "DeviceRepositoryBuilder.php";
+		$this->lockFile = sys_get_temp_dir() . "/WURFL_LOCK";
 	}
 	
 	public function build($wurflFile, $wurflPatches = array(), $capabilitiesToUse = array()) {
 		if (! $this->isRepositoryBuilt ()) {
-			$fp = fopen($this->lockFile, "r");
+			$fp = fopen($this->lockFile, "a+");
 			if (flock($fp, LOCK_EX) && !$this->isRepositoryBuilt()) {
 				$infoIterator = new WURFL_Xml_VersionIterator ( $wurflFile );
 				$deviceIterator = new WURFL_Xml_DeviceIterator ( $wurflFile, $capabilitiesToUse);
