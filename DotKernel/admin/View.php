@@ -217,7 +217,7 @@ class View extends Dot_Template
 	/**
 	 * Create the pagination, based on how many data
 	 * @access public
-	 * @param array $data
+	 * @param array $page
 	 * @return string
 	 */
 	protected function paginator($page)
@@ -379,7 +379,7 @@ class View extends Dot_Template
 		
 	}
 
-	/*
+	/**
 	 * Sets extra breadcrumbs beyond the controller and action that are set as default
 	 * If $breadcrumb is an array, a breadcrumb will be added for each element. The content of the tag
 	 * will be the key of the element, and the href will be the value. You probabily want to leave the value

@@ -167,6 +167,7 @@ class Dot_Template
 	 * base directory from which templates are loaded by storing the value in
 	 * $this->root. Relative filenames are prepended with the path in $this->root.
 	 * @access public
+	 * @param string $root - the root directory for templates
 	 * @return bool
 	 */
 	public function setRoot($root)
@@ -198,6 +199,7 @@ class Dot_Template
 	/**
 	 * Return the end time
 	 * @access private
+	 * @param string $varname - name of the variable
 	 * @return float
 	 */
 	private function _endTimer($varname)
@@ -932,7 +934,7 @@ class Dot_Template
 	 * @access public
 	 * @param mixed $target
 	 * @param mixed $value
-	 * @param string $name
+	 * @param string $append
 	 * @return bool
 	 */
 	public function initBlock($target, $value = '', $append = false)

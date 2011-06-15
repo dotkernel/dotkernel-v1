@@ -31,7 +31,6 @@ class Dot_Settings
 	 * Get settings from database, table, and load into registry $settings
 	 * @access public
 	 * @static
-	 * @param  database connection singleton
 	 * @return object with values from setting table
  	 */
 	public static function getSettings()
@@ -51,7 +50,7 @@ class Dot_Settings
 	 * Set PHP configuration settings
 	 * @access public 
 	 * @static
-	 * @param  array $settings 
+	 * @param  array $phpSettings 
 	 * @param  string $prefix Key prefix to prepend to array values (used to map . separated INI values)
 	 * @return copied from Zend_Application class
  	 */

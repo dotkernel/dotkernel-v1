@@ -219,6 +219,12 @@ class System extends Dot_Model
 		// add any other warnings to $warnings here
 		return $warnings;
 	}
+	/**
+	 * Get a list of files in a directory
+	 * @access public
+	 * @param string $directory
+	 * @return array
+	 */
 	private function _listDirectory($directory)
 	{
 		$result = array();

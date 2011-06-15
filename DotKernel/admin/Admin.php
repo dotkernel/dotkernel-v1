@@ -180,9 +180,10 @@ class Admin extends Dot_Model
 	/**
 	 * Failed admin login - send email notice to valid admin account
 	 * @access private
+	 * @param arry $values
 	 * @return void
 	 */
-	private function sendEmailFailedLogin($value)
+	private function sendEmailFailedLogin($values)
 	{			
 		$this->seo = Zend_Registry::get('seo');		
 		//get the email of the oldest valid admin account
@@ -195,8 +196,8 @@ class Admin extends Dot_Model
 		$country = $dotGeoip->getCountryByIp(Dot_Kernel::getUserIp());
 		$msg = str_replace(array('%LINK%','%USERNAME%','%PASSWORD%','%DATE%', '%COUNTRY%', '%IP%', '%USERAGENT%'), 
 						   array($this->config->website->params->url.'/' .  Zend_Registry::get('requestModule'), 
-						   		 $value['username'], 
-								 $value['password'], 
+						   		 $values['username'], 
+								 $values['password'], 
 								 Dot_Kernel::timeFormat('now', 'long'), 
 								 $country[1], 
 								 Dot_Kernel::getUserIp(), 

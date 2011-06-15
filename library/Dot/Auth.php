@@ -236,6 +236,7 @@ class Dot_Auth
 	 * Check if a user's token is set and is correct
 	 * @access public
 	 * @static
+	 * @param string $type - the identity that is checked (i.e. admin)
 	 * @return void
 	 */
 	public static function checkUserToken($type='admin')
