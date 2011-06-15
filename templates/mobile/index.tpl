@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>{PAGE_TITLE}</title>
+	<link rel="apple-touch-icon" href="{SITE_URL}/images/apple-touch-icon.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<meta name="keywords" content="{PAGE_KEYWORDS}" >
 	<meta name="description" content="{PAGE_DESCRIPTION}" >

@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<link href="http://fonts.googleapis.com/css?family=Cabin:bold" rel="stylesheet" type="text/css" >
 	<title>Admin - {PAGE_TITLE}</title>
+	<link rel="apple-touch-icon" href="{SITE_URL}/images/apple-touch-icon.png">
 	<link rel="stylesheet" href ="{TEMPLATES_URL}/css/admin/style.css" type="text/css" >
 	<link rel="stylesheet" href ="{TEMPLATES_URL}/css/admin/{SKIN}/style.css" type="text/css" >			
 	<script src="{SITE_URL}/externals/jquery/jquery.min.js"></script>

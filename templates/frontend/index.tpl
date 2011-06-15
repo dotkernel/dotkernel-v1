@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=9">
 	<title>{PAGE_TITLE}</title>
+	<link rel="apple-touch-icon" href="{SITE_URL}/images/apple-touch-icon.png">
 	<meta name="keywords" content="{PAGE_KEYWORDS}" >
 	<meta name="description" content="{PAGE_DESCRIPTION}" >
 	<link rel="canonical" href="{CANONICAL_URL}" >
