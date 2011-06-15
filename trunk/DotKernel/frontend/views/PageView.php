@@ -44,6 +44,8 @@ class Page_View extends View
 	 * Show the content of a page item
 	 * @access public
 	 * @param string $templateFile [optional]
+	 * @param string $imageFileNew [optional]
+	 * @param string $imageFileOld [optional]
 	 * @return void
 	 */
 	public function showImage($templateFile = '', $imageFileNew ='', $imageFileOld ='')

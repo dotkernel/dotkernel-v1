@@ -83,6 +83,7 @@ class Dot_Image
 	/**
 	 * Get the transformed image - new image. URL link to it
 	 * @access public
+	 * @param string $src - source of the image
 	 * @return string
 	 */
 	public function getImage($src = '')

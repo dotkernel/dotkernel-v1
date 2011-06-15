@@ -490,7 +490,7 @@ class Dot_Geoip_Country extends Dot_Geoip
 	/**
 	 * Search the country based on IP address
 	 * @access private
-	 * @param int $ipnum
+	 * @param int $ipNum
 	 * @return int
 	 */
 	private function _geoipSeekCountry($ipNum) 

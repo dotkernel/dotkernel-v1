@@ -50,15 +50,22 @@ class Dot_Debug
 	 * @var bool
 	 */	
 	public $memory_usage = true;
-	
+	/**
+	 * The result of microtime() at the start of the request
+	 * @access private
+	 * @var string
+	 */	
 	private $__startTime;
-	
+	/**
+	 * The module being requested
+	 * @access private
+	 * @var string
+	 */	
 	private $__module;
 	
 	/**
 	 * Constructor
 	 * @access public
-	 * @param Zend_Db $db
 	 * @param Dot_Template $tpl
 	 * @return Dot_Debug
 	 */

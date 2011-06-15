@@ -20,11 +20,35 @@
 	
 class Dot_UserAgent_Wurfl
 {
-	// hold an instance of the class
+	/**
+	 * hold an instance of the class
+	 * @var Dot_UserAgent_Wurfl
+	 * @static
+	 */
 	static $_instance;
+	/**
+	 * the wurfl configuration
+	 * @var WURFL_Configuration_XmlConfig
+	 * @static
+	 */
 	static  $wurflConfig;
+	/**
+	 * the APC Cache
+	 * @var Zend_Cache
+	 * @static
+	 */
 	private $_cacheApc;
+	/**
+	 * wurfl manager
+	 * @var WURFL_WURFLManagerFactory
+	 * @access private
+	 */
 	private $_wurflManagerFactory;
+	/**
+	 * the file containing the version
+	 * @var string
+	 * @access private
+	 */
 	private $_versionFile;
 	
 	/**

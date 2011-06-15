@@ -88,6 +88,10 @@ class User_View extends View
 	 * @param string $templateFile
 	 * @param array $list 
 	 * @param int $page
+	 * @param int $browser
+	 * @param int $loginDate
+	 * @param int $sortField
+	 * @param int $orderBy
 	 * @return void
 	 */
 	public function loginsUser($templateFile, $list, $page, $browser, $loginDate, $sortField, $orderBy)

@@ -103,6 +103,9 @@ class User extends Dot_Model_User
 	 * @param int $id 
 	 * @param int $page [optional]
 	 * @param string $browser [optional]
+	 * @param string $loginDate [optional]
+	 * @param string $sortField [optional]
+	 * @param string $orderBy [optional]
 	 * @return array
 	 */
 	public function getLogins($id, $page = 1, $browser = '', $loginDate = '', $sortField = '', $orderBy = '')

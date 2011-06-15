@@ -234,6 +234,11 @@ class System_View extends View
 		}
 		$this->tpl->parse('TRANSPORTER_ROW', 'tpl_row');
 	}
+	/**
+	 * Parse a transporter row block and return it
+	 * @param array $data
+	 * @return string
+	 */
 	public function getTransporterRow($data)
 	{
 		$this->tpl->setFile('tpl_row', 'system/transporter-row-block.tpl');
