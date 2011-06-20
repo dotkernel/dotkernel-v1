@@ -58,12 +58,13 @@
 	<h2>3. Adding a new Controller</h2>
 	<p>
 		To add a controller called Articles in the frontend, you need to add 3 files:
-		<ul>
-			<li><strong>CONTROLLER</strong>: <em>controllers/frontend/articlesController.php</em> , which contains the switch</li>
-			<li><strong>MODEL</strong>: <em>DotKernel/frontend/Articles.php</em>, which contains the class Articles</li>
-			<li><strong>VIEW</strong>: <em>DotKernel/frontend/views/articlesView.php</em>, which contains the class Articles_View</li>
-		</ul>
-		<br/>
+	</p>
+	<ul>
+		<li><strong>CONTROLLER</strong>: <em>controllers/frontend/articlesController.php</em> , which contains the switch</li>
+		<li><strong>MODEL</strong>: <em>DotKernel/frontend/Articles.php</em>, which contains the class Articles</li>
+		<li><strong>VIEW</strong>: <em>DotKernel/frontend/views/articlesView.php</em>, which contains the class Articles_View</li>
+	</ul>
+	<p>
 		As well as the folder <em>templates/frontend/articles/</em> with the necessary template files.<br/>
 		In config/router.xml, inside the &lt;controller&gt; tag, add: <strong>&lt;frontend&gt;Articles&lt;frontend&gt;</strong>
 	</p>

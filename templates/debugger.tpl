@@ -1,4 +1,4 @@
-<link rel="stylesheet" href ="{SITE_URL}/templates/css/debugger.css" type="text/css" >
+<link rel="stylesheet" href="{SITE_URL}/templates/css/debugger.css" type="text/css" >
 <div class="index_debugger clearfix">
 	<!-- BEGIN php_version -->
 	<div class="version_php"><img src="{SITE_URL}/images/debugbar/php.png" class="debugger_images" alt="{PHP_VERSION}">{PHP_VERSION}</div>
