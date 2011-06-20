@@ -8,8 +8,8 @@
 	<meta name="keywords" content="{PAGE_KEYWORDS}" >
 	<meta name="description" content="{PAGE_DESCRIPTION}" >
 	<link rel="canonical" href="{CANONICAL_URL}" >
-	<link rel="stylesheet" href ="{TEMPLATES_URL}/css/frontend/style.css" type="text/css" >
-	<link rel="stylesheet" href ="{SITE_URL}/externals/fonts/stylesheet.css" type="text/css" >	
+	<link rel="stylesheet" href="{TEMPLATES_URL}/css/frontend/style.css" type="text/css" >
+	<link rel="stylesheet" href="{SITE_URL}/externals/fonts/stylesheet.css" type="text/css" >	
 	<script src="{SITE_URL}/externals/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="{TEMPLATES_URL}/js/frontend/main.js"></script>
 	<!--[if lt IE 9]>
