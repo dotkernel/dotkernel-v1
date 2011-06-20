@@ -179,9 +179,10 @@ class Dot_Auth
 	 * @access public
 	 * @param string $who - who to authentificate
 	 * @param array $values - values to process
+	 * @param bool $storeInSession - should the result be stored in the session?
 	 * @return bool
 	 */
-	public function process($who, $values)
+	public function process($who, $values, $storeInSession = true)
 	{
 		$adapter = $this->_getAuthAdapter($who);
 		$adapter->setIdentity($values['username']);
@@ -198,8 +199,11 @@ class Dot_Auth
 		$result = $auth->authenticate($adapter);
 		if($result->isValid())
 		{
-			$session = Zend_Registry::get('session');
-			$session->$who = $adapter->getResultRowObject();
+			if ($storeInSession)
+			{
+				$session = Zend_Registry::get('session');
+				$session->$who = $adapter->getResultRowObject();
+			}
 			return TRUE;
 		}
 		return FALSE;

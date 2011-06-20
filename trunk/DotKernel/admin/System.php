@@ -158,7 +158,15 @@ class System extends Dot_Model
 	public function getWarnings()
 	{
 		// warning "categories"
-		$warnings = array('Delete'=>array(), 'Make Writable'=>array(), 'Make Unwritable'=>array());
+		$warnings = array('Security'=>array(), 'Delete'=>array(), 'Make Writable'=>array(), 'Make Unwritable'=>array());
+		
+		// check that the default admin user isn't enabled
+		$dotAuth = Dot_Auth::getInstance();
+		$defaultAdminValid = $dotAuth->process('admin', array("username"=>"admin", "password"=>"dot"), $storeInSession = false);
+		if ($defaultAdminValid)
+		{
+			$warnings["Security"][] = "Please change the password of the admin user or deactivate him";
+		}
 		
 		// check for files that should be deleted
 		$filesToDelete = array(
