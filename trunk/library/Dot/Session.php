@@ -28,7 +28,7 @@ class Dot_Session
 	{		
 	}
 	/**
-	 * Start the session
+	 * Start the session, using the session settings from application.ini and dots.xml
 	 * @access public
 	 * @static
 	 * @return void
@@ -36,20 +36,24 @@ class Dot_Session
 	public static function start()
 	{
 		$option = Zend_Registry::get('option');
+		$config = Zend_Registry::get('configuration');
+		
 		//check is a session exists for the current module
 		if(isset($option->session))
 		{
 			$namespaceName = $option->session->name;
-			$rememberMe = $option->session->rememberMeSeconds;
+			
 			//if session is not registered, create it
 			if(!(Zend_Registry::isRegistered('session')))
 			{
 				$session = new Zend_Session_Namespace($namespaceName);
+				// set session options 
+				Zend_Session::setOptions($config->resources->session->toArray());				 
 				if(!isset($session->initialized))
 				{
-					Zend_Session::regenerateId();
-					$session->initialized = TRUE;
-					Zend_Session::rememberMe($rememberMe);
+					$session->initialized = TRUE;					
+					// use only session cookie and regenerate session in the same time 
+					Zend_Session::rememberMe($config->resources->session->remember_me_seconds);
 				}
 				Zend_Registry::set('session',$session);
 			}
