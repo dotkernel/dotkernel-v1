@@ -82,7 +82,7 @@ $tpl->displayWidgets($option->widgets->content);
 // parse the main content block
 $tpl->parse('MAIN_CONTENT', 'tpl_main');
 
-// show debugbar, only for logged in users
+// show debugbar, only for logged in admins
 if (isset($_SESSION['admin']['admin']))
 {
 	$debug = new Dot_Debug($tpl);

@@ -9,7 +9,6 @@ current xml dots file. -->
 		<variable option="admin">
 			<session>
 				<name>admin</name>
-				<rememberMeSeconds>864000</rememberMeSeconds>
 			</session>
 			<warningMessage>
 				<modGeoIp>&lt;i&gt;mod_geoip&lt;/i&gt; extension is not installed. 
@@ -42,7 +41,6 @@ current xml dots file. -->
 		<variable option="frontend">
 			<session>
 				<name>frontend</name>
-				<rememberMeSeconds>864000</rememberMeSeconds>
 			</session>
 			<warningMessage>
 				<userPermission>You don't have enough credentials to access this url.</userPermission>
@@ -53,7 +51,6 @@ current xml dots file. -->
 		<variable option="mobile">
 			<session>
 				<name>mobile</name>
-				<rememberMeSeconds>864000</rememberMeSeconds>
 			</session>
 		</variable>
 	</dots>	
