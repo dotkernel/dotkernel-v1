@@ -34,22 +34,4 @@ switch ($registry->requestAction)
 	case 'outbound-links':
 		$pageView->showPage($registry->requestAction);
 	break;
-	case 'image':
-		$dotImage = new Dot_Image();
-		// set the image that will be manipulated
-		$imagePath = APPLICATION_PATH.'/images/frontend/MVC-structure.png';
-		$imageNewPath = APPLICATION_PATH.'/images/frontend/MVC-structure_resize.png';
-		$dotImage->setImage($imagePath);
-		$dotImage->setDestinationImage($imageNewPath);
-		// initiate the parameters for resizing the image
-		$resizeOption = array('width' => 200, 'height' => 435, 'measure' => 'px', 'preview' => TRUE);
-		$dotImage->setOption($resizeOption);
-		// resize the image
-		$imageError = $dotImage->resize();
-		if($imageError)
-		{
-			$session->message['txt'] = $imageError;
-			$session->message['type'] = 'error';
-		}		
-		$pageView->showImage($registry->requestAction, $dotImage->getImage(), $dotImage->getImage($imagePath));	
 }
