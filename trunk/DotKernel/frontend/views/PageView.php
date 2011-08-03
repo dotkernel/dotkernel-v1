@@ -40,19 +40,4 @@ class Page_View extends View
 		if ($templateFile != '') $this->templateFile = $templateFile;//in some cases we need to overwrite this variable
 		$this->tpl->setFile('tpl_main', 'page/' . $this->templateFile . '.tpl');
 	}
-	/**
-	 * Show the content of a page item
-	 * @access public
-	 * @param string $templateFile [optional]
-	 * @param string $imageFileNew [optional]
-	 * @param string $imageFileOld [optional]
-	 * @return void
-	 */
-	public function showImage($templateFile = '', $imageFileNew ='', $imageFileOld ='')
-	{
-		if ($templateFile != '') $this->templateFile = $templateFile;//in some cases we need to overwrite this variable
-		$this->tpl->setFile('tpl_main', 'page/' . $this->templateFile . '.tpl');
-		$this->tpl->setVar('IMAGEFILENEW', $imageFileNew);
-		$this->tpl->setVar('IMAGEFILEOLD', $imageFileOld);
-	}		
 }
