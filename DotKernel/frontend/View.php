@@ -38,7 +38,8 @@ class View extends Dot_Template
 	 */
 	public static function getInstance($root = '.', $unknowns = 'remove', $fallback='')
 	{
-		if (null === self::$_instance) {
+		if (null === self::$_instance) 
+		{
 			self::$_instance = new self($root, $unknowns, $fallback);
 		}
 		return self::$_instance;
@@ -112,10 +113,13 @@ class View extends Dot_Template
 		// add selected to the correct menu item
 		$this->setVar($selectedItem, 'selected');
 		
-		if ($dotAuth->hasIdentity('user')){
+		if ($dotAuth->hasIdentity('user'))
+		{
 			$this->parse('top_menu_logged_block', 'top_menu_logged', true);
 			$this->parse('top_menu_not_logged_block', '');		
-		}else{
+		}
+		else
+		{
 			$this->parse('top_menu_not_logged_block', 'top_menu_not_logged', true);
 			$this->parse('top_menu_logged_block', '');		
 		}
@@ -129,10 +133,13 @@ class View extends Dot_Template
 		// add selected to the correct menu item
 		$this->setVar($selectedItem, 'selected');
 		
-		if ($dotAuth->hasIdentity('user')){
+		if ($dotAuth->hasIdentity('user'))
+		{
 			$this->parse('sidebar_menu_logged_block', 'sidebar_menu_logged', true);
 			$this->parse('sidebar_menu_not_logged_block', '');		
-		}else{
+		}
+		else
+		{
 			$this->parse('sidebar_menu_not_logged_block', 'sidebar_menu_not_logged', true);
 			$this->parse('sidebar_menu_logged_block', '');		
 		}

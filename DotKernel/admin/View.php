@@ -150,7 +150,9 @@ class View extends Dot_Template
 						$this->setVar('BREADCRUMB_TITLE_1', $menuItem['title']);
 						$this->setVar('BREADCRUMB_LINK_1', $this->config->website->params->url.'/'.$this->requestModule.'/'.$menuItem['link']);
 						$this->setVar('BREADCRUMB_DESCRIPTION_1', $menuItem['description']);
-					}else{
+					}
+					else
+					{
 						$this->setVar('MENU_SELECTED', '');
 					}
 					
@@ -175,7 +177,9 @@ class View extends Dot_Template
 							$this->setVar('BREADCRUMB_LINK_2', $this->config->website->params->url.'/'.$this->requestModule.'/'.$subMenuItem['link']);
 							$this->setVar('BREADCRUMB_DESCRIPTION_2', $subMenuItem['description']);
 							$breadcrumbItem2Set = true;
-						}else{
+						}
+						else
+						{
 							$this->setVar('SUBMENU_SELECTED', '');
 						}
 
@@ -398,7 +402,9 @@ class View extends Dot_Template
 				$html .= "<li><a href=\"" . $value . "\">" . $key . "</a></li>";
 			}
 			$this->tpl->setVar('EXTRA_BREADCRUMB', $html);
-		}else{
+		}
+		else
+		{
 			$this->tpl->setVar('EXTRA_BREADCRUMB', "<li><a>" . $breadcrumb . "</a></li>");
 		}
 	}

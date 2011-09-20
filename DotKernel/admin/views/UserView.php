@@ -107,7 +107,9 @@ class User_View extends View
 			if ( strtolower($val['uaBrowser']) == strtolower($browser) )
 			{
 				$this->tpl->setVar('BROWSERSEL', 'selected');
-			}else{
+			}
+			else
+			{
 				$this->tpl->setVar('BROWSERSEL', '');
 			}
 			$this->tpl->parse('browser_row', 'browser', true);
