@@ -129,7 +129,8 @@ class User extends Dot_Model_User
 		{
 			$select->where('dateLogin LIKE ?', '%'.$loginDate.'%');
 		}
-		if ($sortField!=""){
+		if ($sortField!="")
+		{
 			$select->order($sortField. ' '.$orderBy);
 		}		
 		$dotPaginator = new Dot_Paginator($select, $page, $this->settings->resultsPerPage);

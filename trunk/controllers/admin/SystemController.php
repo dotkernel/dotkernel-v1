@@ -47,7 +47,8 @@ switch ($registry->requestAction)
 		{
 			Dot_Auth::checkUserToken();
 			$systemModel->updateSettings($_POST);
-			header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestModule . '/' . $registry->requestController. '/settings/update/done');
+			header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestModule 
+			       . '/' . $registry->requestController. '/settings/update/done');
 			exit;
 		}
 	break;
@@ -105,7 +106,8 @@ switch ($registry->requestAction)
 				$registry->session->message['txt'] = $option->infoMessage->noTransporterDelete;
 				$registry->session->message['type'] = 'info';
 			}
-			header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestModule . '/' . $registry->requestController. '/transporter-list/');
+			header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestModule 
+			        . '/' . $registry->requestController. '/transporter-list/');
 			exit;
 		}
 		$data = $systemModel->getEmailTransporterBy('id', $registry->request['id']);
@@ -129,7 +131,8 @@ switch ($registry->requestAction)
 				$systemModel->updateEmailTransporter($data);
 				$registry->session->message['txt'] = $option->infoMessage->transporterUpdate;
 				$registry->session->message['type'] = 'info';
-				header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestModule . '/' . $registry->requestController. '/transporter-list/');
+				header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestModule
+				         . '/' . $registry->requestController. '/transporter-list/');
 				exit;
 			}
 			else
@@ -155,7 +158,9 @@ switch ($registry->requestAction)
 			$result['success'] = true;
 			$result['message'] = array($option->infoMessage->transporterAdd);
 			$result['row'] = $systemView->getTransporterRow($data);
-		}else{
+		}
+		else
+		{
 			$result['success'] = false;
 			$result['message'] = $error;
 		}
