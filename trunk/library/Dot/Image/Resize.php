@@ -153,7 +153,7 @@ class Dot_Image_Resize extends Dot_Image
 				$this->_imageDestination = imagecreatetruecolor($thumbnailWidth, $thumbHeight);
 				imagecopyresized($this->_imageDestination, $this->_imageSource, 0, 0, 0, 0, $thumbnailWidth, $thumbHeight, $oldWidth, $oldHeight);
 			}
-			#custom resize for offer preview which needs to have exact dimesnions
+			#custom resize for offer preview which needs to have exact dimensions
 			else
 			{
 				#we need to cut from image, so we have a perfect image for the preview

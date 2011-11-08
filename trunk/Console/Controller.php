@@ -16,7 +16,7 @@ switch ($registry->action)
 	case 'count-users':
 		/**
 		 *  example usage
-		 * /var/www/vhosts/example.com/httpdocs/cli/index.php -e staging -a count-users
+		 * /var/www/vhosts/example.com/httpdocs/Console/index.php -e staging -a count-users
 		 */
 		
 		$userModel = new Console_Model_User();
@@ -26,7 +26,7 @@ switch ($registry->action)
 	case 'send-newsletter':
 		/**
 		 *  example usage
-		 * /var/www/vhosts/example.com/httpdocs/cli/index.php -e staging -a send-newsletter "test newsletter"
+		 * /var/www/vhosts/example.com/httpdocs/Console/index.php -e staging -a send-newsletter "test newsletter"
 		 */
 		if (!isset($registry->arguments[0]))
 		{

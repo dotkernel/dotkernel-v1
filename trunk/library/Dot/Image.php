@@ -106,14 +106,3 @@ class Dot_Image
 		return $dotImageResize->resize();
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
