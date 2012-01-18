@@ -260,7 +260,7 @@ class Dot_UserAgent_Wurfl
 	/**
 	 * Core function. Prepare the device short info
 	 * @access private
-	 * @param object $userAgent
+	 * @param string $userAgent
 	 * @return object
 	 */
 	private function _prepareDeviceInfo($userAgent)
@@ -270,6 +270,7 @@ class Dot_UserAgent_Wurfl
 
 		$device = new stdClass();
 		$device->fallBack        = $this->getDeviceFallBack($userAgent);
+		$device->deviceId        = $this->getDeviceId($userAgent);
 		$device->brandName       = $deviceCapabilities['brand_name'];
 		$device->modelName       = $deviceCapabilities['model_name'];
 		$device->browserName     = $deviceCapabilities['mobile_browser'];
@@ -281,22 +282,32 @@ class Dot_UserAgent_Wurfl
 		$device->isTablet        = ($deviceCapabilities['is_tablet'] == 'true') ? TRUE : FALSE;
 		$device->isMobile        = empty($deviceCapabilities['mobile_browser'])? FALSE : TRUE;
 		$device->isSmartphone    = $this->_isSmartphone($deviceCapabilities, $device->isMobile, $device->deviceOs, $device->isTablet);
-		$device->isIphone        = $this->_isIphone($device->fallBack);
+		$device->isIphone        = $this->_isIphone($device->deviceId);
 		$device->isAndroid       = $this->_isAndroid($device->deviceOs);
-		$device->isBlackberry    = $this->_isBlackberry($device->fallBack);
+		$device->isBlackberry    = $this->_isBlackberry($device->deviceId);
 		$device->isSymbian       = $this->_isSymbian($device->deviceOs);
 		$device->isWindowsMobile = $this->_isWindowsMobile($device->deviceOs, $device->isMobile);	
 		return $device;		
 	}
 	
 	/**
-	 * Return device fall back, for instance the string 'apple_iphone_ver3_1_2'
+	 * Return device fall back, for instance the string 'apple_iphone_ver3', which is kind of parent family device 
 	 * @param object $userAgent
-	 * @return 
+	 * @return string
 	 */
 	public function getDeviceFallBack($userAgent)
 	{
 		return $this->_getDeviceForUserAgent($userAgent)->fallBack;
+	}
+	
+	/**
+	 * Return device id , for instance the string 'apple_iphone_ver3_1_2'
+	 * @param object $userAgent
+	 * @return string
+	 */
+	public function getDeviceId($userAgent)
+	{
+		return $this->_getDeviceForUserAgent($userAgent)->id;
 	}
 	
 	/**
@@ -352,14 +363,14 @@ class Dot_UserAgent_Wurfl
 	}
 	
 	/**
-	 * Check again device fallBack the string iphone
+	 * Check again device id the string iphone
 	 * @access private
 	 * @return bool
 	 */
-	private function _isIphone($deviceFallBack)
+	private function _isIphone($deviceId)
 	{
 		$isIphone = FALSE;
-		if(stripos($deviceFallBack, 'iphone') !== FALSE)
+		if(stripos($deviceId, 'iphone') !== FALSE)
 		{
 			$isIphone = TRUE;	
 		}
@@ -382,14 +393,14 @@ class Dot_UserAgent_Wurfl
 	}
 	
 	/**
-	 * Check again device fallBack the string Blackberry
+	 * Check again device id the string Blackberry
 	 * @access private
 	 * @return bool
 	 */
-	private function _isBlackberry($deviceFallBack) 
+	private function _isBlackberry($deviceId) 
 	{
 		$isBlackberry = FALSE;
-		if(stripos($deviceFallBack, 'Blackberry') !== FALSE)
+		if(stripos($deviceId, 'Blackberry') !== FALSE)
 		{
 			$isBlackberry = TRUE;	
 		}
