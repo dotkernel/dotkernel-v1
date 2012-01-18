@@ -280,7 +280,7 @@ class Dot_UserAgent_Wurfl
 		$device->screenHeight    = $deviceCapabilities['resolution_height'];
 		$device->isTablet        = ($deviceCapabilities['is_tablet'] == 'true') ? TRUE : FALSE;
 		$device->isMobile        = empty($deviceCapabilities['mobile_browser'])? FALSE : TRUE;
-		$device->isSmartphone    = $this->_isSmartphone($deviceCapabilities, $device->isMobile, $device->deviceOs);
+		$device->isSmartphone    = $this->_isSmartphone($deviceCapabilities, $device->isMobile, $device->deviceOs, $device->isTablet);
 		$device->isIphone        = $this->_isIphone($device->fallBack);
 		$device->isAndroid       = $this->_isAndroid($device->deviceOs);
 		$device->isBlackberry    = $this->_isBlackberry($device->fallBack);
@@ -327,15 +327,15 @@ class Dot_UserAgent_Wurfl
 	}
 	
 	/**
-	 * Check device capabilities for screen size. We assume that a screen size lower then 240x320 is not a real 
-	 * smartphone, but more something that you can shove it up your ass ( a.k.a "feature phone")
+	 * Check device capabilities for screen size. We assume that a screen size lower then 240x320=76800 is not a real 
+	 * smartphone, but only an  "feature phone" 
 	 * Second mandatory condition: to have an Operating System
 	 * @param array $deviceCapabilities
 	 * @param bool $isMobile
 	 * @access private
 	 * @return bool
 	 */
-	private function _isSmartphone($deviceCapabilities, $isMobile, $deviceOs) 
+	private function _isSmartphone($deviceCapabilities, $isMobile, $deviceOs, $isTablet) 
 	{
 		$isSmartphone =  FALSE;
 		// if is not a mobile device , we will have surprises here :-)
@@ -343,7 +343,7 @@ class Dot_UserAgent_Wurfl
 		{		
 			$screenWidth  = $deviceCapabilities["resolution_width"];
 			$screenHeight = $deviceCapabilities["resolution_height"];
-			if($screenWidth >= 240  && $screenHeight >= 320 && !empty($deviceOs))
+			if( ($screenWidth * $screenHeight ) >= 76800 && !empty($deviceOs)  && !$isTablet)
 			{
 				$isSmartphone =  TRUE;
 			}
