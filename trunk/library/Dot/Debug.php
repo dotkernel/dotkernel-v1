@@ -11,7 +11,7 @@
 */
 
 /**
-* Few useful debugging functions . Planned to be replaced by ZfDebug version
+* Few useful debugging functions .
 * @category   DotKernel
 * @package    DotLibrary
 * @author     DotKernel Team <team@dotkernel.com>
@@ -24,26 +24,26 @@ class Dot_Debug
 	 * @access public
 	 * @var bool
 	 */	
-	public $db_debug = true;
+	public $dbDebug = true;
 	/**
 	 * Display details for db debugger on 1st load - if false, 
 	 * the user will need to click on the div to see details
 	 * @access public
 	 * @var bool
 	 */	
-	public $db_details = false;
+	public $dbDetails = false;
 	/**
 	 * Allow display for db details
 	 * @access public
 	 * @var bool
 	 */	
-	public $allow_db_details = true;
+	public $allowDbDetails = true;
 	/**
 	 * Show or not total time box
 	 * @access public
 	 * @var bool
 	 */
-	public $total_time = true;
+	public $totalTime = true;
 	/**
 	 * Show or not memory usage box
 	 * @access public
@@ -78,6 +78,7 @@ class Dot_Debug
 		$this->__startTime = $registry['startTime'];
 		$this->__module = $registry->requestModule;
 	}
+	
 	/**
 	 * Set magic method
 	 * @access public
@@ -89,6 +90,7 @@ class Dot_Debug
 	{
 		$this->$propriety = $value;
 	}
+	
 	/**
 	 * Count the end time
 	 * @access private
@@ -96,16 +98,11 @@ class Dot_Debug
 	 */
 	private function _endTimer()
 	{
-		// format start time 
-		$stime = explode (' ', $this->__startTime);
-		$startTime = $stime[1] + $stime[0];
-		//format end time
-		$mtime = microtime ();
-		$mtime = explode (' ', $mtime);
-		$endTime = $mtime[1] + $mtime[0];
-		$totalTime = 1000 * round (($endTime - $startTime), 3);
+		$endTime = microtime (true);
+		$totalTime = 1000 * round (($endTime - $this->__startTime), 3);
 		return $totalTime;
 	}
+	
 	/**
 	 * Format the number, show miliseconds
 	 * @access private
@@ -122,6 +119,7 @@ class Dot_Debug
 		}
 		return number_format($number, 6, '.', ' ');
 	}
+	
 	/**
 	 * Display the debug variables
 	 * @access public
@@ -153,7 +151,7 @@ class Dot_Debug
 		$this->showDotVersion();
 		
 		// if we need db debuger
-		if ($this->db_debug)
+		if ($this->dbDebug)
 		{
 			$this->_showDbDebug();
 		}
@@ -162,12 +160,13 @@ class Dot_Debug
 			$this->showMemoryUsage();
 		}
 		// if we need to show total time - put this last so it counts the debug of queries, memory limit, etc
-		if ($this->total_time)
+		if ($this->totalTime)
 		{
 			$this->_showTotalTime();
 		}
 		$this->tpl->parse('DEBUGGER', 'tpl_debugger');		
 	}
+
 	/**
 	 * Display total time 
 	 * @access private
@@ -178,6 +177,7 @@ class Dot_Debug
 		$this->tpl->setVar('TOTAL_GENERAL_TIME', $this->_endTimer());
 		$this->tpl->parse('total_time_block', 'total_time', true);
 	}
+	
 	/**
 	 * Display DB querys for debug
 	 * @access private
@@ -191,7 +191,7 @@ class Dot_Debug
 		{
 			$this->tpl->setVar('INITIAL_DISPLAY', 'none');
 			// initial status
-			if ($this->db_details)
+			if ($this->dbDetails)
 			{
 				$this->tpl->setVar('INITIAL_DISPLAY', 'block');
 			}
@@ -250,7 +250,7 @@ class Dot_Debug
 			$this->tpl->setVar('LONGEST_QUERY', $longestQuery);
 			$this->tpl->setVar('LONGEST_QUERY_TIME', $this->_numberFormat($longestTime, true));
 			// parse final blocks
-			if ($this->allow_db_details)
+			if ($this->allowDbDetails)
 			{
 				$this->tpl->parse('details_db_debug_block', 'details_db_debug', true);
 			}
@@ -261,6 +261,7 @@ class Dot_Debug
 			$this->tpl->parse('if_show_debug_block', 'if_show_debug', true);
 		}
 	}
+	
 	/**
 	 * Display memory usage 
 	 * @access public
@@ -272,6 +273,7 @@ class Dot_Debug
 		$this->tpl->setVar('MEMORY_USAGE', $memory_limit);
 		$this->tpl->parse('memory_usage_block', 'memory_usage', true);
 	}
+	
 	/**
 	 * Display ZF Version
 	 * @access public
@@ -282,6 +284,7 @@ class Dot_Debug
 		$this->tpl->setVar('ZF_VERSION', Zend_Version::VERSION);
 		$this->tpl->parse('zf_version_block', 'zf_version', true);
 	}
+	
 	/**
 	 * Display PHP version
 	 * @access public
@@ -292,6 +295,7 @@ class Dot_Debug
 		$this->tpl->setVar('PHP_VERSION', phpversion());
 		$this->tpl->parse('php_version_block', 'php_version', true);
 	}
+	
 	/**
 	 * Display DotKernel version
 	 * @access public

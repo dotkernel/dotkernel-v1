@@ -17,7 +17,7 @@
  */
 
 // Start counting the time needed to display all content, from the very beginning
-$startTime = microtime();
+$startTime = microtime(true);
 
 // Define application environment
 define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
