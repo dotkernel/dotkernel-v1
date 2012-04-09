@@ -55,8 +55,7 @@ legend{
 }
 
 /*** tables ***/
-.medium_table,
-.chart_table{
+.medium_table{
 	border-color: #D8D8D8;
 }
 table.big_table tbody tr:nth-child(even) td,

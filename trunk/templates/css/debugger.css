@@ -29,6 +29,8 @@
 	font-family: trebuchet ms,lucida sans unicode,sans-serif;
 	width:100%;
 	background-color: #E2E2E2;
+	width:100%;
+	border-spacing: 1px;
 }
 .index_debugger{
 	border: 0px;

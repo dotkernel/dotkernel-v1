@@ -2,7 +2,7 @@
 <legend>List Settings Variables</legend>
 <form method="post" name="configs" action="{SITE_URL}/admin/system/settings-update">
 <input type="hidden" name="userToken" value="{USERTOKEN}">
-<table class="list_table" width="100%">
+<table class="list_table">
 	<thead>
 		<tr>
 			<th width='33%'>Name</th>

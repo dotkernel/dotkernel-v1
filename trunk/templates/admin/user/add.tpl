@@ -2,7 +2,7 @@
 <input type="hidden" name="userToken" value="{USERTOKEN}">
 <fieldset style="width: 500px">
 <legend>Add New User</legend>
-	<table class="medium_table" width="100%">
+	<table class="medium_table">
 		<tr>
 			<td width="140px"><b>Username</b><span class="required">*</span></td>
 			<td><input type="text" name="username" value="{USERNAME}"></td>
