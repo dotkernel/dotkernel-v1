@@ -36,24 +36,27 @@
 
 	});
 </script>
-<div id="adminList">	
-	<table class="g_box" cellpadding="0" cellspacing="1">
+<div id="adminList">
+	<fieldset style="width: 100%">
+	<legend>Filters</legend>
+	<table class="g_box">
 		<tr>
 			<td>
 				<form action="{FORM_ACTION}" method="post" name="logins">
-				  Filter by browser:&nbsp;
+				Browser:&nbsp;
 					<select name="browser" id="browser">
 						<option value=""> - no filter - </option>
 						<!-- BEGIN browser -->
 						<option value="{BROWSERNAME}" {BROWSERSEL}> {BROWSERNAME} </option>
 						<!-- END browser -->
 					</select>
-					Filter by date:&nbsp;
+					Date:&nbsp;
 					<input type="text" id="filterDate" value="{FILTERDATE}">
 				</form>
 			</td>
 		</tr>
 	</table>
+	</fieldset>
 	
 	{PAGINATION}
 	<fieldset style="width: 100%">
