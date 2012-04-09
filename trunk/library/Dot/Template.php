@@ -943,21 +943,20 @@ class Dot_Template
 		{
 			$this->parse($target, $value, $append);
 		}
-		
 		else
 		{			
-			reset($target);			
+			reset($target);
 			while(list($k, $v) = each($target))
 			{
 				if(is_int($k))
-				{				
+				{
 					$this->parse($v, $value, $append);
 				}
 				elseif(is_string($k))
 				{
 					$this->parse($k, $v, $append);
 				}
-				else  $this->setVar($target, $str);
+				else  $this->setVar($target, '');
 			}
 		}
 	}
