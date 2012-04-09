@@ -29,4 +29,4 @@ $feed['published'] = time();
 $entries = $sampleModel->setEntries();
 $feed['entries'] = $entries;
 //set the feed that will be outputed
-$view->setFeed($feed);
+$sampleView->setFeed($feed);

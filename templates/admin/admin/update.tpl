@@ -2,7 +2,7 @@
 <input type="hidden" name="userToken" value="{USERTOKEN}">
 <fieldset style="width: 500px">
 <legend>Admin Acccount</legend>
-	<table class="medium_table" width="100%">
+	<table class="medium_table">
 		<tr>
 			<td width="140px"><b>Username</b></td>
 			<td>{USERNAME}</td>

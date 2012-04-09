@@ -2,7 +2,7 @@
 <input type="hidden" name="userToken" value="{USERTOKEN}">
 <fieldset style="width: 600px">
 <legend>Delete Admin Acccount: {USERNAME}</legend>
-	<table class="medium_table" width="100%">
+	<table class="medium_table">
 		<tr>
 			<td>
 				<strong>Are you sure you want to delete this account ?</strong>

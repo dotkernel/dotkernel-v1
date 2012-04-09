@@ -5,7 +5,7 @@
 </ul>
 <div class="ui-body ui-body-d">
 	<h3>This is an example of a contact form</h3>
-	<span style="color: #ff0000;"><h2>{ERROR_MESSAGE}</h2></span>
+	<h2>{ERROR_MESSAGE}</h2>
 	<div class="ui-body ui-body-e">
 	<form id="contactForm" action="{SITE_URL}/mobile/" method="post" >
 		<div class="ui-field-contain ui-body ui-br" data-role="fieldcontain">

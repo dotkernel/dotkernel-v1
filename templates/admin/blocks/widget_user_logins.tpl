@@ -7,6 +7,7 @@
 		background-color:#fff;
 		border: 1px solid #CFCFCF;
 		margin-top:6px;
+		border-spacing: 0px;
 	}
 	.legendLabel{
 		font-size:11px;
@@ -21,7 +22,7 @@
 	})
 </script>
 <legend>Users Logins By Country</legend>
-<table class="chart_table" width="100%">
+<table class="chartTable">
     <tr>
         <td>
         	<div style="width:100%;height:300px" id="userLoginsChart"></div>

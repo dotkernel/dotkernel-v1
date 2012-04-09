@@ -454,6 +454,7 @@ function parseHtmlRows($data)
 	}
 	table{
 		border-spacing:5px;
+		width:100%;
 	}
 	td.result{
 		font-family:"Lucida Sans Unicode","Lucida Grande",Garuda,sans-serif;
@@ -542,7 +543,7 @@ else
 	
 	<fieldset>
 		<legend>Enviroment Test</legend>
-		<table width="100%" cellpadding="5" cellspacing="1">
+		<table>
 		<tbody>
 		<?php
 			parseHtmlRows($checkServer);
@@ -552,7 +553,7 @@ else
 	</fieldset>
 	<fieldset>
 		<legend>Extensions Test</legend>
-		<table width="100%" cellpadding="5" cellspacing="1">
+		<table>
 		<tbody>
 		<?php
 			parseHtmlRows($check);
@@ -564,7 +565,7 @@ else
 		<legend>Optional Extensions Test</legend>
 
 		<p class="note">The following extensions are optional for DotKernel, but if used can provide access to more classes. </p>
-		<table width="100%" cellpadding="5" cellspacing="1">
+		<table>
 		<tbody>
 		<?php
 			parseHtmlRows($checkOptional);

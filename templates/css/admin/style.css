@@ -2,7 +2,7 @@
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td {
+ caption, tbody, tfoot, thead, tr, th, td {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -10,6 +10,17 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	font-size: 100%;
 	vertical-align: top;
 	background: transparent;
+}
+table {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: top;
+	background: transparent;
+	width:100%;
+	border-spacing: 1px;
 }
 body {
 	line-height: 1.3;
@@ -511,7 +522,7 @@ table.medium_table td:first-child{
 .medium_table input{
 	width: 100%;
 }
-.medium_table, .chart_table{
+.medium_table{
 	border: 1px solid #CFCFCF;
 	background-color: #ffffff;
 	margin: 5px 0px 0px 0px;

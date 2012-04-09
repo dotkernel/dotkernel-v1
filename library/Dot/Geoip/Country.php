@@ -421,7 +421,7 @@ class Dot_Geoip_Country extends Dot_Geoip
 	 */
 	public function geoipCountryNameByName($name)
 	{
-		$countryId = $thisd->geoipCountryIdByName($name);
+		$countryId = $this->geoipCountryIdByName($name);
 		if ($countryId !== false) 
 		{
 		    return $this->_geoipCountryNames[$countryId];

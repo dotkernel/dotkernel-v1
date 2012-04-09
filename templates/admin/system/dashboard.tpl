@@ -7,7 +7,7 @@
 </script>
 <fieldset style="width: 460px;float: left;margin-right: 50px;">
 	<legend>System Overview</legend>
-	<table class="medium_table" width="100%">
+	<table class="medium_table">
 		<tr>
 			<td width="150px">HOSTNAME</td>
 			<td>{HOSTNAME}</td>
@@ -29,7 +29,7 @@
 			<td>{ZFVERSION}</td>
 		</tr>
 	</table>
-	<table class="medium_table" width="100%">
+	<table class="medium_table">
 		<tr>
 			<td width="150px">GEOIP COUNTRY LOCAL</td>
 			<td>{GEOIP_COUNTRY_LOCAL}</td>
@@ -45,7 +45,7 @@
 		</tr>
 		<!-- END is_geoip -->
 	</table>
-	<table class="medium_table" width="100%">
+	<table class="medium_table">
 		<tr>
 			<td>WURFL API VERSION</td>
 			<td>{WURFLAPIVERSION}</td>
@@ -60,7 +60,7 @@
 			<td>{WURFLDATE}</td>
 		</tr>
 	</table>
-	<table class="medium_table" width="100%">
+	<table class="medium_table">
 		<tr>
 			<td width="150px">jQuery Version</td>
 			<td id="jqueryVersion"></td>
