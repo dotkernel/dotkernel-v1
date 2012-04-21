@@ -18,7 +18,7 @@
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
-class Dot_Geoip 
+class Dot_Geoip
 {
 	/**
 	 * Constructor
@@ -26,14 +26,14 @@ class Dot_Geoip
 	 * @return dot_Geoip
 	 */
 	public function __construct()
-	{		
+	{
 		$this->option = Zend_Registry::get('option');
 		$this->config = Zend_Registry::get('configuration');
-	}	
+	}
 	/**
 	 * Get the country by IP
 	 * Return an array with : short name, like 'us' and long name, like 'United States'
-	 * @access public 
+	 * @access public
 	 * @param string $ip
 	 * @return array
 	 */
@@ -55,21 +55,21 @@ class Dot_Geoip
 				$country = $api->getCountryByAddr($geoipPath, $ip);
 			}
 			else
-			{				
+			{
 				$session->message['txt'] = $this->option->warningMessage->modGeoIp;
 				$session->message['type'] = 'warning';
 			}
 		}
 		if(function_exists('geoip_db_avail') && geoip_db_avail(GEOIP_COUNTRY_EDITION) && 'unknown' == $country[0])
-		{ 
+		{
 			//if GeoIP.dat file exists
 			$countryCode= geoip_country_code_by_name($ip);
 			$countryName = geoip_country_name_by_name($ip);
 			$country[0] = $countryCode != FALSE  ? $countryCode : 'unknown';
 			$country[1] = $countryName != FALSE  ? $countryName : 'NA';
-		}		
+		}
 		if(function_exists('geoip_db_avail') && geoip_db_avail(GEOIP_CITY_EDITION_REV0) && 'unknown' == $country[0])
-		{	
+		{
 			//if GeoIPCity.dat file exists
 			$record = geoip_record_by_name($ip);
 			if(!empty($record))
@@ -90,11 +90,11 @@ class Dot_Geoip
 				$country = $api->getCountryByAddr($geoipPath, $ip);
 			}
 			else
-			{				
+			{
 				$session->message['txt'] = $this->option->warningMessage->modGeoIp;
 				$session->message['type'] = 'warning';
 			}
 		}
 		return $country;
-	}	
+	}
 }

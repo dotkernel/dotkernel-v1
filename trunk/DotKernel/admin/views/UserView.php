@@ -4,7 +4,7 @@
 * DotKernel Application Framework
 *
 * @category   DotKernel
-* @package    Admin 
+* @package    Admin
 * @copyright  Copyright (c) 2009-2011 DotBoost Technologies Inc. Canada (http://www.dotboost.com)
 * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 * @version    $Id$
@@ -12,9 +12,9 @@
 
 /**
 * User View Class
-* class that prepare output related to User controller 
+* class that prepare output related to User controller
 * @category   DotKernel
-* @package    Admin 
+* @package    Admin
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
@@ -74,7 +74,7 @@ class User_View extends View
 		$this->tpl->addUserToken();
 		foreach ($data as $k=>$v)
 		{
-		    $this->tpl->setVar(strtoupper($k), $v);			
+		    $this->tpl->setVar(strtoupper($k), $v);
 			if('isActive' == $k)
 			{
 				$this->tpl->setVar('ACTIVE_'.$v, 'checked');
@@ -86,7 +86,7 @@ class User_View extends View
 	 * Display user logins list
 	 * @access public
 	 * @param string $templateFile
-	 * @param array $list 
+	 * @param array $list
 	 * @param int $page
 	 * @param int $browser
 	 * @param int $loginDate
@@ -113,9 +113,9 @@ class User_View extends View
 				$this->tpl->setVar('BROWSERSEL', '');
 			}
 			$this->tpl->parse('browser_row', 'browser', true);
-			
+
 		}
-		$this->tpl->setVar('FILTERDATE', $loginDate);				
+		$this->tpl->setVar('FILTERDATE', $loginDate);
 		$this->tpl->setBlock('tpl_main', 'list', 'list_block');
 		$this->tpl->paginator($list['pages']);
 		$this->tpl->setVar('PAGE', $page);
@@ -125,7 +125,7 @@ class User_View extends View
 		foreach ($sortableFields as $field)
 		{
 			$linkSort = '/admin/user/logins/sort/'.$field.'/order/';
-			$linkSort .= ($orderBy == 'asc') ? 'desc' : 'asc';  
+			$linkSort .= ($orderBy == 'asc') ? 'desc' : 'asc';
 			$this->tpl->setVar('LINK_SORT_'.strtoupper($field), $linkSort);
 			if($field != $sortField)
 			{
@@ -139,9 +139,9 @@ class User_View extends View
 			{
 				$sortClass = 'sort_down';
 			}
-			$this->tpl->setVar('CLASS_SORT_'.strtoupper($field), $sortClass);			
+			$this->tpl->setVar('CLASS_SORT_'.strtoupper($field), $sortClass);
 		}
-		
+
 		foreach ($list['data'] as $k => $v)
 		{
 			$country = $dotGeoip->getCountryByIp($v['ip']);
@@ -155,12 +155,12 @@ class User_View extends View
 			$this->tpl->setVar('WHOISURL', $this->settings->whoisUrl);
 			$this->tpl->setVar('USERAGENT', $v['userAgent']);
 			$this->tpl->setVar('BROWSERIMAGE', Dot_UserAgent::getBrowserIcon($v['userAgent']));
-			$os = Dot_UserAgent::getOsIcon($v['userAgent']);			
+			$os = Dot_UserAgent::getOsIcon($v['userAgent']);
 			$this->tpl->setVar('OSIMAGE', $os['icon']);
 			$this->tpl->setVar('OSMAJOR', $os['major']);
 			$this->tpl->setVar('OSMINOR', $os['minor']);
 			$this->tpl->setVar('DATELOGIN', Dot_Kernel::timeFormat($v['dateLogin'], 'long'));
 			$this->tpl->parse('list_block', 'list', true);
-		}	
+		}
 	}
 }

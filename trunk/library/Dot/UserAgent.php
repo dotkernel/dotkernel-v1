@@ -20,15 +20,15 @@
 class Dot_UserAgent
 {
 	/**
-	 * Constructor, 
+	 * Constructor,
 	 * @access public
 	 * @return Dot_UserAgent
 	*/
 	function __construct()
-	{		
+	{
 		$this->config = Zend_Registry::get('configuration');
 	}
-	
+
 	/**
 	 * Get HTTP UserAgent Device Info from WURFL file
 	 * Device may be Bot, Checker, Console, Desktop, Email, Feed, Mobile, Offline, Probe, Spam, Text, Validator
@@ -40,7 +40,7 @@ class Dot_UserAgent
 		$deviceInfo = $wurfl->getDevice($userAgent);
 		return $deviceInfo;
 	}
-	
+
 	/**
 	 * Return the name of the browser icon based on User Agent
 	 * @access public
@@ -65,7 +65,7 @@ class Dot_UserAgent
 		}
 		return 'unknown';
 	}
-	
+
 	/**
 	 * Return the name of the OS icon based on User Agent
 	 * @access public

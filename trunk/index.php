@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * DotBoost Technologies Inc.
  * DotKernel Application Framework
@@ -9,8 +9,8 @@
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @version    $Id$
  */
- 
- /**
+
+/**
  * Main public executable wrapper.
  * Setup environment, setup index controllers, and load modules to run
  * @author     DotKernel Team <team@dotkernel.com>
@@ -26,7 +26,7 @@ define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV')
 define('APPLICATION_PATH', realpath(dirname(__FILE__)));
 
 //Set error reporting
-if(APPLICATION_ENV != 'production') error_reporting(-1);
+if(APPLICATION_ENV != 'production') error_reporting(- 1);
 
 //Set include  path to library directory
 set_include_path(implode(PATH_SEPARATOR, array(APPLICATION_PATH . '/library', get_include_path())));

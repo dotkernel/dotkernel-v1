@@ -11,7 +11,7 @@
 */
 
 /**
-* Alternate SMTP server mail() class 
+* Alternate SMTP server mail() class
 * @category   DotKernel
 * @package    DotLibrary
 * @subpackage DotEmail
@@ -22,7 +22,7 @@ class Dot_Email_Smtp extends Dot_Email
 {
 	/**
 	 * Email constructor
-	 * @access public 
+	 * @access public
 	 * @param string $to [optional]
 	 * @param string $fromName [optional]
 	 * @param string $fromEmail [optional]
@@ -41,9 +41,9 @@ class Dot_Email_Smtp extends Dot_Email
 										   'password' => $this->smtpData['smtpPassword'],
 										   'port' => $this->smtpData['smtpPort'],
 									       'ssl' => $this->smtpData['smtpSsl']);
-			$this->transport = new Zend_Mail_Transport_Smtp($this->smtpData['smtpServer'], $mailConfigs);	
+			$this->transport = new Zend_Mail_Transport_Smtp($this->smtpData['smtpServer'], $mailConfigs);
 		}
-	}	
+	}
 	/**
 	 * Return the transporter
 	 * @access public
@@ -63,8 +63,8 @@ class Dot_Email_Smtp extends Dot_Email
 	{
 		$smtp = array();
 		$select = $this->db->select()
-						   ->from('emailTransporter', 
-							 			  array('id', 
+						   ->from('emailTransporter',
+							 			  array('id',
 												'smtpUsername' => 'user',
 												'smtpPassword' => 'pass',
 												'smtpServer' => 'server',
@@ -74,10 +74,10 @@ class Dot_Email_Smtp extends Dot_Email
 						   ->where('isActive = ?','1')
 						   ->order('id')
 						   ->limit('1');
-		$result = $this->db->fetchAll($select);	
+		$result = $this->db->fetchAll($select);
 		if (count($result) > 0)
-		{			
-			$smtp = $result[0];			
+		{
+			$smtp = $result[0];
 		}
 		else
 		{
@@ -85,10 +85,10 @@ class Dot_Email_Smtp extends Dot_Email
 			$this->db->update('emailTransporter', array('counter'=>0), $where);
 			$this->db->update('emailTransporter', array('date'=>new Zend_Db_Expr('NOW()')), $where);
 			$select->where("`date` = DATE_FORMAT( NOW( ) , '%Y-%m-%d' )");
-			$result = $this->db->fetchAll($select);	
+			$result = $this->db->fetchAll($select);
 			if (count($result) > 0)
-			{			
-				$smtp = $result[0];				
+			{
+				$smtp = $result[0];
 			}
 		}
 		return $smtp;

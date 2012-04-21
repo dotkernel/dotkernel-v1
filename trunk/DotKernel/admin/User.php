@@ -14,7 +14,7 @@
 * User Model
 * Here are all the actions related to the user
 * @category   DotKernel
-* @package    Admin 
+* @package    Admin
 * @author     DotKernel Team <team@dotkernel.com>
 */
 class User extends Dot_Model_User
@@ -26,12 +26,12 @@ class User extends Dot_Model_User
 	public function __construct()
 	{
 		parent::__construct();
-	}	
+	}
 	/**
 	 * Get user list
-	 * @access public 
+	 * @access public
 	 * @param int $page [optional]
-	 * @return array	 
+	 * @return array
 	 */
 	public function getUserList($page = 1)
 	{
@@ -48,7 +48,7 @@ class User extends Dot_Model_User
 	public function deleteUser($id)
 	{
 		$this->db->delete('user', 'id = ' . $id);
-	}	
+	}
 	/**
 	 * Send forgot password to user
 	 * @access public
@@ -65,10 +65,10 @@ class User extends Dot_Model_User
 			$dotEmail = new Dot_Email();
 			$dotEmail->addTo($value['email']);
 			$dotEmail->setSubject($seoOption->siteName . ' - ' . $this->option->forgotPassword->subject);
-			$msg = str_replace(array('%FIRSTNAME%', '%PASSWORD%'), 
-							   array($value['firstName'], $value['password']), 
+			$msg = str_replace(array('%FIRSTNAME%', '%PASSWORD%'),
+							   array($value['firstName'], $value['password']),
 				              $this->option->forgotPassword->message);
-			$dotEmail->setBodyText($msg);		
+			$dotEmail->setBodyText($msg);
 			$succeed = $dotEmail->send();
 			if($succeed)
 			{
@@ -79,13 +79,13 @@ class User extends Dot_Model_User
 			{
 				$session->message['txt'] = $this->option->errorMessage->emailNotSent.$value['email'];
 				$session->message['type'] = 'error';
-			}		
+			}
 		}
 		else
 		{
 			$session->message['txt'] = $value['email'].$this->option->infoMessage->emailNotFound;
 			$session->message['type'] = 'info';
-		}		
+		}
 	}
 	/**
 	 * Activate/Inactivate user account
@@ -94,13 +94,13 @@ class User extends Dot_Model_User
 	 * @return void
 	 */
 	public function activateUser($id, $isActive)
-	{		
+	{
         $this->db->update('user', array('isActive' => $isActive), 'id = '.$id);
 	}
 	/**
 	 * Get admin users logins archive list
 	 * @access public
-	 * @param int $id 
+	 * @param int $id
 	 * @param int $page [optional]
 	 * @param string $browser [optional]
 	 * @param string $loginDate [optional]
@@ -117,7 +117,7 @@ class User extends Dot_Model_User
 							'userLogin.userId = user.id',
 							'username'
 						);
-		if ($id > 0) 
+		if ($id > 0)
 		{
 			$select->where('userId = ?', $id);
 		}
@@ -132,16 +132,16 @@ class User extends Dot_Model_User
 		if ($sortField!="")
 		{
 			$select->order($sortField. ' '.$orderBy);
-		}		
+		}
 		$dotPaginator = new Dot_Paginator($select, $page, $this->settings->resultsPerPage);
 		return $dotPaginator->getData();
-		
-	}	
+
+	}
 	/**
 	 * Get top <topCount> logins by country
 	 * If there are more countries returned than <topCountry>, the sum of the remainder
 	 * will be added to $result['Other']
-	 * @param topCount - the number of countries to return  
+	 * @param topCount - the number of countries to return
 	 * @access public
 	 * @return array
 	 */
@@ -174,10 +174,10 @@ class User extends Dot_Model_User
 			}
 			$data[] = array(
 				'label' => 'Other',
-				'data' => $otherCount 
+				'data' => $otherCount
 			);
 		}
-		
+
 		return $data;
 	}
 }

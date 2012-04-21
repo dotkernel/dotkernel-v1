@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * DotBoost Technologies Inc.
  * DotKernel Application Framework
@@ -9,7 +9,7 @@
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @version    $Id$
  */
- 
+
  /**
  * Image manipulation
  * @category   DotKernel
@@ -19,17 +19,17 @@
  */
 
 class Dot_Image
-{	
+{
 	/**
 	 * Image filename
 	 * @var string
-	 * @access public	 
+	 * @access public
 	 */
 	public $source = '';
 	/**
 	 * New image, after transformation
 	 * @var string
-	 * @access public	 
+	 * @access public
 	 */
 	public $destination = '';
 	/**
@@ -48,7 +48,7 @@ class Dot_Image
 		$option = Zend_Registry::get('option');
 		if(!extension_loaded('gd'))
 		{
-			die($option->warningMessage->modGd);			
+			die($option->warningMessage->modGd);
 		}
 	}
 	/**
@@ -60,7 +60,7 @@ class Dot_Image
 	public function setImage($filename)
 	{
 		$this->source = $filename;
-	}	
+	}
 	/**
 	 * Set the image file
 	 * @access public
@@ -70,7 +70,7 @@ class Dot_Image
 	public function setDestinationImage($filename)
 	{
 		$this->destination = $filename;
-	}	
+	}
 	/**
 	 * Set the image options
 	 * @param object $option
@@ -78,7 +78,7 @@ class Dot_Image
 	 */
 	public function setOption($option)
 	{
-		$this->_option = $option;		
+		$this->_option = $option;
 	}
 	/**
 	 * Get the transformed image - new image. URL link to it
@@ -102,7 +102,7 @@ class Dot_Image
 		$dotImageResize = new Dot_Image_Resize();
 		$dotImageResize->setImage($this->source);
 		$dotImageResize->setDestinationImage($this->destination);
-		$dotImageResize->setOption($this->_option);		
+		$dotImageResize->setOption($this->_option);
 		return $dotImageResize->resize();
 	}
 }

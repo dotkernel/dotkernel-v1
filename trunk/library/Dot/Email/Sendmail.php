@@ -11,7 +11,7 @@
 */
 
 /**
-* Default server mail() class 
+* Default server mail() class
 * @category   DotKernel
 * @package    DotLibrary
 * @subpackage DotEmail
@@ -22,7 +22,7 @@ class Dot_Email_Sendmail extends Dot_Email
 {
 	/**
 	 * Email constructor
-	 * @access public 
+	 * @access public
 	 * @param string $fromEmail [optional]
 	 * @return Dot_Email_Sendmail
 	 */

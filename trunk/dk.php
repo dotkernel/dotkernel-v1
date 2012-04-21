@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * DotBoost Technologies Inc.
  * DotKernel Application Framework
@@ -9,22 +9,22 @@
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @version    $Id$
  */
- 
+
  /**
- * Check DotKernel Requirements for Installation 
+ * Check DotKernel Requirements for Installation
  * @author     DotKernel Team <team@dotkernel.com>
  */
 $test = true;
-//kill the SAFE MODE 
+//kill the SAFE MODE
 if(ini_get('safe_mode'))
 {
-	$checkServer['safe_mode'] = array('name'   => 'Safe Mode <b>ON</b>', 
-																		'status' => 'failed', 
+	$checkServer['safe_mode'] = array('name'   => 'Safe Mode <b>ON</b>',
+																		'status' => 'failed',
 																		'value'  => 'This feature has been <b>DEPRECATED</b> as of PHP 5.3.0. <br>Relying on
 																		             this feature is highly discouraged.');
-	$test = false;	
+	$test = false;
 }
-// get HostName 
+// get HostName
 if(version_compare(PHP_VERSION, '5.3.0', '>='))
 {
 	$hostName = gethostname();
@@ -33,8 +33,8 @@ else
 {
 	$hostName = php_uname('n');
 }
-$checkServer['host'] = array('name'   => 'Host Name', 
-														 'status' => 'pass', 
+$checkServer['host'] = array('name'   => 'Host Name',
+														 'status' => 'pass',
 						                 'value'  => $hostName);
 // get APACHE VERSION
 if(function_exists('apache_get_version'))
@@ -46,20 +46,20 @@ else
 	$apacheTmp = explode(" ", $_SERVER["SERVER_SOFTWARE"], 3);
 	$apacheVersion = $apacheTmp[0] . " " . $apacheTmp[1];
 }
-$checkServer['apache'] = array('name'   => 'Apache Version', 
-							                 'status' => 'pass', 
+$checkServer['apache'] = array('name'   => 'Apache Version',
+							                 'status' => 'pass',
 							                 'value'  => $apacheVersion);
 // check PHP VERSION
 if(version_compare(PHP_VERSION, '5.2.10', '>='))
 {
-	$checkServer['php'] = array('name'   => 'PHP Version', 
-								              'status' => 'pass', 
+	$checkServer['php'] = array('name'   => 'PHP Version',
+								              'status' => 'pass',
 								              'value'  => PHP_VERSION);
 }
 else
 {
-	$checkServer['php'] = array('name'   => 'PHP Version', 
-								              'status' => 'failed', 
+	$checkServer['php'] = array('name'   => 'PHP Version',
+								              'status' => 'failed',
 								              'value'  => 'DotKernel requires <a href="http://php.net/downloads.php">PHP</a> 5.2.10
 															             or newer, your version is ' . PHP_VERSION . '.');
 	$test = false;
@@ -77,14 +77,14 @@ if(function_exists('mysqli_get_client_version') && function_exists('mysqli_get_c
 	$mysqlClientVersion = current(explode(' - ', mysqli_get_client_info()));
 	if(version_compare($mysqlVersion, '5.0', '>='))
 	{
-		$checkServer['mysql'] = array('name'   => 'MySQL Client Version', 
-									                'status' => 'pass', 
+		$checkServer['mysql'] = array('name'   => 'MySQL Client Version',
+									                'status' => 'pass',
 									                'value'  => $mysqlClientVersion);
 	}
 	else
 	{
-		$checkServer['mysql'] = array('name'   => 'MySQL Client Version', 
-									                'status' => 'failed', 
+		$checkServer['mysql'] = array('name'   => 'MySQL Client Version',
+									                'status' => 'failed',
 									                'value'  => 'DotKernel requires <a href="http://dev.mysql.com/downloads/">MySQL</a>
 																							 5.0 or newer, your version is ' . $mysqlClientVersion . '.');
 		$test = false;
@@ -92,8 +92,8 @@ if(function_exists('mysqli_get_client_version') && function_exists('mysqli_get_c
 }
 else
 {
-	$checkServer['mysql'] = array('name'   => 'MySQL Client Version', 
-								                'status' => 'failed', 
+	$checkServer['mysql'] = array('name'   => 'MySQL Client Version',
+								                'status' => 'failed',
 								                'value'  => 'DotKernel requires that your PHP enviroment have <b>MySQLi</b>
 																             extension enabled.');
 	$test = false;
@@ -102,21 +102,21 @@ else
 if( $checkServer['mysql']['status'] != 'failed')
 {
  	$mysqlServerVersion = array();
- // check shell_exec only if is not in safe mode 
+ // check shell_exec only if is not in safe mode
 	if(!array_key_exists('safe_mode' , $checkServer))
 	{
-			preg_match('/[0-9]\.[0-9]+\.[0-9]+/', shell_exec('mysql -V'), $mysqlServerVersion);		
+			preg_match('/[0-9]\.[0-9]+\.[0-9]+/', shell_exec('mysql -V'), $mysqlServerVersion);
 	}
  // return an empty array ?
 	if(!count($mysqlServerVersion)) $mysqlServerVersion[0] = 'N/A';
-	$checkServer['mysql_server_version'] = array('name'   => 'MySQL Server Version', 
-								                               'status' => 'pass', 
+	$checkServer['mysql_server_version'] = array('name'   => 'MySQL Server Version',
+								                               'status' => 'pass',
 								                               'value'  => $mysqlServerVersion[0]);
 }
 else
 {
-		$checkServer['mysql_server_version'] = array('name'   => 'MySQL Server Version', 
-								                                 'status' => 'failed', 
+		$checkServer['mysql_server_version'] = array('name'   => 'MySQL Server Version',
+								                                 'status' => 'failed',
 								                                 'value'  => 'Unable to test <b>MySQL Server</b> version.');
 	$test = false;
 }
@@ -127,25 +127,25 @@ if($zendExists)
 	$zend_loader = Zend_Loader_Autoloader::getInstance();
 	if(version_compare(Zend_Version::VERSION, '1.11.0', '>='))
 	{
-		$checkServer['zend'] = array('name'   => 'Zend Framework Version', 
-									 							 'status' => 'pass', 
+		$checkServer['zend'] = array('name'   => 'Zend Framework Version',
+									 							 'status' => 'pass',
 									               'value'  => Zend_Version::VERSION);
 	}
 	else
 	{
-		$checkServer['zend'] = array('name'   => 'Zend Framework Version', 
-						                     'status' => 'failed', 
-									               'value'  => 'DotKernel requires <a href="http://framework.zend.com/download">Zend 
-																 			        Framework</a> 1.11.0 or newer, your version is 
+		$checkServer['zend'] = array('name'   => 'Zend Framework Version',
+						                     'status' => 'failed',
+									               'value'  => 'DotKernel requires <a href="http://framework.zend.com/download">Zend
+																 			        Framework</a> 1.11.0 or newer, your version is
 																							' . Zend_Version::VERSION . '.');
 		$test = false;
 	}
 }
 else
 {
-	$checkServer['zend'] = array('name'   => 'Zend Framework Version', 
-								               'status' => 'failed', 
-							                 'value'  => 'DotKernel requires that <a href="http://framework.zend.com/download">Zend 
+	$checkServer['zend'] = array('name'   => 'Zend Framework Version',
+								               'status' => 'failed',
+							                 'value'  => 'DotKernel requires that <a href="http://framework.zend.com/download">Zend
 															              Framework</a> be installed on your server. </br>Check this article
 															              <a href="http://www.dotkernel.com/zend-framework/zend-framework-pear-plesk-server/">
 																						Zend Framework as PEAR accessible repository on Plesk server</a> for more
@@ -156,8 +156,8 @@ else
 // check apache module rewrite
 if(function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules()))
 {
-	$check['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i> module', 
-										 	                 'status' => 'pass', 
+	$check['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i> module',
+										 	                 'status' => 'pass',
 										                   'value'  => 'OK');
 }
 else
@@ -169,9 +169,9 @@ else
 	$apacheModule = (strpos($contents, 'mod_rewrite') !== false);
 	if($apacheModule)
 	{
-		$check['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i> module', 
-										                     'status' => 'pass', 
-										                     'value'  => 'OK');	
+		$check['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i> module',
+										                     'status' => 'pass',
+										                     'value'  => 'OK');
 	}
 	else
 	{
@@ -179,32 +179,32 @@ else
 		$cgi = (!strpos($contents, 'mod_php') !== false);
 		if($cgi)
 		{
-			 $check['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i> module', 
-																						'status' => 'pass', 
-																						'value'  => 'You are running Apache with <br> cgi-fastcgi. <br> Presence of 
+			 $check['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i> module',
+																						'status' => 'pass',
+																						'value'  => 'You are running Apache with <br> cgi-fastcgi. <br> Presence of
 																												mod_rewrite <br>cannot be determined.');
 		}
 		else
 		{
-			$check['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i> module', 
-											                   'status' => 'failed', 
+			$check['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i> module',
+											                   'status' => 'failed',
 											                   'value'  => 'DotKernel requires Apache mod_rewrite for htaccess route.');
 			$test = false;
 		}
 
 	}
 }
-// check ctype	
+// check ctype
 if(extension_loaded('ctype'))
 {
-	$check['php_ctype'] = array('name'   => 'PHP <i>Ctype</i>', 
-															'status' => 'pass', 
+	$check['php_ctype'] = array('name'   => 'PHP <i>Ctype</i>',
+															'status' => 'pass',
 															'value'  => 'OK');
 }
 else
 {
-	$check['php_ctype'] = array('name'   => 'PHP <i>Ctype</i>', 
-														  'status' => 'failed', 
+	$check['php_ctype'] = array('name'   => 'PHP <i>Ctype</i>',
+														  'status' => 'failed',
 															'value'  => 'DotKernel requires <a href="http://www.php.net/manual/en/book.ctype.php">
 															             Ctype</a> extension.');
 	$test = false;
@@ -212,30 +212,30 @@ else
 // check PDO MySQL
 if(extension_loaded('pdo_mysql'))
 {
-	$check['php_pdo_mysql'] = array('name'   => 'PHP <i>PDO_MySQL</i>', 
-																	'status' => 'pass', 
+	$check['php_pdo_mysql'] = array('name'   => 'PHP <i>PDO_MySQL</i>',
+																	'status' => 'pass',
 																	'value'  => 'OK');
 }
 else
 {
-	$check['php_pdo_mysql'] = array('name'   => 'PHP <i>PDO_MySQL</i>', 
-																	'status' => 'failed', 
+	$check['php_pdo_mysql'] = array('name'   => 'PHP <i>PDO_MySQL</i>',
+																	'status' => 'failed',
 																	'value'  => 'By default, DotKernel use  <br />
-																	             <a href="http://www.php.net/manual/en/ref.pdo-mysql.php">PDO MySQL</a> 
+																	             <a href="http://www.php.net/manual/en/ref.pdo-mysql.php">PDO MySQL</a>
 																							 driver. ');
 	$test = false;
 }
 // check session
 if(extension_loaded('session'))
 {
-	$check['php_session'] = array('name'   => 'PHP <i>session</i>', 
-															  'status' => 'pass', 
+	$check['php_session'] = array('name'   => 'PHP <i>session</i>',
+															  'status' => 'pass',
 															  'value'  => 'OK');
 }
 else
 {
-	$check['php_session'] = array('name'   => 'PHP <i>session</i>', 
-																'status' => 'failed', 
+	$check['php_session'] = array('name'   => 'PHP <i>session</i>',
+																'status' => 'failed',
 																'value'  => 'DotKernel requires <a href="http://www.php.net/manual/en/book.session.php">
 																						 <br />Session Handling</a>. ');
 	$test = false;
@@ -243,14 +243,14 @@ else
 // check SPL
 if(function_exists('spl_autoload_register'))
 {
-	$check['php_spl'] = array('name'   => 'PHP <i>SPL</i>', 
-													  'status' => 'pass', 
+	$check['php_spl'] = array('name'   => 'PHP <i>SPL</i>',
+													  'status' => 'pass',
 													  'value'  => 'OK');
 }
 else
 {
-	$check['php_spl'] = array('name'   => 'PHP <i>SPL</i>', 
-														'status' => 'failed', 
+	$check['php_spl'] = array('name'   => 'PHP <i>SPL</i>',
+														'status' => 'failed',
 														'value'  => 'DotKernel requires <br />
 																					<a href="http://www.php.net/manual/en/book.spl.php">SPL</a> library. ');
 	$test = false;
@@ -258,15 +258,15 @@ else
 // check JSON
 if(function_exists('json_decode'))
 {
-	$check['php_json'] = array('name'   => 'PHP <i>JSON</i>', 
-													  'status' => 'pass', 
+	$check['php_json'] = array('name'   => 'PHP <i>JSON</i>',
+													  'status' => 'pass',
 													  'value'  => 'OK');
 }
 else
 {
-	$check['php_json'] = array('name'   => 'PHP <i>JSON</i>', 
-														'status' => 'failed', 
-														'value'  => 'DotKernel requires 
+	$check['php_json'] = array('name'   => 'PHP <i>JSON</i>',
+														'status' => 'failed',
+														'value'  => 'DotKernel requires
 																					<a href="http://www.php.net/manual/en/book.json.php">JSON</a> library. ');
 	$test = false;
 }
@@ -274,74 +274,74 @@ else
 // check APC
 if((function_exists('apc_cache_info') && (@apc_cache_info() !== FALSE)))
 {
-	$checkOptional['php_apc'] = array('name'   => 'PHP <i>APC</i>', 
-																	   'status' => 'pass', 
+	$checkOptional['php_apc'] = array('name'   => 'PHP <i>APC</i>',
+																	   'status' => 'pass',
 																	   'value'  => 'OK');
 }
 else
 {
-	$checkOptional['php_apc'] = array('name'   => 'PHP <i>APC</i>', 
-																		'status' => 'failed', 
-																		'value'  => 'DotKernel recommend the use <br /> 
+	$checkOptional['php_apc'] = array('name'   => 'PHP <i>APC</i>',
+																		'status' => 'failed',
+																		'value'  => 'DotKernel recommend the use <br />
 																		 							of APC extension for opcode caching. ');
 }
 
 // check cURL
 if(extension_loaded('curl'))
 {
-	$checkOptional['php_curl'] = array('name'   => 'PHP <i>cURL</i>', 
-																	   'status' => 'pass', 
+	$checkOptional['php_curl'] = array('name'   => 'PHP <i>cURL</i>',
+																	   'status' => 'pass',
 																	   'value'  => 'OK');
 }
 else
 {
-	$checkOptional['php_curl'] = array('name'   => 'PHP <i>cURL</i>', 
-																	   'status' => 'failed', 
+	$checkOptional['php_curl'] = array('name'   => 'PHP <i>cURL</i>',
+																	   'status' => 'failed',
 																	   'value'  => 'DotKernel requires <br>
-																									<a href="http://www.php.net/manual/en/book.curl.php">Client URL</a> 
+																									<a href="http://www.php.net/manual/en/book.curl.php">Client URL</a>
 																									 library.');
 }
 // check gd
 if(extension_loaded('gd'))
 {
-	$checkOptional['php_gd'] = array('name'   => 'PHP <i>GD</i>', 
-																	 'status' => 'pass', 
+	$checkOptional['php_gd'] = array('name'   => 'PHP <i>GD</i>',
+																	 'status' => 'pass',
 																	 'value'  => 'OK');
 }
 else
 {
-	$checkOptional['php_gd'] = array('name'   => 'PHP <i>GD</i>', 
-																	 'status' => 'failed', 
-																	 'value'  => 'DotKernel requires 
+	$checkOptional['php_gd'] = array('name'   => 'PHP <i>GD</i>',
+																	 'status' => 'failed',
+																	 'value'  => 'DotKernel requires
 																								<a href="http://www.php.net/manual/en/book.image.php">GD</a> library,
 																								<br>for image manipulation.');
 }
 // check mbstring
 if(extension_loaded('mbstring'))
 {
-	$checkOptional['php_mbstring'] = array('name'   => 'PHP <i>mbstring</i>', 
-																			   'status' => 'pass', 
+	$checkOptional['php_mbstring'] = array('name'   => 'PHP <i>mbstring</i>',
+																			   'status' => 'pass',
 																			   'value'  => 'OK');
 }
 else
 {
-	$checkOptional['php_mbstring'] = array('name'   => 'PHP <i>mbstring</i>', 
-																				 'status' => 'failed', 
-																					'value'  => 'DotKernel requires 
+	$checkOptional['php_mbstring'] = array('name'   => 'PHP <i>mbstring</i>',
+																				 'status' => 'failed',
+																					'value'  => 'DotKernel requires
 																											<a href="http://www.php.net/manual/en/book.mbstring.php">mbstring
 																											</a> extension, <br>used by Zend Framework.');
 }
 // check ssh2 extension
 if(extension_loaded('ftp'))
 {
-	$checkOptional['php_ftp'] = array('name'   => 'PHP <i>ftp</i>', 
-																			   'status' => 'pass', 
+	$checkOptional['php_ftp'] = array('name'   => 'PHP <i>ftp</i>',
+																			   'status' => 'pass',
 																			   'value'  => 'OK');
 }
 else
 {
-	$checkOptional['php_ftp'] = array('name'   => 'PHP <i>ftp</i>', 
-																				 'status' => 'failed', 
+	$checkOptional['php_ftp'] = array('name'   => 'PHP <i>ftp</i>',
+																				 'status' => 'failed',
 																					'value'  => 'DotKernel recommend <br />
 																											<a href="http://www.php.net/manual/en/book.ftp.php">ftp</a>
 																											extension.');
@@ -349,14 +349,14 @@ else
 // check zip extension
 if(extension_loaded('zip'))
 {
-	$checkOptional['php_zip'] = array('name'   => 'PHP <i>zip</i>', 
-																			   'status' => 'pass', 
+	$checkOptional['php_zip'] = array('name'   => 'PHP <i>zip</i>',
+																			   'status' => 'pass',
 																			   'value'  => 'OK');
 }
 else
 {
-	$checkOptional['php_zip'] = array('name'   => 'PHP <i>zip</i>', 
-																				 'status' => 'failed', 
+	$checkOptional['php_zip'] = array('name'   => 'PHP <i>zip</i>',
+																				 'status' => 'failed',
 																					'value'  => 'DotKernel recommend <br />
 																											<a href="http://www.php.net/manual/en/book.zip.php">Zip</a>
 																											extension.');
@@ -364,15 +364,15 @@ else
 //check GeoIp
 if(extension_loaded('geoip'))
 {
-	$checkOptional['php_geoip'] = array('name'   => 'PHP <i>GeoIP</i>', 
-																			'status' => 'pass', 
+	$checkOptional['php_geoip'] = array('name'   => 'PHP <i>GeoIP</i>',
+																			'status' => 'pass',
 																			'value'  => 'OK');
 }
 else
 {
-	$checkOptional['php_geoip'] = array('name'   => 'PHP <i>GeoIP</i>', 
-																			'status' => 'failed', 
-																			'value'  => 'DotKernel requires 
+	$checkOptional['php_geoip'] = array('name'   => 'PHP <i>GeoIP</i>',
+																			'status' => 'failed',
+																			'value'  => 'DotKernel requires
 																									<a href="http://www.php.net/manual/en/book.geoip.php">GeoIP</a><br />
 																									 used by the  Dot_GeoIP <br> class for faster compilation.');
 }
@@ -393,7 +393,7 @@ function parseHtmlRows($data)
 	echo "</tr>";
 }
 // Start to parse the installation requirements HTML format
-?><!doctype html> 
+?><!doctype html>
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
@@ -488,7 +488,7 @@ function parseHtmlRows($data)
 		font-weight: bold;
 		line-height: 29px !important;
 		font-family: Arial, sans-serif;
-	}		
+	}
 	.testfailed{
 		margin: 30px 0px 20px 0px;
 		font-size: 15px;
@@ -518,9 +518,9 @@ function parseHtmlRows($data)
 	<h1>DotKernel  System Requirements Check</h1>
 	<p class="intro">
 		We have run the tests below to determine if DotKernel will work in your environment.<br/>
-		If any of the tests have failed, consult the <a href="http://www.dotkernel.com/docs/system-requirements/">system requirements</a> page for more information. 
+		If any of the tests have failed, consult the <a href="http://www.dotkernel.com/docs/system-requirements/">system requirements</a> page for more information.
 	</p>
-	
+
 <?php
 if($test)
 {
@@ -529,7 +529,7 @@ if($test)
 		<p>Your enviroment passed all the requirements needed to run DotKernel.</p>
 		You can now delete or rename the <i>dk.php</i> file.</div>
 	<?php
-} 
+}
 else
 {
 	?>
@@ -540,7 +540,7 @@ else
 	<?php
 }
 ?>
-	
+
 	<fieldset>
 		<legend>Enviroment Test</legend>
 		<table>

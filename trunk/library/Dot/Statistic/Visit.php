@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
 * DotBoost Technologies Inc.
 * DotKernel Application Framework
@@ -23,13 +23,13 @@ class Dot_Statistic_Visit extends Dot_Statistic
 	/**
 	 * Constructor
 	 * @access public
-	 * @return 
+	 * @return
 	 */
   public function __construct()
 	{
 		$this->config = Zend_Registry::get('configuration');
-	}	
-	
+	}
+
 	/**
 	 * Register usefull information about the visit
 	 * @access public
@@ -38,13 +38,13 @@ class Dot_Statistic_Visit extends Dot_Statistic
 	public static function recordVisit()
 	{
 		$db      = Zend_Registry::get('database');
-		
+
 		$ip      = Dot_Kernel::GetUserIp();
 		$proxyIp = $_SERVER['REMOTE_ADDR'];
-		
+
 		$dotGeoip = new Dot_Geoip();
 		$country = $dotGeoip->getCountryByIp($ip);
-		
+
 		$logVisit = array(
 									'ip'               => $ip,
 									'proxyIp'          => $proxyIp,
@@ -70,7 +70,7 @@ class Dot_Statistic_Visit extends Dot_Statistic
 																					$_SERVER["HTTP_X_FORWARDED_FOR"] : '',
 									'xForwardedHost'   => array_key_exists("HTTP_X-FORWARDED-HOST", $_SERVER) ?
 																					$_SERVER["HTTP_X-FORWARDED-HOST "] : '',
-									'xForwardedServer' => array_key_exists("HTTP_X-FORWARDED-SERVER", $_SERVER) ? 
+									'xForwardedServer' => array_key_exists("HTTP_X-FORWARDED-SERVER", $_SERVER) ?
 																					$_SERVER["HTTP_X-FORWARDED-SERVER"] : '',
 									'referer'          => array_key_exists("HTTP_REFERER", $_SERVER) ?
 																					$_SERVER['HTTP_REFERER'] : ''
@@ -78,7 +78,7 @@ class Dot_Statistic_Visit extends Dot_Statistic
 		$db->insert('statisticVisit', $logVisit);
 		return $db->lastInsertId();
 	}
-	
+
 	/**
 	 * Record mobile device info in database, for future analysis
 	 * @param integer $visitId
@@ -95,7 +95,7 @@ class Dot_Statistic_Visit extends Dot_Statistic
 													'browserName'     => $device->browserName,
 													'browserVersion'  => $device->browserVersion,
 													'deviceOs'        => $device->deviceOs,
-													'deviceOsVersion' => $device->deviceOsVersion, 
+													'deviceOsVersion' => $device->deviceOsVersion,
 													'screenWidth'     => $device->screenWidth,
 													'screenHeight'    => $device->screenHeight,
 													'isTablet'        => (int)$device->isTablet,
@@ -105,7 +105,7 @@ class Dot_Statistic_Visit extends Dot_Statistic
 													'isAndroid'       => (int)$device->isAndroid,
 													'isBlackberry'    => (int)$device->isBlackberry,
 													'isSymbian'       => (int)$device->isSymbian,
-													'isWindowsMobile' => (int)$device->isWindowsMobile 
+													'isWindowsMobile' => (int)$device->isWindowsMobile
 												);
 		$db->insert('statisticVisitMobile', $visitMobile);
 		return TRUE;

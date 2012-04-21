@@ -19,7 +19,7 @@
 */
 
 class Dot_Validate
-{	
+{
 	/**
 	 * Validate options
 	 * @access private
@@ -33,7 +33,7 @@ class Dot_Validate
 	 * @return Dot_Validate
 	 */
 	public function __construct($options = array())
-	{		
+	{
 		$this->_options = $options;
 	}
 }

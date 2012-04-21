@@ -26,7 +26,7 @@ class Sample extends Dot_Model
 	 */
 	public function __construct()
 	{
-		parent::__construct();	
+		parent::__construct();
 	}
 	/**
 	 * Get sample items
@@ -62,5 +62,5 @@ class Sample extends Dot_Model
 			$entries[] = $entry;
 		}
 		return $entries;
-	}	
+	}
 }
