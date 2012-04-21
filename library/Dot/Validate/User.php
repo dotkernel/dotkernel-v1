@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * DotBoost Technologies Inc.
  * DotKernel Application Framework
@@ -9,7 +9,7 @@
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @version    $Id$
  */
- 
+
  /**
  * Validate User
  * @category   DotKernel
@@ -17,9 +17,9 @@
  * @subpackage DotValidate
  * @author     DotKernel Team <team@dotkernel.com>
  */
- 
-class Dot_Validate_User extends Dot_Validate 
-{	
+
+class Dot_Validate_User extends Dot_Validate
+{
 	/**
 	 * Validate user options
 	 * Is an array with the following keys
@@ -31,8 +31,8 @@ class Dot_Validate_User extends Dot_Validate
 	 * @access private
 	 */
 	private $_options = array('who' => 'user',
-														'action' => '', 
-														'values' => array(), 
+														'action' => '',
+														'values' => array(),
 														'userId' => 0);
 	/**
 	 * Valid data after validation
@@ -53,8 +53,8 @@ class Dot_Validate_User extends Dot_Validate
 	 * @return Dot_Validate
 	 */
 	public function __construct($options = array())
-	{		
-		$this->option = Zend_Registry::get('option');	
+	{
+		$this->option = Zend_Registry::get('option');
 		foreach ($options as $key =>$value)
 		{
 			$this->_options[$key] = $value;
@@ -73,25 +73,25 @@ class Dot_Validate_User extends Dot_Validate
 		//validate the input data - username, password and email will be also filtered
 		$validatorChain = new Zend_Validate();
 		$dotFilter = new Dot_Filter();
-		//validate details parameters	
+		//validate details parameters
 		if(array_key_exists('details', $values))
-		{			
+		{
 			$validatorChain->addValidator(new Zend_Validate_StringLength(array('min' => $this->option->validate->details->lengthMin)));
 			$this->_callFilter($validatorChain, $values['details']);
-		}		
+		}
 		//validate username
 		if(array_key_exists('username', $values))
 		{
 			$validatorChain = new Zend_Validate();
 			$validatorChain->addValidator(new Zend_Validate_Alnum())
-											->addValidator(new Zend_Validate_StringLength($this->option->validate->details->lengthMin, 
+											->addValidator(new Zend_Validate_StringLength($this->option->validate->details->lengthMin,
 																																		$this->option->validate->details->lengthMax));
 			$this->_callFilter($validatorChain, $values['username']);
 			if(in_array($this->_options['action'], array('add', 'update')))
-			{				
+			{
 				$uniqueError = $this->_validateUnique('username', $values['username']['username']);
 				$this->_error = array_merge($this->_error, $uniqueError);
-			}			
+			}
 		}
 		//validate email
 		if(array_key_exists('email', $values))
@@ -99,18 +99,18 @@ class Dot_Validate_User extends Dot_Validate
 			$validatorEmail = new Zend_Validate_EmailAddress();
 			$this->_callFilter($validatorEmail, $values['email']);
 			if(in_array($this->_options['action'], array('add', 'update')))
-			{				
+			{
 				$uniqueError = $this->_validateUnique('email', $values['email']['email']);
 				$this->_error = array_merge($this->_error, $uniqueError);
 			}
-		}			
+		}
 		//validate enum
 		if(array_key_exists('enum', $values))
 		{
 			$validatorEnum = new Zend_Validate_InArray(explode(',', $values['enum'][0]));
 			unset($values['enum'][0]);
 			$this->_callFilter($validatorEnum, $values['enum']);
-		}						
+		}
 		//validate phone
 		if(array_key_exists('phone', $values))
 		{
@@ -125,28 +125,28 @@ class Dot_Validate_User extends Dot_Validate
 			else
 			{
 				$this->_error = array_merge($this->_error, array('phone' => $dotValidatorPhone->getError()));
-			}			
-		}		
-		//validate password	
+			}
+		}
+		//validate password
 		if(array_key_exists('password', $values) && isset($values['password']['password']))
-		{		
-			if(isset($values['password']['password2']) 
+		{
+			if(isset($values['password']['password2'])
 				&& $values['password']['password'] != $values['password']['password2'])
 			{
 				$this->_error['password'] = $this->option->errorMessage->passwordTwice;
 			}
 			else
 			{
-				if(isset($values['password']['password2'])) 
+				if(isset($values['password']['password2']))
 					unset($values['password']['password2']);
 				$validatorChain = new Zend_Validate();
 				$validatorChain->addValidator(new Zend_Validate_StringLength(
-												$this->option->validate->password->lengthMin, 
+												$this->option->validate->password->lengthMin,
 												$this->option->validate->password->lengthMax
-											));			
+											));
 				$this->_callFilter($validatorChain, $values['password']);
 			}
-		}	
+		}
 		// validate captcha
 		if(array_key_exists('captcha', $values))
 		{
@@ -160,19 +160,19 @@ class Dot_Validate_User extends Dot_Validate
 				// validate secure image code
 				try
 				{
-					// just in frontend is recaptcha included. 
+					// just in frontend is recaptcha included.
 					// if you want it in other modules, add getRecaptcha() method from frontend/View.php in others View.php of the modules
 					$view = View::getInstance();
-					$result = $view->getRecaptcha()->verify($values['captcha']['recaptcha_challenge_field'], 
+					$result = $view->getRecaptcha()->verify($values['captcha']['recaptcha_challenge_field'],
 																										$values['captcha']['recaptcha_response_field']);
-					if (!$result->isValid()) 
+					if (!$result->isValid())
 					{
 						$this->_error = array_merge($this->_error, array('Secure Image' => $this->option->errorMessage->captcha));
 					}
 				}
 				catch(Zend_Exception $e)
 				{
-					$this->_error = array_merge($this->_error, array('Secure Image' => $this->option->errorMessage->captcha. ' ' 
+					$this->_error = array_merge($this->_error, array('Secure Image' => $this->option->errorMessage->captcha. ' '
 																			. $e->getMessage()));
 				}
 			}
@@ -189,12 +189,12 @@ class Dot_Validate_User extends Dot_Validate
 	/**
 	 * Get valid data
 	 * @access public
-	 * @return array 
+	 * @return array
 	 */
 	public function getData()
 	{
 		return $this->_data;
-	}	
+	}
 	/**
 	 * Get errors encounter on validation
 	 * @access public
@@ -224,7 +224,7 @@ class Dot_Validate_User extends Dot_Validate
 		else
 		{
 			$uniqueCondition = (FALSE != $exists);
-		}			
+		}
 		if($uniqueCondition)
 		{
 			$error[$field] = $value . $this->option->errorMessage->userExists;
@@ -239,7 +239,7 @@ class Dot_Validate_User extends Dot_Validate
 	 * @return array
 	 */
 	public function _getUserBy($field = '', $value = '')
-	{		
+	{
 		$db = Zend_Registry::get('database');
 		$select = $db->select()
 									->from($this->_options['who'])

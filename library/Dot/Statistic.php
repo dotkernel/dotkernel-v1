@@ -27,8 +27,8 @@ class Dot_Statistic
 	 */
 	private function __construct()
 	{
-	}	
-	
+	}
+
 	/**
 	 * call the function to record the visit
 	 * @access public
@@ -39,7 +39,7 @@ class Dot_Statistic
 		$visitId = Dot_Statistic_Visit::recordVisit();
 		return $visitId;
 	}
-	
+
 	/**
 	 * Record device info in statisticVisitMobile table
 	 * @param object $visitId

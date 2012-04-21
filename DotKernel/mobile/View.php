@@ -42,12 +42,12 @@ class View extends Dot_Template
 			self::$_instance = new self($root, $unknowns, $fallback);
 		}
 		return self::$_instance;
-	}	
+	}
 	/**
 	 * Initalize some parameter
 	 * @access public
 	 * @return void
-	 */	
+	 */
 	public function init()
 	{
 		$this->requestModule = Zend_Registry::get('requestModule');
@@ -58,7 +58,7 @@ class View extends Dot_Template
 	}
 	/**
 	 * Set the template file
-	 * @access public 
+	 * @access public
 	 * @return void
 	 */
 	public function setViewFile()
@@ -90,7 +90,7 @@ class View extends Dot_Template
 		$this->setVar('PAGE_CONTENT_TITLE', $pageTitle);
 		$this->setVar('SITE_NAME', $this->seo->siteName);
 		$this->setVar('CANONICAL_URL', $this->seo->canonicalUrl);
-	}	
+	}
 	/**
 	 * Display message - error, warning, info
 	 * @access public
@@ -106,7 +106,7 @@ class View extends Dot_Template
 			$this->setBlock('tpl_msg', 'msg_array', 'msg_array_row');
 			$this->setVar('MESSAGE_TYPE', $session->message['type']);
 			if(is_array($session->message['txt']))
-			{			
+			{
 				foreach ($session->message['txt'] as $k => $msg)
 				{
 					$this->setVar('MESSAGE_ARRAY', is_string($k) ? $msg = ucfirst($k) . ' - ' . htmlspecialchars($msg) : htmlspecialchars($msg));
@@ -117,9 +117,9 @@ class View extends Dot_Template
 			{
 				$this->parse('msg_array_row', '');
 				$this->setVar('MESSAGE_STRING', htmlspecialchars($session->message['txt']));
-			}			
+			}
 			$this->parse('MESSAGE_BLOCK', 'tpl_msg');
 			unset($session->message);
-		}		
+		}
 	}
 }

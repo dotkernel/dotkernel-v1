@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * DotBoost Technologies Inc.
  * DotKernel Application Framework
@@ -9,7 +9,7 @@
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @version    $Id$
  */
- 
+
  /**
  * Filter Phone Number
  * @category   DotKernel
@@ -17,8 +17,8 @@
  * @subpackage DotFilter
  * @author     DotKernel Team <team@dotkernel.com>
  */
- 
-class Dot_Filter_Phone extends Dot_Filter 
+
+class Dot_Filter_Phone extends Dot_Filter
 {
 	/**
 	 * Filter options
@@ -45,16 +45,16 @@ class Dot_Filter_Phone extends Dot_Filter
 	 * @return Dot_Filter_Phone
 	 */
 	public function __construct($options = array())
-	{		
+	{
 		$this->_options = $options;
-	}		
+	}
 	/**
 	 * Filter phone number, only digits will pass
-	 * @access public	 
-	 * @return string 
+	 * @access public
+	 * @return string
 	 */
 	public function filter()
-	{		
+	{
 		// only pass the digits characters from a phone number
 		$filter = new Zend_Filter_Digits();
 		return $filter->filter($this->_options['value']);

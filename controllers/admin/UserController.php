@@ -25,8 +25,8 @@ switch ($registry->requestAction)
 	case 'list':
 		// list users
 		$page = (isset($registry->request['page']) && $registry->request['page'] > 0) ? $registry->request['page'] : 1;
-		$users = $userModel->getUserList($page);		
-		$userView->listUser('list', $users, $page);		
+		$users = $userModel->getUserList($page);
+		$userView->listUser('list', $users, $page);
 	break;
 	case 'add':
 		// display form and add new user
@@ -35,11 +35,11 @@ switch ($registry->requestAction)
 		{
 			Dot_Auth::checkUserToken();
 			// POST values that will be validated
-			$values = array('details' => 
+			$values = array('details' =>
 								array('firstName'=>$_POST['firstName'],
 									  'lastName'=>$_POST['lastName']
 									 ),
-							'username' => 
+							'username' =>
 								array('username' => $_POST['username']
 									 ),
 							'email' => array('email' => $_POST['email']),
@@ -75,7 +75,7 @@ switch ($registry->requestAction)
 		{
 			Dot_Auth::checkUserToken();
 			// POST values that will be validated
-			$values = array('details' => 
+			$values = array('details' =>
 								array('firstName'=>$_POST['firstName'],
 									  'lastName'=>$_POST['lastName']
 									 ),
@@ -120,7 +120,7 @@ switch ($registry->requestAction)
 		$dotValidateUser = new Dot_Validate_User(array('who' => 'user', 'action' => 'activate', 'values' => $values));
 
 		if($dotValidateUser->isValid())
-		{	
+		{
 			$data = $dotValidateUser->getData();
 			// no error - then change active value of user
 			$userModel->activateUser($id, $data['isActive']);
@@ -166,7 +166,7 @@ switch ($registry->requestAction)
 		$userView->setExtraBreadcrumb($data['username']);
 		$pageTitle .= ' "' . $data['username'] . '"';
 		// delete page confirmation
-		$userView->details('delete', $data);	
+		$userView->details('delete', $data);
 	break;
 	case 'send-password':
 		// send an email with the password to the selected user
@@ -174,7 +174,7 @@ switch ($registry->requestAction)
 		$error = array();
 		if ($registry->request['id'] > 0)
 		{
-			// send user password 
+			// send user password
 			$userModel->sendPassword($registry->request['id']);
 		}
 		else
@@ -187,7 +187,7 @@ switch ($registry->requestAction)
 	break;
 	case 'logins':
 		// list user logins
-		$id = (isset($registry->request['id'])) ? (int)$registry->request['id'] : 0;		
+		$id = (isset($registry->request['id'])) ? (int)$registry->request['id'] : 0;
 		$page = (isset($registry->request['page']) && $registry->request['page'] > 0) ? $registry->request['page'] : 1;
 		$browser = (isset($registry->request['browser'])) ? urldecode($registry->request['browser']) : '';
 		$loginDate = (isset($registry->request['loginDate'])) ? $registry->request['loginDate'] : '';

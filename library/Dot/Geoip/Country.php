@@ -70,7 +70,7 @@ class Dot_Geoip_Country extends Dot_Geoip
 	/**
 	 * File handle identifier
 	 * @access private
-	 * @var resource 
+	 * @var resource
 	 */
 	private $_filehandle;
 	/**
@@ -90,68 +90,68 @@ class Dot_Geoip_Country extends Dot_Geoip
 	 * @access private
 	 * @var int
 	 */
-    private $_databaseSegments;	
+    private $_databaseSegments;
 	/**
 	 * Record length
 	 * @access private
 	 * @var int
 	 */
-    private $_recordLength;	
+    private $_recordLength;
 	/**
-	 * ID returned by shmop_open() function to access the shared memory segment 
+	 * ID returned by shmop_open() function to access the shared memory segment
 	 * @access private
 	 * @var int
 	 */
-    private $_shmid;	
+    private $_shmid;
 	/**
 	 * Array with country code to number corespondence
 	 * @access private
 	 * @var array
 	 */
     private $_geoipCountryCodeToNumber = array(
-		"" => 0, "AP" => 1, "EU" => 2, "AD" => 3, "AE" => 4, "AF" => 5, 
-		"AG" => 6, "AI" => 7, "AL" => 8, "AM" => 9, "AN" => 10, "AO" => 11, 
-		"AQ" => 12, "AR" => 13, "AS" => 14, "AT" => 15, "AU" => 16, "AW" => 17, 
-		"AZ" => 18, "BA" => 19, "BB" => 20, "BD" => 21, "BE" => 22, "BF" => 23, 
-		"BG" => 24, "BH" => 25, "BI" => 26, "BJ" => 27, "BM" => 28, "BN" => 29, 
-		"BO" => 30, "BR" => 31, "BS" => 32, "BT" => 33, "BV" => 34, "BW" => 35, 
-		"BY" => 36, "BZ" => 37, "CA" => 38, "CC" => 39, "CD" => 40, "CF" => 41, 
-		"CG" => 42, "CH" => 43, "CI" => 44, "CK" => 45, "CL" => 46, "CM" => 47, 
-		"CN" => 48, "CO" => 49, "CR" => 50, "CU" => 51, "CV" => 52, "CX" => 53, 
-		"CY" => 54, "CZ" => 55, "DE" => 56, "DJ" => 57, "DK" => 58, "DM" => 59, 
-		"DO" => 60, "DZ" => 61, "EC" => 62, "EE" => 63, "EG" => 64, "EH" => 65, 
-		"ER" => 66, "ES" => 67, "ET" => 68, "FI" => 69, "FJ" => 70, "FK" => 71, 
+		"" => 0, "AP" => 1, "EU" => 2, "AD" => 3, "AE" => 4, "AF" => 5,
+		"AG" => 6, "AI" => 7, "AL" => 8, "AM" => 9, "AN" => 10, "AO" => 11,
+		"AQ" => 12, "AR" => 13, "AS" => 14, "AT" => 15, "AU" => 16, "AW" => 17,
+		"AZ" => 18, "BA" => 19, "BB" => 20, "BD" => 21, "BE" => 22, "BF" => 23,
+		"BG" => 24, "BH" => 25, "BI" => 26, "BJ" => 27, "BM" => 28, "BN" => 29,
+		"BO" => 30, "BR" => 31, "BS" => 32, "BT" => 33, "BV" => 34, "BW" => 35,
+		"BY" => 36, "BZ" => 37, "CA" => 38, "CC" => 39, "CD" => 40, "CF" => 41,
+		"CG" => 42, "CH" => 43, "CI" => 44, "CK" => 45, "CL" => 46, "CM" => 47,
+		"CN" => 48, "CO" => 49, "CR" => 50, "CU" => 51, "CV" => 52, "CX" => 53,
+		"CY" => 54, "CZ" => 55, "DE" => 56, "DJ" => 57, "DK" => 58, "DM" => 59,
+		"DO" => 60, "DZ" => 61, "EC" => 62, "EE" => 63, "EG" => 64, "EH" => 65,
+		"ER" => 66, "ES" => 67, "ET" => 68, "FI" => 69, "FJ" => 70, "FK" => 71,
 		"FM" => 72, "FO" => 73, "FR" => 74, "FX" => 75, "GA" => 76, "GB" => 77,
-		"GD" => 78, "GE" => 79, "GF" => 80, "GH" => 81, "GI" => 82, "GL" => 83, 
-		"GM" => 84, "GN" => 85, "GP" => 86, "GQ" => 87, "GR" => 88, "GS" => 89, 
-		"GT" => 90, "GU" => 91, "GW" => 92, "GY" => 93, "HK" => 94, "HM" => 95, 
-		"HN" => 96, "HR" => 97, "HT" => 98, "HU" => 99, "ID" => 100, "IE" => 101, 
-		"IL" => 102, "IN" => 103, "IO" => 104, "IQ" => 105, "IR" => 106, "IS" => 107, 
-		"IT" => 108, "JM" => 109, "JO" => 110, "JP" => 111, "KE" => 112, "KG" => 113, 
-		"KH" => 114, "KI" => 115, "KM" => 116, "KN" => 117, "KP" => 118, "KR" => 119, 
-		"KW" => 120, "KY" => 121, "KZ" => 122, "LA" => 123, "LB" => 124, "LC" => 125, 
-		"LI" => 126, "LK" => 127, "LR" => 128, "LS" => 129, "LT" => 130, "LU" => 131, 
-		"LV" => 132, "LY" => 133, "MA" => 134, "MC" => 135, "MD" => 136, "MG" => 137, 
-		"MH" => 138, "MK" => 139, "ML" => 140, "MM" => 141, "MN" => 142, "MO" => 143, 
-		"MP" => 144, "MQ" => 145, "MR" => 146, "MS" => 147, "MT" => 148, "MU" => 149, 
+		"GD" => 78, "GE" => 79, "GF" => 80, "GH" => 81, "GI" => 82, "GL" => 83,
+		"GM" => 84, "GN" => 85, "GP" => 86, "GQ" => 87, "GR" => 88, "GS" => 89,
+		"GT" => 90, "GU" => 91, "GW" => 92, "GY" => 93, "HK" => 94, "HM" => 95,
+		"HN" => 96, "HR" => 97, "HT" => 98, "HU" => 99, "ID" => 100, "IE" => 101,
+		"IL" => 102, "IN" => 103, "IO" => 104, "IQ" => 105, "IR" => 106, "IS" => 107,
+		"IT" => 108, "JM" => 109, "JO" => 110, "JP" => 111, "KE" => 112, "KG" => 113,
+		"KH" => 114, "KI" => 115, "KM" => 116, "KN" => 117, "KP" => 118, "KR" => 119,
+		"KW" => 120, "KY" => 121, "KZ" => 122, "LA" => 123, "LB" => 124, "LC" => 125,
+		"LI" => 126, "LK" => 127, "LR" => 128, "LS" => 129, "LT" => 130, "LU" => 131,
+		"LV" => 132, "LY" => 133, "MA" => 134, "MC" => 135, "MD" => 136, "MG" => 137,
+		"MH" => 138, "MK" => 139, "ML" => 140, "MM" => 141, "MN" => 142, "MO" => 143,
+		"MP" => 144, "MQ" => 145, "MR" => 146, "MS" => 147, "MT" => 148, "MU" => 149,
 		"MV" => 150, "MW" => 151, "MX" => 152, "MY" => 153, "MZ" => 154, "NA" => 155,
-		"NC" => 156, "NE" => 157, "NF" => 158, "NG" => 159, "NI" => 160, "NL" => 161, 
-		"NO" => 162, "NP" => 163, "NR" => 164, "NU" => 165, "NZ" => 166, "OM" => 167, 
-		"PA" => 168, "PE" => 169, "PF" => 170, "PG" => 171, "PH" => 172, "PK" => 173, 
-		"PL" => 174, "PM" => 175, "PN" => 176, "PR" => 177, "PS" => 178, "PT" => 179, 
-		"PW" => 180, "PY" => 181, "QA" => 182, "RE" => 183, "RO" => 184, "RU" => 185, 
-		"RW" => 186, "SA" => 187, "SB" => 188, "SC" => 189, "SD" => 190, "SE" => 191, 
-		"SG" => 192, "SH" => 193, "SI" => 194, "SJ" => 195, "SK" => 196, "SL" => 197, 
-		"SM" => 198, "SN" => 199, "SO" => 200, "SR" => 201, "ST" => 202, "SV" => 203, 
-		"SY" => 204, "SZ" => 205, "TC" => 206, "TD" => 207, "TF" => 208, "TG" => 209, 
-		"TH" => 210, "TJ" => 211, "TK" => 212, "TM" => 213, "TN" => 214, "TO" => 215, 
-		"TL" => 216, "TR" => 217, "TT" => 218, "TV" => 219, "TW" => 220, "TZ" => 221, 
-		"UA" => 222, "UG" => 223, "UM" => 224, "US" => 225, "UY" => 226, "UZ" => 227, 
+		"NC" => 156, "NE" => 157, "NF" => 158, "NG" => 159, "NI" => 160, "NL" => 161,
+		"NO" => 162, "NP" => 163, "NR" => 164, "NU" => 165, "NZ" => 166, "OM" => 167,
+		"PA" => 168, "PE" => 169, "PF" => 170, "PG" => 171, "PH" => 172, "PK" => 173,
+		"PL" => 174, "PM" => 175, "PN" => 176, "PR" => 177, "PS" => 178, "PT" => 179,
+		"PW" => 180, "PY" => 181, "QA" => 182, "RE" => 183, "RO" => 184, "RU" => 185,
+		"RW" => 186, "SA" => 187, "SB" => 188, "SC" => 189, "SD" => 190, "SE" => 191,
+		"SG" => 192, "SH" => 193, "SI" => 194, "SJ" => 195, "SK" => 196, "SL" => 197,
+		"SM" => 198, "SN" => 199, "SO" => 200, "SR" => 201, "ST" => 202, "SV" => 203,
+		"SY" => 204, "SZ" => 205, "TC" => 206, "TD" => 207, "TF" => 208, "TG" => 209,
+		"TH" => 210, "TJ" => 211, "TK" => 212, "TM" => 213, "TN" => 214, "TO" => 215,
+		"TL" => 216, "TR" => 217, "TT" => 218, "TV" => 219, "TW" => 220, "TZ" => 221,
+		"UA" => 222, "UG" => 223, "UM" => 224, "US" => 225, "UY" => 226, "UZ" => 227,
 		"VA" => 228, "VC" => 229, "VE" => 230, "VG" => 231, "VI" => 232, "VN" => 233,
-		"VU" => 234, "WF" => 235, "WS" => 236, "YE" => 237, "YT" => 238, "RS" => 239, 
-		"ZA" => 240, "ZM" => 241, "ME" => 242, "ZW" => 243, "A1" => 244, "A2" => 245, 
+		"VU" => 234, "WF" => 235, "WS" => 236, "YE" => 237, "YT" => 238, "RS" => 239,
+		"ZA" => 240, "ZM" => 241, "ME" => 242, "ZW" => 243, "A1" => 244, "A2" => 245,
 		"O1" => 246, "AX" => 247, "GG" => 248, "IM" => 249, "JE" => 250, "BL" => 251,
-		"MF" => 252);	
+		"MF" => 252);
 	/**
 	 * Array with country codes (2 chars)
 	 * @access private
@@ -177,7 +177,7 @@ class Dot_Geoip_Country extends Dot_Geoip
 		"TF", "TG", "TH", "TJ", "TK", "TM", "TN", "TO", "TL", "TR", "TT", "TV", "TW",
 		"TZ", "UA", "UG", "UM", "US", "UY", "UZ", "VA", "VC", "VE", "VG", "VI", "VN",
 		"VU", "WF", "WS", "YE", "YT", "RS", "ZA", "ZM", "ME", "ZW", "A1", "A2", "O1",
-		"AX", "GG", "IM", "JE", "BL", "MF");	
+		"AX", "GG", "IM", "JE", "BL", "MF");
 	/**
 	 * Array with country codes (3 chars)
 	 * @access private
@@ -203,7 +203,7 @@ class Dot_Geoip_Country extends Dot_Geoip
 		"TGO","THA","TJK","TKL","TLS","TKM","TUN","TON","TUR","TTO","TUV","TWN","TZA",
 		"UKR","UGA","UMI","USA","URY","UZB","VAT","VCT","VEN","VGB","VIR","VNM","VUT",
 		"WLF","WSM","YEM","MYT","SRB","ZAF","ZMB","MNE","ZWE","A1","A2","O1",
-		"ALA","GGY","IMN","JEY","BLM","MAF");	
+		"ALA","GGY","IMN","JEY","BLM","MAF");
 	/**
 	 * Array with country names
 	 * @access private
@@ -260,38 +260,38 @@ class Dot_Geoip_Country extends Dot_Geoip
 		"Vietnam", "Vanuatu", "Wallis and Futuna", "Samoa", "Yemen", "Mayotte",
 		"Serbia", "South Africa", "Zambia", "Montenegro", "Zimbabwe",
 		"Anonymous Proxy","Satellite Provider","Other",
-		"Aland Islands","Guernsey","Isle of Man","Jersey","Saint Barthelemy","Saint Martin");		
+		"Aland Islands","Guernsey","Isle of Man","Jersey","Saint Barthelemy","Saint Martin");
 	/**
 	 * Array with continent codes
 	 * @access private
 	 * @var array
 	 */
     private $_geoipContinentCodes = array(
-		  "--", "AS", "EU", "EU", "AS", "AS", "NA", "NA", "EU", "AS", 
-		  "NA", "AF", "AN", "SA", "OC", "EU", "OC", "NA", "AS", "EU", 
-		  "NA", "AS", "EU", "AF", "EU", "AS", "AF", "AF", "NA", "AS", 
-		  "SA", "SA", "NA", "AS", "AN", "AF", "EU", "NA", "NA", "AS", 
-		  "AF", "AF", "AF", "EU", "AF", "OC", "SA", "AF", "AS", "SA", 
-		  "NA", "NA", "AF", "AS", "AS", "EU", "EU", "AF", "EU", "NA", 
-		  "NA", "AF", "SA", "EU", "AF", "AF", "AF", "EU", "AF", "EU", 
-		  "OC", "SA", "OC", "EU", "EU", "EU", "AF", "EU", "NA", "AS", 
-		  "SA", "AF", "EU", "NA", "AF", "AF", "NA", "AF", "EU", "AN", 
-		  "NA", "OC", "AF", "SA", "AS", "AN", "NA", "EU", "NA", "EU", 
-		  "AS", "EU", "AS", "AS", "AS", "AS", "AS", "EU", "EU", "NA", 
-		  "AS", "AS", "AF", "AS", "AS", "OC", "AF", "NA", "AS", "AS", 
-		  "AS", "NA", "AS", "AS", "AS", "NA", "EU", "AS", "AF", "AF", 
-		  "EU", "EU", "EU", "AF", "AF", "EU", "EU", "AF", "OC", "EU", 
-		  "AF", "AS", "AS", "AS", "OC", "NA", "AF", "NA", "EU", "AF", 
-		  "AS", "AF", "NA", "AS", "AF", "AF", "OC", "AF", "OC", "AF", 
-		  "NA", "EU", "EU", "AS", "OC", "OC", "OC", "AS", "NA", "SA", 
-		  "OC", "OC", "AS", "AS", "EU", "NA", "OC", "NA", "AS", "EU", 
-		  "OC", "SA", "AS", "AF", "EU", "EU", "AF", "AS", "OC", "AF", 
-		  "AF", "EU", "AS", "AF", "EU", "EU", "EU", "AF", "EU", "AF", 
-		  "AF", "SA", "AF", "NA", "AS", "AF", "NA", "AF", "AN", "AF", 
-		  "AS", "AS", "OC", "AS", "AF", "OC", "AS", "EU", "NA", "OC", 
-		  "AS", "AF", "EU", "AF", "OC", "NA", "SA", "AS", "EU", "NA", 
-		  "SA", "NA", "NA", "AS", "OC", "OC", "OC", "AS", "AF", "EU", 
-		  "AF", "AF", "EU", "AF", "--", "--", "--", "EU", "EU", "EU", 
+		  "--", "AS", "EU", "EU", "AS", "AS", "NA", "NA", "EU", "AS",
+		  "NA", "AF", "AN", "SA", "OC", "EU", "OC", "NA", "AS", "EU",
+		  "NA", "AS", "EU", "AF", "EU", "AS", "AF", "AF", "NA", "AS",
+		  "SA", "SA", "NA", "AS", "AN", "AF", "EU", "NA", "NA", "AS",
+		  "AF", "AF", "AF", "EU", "AF", "OC", "SA", "AF", "AS", "SA",
+		  "NA", "NA", "AF", "AS", "AS", "EU", "EU", "AF", "EU", "NA",
+		  "NA", "AF", "SA", "EU", "AF", "AF", "AF", "EU", "AF", "EU",
+		  "OC", "SA", "OC", "EU", "EU", "EU", "AF", "EU", "NA", "AS",
+		  "SA", "AF", "EU", "NA", "AF", "AF", "NA", "AF", "EU", "AN",
+		  "NA", "OC", "AF", "SA", "AS", "AN", "NA", "EU", "NA", "EU",
+		  "AS", "EU", "AS", "AS", "AS", "AS", "AS", "EU", "EU", "NA",
+		  "AS", "AS", "AF", "AS", "AS", "OC", "AF", "NA", "AS", "AS",
+		  "AS", "NA", "AS", "AS", "AS", "NA", "EU", "AS", "AF", "AF",
+		  "EU", "EU", "EU", "AF", "AF", "EU", "EU", "AF", "OC", "EU",
+		  "AF", "AS", "AS", "AS", "OC", "NA", "AF", "NA", "EU", "AF",
+		  "AS", "AF", "NA", "AS", "AF", "AF", "OC", "AF", "OC", "AF",
+		  "NA", "EU", "EU", "AS", "OC", "OC", "OC", "AS", "NA", "SA",
+		  "OC", "OC", "AS", "AS", "EU", "NA", "OC", "NA", "AS", "EU",
+		  "OC", "SA", "AS", "AF", "EU", "EU", "AF", "AS", "OC", "AF",
+		  "AF", "EU", "AS", "AF", "EU", "EU", "EU", "AF", "EU", "AF",
+		  "AF", "SA", "AF", "NA", "AS", "AF", "NA", "AF", "AN", "AF",
+		  "AS", "AS", "OC", "AS", "AF", "OC", "AS", "EU", "NA", "OC",
+		  "AS", "AF", "EU", "AF", "OC", "NA", "SA", "AS", "EU", "NA",
+		  "SA", "NA", "NA", "AS", "OC", "OC", "OC", "AS", "AF", "EU",
+		  "AF", "AF", "EU", "AF", "--", "--", "--", "EU", "EU", "EU",
 		  "EU", "NA", "NA");
 	/**
 	 * Constructor
@@ -299,8 +299,8 @@ class Dot_Geoip_Country extends Dot_Geoip
 	 * @return Dot_Geoip_Country
 	 */
 	public function __construct()
-	{	
-	}			
+	{
+	}
 	 /** Get file version
 	 * Return database name and version
 	 * @access public
@@ -321,7 +321,7 @@ class Dot_Geoip_Country extends Dot_Geoip
 			$message = trim(substr($lastLine, $pos1, $pos2-$pos1));
 	 	}
 		return $message;
-	}	
+	}
 	/**
 	 * Get the country by IP
 	 * Return an array with : short name, like 'us' and long name, like 'United States'
@@ -351,22 +351,22 @@ class Dot_Geoip_Country extends Dot_Geoip
 	 * @param int $flags
 	 * @return void
 	 */
-	private function _geoipOpen($filename, $flags) 
+	private function _geoipOpen($filename, $flags)
 	{
 		$this->_flags = $flags;
-		if ($this->_flags & GEOIP_SHARED_MEMORY) 
+		if ($this->_flags & GEOIP_SHARED_MEMORY)
 		{
 			$this->_shmid = @shmop_open (GEOIP_SHM_KEY, "a", 0, 0);
 		}
-		else 
+		else
 		{
 			$this->_filehandle = fopen($filename,"rb") or die( "Can not open $filename\n" );
-			if ($this->_flags & GEOIP_MEMORY_CACHE) 
+			if ($this->_flags & GEOIP_MEMORY_CACHE)
 			{
 				$sArray = fstat($this->_filehandle);
 			    $this->_memoryBuffer = fread($this->_filehandle, $sArray['size']);
 			}
-		}	
+		}
 		$this->_setupSegments();
 	}
 	/**
@@ -374,12 +374,12 @@ class Dot_Geoip_Country extends Dot_Geoip
 	 * @access private
 	 * @return bool
 	 */
-	private function _geoipClose() 
+	private function _geoipClose()
 	{
-		if ($this->_flags & GEOIP_SHARED_MEMORY) 
+		if ($this->_flags & GEOIP_SHARED_MEMORY)
 		{
 			return true;
-		}	
+		}
 		return fclose($this->_filehandle);
 	}
 	/**
@@ -392,7 +392,7 @@ class Dot_Geoip_Country extends Dot_Geoip
 	public function geoipCountryIdByName($name)
 	{
 		$addr = gethostbyname($name);
-		if (!$addr || $addr == $name) 
+		if (!$addr || $addr == $name)
 		{
 			return false;
   		}
@@ -404,10 +404,10 @@ class Dot_Geoip_Country extends Dot_Geoip
 	 * @param string $name
 	 * @return string
 	 */
-	public function geoipCountryCodeByName($name) 
+	public function geoipCountryCodeByName($name)
 	{
 		$countryId = $this->geoipCountryIdByName($name);
-		if ($countryId !== false) 
+		if ($countryId !== false)
 		{
 			return $this->_geoipCountryCodes[$countryId];
 		}
@@ -422,7 +422,7 @@ class Dot_Geoip_Country extends Dot_Geoip
 	public function geoipCountryNameByName($name)
 	{
 		$countryId = $this->geoipCountryIdByName($name);
-		if ($countryId !== false) 
+		if ($countryId !== false)
 		{
 		    return $this->_geoipCountryNames[$countryId];
 		}
@@ -430,11 +430,11 @@ class Dot_Geoip_Country extends Dot_Geoip
 	}
 	/**
 	 * Get country id based on IP address
-	 * @access private 
+	 * @access private
 	 * @param string $addr
 	 * @return int
 	 */
-	private function _geoipCountryIdByAddr($addr) 
+	private function _geoipCountryIdByAddr($addr)
 	{
 	  $ipNum = ip2long($addr);
 	  return $this->_geoipSeekCountry($ipNum) - GEOIP_COUNTRY_BEGIN;
@@ -445,20 +445,20 @@ class Dot_Geoip_Country extends Dot_Geoip
 	 * @param string $addr
 	 * @return string
 	 */
-	private function _geoipCountryCodeByAddr($addr) 
+	private function _geoipCountryCodeByAddr($addr)
 	{
-	  if ($this->_databaseType == GEOIP_CITY_EDITION_REV1) 
+	  if ($this->_databaseType == GEOIP_CITY_EDITION_REV1)
 	  {
 	    $record = $this->geoip_record_by_addr($addr);
-	    if ( $record !== false ) 
+	    if ( $record !== false )
 		{
 	      return $record->country_code;
 	    }
-	  } 
-	  else 
+	  }
+	  else
 	  {
 	    $countryId = $this->_geoipCountryIdByAddr($addr);
-	    if ($countryId !== false) 
+	    if ($countryId !== false)
 		{
 	      return $this->_geoipCountryCodes[$countryId];
 	    }
@@ -467,20 +467,20 @@ class Dot_Geoip_Country extends Dot_Geoip
 	}
 	/**
 	 * Get country name based on IP address
-	 * @access public 
+	 * @access public
 	 * @param string $addr
 	 * @return string
 	 */
-	public function geoipCountryNameByAddr($addr) 
+	public function geoipCountryNameByAddr($addr)
 	{
-		if ($this->_databaseType == GEOIP_CITY_EDITION_REV1) 
+		if ($this->_databaseType == GEOIP_CITY_EDITION_REV1)
 		{
 			$record = geoip_record_by_addr($gi,$addr);
 			return $record->country_name;
-		} 
+		}
 		else {
 			$countryId = $this->_geoipCountryIdByAddr($addr);
-			if ($countryId !== false) 
+			if ($countryId !== false)
 			{
 		  		return $this->_geoipCountryNames[$countryId];
 			}
@@ -493,12 +493,12 @@ class Dot_Geoip_Country extends Dot_Geoip
 	 * @param int $ipNum
 	 * @return int
 	 */
-	private function _geoipSeekCountry($ipNum) 
+	private function _geoipSeekCountry($ipNum)
 	{
 	  $offset = 0;
-	  for ($depth = 31; $depth >= 0; --$depth) 
+	  for ($depth = 31; $depth >= 0; --$depth)
 	  {
-	    if ($this->_flags & GEOIP_MEMORY_CACHE) 
+	    if ($this->_flags & GEOIP_MEMORY_CACHE)
 		{
 	      // workaround php's broken substr, strpos, etc handling with
 	      // mbstring.func_overload and mbstring.internal_encoding
@@ -508,38 +508,38 @@ class Dot_Geoip_Country extends Dot_Geoip
                         2 * $this->_recordLength * $offset,
                         2 * $this->_recordLength);
 	      mb_internal_encoding($enc);
-	    } 
-		elseif ($this->_flags & GEOIP_SHARED_MEMORY) 
+	    }
+		elseif ($this->_flags & GEOIP_SHARED_MEMORY)
 		{
-	      $buf = @shmop_read($this->_shmid, 
+	      $buf = @shmop_read($this->_shmid,
                              2 * $this->_recordLength * $offset,
                              2 * $this->_recordLength );
-	    } 
-		else 
+	    }
+		else
 		{
-	      fseek($this->_filehandle, 2 * $this->_recordLength * $offset, SEEK_SET) == 0 
+	      fseek($this->_filehandle, 2 * $this->_recordLength * $offset, SEEK_SET) == 0
 		  	or die("fseek failed");
 	      $buf = fread($this->_filehandle, 2 * $this->_recordLength);
 	    }
 	    $x = array(0,0);
-	    for ($i = 0; $i < 2; ++$i) 
+	    for ($i = 0; $i < 2; ++$i)
 		{
-	      for ($j = 0; $j < $this->_recordLength; ++$j) 
+	      for ($j = 0; $j < $this->_recordLength; ++$j)
 		  {
 	        $x[$i] += ord($buf[$this->_recordLength * $i + $j]) << ($j * 8);
 	      }
 	    }
-	    if ($ipNum & (1 << $depth)) 
+	    if ($ipNum & (1 << $depth))
 		{
-	      if ($x[1] >= $this->_databaseSegments) 
+	      if ($x[1] >= $this->_databaseSegments)
 		  {
 	        return $x[1];
 	      }
 	      $offset = $x[1];
-	    } 
-		else 
+	    }
+		else
 		{
-	      if ($x[0] >= $this->_databaseSegments) 
+	      if ($x[0] >= $this->_databaseSegments)
 		  {
 	        return $x[0];
 	      }
@@ -551,14 +551,14 @@ class Dot_Geoip_Country extends Dot_Geoip
 	}
 	/**
 	 * Get GeoIP Organization by IP address
-	 * Note: file GeoIPOrg.dat is required 
+	 * Note: file GeoIPOrg.dat is required
 	 * @param string $ipnum
 	 * @return string
 	 */
 	private function _getOrg($ipnum)
 	{
 		$seekOrg = $this->_geoipSeekCountry($ipnum);
-		if ($seekOrg == $this->_databaseSegments) 
+		if ($seekOrg == $this->_databaseSegments)
 		{
 			return NULL;
 		}
@@ -572,7 +572,7 @@ class Dot_Geoip_Country extends Dot_Geoip
 		// workaround php's broken substr, strpos, etc handling with
 		// mbstring.func_overload and mbstring.internal_encoding
 		$enc = mb_internal_encoding();
-		mb_internal_encoding('ISO-8859-1'); 
+		mb_internal_encoding('ISO-8859-1');
 		$orgBuf = substr($orgBuf, 0, strpos($orgBuf, "\0"));
 		mb_internal_encoding($enc);
 		return $orgBuf;
@@ -583,9 +583,9 @@ class Dot_Geoip_Country extends Dot_Geoip
 	 * @param string $addr
 	 * @return string
 	 */
-	public function geoipOrgByAddr ($addr) 
+	public function geoipOrgByAddr ($addr)
 	{
-	  if ($addr == NULL) 
+	  if ($addr == NULL)
 	  {
 	    return 0;
 	  }
@@ -608,34 +608,34 @@ class Dot_Geoip_Country extends Dot_Geoip
 			{
 			  $country_code = "US";
 			  $region = chr(($seekRegion - 1000)/26 + 65) . chr(($seekRegion - 1000)%26 + 65);
-			} 
-			else 
+			}
+			else
 			{
 			  $country_code = $this->_geoipCountryCodes[$seekRegion];
 			  $region = "";
 			}
 			return array ($country_code,$region);
-		}  
-		else if ($this->_databaseType == GEOIP_REGION_EDITION_REV1) 
+		}
+		else if ($this->_databaseType == GEOIP_REGION_EDITION_REV1)
 		{
 			$seekRegion = $this->_geoipSeekCountry($ipnum) - GEOIP_STATE_BEGIN_REV1;
 			//print $seek_region;
 			if ($seekRegion < US_OFFSET)
 			{
 			  $country_code = "";
-			  $region = "";  
-			} 
-			elseif ($seekRegion < CANADA_OFFSET) 
+			  $region = "";
+			}
+			elseif ($seekRegion < CANADA_OFFSET)
 			{
 			  $country_code = "US";
 			  $region = chr(($seekRegion - US_OFFSET)/26 + 65) . chr(($seekRegion - US_OFFSET)%26 + 65);
 			}
-			elseif ($seekRegion < WORLD_OFFSET) 
+			elseif ($seekRegion < WORLD_OFFSET)
 			{
 			  $country_code = "CA";
 			  $region = chr(($seekRegion - CANADA_OFFSET)/26 + 65) . chr(($seekRegion - CANADA_OFFSET)%26 + 65);
 			}
-			else 
+			else
 			{
 			  $country_code = $this->_geoipCountryCodes[($seekRegion - WORLD_OFFSET) / FIPS_RANGE];
 			  $region = "";
@@ -649,9 +649,9 @@ class Dot_Geoip_Country extends Dot_Geoip
 	 * @param string $addr
 	 * @return array
 	 */
-	public function geoipRegionByAddr ($addr) 
+	public function geoipRegionByAddr ($addr)
 	{
-		if ($addr == NULL) 
+		if ($addr == NULL)
 		{
 			return 0;
 		}
@@ -662,32 +662,32 @@ class Dot_Geoip_Country extends Dot_Geoip
 	 * Setup segments from GeoIp
 	 * @access private
 	 * @return void
-	 */	
+	 */
 	private function _setupSegments()
 	{
 	  $this->_databaseType = GEOIP_COUNTRY_EDITION;
 	  $this->_recordLength = STANDARD_RECORD_LENGTH;
-	  if ($this->_flags & GEOIP_SHARED_MEMORY) 
+	  if ($this->_flags & GEOIP_SHARED_MEMORY)
 	  {
 	    $offset = @shmop_size ($this->_shmid) - 3;
-	    for ($i = 0; $i < STRUCTURE_INFO_MAX_SIZE; $i++) 
+	    for ($i = 0; $i < STRUCTURE_INFO_MAX_SIZE; $i++)
 		{
 	        $delim = @shmop_read ($this->_shmid, $offset, 3);
 	        $offset += 3;
-	        if ($delim == (chr(255).chr(255).chr(255))) 
+	        if ($delim == (chr(255).chr(255).chr(255)))
 			{
 	            $this->_databaseType = ord(@shmop_read ($this->_shmid, $offset, 1));
 	            $offset++;
 	            if ($this->_databaseType == GEOIP_REGION_EDITION_REV0)
 				{
 	                $this->_databaseSegments = GEOIP_STATE_BEGIN_REV0;
-	            } 
+	            }
 				else if ($this->_databaseType == GEOIP_REGION_EDITION_REV1)
 				{
 	                $this->_databaseSegments = GEOIP_STATE_BEGIN_REV1;
-		    	} 
+		    	}
 				else if (($this->_databaseType == GEOIP_CITY_EDITION_REV0)
-						 || ($this->_databaseType == GEOIP_CITY_EDITION_REV1) 
+						 || ($this->_databaseType == GEOIP_CITY_EDITION_REV1)
 	                     || ($this->_databaseType == GEOIP_ORG_EDITION)
 	                     || ($this->_databaseType == GEOIP_DOMAIN_EDITION)
 			    		 || ($this->_databaseType == GEOIP_ISP_EDITION)
@@ -702,17 +702,17 @@ class Dot_Geoip_Country extends Dot_Geoip
 					{
 	                    $this->_databaseSegments += (ord($buf[$j]) << ($j * 8));
 	                }
-		            if (($this->_databaseType == GEOIP_ORG_EDITION) 
+		            if (($this->_databaseType == GEOIP_ORG_EDITION)
 						|| ($this->_databaseType == GEOIP_DOMAIN_EDITION)
 						|| ($this->_databaseType == GEOIP_ISP_EDITION)
-					   ) 
+					   )
 					{
 		                $this->_recordLength = ORG_RECORD_LENGTH;
 	                }
 	            }
 	            break;
 	        }
-			else 
+			else
 			{
 	            $offset -= 4;
 	        }
@@ -725,11 +725,11 @@ class Dot_Geoip_Country extends Dot_Geoip
 			$this->_databaseSegments = GEOIP_COUNTRY_BEGIN;
 		}
 	}
-	else 
+	else
 	{
 	    $filepos = ftell($this->_filehandle);
 	    fseek($this->_filehandle, -3, SEEK_END);
-	    for ($i = 0; $i < STRUCTURE_INFO_MAX_SIZE; $i++) 
+	    for ($i = 0; $i < STRUCTURE_INFO_MAX_SIZE; $i++)
 		{
 	        $delim = fread($this->_filehandle,3);
 	        if ($delim == (chr(255).chr(255).chr(255)))
@@ -742,7 +742,7 @@ class Dot_Geoip_Country extends Dot_Geoip
 	        	else if ($this->_databaseType == GEOIP_REGION_EDITION_REV1)
 				{
 		    		$this->_databaseSegments = GEOIP_STATE_BEGIN_REV1;
-	            }  
+	            }
 				else if (($this->_databaseType == GEOIP_CITY_EDITION_REV0)
 						 || ($this->_databaseType == GEOIP_CITY_EDITION_REV1)
 						 || ($this->_databaseType == GEOIP_ORG_EDITION)
@@ -759,17 +759,17 @@ class Dot_Geoip_Country extends Dot_Geoip
 					{
 	            		$this->_databaseSegments += (ord($buf[$j]) << ($j * 8));
 	            	}
-		    		if ($this->_databaseType == GEOIP_ORG_EDITION 
+		    		if ($this->_databaseType == GEOIP_ORG_EDITION
 						|| $this->_databaseType == GEOIP_DOMAIN_EDITION
 						|| $this->_databaseType == GEOIP_ISP_EDITION
-						) 
+						)
 					{
 		    			$this->_recordLength = ORG_RECORD_LENGTH;
 	            	}
 	        	}
 	        	break;
 	        }
-			else 
+			else
 			{
 	        	fseek($this->_filehandle, -4, SEEK_CUR);
 	        }

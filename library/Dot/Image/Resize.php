@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * DotBoost Technologies Inc.
  * DotKernel Application Framework
@@ -9,7 +9,7 @@
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @version    $Id$
  */
- 
+
  /**
  * Resize images
  * @category   DotKernel
@@ -23,13 +23,13 @@ class Dot_Image_Resize extends Dot_Image
 	/**
 	 * Image filename
 	 * @var string
-	 * @access public	 
+	 * @access public
 	 */
 	public $source = '';
 	/**
 	 * New image, after transformation
 	 * @var string
-	 * @access public	 
+	 * @access public
 	 */
 	public $destination = '';
 	/**
@@ -39,7 +39,7 @@ class Dot_Image_Resize extends Dot_Image
 	 * 			- height: integer
 	 * 			- measure: 'px', '%'
 	 * 			- preview: bool [TRUE][FALSE] - if true, preserve the ratio aspect
-	 * 			- exactSize: bool [TRUE][FALSE] - if true, make the image the 
+	 * 			- exactSize: bool [TRUE][FALSE] - if true, make the image the
 	 * 			  			 exact size, even if it will be twist
 	 * @var array
 	 * @access private
@@ -47,7 +47,7 @@ class Dot_Image_Resize extends Dot_Image
 	private  $_option = array
 							('width' => 100,
 							 'height' => 100,
-							 'measure' => '%', 
+							 'measure' => '%',
 							 'preview' => FALSE,
 							 'exactSize' => FALSE
 							 );
@@ -101,11 +101,11 @@ class Dot_Image_Resize extends Dot_Image
 	 * @return array
 	 */
 	public function resize()
-	{		
-	
+	{
+
 		#get errors for create image
 		$oldTrackErrorSetting = ini_set('track_errors', '1');
-		
+
 		#create image from string
 		$this->_imageSource = @imagecreatefromstring($this->_getImageString());
 		if ($this->_imageSource === false)
@@ -115,16 +115,16 @@ class Dot_Image_Resize extends Dot_Image
 			$errorMessage = $errorMessage[(count($errorMessage) - 1)];
 			return array('error' => $errorMessage);
 		}
-		
+
 		#change track errors back to default
 		ini_set('track_errors', $oldTrackErrorSetting);
-		
+
 		try{
 			#get new dimensions
 			$oldWidth = imagesx($this->_imageSource);
 			$oldHeight = imagesy($this->_imageSource);
 			#if we need an exact redimension
-			if ($this->_option['exactSize'] !== FALSE) 
+			if ($this->_option['exactSize'] !== FALSE)
 			{
 				$thumbnailWidth = $this->_option['width'];
 				$thumbHeight = $this->_option['height'];
@@ -136,12 +136,12 @@ class Dot_Image_Resize extends Dot_Image
 				{
 					$thumbnailWidth = $this->_option['width'];
 					$thumbHeight = $oldHeight * ($this->_option['height'] / $oldWidth);
-				}	
+				}
 				if($oldWidth < $oldHeight)
 				{
 					$thumbnailWidth = $oldWidth * ($this->_option['width'] / $oldHeight);
 					$thumbHeight = $this->_option['height'];
-				}	
+				}
 				if($oldWidth == $oldHeight)
 				{
 					$thumbnailWidth = $this->_option['width'];
@@ -177,11 +177,11 @@ class Dot_Image_Resize extends Dot_Image
 			#save new image
 			$resizedImage = @imagejpeg($this->_imageDestination, $this->destination);
 
-			if ($resizedImage === false) 
+			if ($resizedImage === false)
 			{
 				#return custom image
 				return array('error' => 'Unable to save image !');
-			}			
+			}
 		}
 		catch (Exception $fail)
 		{

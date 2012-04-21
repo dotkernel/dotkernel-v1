@@ -11,13 +11,13 @@
 */
 
 /**
-* Dot User Agent Wurfl integration 
+* Dot User Agent Wurfl integration
 * @category   DotKernel
 * @package    DotLibrary
 * @subpackage DotUserAgent
 * @author     DotKernel Team <team@dotkernel.com>
 */
-	
+
 class Dot_UserAgent_Wurfl
 {
 	/**
@@ -50,7 +50,7 @@ class Dot_UserAgent_Wurfl
 	 * @access private
 	 */
 	private $_versionFile;
-	
+
 	/**
 	 * private constructor, set the WURFL configuration paramethers
 	 * @return void
@@ -62,23 +62,23 @@ class Dot_UserAgent_Wurfl
 		require_once $this->config->resources->useragent->wurflapi->lib_dir . 'Application.php';
 		$wurflConfig = new WURFL_Configuration_XmlConfig($this->config->resources->useragent->wurflapi->config_file);
 		self::$wurflConfig = $wurflConfig;
-		
-		// if we have APC enabled, start the cache object too 
-		if(TRUE == $this->config->resources->useragent->wurflapi->cache && 
+
+		// if we have APC enabled, start the cache object too
+		if(TRUE == $this->config->resources->useragent->wurflapi->cache &&
 		    function_exists('apc_cache_info') && (@apc_cache_info() !== FALSE) )
-		{			
-			$frontendOptions = array('lifetime' => $this->config->resources->useragent->wurflapi->cache_lifetime ,               
+		{
+			$frontendOptions = array('lifetime' => $this->config->resources->useragent->wurflapi->cache_lifetime ,
 											 				  'automatic_serialization' => TRUE );
 			$cache = Zend_Cache :: factory('Core', 'APC', $frontendOptions);
 			$this->_cacheApc = $cache;
-		}	
-		
+		}
+
 		// Now is time to start the factory, if is a must ...
 		if($this->_cacheExist()) $this->_buildFactory();
 	}
-	
+
 	/**
-	 * The singleton method 
+	 * The singleton method
 	 * @return Dot_UserAgent_Wurfl instance
 	 */
 	public static function getInstance()
@@ -92,25 +92,25 @@ class Dot_UserAgent_Wurfl
 
 	/**
 	 * Start the WURFL library Factory Manager
-	 * @return void 
+	 * @return void
 	 */
 	private function _buildFactory()
 	{
 		$wurflManagerFactory = new WURFL_WURFLManagerFactory(self::$wurflConfig);
 		$this->_wurflManagerFactory = $wurflManagerFactory;
 	}
-	
+
 	/**
-	 * Important function, Decision if is allowed to start the wurflfactory object or not. 
-	 * Is checking for version.txt file which is supposed to not be there if there is no cache 
-	 * @return bool 
+	 * Important function, Decision if is allowed to start the wurflfactory object or not.
+	 * Is checking for version.txt file which is supposed to not be there if there is no cache
+	 * @return bool
 	 */
 	private function _cacheExist()
 	{
 		$this->_versionFile = self::$wurflConfig->persistence['params']['dir'] . '/version.txt';
 		return is_file($this->_versionFile);
 	}
-	
+
 	/**
 	 * Create the WURFL object and store the content. Use with precaution !!! As will load a lot of files
 	 * @access public
@@ -128,9 +128,9 @@ class Dot_UserAgent_Wurfl
 		}
 
 	}
-	
+
 	/**
-	 * Remove the content from the persistent storage, only if the cache exist 
+	 * Remove the content from the persistent storage, only if the cache exist
 	 * @access public
 	 * @return void
 	 */
@@ -141,7 +141,7 @@ class Dot_UserAgent_Wurfl
 			$this->_wurflManagerFactory->remove();
 		}
 	}
-	
+
 	/**
 	 * Get information about WURFL  previously saved in version.txt file
 	 * @access public
@@ -162,7 +162,7 @@ class Dot_UserAgent_Wurfl
 		}
 		return $result;
 	}
-	
+
 	/**
 	 * Generate a special file with 2 tags:  build date, (YYYY-MM-DD, HH:ss) and xml file date (eg. 2011-04-24)
 	 * @access private
@@ -177,10 +177,10 @@ class Dot_UserAgent_Wurfl
 			$writer->setFormatter($formatter);
 			$logger = new Zend_Log($writer);
 			$logger->info($xmlFileDate);
-			$logger->info(date("F j, Y, H:i"));   
+			$logger->info(date("F j, Y, H:i"));
 		}
 	}
-	
+
 	/**
 	 * Return a huge un-usable object . Use it with precaution !
 	 * @param object $server where is usually an object similar with $_SERVER global variable
@@ -192,7 +192,7 @@ class Dot_UserAgent_Wurfl
 		$wurflManager = $this->_wurflManagerFactory->create(true);
 		return $wurflManager->getDeviceForHttpRequest($server);
 	}
-	
+
 	/**
 	 * Return a huge un-usable object . But only when cache exists. Use it with precaution !
 	 * @param string UserAgent, usually $_SERVER["HTTP_USER_AGENT"]
@@ -207,10 +207,10 @@ class Dot_UserAgent_Wurfl
 			return $wurflManager->getDeviceForUserAgent($userAgent);
 		}
 	}
-	
-	/** 
+
+	/**
 	 *  Return a nice usable array with device capabilities
-	 * @access public 
+	 * @access public
 	 * @param string $userAgent
 	 * @return  array
 	 */
@@ -221,42 +221,42 @@ class Dot_UserAgent_Wurfl
 			return $this->_getDeviceForUserAgent($userAgent)->getAllCapabilities();
 		}
 	}
-	
-	/** 
+
+	/**
 	 * get from WURFL huge object only few interesting params
 	 * @access public
 	 * @param object $userAgent
-	 * @return array with short summary related to device 
-	 */		
+	 * @return array with short summary related to device
+	 */
 	public function getDevice($userAgent)
 	{
-		// if cache is enabled in application.ini and APC is enabled 
+		// if cache is enabled in application.ini and APC is enabled
 		if($this->_cacheApc)
 		{
-			$cacheToken = $this->config->resources->useragent->wurflapi->cache_namespace . '_' . md5($userAgent);						
-			//check if we have the info there in cache 
-			$device = $this->_getDeviceFromCache($cacheToken);	
+			$cacheToken = $this->config->resources->useragent->wurflapi->cache_namespace . '_' . md5($userAgent);
+			//check if we have the info there in cache
+			$device = $this->_getDeviceFromCache($cacheToken);
 			if($device)
 			{
-				return $device;				
+				return $device;
 			}
 			else
 			{
-				// prepare the array and save it in cache 
+				// prepare the array and save it in cache
 			 	$device = ($this->_cacheExist()) ? $this->_prepareDeviceInfo($userAgent) : new StdClass();
 				$this->_saveDeviceToCache($device, $cacheToken);
 				return $device;
 			}
-				
-		}	
+
+		}
 		// No APC cache available
 		else
 		{
 			$object = ($this->_cacheExist()) ? $this->_prepareDeviceInfo($userAgent) : new StdClass();
 			return $object;
-		}		
+		}
 	}
-	
+
 	/**
 	 * Core function. Prepare the device short info
 	 * @access private
@@ -274,9 +274,9 @@ class Dot_UserAgent_Wurfl
 		$device->brandName       = $deviceCapabilities['brand_name'];
 		$device->modelName       = $deviceCapabilities['model_name'];
 		$device->browserName     = $deviceCapabilities['mobile_browser'];
-		$device->browserVersion  = $deviceCapabilities['mobile_browser_version']; 
+		$device->browserVersion  = $deviceCapabilities['mobile_browser_version'];
 		$device->deviceOs        = $deviceCapabilities['device_os'];
-		$device->deviceOsVersion = $deviceCapabilities['device_os_version']; 
+		$device->deviceOsVersion = $deviceCapabilities['device_os_version'];
 		$device->screenWidth     = $deviceCapabilities['resolution_width'];
 		$device->screenHeight    = $deviceCapabilities['resolution_height'];
 		$device->isTablet        = ($deviceCapabilities['is_tablet'] == 'true') ? TRUE : FALSE;
@@ -286,12 +286,12 @@ class Dot_UserAgent_Wurfl
 		$device->isAndroid       = $this->_isAndroid($device->deviceOs);
 		$device->isBlackberry    = $this->_isBlackberry($device->deviceId);
 		$device->isSymbian       = $this->_isSymbian($device->deviceOs);
-		$device->isWindowsMobile = $this->_isWindowsMobile($device->deviceOs, $device->isMobile);	
-		return $device;		
+		$device->isWindowsMobile = $this->_isWindowsMobile($device->deviceOs, $device->isMobile);
+		return $device;
 	}
-	
+
 	/**
-	 * Return device fall back, for instance the string 'apple_iphone_ver3', which is kind of parent family device 
+	 * Return device fall back, for instance the string 'apple_iphone_ver3', which is kind of parent family device
 	 * @param object $userAgent
 	 * @return string
 	 */
@@ -299,7 +299,7 @@ class Dot_UserAgent_Wurfl
 	{
 		return $this->_getDeviceForUserAgent($userAgent)->fallBack;
 	}
-	
+
 	/**
 	 * Return device id , for instance the string 'apple_iphone_ver3_1_2'
 	 * @param object $userAgent
@@ -309,26 +309,26 @@ class Dot_UserAgent_Wurfl
 	{
 		return $this->_getDeviceForUserAgent($userAgent)->id;
 	}
-	
+
 	/**
 	 * Retrieve from cache a serializes array with device infos. Called only when we have the _cache set
 	 * @access private
 	 * @param object $cacheToken
-	 * @return 
+	 * @return
 	 */
 	private function _getDeviceFromCache($cacheToken)
 	{
 		$device = FALSE;
-		// check if we have a that cache piece 
+		// check if we have a that cache piece
 		if($this->_cacheApc->test($cacheToken))
 		{
 			$device = $this->_cacheApc->load($cacheToken);
-		}		
+		}
 		return $device;
-	} 
-	
+	}
+
 	/**
-	 * Save into the cache the device info array 
+	 * Save into the cache the device info array
 	 * @param object $device , $cacheToken
 	 * @return void
 	 */
@@ -336,22 +336,22 @@ class Dot_UserAgent_Wurfl
 	{
 		$this->_cacheApc->save($device, $cacheToken);
 	}
-	
+
 	/**
-	 * Check device capabilities for screen size. We assume that a screen size lower then 240x320=76800 is not a real 
-	 * smartphone, but only an  "feature phone" 
+	 * Check device capabilities for screen size. We assume that a screen size lower then 240x320=76800 is not a real
+	 * smartphone, but only an  "feature phone"
 	 * Second mandatory condition: to have an Operating System
 	 * @param array $deviceCapabilities
 	 * @param bool $isMobile
 	 * @access private
 	 * @return bool
 	 */
-	private function _isSmartphone($deviceCapabilities, $isMobile, $deviceOs, $isTablet) 
+	private function _isSmartphone($deviceCapabilities, $isMobile, $deviceOs, $isTablet)
 	{
 		$isSmartphone =  FALSE;
 		// if is not a mobile device , we will have surprises here :-)
 		if($isMobile)
-		{		
+		{
 			$screenWidth  = $deviceCapabilities["resolution_width"];
 			$screenHeight = $deviceCapabilities["resolution_height"];
 			if( ($screenWidth * $screenHeight ) >= 76800 && !empty($deviceOs)  && !$isTablet)
@@ -361,7 +361,7 @@ class Dot_UserAgent_Wurfl
 		}
 		return $isSmartphone;
 	}
-	
+
 	/**
 	 * Check again device id the string iphone
 	 * @access private
@@ -372,11 +372,11 @@ class Dot_UserAgent_Wurfl
 		$isIphone = FALSE;
 		if(stripos($deviceId, 'iphone') !== FALSE)
 		{
-			$isIphone = TRUE;	
+			$isIphone = TRUE;
 		}
 		return $isIphone;
 	}
-	
+
 	/**
 	 * Check again device OS Name the string Android
 	 * @access private
@@ -387,22 +387,22 @@ class Dot_UserAgent_Wurfl
 		$isAndroid = FALSE;
 		if(stripos($deviceOsName, 'Android') !== FALSE)
 		{
-			$isAndroid = TRUE;	
+			$isAndroid = TRUE;
 		}
 		return $isAndroid;
 	}
-	
+
 	/**
 	 * Check again device id the string Blackberry
 	 * @access private
 	 * @return bool
 	 */
-	private function _isBlackberry($deviceId) 
+	private function _isBlackberry($deviceId)
 	{
 		$isBlackberry = FALSE;
 		if(stripos($deviceId, 'Blackberry') !== FALSE)
 		{
-			$isBlackberry = TRUE;	
+			$isBlackberry = TRUE;
 		}
 		return $isBlackberry;
 	}
@@ -417,13 +417,13 @@ class Dot_UserAgent_Wurfl
 		$isSymbian = FALSE;
 		if(stripos($deviceOsName, 'Symbian') !== FALSE)
 		{
-			$isSymbian = TRUE;	
+			$isSymbian = TRUE;
 		}
 		return $isSymbian;
-	}	
-	
+	}
+
 	/**
-	 * Check if is an Windows Mobile device 
+	 * Check if is an Windows Mobile device
 	 * @param object $deviceOsName
 	 * @param object $isMobile
 	 * @return bool
@@ -433,17 +433,17 @@ class Dot_UserAgent_Wurfl
 		$isWindows = FALSE;
 		if(stripos($deviceOsName, 'Windows') !== FALSE && $isMobile == TRUE)
 		{
-			$isWindows = TRUE;	
+			$isWindows = TRUE;
 		}
 		return $isWindows;
 	}
-	
+
 	/**
-	 * Prevent user to clone the instance 
+	 * Prevent user to clone the instance
 	 * @return void
 	 */
 	final private function __clone()
 	{
 		trigger_error('Clone is not allowed.', E_USER_ERROR);
-	} 
+	}
 }

@@ -19,16 +19,16 @@
 */
 
 class Dot_Acl
-{        	
+{
 	/**
 	 * Dot_Acl constructor.
-	 * Make the proper initializations, set roles, resources and permisssions 
-	 * using Zend_Acl 
+	 * Make the proper initializations, set roles, resources and permisssions
+	 * using Zend_Acl
 	 * @access public
-	 * @return Dot_Acl 
-	 */		
+	 * @return Dot_Acl
+	 */
 	public function __construct()
-	{		
+	{
 		$router = new Zend_Config_Xml(CONFIGURATION_PATH.'/router.xml');
 		$role = new Zend_Config_Xml(CONFIGURATION_PATH.'/acl/role.xml');
 
@@ -36,7 +36,7 @@ class Dot_Acl
 		$this->requestController = Zend_Registry::get('requestController');
 		$this->requestControllerProcessed = Zend_Registry::get('requestControllerProcessed');
 		$this->requestAction = Zend_Registry::get('requestAction');
-		
+
 		// instantiate Zend_Acl
 		$this->acl = new Zend_Acl();
 		//get resource(controllers) only for the curent module
@@ -44,10 +44,10 @@ class Dot_Acl
 		//get permission only for current module
 		$this->_permission = $role->permission->{$this->requestModule};
 		$this->_role = $role->type;
-		
+
 		$this->_addRoles();
-		$this->_addResources();	
-	}	
+		$this->_addResources();
+	}
 	/**
 	 * Add roles to ACL
 	 * @access private
@@ -58,7 +58,7 @@ class Dot_Acl
 		// prepare roles from the xml to an array
 		$roles = array();
 		foreach ($this->_role->toArray()as $parent => $v)
-		{			
+		{
 			if(is_string($v))
 			{
 				if(isset($roles[$v]))
@@ -73,7 +73,7 @@ class Dot_Acl
 			else
 			{
 				foreach ($v as $child)
-				{					
+				{
 					if(isset($roles[$child]))
 					{
 						$roles[$child] = array_merge($roles[$child], array($parent));
@@ -84,23 +84,23 @@ class Dot_Acl
 					}
 				}
 			}
-		}	
-		// add roles to ACL	
+		}
+		// add roles to ACL
 		foreach($roles as $name => $parents)
 		{
-			if(!$this->acl->hasRole($name)) 
+			if(!$this->acl->hasRole($name))
 			{
                 if(empty($parents))
 				{
                     $parents = array();
-				} 
+				}
                 $this->acl->addRole(new Zend_Acl_Role($name), $parents);
-            }			
+            }
 		}
 	}
 	/**
 	 * Add resources and permissions to ACL
-	 * @access private 
+	 * @access private
 	 * @return void
 	 */
 	private function _addResources()
@@ -108,20 +108,20 @@ class Dot_Acl
 		// add resource to ACL
 		if(is_string($this->_resource))
 		{
-			$this->_resource = new Zend_Config(array(0=>$this->_resource));						
-		}		
+			$this->_resource = new Zend_Config(array(0=>$this->_resource));
+		}
 		foreach ($this->_resource->toArray() as $resource)
 		{
 			if(!$this->acl->has($resource))
 			{
             	$this->acl->add(new Zend_Acl_Resource($resource));
         	}
-		}		
+		}
 		// prepare permission and add them to ACL
 		foreach ($this->_permission->toArray() as $permission => $value)
-		{		
+		{
 			foreach ($value as $role => $allControllers)
-			{				
+			{
 				if('all' == $allControllers)
 				{
 					if('allow' == $permission)
@@ -134,9 +134,9 @@ class Dot_Acl
 					}
 				}
 				elseif(is_array($allControllers))
-				{					
+				{
 					foreach ($allControllers as $controller => $action)
-					{						
+					{
 						if('all' == $action)
 						{
 	                        $action = null;
@@ -148,10 +148,10 @@ class Dot_Acl
 						if('deny' == $permission)
 						{
 							 $this->acl->deny($role, $controller, $action);
-						}					
+						}
 					}
-				}			
-			}			
+				}
+			}
 		}
 	}
 	/**
@@ -175,11 +175,11 @@ class Dot_Acl
 		$privillege = $this->requestAction;
 		if(!$this->acl->has($resource))
 		{
-			return FALSE;	
+			return FALSE;
 		}
 		else
 		{
 			return $this->acl->isAllowed($role, $resource, $privillege);
 		}
-	}	
+	}
 }

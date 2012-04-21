@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * DotBoost Technologies Inc.
  * DotKernel Application Framework
@@ -9,7 +9,7 @@
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @version    $Id$
  */
- 
+
  /**
  * Filter Phone Number
  * @category   DotKernel
@@ -19,7 +19,7 @@
  */
 
 class Dot_Filter
-{	
+{
 	/**
 	 * Filter options
 	 * @access protected
@@ -45,7 +45,7 @@ class Dot_Filter
 	 * @return Dot_Filter
 	 */
 	public function __construct($options = array())
-	{		
+	{
 		foreach ($options as $key =>$value)
 		{
 			$this->_options[$key] = $value;
@@ -53,8 +53,8 @@ class Dot_Filter
 	}
 	/**
 	 * Filter data that was previously validated (input data)
-	 * If data was not valid, filter the error message that will 
-	 * be output to the user (output data) 
+	 * If data was not valid, filter the error message that will
+	 * be output to the user (output data)
 	 * @access public
 	 * @return bool
 	 */
@@ -63,7 +63,7 @@ class Dot_Filter
 		$this->_data = array();
 		$this->_error = array();
 		$values = $this->_options['values'];
-		$validator = $this->_options['validator'];		
+		$validator = $this->_options['validator'];
 		$filter = new Zend_Filter();
         $filter->addFilter(new Zend_Filter_HtmlEntities());
         $filter->addFilter(new Zend_Filter_StringTrim());
@@ -71,8 +71,8 @@ class Dot_Filter
 		{
 		    if($validator->isValid($values[$k]))
 			{
-				//filter the input     
-				$this->_data[$k] = $filter->filter($values[$k]); 
+				//filter the input
+				$this->_data[$k] = $filter->filter($values[$k]);
 			}
 			else
 			{
@@ -82,7 +82,7 @@ class Dot_Filter
 					$this->_error[$k] = str_replace($values[$k], $filter->filter($values[$k]), $message);
 				}
 			}
-		}		
+		}
 		if(empty($this->_error))
 		{
 			return TRUE;
@@ -95,12 +95,12 @@ class Dot_Filter
 	/**
 	 * Get filtered data
 	 * @access public
-	 * @return array 
+	 * @return array
 	 */
 	public function getData()
 	{
 		return $this->_data;
-	}	
+	}
 	/**
 	 * Get errors encounter on filtration
 	 * @access public
