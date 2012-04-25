@@ -142,7 +142,7 @@ function pieChart(elementId, data, noDataMessage){
 		series: {
 			pie: { 
 				show: true,
-				radius: 0.8,
+				radius: 100,
 				highlight: {
 					opacity:0.25
 				}

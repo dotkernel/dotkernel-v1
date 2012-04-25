@@ -2,6 +2,7 @@
 <style>
 	.legendColorBox{
 		vertical-align:middle;
+		width:18px;
 	}
 	.chartTable{
 		background-color:#fff;
@@ -11,6 +12,12 @@
 	}
 	.legendLabel{
 		font-size:11px;
+	}
+	.legend{
+		position:absolute;
+		top:5px;
+		right:5px;
+		width:160px;
 	}
 </style>
 <script type="text/javascript" src="{SITE_URL}/externals/jquery/jquery.flot.pie.min.js"></script>
