@@ -48,7 +48,7 @@ class System_View extends View
 		$this->tpl->setVar('MYSQL',$mysqlVersion);
 		$this->tpl->setVar('PHP',phpversion());
 		$this->tpl->setVar('APCVERSION', $apcInfo['version']);
-		if ($apcInfo['version'] == TRUE)
+		if ($apcInfo['enabled'] == TRUE)
 		{
 			$this->tpl->setVar('APCSTATUS', 'enabled');
 		}
