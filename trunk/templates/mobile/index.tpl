@@ -37,7 +37,6 @@
 	<div data-role="footer" data-theme="c">
 		&copy; 2009 - 2012 DotBoost Technologies Inc.
 	</div><!-- /footer -->
-
 </div>
 </body>
 </html>

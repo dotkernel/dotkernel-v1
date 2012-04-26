@@ -43,6 +43,7 @@ class Page_View extends View
 		foreach ($data as $key => $val)
 		{
 			$this->tpl->setVar(strtoupper($key), $val);
+			
 		}
 	}		
 }
