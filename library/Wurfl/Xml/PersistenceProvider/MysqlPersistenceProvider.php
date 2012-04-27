@@ -28,9 +28,9 @@ class WURFL_Xml_PersistenceProvider_MysqlPersistenceProvider extends WURFL_Xml_P
 	const DEFAULT_PORT = 3306;
 	const DEFAULT_KEYCOLUMN="key";
 	const DEFAULT_VALUECOLUMN="value";
-	
+
 	protected $persistenceIdentifier = "MYSQL_PERSISTENCE_PROVIDER";
-	
+
 	private $_link;
 	private $_host;
 	private $_db;
@@ -40,15 +40,15 @@ class WURFL_Xml_PersistenceProvider_MysqlPersistenceProvider extends WURFL_Xml_P
 	private $_table;
 	private $_keycolumn;
 	private $_valuecolumn;
-	
+
 	public function __construct($params) {
 		if (is_array($params)) {
 			$this->_host = isset($params["host"]) ? $params["host"] : self::DEFAULT_HOST;
 			$this->_port = isset($params["port"]) ? $params["port"] : self::DEFAULT_PORT;
 			$this->_user = isset($params["user"]) ? $params["user"] : self::DEFAULT_USER;
 			$this->_pass = isset($params["pass"]) ? $params["pass"] : self::DEFAULT_PASS;
-			$this->_db = isset($params["db"]) ? $params["db"] : self::DEFAULT_DB;			
-			$this->_table = isset($params["table"]) ? $params["table"] : self::DEFAULT_TABLE;			
+			$this->_db = isset($params["db"]) ? $params["db"] : self::DEFAULT_DB;
+			$this->_table = isset($params["table"]) ? $params["table"] : self::DEFAULT_TABLE;
 			$this->_keycolumn = isset($params["keycolumn"]) ? $params["keycolumn"] : self::DEFAULT_KEYCOLUMN;
 			$this->_valuecolumn = isset($params["valuecolumn"]) ? $params["valuecolumn"] : self::DEFAULT_VALUECOLUMN;
 		}
@@ -61,41 +61,41 @@ class WURFL_Xml_PersistenceProvider_MysqlPersistenceProvider extends WURFL_Xml_P
 	 */
 	public final function initialize() {
 		$this->_ensureModuleExistance();
-		
+
 		/* Initializes link to MySql */
 		$this->_link = mysql_connect("$this->_host:$this->_port",$this->_user,$this->_pass);
 		if (mysql_error($this->_link)) {
 			throw new WURFL_Xml_PersistenceProvider_Exception("Couldn't link to $this->_host (".mysql_error($this->_link).")");
 		}
-		
+
 		/* Initializes link to database */
 		$success=mysql_select_db($this->_db,$this->_link);
 		if (!$success) {
 			throw new WURFL_Xml_PersistenceProvider_Exception("Couldn't change to database $this->_db (".mysql_error($this->_link).")");
 		}
-		
+
 		/* Is Table there? */
 		$test = mysql_query("SHOW TABLES FROM $this->_db LIKE '$this->_table'",$this->_link);
 		if (!is_resource($test)) {
 			throw new WURFL_Xml_PersistenceProvider_Exception("Couldn't show tables from database $this->_db (".mysql_error($this->_link).")");
 		}
-		
+
 		// create table if it's not there.
 		if (mysql_num_rows($test)==0) {
-			$sql="CREATE TABLE `$this->_db`.`$this->_table` (                               
-                      `$this->_keycolumn` varchar(255) collate latin1_general_ci NOT NULL,          
-                      `$this->_valuecolumn` mediumblob NOT NULL,                                    
-                      `ts` timestamp NOT NULL default CURRENT_TIMESTAMP,              
-                      PRIMARY KEY  (`$this->_keycolumn`)                                            
+			$sql="CREATE TABLE `$this->_db`.`$this->_table` (
+                      `$this->_keycolumn` varchar(255) collate latin1_general_ci NOT NULL,
+                      `$this->_valuecolumn` mediumblob NOT NULL,
+                      `ts` timestamp NOT NULL default CURRENT_TIMESTAMP,
+                      PRIMARY KEY  (`$this->_keycolumn`)
                     ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci";
 			$success=mysql_query($sql,$this->_link);
 			if (!$success) {
 				throw new WURFL_Xml_PersistenceProvider_Exception("Table $this->_table missing in $this->_db (".mysql_error($this->_link).")");
 			}
-		} 
-		
+		}
+
 		if (is_resource($test)) mysql_free_result($test);
-	}	
+	}
 
 	/**
 	 * Saves the object.
@@ -125,13 +125,13 @@ class WURFL_Xml_PersistenceProvider_MysqlPersistenceProvider extends WURFL_Xml_P
 	public function load($objectId) {
 		$objectId = $this->encode($objectId);
 		$objectId = mysql_escape_string($objectId);
-		
+
 		$sql="select `$this->_valuecolumn` from `$this->_db`.`$this->_table` where `$this->_keycolumn`='$objectId'";
 		$result=mysql_query($sql,$this->_link);
 		if (!is_resource($result)) {
 			throw new WURFL_Xml_PersistenceProvider_Exception("MySql error ".mysql_error($this->_link)."in $this->_db");
 		}
-		
+
 		$row = mysql_fetch_assoc($result);
 		if (is_array($row)) {
 			$return = unserialize($row['value']);
@@ -141,7 +141,7 @@ class WURFL_Xml_PersistenceProvider_MysqlPersistenceProvider extends WURFL_Xml_P
 		if (is_resource($result)) mysql_free_result($result);
 		return $return;
 	}
-	
+
 	public function clear() {
 		$sql = "truncate table `$this->_db`.`$this->_table`";
 		$success=mysql_query($sql,$this->_link);
@@ -150,7 +150,7 @@ class WURFL_Xml_PersistenceProvider_MysqlPersistenceProvider extends WURFL_Xml_P
 		}
 		return $success;
 	}
-	
+
 
 
 	/**
