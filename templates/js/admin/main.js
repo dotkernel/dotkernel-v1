@@ -119,61 +119,35 @@ $(document).ready(function(){
 /*** end activate/deactivate rows ***/
 
 /*** pie chart ***/
-function pieChart(elementId, data, noDataMessage){
-	var total = 0;
+function pieChart(elementId, userLogins, noDataMessage){
+	var arrayTableData = [];
+	var j = 0;
 	
-	if (noDataMessage === undefined){
-		noDataMessage = "No Data"
-	}
-	
-	if (data.length === 0){
-		$("#" + elementId).append($("<div style='width:100%;padding-top:100px;color:#ddd;font-size:30px;text-align:center'>"+noDataMessage+"</div>"));
-		return;
-	}
-	
-	for (var i in data){
-		total += data[i].data
-	}
-	$.map(data, function(el, index){
-		el.label += " (" + Math.round(el.data/total*10000) / 100 + "%)";
-		return el;
-	});
-	$.plot($("#" + elementId), data, {
-		series: {
-			pie: { 
-				show: true,
-				radius: 100,
-				highlight: {
-					opacity:0.25
-				}
-			}
-		},
-		grid: {
-			hoverable: true
-		}
-	});
-
-	$("#" + elementId).bind("plothover", pieHover);
-
-	var $legendItems = $("#" + elementId + " .legend table tbody").children();
-
-	function pieHover(event, pos, obj) 
+	if (userLogins.length === 0)
 	{
-		var selectedIndex = (obj!==null ? obj.seriesIndex : null);
-		if (selectedIndex === null){
-			$legendItems.stop().fadeTo(100, 1);
-		}else{
-			$legendItems.each(function(index, element){
-				if (index == selectedIndex){
-					$(this).stop().fadeTo(100, 1)
-				}else{
-					$(this).stop().fadeTo(100, 0.5)
-				}
-			});
-		}
+		$("#" + elementId).append($("<div style='width:100%;padding-top:100px;color:#ddd;font-size:30px;text-align:center'>"+noDataMessage+"</div>"));
 	}
+	
+	arrayTableData[j] = ['country', 'logins'];
+	for (var i in userLogins)
+	{
+		j++;
+		arrayTableData[j] = [userLogins[i].label, userLogins[i].data];
+	}
+	
+	google.load("visualization", "1", {packages: ["corechart"]});
+	google.setOnLoadCallback(drawChart);
+	function drawChart() 
+	{
+		var data = google.visualization.arrayToDataTable(arrayTableData);
+        var options = {
+		chartArea: {width: 450},
+		colors:['#69D2E7', '#F38630', '#D3CE3D', '#CC333F', '#A7DBD8', '#915B2F', '#FFC90E', '#F597DE', '#09AB82', '#4E431A'],
+        };
+        var chart = new google.visualization.PieChart(document.getElementById(elementId));
+        chart.draw(data, options);
+    }
 }
-
 /*** end pie chart ***/
 
 /**
