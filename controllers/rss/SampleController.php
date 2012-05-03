@@ -16,7 +16,7 @@
 */
 
 $sampleModel = new Sample();
-$sampleView = new Sample_View();
+$sampleView = new Sample_View($view);
 
 //prepare feed
 $feed = array(

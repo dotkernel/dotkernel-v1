@@ -19,6 +19,30 @@
 class View
 {
 	/**
+	 * Singleton instance
+	 * @access protected
+	 * @static
+	 * @var Dot_Template
+	 */
+	protected static $_instance = null;
+	/**
+	 * Returns an instance of Dot_View
+	 * Singleton pattern implementation
+	 * @access public
+	 * @param string $root     Template root directory
+	 * @param string $unknowns How to handle unknown variables
+	 * @param array  $fallback Fallback paths
+	 * @return Dot_Template
+	 */
+	public static function getInstance($root = '.', $unknowns = 'remove', $fallback='')
+	{
+		if (null === self::$_instance)
+		{
+			self::$_instance = new self($root, $unknowns, $fallback);
+		}
+		return self::$_instance;
+	}
+	/**
 	 * Set the feed content
 	 * @access public
 	 * @param array $feed
