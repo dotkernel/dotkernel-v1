@@ -19,5 +19,24 @@
 
 class Sample_View extends View
 {
-
+	/**
+	 * Constructor
+	 * @access public
+	 * @param Dot_Template $tpl
+	 */
+	public function __construct($view)
+	{
+		$this->view = $view;
+	}
+	
+	/**
+	 * Set the feed content
+	 * @access public
+	 * @param array $feed
+	 * @return void
+	 */
+	public function setFeed($feed)
+	{
+		$this->view->setFeed($feed);
+	}
 }

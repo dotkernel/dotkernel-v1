@@ -22,7 +22,7 @@
  * This View class does not inherit from Dot_Template class
  */
 require(DOTKERNEL_PATH . '/' . $registry->requestModule . '/' . 'View.php');
-$view = new View();
+$view = View::getInstance(TEMPLATES_PATH . '/' . $registry->requestModule);
 /** 
  * each Controller  must load its own specific models and views
  */
