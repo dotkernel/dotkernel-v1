@@ -32,15 +32,14 @@ class Dot_Geoip
 	}
 	/**
 	 * Get the country by IP
-	 * Return an array with : short name, like 'us' and long name, like 'United States'
+	 * Return an array with : short name, like 'us', long name, like 'United States and response like 'OK' or <error_message> '
 	 * @access public
 	 * @param string $ip
 	 * @return array
 	 */
 	public function getCountryByIp($ip)
 	{
-		$session = Zend_Registry::get('session');
-		$country = array(0 => 'unknown',1 => 'NA');
+		$country = array(0 => 'unknown',1 => 'NA','response' => 'OK');
 		if (Dot_Kernel::validIp($ip)!="public")
 		{
 			return $country;
@@ -56,8 +55,7 @@ class Dot_Geoip
 			}
 			else
 			{
-				$session->message['txt'] = $this->option->warningMessage->modGeoIp;
-				$session->message['type'] = 'warning';
+				$country['response'] = 'Warning: ' . $this->option->warningMessage->modGeoIp;
 			}
 		}
 		if(function_exists('geoip_db_avail') && geoip_db_avail(GEOIP_COUNTRY_EDITION) && 'unknown' == $country[0])
@@ -91,8 +89,7 @@ class Dot_Geoip
 			}
 			else
 			{
-				$session->message['txt'] = $this->option->warningMessage->modGeoIp;
-				$session->message['type'] = 'warning';
+				$country['response'] = 'Warning: ' . $this->option->warningMessage->modGeoIp;
 			}
 		}
 		return $country;
