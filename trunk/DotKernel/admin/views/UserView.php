@@ -29,6 +29,7 @@ class User_View extends View
 	{
 		$this->tpl = $tpl;
 		$this->settings = Zend_Registry::get('settings');
+		$this->session = Zend_Registry::get('session');
 	}
 	/**
 	 * List users
@@ -97,6 +98,7 @@ class User_View extends View
 	public function loginsUser($templateFile, $list, $page, $browser, $loginDate, $sortField, $orderBy)
 	{
 		$dotGeoip = new Dot_Geoip();
+		$geoIpWorking = TRUE;
 		$this->tpl->setFile('tpl_main', 'user/' . $templateFile . '.tpl');
 		$this->tpl->setBlock('tpl_main', 'browser', 'browser_row');
 		$xml = new Zend_Config_Xml(CONFIGURATION_PATH.'/useragent/browser.xml');
@@ -145,6 +147,12 @@ class User_View extends View
 		foreach ($list['data'] as $k => $v)
 		{
 			$country = $dotGeoip->getCountryByIp($v['ip']);
+			if($country['response'] != 'OK' && $geoIpWorking === TRUE)
+			{
+				$geoIpWorking = FALSE;
+				$this->session->message['txt'] = $country['response'];
+				$this->session->message['type'] = 'warning';
+			}
 			$this->tpl->setVar('ID', $v['id']);
 			$this->tpl->setVar('USERID', $v['userId']);
 			$this->tpl->setVar('USERNAME', $v['username']);

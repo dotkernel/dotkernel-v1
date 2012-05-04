@@ -29,6 +29,7 @@ class Admin_View extends View
 	{
 		$this->tpl = $tpl;
 		$this->settings = Zend_Registry::get('settings');
+		$this->session = Zend_Registry::get('session');
 	}
 	/**
 	 * Display the login form
@@ -105,6 +106,7 @@ class Admin_View extends View
 	public function loginsUser($templateFile, $list, $page)
 	{
 		$dotGeoip = new Dot_Geoip();
+		$geoIpWorking = TRUE;
 		$this->tpl->setFile('tpl_main', 'admin/' . $templateFile . '.tpl');
 		$this->tpl->setBlock('tpl_main', 'list', 'list_block');
 		$this->tpl->paginator($list['pages']);
@@ -112,6 +114,12 @@ class Admin_View extends View
 		foreach ($list['data'] as $k => $v)
 		{
 			$country = $dotGeoip->getCountryByIp($v['ip']);
+			if($country['response'] != 'OK' && $geoIpWorking === TRUE)
+			{
+				$geoIpWorking = FALSE;
+				$this->session->message['txt'] = $country['response'];
+				$this->session->message['type'] = 'warning';
+			}
 			$this->tpl->setVar('ID', $v['id']);
 			$this->tpl->setVar('ADMINID', $v['adminId']);
 			$this->tpl->setVar('USERNAME', $v['username']);
