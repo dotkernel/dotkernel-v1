@@ -1,13 +1,4 @@
 <!-- piechart for users logins-->
-<style>
-	.chartTable{
-		background-color:#fff;
-		border: 1px solid #CFCFCF;
-		margin-top:6px;
-		border-spacing: 0px;
-	}
-</style>
-
 <legend>Users Logins By Country</legend>
 <table class="chartTable">
     <tr>
@@ -18,9 +9,10 @@
 </table>
 
 <script type="text/javascript">   
-    var userLogins = {PIEDATA};
+    var userLogins = {PIECHART_DATA};
+    var colors = {PIECHART_COLOR};
 	var noDataMessage = "No Data";
 	var elementId = "userLoginsChart";
 	
-	pieChart(elementId, userLogins, noDataMessage);
+	pieChart(elementId, userLogins, noDataMessage, colors);
 </script>

@@ -346,9 +346,34 @@ class View extends Dot_Template
 		// pie chart
 		$userModel = new User();
 		$userCountry = $userModel->getTopCountryLogins($widgetOption['countCountryUserLogin']);
+		//parse countries
 		$jsonString = Zend_Json::encode($userCountry);
 		$jsonString = preg_replace('/\{/', '{ ', $jsonString);
-		$this->setVar('PIEDATA', $jsonString);
+		$this->setVar('PIECHART_DATA', $jsonString);
+		//parse colors
+		$jsonString = Zend_Json::encode($widgetOption['colorCharts']['color']);
+		$jsonString = preg_replace('/\{/', '{ ', $jsonString);
+		$this->setVar('PIECHART_COLOR', $jsonString);
+	}
+	/**
+	 * Display the widget: Top Users Columnchart
+	 * @access private
+	 * @param array $widgetOption
+	 * @return void
+	 */
+	private function _displayTopUsersColumnchart($widgetOption)
+	{	
+		// column chart
+		$userModel = new User();
+		$topUsers = $userModel->getTopUsersByLogins($widgetOption['countUsers']);
+		//parse users
+		$jsonString = Zend_Json::encode($topUsers);
+		$jsonString = preg_replace('/\{/', '{ ', $jsonString);
+		$this->setVar('COLCHART_DATA', $jsonString);
+		//parse colors
+		$jsonString = Zend_Json::encode($widgetOption['colorCharts']['color']);
+		$jsonString = preg_replace('/\{/', '{ ', $jsonString);
+		$this->setVar('COLCHART_COLOR', $jsonString);
 	}
 	/**
 	 * Display widgets content
@@ -375,12 +400,15 @@ class View extends Dot_Template
 					case 'WIDGET_USER_LOGINS':						
 						$this->_displayUserLoginsPiechart($val);												
 					break;
+					case 'WIDGET_TOP_USERS':
+						$this->_displayTopUsersColumnchart($val);
+					break;
 				}
 				// parse the widget content
 				$this->parse(strtoupper($val['token']), 'tpl_widget');
+				$this->unsetVar('tpl_widget');
 			}
 		}
-		
 	}
 
 	/**

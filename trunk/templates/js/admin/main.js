@@ -119,40 +119,7 @@ $(document).ready(function(){
 /*** end activate/deactivate rows ***/
 
 /*** pie chart ***/
-/*
-function pieChart(elementId, userLogins, noDataMessage){
-	var arrayTableData = [];
-	var j = 0;
-	
-	if (userLogins.length === 0)
-	{
-		$("#" + elementId).append($("<div style='width:100%;padding-top:100px;color:#ddd;font-size:30px;text-align:center'>"+noDataMessage+"</div>"));
-	}
-	
-	arrayTableData[j] = ['country', 'logins'];
-	for (var i in userLogins)
-	{
-		j++;
-		arrayTableData[j] = [userLogins[i].label, userLogins[i].data];
-	}
-	
-	google.load("visualization", "1", {packages: ["corechart"]});
-	google.setOnLoadCallback(drawChart);
-	function drawChart() 
-	{
-		var data = google.visualization.arrayToDataTable(arrayTableData);
-        var options = {
-		chartArea: {width: 450},
-		colors:['#69D2E7', '#F38630', '#D3CE3D', '#CC333F', '#A7DBD8', '#915B2F', '#FFC90E', '#F597DE', '#09AB82', '#4E431A'],
-        };
-        var chart = new google.visualization.PieChart(document.getElementById(elementId));
-        chart.draw(data, options);
-    }
-}
-*/
-/*** end pie chart ***/
-
-function pieChart(elementId, userLogins, noDataMessage){
+function pieChart(elementId, userLogins, noDataMessage, colors){
 	
 	var arrayTableData = [];
 	var total = 0;
@@ -166,15 +133,14 @@ function pieChart(elementId, userLogins, noDataMessage){
 	//prepare array
 	for (var i in userLogins)
 	{
-		arrayTableData[i] = { name: userLogins[i].label, y: userLogins[i].data, id: userLogins[i].data };
+		arrayTableData[i] = { name: userLogins[i].label, y: userLogins[i].data, id: userLogins[i].data, color: colors[i] };
 	}
 	
 	chart = new Highcharts.Chart({
 		chart: {
 			renderTo: elementId,
 			plotBackgroundColor: null,
-			plotBorderWidth: null,
-			plotShadow: false
+			plotBorderWidth: 0,
 		},
 		credits: {
 			enabled: false
@@ -184,7 +150,7 @@ function pieChart(elementId, userLogins, noDataMessage){
 		},
 		tooltip: {
 			formatter: function() {
-				return '<b>'+ this.point.name +'</b>: '+ this.percentage.toPrecision(2) +' %';
+				return '<b>'+ this.point.name +'</b>: '+ this.percentage.toPrecision(3) +' %';
 			}
 		},
 		legend: {
@@ -225,6 +191,84 @@ function pieChart(elementId, userLogins, noDataMessage){
 	});
 	
 }
+/*** end pie chart ***/
+
+/*** column chart ***/
+function columnChart(elementId, topUsers, noDataMessage, colors){
+	
+	var labelData = [];
+	var valueData = [];
+	var total = 0;
+	
+	if (topUsers.length === 0)
+	{
+		$("#" + elementId).append($("<div style='width:100%;padding-top:100px;color:#ddd;font-size:30px;text-align:center'>"+noDataMessage+"</div>"));
+		return;
+	}
+	
+	//prepare array
+	for (var i in topUsers)
+	{
+		labelData[i] = topUsers[i].label;
+		valueData[i] = { y: topUsers[i].data, color: colors[i]};
+	}
+	
+	chart = new Highcharts.Chart({
+		chart: {
+			renderTo: elementId,
+			plotBackgroundColor: null,
+			plotBorderWidth: 0,
+		},
+		credits: {
+			enabled: false
+		},
+		title: {
+			text: ''
+		},
+		yAxis: {
+			title: {
+				text: 'Logins count'
+			}
+		},
+		xAxis: {
+			categories: labelData,
+			labels: {
+				rotation: -45,
+				align: 'right',
+				style: {
+					font: 'normal 11px Verdana, sans-serif'
+				}
+			}
+		},
+		tooltip: {
+			formatter: function() {
+				return '<b>'+ this.x + '</b><br/>' + 'Logins count: '+ this.y;
+			}
+		},
+		plotOptions: {
+			column: {
+				dataLabels: {
+					enabled: true
+				},
+				showInLegend: false
+			}
+		},
+		series: [{
+			type: 'column',
+			name: 'Top Users',
+			data: valueData,
+			dataLabels: {
+				enabled: true,
+				rotation: -90,
+				color: '#FFFFFF',
+				align: 'right',
+				x: -3,
+				y: 5
+			}
+		}]
+	});
+}
+/*** end of column chart ***/
 
 /**
  * Show/Hide div ID

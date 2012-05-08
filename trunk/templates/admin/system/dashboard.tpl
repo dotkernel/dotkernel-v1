@@ -5,6 +5,7 @@
 		$("#jqueryUiVersion").text($.ui.version);
 	});
 </script>
+
 <fieldset style="width: 460px;float: left;margin-right: 50px;">
 	<legend>System Overview</legend>
 	<table class="medium_table">
@@ -70,11 +71,9 @@
 			<td id="jqueryUiVersion"></td>
 		</tr>
 	</table>
-</fieldset>
-<fieldset style="width: 500px;float: left;margin-right: 50px;">
-	{WIDGET_USER_LOGINS}
+	
 	<!-- BEGIN warnings -->
-	<div class="message_error" style="width:480px;margin-top:10px;padding:10px">
+	<div class="message_error" style="margin-top:10px;padding:10px">
 		<strong style="font-size:13px">{WARNING_TYPE}</strong>
 		<ul style="padding:3px 15px;color:#666;font-size:11px">
 			<!-- BEGIN warning_item -->
@@ -84,3 +83,12 @@
 	</div>
 	<!-- END warnings -->
 </fieldset>
+
+<div style="width: 500px;float: left;margin-right: 50px;">
+	<fieldset>
+		{WIDGET_USER_LOGINS}
+	</fieldset>
+	<fieldset>
+		{WIDGET_TOP_USERS}
+	</fieldset>
+</div>
