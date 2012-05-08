@@ -1,12 +1,3 @@
-<script type="text/javascript" src="{SITE_URL}/externals/google.chart.js"></script>
-<script type="text/javascript">   
-    var userLogins = {PIEDATA};
-	var noDataMessage = "No Data";
-	var elementId = "userLoginsChart";
-	
-	pieChart(elementId, userLogins, noDataMessage);
-</script>
-
 <!-- piechart for users logins-->
 <style>
 	.chartTable{
@@ -25,3 +16,11 @@
 		</td>
     </tr>
 </table>
+
+<script type="text/javascript">   
+    var userLogins = {PIEDATA};
+	var noDataMessage = "No Data";
+	var elementId = "userLoginsChart";
+	
+	pieChart(elementId, userLogins, noDataMessage);
+</script>

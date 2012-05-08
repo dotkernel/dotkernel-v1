@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href ="{TEMPLATES_URL}/css/admin/{SKIN}/style.css" type="text/css" >			
 	<script src="{SITE_URL}/externals/jquery/jquery.min.js"></script>
 	<script src="{SITE_URL}/externals/jquery/ui/jquery-ui.min.js"></script>
+	<script src="{SITE_URL}/externals/highcharts/highcharts.js"></script>
 	<link rel="stylesheet" href ="{SITE_URL}/externals/jquery/ui/jquery-ui.min.css" type="text/css" >
 	<script src="{TEMPLATES_URL}/js/admin/main.js"></script>
 </head>
