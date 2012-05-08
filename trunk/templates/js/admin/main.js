@@ -119,6 +119,7 @@ $(document).ready(function(){
 /*** end activate/deactivate rows ***/
 
 /*** pie chart ***/
+/*
 function pieChart(elementId, userLogins, noDataMessage){
 	var arrayTableData = [];
 	var j = 0;
@@ -148,7 +149,82 @@ function pieChart(elementId, userLogins, noDataMessage){
         chart.draw(data, options);
     }
 }
+*/
 /*** end pie chart ***/
+
+function pieChart(elementId, userLogins, noDataMessage){
+	
+	var arrayTableData = [];
+	var total = 0;
+	
+	if (userLogins.length === 0)
+	{
+		$("#" + elementId).append($("<div style='width:100%;padding-top:100px;color:#ddd;font-size:30px;text-align:center'>"+noDataMessage+"</div>"));
+		return;
+	}
+	
+	//prepare array
+	for (var i in userLogins)
+	{
+		arrayTableData[i] = { name: userLogins[i].label, y: userLogins[i].data, id: userLogins[i].data };
+	}
+	
+	chart = new Highcharts.Chart({
+		chart: {
+			renderTo: elementId,
+			plotBackgroundColor: null,
+			plotBorderWidth: null,
+			plotShadow: false
+		},
+		credits: {
+			enabled: false
+		},
+		title: {
+			text: ''
+		},
+		tooltip: {
+			formatter: function() {
+				return '<b>'+ this.point.name +'</b>: '+ this.percentage.toPrecision(2) +' %';
+			}
+		},
+		legend: {
+			width: 170,
+			layout: "vertical",
+			align: "right",
+			verticalAlign: "top",
+			borderWidth: 0,
+			labelFormatter: function() {
+				return this.name;
+			}
+		},
+		plotOptions: {
+			pie: {
+				allowPointSelect: true,
+				cursor: 'pointer',
+				dataLabels: {
+					enabled: false
+				},
+				showInLegend: true,
+				point: {
+					events: {
+						legendItemClick: function() {
+							if(this.y == 0)
+								this.update(this.id);
+							else
+								this.update(0);
+						}
+					}
+				}
+			}
+		},
+		series: [{
+			type: 'pie',
+			name: 'User logins',
+			data: arrayTableData
+		}]
+	});
+	
+}
 
 /**
  * Show/Hide div ID
