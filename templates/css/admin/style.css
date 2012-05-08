@@ -723,3 +723,12 @@ input.bigger{width: 100%;}
 .ui-tooltip-content{
 	font-size:10px;
 }
+
+/******* Dashboard Page *******/
+.chartTable{
+	background-color:#fff;
+	border: 1px solid #CFCFCF;
+	margin-top:6px;
+	border-spacing: 0px;
+	padding:1px;
+}

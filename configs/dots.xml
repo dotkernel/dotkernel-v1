@@ -36,6 +36,22 @@ current xml dots file. -->
 						<color>#4E431A</color>
 					</colorCharts>
 				</content>
+				<content>
+					<token>WIDGET_TOP_USERS</token>
+					<countUsers>10</countUsers>
+					<colorCharts>
+						<color>#69D2E7</color>
+						<color>#F38630</color>
+						<color>#D3CE3D</color>
+						<color>#CC333F</color>
+						<color>#A7DBD8</color>
+						<color>#915B2F</color>
+						<color>#FFC90E</color>
+						<color>#F597DE</color>
+						<color>#09AB82</color>
+						<color>#4E431A</color>
+					</colorCharts>
+				</content>
 			</widgets>
 		</variable>
 		<variable option="frontend">

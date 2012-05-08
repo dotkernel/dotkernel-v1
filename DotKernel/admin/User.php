@@ -180,4 +180,31 @@ class User extends Dot_Model_User
 
 		return $data;
 	}
+	
+	/**
+	 * Get top <topCount> users by logins
+	 * @param topCount - the number of users to return
+	 * @access public
+	 * @return array
+	 */
+	public function getTopUsersByLogins($topCount)
+	{
+		$select = $this->db->select()
+							->from(array('a' => 'userLogin'),
+									array('b.username', 'cnt'=>'COUNT(a.userId)'))
+							->joinLeft(array('b' => 'user'), 'a.userId = b.id', array())
+							->group('userId')
+							->order('cnt DESC')
+							->limit($topCount);
+		$logins = $this->db->fetchAll($select);
+		$data = array();
+		foreach($logins as $login)
+		{
+			$data[] = array(
+					'label' => $login['username'],
+					'data' =>  intval($login['cnt'])
+			);
+		}
+		return $data;
+	}
 }
