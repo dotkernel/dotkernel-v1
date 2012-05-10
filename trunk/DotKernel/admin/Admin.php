@@ -241,7 +241,14 @@ class Admin extends Dot_Model
 	
 			$month = date('F', $login);
 			$day = date('j', $login);
-			$result[$month][$day]++;
+			if(!isset($result[$month][$day]))
+			{
+				$result[$month][$day] = 1;
+			}
+			else
+			{
+				$result[$month][$day]++;
+			}
 		}
 		$i = 0;
 		foreach($result as $month => $days)
