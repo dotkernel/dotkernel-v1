@@ -207,4 +207,51 @@ class User extends Dot_Model_User
 		}
 		return $data;
 	}
+	
+	/**
+	 * Get last three months user's logins
+	 * @access public
+	 * @return array
+	 */
+	public function getUsersTimeActivity($monthsBefore)
+	{
+		$fromDate = mktime(0, 0, 0, date('n')-($monthsBefore-1), date('j'),   date('Y'));
+		$fromDate = date('Y-m-01', $fromDate);
+		$select = $this->db->select()
+							->from(array('a' => 'userLogin'), array('dateLogin'))
+							->where('dateLogin >= ?', $fromDate);
+		$resultLogins = $this->db->fetchAll($select);
+		
+		$daySec = 86400; // Day in seconds
+		$fTime = strtotime($fromDate);
+		$nTime = strtotime(date('Y-m-d'));
+		$result = array();
+		$series = array();
+		
+		for($i = $fTime; $i <= $nTime; $i += $daySec)
+		{
+			$month = date('F', $i);
+			$day = date('j', $i);
+			$result[$month][$day] = 0;
+		}
+		
+		foreach($resultLogins as $login)
+		{
+			$login = explode(' ', $login['dateLogin']);
+			$login = strtotime($login[0]);
+				
+			$month = date('F', $login);
+			$day = date('j', $login);
+			$result[$month][$day]++;
+		}
+		$i = 0;
+		foreach($result as $month => $days)
+		{
+			$series[$i] = new stdClass();
+			$series[$i]->name = $month;
+			$series[$i]->data = array_merge($days, array());
+			$i++;
+		}
+		return $series;
+	}
 }

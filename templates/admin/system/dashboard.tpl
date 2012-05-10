@@ -92,3 +92,8 @@
 		{WIDGET_TOP_USERS}
 	</fieldset>
 </div>
+<div style="width: 500px;float: left;margin-right: 50px;">
+	<fieldset>
+		{WIDGET_TIME_ACTIVITY}
+	</fieldset>
+</div>

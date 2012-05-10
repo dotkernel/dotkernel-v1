@@ -376,6 +376,26 @@ class View extends Dot_Template
 		$this->setVar('COLCHART_COLOR', $jsonString);
 	}
 	/**
+	 * Display the widget: Time Activty Linechart
+	 * @access private
+	 * @param array $widgetOption
+	 * @return void
+	 */
+	private function _displayTimeActivityLinechart($widgetOption)
+	{
+		// column chart
+		$userModel = new User();
+		$timeActivity = $userModel->getUsersTimeActivity($widgetOption['monthsBefore']);
+		//parse data
+		$jsonString = Zend_Json::encode($timeActivity);
+		$jsonString = preg_replace('/\{/', '{ ', $jsonString);
+		$this->setVar('LINECHART_DATA', $jsonString);
+		//parse colors
+		$jsonString = Zend_Json::encode($widgetOption['colorCharts']['color']);
+		$jsonString = preg_replace('/\{/', '{ ', $jsonString);
+		$this->setVar('LINECHART_COLOR', $jsonString);
+	}
+	/**
 	 * Display widgets content
 	 * @access public
 	 * @param Zend_Config $value
@@ -402,6 +422,9 @@ class View extends Dot_Template
 					break;
 					case 'WIDGET_TOP_USERS':
 						$this->_displayTopUsersColumnchart($val);
+					break;
+					case 'WIDGET_TIME_ACTIVITY':
+						$this->_displayTimeActivityLinechart($val);
 					break;
 				}
 				// parse the widget content
