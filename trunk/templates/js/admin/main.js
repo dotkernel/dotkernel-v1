@@ -122,7 +122,6 @@ $(document).ready(function(){
 function pieChart(elementId, userLogins, noDataMessage, colors){
 	
 	var arrayTableData = [];
-	var total = 0;
 	
 	if (userLogins.length === 0)
 	{
@@ -198,7 +197,6 @@ function columnChart(elementId, topUsers, noDataMessage, colors){
 	
 	var labelData = [];
 	var valueData = [];
-	var total = 0;
 	
 	if (topUsers.length === 0)
 	{
@@ -266,6 +264,53 @@ function columnChart(elementId, topUsers, noDataMessage, colors){
 				y: 5
 			}
 		}]
+	});
+}
+/*** end of column chart ***/
+
+/*** line chart ***/
+function lineChart(elementId, timeActivity, noDataMessage, colors){
+	if (timeActivity.length === 0)
+	{
+		$("#" + elementId).append($("<div style='width:100%;padding-top:100px;color:#ddd;font-size:30px;text-align:center'>"+noDataMessage+"</div>"));
+		return;
+	}
+	
+	chart = new Highcharts.Chart({
+		chart: {
+			renderTo: elementId,
+			type: 'line',
+			plotBackgroundColor: null,
+			plotBorderWidth: 0,
+		},
+		credits: {
+			enabled: false
+		},
+		title: {
+			text: ''
+		},
+		tooltip: {
+			formatter: function() {
+					return '<b>' + this.series.name + ' ' + this.x + '</b><br/>' + 'Total logins: ' + this.y;
+			}
+		},
+		yAxis: {
+			title: {
+				text: 'Logins count'
+			},
+			min: 0
+		},
+		xAxis: {
+			categories: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'],
+			labels: {
+				rotation: -45,
+				align: 'right',
+				style: {
+					font: 'normal 10px Verdana, sans-serif'
+				}
+			}
+		},
+		series: timeActivity
 	});
 }
 /*** end of column chart ***/
