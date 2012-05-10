@@ -1,5 +1,5 @@
 <!-- linechart for last months activity-->
-<legend>Last months user's logins</legend>
+<legend>Last months admin's logins</legend>
 <table class="chartTable">
     <tr>
         <td>

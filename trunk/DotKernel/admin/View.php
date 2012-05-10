@@ -384,8 +384,8 @@ class View extends Dot_Template
 	private function _displayTimeActivityLinechart($widgetOption)
 	{
 		// column chart
-		$userModel = new User();
-		$timeActivity = $userModel->getUsersTimeActivity($widgetOption['monthsBefore']);
+		$adminModel = new Admin();
+		$timeActivity = $adminModel->getAdminsTimeActivity($widgetOption['monthsBefore']);
 		//parse data
 		$jsonString = Zend_Json::encode($timeActivity);
 		$jsonString = preg_replace('/\{/', '{ ', $jsonString);
