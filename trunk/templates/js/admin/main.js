@@ -289,6 +289,7 @@ function lineChart(elementId, timeActivity, noDataMessage, colors){
 		title: {
 			text: ''
 		},
+		colors: colors,
 		tooltip: {
 			formatter: function() {
 					return '<b>' + this.series.name + ' ' + this.x + '</b><br/>' + 'Total logins: ' + this.y;
