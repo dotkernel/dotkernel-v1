@@ -23,7 +23,7 @@ Dot_Session::start();
 /**
  *  Example of usage for WURFL API integration. If wurfl  module is active, you can redirect to /mobile controller 
  */
-if($registry->configuration->resources->useragent->wurflapi->active)
+if($registry->configuration->resources->useragent->wurflcloud->active)
 {
 	$deviceInfo = Dot_UserAgent :: getDeviceInfo($_SERVER); 
 	if( (0 < count((array)$deviceInfo)) && $deviceInfo->isMobile)
@@ -44,7 +44,7 @@ if($registry->configuration->resources->useragent->wurflapi->active)
 			
 			//redirect to mobile controller , only if the session is not set. 
 			//Otherwise will trap the user in mobile controller
-			if($registry->configuration->resources->useragent->wurflapi->redirect)
+			if($registry->configuration->resources->useragent->wurflcloud->redirect)
 			{
 				header('location: '.$registry->configuration->website->params->url.'/mobile');
 				exit;
