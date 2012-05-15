@@ -5,7 +5,7 @@
 *
 * @category   DotKernel
 * @package    DotLibrary
-* @copyright  Copyright (c) 2009-2011 DotBoost Technologies Inc. Canada (http://www.dotboost.com)
+* @copyright  Copyright (c) 2009-2012 DotBoost Technologies Inc. (http://www.dotboost.com)
 * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 * @version    $Id: WurflCloud.php 702 2012-05-11 00:22:47Z andrei $
 */
