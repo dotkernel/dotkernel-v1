@@ -25,7 +25,7 @@ Dot_Session::start();
  */
 if($registry->configuration->resources->useragent->wurflapi->active)
 {
-	$deviceInfo = Dot_UserAgent :: getDeviceInfo($_SERVER["HTTP_USER_AGENT"]); 
+	$deviceInfo = Dot_UserAgent :: getDeviceInfo($_SERVER); 
 	if( (0 < count((array)$deviceInfo)) && $deviceInfo->isMobile)
 	{
 		/**

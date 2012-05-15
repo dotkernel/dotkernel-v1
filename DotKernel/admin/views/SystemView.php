@@ -43,6 +43,8 @@ class System_View extends View
 	public function dashboard($templateFile, $mysqlVersion, $apcInfo, $geoIpVersion, $wurflInfo, $warnings)
 	{
 		$this->tpl->setFile('tpl_main', 'system/' . $templateFile . '.tpl');
+		$this->tpl->setBlock('tpl_main', 'wurfl_api_info', 'wurfl_api');
+		$this->tpl->setBlock('tpl_main', 'wurfl_cloud_info', 'wurfl_cloud');
 		// system overview
 		$this->tpl->setVar('HOSTNAME' , System::getHostname());
 		$this->tpl->setVar('MYSQL',$mysqlVersion);
@@ -59,9 +61,20 @@ class System_View extends View
 		$this->tpl->setVar('PHPAPI',php_sapi_name());
 		$this->tpl->setVar('ZFVERSION', Zend_Version::VERSION);
 		
-		$this->tpl->setVar('WURFLCACHEBUILT', $wurflInfo['cacheDate']);
-		$this->tpl->setVar('WURFLDATE', $wurflInfo['xmlFileDate']);
-		$this->tpl->setVar('WURFLAPIVERSION', $wurflInfo['apiVersion']);
+		if(!empty($wurflInfo['api']))
+		{
+			$this->tpl->setVar('WURFLCACHEBUILT', $wurflInfo['api']['cacheDate']);
+			$this->tpl->setVar('WURFLDATE', $wurflInfo['api']['xmlFileDate']);
+			$this->tpl->setVar('WURFLAPIVERSION', $wurflInfo['api']['apiVersion']);
+			$this->tpl->parse('wurfl_api', 'wurfl_api_info');
+		}
+		if(!empty($wurflInfo['cloud']))
+		{
+			$this->tpl->setVar('WURFL_CLIENT_VERSION', $wurflInfo['cloud']['clientVersion']);
+			$this->tpl->setVar('WURFL_API_VERSION', $wurflInfo['cloud']['apiVersion']);
+			$this->tpl->setVar('WURFL_CLOUD_SERVER', $wurflInfo['cloud']['cloudServer']);
+			$this->tpl->parse('wurfl_cloud', 'wurfl_cloud_info');
+		}
 
 		// show warnigns
 		$this->tpl->setBlock('tpl_main', 'warning_item', 'warning_item_block');
