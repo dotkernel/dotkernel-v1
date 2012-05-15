@@ -46,6 +46,7 @@
 		</tr>
 		<!-- END is_geoip -->
 	</table>
+	<!-- BEGIN wurfl_api_info -->
 	<table class="medium_table">
 		<tr>
 			<td>WURFL API VERSION</td>
@@ -61,6 +62,23 @@
 			<td>{WURFLDATE}</td>
 		</tr>
 	</table>
+	<!-- END wurfl_api_info -->
+	<!-- BEGIN wurfl_cloud_info -->
+	<table class="medium_table">
+		<tr>
+			<td>WURFL CLIENT VERSION</td>
+			<td>{WURFL_CLIENT_VERSION}</td>
+		</tr>
+		<tr>
+			<td width="150px">WURFL API VERSION</td>
+			<td>{WURFL_API_VERSION}</td>
+		</tr>
+		<tr>
+			<td>WURFL CLOUD SERVER</td>
+			<td>{WURFL_CLOUD_SERVER}</td>
+		</tr>
+	</table>
+	<!-- END wurfl_cloud_info -->
 	<table class="medium_table">
 		<tr>
 			<td width="150px">jQuery Version</td>

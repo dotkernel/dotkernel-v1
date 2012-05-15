@@ -38,6 +38,12 @@ class Dot_UserAgent_WurflCloud
 	 * @static
 	 */
 	private $_cacheApc;
+	/**
+	 * contains last error when something went wrong per api call
+	 * @var unknown_type
+	 * @public
+	 */
+	public $lastError = '';
 
 	/**
 	 * private constructor, set the WURFL configuration paramethers
@@ -110,7 +116,14 @@ class Dot_UserAgent_WurflCloud
 		// Set your API Key here
 		$config->api_key = $this->config->resources->useragent->wurflcloud->api_key;
 		// Create a WURFL Cloud Client
-		$wurflCloudClient = new WurflCloud_Client_Client($config, new WurflCloud_Cache_Cookie());
+		if(TRUE == $this->config->resources->useragent->wurflcloud->cache)
+		{
+			$wurflCloudClient = new WurflCloud_Client_Client($config, new WurflCloud_Cache_Cookie());
+		}	
+		else
+		{
+			$wurflCloudClient = new WurflCloud_Client_Client($config, new WurflCloud_Cache_Null());
+		}
 		$this->_wurflCloudClient = $wurflCloudClient;
 	}
 	
@@ -140,10 +153,12 @@ class Dot_UserAgent_WurflCloud
 		try {
 			$this->_wurflCloudClient->detectDevice($httpRequest);
 			return $this->_wurflCloudClient->capabilities;
+			$this->lastError = '';
 		}
 		catch(Exception $e) {
 			// Show any errors
-			echo "<b>[Wurfl] Error</b>: " . $e->getMessage();
+			//trigger_error($e->getMessage(), E_USER_WARNING);
+			$this->lastError = $e->getMessage();
 		}
 	}
 	

@@ -53,15 +53,22 @@ switch ($registry->requestAction)
 		}
 	break;
 	case 'build-wurfl-cache':
-		set_time_limit(0);
-		$wurfl = Dot_UserAgent_Wurfl::getInstance();
-		$wurfl->createWurflFactory();
+		if(Dot_UserAgent::checkWurflApi() === TRUE)
+		{
+			set_time_limit(0);
+			$wurfl = Dot_UserAgent_Wurfl::getInstance();
+			$wurfl->createWurflFactory();
+		}
 		header('Location: '.$registry->configuration->website->params->url. '/admin');
 		exit();
 	break;
 	case 'empty-wurfl-cache':
-		$wurfl = Dot_UserAgent_Wurfl::getInstance();
-		$wurfl->removeWurflFactory();
+		if(Dot_UserAgent::checkWurflApi() === TRUE)
+		{
+			set_time_limit(0);
+			$wurfl = Dot_UserAgent_Wurfl::getInstance();
+			$wurfl->removeWurflFactory();
+		}
 		header('Location: '.$registry->configuration->website->params->url. '/admin');
 		exit();
 	break;
@@ -168,12 +175,5 @@ switch ($registry->requestAction)
 		
 		echo Zend_Json::encode($result);
 		exit();
-	break;
-	
-	case 'wurfl-cloud':
-		$dotUserAgent = new Dot_UserAgent();
-		$device = $dotUserAgent->getDeviceInfo($_SERVER);
-		Zend_Debug::dump($device);
-		exit;
 	break;
 }

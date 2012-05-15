@@ -141,12 +141,24 @@ class System extends Dot_Model
 	 */
 	public function getWurflInfo()
 	{
-		$result = array();
-		$wurfl = Dot_UserAgent_Wurfl::getInstance();
-		$wurflInfo = $wurfl->getWurflVersion();
-		$result['xmlFileDate']    = $wurflInfo['xmlFileDate'];
-		$result['cacheDate']      = $wurflInfo['cacheDate'];
-		$result['apiVersion']     = $this->config->resources->useragent->wurflapi->api_version;
+		$result = array('api' => array(),
+						'cloud' => array());
+		// first test the api
+		if(Dot_UserAgent::checkWurflApi() === TRUE)
+		{
+			// get wurfl api info
+			$wurfl = Dot_UserAgent_Wurfl::getInstance();
+			$wurflInfo = $wurfl->getWurflVersion();
+			$result['api']['xmlFileDate']    = $wurflInfo['xmlFileDate'];
+			$result['api']['cacheDate']      = $wurflInfo['cacheDate'];
+			$result['api']['apiVersion']     = $this->config->resources->useragent->wurflapi->api_version;
+		}
+		// get wurfl cloud info
+		$wurfl = Dot_UserAgent_WurflCloud::getInstance();
+		$result['cloud']['clientVersion'] = $wurfl->getClientVersion();
+		$result['cloud']['apiVersion'] = $wurfl->getAPIVersion();
+		$result['cloud']['cloudServer'] = $wurfl->getCloudServer();
+		
 		return $result;
 	}
 	/**
@@ -158,7 +170,7 @@ class System extends Dot_Model
 	public function getWarnings()
 	{
 		// warning "categories"
-		$warnings = array('Security'=>array(), 'Delete'=>array(), 'Make Writable'=>array(), 'Make Unwritable'=>array());
+		$warnings = array('Security'=>array(), 'Delete'=>array(), 'Make Writable'=>array(), 'Make Unwritable'=>array(), 'Settings' => array());
 		
 		// check that the default admin user isn't enabled
 		$dotAuth = Dot_Auth::getInstance();
@@ -222,6 +234,14 @@ class System extends Dot_Model
 					}
 				}
 			}
+		}
+		
+		// test wurfl cloud api key
+		$wurflCloud = Dot_UserAgent_WurflCloud::getInstance();
+		$wurflCloud->getDeviceCapabilities();
+		if(!empty($wurflCloud->lastError))
+		{
+			$warnings['Settings'][] = $wurflCloud->lastError;
 		}
 							
 		// add any other warnings to $warnings here
