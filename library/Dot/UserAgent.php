@@ -30,15 +30,46 @@ class Dot_UserAgent
 	}
 
 	/**
-	 * Get HTTP UserAgent Device Info from WURFL file
+	 * Get HTTP Request Device Info from WURFL
 	 * Device may be Bot, Checker, Console, Desktop, Email, Feed, Mobile, Offline, Probe, Spam, Text, Validator
 	 * @return object
 	 */
-	public static function getDeviceInfo($userAgent)
+	public static function getDeviceInfo($httpRequest)
 	{
-		$wurfl = Dot_UserAgent_Wurfl::getInstance();
-		$deviceInfo = $wurfl->getDevice($userAgent);
-		return $deviceInfo;
+		$config = Zend_Registry::get('configuration');
+		if(Dot_UserAgent::_checkWurflApi() && !$config->resources->useragent->wurflcloud->use_instead)
+		{
+			$wurfl = Dot_UserAgent_Wurfl::getInstance();
+			$deviceInfo = $wurfl->getDevice($httpRequest['HTTP_USER_AGENT']);
+			return $deviceInfo;
+		}
+		else
+		{
+			$wurfl = Dot_UserAgent_WurflCloud::getInstance();
+			$deviceInfo = $wurfl->getDevice($httpRequest);
+			return $deviceInfo;
+		}
+	}
+	
+	/**
+	 * Test if Wurfl package is installed and working
+	 * @return boolean
+	 */
+	private static function _checkWurflApi()
+	{
+		$config = Zend_Registry::get('configuration');
+		$enabled = FALSE;
+		if(isset($config->resources->useragent->wurflapi->lib_dir) && isset($config->resources->useragent->wurflapi->config_file))
+		{
+			if(class_exists('Dot_UserAgent_Wurfl') && file_exists(CONFIGURATION_PATH.'/useragent/wurfl.xml'))
+			{
+				if(file_exists($config->resources->useragent->wurflapi->lib_dir . 'Application.php'))
+				{
+					$enabled = TRUE;
+				}
+			}
+		}
+		return $enabled;
 	}
 
 	/**

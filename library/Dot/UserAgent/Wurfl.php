@@ -55,7 +55,7 @@ class Dot_UserAgent_Wurfl
 	 * private constructor, set the WURFL configuration paramethers
 	 * @return void
 	 */
-	 private function __construct()
+	private function __construct()
 	{
 		$this->config = Zend_Registry::get('configuration');
 		// load WURFL library and configuration XML file
