@@ -15,6 +15,7 @@
  * @category   DotKernel
  * @package    DotLibrary
  * @subpackage DotFilter
+ * @see		   Dot_Filter
  * @author     DotKernel Team <team@dotkernel.com>
  */
 

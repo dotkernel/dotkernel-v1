@@ -15,6 +15,7 @@
 * @category   DotKernel
 * @package    DotLibrary
 * @subpackage DotStatistic
+* @see		  Dot_Statistic
 * @author     DotKernel Team <team@dotkernel.com>
 */
 

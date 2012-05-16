@@ -15,6 +15,7 @@
  * @category   DotKernel
  * @package    DotLibrary
  * @subpackage DotValidate
+ * @see		   Dot_Validate
  * @author     DotKernel Team <team@dotkernel.com>
  */
 

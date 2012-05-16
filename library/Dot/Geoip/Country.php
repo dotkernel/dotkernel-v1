@@ -57,6 +57,7 @@ if (!defined("CITYCOMBINED_FIXED_RECORD")) define("CITYCOMBINED_FIXED_RECORD", 7
 * @category   DotKernel
 * @package    DotLibrary
 * @subpackage DotGeoip
+* @see		  Dot_Geoip
 * @author     DotKernel Team <team@dotkernel.com>
 */
 class Dot_Geoip_Country extends Dot_Geoip

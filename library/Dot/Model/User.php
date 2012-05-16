@@ -15,6 +15,7 @@
 * @category   DotKernel
 * @package    DotLibrary
 * @subpackage DotModel
+* @see		  Dot_Model
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
