@@ -15,7 +15,9 @@
 * @category   DotKernel
 * @package    DotLibrary
 * @subpackage DotUserAgent
+* @see		  Dot_UserAgent
 * @author     DotKernel Team <team@dotkernel.com>
+* @since	  v1.6.0 2012-05-11 00:22:47
 */
 
 class Dot_UserAgent_WurflCloud

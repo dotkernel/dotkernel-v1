@@ -15,6 +15,7 @@
  * @category   DotKernel
  * @package    DotLibrary
  * @subpackage DotImage
+ * @see		   Dot_Image
  * @author     DotKernel Team <team@dotkernel.com>
  */
 
