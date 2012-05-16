@@ -24,7 +24,7 @@ class Dot_Kernel
 	 * Dot Kernel version identification
 	 * @var string
 	 */
-	const VERSION = '1.6.0 dev';
+	const VERSION = '1.6.0';
 	/*
  	 * Start DotKernel
 	 * Pass controll to the Front Controller if it exists,
