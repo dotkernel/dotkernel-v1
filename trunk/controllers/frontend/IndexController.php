@@ -23,31 +23,34 @@ Dot_Session::start();
 /**
  *  Example of usage for WURFL API integration. If wurfl  module is active, you can redirect to /mobile controller 
  */
-if($registry->configuration->resources->useragent->wurflcloud->active)
+if(isset($registry->configuration->resources->useragent->wurflcloud) || isset($registry->configuration->resources->useragent->wurflapi))
 {
-	$deviceInfo = Dot_UserAgent :: getDeviceInfo($_SERVER); 
-	if( (0 < count((array)$deviceInfo)) && $deviceInfo->isMobile)
+	if($registry->configuration->resources->useragent->wurflcloud->active || $registry->configuration->resources->useragent->wurflapi->active)
 	{
-		/**
- 		* Example of usage of Statistic class. We may want to record every site visits, in order to find new mobile device
- 		* that are not listed in WURFL xml file. Record in session the visitId for later usage.
- 		*/
-		if(!$registry->session->visitId)
+		$deviceInfo = Dot_UserAgent :: getDeviceInfo($_SERVER); 
+		if( (0 < count((array)$deviceInfo)) && $deviceInfo->isMobile)
 		{
-			$registry->session->visitId = Dot_Statistic::registerVisit();
-		}
-		
-		// if the Statistic module is integrate, record the deviceInfo too, and record TRUE in $session->mobile 
-		if(!$registry->session->mobile)
-		{
-			$registry->session->mobile = Dot_Statistic::registerMobileDetails($registry->session->visitId, $deviceInfo);
-			
-			//redirect to mobile controller , only if the session is not set. 
-			//Otherwise will trap the user in mobile controller
-			if($registry->configuration->resources->useragent->wurflcloud->redirect)
+			/**
+	 		* Example of usage of Statistic class. We may want to record every site visits, in order to find new mobile device
+	 		* that are not listed in WURFL xml file. Record in session the visitId for later usage.
+	 		*/
+			if(!$registry->session->visitId)
 			{
-				header('location: '.$registry->configuration->website->params->url.'/mobile');
-				exit;
+				$registry->session->visitId = Dot_Statistic::registerVisit();
+			}
+			
+			// if the Statistic module is integrate, record the deviceInfo too, and record TRUE in $session->mobile 
+			if(!$registry->session->mobile)
+			{
+				$registry->session->mobile = Dot_Statistic::registerMobileDetails($registry->session->visitId, $deviceInfo);
+				
+				//redirect to mobile controller , only if the session is not set. 
+				//Otherwise will trap the user in mobile controller
+				if($registry->configuration->resources->useragent->wurflcloud->redirect)
+				{
+					header('location: '.$registry->configuration->website->params->url.'/mobile');
+					exit;
+				}
 			}
 		}
 	}
