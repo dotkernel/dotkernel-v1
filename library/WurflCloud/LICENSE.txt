@@ -1,7 +1,6 @@
-
 License for WURFL Cloud Client
 
-This software is © ScientiaMobile and all rights are reserved. 
+This software is ¬© ScientiaMobile and all rights are reserved. 
 Software is licensed for your personal use, only in compliance 
 with the conditions set out in this license and solely for 
 connecting with certain services rendered by ScientiaMobile 
@@ -9,20 +8,22 @@ under the name of WURFL Cloud, and with the several ones if any that
 from time to time will be listed at http://www.scientiamobile.com/cloud. 
 
 License is subject the execution of the WURFL Cloud License Agreement and 
-the conditions therein are incorporated herewith. No other use is allowed 
-unless explicitly authorized in writing by ScientiaMobile.
+the conditions therein are incorporated herewith, except for the right 
+to redistribute the software only as authorized in the following paragraph. 
+No other use is allowed unless explicitly authorized in writing by ScientiaMobile
 
-License is personal, conditioned, non-transferable, limited to the version 
-received and does not allow making derivative works even when 
-the source code is provided or the language is an interpreted one and regardless 
-whether the code is not obfuscated. By way of clarification ìderivativesî 
-within the working of this license does not extend to linking an unmodified 
-instance of software lawfully obtained from ScientiaMobile with any other 
-software however licensed, no further permission is required for 
-this limited scope (linking exception).
+License is non-transferable, conditioned, limited to the version 
+received and to the use and distribution of this software only in connection 
+with the Dotkernel software framework, and does not allow making derivative works 
+even when the source code is provided or the language is an interpreted one 
+and regardless of whether the code is not obfuscated. 
+By way of clarification "derivatives" within the working of this license 
+does not extend to linking an unmodified instance of software 
+lawfully obtained from ScientiaMobile with any other software however 
+licensed, no further permission is required for this limited scope (linking exception).
 
 The software could contain, rely upon, depend on, interact with, link to 
-Free and Open Source Software (ìFOSSî), Insofar as said FOSS is concerned 
+Free and Open Source Software ("FOSS"), Insofar as said FOSS is concerned 
 and where locally specified, the terms of the FOSS license prevail. 
 If You or any third party find any inconsistency, lack of clarity, or any 
 contradiction to the applicable FOSS license, and/or if You or any third party 
@@ -36,7 +37,7 @@ and distributors for causes of action involving any ScientiaMobile software
 or services, or if the WURFL Cloud License Agreement is terminated for 
 whichever reason or cause.
 
-SOFTWARE IS PROVIDED "AS IS" AND ìAS AVAILABLE.î  ALL EXPRESS OR IMPLIED 
+SOFTWARE IS PROVIDED "AS IS" AND ‚ÄúAS AVAILABLE.‚Äù  ALL EXPRESS OR IMPLIED 
 CONDITIONS, REPRESENTATIONS, AND WARRANTIES INCLUDING, WITHOUT LIMITATION, 
 ANY IMPLIED WARRANTY OR CONDITION OF MERCHANTABILITY, FITNESS FOR A PARTICULAR 
 PURPOSE, NON-INFRINGEMENT, SATISFACTORY QUALITY, NON-INTERFERENCE, ACCURACY 
@@ -67,5 +68,3 @@ you are invited to contact ScientiaMobile and ask for a copy under a separate
 agreement, which will be negotiated in good faith.
 
 The laws of the Commonwealth of Virginia apply to this license.
-
-
