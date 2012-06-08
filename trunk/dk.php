@@ -156,7 +156,7 @@ else
 // check apache module rewrite
 if(function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules()))
 {
-	$check['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i> module',
+	$check['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i>',
 										 	                 'status' => 'pass',
 										                   'value'  => 'OK');
 }
@@ -169,7 +169,7 @@ else
 	$apacheModule = (strpos($contents, 'mod_rewrite') !== false);
 	if($apacheModule)
 	{
-		$check['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i> module',
+		$check['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i>',
 										                     'status' => 'pass',
 										                     'value'  => 'OK');
 	}
@@ -179,14 +179,14 @@ else
 		$cgi = (!strpos($contents, 'mod_php') !== false);
 		if($cgi)
 		{
-			 $check['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i> module',
+			 $check['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i>',
 																						'status' => 'pass',
 																						'value'  => 'You are running Apache with <br> cgi-fastcgi. <br> Presence of
 																												mod_rewrite <br>cannot be determined.');
 		}
 		else
 		{
-			$check['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i> module',
+			$check['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i>',
 											                   'status' => 'failed',
 											                   'value'  => 'DotKernel requires Apache mod_rewrite for htaccess route.');
 			$test = false;
