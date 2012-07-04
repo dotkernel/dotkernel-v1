@@ -127,13 +127,13 @@ if($zendExists)
 	$zend_loader = Zend_Loader_Autoloader::getInstance();
 	if(version_compare(Zend_Version::VERSION, '1.11.0', '>='))
 	{
-		$checkServer['zend'] = array('name'   => 'Zend Framework Version',
+		$checkServer['zend'] = array('name'   => 'Zend Framework',
 									 							 'status' => 'pass',
 									               'value'  => Zend_Version::VERSION);
 	}
 	else
 	{
-		$checkServer['zend'] = array('name'   => 'Zend Framework Version',
+		$checkServer['zend'] = array('name'   => 'Zend Framework',
 						                     'status' => 'failed',
 									               'value'  => 'DotKernel requires <a href="http://framework.zend.com/download">Zend
 																 			        Framework</a> 1.11.0 or newer, your version is
@@ -143,7 +143,7 @@ if($zendExists)
 }
 else
 {
-	$checkServer['zend'] = array('name'   => 'Zend Framework Version',
+	$checkServer['zend'] = array('name'   => 'Zend Framework',
 								               'status' => 'failed',
 							                 'value'  => 'DotKernel requires that <a href="http://framework.zend.com/download">Zend
 															              Framework</a> be installed on your server. </br>Check this article
@@ -156,7 +156,7 @@ else
 // check apache module rewrite
 if(function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules()))
 {
-	$check['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i>',
+	$checkServer['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i>',
 										 	                 'status' => 'pass',
 										                   'value'  => 'OK');
 }
@@ -169,7 +169,7 @@ else
 	$apacheModule = (strpos($contents, 'mod_rewrite') !== false);
 	if($apacheModule)
 	{
-		$check['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i>',
+		$checkServer['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i>',
 										                     'status' => 'pass',
 										                     'value'  => 'OK');
 	}
@@ -179,14 +179,14 @@ else
 		$cgi = (!strpos($contents, 'mod_php') !== false);
 		if($cgi)
 		{
-			 $check['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i>',
-																						'status' => 'pass',
-																						'value'  => 'You are running Apache with <br> cgi-fastcgi. <br> Presence of
-																												mod_rewrite <br>cannot be determined.');
+			 $checkServer['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i>',
+																						'status' => 'info',
+																						'value'  => 'You are running Apache with cgi-fastcgi. <br> Presence of
+																												mod_rewrite cannot be determined.');
 		}
 		else
 		{
-			$check['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i>',
+			$checkServer['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i>',
 											                   'status' => 'failed',
 											                   'value'  => 'DotKernel requires Apache mod_rewrite for htaccess route.');
 			$test = false;
@@ -194,21 +194,68 @@ else
 
 	}
 }
-// check ctype
+
+// check default charset UTF-8 related
+$defaultCharset = ini_get ('default_charset');
+
+if( $defaultCharset == 'utf-8')
+{
+	$checkUtf8['php_charset'] = array('name'   => 'PHP <i>charset</i>',
+																		'status' => 'pass',
+																		'value'  => 'OK');
+}
+else
+{
+	$checkUtf8['php_charset'] = array('name'   => 'PHP <i>charset</i>',
+																		'status' => 'failed',
+																		'value'  => 'PHP default charset is not set.');
+}
+// check ctype UTF-8 related
 if(extension_loaded('ctype'))
 {
-	$check['php_ctype'] = array('name'   => 'PHP <i>Ctype</i>',
+	$checkUtf8['php_ctype'] = array('name'   => 'PHP <i>Ctype</i>',
 															'status' => 'pass',
 															'value'  => 'OK');
 }
 else
 {
-	$check['php_ctype'] = array('name'   => 'PHP <i>Ctype</i>',
+	$checkUtf8['php_ctype'] = array('name'   => 'PHP <i>Ctype</i>',
 														  'status' => 'failed',
 															'value'  => 'DotKernel requires <a href="http://www.php.net/manual/en/book.ctype.php">
 															             Ctype</a> extension.');
 	$test = false;
 }
+// check mbstring UTF-8 related
+if(extension_loaded('mbstring'))
+{
+	$checkUtf8['php_mbstring'] = array('name'   => 'PHP <i>mbstring</i>',
+					'status' => 'pass',
+					'value'  => 'OK');
+}
+else
+{
+	$checkUtf8['php_mbstring'] = array('name'   => 'PHP <i>mbstring</i>',
+					'status' => 'failed',
+					'value'  => 'DotKernel requires
+																		<a href="http://www.php.net/manual/en/book.mbstring.php">mbstring
+																		</a> extension, <br>used by Zend Framework.');
+}
+// check iconv UTF-8 related
+if(extension_loaded('iconv'))
+{
+	$checkUtf8['php_iconv'] = array('name'   => 'PHP <i>iconv</i>',
+					'status' => 'pass',
+					'value'  => 'OK');
+}
+else
+{
+	$checkUtf8['php_iconv'] = array('name'   => 'PHP <i>iconv</i>',
+					'status' => 'failed',
+					'value'  => 'DotKernel requires
+																		<a href="http://sk.php.net/manual/en/book.iconv.php">iconv
+																		</a> extension, <br>used by Zend Framework.');
+}
+
 // check PDO MySQL
 if(extension_loaded('pdo_mysql'))
 {
@@ -316,21 +363,7 @@ else
 																								<a href="http://www.php.net/manual/en/book.image.php">GD</a> library,
 																								<br>for image manipulation.');
 }
-// check mbstring
-if(extension_loaded('mbstring'))
-{
-	$checkOptional['php_mbstring'] = array('name'   => 'PHP <i>mbstring</i>',
-																			   'status' => 'pass',
-																			   'value'  => 'OK');
-}
-else
-{
-	$checkOptional['php_mbstring'] = array('name'   => 'PHP <i>mbstring</i>',
-																				 'status' => 'failed',
-																					'value'  => 'DotKernel requires
-																											<a href="http://www.php.net/manual/en/book.mbstring.php">mbstring
-																											</a> extension, <br>used by Zend Framework.');
-}
+
 // check ssh2 extension
 if(extension_loaded('ftp'))
 {
@@ -418,7 +451,7 @@ function parseHtmlRows($data)
 	}
 	.intro{
 		margin-top:5px;
-		font-size:17px;
+		font-size:16px;
 	}
 	fieldset{
 		border-color:#404D79;
@@ -474,7 +507,11 @@ function parseHtmlRows($data)
 	}
 	.failed{
 		color: #B8250C;
-		font-weight: bold;
+		font-weight: normal;
+	}
+	.info{
+		color: #3366cc;
+		font-weight: normal;
 	}
 	.testpass{
 		margin: 30px 0px 20px 0px;
@@ -542,7 +579,7 @@ else
 ?>
 
 	<fieldset>
-		<legend>Enviroment Test</legend>
+		<legend>Server Enviroment</legend>
 		<table>
 		<tbody>
 		<?php
@@ -552,7 +589,7 @@ else
 		</table>
 	</fieldset>
 	<fieldset>
-		<legend>Extensions Test</legend>
+		<legend>PHP Extensions</legend>
 		<table>
 		<tbody>
 		<?php
@@ -561,8 +598,18 @@ else
 		</tbody>
 		</table>
 	</fieldset>
+		<fieldset>
+		<legend>PHP UTF-8</legend>
+		<table>
+		<tbody>
+		<?php
+			parseHtmlRows($checkUtf8);
+		?>
+		</tbody>
+		</table>
+	</fieldset>
 	<fieldset>
-		<legend>Optional Extensions Test</legend>
+		<legend>PHP Optional Extensions</legend>
 
 		<p class="note">The following extensions are optional for DotKernel, but if used can provide access to more classes. </p>
 		<table>
