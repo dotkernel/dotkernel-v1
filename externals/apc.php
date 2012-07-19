@@ -26,6 +26,8 @@ if (@$_SESSION['admin']['admin']->role !== 'admin')
 
  */
 
+$VERSION='$Id: apc.php 325483 2012-05-01 00:34:04Z rasmus $';
+
 ////////// READ OPTIONAL CONFIGURATION FILE ////////////
 if (file_exists("apc.conf.php")) include("apc.conf.php");
 ////////////////////////////////////////////////////////
@@ -93,7 +95,7 @@ $vardom=array(
 	'SORT1'	=> '/^[AHSMCDTZ]$/',	// first sort key
 	'SORT2'	=> '/^[DA]$/',			// second sort key
 	'AGGR'	=> '/^\d+$/',			// aggregation by dir level
-	'SEARCH'	=> '~^[a-zA-Z0-1/_.-]*$~'			// aggregation by dir level
+	'SEARCH'	=> '~^[a-zA-Z0-9/_.-]*$~'			// aggregation by dir level
 );
 
 // default cache mode
@@ -191,11 +193,11 @@ if ($AUTHENTICATED && !empty($MYREQUEST['DU'])) {
 	apc_delete($MYREQUEST['DU']);
 }
 
-$cache = @apc_cache_info($cache_mode);
-if(!function_exists('apc_cache_info') || $cache === FALSE) {
-	echo "<H3>No cache info available.  APC does not appear to be running.</H3>";
-  exit;
+if(!function_exists('apc_cache_info') || !($cache=@apc_cache_info($cache_mode))) {
+	echo "No cache info available.  APC does not appear to be running.";
+	exit;
 }
+	
 
 $cache_user = apc_cache_info('user', 1);  
 $mem=apc_sma_info();
@@ -1350,6 +1352,6 @@ EOB;
 
 ?>
 
-<!-- <?php echo "\nBased on APCGUI By R.Becker\n"?> -->
+<!-- <?php echo "\nBased on APCGUI By R.Becker\n$VERSION\n"?> -->
 </body>
 </html>
