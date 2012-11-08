@@ -37,7 +37,7 @@ class Dot_UserAgent
 	public static function getDeviceInfo($httpRequest)
 	{
 		$config = Zend_Registry::get('configuration');
-		if(Dot_UserAgent::checkWurflApi() && $config->resources->useragent->wurflcloud->active === FALSE)
+		if(Dot_UserAgent::checkWurflApi() && empty($config->resources->useragent->wurflcloud->active))
 		{
 			$wurfl = Dot_UserAgent_Wurfl::getInstance();
 			$deviceInfo = $wurfl->getDevice($httpRequest['HTTP_USER_AGENT']);
