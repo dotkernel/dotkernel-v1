@@ -33,7 +33,7 @@ class Dot_UserAgent_WurflCloud
 	 * @var WurflCloud_Client_Client
 	 * @static
 	 */
-	private  $_wurflCloudClient;
+	private $_wurflCloudClient;
 	/**
 	 * the APC Cache
 	 * @var Zend_Cache
