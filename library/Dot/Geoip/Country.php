@@ -1,14 +1,23 @@
 <?php
 /**
-* DotBoost Technologies Inc.
-* DotKernel Application Framework
-*
-* @category   DotKernel
-* @package    DotLibrary
-* @copyright  Copyright (c) 2009-2012 DotBoost Technologies Inc. (http://www.dotboost.com)
-* @license    http://www.gnu.org/licenses/lgpl.html
-* @version    $Id$
-*/
+ * DotBoost Technologies Inc.
+ * DotKernel Application Framework
+ *
+ * @category   DotKernel
+ * @package    DotLibrary
+ * @copyright  Copyright (c) 2009-2012 DotBoost Technologies Inc. (http://www.dotboost.com)
+ * @license    http://www.gnu.org/licenses/lgpl.html
+ * @version    $Id$
+ */
+
+/**
+ * Geo IP Country - connect to GeoIP.dat database to return the country based on IP address
+ * @category   DotKernel
+ * @package    DotLibrary
+ * @subpackage DotGeoip
+ * @see		  Dot_Geoip
+ * @author     DotKernel Team <team@dotkernel.com>
+ */
 
 /**
  * Defined constants used for GeoIp database reading
@@ -51,15 +60,6 @@ if (!defined("GEOIP_ACCURACYRADIUS_EDITION")) define("GEOIP_ACCURACYRADIUS_EDITI
 if (!defined("GEOIP_CITYCOMBINED_EDITION")) define("GEOIP_CITYCOMBINED_EDITION", 15);
 if (!defined("CITYCOMBINED_FIXED_RECORD")) define("CITYCOMBINED_FIXED_RECORD", 7 );
 
-
-/**
-* Geo IP Country - connect to GeoIP.dat database to return the country based on IP address
-* @category   DotKernel
-* @package    DotLibrary
-* @subpackage DotGeoip
-* @see		  Dot_Geoip
-* @author     DotKernel Team <team@dotkernel.com>
-*/
 class Dot_Geoip_Country extends Dot_Geoip
 {
 	/**

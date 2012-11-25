@@ -1,21 +1,21 @@
 <?php
 /**
-* DotBoost Technologies Inc.
-* DotKernel Application Framework
-*
-* @category   DotKernel
-* @package    DotLibrary
-* @copyright  Copyright (c) 2009-2012 DotBoost Technologies Inc. (http://www.dotboost.com)
-* @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
-* @version    $Id$
-*/
+ * DotBoost Technologies Inc.
+ * DotKernel Application Framework
+ *
+ * @category   DotKernel
+ * @package    DotLibrary
+ * @copyright  Copyright (c) 2009-2012 DotBoost Technologies Inc. (http://www.dotboost.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version    $Id$
+ */
 
 /**
-* Bunch of miscelaneous  functions, used in all DotKernel Applications
-* @category   DotKernel
-* @package    DotLibrary
-* @author     DotKernel Team <team@dotkernel.com>
-*/
+ * Bunch of miscelaneous  functions, used in all DotKernel Applications
+ * @category   DotKernel
+ * @package    DotLibrary
+ * @author     DotKernel Team <team@dotkernel.com>
+ */
 
 class Dot_Kernel
 {
@@ -25,7 +25,7 @@ class Dot_Kernel
 	 * @var string
 	 */
 	const VERSION = '1.6.1 dev';
-	/*
+	/**
  	 * Start DotKernel
 	 * Pass controll to the Front Controller if it exists,
 	 * otherwise throw a 404 error
