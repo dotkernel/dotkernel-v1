@@ -1,24 +1,24 @@
 <?php
 /**
-* DotBoost Technologies Inc.
-* DotKernel Application Framework
-*
-* @category   DotKernel
-* @package    DotLibrary
-* @copyright  Copyright (c) 2009-2012 DotBoost Technologies Inc. (http://www.dotboost.com)
-* @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
-* @version    $Id: WurflCloud.php 702 2012-05-11 00:22:47Z andrei $
-*/
+ * DotBoost Technologies Inc.
+ * DotKernel Application Framework
+ *
+ * @category   DotKernel
+ * @package    DotLibrary
+ * @copyright  Copyright (c) 2009-2012 DotBoost Technologies Inc. (http://www.dotboost.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version    $Id: WurflCloud.php 702 2012-05-11 00:22:47Z andrei $
+ */
 
 /**
-* Dot User Agent Wurfl Cloud integration
-* @category   DotKernel
-* @package    DotLibrary
-* @subpackage DotUserAgent
-* @see		  Dot_UserAgent
-* @author     DotKernel Team <team@dotkernel.com>
-* @since	  v1.6.0 2012-05-11 00:22:47
-*/
+ * Dot User Agent Wurfl Cloud integration
+ * @category   DotKernel
+ * @package    DotLibrary
+ * @subpackage DotUserAgent
+ * @see		  Dot_UserAgent
+ * @author     DotKernel Team <team@dotkernel.com>
+ * @since	  v1.6.0 2012-05-11 00:22:47
+ */
 
 class Dot_UserAgent_WurflCloud
 {

@@ -1,21 +1,21 @@
 <?php
 /**
-* DotBoost Technologies Inc.
-* DotKernel Application Framework
-*
-* @category   DotKernel
-* @package    DotLibrary
-* @copyright  Copyright (c) 2009-2012 DotBoost Technologies Inc. (http://www.dotboost.com)
-* @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
-* @version    $Id$
-*/
+ * DotBoost Technologies Inc.
+ * DotKernel Application Framework
+ *
+ * @category   DotKernel
+ * @package    DotLibrary
+ * @copyright  Copyright (c) 2009-2012 DotBoost Technologies Inc. (http://www.dotboost.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version    $Id$
+ */
 
 /**
-* Few useful debugging functions .
-* @category   DotKernel
-* @package    DotLibrary
-* @author     DotKernel Team <team@dotkernel.com>
-*/
+ * Few useful debugging functions .
+ * @category   DotKernel
+ * @package    DotLibrary
+ * @author     DotKernel Team <team@dotkernel.com>
+ */
 
 class Dot_Debug
 {	

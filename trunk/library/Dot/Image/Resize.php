@@ -104,33 +104,37 @@ class Dot_Image_Resize extends Dot_Image
 	public function resize()
 	{
 
-		#get errors for create image
+		//get errors for create image
 		$oldTrackErrorSetting = ini_set('track_errors', '1');
 
-		#create image from string
+		//create image from string
 		$this->_imageSource = @imagecreatefromstring($this->_getImageString());
 		if ($this->_imageSource === false)
 		{
-			#manual error variable, do not change it: http://php.net/manual/en/reserved.variables.phperrormsg.php
+			/**
+			 * Error variable from PHP Manual
+			 * Do Not Change It !
+			 * http://php.net/manual/en/reserved.variables.phperrormsg.php
+			 */
 			$errorMessage = explode(':', $php_errormsg);
 			$errorMessage = $errorMessage[(count($errorMessage) - 1)];
 			return array('error' => $errorMessage);
 		}
 
-		#change track errors back to default
+		//change track errors back to default
 		ini_set('track_errors', $oldTrackErrorSetting);
 
 		try{
-			#get new dimensions
+			// get new dimensions
 			$oldWidth = imagesx($this->_imageSource);
 			$oldHeight = imagesy($this->_imageSource);
-			#if we need an exact redimension
+			// if we need an exact redimension
 			if ($this->_option['exactSize'] !== FALSE)
 			{
 				$thumbnailWidth = $this->_option['width'];
 				$thumbHeight = $this->_option['height'];
 			}
-			#redimension using largest dimension as a standard
+			// redimension using largest dimension as a standard
 			else
 			{
 				if($oldWidth > $oldHeight)
@@ -154,20 +158,20 @@ class Dot_Image_Resize extends Dot_Image
 				$this->_imageDestination = imagecreatetruecolor($thumbnailWidth, $thumbHeight);
 				imagecopyresized($this->_imageDestination, $this->_imageSource, 0, 0, 0, 0, $thumbnailWidth, $thumbHeight, $oldWidth, $oldHeight);
 			}
-			#custom resize for offer preview which needs to have exact dimensions
+			// custom resize for offer preview which needs to have exact dimensions
 			else
 			{
-				#we need to cut from image, so we have a perfect image for the preview
-				#we need to get the aspect ratio between image size and given width
+				// we need to cut from image, so we have a perfect image for the preview
+				// we need to get the aspect ratio between image size and given width
 				$aspectRatio = $oldWidth / $this->_option['width'];
-				#the image content bellow this point wont be needed
+				// the image content bellow this point wont be needed
 				$cuttedImageHeight = floor($this->_option['height'] * $aspectRatio);
 
 				$this->_imageDestination = imagecreatetruecolor($this->_option['width'], $this->_option['height']);
 				imagecopyresampled($this->_imageDestination, $this->_imageSource, 0, 0, 0, 0, $this->_option['width'], $this->_option['height'], $oldWidth, $cuttedImageHeight);
 
-				#fill this image white, it may not be an entire image from the shrinktheweb.com, so leave a white background, not a black one
-				#a black one would look like an unfinished image
+				// fill this image white, it may not be an entire image from the shrinktheweb.com, so leave a white background, not a black one
+				// a black one would look like an unfinished image
 				if ($oldHeight < $cuttedImageHeight)
 				{
 					$white = imagecolorallocate($this->_imageSource, 255, 255, 255);
@@ -175,12 +179,12 @@ class Dot_Image_Resize extends Dot_Image
 					imagefilledrectangle($this->_imageDestination, 0, $this->_option['height'] - $rectanglewidth, $this->_option['width'], $this->_option['height'], $white);
 				}
 			}
-			#save new image
+			// save new image
 			$resizedImage = @imagejpeg($this->_imageDestination, $this->destination);
 
 			if ($resizedImage === false)
 			{
-				#return custom image
+				// return custom image
 				return array('error' => 'Unable to save image !');
 			}
 		}
@@ -189,7 +193,7 @@ class Dot_Image_Resize extends Dot_Image
 			$message = 'Image resize error: '.$fail->getMessage();
 			return array('error' => $message);
 		}
-		#return no error
+		// return no error
 		return array();
 	}
 }
