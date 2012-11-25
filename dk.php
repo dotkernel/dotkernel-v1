@@ -124,7 +124,7 @@ else
 $zendExists = @include_once 'Zend/Loader/Autoloader.php';
 if($zendExists)
 {
-	$zend_loader = Zend_Loader_Autoloader::getInstance();
+	$zendLoader = Zend_Loader_Autoloader::getInstance();
 	if(version_compare(Zend_Version::VERSION, '1.11.0', '>='))
 	{
 		$checkServer['zend'] = array('name'   => 'Zend Framework',

@@ -43,10 +43,10 @@ define('IMAGES_DIR', '/images');
 
 // Load Zend Framework
 require_once 'Zend/Loader/Autoloader.php';
-$zend_loader = Zend_Loader_Autoloader::getInstance();
+$zendLoader = Zend_Loader_Autoloader::getInstance();
 
 //includes all classes in library folder. That class names must start with Dot_
-$zend_loader->registerNamespace('Dot_');
+$zendLoader->registerNamespace('Dot_');
 
 // initialize the DotKernel Enviromnment
 Dot_Kernel::initialize($startTime);

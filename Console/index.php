@@ -35,9 +35,9 @@ defined('DOTKERNEL_PATH') || define('DOTKERNEL_PATH', $rootPath.'/DotKernel');
 
 // Load Zend Framework
 require_once 'Zend/Loader/Autoloader.php';
-$zend_loader = Zend_Loader_Autoloader::getInstance();
-$zend_loader->registerNamespace('Dot_');
-$zend_loader->registerNamespace('Console_');
+$zendLoader = Zend_Loader_Autoloader::getInstance();
+$zendLoader->registerNamespace('Dot_');
+$zendLoader->registerNamespace('Console_');
 
 // Parse the command line arguments
 try
