@@ -197,8 +197,7 @@ else
 
 // check default charset UTF-8 related
 $defaultCharset = ini_get ('default_charset');
-
-if( $defaultCharset == 'utf-8')
+if(stristr($defaultCharset, 'utf-8'))
 {
 	$checkUtf8['php_charset'] = array('name'   => 'PHP <i>charset</i>',
 																		'status' => 'pass',
