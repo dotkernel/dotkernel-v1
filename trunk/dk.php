@@ -20,8 +20,8 @@ if(ini_get('safe_mode'))
 {
 	$checkServer['safe_mode'] = array('name'   => 'Safe Mode <b>ON</b>',
 																		'status' => 'failed',
-																		'value'  => 'This feature has been <b>DEPRECATED</b> as of PHP 5.3.0. <br>Relying on
-																		             this feature is highly discouraged.');
+																		'value'  => 'This feature has been <b>DEPRECATED</b> as of PHP 5.3.0. Relying on this feature
+																								 is highly discouraged.');
 	$test = false;
 }
 // get HostName
@@ -35,7 +35,7 @@ else
 }
 $checkServer['host'] = array('name'   => 'Host Name',
 														 'status' => 'pass',
-						                 'value'  => $hostName);
+														 'value'  => $hostName);
 // get APACHE VERSION
 if(function_exists('apache_get_version'))
 {
@@ -47,21 +47,21 @@ else
 	$apacheVersion = $apacheTmp[0] . " " . $apacheTmp[1];
 }
 $checkServer['apache'] = array('name'   => 'Apache Version',
-							                 'status' => 'pass',
-							                 'value'  => $apacheVersion);
+															 'status' => 'pass',
+															 'value'  => $apacheVersion);
 // check PHP VERSION
-if(version_compare(PHP_VERSION, '5.2.10', '>='))
+if(version_compare(PHP_VERSION, '5.2.11', '>='))
 {
 	$checkServer['php'] = array('name'   => 'PHP Version',
-								              'status' => 'pass',
-								              'value'  => PHP_VERSION);
+															'status' => 'pass',
+															'value'  => PHP_VERSION);
 }
 else
 {
 	$checkServer['php'] = array('name'   => 'PHP Version',
-								              'status' => 'failed',
-								              'value'  => 'DotKernel requires <a href="http://php.net/downloads.php">PHP</a> 5.2.10
-															             or newer, your version is ' . PHP_VERSION . '.');
+															'status' => 'failed',
+															'value'  => 'DotKernel requires <a href="http://php.net/downloads.php">PHP</a> 5.2.11 or newer, your version 
+																					is ' . PHP_VERSION . '.');
 	$test = false;
 }
 // check MySQL Client version
@@ -78,24 +78,23 @@ if(function_exists('mysqli_get_client_version') && function_exists('mysqli_get_c
 	if(version_compare($mysqlVersion, '5.0', '>='))
 	{
 		$checkServer['mysql'] = array('name'   => 'MySQL Client Version',
-									                'status' => 'pass',
-									                'value'  => $mysqlClientVersion);
+																	'status' => 'pass',
+																	'value'  => $mysqlClientVersion);
 	}
 	else
 	{
 		$checkServer['mysql'] = array('name'   => 'MySQL Client Version',
-									                'status' => 'failed',
-									                'value'  => 'DotKernel requires <a href="http://dev.mysql.com/downloads/">MySQL</a>
-																							 5.0 or newer, your version is ' . $mysqlClientVersion . '.');
+																	'status' => 'failed',
+																	'value'  => 'DotKernel requires <a href="http://dev.mysql.com/downloads/">MySQL</a> 5.0 or newer, 
+																							your version is ' . $mysqlClientVersion . '.');
 		$test = false;
 	}
 }
 else
 {
 	$checkServer['mysql'] = array('name'   => 'MySQL Client Version',
-								                'status' => 'failed',
-								                'value'  => 'DotKernel requires that your PHP enviroment have <b>MySQLi</b>
-																             extension enabled.');
+																'status' => 'failed',
+																'value'  => 'DotKernel requires that your PHP enviroment have <b>MySQLi</b> extension enabled.');
 	$test = false;
 }
 // check MySQL Server version
@@ -110,14 +109,14 @@ if( $checkServer['mysql']['status'] != 'failed')
  // return an empty array ?
 	if(!count($mysqlServerVersion)) $mysqlServerVersion[0] = 'N/A';
 	$checkServer['mysql_server_version'] = array('name'   => 'MySQL Server Version',
-								                               'status' => 'pass',
-								                               'value'  => $mysqlServerVersion[0]);
+																							 'status' => 'pass',
+																							 'value'  => $mysqlServerVersion[0]);
 }
 else
 {
 		$checkServer['mysql_server_version'] = array('name'   => 'MySQL Server Version',
-								                                 'status' => 'failed',
-								                                 'value'  => 'Unable to test <b>MySQL Server</b> version.');
+																								 'status' => 'failed',
+																								 'value'  => 'Unable to test <b>MySQL Server</b> version.');
 	$test = false;
 }
 // check Zend Framework version
@@ -129,36 +128,34 @@ if($zendExists)
 	{
 		$checkServer['zend'] = array('name'   => 'Zend Framework',
 									 							 'status' => 'pass',
-									               'value'  => Zend_Version::VERSION);
+																 'value'  => Zend_Version::VERSION);
 	}
 	else
 	{
 		$checkServer['zend'] = array('name'   => 'Zend Framework',
-						                     'status' => 'failed',
-									               'value'  => 'DotKernel requires <a href="http://framework.zend.com/download">Zend
-																 			        Framework</a> 1.11.0 or newer, your version is
-																							' . Zend_Version::VERSION . '.');
+																 'status' => 'failed',
+																 'value'  => '<a href="http://framework.zend.com/downloads/latest" target="_blank">Zend Framework</a> 
+																							1.11.0 or newer is required, your version is only ' . Zend_Version::VERSION . '.');
 		$test = false;
 	}
 }
 else
 {
 	$checkServer['zend'] = array('name'   => 'Zend Framework',
-								               'status' => 'failed',
-							                 'value'  => 'DotKernel requires that <a href="http://framework.zend.com/download">Zend
-															              Framework</a> be installed on your server. </br>Check this article
-															              <a href="http://www.dotkernel.com/zend-framework/zend-framework-pear-plesk-server/">
-																						Zend Framework as PEAR accessible repository on Plesk server</a> for more
-																						details on how to install it.');
+															 'status' => 'failed',
+															 'value'  => '<a href="http://framework.zend.com/downloads/latest" target="_blank">Zend Framework</a> is required
+																						to  be installed on your server. Check 
+																						<a href="http://www.dotkernel.com/zend-framework/zend-framework-pear-plesk-server/" target="_blank">
+																						this article</a> for more details on how to install it.');
 	$test = false;
 }
 
 // check apache module rewrite
 if(function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules()))
 {
-	$checkServer['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i>',
-										 	                 'status' => 'pass',
-										                   'value'  => 'OK');
+	$checkServer['apache_mod_rewrite'] = array('name'   => 'Apache mod_rewrite',
+																						 'status' => 'pass',
+																						 'value'  => 'OK');
 }
 else
 {
@@ -169,9 +166,9 @@ else
 	$apacheModule = (strpos($contents, 'mod_rewrite') !== false);
 	if($apacheModule)
 	{
-		$checkServer['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i>',
-										                     'status' => 'pass',
-										                     'value'  => 'OK');
+		$checkServer['apache_mod_rewrite'] = array('name'   => 'Apache mod_rewrite',
+																							 'status' => 'pass',
+																							 'value'  => 'OK');
 	}
 	else
 	{
@@ -179,16 +176,15 @@ else
 		$cgi = (!strpos($contents, 'mod_php') !== false);
 		if($cgi)
 		{
-			 $checkServer['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i>',
-																						'status' => 'info',
-																						'value'  => 'You are running Apache with cgi-fastcgi. <br> Presence of
-																												mod_rewrite cannot be determined.');
+			 $checkServer['apache_mod_rewrite'] = array('name'   => 'Apache mod_rewrite',
+																									'status' => 'confused',
+																									'value'  => 'Cannot be determined, as you are running Apache with cgi-fastcgi.');
 		}
 		else
 		{
 			$checkServer['apache_mod_rewrite'] = array('name'   => 'Apache <i>mod_rewrite</i>',
-											                   'status' => 'failed',
-											                   'value'  => 'DotKernel requires Apache mod_rewrite for htaccess route.');
+																								 'status' => 'failed',
+																								 'value'  => 'DotKernel requires Apache mod_rewrite for .htaccess route.');
 			$test = false;
 		}
 
@@ -199,266 +195,252 @@ else
 $defaultCharset = ini_get ('default_charset');
 if(stristr($defaultCharset, 'utf-8'))
 {
-	$checkUtf8['php_charset'] = array('name'   => 'PHP <i>charset</i>',
+	$checkUtf8['php_charset'] = array('name'   => 'Default charset',
 																		'status' => 'pass',
-																		'value'  => 'OK');
+																		'value'  => 'UTF-8');
 }
 else
 {
-	$checkUtf8['php_charset'] = array('name'   => 'PHP <i>charset</i>',
-																		'status' => 'failed',
-																		'value'  => 'PHP default charset is not set.');
+	$currentCharset = $defaultCharset ? $defaultCharset : 'PHP default charset is not set.';
+	$checkUtf8['php_charset'] = array('name'   => 'Default charset',
+																		'status' => 'hmmm',
+																		'value'  => $currentCharset);
 }
 // check ctype UTF-8 related
 if(extension_loaded('ctype'))
 {
-	$checkUtf8['php_ctype'] = array('name'   => 'PHP <i>Ctype</i>',
-															'status' => 'pass',
-															'value'  => 'OK');
-}
-else
-{
-	$checkUtf8['php_ctype'] = array('name'   => 'PHP <i>Ctype</i>',
-														  'status' => 'failed',
-															'value'  => 'DotKernel requires <a href="http://www.php.net/manual/en/book.ctype.php">
-															             Ctype</a> extension.');
-	$test = false;
-}
-// check mbstring UTF-8 related
-if(extension_loaded('mbstring'))
-{
-	$checkUtf8['php_mbstring'] = array('name'   => 'PHP <i>mbstring</i>',
-					'status' => 'pass',
-					'value'  => 'OK');
-}
-else
-{
-	$checkUtf8['php_mbstring'] = array('name'   => 'PHP <i>mbstring</i>',
-					'status' => 'failed',
-					'value'  => 'DotKernel requires
-																		<a href="http://www.php.net/manual/en/book.mbstring.php">mbstring
-																		</a> extension, <br>used by Zend Framework.');
-}
-// check iconv UTF-8 related
-if(extension_loaded('iconv'))
-{
-	$checkUtf8['php_iconv'] = array('name'   => 'PHP <i>iconv</i>',
-					'status' => 'pass',
-					'value'  => 'OK');
-}
-else
-{
-	$checkUtf8['php_iconv'] = array('name'   => 'PHP <i>iconv</i>',
-					'status' => 'failed',
-					'value'  => 'DotKernel requires
-																		<a href="http://sk.php.net/manual/en/book.iconv.php">iconv
-																		</a> extension, <br>used by Zend Framework.');
-}
-
-// check PDO MySQL
-if(extension_loaded('pdo_mysql'))
-{
-	$check['php_pdo_mysql'] = array('name'   => 'PHP <i>PDO_MySQL</i>',
+	$checkUtf8['php_ctype'] = array('name'   => 'Ctype',
 																	'status' => 'pass',
 																	'value'  => 'OK');
 }
 else
 {
-	$check['php_pdo_mysql'] = array('name'   => 'PHP <i>PDO_MySQL</i>',
+	$checkUtf8['php_ctype'] = array('name'   => 'Ctype',
 																	'status' => 'failed',
-																	'value'  => 'By default, DotKernel use  <br />
-																	             <a href="http://www.php.net/manual/en/ref.pdo-mysql.php">PDO MySQL</a>
+																	'value'  => 'DotKernel requires <a href="http://www.php.net/manual/en/book.ctype.php"> Ctype</a> extension.');
+	$test = false;
+}
+// check mbstring UTF-8 related
+if(extension_loaded('mbstring'))
+{
+	$checkUtf8['php_mbstring'] = array('name'   => 'mbstring',
+																		 'status' => 'pass',
+																		 'value'  => 'OK');
+}
+else
+{
+	$checkUtf8['php_mbstring'] = array('name'   => 'mbstring',
+																		 'status' => 'failed',
+																		 'value'  => 'DotKernel requires <a href="http://www.php.net/manual/en/book.mbstring.php">mbstring
+																									</a> extension, used by Zend Framework.');
+}
+// check iconv UTF-8 related
+if(extension_loaded('iconv'))
+{
+	$checkUtf8['php_iconv'] = array('name'   => 'iconv',
+																	'status' => 'pass',
+																	'value'  => 'OK');
+}
+else
+{
+	$checkUtf8['php_iconv'] = array('name'   => 'iconv',
+																	'status' => 'failed',
+																	'value'  => 'DotKernel requires <a href="http://sk.php.net/manual/en/book.iconv.php">iconv
+																							</a> extension, used by Zend Framework.');
+}
+
+// check PDO MySQL
+if(extension_loaded('pdo_mysql'))
+{
+	$check['php_pdo_mysql'] = array('name'   => 'PDO MySQL',
+																	'status' => 'pass',
+																	'value'  => 'OK');
+}
+else
+{
+	$check['php_pdo_mysql'] = array('name'   => 'PDO MySQL',
+																	'status' => 'failed',
+																	'value'  => 'By default, DotKernel use  <a href="http://www.php.net/manual/en/ref.pdo-mysql.php">PDO MySQL</a>
 																							 driver. ');
 	$test = false;
 }
 // check session
 if(extension_loaded('session'))
 {
-	$check['php_session'] = array('name'   => 'PHP <i>session</i>',
+	$check['php_session'] = array('name'   => 'session',
 															  'status' => 'pass',
 															  'value'  => 'OK');
 }
 else
 {
-	$check['php_session'] = array('name'   => 'PHP <i>session</i>',
+	$check['php_session'] = array('name'   => 'session',
 																'status' => 'failed',
-																'value'  => 'DotKernel requires <a href="http://www.php.net/manual/en/book.session.php">
-																						 <br />Session Handling</a>. ');
+																'value'  => 'DotKernel requires <a href="http://www.php.net/manual/en/book.session.php"> Session Handling</a>. ');
 	$test = false;
 }
 // check SPL
 if(function_exists('spl_autoload_register'))
 {
-	$check['php_spl'] = array('name'   => 'PHP <i>SPL</i>',
+	$check['php_spl'] = array('name'   => 'SPL',
 													  'status' => 'pass',
 													  'value'  => 'OK');
 }
 else
 {
-	$check['php_spl'] = array('name'   => 'PHP <i>SPL</i>',
+	$check['php_spl'] = array('name'   => 'SPL',
 														'status' => 'failed',
-														'value'  => 'DotKernel requires <br />
-																					<a href="http://www.php.net/manual/en/book.spl.php">SPL</a> library. ');
+														'value'  => 'DotKernel requires <a href="http://www.php.net/manual/en/book.spl.php">SPL</a> library. ');
 	$test = false;
 }
 // check JSON
 if(function_exists('json_decode'))
 {
-	$check['php_json'] = array('name'   => 'PHP <i>JSON</i>',
-													  'status' => 'pass',
-													  'value'  => 'OK');
+	$check['php_json'] = array('name'   => 'JSON',
+														 'status' => 'pass',
+														 'value'  => 'OK');
 }
 else
 {
-	$check['php_json'] = array('name'   => 'PHP <i>JSON</i>',
-														'status' => 'failed',
-														'value'  => 'DotKernel requires
-																					<a href="http://www.php.net/manual/en/book.json.php">JSON</a> library. ');
+	$check['php_json'] = array('name'   => 'JSON',
+														 'status' => 'failed',
+														 'value'  => 'DotKernel requires <a href="http://www.php.net/manual/en/book.json.php">JSON</a> library. ');
 	$test = false;
 }
 
 // check APC
 if((function_exists('apc_cache_info') && (@apc_cache_info() !== FALSE)))
 {
-	$checkOptional['php_apc'] = array('name'   => 'PHP <i>APC</i>',
-																	   'status' => 'pass',
-																	   'value'  => 'OK');
+	$checkOptional['php_apc'] = array('name'   => 'APC',
+																		'status' => 'pass',
+																		'value'  => 'OK');
 }
 else
 {
-	$checkOptional['php_apc'] = array('name'   => 'PHP <i>APC</i>',
-																		'status' => 'failed',
-																		'value'  => 'DotKernel recommend the use <br />
-																		 							of APC extension for opcode caching. ');
+	$checkOptional['php_apc'] = array('name'   => 'APC',
+																		'status' => 'hmmm',
+																		'value'  => 'DotKernel recommend the use of APC extension for opcode caching. ');
 }
 
 // check cURL
 if(extension_loaded('curl'))
 {
-	$checkOptional['php_curl'] = array('name'   => 'PHP <i>cURL</i>',
-																	   'status' => 'pass',
-																	   'value'  => 'OK');
+	$checkOptional['php_curl'] = array('name'   => 'cURL',
+																		 'status' => 'pass',
+																		 'value'  => 'OK');
 }
 else
 {
-	$checkOptional['php_curl'] = array('name'   => 'PHP <i>cURL</i>',
-																	   'status' => 'failed',
-																	   'value'  => 'DotKernel requires <br>
-																									<a href="http://www.php.net/manual/en/book.curl.php">Client URL</a>
-																									 library.');
+	$checkOptional['php_curl'] = array('name'   => 'cURL',
+																		 'status' => 'hmmm',
+																		 'value'  => 'DotKernel requires <a href="http://www.php.net/manual/en/book.curl.php">Client URL</a>
+																									library.');
 }
 // check gd
 if(extension_loaded('gd'))
 {
-	$checkOptional['php_gd'] = array('name'   => 'PHP <i>GD</i>',
+	$checkOptional['php_gd'] = array('name'   => 'GD Lib',
 																	 'status' => 'pass',
 																	 'value'  => 'OK');
 }
 else
 {
-	$checkOptional['php_gd'] = array('name'   => 'PHP <i>GD</i>',
-																	 'status' => 'failed',
-																	 'value'  => 'DotKernel requires
-																								<a href="http://www.php.net/manual/en/book.image.php">GD</a> library,
-																								<br>for image manipulation.');
+	$checkOptional['php_gd'] = array('name'   => 'GD Lib',
+																	 'status' => 'hmmm',
+																	 'value'  => 'DotKernel requires <a href="http://www.php.net/manual/en/book.image.php">GD</a> library,
+																								for image manipulation.');
 }
 
 // check ssh2 extension
 if(extension_loaded('ftp'))
 {
-	$checkOptional['php_ftp'] = array('name'   => 'PHP <i>ftp</i>',
-																			   'status' => 'pass',
-																			   'value'  => 'OK');
+	$checkOptional['php_ftp'] = array('name'   => 'ftp',
+																		'status' => 'pass',
+																		'value'  => 'OK');
 }
 else
 {
-	$checkOptional['php_ftp'] = array('name'   => 'PHP <i>ftp</i>',
-																				 'status' => 'failed',
-																					'value'  => 'DotKernel recommend <br />
-																											<a href="http://www.php.net/manual/en/book.ftp.php">ftp</a>
-																											extension.');
+	$checkOptional['php_ftp'] = array('name'   => 'ftp',
+																		'status' => 'hmmm',
+																		'value'  => 'DotKernel recommends <a href="http://www.php.net/manual/en/book.ftp.php">ftp</a>
+																									extension.');
 }
 // check zip extension
 if(extension_loaded('zip'))
 {
-	$checkOptional['php_zip'] = array('name'   => 'PHP <i>zip</i>',
-																			   'status' => 'pass',
-																			   'value'  => 'OK');
+	$checkOptional['php_zip'] = array('name'   => 'zip',
+																		'status' => 'pass',
+																		'value'  => 'OK');
 }
 else
 {
-	$checkOptional['php_zip'] = array('name'   => 'PHP <i>zip</i>',
-																				 'status' => 'failed',
-																					'value'  => 'DotKernel recommend <br />
-																											<a href="http://www.php.net/manual/en/book.zip.php">Zip</a>
-																											extension.');
+	$checkOptional['php_zip'] = array('name'   => 'zip',
+																		'status' => 'hmmm',
+																		'value'  => 'DotKernel recommends <a href="http://www.php.net/manual/en/book.zip.php">Zip</a>
+																									extension.');
 }
 //check GeoIp
 if(extension_loaded('geoip'))
 {
-	$checkOptional['php_geoip'] = array('name'   => 'PHP <i>GeoIP</i>',
+	$checkOptional['php_geoip'] = array('name'   => 'GeoIP',
 																			'status' => 'pass',
 																			'value'  => 'OK');
 }
 else
 {
-	$checkOptional['php_geoip'] = array('name'   => 'PHP <i>GeoIP</i>',
-																			'status' => 'failed',
-																			'value'  => 'DotKernel requires
-																									<a href="http://www.php.net/manual/en/book.geoip.php">GeoIP</a><br />
-																									 used by the  Dot_GeoIP <br> class for faster compilation.');
+	$checkOptional['php_geoip'] = array('name'   => 'GeoIP',
+																			'status' => 'hmmm',
+																			'value'  => 'DotKernel recommends <a href="http://www.php.net/manual/en/book.geoip.php">GeoIP</a> 
+																										extension used by the Dot_GeoIP class for faster compilation.');
 }
 
 function parseHtmlRows($data)
 {
-	echo "<tr>";
 	foreach($data as $ky => $val)
 	{
-		?>
-				<td class="result">
-					<strong><?php echo $val['name'];?></strong>
-					<br/><br/>
-					<span class="<?php echo $val['status']; ?>"><?php echo $val['value']; ?></span>
-				</td>
-		<?php
+	echo <<<EOD
+			<tr>
+				<td width="40%"><li>$val[name]</td>
+				<td class="$val[status]" width="60%">$val[value]</td>
+			</tr>
+EOD;
 	}
-	echo "</tr>";
 }
+
 // Start to parse the installation requirements HTML format
-?><!doctype html>
+?>
+<!doctype html>
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
-<meta http-equiv="X-UA-Compatible" content="IE=9">
-<!-- Start to parse the installation requirements HTML format-->
-	<title>DotKernel System Requirements Check</title>
+<title>DotKernel System Requirements Check</title>
 <style type="text/css">
-	html, body{
-		padding:0;
-		margin:0;
-		color:#404D79;
-		background-color:#fff;
-		width:100%;
-	}
-	legend{
-		font-size:25px;
-		padding: 2px 5px 2px 0;
+	body{
+		text-align: center;
+		background-color: #ffffff;
+		font-family: Lucida sans unicode, sans-serif;
+		font-size: 14px;
+		line-height: 22px;
+		padding: 0px;
+		margin: 0px;
 	}
 	h1{
-		margin-top:40px;
-		margin-bottom:0px;
+		font-size: 30px;
+		font-weight: normal;
+		color: #272727;
+		margin: 1px 0 0 0;
+		line-height: 40px;
 	}
-	.intro{
-		margin-top:5px;
-		font-size:16px;
+	a{
+		color: #0F83C8;
+		text-decoration: none;
 	}
-	fieldset{
-		border-color:#404D79;
-		border-bottom:none;
-		border-left:none;
-		border-right:none;
-		padding:0;
-		margin-bottom:50px;
+	a:hover{
+		color: #EE6C25;
+		text-decoration: underline;
+	}
+	p{
+		padding: 0px;
+		margin: 10px 0px;
 	}
 	#header{
 		width:100%;
@@ -472,153 +454,154 @@ function parseHtmlRows($data)
 		font-size:20px;
 		padding-top:8px;
 		margin: 0 auto;
-		width:1200px;
+		width:700px;
 		height:70px;
+		text-align: left;
 	}
-	#header div, h1, legend{
-		font-family: Arial, sans-serif;
-	}
-	#wrap{
-		font-family:"Lucida Sans Unicode","Lucida Grande",Garuda,sans-serif;
+	.wrap{
 		margin: 0px auto;
-		width: 1200px;
-		padding: 5px 35px 35px 35px;
+		padding: 20px 0 0 0;
+		width: 750px;
+		background: #FCFCFC;
+	}
+	.intro{
+		margin: 0px;
+		padding: 0px 0px;
+		font-size: 14px;
+		line-height: 20px;
+		color: #999999;
 	}
 	table{
-		border-spacing:5px;
-		width:100%;
+		color: #4A4A4A;
+		}
+	table td{
+		text-align: left;
 	}
-	td.result{
-		font-family:"Lucida Sans Unicode","Lucida Grande",Garuda,sans-serif;
-		font-size:13px;
-		padding: 30px 10px;
-		text-align:center;
-		background-color:#F1F2F6;
+	li{
+		list-style:circle inside;
 	}
-	td.result strong{
-		font-size:16px;
-		font-family: Arial, sans-serif;
-		font-weight: bold;
+	.req{
+		width: 750px;
+		padding: 10px 0;
+		margin: 0 0 40px 0;
+		border-top: 1px solid #c1c9e2;
+		border-bottom: 1px solid #c1c9e2;
 	}
-	.pass {
-		color: #12A30E;
-		font-weight: bold;
+	.req h2{
+		margin: 0px;
+		width: 240px;
+		text-align: center;
+		color: #272727;
+		font-size: 28px;
+		font-weight: normal;
+		line-height: 36px;
+	}
+	.status_ok {padding: 30px 0;}
+	.status_ok p{
+		margin: 0px 0 0px 0;
+		color: #4ea534;
+		font-size: 19px;
+	}
+	.status_ok span{
+		color: #999999;
+	}
+	.status_not_ok {padding: 30px 0;}
+	.status_not_ok p{
+		margin: 0px 0 0px 0;
+		color: #4ea534;
+		font-size: 19px;
+	}
+	.status_not_ok span{
+		color: #999999;
+	}
+	.pass{
+		color: #4ea534;
 	}
 	.failed{
-		color: #B8250C;
-		font-weight: normal;
-	}
-	.info{
-		color: #3366cc;
-		font-weight: normal;
-	}
-	.testpass{
-		margin: 30px 0px 20px 0px;
-		font-size: 15px;
-	}
-	.testpass p{
-		margin: 0px 0px 10px 0px;
-		padding: 0px;
-		font-size: 24px;
-		color: #1B7A0A;
-		font-weight: bold;
-		line-height: 29px !important;
-		font-family: Arial, sans-serif;
-	}
-	.testfailed{
-		margin: 30px 0px 20px 0px;
-		font-size: 15px;
-	}
-	.note{
-		margin: 5px 0px 0px 0px;
+		color: #f12f2f;
 		font-size: 13px;
 	}
-	a{
-		color: #137dd7;
+	.hmmm{
+		color: #C75B0C;
+		font-size: 13px;
 	}
-	.testfailed p{
-		margin: 0px 0px 10px 0px;
-		padding: 0px;
-		font-size: 24px;
-		color: #FF0000;
-		font-weight: bold;
-		line-height: 29px !important;
-		font-family: Arial, sans-serif;
+	.confused{
+		color: #537EC8;
+		font-size: 13px;
 	}
 </style>
 </head>
 
 <body>
-<div id="header"><div><img alt="DotKernel" src="data:image/png;base64,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" /></div></div>
-<div id="wrap">
+<div id="header">
+	<div>
+		<img alt="DotKernel" src="data:image/png;base64,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" />
+	</div>
+</div>
+<div class="wrap">
 	<h1>DotKernel  System Requirements Check</h1>
 	<p class="intro">
 		We have run the tests below to determine if DotKernel will work in your environment.<br/>
-		If any of the tests have failed, consult the <a href="http://www.dotkernel.com/docs/system-requirements/">system requirements</a> page for more information.
+		If any of the tests have failed, consult the <a href="http://www.dotkernel.com/docs/system-requirements/" target="_blank">
+		system requirements</a> page for more information.
 	</p>
-
 <?php
 if($test)
 {
 	?>
-	<div class="testpass">
+	<div class="status_ok">
+		<img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAYAAACMRWrdAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABMpJREFUeNrUmm1oFEcYxx8vIan0zOWSppqcxnevWq0vEY0mEPFTRRIQI4rBYhDNN21rEy9NVWyjudpWwS8iCAZLA0UxIH4QQVFyChZESaCYxhqTGClU8l5aA6V9nr1ndWP2XnZm7vb2H/6QZO9m5rfzzDM7Mzul4qfVoFg+9MfoNWg/2o1ehs7g6+PoDvQYuhP9C/o6ul9lI9IVlUMN34KuQBfF+GyG4TNl6H38+wP0VXQrg0vJJfn9SvRjdDv6WBxQ0VTEZbRzmZV2gNGdvo++xOGmWn4u+z7XlXCwuehr6Ns8hhKtNVzXNa47IWAUGg/RmyH52sx1V6oGa+TQ8IB98nAbGlWApaHPoxsgddTAbUqTSfdUwG5IPe1hsGqRHmtKUShdu7mNlsC2owOQ+gpwW+MCo7R6Dpyjc2ZTgRnYBZuzn0i2vBALbKfoTG+zyrjtpmAZ0QajA9RkWEFMANuFLnQwWCEzTAILgPMVeBuMYnSBnS2an7MYzpZfgYtbb8CKGWtFi1mg5wiXIQxt0zyvHw6u/wYKps0CT6YXPlv/NazMLxYtbpcRrMIuqLneRVBbegJ8WbNf/y/7nRz4dN0xWJW/DtJclhf5W3QwWtbn2dVTtSUnsKcm5yyCqy1tgqqPaqwWm0NMdDs22gZVag6l66/xURj6Z0Ck+I3p3GPJH1MljVGhno88g+9CX8KzoS6RKlakq9qzmII//+FP7Oz3AXxRcjwqVP9ID3x/VxhKy440xnyyUAtzl8DhDadh6fSiGIliIWa/xphQJ0P10D3YJdMkn0s2cczOnq9lsKKCEjhQfBQW5S6NmP3qSoMTsp9Z+BGURE/pyiMwt0yqpsbOzJqj/f3+u/lamC3OWz5p8o2U/XT1DXfLhp9RbuENU/97y+BznFR1KF3T3QVaD9J14+QbradejPbCD/e+kg0/o8YpeYyJ9Nq2D6uh0DPP9NoMtw/2Fx+BK79ehHL/jphQwbY66Bn6XWXiHUvzby3Yi794rX6zb6Rb6xXv1FzT61mZ2bB2ZlnE62/CrwHD74nqGeUPCkWhU47uwd+kwufFaJ8GReUkQP0EJny76I6fDAUsw4W/d0hVojDTEwJ7JFNCeODHf+fp86fuHVaZKMz0iMBuyZaij5WeGGOFoL5tC8DTwc5EP7XdIjA6ZBuQLYkm12DboYg9EQ6/+kSGny5i6dDnsVYVJUYKS3pMshKukmo1LjR/VFXqmxTeNeExKcFjyiiNheYxrX4I78vlqCh55NUQdL5sh2mZHmh+eAbH1ONkQdEgP2gEo/XGK3S5qhpogXi39yYM/P1nMpd69RA+pJ+w/dYMil9JSLL6mQHeBqP3L+ocDFbHDJPASC3okAOhQtx2iARGolPCYQdBDYPJyaYrQmapcRBYjdnzbqSF5s/ooAOggtxWiBdMT50tKQzVwm0Eq2CkT4wpNIXUzG0DUbB/eWAGUyz8qrltwmDGsNzG+yN2aYzbUB/Ph63sUl1Gr4TwS5PJ1nWu+3K8X7C6/UZpdRN6g/5MlmA94Lo2Wd3CEN1XvIOmd26rZPZMYtzAKq7jjkgBsq/OtrBp054OD+nQTfT0poMXiVdVREO6wpAhH4Xw6X0FA5LdJrD6y84dbILpVdnl/wswAOhWa3L1/r26AAAAAElFTkSuQmCC" />
 		<p>Your enviroment passed all the requirements needed to run DotKernel.</p>
-		You can now delete or rename the <i>dk.php</i> file.</div>
+		</div>
 	<?php
 }
 else
 {
 	?>
-	<div class="testfailed">
-		<p>The test has failed.</p>
-		Check <a href="http://www.dotkernel.com/docs/system-requirements/">system requirements</a> page for more information.
+	<div class="status_not_ok">
+		<img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAYAAACMRWrdAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABWZJREFUeNrUml1oE1kUx09m8tG09YOt9YNCYUtxH7RaaVFfJH2S1WJR6bqyi1Wp4oPK1k9SWr+w0kr9iD4pFFopDaxdCIhIn2QXfNmFump8WSj7sFL8qBYKJU0rSfacyZ04bSeZuXcmJjnwh0By75zfnDsn58y9jqmNG8Fmq0B9j9qM+g5ViqpBudn3c6gwahr1D+ov1Ahq3E4nHDaBkeN7UE2oOsE5RlGPUCEGnlOwZlQXi4ydRpHsRP0mOoEkOM6H+hM1nAUoYHMOs2v4vgbYt6jHqN/ZM5Rt28yu9ZhdOytgtOz+RjXC17dGdu1mu8G62NJYBrmzZcyHLjvAZFQfqgPyxzqYT3KmHzkNJqEJDkH+WSsDOywSse48hVLtEPORC+xHlB/y3/zMV1NglFbvQ+HYfb2/Aj2w/hxnP5Fs2W8E9pPoP32Ozcd81wVzZ3oYM5rbDd6rV6G4rw+kVau4h3uOHoWShw9B3rTJCly3poOYB3YAVSkEdfkyuHbtAmd9PXhv3QJp9WrzUK2t4Dl+HOS1a6G4txfk2lpRsErGsAiMPwt6POC9dAlcO3d++Udftw686KCjvNwc1MmTX1qNFSuScOIdh38hGK3Raq4pnE7wXrwIrsbFpaNcUwPFgUDGyHmOHJkHlYLDG1KMURdcltVqjpA0y9B8E7d0KXi7u3Wh5kXuxg3dZ06J1IkT6ecvK1Mi59yyRQTugBasiQtsyRJTF5XXr0/CaSKnRCoDlHZZUuQFbI8KRqPLeUbGx8chgs4lPnwwhkPnVDh3S0sSyuEwHDf34AHM9veLgH1DTPRq4Bf8EBCZQd6wQXke6O4a3oy3b0FauRIHyaagordvW0n9bWrEhCz26hVETp+GxMSEcX+0Zo15qEAALFqtZPWdRQru40fL5QMtPSVSiYTVqaoJrMLqLLFwGCJnzliCU56pu3ftKrEqJN7EkRbu5UuItLVB/N27XEZKtXICK7Vrttjr1zBz/jwkIhHzkRoehtk7d+wuikslu2ekcshhIkmkfl9VZar84l3ZBDZt12yu7duh6NQppYY0DVZXp5RmwHEzTNg0gU3YMZPT54Oizk7M6/yLwLltG3gvXMA747ILbIq8sLzLQeUV9WNUQwpHe/duKGpvF7oxOjZOs4xZhqI2xQJUqrXbuxeK/H47luUYgb0Qhtq6FbzXr5uC+hwKQfzNG2O4ffvsiNwLGv1UCKqhIRmp5ctN/fnOXLkCMx0dkPj0yRiuuVnpyh0lJaJgTwmMNtkmeUZR3ee9dk1pXwyhBgZStZ9SfmHWNNMVuJqawL1/vwgUsYTVeIe42pb372H23j3DSiFV0Gp+p8BR+WUQudjz5/D5yRMRsJC20RzkGhqPw9zgIESxz6LPaSOVpqJQassMXUFsdBQiZ88qrY6ADWrBnolkx7mhoSRcuuWXBjpVW+rAUaQi585BYnJSKBui/tCCxVC9QrVLMAhRTCLqcuPpp5TIUW3JugIlUuJQoGXQbq7Ty8Z/RdsY98GDIJWVQRQ7au76EssqyoTRmzettD5UaFRB8rjFolMD9Jp4CArTfkYFU5l7wZdB9rwVmj3TQumBkdEu4VQBQU2Bzs6mlCazHCsgsGN6GT1dQfYrqqcAoHqYr2AWjKx94brNMwsyH4EXjKwFNZCHUAPMNxAFi7EHsyfPlt9h5pswmHZZ/mDn+xGR9xjMh3ZTHQjHxHTEjjatRnIANcKubfqYH2+bSml1B6oBkgcns22j7Fo7eIt00f6bKuh6VsaMZQFojM1dr1brvGbX0Vk6Lkubh7TpJrp7E2ZN4iM7VoMjC4edKxlkDVOpDqx62DnMRDD/2enE/wIMAKdcnZ8LWVMpAAAAAElFTkSuQmCC" />
+		<p>Catastrophic failure.</p>
 	</div>
 	<?php
 }
 ?>
+	<div class="req">
+		<table cellpadding="5" cellspacing="1">
+			<tr>
+				<td rowspan="8" valign="middle">
+					<h2>System Environment</h2></td>
+			</tr>
+		<?php parseHtmlRows($checkServer); ?>
+		</table>
+	</div>
+	<div class="req">
+		<table cellpadding="5" cellspacing="1">
+			<tr>
+				<td rowspan="5" valign="middle">
+					<h2>PHP <br> Extensions</h2></td>
+			</tr>
+		<?php parseHtmlRows($check); ?>
+		</table>
+	</div>
+	<div class="req">
+		<table cellpadding="5" cellspacing="1">
+			<tr>
+				<td rowspan="5" valign="middle">
+					<h2>PHP <br> Character Encoding</h2></td>
+			</tr>
+		<?php parseHtmlRows($checkUtf8); ?>
+		</table>
+	</div>
+	<div class="req">
+		<table cellpadding="5" cellspacing="1">
+			<tr>
+				<td rowspan="7" valign="middle">
+					<h2>PHP <br> Optional Extensions</h2></td>
+			</tr>
+		<?php parseHtmlRows($checkOptional); ?>
+		</table>
+	</div>
 
-	<fieldset>
-		<legend>Server Enviroment</legend>
-		<table>
-		<tbody>
-		<?php
-			parseHtmlRows($checkServer);
-		?>
-		</tbody>
-		</table>
-	</fieldset>
-	<fieldset>
-		<legend>PHP Extensions</legend>
-		<table>
-		<tbody>
-		<?php
-			parseHtmlRows($check);
-		?>
-		</tbody>
-		</table>
-	</fieldset>
-		<fieldset>
-		<legend>PHP UTF-8</legend>
-		<table>
-		<tbody>
-		<?php
-			parseHtmlRows($checkUtf8);
-		?>
-		</tbody>
-		</table>
-	</fieldset>
-	<fieldset>
-		<legend>PHP Optional Extensions</legend>
-
-		<p class="note">The following extensions are optional for DotKernel, but if used can provide access to more classes. </p>
-		<table>
-		<tbody>
-		<?php
-			parseHtmlRows($checkOptional);
-		?>
-		</tbody>
-		</table>
-	</fieldset>
 </div>
 </body>
 </html>
