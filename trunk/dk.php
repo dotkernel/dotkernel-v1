@@ -399,8 +399,8 @@ function parseHtmlRows($data)
 	{
 	echo <<<EOD
 			<tr>
-				<td width="40%"><li>$val[name]</td>
-				<td class="$val[status]" width="60%">$val[value]</td>
+				<td width="20%">$val[name]</td>
+				<td class="$val[status]" width="35%">$val[value]</td>
 			</tr>
 EOD;
 	}
@@ -418,16 +418,16 @@ EOD;
 		text-align: center;
 		background-color: #ffffff;
 		font-family: Lucida sans unicode, sans-serif;
-		font-size: 14px;
-		line-height: 22px;
+		font-size: 13px;
+		line-height: 20px;
 		padding: 0px;
 		margin: 0px;
 	}
 	h1{
-		font-size: 30px;
+		font-size: 32px;
 		font-weight: normal;
 		color: #272727;
-		margin: 1px 0 0 0;
+		margin: 20px 0 0 0;
 		line-height: 40px;
 	}
 	a{
@@ -461,7 +461,7 @@ EOD;
 	.wrap{
 		margin: 0px auto;
 		padding: 20px 0 0 0;
-		width: 750px;
+		width: 800px;
 		background: #FCFCFC;
 	}
 	.intro{
@@ -481,17 +481,15 @@ EOD;
 		list-style:circle inside;
 	}
 	.req{
-		width: 750px;
 		padding: 10px 0;
 		margin: 0 0 40px 0;
-		border-top: 1px solid #c1c9e2;
-		border-bottom: 1px solid #c1c9e2;
+		border-top: 1px solid #D8D8D8;
+		border-bottom: 1px solid #D8D8D8;
 	}
 	.req h2{
 		margin: 0px;
-		width: 240px;
 		text-align: center;
-		color: #272727;
+		color: #C0C0C0;
 		font-size: 28px;
 		font-weight: normal;
 		line-height: 36px;
@@ -499,8 +497,8 @@ EOD;
 	.status_ok {padding: 30px 0;}
 	.status_ok p{
 		margin: 0px 0 0px 0;
-		color: #4ea534;
-		font-size: 19px;
+		color: #438E2D;
+		font-size: 21px;
 	}
 	.status_ok span{
 		color: #999999;
@@ -508,26 +506,23 @@ EOD;
 	.status_not_ok {padding: 30px 0;}
 	.status_not_ok p{
 		margin: 0px 0 0px 0;
-		color: #4ea534;
-		font-size: 19px;
+		color: #F12F2F;
+		font-size: 21px;
 	}
 	.status_not_ok span{
 		color: #999999;
 	}
 	.pass{
-		color: #4ea534;
+		color: #438E2D;
 	}
 	.failed{
-		color: #f12f2f;
-		font-size: 13px;
+		color: #F12F2F;
 	}
 	.hmmm{
-		color: #C75B0C;
-		font-size: 13px;
+		color: #F49248;
 	}
 	.confused{
 		color: #537EC8;
-		font-size: 13px;
 	}
 </style>
 </head>
@@ -550,7 +545,7 @@ if($test)
 {
 	?>
 	<div class="status_ok">
-		<img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAYAAACMRWrdAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABMpJREFUeNrUmm1oFEcYxx8vIan0zOWSppqcxnevWq0vEY0mEPFTRRIQI4rBYhDNN21rEy9NVWyjudpWwS8iCAZLA0UxIH4QQVFyChZESaCYxhqTGClU8l5aA6V9nr1ndWP2XnZm7vb2H/6QZO9m5rfzzDM7Mzul4qfVoFg+9MfoNWg/2o1ehs7g6+PoDvQYuhP9C/o6ul9lI9IVlUMN34KuQBfF+GyG4TNl6H38+wP0VXQrg0vJJfn9SvRjdDv6WBxQ0VTEZbRzmZV2gNGdvo++xOGmWn4u+z7XlXCwuehr6Ns8hhKtNVzXNa47IWAUGg/RmyH52sx1V6oGa+TQ8IB98nAbGlWApaHPoxsgddTAbUqTSfdUwG5IPe1hsGqRHmtKUShdu7mNlsC2owOQ+gpwW+MCo7R6Dpyjc2ZTgRnYBZuzn0i2vBALbKfoTG+zyrjtpmAZ0QajA9RkWEFMANuFLnQwWCEzTAILgPMVeBuMYnSBnS2an7MYzpZfgYtbb8CKGWtFi1mg5wiXIQxt0zyvHw6u/wYKps0CT6YXPlv/NazMLxYtbpcRrMIuqLneRVBbegJ8WbNf/y/7nRz4dN0xWJW/DtJclhf5W3QwWtbn2dVTtSUnsKcm5yyCqy1tgqqPaqwWm0NMdDs22gZVag6l66/xURj6Z0Ck+I3p3GPJH1MljVGhno88g+9CX8KzoS6RKlakq9qzmII//+FP7Oz3AXxRcjwqVP9ID3x/VxhKy440xnyyUAtzl8DhDadh6fSiGIliIWa/xphQJ0P10D3YJdMkn0s2cczOnq9lsKKCEjhQfBQW5S6NmP3qSoMTsp9Z+BGURE/pyiMwt0yqpsbOzJqj/f3+u/lamC3OWz5p8o2U/XT1DXfLhp9RbuENU/97y+BznFR1KF3T3QVaD9J14+QbradejPbCD/e+kg0/o8YpeYyJ9Nq2D6uh0DPP9NoMtw/2Fx+BK79ehHL/jphQwbY66Bn6XWXiHUvzby3Yi794rX6zb6Rb6xXv1FzT61mZ2bB2ZlnE62/CrwHD74nqGeUPCkWhU47uwd+kwufFaJ8GReUkQP0EJny76I6fDAUsw4W/d0hVojDTEwJ7JFNCeODHf+fp86fuHVaZKMz0iMBuyZaij5WeGGOFoL5tC8DTwc5EP7XdIjA6ZBuQLYkm12DboYg9EQ6/+kSGny5i6dDnsVYVJUYKS3pMshKukmo1LjR/VFXqmxTeNeExKcFjyiiNheYxrX4I78vlqCh55NUQdL5sh2mZHmh+eAbH1ONkQdEgP2gEo/XGK3S5qhpogXi39yYM/P1nMpd69RA+pJ+w/dYMil9JSLL6mQHeBqP3L+ocDFbHDJPASC3okAOhQtx2iARGolPCYQdBDYPJyaYrQmapcRBYjdnzbqSF5s/ooAOggtxWiBdMT50tKQzVwm0Eq2CkT4wpNIXUzG0DUbB/eWAGUyz8qrltwmDGsNzG+yN2aYzbUB/Ph63sUl1Gr4TwS5PJ1nWu+3K8X7C6/UZpdRN6g/5MlmA94Lo2Wd3CEN1XvIOmd26rZPZMYtzAKq7jjkgBsq/OtrBp054OD+nQTfT0poMXiVdVREO6wpAhH4Xw6X0FA5LdJrD6y84dbILpVdnl/wswAOhWa3L1/r26AAAAAElFTkSuQmCC" />
+		<img alt="" width="54" height="54" border="0" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAYAAACMRWrdAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABMpJREFUeNrUmm1oFEcYxx8vIan0zOWSppqcxnevWq0vEY0mEPFTRRIQI4rBYhDNN21rEy9NVWyjudpWwS8iCAZLA0UxIH4QQVFyChZESaCYxhqTGClU8l5aA6V9nr1ndWP2XnZm7vb2H/6QZO9m5rfzzDM7Mzul4qfVoFg+9MfoNWg/2o1ehs7g6+PoDvQYuhP9C/o6ul9lI9IVlUMN34KuQBfF+GyG4TNl6H38+wP0VXQrg0vJJfn9SvRjdDv6WBxQ0VTEZbRzmZV2gNGdvo++xOGmWn4u+z7XlXCwuehr6Ns8hhKtNVzXNa47IWAUGg/RmyH52sx1V6oGa+TQ8IB98nAbGlWApaHPoxsgddTAbUqTSfdUwG5IPe1hsGqRHmtKUShdu7mNlsC2owOQ+gpwW+MCo7R6Dpyjc2ZTgRnYBZuzn0i2vBALbKfoTG+zyrjtpmAZ0QajA9RkWEFMANuFLnQwWCEzTAILgPMVeBuMYnSBnS2an7MYzpZfgYtbb8CKGWtFi1mg5wiXIQxt0zyvHw6u/wYKps0CT6YXPlv/NazMLxYtbpcRrMIuqLneRVBbegJ8WbNf/y/7nRz4dN0xWJW/DtJclhf5W3QwWtbn2dVTtSUnsKcm5yyCqy1tgqqPaqwWm0NMdDs22gZVag6l66/xURj6Z0Ck+I3p3GPJH1MljVGhno88g+9CX8KzoS6RKlakq9qzmII//+FP7Oz3AXxRcjwqVP9ID3x/VxhKy440xnyyUAtzl8DhDadh6fSiGIliIWa/xphQJ0P10D3YJdMkn0s2cczOnq9lsKKCEjhQfBQW5S6NmP3qSoMTsp9Z+BGURE/pyiMwt0yqpsbOzJqj/f3+u/lamC3OWz5p8o2U/XT1DXfLhp9RbuENU/97y+BznFR1KF3T3QVaD9J14+QbradejPbCD/e+kg0/o8YpeYyJ9Nq2D6uh0DPP9NoMtw/2Fx+BK79ehHL/jphQwbY66Bn6XWXiHUvzby3Yi794rX6zb6Rb6xXv1FzT61mZ2bB2ZlnE62/CrwHD74nqGeUPCkWhU47uwd+kwufFaJ8GReUkQP0EJny76I6fDAUsw4W/d0hVojDTEwJ7JFNCeODHf+fp86fuHVaZKMz0iMBuyZaij5WeGGOFoL5tC8DTwc5EP7XdIjA6ZBuQLYkm12DboYg9EQ6/+kSGny5i6dDnsVYVJUYKS3pMshKukmo1LjR/VFXqmxTeNeExKcFjyiiNheYxrX4I78vlqCh55NUQdL5sh2mZHmh+eAbH1ONkQdEgP2gEo/XGK3S5qhpogXi39yYM/P1nMpd69RA+pJ+w/dYMil9JSLL6mQHeBqP3L+ocDFbHDJPASC3okAOhQtx2iARGolPCYQdBDYPJyaYrQmapcRBYjdnzbqSF5s/ooAOggtxWiBdMT50tKQzVwm0Eq2CkT4wpNIXUzG0DUbB/eWAGUyz8qrltwmDGsNzG+yN2aYzbUB/Ph63sUl1Gr4TwS5PJ1nWu+3K8X7C6/UZpdRN6g/5MlmA94Lo2Wd3CEN1XvIOmd26rZPZMYtzAKq7jjkgBsq/OtrBp054OD+nQTfT0poMXiVdVREO6wpAhH4Xw6X0FA5LdJrD6y84dbILpVdnl/wswAOhWa3L1/r26AAAAAElFTkSuQmCC" />
 		<p>Your enviroment passed all the requirements needed to run DotKernel.</p>
 		</div>
 	<?php
@@ -559,43 +554,43 @@ else
 {
 	?>
 	<div class="status_not_ok">
-		<img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAYAAACMRWrdAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABWZJREFUeNrUml1oE1kUx09m8tG09YOt9YNCYUtxH7RaaVFfJH2S1WJR6bqyi1Wp4oPK1k9SWr+w0kr9iD4pFFopDaxdCIhIn2QXfNmFump8WSj7sFL8qBYKJU0rSfacyZ04bSeZuXcmJjnwh0By75zfnDsn58y9jqmNG8Fmq0B9j9qM+g5ViqpBudn3c6gwahr1D+ov1Ahq3E4nHDaBkeN7UE2oOsE5RlGPUCEGnlOwZlQXi4ydRpHsRP0mOoEkOM6H+hM1nAUoYHMOs2v4vgbYt6jHqN/ZM5Rt28yu9ZhdOytgtOz+RjXC17dGdu1mu8G62NJYBrmzZcyHLjvAZFQfqgPyxzqYT3KmHzkNJqEJDkH+WSsDOywSse48hVLtEPORC+xHlB/y3/zMV1NglFbvQ+HYfb2/Aj2w/hxnP5Fs2W8E9pPoP32Ozcd81wVzZ3oYM5rbDd6rV6G4rw+kVau4h3uOHoWShw9B3rTJCly3poOYB3YAVSkEdfkyuHbtAmd9PXhv3QJp9WrzUK2t4Dl+HOS1a6G4txfk2lpRsErGsAiMPwt6POC9dAlcO3d++Udftw686KCjvNwc1MmTX1qNFSuScOIdh38hGK3Raq4pnE7wXrwIrsbFpaNcUwPFgUDGyHmOHJkHlYLDG1KMURdcltVqjpA0y9B8E7d0KXi7u3Wh5kXuxg3dZ06J1IkT6ecvK1Mi59yyRQTugBasiQtsyRJTF5XXr0/CaSKnRCoDlHZZUuQFbI8KRqPLeUbGx8chgs4lPnwwhkPnVDh3S0sSyuEwHDf34AHM9veLgH1DTPRq4Bf8EBCZQd6wQXke6O4a3oy3b0FauRIHyaagordvW0n9bWrEhCz26hVETp+GxMSEcX+0Zo15qEAALFqtZPWdRQru40fL5QMtPSVSiYTVqaoJrMLqLLFwGCJnzliCU56pu3ftKrEqJN7EkRbu5UuItLVB/N27XEZKtXICK7Vrttjr1zBz/jwkIhHzkRoehtk7d+wuikslu2ekcshhIkmkfl9VZar84l3ZBDZt12yu7duh6NQppYY0DVZXp5RmwHEzTNg0gU3YMZPT54Oizk7M6/yLwLltG3gvXMA747ILbIq8sLzLQeUV9WNUQwpHe/duKGpvF7oxOjZOs4xZhqI2xQJUqrXbuxeK/H47luUYgb0Qhtq6FbzXr5uC+hwKQfzNG2O4ffvsiNwLGv1UCKqhIRmp5ctN/fnOXLkCMx0dkPj0yRiuuVnpyh0lJaJgTwmMNtkmeUZR3ee9dk1pXwyhBgZStZ9SfmHWNNMVuJqawL1/vwgUsYTVeIe42pb372H23j3DSiFV0Gp+p8BR+WUQudjz5/D5yRMRsJC20RzkGhqPw9zgIESxz6LPaSOVpqJQassMXUFsdBQiZ88qrY6ADWrBnolkx7mhoSRcuuWXBjpVW+rAUaQi585BYnJSKBui/tCCxVC9QrVLMAhRTCLqcuPpp5TIUW3JugIlUuJQoGXQbq7Ty8Z/RdsY98GDIJWVQRQ7au76EssqyoTRmzettD5UaFRB8rjFolMD9Jp4CArTfkYFU5l7wZdB9rwVmj3TQumBkdEu4VQBQU2Bzs6mlCazHCsgsGN6GT1dQfYrqqcAoHqYr2AWjKx94brNMwsyH4EXjKwFNZCHUAPMNxAFi7EHsyfPlt9h5pswmHZZ/mDn+xGR9xjMh3ZTHQjHxHTEjjatRnIANcKubfqYH2+bSml1B6oBkgcns22j7Fo7eIt00f6bKuh6VsaMZQFojM1dr1brvGbX0Vk6Lkubh7TpJrp7E2ZN4iM7VoMjC4edKxlkDVOpDqx62DnMRDD/2enE/wIMAKdcnZ8LWVMpAAAAAElFTkSuQmCC" />
+		<img alt="" width="54" height="54" border="0" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAYAAACMRWrdAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABWZJREFUeNrUml1oE1kUx09m8tG09YOt9YNCYUtxH7RaaVFfJH2S1WJR6bqyi1Wp4oPK1k9SWr+w0kr9iD4pFFopDaxdCIhIn2QXfNmFump8WSj7sFL8qBYKJU0rSfacyZ04bSeZuXcmJjnwh0By75zfnDsn58y9jqmNG8Fmq0B9j9qM+g5ViqpBudn3c6gwahr1D+ov1Ahq3E4nHDaBkeN7UE2oOsE5RlGPUCEGnlOwZlQXi4ydRpHsRP0mOoEkOM6H+hM1nAUoYHMOs2v4vgbYt6jHqN/ZM5Rt28yu9ZhdOytgtOz+RjXC17dGdu1mu8G62NJYBrmzZcyHLjvAZFQfqgPyxzqYT3KmHzkNJqEJDkH+WSsDOywSse48hVLtEPORC+xHlB/y3/zMV1NglFbvQ+HYfb2/Aj2w/hxnP5Fs2W8E9pPoP32Ozcd81wVzZ3oYM5rbDd6rV6G4rw+kVau4h3uOHoWShw9B3rTJCly3poOYB3YAVSkEdfkyuHbtAmd9PXhv3QJp9WrzUK2t4Dl+HOS1a6G4txfk2lpRsErGsAiMPwt6POC9dAlcO3d++Udftw686KCjvNwc1MmTX1qNFSuScOIdh38hGK3Raq4pnE7wXrwIrsbFpaNcUwPFgUDGyHmOHJkHlYLDG1KMURdcltVqjpA0y9B8E7d0KXi7u3Wh5kXuxg3dZ06J1IkT6ecvK1Mi59yyRQTugBasiQtsyRJTF5XXr0/CaSKnRCoDlHZZUuQFbI8KRqPLeUbGx8chgs4lPnwwhkPnVDh3S0sSyuEwHDf34AHM9veLgH1DTPRq4Bf8EBCZQd6wQXke6O4a3oy3b0FauRIHyaagordvW0n9bWrEhCz26hVETp+GxMSEcX+0Zo15qEAALFqtZPWdRQru40fL5QMtPSVSiYTVqaoJrMLqLLFwGCJnzliCU56pu3ftKrEqJN7EkRbu5UuItLVB/N27XEZKtXICK7Vrttjr1zBz/jwkIhHzkRoehtk7d+wuikslu2ekcshhIkmkfl9VZar84l3ZBDZt12yu7duh6NQppYY0DVZXp5RmwHEzTNg0gU3YMZPT54Oizk7M6/yLwLltG3gvXMA747ILbIq8sLzLQeUV9WNUQwpHe/duKGpvF7oxOjZOs4xZhqI2xQJUqrXbuxeK/H47luUYgb0Qhtq6FbzXr5uC+hwKQfzNG2O4ffvsiNwLGv1UCKqhIRmp5ctN/fnOXLkCMx0dkPj0yRiuuVnpyh0lJaJgTwmMNtkmeUZR3ee9dk1pXwyhBgZStZ9SfmHWNNMVuJqawL1/vwgUsYTVeIe42pb372H23j3DSiFV0Gp+p8BR+WUQudjz5/D5yRMRsJC20RzkGhqPw9zgIESxz6LPaSOVpqJQassMXUFsdBQiZ88qrY6ADWrBnolkx7mhoSRcuuWXBjpVW+rAUaQi585BYnJSKBui/tCCxVC9QrVLMAhRTCLqcuPpp5TIUW3JugIlUuJQoGXQbq7Ty8Z/RdsY98GDIJWVQRQ7au76EssqyoTRmzettD5UaFRB8rjFolMD9Jp4CArTfkYFU5l7wZdB9rwVmj3TQumBkdEu4VQBQU2Bzs6mlCazHCsgsGN6GT1dQfYrqqcAoHqYr2AWjKx94brNMwsyH4EXjKwFNZCHUAPMNxAFi7EHsyfPlt9h5pswmHZZ/mDn+xGR9xjMh3ZTHQjHxHTEjjatRnIANcKubfqYH2+bSml1B6oBkgcns22j7Fo7eIt00f6bKuh6VsaMZQFojM1dr1brvGbX0Vk6Lkubh7TpJrp7E2ZN4iM7VoMjC4edKxlkDVOpDqx62DnMRDD/2enE/wIMAKdcnZ8LWVMpAAAAAElFTkSuQmCC" />
 		<p>Catastrophic failure.</p>
 	</div>
 	<?php
 }
 ?>
 	<div class="req">
-		<table cellpadding="5" cellspacing="1">
+		<table  width="100%" cellpadding="5" cellspacing="0">
 			<tr>
-				<td rowspan="8" valign="middle">
+				<td rowspan="8" valign="middle" width="45%">
 					<h2>System Environment</h2></td>
 			</tr>
 		<?php parseHtmlRows($checkServer); ?>
 		</table>
 	</div>
 	<div class="req">
-		<table cellpadding="5" cellspacing="1">
+		<table width="100%" cellpadding="5" cellspacing="0">
 			<tr>
-				<td rowspan="5" valign="middle">
+				<td rowspan="5" valign="middle" width="45%">
 					<h2>PHP <br> Extensions</h2></td>
 			</tr>
 		<?php parseHtmlRows($check); ?>
 		</table>
 	</div>
 	<div class="req">
-		<table cellpadding="5" cellspacing="1">
+		<table width="100%" cellpadding="5" cellspacing="0">
 			<tr>
-				<td rowspan="5" valign="middle">
+				<td rowspan="5" valign="middle" width="45%">
 					<h2>PHP <br> Character Encoding</h2></td>
 			</tr>
 		<?php parseHtmlRows($checkUtf8); ?>
 		</table>
 	</div>
 	<div class="req">
-		<table cellpadding="5" cellspacing="1">
+		<table width="100%" cellpadding="5" cellspacing="0">
 			<tr>
-				<td rowspan="7" valign="middle">
+				<td rowspan="7" valign="middle" width="45%">
 					<h2>PHP <br> Optional Extensions</h2></td>
 			</tr>
 		<?php parseHtmlRows($checkOptional); ?>
