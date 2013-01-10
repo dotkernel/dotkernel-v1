@@ -513,7 +513,7 @@ EOD;
 		color: #999999;
 	}
 	.pass{
-		color: #438E2D;
+		color: #108D0A;
 	}
 	.failed{
 		color: #F12F2F;
