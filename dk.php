@@ -50,18 +50,23 @@ $checkServer['apache'] = array('name'   => 'Apache Version',
 															 'status' => 'pass',
 															 'value'  => $apacheVersion);
 // check PHP VERSION
-if(version_compare(PHP_VERSION, '5.2.11', '>='))
+if(version_compare(PHP_VERSION, '5.4.0', '>='))
 {
 	$checkServer['php'] = array('name'   => 'PHP Version',
 															'status' => 'pass',
 															'value'  => PHP_VERSION);
 }
+else if (version_compare(PHP_VERSION, '5.3.0', '>='))
+{
+	$checkServer['php'] = array('name'   => 'PHP Version',
+															'status' => 'hmmm',
+															'value'  => '<b>' . PHP_VERSION . '</b>');
+}
 else
 {
 	$checkServer['php'] = array('name'   => 'PHP Version',
 															'status' => 'failed',
-															'value'  => 'DotKernel requires <a href="http://php.net/downloads.php">PHP</a> 5.2.11 or newer, your version 
-																					is ' . PHP_VERSION . '.');
+															'value'  => 'Your version of PHP:  <b>' . PHP_VERSION . '</b> is at End-Of-Life. Please upgrade.');
 	$test = false;
 }
 // check MySQL Client version
@@ -460,7 +465,7 @@ EOD;
 	}
 	.wrap{
 		margin: 0px auto;
-		padding: 20px 0 0 0;
+		padding: 2px 0 0 0;
 		width: 800px;
 		background: #FCFCFC;
 	}
@@ -473,9 +478,13 @@ EOD;
 	}
 	table{
 		color: #4A4A4A;
-		}
+		width: 100%;
+		border-spacing:0;
+		border-collapse:collapse;
+	}
 	table td{
 		text-align: left;
+		padding: 5px; 
 	}
 	li{
 		list-style:circle inside;
@@ -561,7 +570,7 @@ else
 }
 ?>
 	<div class="req">
-		<table  width="100%" cellpadding="5" cellspacing="0">
+		<table>
 			<tr>
 				<td rowspan="8" valign="middle" width="45%">
 					<h2>System Environment</h2></td>
@@ -570,7 +579,7 @@ else
 		</table>
 	</div>
 	<div class="req">
-		<table width="100%" cellpadding="5" cellspacing="0">
+		<table>
 			<tr>
 				<td rowspan="5" valign="middle" width="45%">
 					<h2>PHP <br> Extensions</h2></td>
@@ -579,7 +588,7 @@ else
 		</table>
 	</div>
 	<div class="req">
-		<table width="100%" cellpadding="5" cellspacing="0">
+		<table>
 			<tr>
 				<td rowspan="5" valign="middle" width="45%">
 					<h2>PHP <br> Character Encoding</h2></td>
@@ -588,7 +597,7 @@ else
 		</table>
 	</div>
 	<div class="req">
-		<table width="100%" cellpadding="5" cellspacing="0">
+		<table>
 			<tr>
 				<td rowspan="7" valign="middle" width="45%">
 					<h2>PHP <br> Optional Extensions</h2></td>
