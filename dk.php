@@ -124,10 +124,16 @@ else
 																								 'value'  => 'Unable to test <b>MySQL Server</b> version.');
 	$test = false;
 }
-// check Zend Framework version
-$zendExists = @include_once 'Zend/Loader/Autoloader.php';
-if($zendExists)
+// check if Zend Framework is installed, if  is in include_path and its version
+$pathArray = explode( PATH_SEPARATOR, get_include_path() );
+function checkAllPaths($includePathLocation)
 {
+	return file_exists($includePathLocation.'/Zend/Loader/Autoloader.php');
+}
+$zendExist = array_map('checkAllPaths' , $pathArray);
+if(in_array(1, $zendExist))
+{
+	include_once 'Zend/Loader/Autoloader.php';
 	$zendLoader = Zend_Loader_Autoloader::getInstance();
 	if(version_compare(Zend_Version::VERSION, '1.11.0', '>='))
 	{
@@ -528,7 +534,7 @@ EOD;
 		color: #F12F2F;
 	}
 	.hmmm{
-		color: #F49248;
+		color: #F86914;
 	}
 	.confused{
 		color: #537EC8;
