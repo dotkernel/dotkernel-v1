@@ -125,12 +125,22 @@ else
 	$test = false;
 }
 // check if Zend Framework is installed, if  is in include_path and its version
-$pathArray = explode( PATH_SEPARATOR, get_include_path() );
+// get open_basedir and include path locations. If open basedir is not set, then 
+$openBasedirArray =  (ini_get('open_basedir')) ? explode( PATH_SEPARATOR, ini_get('open_basedir')): NULL;
+$includePathArray = explode( PATH_SEPARATOR, get_include_path());
+
+// if open_basedir is not set, we do not need to calculate the intersection 
+$openBasedirInclude = $includePathArray;
+if (!is_null($openBasedirArray))
+{
+	$openBasedirInclude = array_intersect($openBasedirArray, $includePathArray);
+}
+
 function checkAllPaths($includePathLocation)
 {
 	return file_exists($includePathLocation.'/Zend/Loader/Autoloader.php');
 }
-$zendExist = array_map('checkAllPaths' , $pathArray);
+$zendExist = array_map('checkAllPaths' , $openBasedirInclude);
 if(in_array(1, $zendExist))
 {
 	include_once 'Zend/Loader/Autoloader.php';
@@ -154,10 +164,18 @@ else
 {
 	$checkServer['zend'] = array('name'   => 'Zend Framework',
 															 'status' => 'failed',
-															 'value'  => '<a href="http://framework.zend.com/downloads/latest" target="_blank">Zend Framework</a> is required
-																						to  be installed on your server. Check 
-																						<a href="http://www.dotkernel.com/zend-framework/zend-framework-pear-plesk-server/" target="_blank">
-																						this article</a> for more details on how to install it.');
+															 'value'  => '<a href="http://framework.zend.com/downloads/latest" target="_blank">Zend Framework</a> is missing. 
+																						Check <a href="http://www.dotkernel.com/zend-framework/zend-framework-pear-plesk-server/" target="_blank">
+																						this article</a> for more details on how to install it. Also check your <b>include_path</b> and 
+																						<b>open_basedir</b> directives in your php.ini.');
+	// List include path and open basedir folders
+	$checkServer['includePath'] = array('name'   => 'Include Path',
+																			'status' => 'confused',
+																			'value'  => get_include_path());
+	
+	$checkServer['openBasedir'] = array('name'   => 'Open Basedir',
+																			'status' => 'confused',
+																			'value'  => ini_get('open_basedir'));
 	$test = false;
 }
 
@@ -578,7 +596,7 @@ else
 	<div class="req">
 		<table>
 			<tr>
-				<td rowspan="8" valign="middle" width="45%">
+				<td rowspan="10" valign="middle" width="45%">
 					<h2>System Environment</h2></td>
 			</tr>
 		<?php parseHtmlRows($checkServer); ?>
