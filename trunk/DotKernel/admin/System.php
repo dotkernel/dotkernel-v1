@@ -239,7 +239,7 @@ class System extends Dot_Model
 		// test wurfl cloud api key
 		$wurflCloud = Dot_UserAgent_WurflCloud::getInstance();
 		$wurflCloud->getDeviceCapabilities();
-		if(!empty($wurflCloud->lastError))
+		if(!empty($wurflCloud->lastError) && $this->config->resources->useragent->wurflcloud->active)
 		{
 			$warnings['Settings'][] = $wurflCloud->lastError;
 		}
