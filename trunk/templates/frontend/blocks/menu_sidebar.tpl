@@ -3,6 +3,9 @@
 	<li class="{SEL_PAGE_HOME}">
 		<a href="{SITE_URL}" target="_self">Home</a> 
 	</li>
+	<li class="{SEL_PAGE_CODING-STANDARD}">
+		<a href="{SITE_URL}/page/coding-standard/">Coding Standard</a> 
+	</li>
 	<li class="{SEL_PAGE_ABOUT}">
 		<a href="{SITE_URL}/page/about/">About</a> 
 	</li> 

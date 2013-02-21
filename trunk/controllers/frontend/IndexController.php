@@ -14,7 +14,7 @@
  * Frontend Module - Index Controller
  * Is doing all the job for specific frontend control stuff
  * @author     DotKernel Team <team@dotkernel.com>
- */ 
+ */
 
 // initialize the session
 // if you don't use the session object in this module, feel free to remove this line
@@ -24,7 +24,8 @@ Dot_Session::start();
  *  Example of usage for WURFL API integration. If wurfl  module is active, you can redirect to /mobile controller 
  */
 $wurflConf = $registry->configuration->resources->useragent->wurflcloud;
-if(isset($registry->configuration->resources->useragent->wurflapi->active) && $registry->configuration->resources->useragent->wurflcloud->active === FALSE)
+if(isset($registry->configuration->resources->useragent->wurflapi->active) 
+					&& $registry->configuration->resources->useragent->wurflcloud->active === FALSE)
 {
 	$wurflConf = $registry->configuration->resources->useragent->wurflapi;
 }

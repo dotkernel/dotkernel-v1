@@ -33,6 +33,10 @@
 			<h2>Download latest version</h2>
 			<a href="http://www.dotkernel.com/download/">www.dotkernel.com/download</a>
 		</div>
+		<div id="download">
+			<h2>Coding Standard</h2>
+			<a href="{SITE_URL}/page/coding-standard/">Sample Class</a>
+		</div>
 		<div class="clear"></div>
 	</div>
 	

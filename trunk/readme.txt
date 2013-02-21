@@ -17,9 +17,9 @@ SYSTEM REQUIREMENTS
 
 DotKernel requires:
 - APACHE HTTP server
-- PHP 5.2.10 or later
-- MySQL 5.0 or later
-- Zend Framework 1.8.0 or later
+- PHP 5.2.10 or later ( PHP 5.4.x recommended)
+- MySQL 5.0 or later (MySQL 5.5.x recommended )
+- Zend Framework 1.8.0 or later (Zend Framework 1.12.x recommended)
 For more details, please see: 
 	http://www.dotkernel.com/docs/system-requirements/
 
@@ -47,13 +47,13 @@ DOCUMENTATION
 ---------
 
 Online documentation can be found at 
-	http://www.dotkernel.com/docs/
+	http://www.dotkernel.com/phpdocs/
      
 QUESTIONS
 ---------
 
-If you have any questions about DotKernel, visit our forum:
-	http://www.dotkernel.com/forum/
+If you have any questions about DotKernel, visit our website:
+	http://www.dotkernel.com/
 	
 FEEDBACK
 --------
