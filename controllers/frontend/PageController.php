@@ -34,4 +34,7 @@ switch ($registry->requestAction)
 	case 'outbound-links':
 		$pageView->showPage($registry->requestAction);
 	break;
+	case 'coding-standard':
+		$pageView->showCodingStandard();
+	break;
 }

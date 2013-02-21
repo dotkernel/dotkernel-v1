@@ -26,7 +26,7 @@ if (@$_SESSION['admin']['admin']->role !== 'admin')
 
  */
 
-$VERSION='$Id: apc.php 325483 2012-05-01 00:34:04Z rasmus $';
+$VERSION='$Id$';
 
 ////////// READ OPTIONAL CONFIGURATION FILE ////////////
 if (file_exists("apc.conf.php")) include("apc.conf.php");

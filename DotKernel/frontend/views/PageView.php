@@ -40,4 +40,18 @@ class Page_View extends View
 		if ($templateFile != '') $this->templateFile = $templateFile;//in some cases we need to overwrite this variable
 		$this->tpl->setFile('tpl_main', 'page/' . $this->templateFile . '.tpl');
 	}
+	
+	/** Display the content of the Sample Class file
+	 * @access public
+	 * @param
+	 * @return void
+	 */
+	public function showCodingStandard()
+	{
+		$content = highlight_file(APPLICATION_PATH . '/library/Dot/Sample/Class.php', true);
+		
+		$this->tpl->setFile('tpl_main', 'page/coding-standard.tpl');
+		$this->tpl->setVar('CODING_STANDARD', $content);
+		
+	}
 }
