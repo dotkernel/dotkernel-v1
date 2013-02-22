@@ -6,56 +6,56 @@
 				<identify>
 					<osName>Android</osName>
 					<uaString>Android</uaString>
-				</identify>		
+				</identify>
 			</name>
 			<name type="mobile">
 				<os>Blackberry</os>
 				<identify>
 					<osName>Blackberry</osName>
 					<uaString>Blackberry</uaString>
-				</identify>		
+				</identify>
 			</name>
 			<name type="mobile">
 				<os>Windows Mobile</os>
 				<identify>
 					<osName>Windows Mobile</osName>
 					<uaString>Windows Mobile</uaString>
-				</identify>		
+				</identify>
 			</name>
 			<name type="mobile">
-				<os>iPhone</os>
+				<os>iOS</os>
 				<identify>
-					<osName>iPhone</osName>
+					<osName>iOS</osName>
 					<uaString>iPhone|iPad</uaString>
-				</identify>		
+				</identify>
 			</name>
 			<name type="mobile">
 				<os>Samsung</os>
 				<identify>
 					<osName>Samsung OS</osName>
 					<uaString>Samsung|sam-r|SCH|SGH</uaString>
-				</identify>		
+				</identify>
 			</name>
 			<name type="mobile">
 				<os>Huawei</os>
 				<identify>
 					<osName>Huawei</osName>
 					<uaString>huawei</uaString>
-				</identify>		
+				</identify>
 			</name>
 			<name type="mobile">
 				<os>LG</os>
 				<identify>
 					<osName>LG OS</osName>
 					<uaString>LG</uaString>
-				</identify>		
+				</identify>
 			</name>
 			<name type="mobile">
 				<os>Motorola</os>
 				<identify>
 					<osName>Motorola</osName>
 					<uaString>Cricket</uaString>
-				</identify>		
+				</identify>
 			</name>
 			<name type="mobile">
 				<os>PlayStation Portable</os>
@@ -69,21 +69,21 @@
 				<identify>
 					<osName>Kyocera</osName>
 					<uaString>KWC</uaString>
-				</identify>		
+				</identify>
 			</name>
 			<name type="mobile">
 				<os>Symbian</os>
 				<identify>
 					<osName>Symbian OS</osName>
 					<uaString>SymbOS</uaString>
-				</identify>		
+				</identify>
 			</name>
  			<name type="desktop">
  				<os>Windows</os>
 				<identify>
 					<osName>Windows 3.11</osName>
 					<uaString>Win16</uaString>
-				</identify>			
+				</identify>
 				<identify>
 					<osName>Windows 95</osName>
 					<uaString>Windows 95|Win95|Windows_95</uaString>
@@ -111,6 +111,10 @@
 				<identify>
 					<osName>Windows 7</osName>
 					<uaString>Windows NT 6.1</uaString>
+				</identify>
+				<identify>
+					<osName>Windows 8</osName>
+					<uaString>Windows NT 6.2</uaString>
 				</identify>
 				<identify>
 					<osName>Windows NT</osName>
