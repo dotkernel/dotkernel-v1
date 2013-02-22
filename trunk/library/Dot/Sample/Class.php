@@ -3,6 +3,7 @@
  * DotKernel (1.7) Coding Standard Sample File
  *
  * NOTES:
+ * All files must be UTF8 , with endline UNIX style, and .php extension
  * File level and class level docblock required
  * Indent = 1 tab (required)
  * Closing PHP Tag Prohibited
