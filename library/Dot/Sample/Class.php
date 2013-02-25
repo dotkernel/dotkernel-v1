@@ -44,12 +44,14 @@ class Dot_Sample_Class  extends Dot_Other_Class
 	public $sampleClassProperty;
 	
 	/**
-	 * Description of Private property. always start with underscore , followed by lowercase letter
+	 * Description of Private property. 
+	 * always start with underscore , followed by lowercase letter
 	 */
 	private $_samplePrivatePropriety;
 	
 	/**
-	 * Description of Protected property. always start with underscore , followed by lowercase letter
+	 * Description of Protected property. 
+	 * always start with underscore , followed by lowercase letter
 	 */
 	protected $_sampleProtectedproriety;
 	
@@ -72,7 +74,8 @@ class Dot_Sample_Class  extends Dot_Other_Class
 	}
 
 	/**
-	 * Description of method. Method name always start with underscore and lowercase letter
+	 * Description of method. 
+	 * Method name always start with underscore and lowercase letter
 	 *
 	 */
 	protected function _thisMethodBeginsWithUnderscore()
