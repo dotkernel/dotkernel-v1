@@ -21,7 +21,7 @@
  */
 
 /**
- * Description of Class
+ * Description of Class. Class Name Always Start with Capital Letter
  *
  * @category   DotKernel
  * @package    DotLibrary
@@ -37,14 +37,25 @@ class Dot_Sample_Class  extends Dot_Other_Class
 	const CONSTANT_NAME = 'Must be all uppercase';
 
 	/**
-	 * Description of property
+	 * Description of property. always start with lowercase letter
 	 *
 	 * @var type
 	 */
 	public $sampleClassProperty;
-
+	
+	/**
+	 * Description of Private property. always start with underscore , followed by lowercase letter
+	 */
+	private $_samplePrivatePropriety;
+	
+	/**
+	 * Description of Protected property. always start with underscore , followed by lowercase letter
+	 */
+	protected $_sampleProtectedproriety;
+	
 	/**
 	* Function name should be verbose and descriptive and  must be written in camelCase
+	* always start with lowercase letter
 	* Private and Protected function names must begin with an underscore
 	* Class methods must always declare visibility
 	* Methods must have a docblock with the function description,
@@ -61,7 +72,7 @@ class Dot_Sample_Class  extends Dot_Other_Class
 	}
 
 	/**
-	 * Description of method
+	 * Description of method. Method name always start with underscore and lowercase letter
 	 *
 	 */
 	protected function _thisMethodBeginsWithUnderscore()
