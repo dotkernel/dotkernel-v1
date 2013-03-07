@@ -41,4 +41,9 @@ switch ($registry->action)
 		// code to send the newsleter using methods from cli_Newsletter should go here
 
 		break;
+
+	case 'default':
+		echo "Action doesn't exist";
+		exit(1);
+		break;
 }
