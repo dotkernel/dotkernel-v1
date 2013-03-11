@@ -15,7 +15,7 @@
  * @author     DotKernel Team <team@dotkernel.com>
  */
 $test = true;
-//kill the SAFE MODE
+////kill the SAFE MODE
 if(ini_get('safe_mode'))
 {
 	$checkServer['safe_mode'] = array('name'   => 'Safe Mode <b>ON</b>',
