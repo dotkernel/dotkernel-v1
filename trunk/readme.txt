@@ -35,9 +35,11 @@ Note: It is important to follow the steps in the exact order below (especially s
    3. Unzip the downloaded package. You should have a DotKernel-@VERSION@ directory
    4. Upload the folder content to your web server
    5. Create a MySQL database and import dot_kernel.sql file into it
-   6. Set your environment (production, staging or development) in .htaccess by using the APPLICATION_ENV variable. In DotKernel, the development environment is set by default.
-   7. Depending on your environment, edit the configuration file configs/application.ini to reflect the website url and the connection to the database you created previously
-   8. Test the installation by opening the URL you set as your website. If you see the Home page, your DotKernel installation is completed!
+   6. Set your environment (production, staging or development) in .htaccess by using the APPLICATION_ENV variable. In DotKernel, the development 
+      environment is set by default.
+   7. Depending on your environment, edit the configuration file configs/application.ini to reflect the website url and the connection to the database 
+      you created previously
+   8. Test the installation by opening the URL you set as your website. If you see the Home page, your DotKernel installation is completed.
    9. Login into admin module: http://www.yourdotkernelinstance.com/admin/ with username: admin and password: dot
   10. Change settings.admin.salt value from application.ini to a random string
   11. Change your admin password: http://www.yourdotkernelinstance.com/admin/admin/account/ 
