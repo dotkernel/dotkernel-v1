@@ -3,7 +3,7 @@
 				<a href="{SITE_URL}/page/home/">Home</a> 
 		</li> 
 		<li> 
-				<a href="http://www.dotboost.com/about-us/" target="_blank">About Us</a> 
+				<a href="http://www.dotboost.com/about/" target="_blank">About Us</a> 
 		</li> 
 		<li> 
 				<a href="http://www.dotkernel.com/" target="_blank">DotKernel</a> 
