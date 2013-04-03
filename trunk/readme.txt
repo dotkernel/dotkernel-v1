@@ -79,3 +79,6 @@ LICENSE
 
 DotKernel is Open Source, and released under Open Software License (OSL 3.0)
 See http://v1.dotkernel.net/license.txt
+
+This product includes GeoLite data created by MaxMind, available from
+  <a href="http://www.maxmind.com">http://www.maxmind.com</a>.
