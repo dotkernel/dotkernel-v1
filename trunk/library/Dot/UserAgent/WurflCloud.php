@@ -263,7 +263,6 @@ class Dot_UserAgent_WurflCloud
 	private function _isSmartphone($isMobile, $deviceOs, $browserName)
 	{
 		$isSmartphone =  FALSE;
-		// if is not a mobile device , we will have surprises here :-)
 		if($isMobile && !empty($deviceOs) && !empty($browserName))
 		{
 			$isSmartphone =  TRUE;
