@@ -158,8 +158,6 @@ class Dot_UserAgent_WurflCloud
 			$this->lastError = '';
 		}
 		catch(Exception $e) {
-			// Show any errors
-			//trigger_error($e->getMessage(), E_USER_WARNING);
 			$this->lastError = $e->getMessage();
 		}
 	}
@@ -255,8 +253,7 @@ class Dot_UserAgent_WurflCloud
 	}
 	
 	/**
-	 * Check device capabilities for screen size. We assume that a screen size lower then 240x320=76800 is not a real
-	 * smartphone, but only an  "feature phone"
+	 * Check device capabilities
 	 * Second mandatory condition: to have an Operating System
 	 * @param array $deviceCapabilities
 	 * @param bool $isMobile
