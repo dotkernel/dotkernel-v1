@@ -60,7 +60,7 @@
 	
 	{PAGINATION}
 	<fieldset style="width: 100%">
-	<legend>List logins</legend>
+	<legend>List Log In's</legend>
 	<table class="big_table">
 		<thead>
 			<tr>

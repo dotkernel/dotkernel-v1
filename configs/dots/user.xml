@@ -56,7 +56,7 @@
 				</action>
 			</pageTitle>
 			<errorMessage>
-				<login>Wrong Login Credentials</login>
+				<login>Wrong Log In Credentials</login>
 				<captcha>Incorrect. Try again.</captcha>	
 				<passwordTwice>You did not enter the same password twice. Please re-enter your password.</passwordTwice>	
 				<emailSent>Your password was sent to </emailSent>	

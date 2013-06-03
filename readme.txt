@@ -40,7 +40,7 @@ Note: It is important to follow the steps in the exact order below (especially s
    7. Depending on your environment, edit the configuration file configs/application.ini to reflect the website url and the connection to the database 
       you created previously
    8. Test the installation by opening the URL you set as your website. If you see the Home page, your DotKernel installation is completed.
-   9. Login into admin module: http://www.yourdotkernelinstance.com/admin/ with username: admin and password: dot
+   9. Log In into admin module: http://www.yourdotkernelinstance.com/admin/ with username: admin and password: dot
   10. Change settings.admin.salt value from application.ini to a random string
   11. Change your admin password: http://www.yourdotkernelinstance.com/admin/admin/account/ 
    

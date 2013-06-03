@@ -73,7 +73,7 @@
 		In config/router.xml, inside the &lt;controller&gt; tag, add: <strong>&lt;frontend&gt;Articles&lt;frontend&gt;</strong>
 	</p>
 		 
-	<h2>Admin Panel Login</h2>
+	<h2>Admin Panel Log In</h2>
 	<strong>www.your-site.com/admin</strong><br/> 
 	username: admin<br/> 
 	password: dot<br/> 
