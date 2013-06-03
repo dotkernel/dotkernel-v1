@@ -141,8 +141,7 @@ class System extends Dot_Model
 	 */
 	public function getWurflInfo()
 	{
-		$result = array('api' => array(),
-						'cloud' => array());
+		$result = array('api' => array(), 'cloud' => array());
 		// first test the api
 		if(Dot_UserAgent::checkWurflApi() === TRUE)
 		{
@@ -170,44 +169,57 @@ class System extends Dot_Model
 	public function getWarnings()
 	{
 		// warning "categories"
-		$warnings = array('Security'=>array(), 
-												'Delete'=>array(),
-													'Make Writable'=>array(), 
-														'Make Unwritable'=>array(),
-															'Settings' => array());
+		$warnings = array('Security Warning'=>array(),
+												'Debug Email' => array(),
+													'Delete Files'=>array(),
+														'Make Writable'=>array(), 
+															'Make Unwritable'=>array(),
+																	'Wurfl Cloud' => array());
 		
 		// check that the default admin user isn't enabled
 		$dotAuth = Dot_Auth::getInstance();
 		$defaultAdminValid = $dotAuth->process('admin', array("username"=>"admin", "password"=>"dot"), $storeInSession = false);
 		if ($defaultAdminValid)
 		{
-			$warnings["Security"][] = "Please change the password of the admin user or deactivate him";
+			$warnings["Security Warning"][] = "Please change the password of the default admin user or deactivate him";
+		}
+		
+		// if the oldest admin have the same email team@dotkernel.com
+		$select = $this->db->select()->from('admin', 'email')->where('isActive = ?', '1')->order('dateCreated asc')->limit(1);
+		$emailAdmin = $this->db->fetchOne($select);
+		if('team@dotkernel.com' == $emailAdmin)
+		{
+			$warnings["Debug Email"][] = "Please change the email of the default admin user or deactivate him.";
+		}
+		
+		//if the devEmails is the default one : team@dotkernel.com 
+		$select = $this->db->select()->from('setting')->where('`key`=?', 'devEmails')->where('`value` LIKE ?', '%team@dotkernel.com%');
+		$devEmails = $this->db->fetchOne($select);
+		if ($defaultAdminValid)
+		{
+			$warnings["Debug Email"][] = "Update the setting.devEmails value to reflect your debug email.";
 		}
 		
 		// check for files that should be deleted
-		$filesToDelete = array(
-			"dot_kernel.sql",
-			"readme.txt",
-			"dk.php"
-		);
+		$filesToDelete = array( "dot_kernel.sql", "readme.txt", "dk.php");
 		foreach ($filesToDelete as $file)
 		{
 			if (file_exists(APPLICATION_PATH."/".$file))
 			{
-				$warnings['Delete'][] = $file;
+				$warnings['Delete Files'][] = $file;
 			}
 		}
 
 		//ignore permission warning if OS is Windows
 		if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') 
 		{
-			// warning if application.ini is not writable
+			// warning if application.ini is writable
 			if (is_writable(APPLICATION_PATH."/configs/application.ini"))
 			{
 				$warnings["Make Unwritable"][] = 'configs/application.ini';
 			}
 			
-			// only the folders set in application.ini (folders.perimssion[]) should be writable 	
+			// only the folders set in application.ini (folders.permission[]) should be writable 	
 			$folderException = $this->config->folders->permission->toArray();
 			// go through all folders in the tree
 			$folders = $this->_listDirectory(APPLICATION_PATH);
@@ -234,10 +246,18 @@ class System extends Dot_Model
 				{
 					if (is_writable($path))
 					{
+						
 						$warnings["Make Unwritable"][] = $path;
 					}
 				}
 			}
+			// info about how to add exception
+			if(!count($warnings["Make Unwritable"]))
+			{
+				$warnings["Make Unwritable"][] = 'It is possible to add your writable folders to the exclude list by adding it 
+														as folders.permission[] exception in application.ini';
+			}
+			
 		}
 		
 		// test wurfl cloud api key
@@ -245,7 +265,8 @@ class System extends Dot_Model
 		$wurflCloud->getDeviceCapabilities();
 		if(!empty($wurflCloud->lastError) && $this->config->resources->useragent->wurflcloud->active)
 		{
-			$warnings['Settings'][] = $wurflCloud->lastError;
+			$warnings['Wurfl Cloud'][] = $wurflCloud->lastError;
+			$warnings['Wurfl Cloud'][] = 'resources.useragent.wurflcloud.api_key does not match the Site URL';
 		}
 							
 		// add any other warnings to $warnings here
