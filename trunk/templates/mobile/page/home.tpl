@@ -9,14 +9,14 @@
 	<div class="ui-body ui-body-e">
 	<form id="contactForm" action="{SITE_URL}/mobile/" method="post" >
 		<div class="ui-field-contain ui-body ui-br" data-role="fieldcontain">
-			<label class="ui-input-text" for="name">Email:</label>
-			<input class="ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-c required email"
-				name="email" id="email" value="{EMAIL}" type="text">
+			<label class="ui-input-text" for="email">Email:</label>
+			<input class="ui-input-text ui-body-null ui-corner-all ui-body-c required email"
+				name="email" id="email" value="{EMAIL}" type="email">
 			<br/><span id="emailError"  style="color: #ff0000;"></span>
 		</div>
 		<div class="ui-field-contain ui-body ui-br" data-role="fieldcontain">
-			<label class="ui-input-text" for="name">Phone (only US country):</label>
-			<input class="ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-c required email" 
+			<label class="ui-input-text" for="phone">Phone (only US country):</label>
+			<input class="ui-input-text ui-body-null ui-corner-all ui-body-c required" 
 				name="phone" id="phone" value="{PHONE}" type="text">
 			<br/>
 		</div>
