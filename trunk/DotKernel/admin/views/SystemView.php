@@ -46,7 +46,7 @@ class System_View extends View
 		$this->tpl->setBlock('tpl_main', 'wurfl_api_info', 'wurfl_api');
 		$this->tpl->setBlock('tpl_main', 'wurfl_cloud_info', 'wurfl_cloud');
 		// system overview
-		$this->tpl->setVar('HOSTNAME' , System::getHostname());
+		$this->tpl->setVar('HOSTNAME' , System::getSystemHostname());
 		$this->tpl->setVar('MYSQL',$mysqlVersion);
 		$this->tpl->setVar('PHP',phpversion());
 		$this->tpl->setVar('APCVERSION', $apcInfo['version']);

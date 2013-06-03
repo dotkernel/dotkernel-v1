@@ -102,7 +102,7 @@ class System extends Dot_Model
 	 * @access public
 	 * @return string
 	 */
-	public static function getHostname()
+	public static function getSystemHostname()
 	{
 			if(version_compare(PHP_VERSION, '5.3.0', '>='))
 			{
@@ -170,7 +170,11 @@ class System extends Dot_Model
 	public function getWarnings()
 	{
 		// warning "categories"
-		$warnings = array('Security'=>array(), 'Delete'=>array(), 'Make Writable'=>array(), 'Make Unwritable'=>array(), 'Settings' => array());
+		$warnings = array('Security'=>array(), 
+												'Delete'=>array(),
+													'Make Writable'=>array(), 
+														'Make Unwritable'=>array(),
+															'Settings' => array());
 		
 		// check that the default admin user isn't enabled
 		$dotAuth = Dot_Auth::getInstance();
