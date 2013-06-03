@@ -260,7 +260,7 @@ function columnChart(elementId, topUsers, noDataMessage, colors){
 				rotation: -90,
 				color: '#FFFFFF',
 				align: 'right',
-				x: -3,
+				x: 2,
 				y: 5
 			}
 		}]
