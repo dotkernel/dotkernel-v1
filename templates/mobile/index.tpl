@@ -27,7 +27,7 @@
 <div data-role="page" data-theme="e"> 
 	<div data-role="header" data-theme="b" data-nobackbtn="true"> 
 		<p>&nbsp;</p>
-		<a class="ui-btn-left" href="{SITE_URL}" rel="external" >Web {SITE_NAME}</a>
+		<a data-role="button" data-inline="true" href="{SITE_URL}" rel="external" style="margin-top:0.3em;" >Web {SITE_NAME}</a>
 	</div><!-- /header -->	
 	<div data-role="content">	
 					<h1>{PAGE_CONTENT_TITLE}</h1>
