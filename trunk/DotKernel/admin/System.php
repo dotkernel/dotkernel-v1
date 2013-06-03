@@ -181,7 +181,7 @@ class System extends Dot_Model
 		$defaultAdminValid = $dotAuth->process('admin', array("username"=>"admin", "password"=>"dot"), $storeInSession = false);
 		if ($defaultAdminValid)
 		{
-			$warnings["Security Warning"][] = "Please change the password of the default admin user or deactivate him";
+			$warnings["Security Warning"][] = "Please change the password of the oldest admin user or deactivate him";
 		}
 		
 		// if the oldest admin have the same email team@dotkernel.com
@@ -252,10 +252,10 @@ class System extends Dot_Model
 				}
 			}
 			// info about how to add exception
-			if(!count($warnings["Make Unwritable"]))
+			if(count($warnings["Make Unwritable"]))
 			{
-				$warnings["Make Unwritable"][] = 'It is possible to add your writable folders to the exclude list by adding it 
-														as folders.permission[] exception in application.ini';
+				$warnings["Make Unwritable"][] = '**  <em>It is possible to add your writable folders to the exclude list by adding it
+														as folders.permission[] exception in application.ini</em>';
 			}
 			
 		}
