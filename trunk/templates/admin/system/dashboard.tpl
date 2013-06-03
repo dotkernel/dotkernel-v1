@@ -92,7 +92,7 @@
 	
 	<!-- BEGIN warnings -->
 	<div class="message_error" style="margin-top:10px;padding:10px">
-		<strong style="font-size:13px">{WARNING_TYPE}</strong>
+		<strong style="font-size:13px;color:red;">{WARNING_TYPE}</strong>
 		<ul style="padding:3px 15px;color:#666;font-size:11px">
 			<!-- BEGIN warning_item -->
 			<li>{WARNING_DESCRIPTION}</li>
