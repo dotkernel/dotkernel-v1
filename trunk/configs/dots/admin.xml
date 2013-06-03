@@ -6,7 +6,7 @@
 		<variable option="admin">
 			<pageTitle>
 				<action>
-					<login>Login</login>
+					<login>Log In</login>
 					<account>My Admin Account</account>
 					<list>List Admin Users</list>
 					<add>Add New Admin User</add>
@@ -48,7 +48,7 @@
 				</username>
 			</validate>					
 			<failedLogin>
-				<subject>Admin Failed Login !</subject>
+				<subject>Admin Failed Log In !</subject>
 				<message>Dear admin, 
 							
 Someone tried to login in admin with wrong login credentials:

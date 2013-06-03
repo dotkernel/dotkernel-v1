@@ -19,7 +19,7 @@
 				<th style="width: 50px;">Country</th>
 				<th style="width: 50px;">Browser</th>
 				<th style="width: 50px;">OS</th>
-				<th style="width: 150px;">Login Date</th>
+				<th style="width: 150px;">Log In Date</th>
 			</tr>
 		</thead>
 		<tbody>

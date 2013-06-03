@@ -7,7 +7,7 @@
 	</li>
 	<!-- BEGIN top_menu_not_logged -->
 	<li class="{SEL_USER_LOGIN}">
-		<a href="{SITE_URL}/user/login">Login</a>
+		<a href="{SITE_URL}/user/login">Log In</a>
 	</li>
 	<li class="{SEL_USER_REGISTER}">
 		<a href="{SITE_URL}/user/register">Register</a>
@@ -18,7 +18,7 @@
 		<a href="{SITE_URL}/user/account">My Account</a>
 	</li>
 	<li>
-		<a href="{SITE_URL}/user/logout">Logout</a>
+		<a href="{SITE_URL}/user/logout">Log Out</a>
 	</li>
 	<!-- END top_menu_logged -->
 </ul>

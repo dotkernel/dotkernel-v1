@@ -12,7 +12,7 @@
 		</tr>
 		<tr>
 			<td></td>
-			<td><input type="submit" onclick="" class="button" value="Login"></td>
+			<td><input type="submit" onclick="" class="button" value="Log In"></td>
 		</tr>
 		<tr>
 			<td></td>
