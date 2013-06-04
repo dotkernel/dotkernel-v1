@@ -65,7 +65,6 @@ class Dot_Filter
 		$values = $this->_options['values'];
 		$validator = $this->_options['validator'];
 		$filter = new Zend_Filter();
-        $filter->addFilter(new Zend_Filter_HtmlEntities());
         $filter->addFilter(new Zend_Filter_StringTrim());
 		foreach ($values as $k=>$v)
 		{
