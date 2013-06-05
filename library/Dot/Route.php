@@ -80,10 +80,10 @@ class Dot_Route
 		$request = array();
 		while (list($key, $val) = each($requestRaw))
 		{
-			$request[$val] = current($requestRaw);
+			$request[urldecode($val)] = urldecode(current($requestRaw));
 			next($requestRaw);
 		}
-
+		
 		// remove first element of the request array, is module and action in it
 		array_shift($request);
 
