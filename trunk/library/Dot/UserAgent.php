@@ -41,14 +41,13 @@ class Dot_UserAgent
 		{
 			$wurfl = Dot_UserAgent_Wurfl::getInstance();
 			$deviceInfo = $wurfl->getDevice($httpRequest['HTTP_USER_AGENT']);
-			return $deviceInfo;
 		}
 		else
 		{
 			$wurfl = Dot_UserAgent_WurflCloud::getInstance();
 			$deviceInfo = $wurfl->getDevice($httpRequest);
-			return $deviceInfo;
 		}
+		return $deviceInfo;
 	}
 	
 	/**

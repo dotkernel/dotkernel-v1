@@ -130,27 +130,12 @@ class Dot_UserAgent_WurflCloud
 	}
 	
 	/**
-	 * Return UserAgent
-	 * @param array $httpRequest
-	 * @return string with user agent
-	 */
-	private function _getUserAgent($httpRequest = null)
-	{
-		$userAgent = $_SERVER['HTTP_USER_AGENT'];
-		if(!empty($httpRequest))
-		{
-			$userAgent = $httpRequest['HTTP_USER_AGENT'];
-		}
-		return $userAgent;
-	}
-	
-	/**
 	 *  Return an array with device capabilities for your wurfl cloud account. This function is not using the cache
 	 * @access public
 	 * @param string $httpRequest
 	 * @return  array
 	 */
-	public function getDeviceCapabilities($httpRequest = null)
+	public function getDeviceCapabilities($httpRequest)
 	{
 		try {
 			$this->_wurflCloudClient->detectDevice($httpRequest);
@@ -168,10 +153,10 @@ class Dot_UserAgent_WurflCloud
 	 * @param object $httpRequest
 	 * @return array with short summary related to device
 	 */
-	public function getDevice($httpRequest = null)
+	public function getDevice($httpRequest)
 	{
 		// get user agent
-		$userAgent = $this->_getUserAgent($httpRequest);
+		$userAgent = $httpRequest['HTTP_USER_AGENT'];
 		// if cache is enabled in application.ini and APC is enabled
 		if($this->_cacheApc)
 		{
