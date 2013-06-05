@@ -281,7 +281,7 @@ class System extends Dot_Model
 	private function _listDirectory($directory)
 	{
 		$result = array();
-		if ($handle = opendir($directory)) 
+		if ($handle = opendir($directory))
 		{
 		   while (false !== ($file = readdir($handle))) 
 		   {
