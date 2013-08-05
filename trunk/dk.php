@@ -160,12 +160,12 @@ else
 	$apacheModule = (strpos($contents, 'mod_rewrite') !== false);
 	if($apacheModule)
 	{
-		$checkServer['apache_mod_rewrite'] = array('name' => 'mod_rewrite', 'status' => 'pass', 'value' => 'OK');
+		$checkServer['apache_mod_rewrite'] = array('name' => 'Apache mod_rewrite', 'status' => 'pass', 'value' => 'OK');
 	}
 	else
 	{
 		// if we don't have mod_rewrite, only some sort of CGI bridge
-		$checkServer['apache_mod_rewrite'] = array('name' => 'mod_rewrite', 
+		$checkServer['apache_mod_rewrite'] = array('name' => 'Url Rewrite', 
 																							'status' => 'confused', 
 																							'value' => strtoupper(PHP_SAPI));
 	}
