@@ -262,16 +262,27 @@ else
 	$test = false;
 }
 
-// check APC
-$apcVersion = phpversion('apc');
+// check APC . First for APCu, then if is not present, check for old APC
+$apcu= phpversion('apcu');
+if($apcu)
+{
+	$apcVersion = $apcu;
+	$apcExtensionName = 'APCu';
+}
+else 
+{
+	$apcVersion = phpversion('apc');
+	$apcExtensionName = 'APC';
+}
+
 if($apcVersion)
 {
-	$checkOptional['php_apc'] = array('name' => 'APC', 'status' => 'pass', 'value' => $apcVersion);
+	$checkOptional['php_apc'] = array('name' => $apcExtensionName , 'status' => 'pass', 'value' => $apcVersion);
 }
 else
 {
-	$checkOptional['php_apc'] = array('name' => 'APC', 'status' => 'hmmm', 
-					'value' => 'DotKernel recommend the use of APC extension for opcode caching. ');
+	$checkOptional['php_apc'] = array('name' => $apcExtensionName, 'status' => 'hmmm', 
+					'value' => 'DotKernel recommend the use of APC or APCu extension for local user value caching. ');
 }
 
 // check cURL
