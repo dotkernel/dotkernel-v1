@@ -49,6 +49,7 @@ class System_View extends View
 		$this->tpl->setVar('HOSTNAME' , System::getSystemHostname());
 		$this->tpl->setVar('MYSQL',$mysqlVersion);
 		$this->tpl->setVar('PHP',phpversion());
+		$this->tpl->setVar('APCNAME', $apcInfo['name']);
 		$this->tpl->setVar('APCVERSION', $apcInfo['version']);
 		if ($apcInfo['enabled'] == TRUE)
 		{
@@ -208,9 +209,10 @@ class System_View extends View
 	 * @access public
 	 * @return void
 	 */
-	public function showAPCInfo()
+	public function showAPCInfo($apcu=null)
 	{
 		$this->tpl->setFile('tpl_main', 'system/apcinfo.tpl');
+		$this->tpl->setVar('APC_FILE', 'apc' . $apcu);
 	}
 	/**
 	 * List the email transporter

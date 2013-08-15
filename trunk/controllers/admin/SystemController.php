@@ -77,8 +77,13 @@ switch ($registry->requestAction)
 		$systemView->showPHPInfo('phpinfo');
 	break;
 	case 'apc-info':
-		// display apc.php
-		$systemView->showAPCInfo();
+		// display APC or APCu
+		$apcu = NULL;
+		if(phpversion('apcu')) 
+		{
+			$apcu = 'u';
+		}
+		$systemView->showAPCInfo($apcu);
 	break;
 	case 'transporter-list':
 		$page = (isset($registry->request['page']) && $registry->request['page'] > 0) ? $registry->request['page'] : 1;
