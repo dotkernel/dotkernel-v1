@@ -18,7 +18,7 @@
 			<td>{PHP} ({PHPAPI}) &nbsp;&nbsp;[ <a href="{SITE_URL}/admin/system/phpinfo">PHP Info</a> ]</td>
 		</tr>
 		<tr>
-			<td>APC</td>
+			<td>{APCNAME}</td>
 			<td>{APCVERSION} ({APCSTATUS}) &nbsp;&nbsp;[ <a href="{SITE_URL}/admin/system/apc-info/">APC Info</a> ]</td>
 		</tr>
 		<tr>

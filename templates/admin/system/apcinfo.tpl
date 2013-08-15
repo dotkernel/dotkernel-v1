@@ -1,4 +1,4 @@
-<iframe src="{SITE_URL}/externals/apc.php" style="width:100%; height:100%;" id="apcFrame">
+<iframe src="{SITE_URL}/externals/{APC_FILE}.php" style="width:100%; height:100%;" id="apcFrame">
 </iframe>
 
 <script>

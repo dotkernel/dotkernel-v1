@@ -117,6 +117,7 @@ class System extends Dot_Model
 	/**
 	 * Get information about APC
 	 * Returns an array with the following elements:
+	 *    name: string with the name of the extension: either old APC or new APCu
 	 *    version: a string with the version of APC that is currently installed or an empty string if it's not installed
 	 *    enabled: boolean
 	 * @access public
@@ -125,7 +126,19 @@ class System extends Dot_Model
 	public function getAPCInfo()
 	{
 		$result = array();
-		$result["version"] = (phpversion('apc')===FALSE) ? "" : phpversion('apc');
+		// check APC . First for APCu, then if is not present, check for old APC
+		$apcu= phpversion('apcu');
+		if($apcu)
+		{
+			$apcVersion = $apcu;
+			$result["name"] = 'APCu';
+		}
+		else
+		{
+			$apcVersion = phpversion('apc');
+			$result["name"] = 'APC';
+		}		
+		$result["version"] = ($apcVersion===FALSE) ? "" : $apcVersion;
 		$result["enabled"] = (function_exists('apc_cache_info') && (@apc_cache_info() !== FALSE));
 		return $result;
 	}
