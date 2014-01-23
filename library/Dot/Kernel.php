@@ -34,7 +34,7 @@ class Dot_Kernel
 	{
 		$registry = Zend_Registry::getInstance();
 
-		$frontControllerPath = CONTROLLERS_PATH.'/' . $registry->requestModule . '/' . 'IndexController.php';
+		$frontControllerPath = CONTROLLERS_PATH . '/' . $registry->requestModule . '/' . 'IndexController.php';
 		if (file_exists($frontControllerPath))
 		{
 			require($frontControllerPath);
