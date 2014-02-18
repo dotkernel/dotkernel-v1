@@ -320,8 +320,10 @@ if (isset($MYREQUEST['IMG']))
 		$image = imagecreate($size+50, $size+10);
 
 	$col_white = imagecolorallocate($image, 0xFF, 0xFF, 0xFF);
-	$col_red   = imagecolorallocate($image, 0xD0, 0x60,  0x30);
-	$col_green = imagecolorallocate($image, 0x60, 0xF0, 0x60);
+	/*$col_red   = imagecolorallocate($image, 0xD0, 0x60,  0x30);*/
+	$col_red   = imagecolorallocate($image, 0xd9, 0x64,  0x4f);
+	/*$col_green = imagecolorallocate($image, 0x60, 0xF0, 0x60);*/
+	$col_green = imagecolorallocate($image, 0xBC, 0xE0, 0x2E);
 	$col_black = imagecolorallocate($image,   0,   0,   0);
 	imagecolortransparent($image,$col_white);
 
@@ -523,7 +525,7 @@ body,p,td,th,input,submit { font-size:0.8em;font-family:arial,helvetica,sans-ser
 td { vertical-align:top }
 a { color:black; font-weight:none; text-decoration:none; }
 a:hover { text-decoration:underline; }
-div.content { padding:1em 1em 1em 1em; position:absolute; width:97%; z-index:100; }
+div.content { padding: 0px; position:absolute; width:100%; z-index:100; }
 
 
 div.head div.login {
@@ -575,38 +577,28 @@ hr.apc {
 	padding:0;
 }
 
-ol,menu { margin:1em 0 0 0; padding:0.2em; margin-left:1em;}
+ol,menu { display:block; clear: both; margin:1em 0 2.5em 0em; padding: 0px;}
 ol.menu li { display:inline; margin-right:0.7em; list-style:none; font-size:85%}
 ol.menu a {
-	background:rgb(153,153,204);
-	border:solid rgb(102,102,153) 2px;
-	color:white;
+	background: #99E0FF;
+	color: #1A4862;
 	font-weight:bold;
-	margin-right:0em;
-	padding:0.1em 0.5em 0.1em 0.5em;
+	padding:0.8em 1.5em 0.8em 1.5em;
 	text-decoration:none;
-	margin-left: 5px;
 	}
 ol.menu a.child_active {
-	background:rgb(153,153,204);
-	border:solid rgb(102,102,153) 2px;
+	background: #3178A2;
 	color:white;
 	font-weight:bold;
-	margin-right:0em;
-	padding:0.1em 0.5em 0.1em 0.5em;
+	padding:0.8em 1.5em 0.8em 1.5em;
 	text-decoration:none;
-	border-left: solid black 5px;
-	margin-left: 0px;
 	}
 ol.menu span.active {
-	background:rgb(153,153,204);
-	border:solid rgb(102,102,153) 2px;
-	color:black;
+	background: #3178A2;
+	color:white;
 	font-weight:bold;
-	margin-right:0em;
-	padding:0.1em 0.5em 0.1em 0.5em;
+	padding:0.8em 1.5em 0.8em 1.5em;
 	text-decoration:none;
-	border-left: solid black 5px;
 	}
 ol.menu span.inactive {
 	background:rgb(193,193,244);
@@ -619,40 +611,42 @@ ol.menu span.inactive {
 	margin-left: 5px;
 	}
 ol.menu a:hover {
-	background:rgb(193,193,244);
+	background: #3178A2;
+	color: white;
 	text-decoration:none;
 	}
 	
 	
 div.info {
-	background:rgb(204,204,204);
-	border:solid rgb(204,204,204) 1px;
+	/*background:rgb(204,204,204);*/
+	/*border:solid rgb(204,204,204) 1px;*/
 	margin-bottom:1em;
 	}
 div.info h2 {
-	background:rgb(204,204,204);
-	color:black;
-	font-size:1em;
+	background: #1A4863;
+	color: #ffffff;
+	font-size: 1.2em;
+	font-family: Arial, sans-serif;
 	margin:0;
-	padding:0.1em 1em 0.1em 1em;
+	padding:0.5em 1em 0.5em 1em;
 	}
 div.info table {
-	border:solid rgb(204,204,204) 1px;
-	border-spacing:0;
+	/*border:solid rgb(204,204,204) 1px;
+	border-spacing:0;*/
 	width:100%;
 	}
 div.info table th {
-	background:rgb(204,204,204);
+	background: #1A4762;
 	color:white;
 	margin:0;
-	padding:0.1em 1em 0.1em 1em;
+	padding:0.5em 1em 0.5em 1em;
 	}
-div.info table th a.sortable { color:black; }
-div.info table tr.tr-0 { background:rgb(238,238,238); }
-div.info table tr.tr-1 { background:rgb(221,221,221); }
-div.info table td { padding:0.3em 1em 0.3em 1em; }
-div.info table td.td-0 { border-right:solid rgb(102,102,153) 1px; white-space:nowrap; }
-div.info table td.td-n { border-right:solid rgb(102,102,153) 1px; }
+div.info table th a.sortable { color:white; }
+div.info table tr.tr-0 { background: #FFFFFF; }
+div.info table tr.tr-1 { background: #EEEEEE; }
+div.info table td { padding:0.5em 1em 0.5em 1em; }
+div.info table td.td-0 { /*border-right:solid rgb(102,102,153) 1px;*/ white-space:nowrap; }
+div.info table td.td-n { /*border-right:solid rgb(102,102,153) 1px;*/ }
 div.info table td h3 {
 	color:black;
 	font-size:1.1em;
@@ -660,21 +654,21 @@ div.info table td h3 {
 	}
 
 div.graph { margin-bottom:1em }
-div.graph h2 { background:rgb(204,204,204);; color:black; font-size:1em; margin:0; padding:0.1em 1em 0.1em 1em; }
-div.graph table { border:solid rgb(204,204,204) 1px; color:black; font-weight:normal; width:100%; }
-div.graph table td.td-0 { background:rgb(238,238,238); }
-div.graph table td.td-1 { background:rgb(221,221,221); }
+div.graph h2 { background: #1A4863; color: #FFFFFF; font-size:1.2em; margin:0; padding:0.5em 1em 0.5em 1em; }
+div.graph table { color:black; font-weight:normal; width:100%; }
+/*div.graph table td.td-0 { background:rgb(238,238,238); }
+div.graph table td.td-1 { background:rgb(221,221,221); }*/
 div.graph table td { padding:0.2em 1em 0.4em 1em; }
 
 div.div1,div.div2 { margin-bottom:1em; width:35em; }
-div.div3 { position:absolute; left:40em; top:1em; width:580px; }
+div.div3 { position:absolute; left:40em; top:0em; width:580px; }
 //div.div3 { position:absolute; left:37em; top:1em; right:1em; }
 
-div.sorting { margin:1.5em 0em 1.5em 2em }
+div.sorting { margin: 0.5em 0em 2.5em 0em }
 .center { text-align:center }
 .aright { position:absolute;right:1em }
 .right { text-align:right }
-.ok { color:rgb(0,200,0); font-weight:bold}
+.ok { color:#71af1d; font-weight:bold}
 .failed { color:rgb(200,0,0); font-weight:bold}
 
 span.box {
@@ -684,8 +678,8 @@ span.box {
 	padding:0 0.5em 0 0.5em;
 	margin-right:1em;
 }
-span.green { background:#60F060; padding:0 0.5em 0 0.5em}
-span.red { background:#D06030; padding:0 0.5em 0 0.5em }
+span.green { background: #BCE02E; padding:0 0.5em 0 0.5em}
+span.red { background: #d9644f; padding:0 0.5em 0 0.5em }
 
 div.authneeded {
 	background:rgb(238,238,238);
@@ -698,13 +692,34 @@ div.authneeded {
 	}
 	
 input {
-	background:rgb(153,153,204);
-	border:solid rgb(102,102,153) 2px;
+	background: #1D4B66;
+	border:solid #1D4B66 1px;
 	color:white;
 	font-weight:bold;
 	margin-right:1em;
 	padding:0.1em 0.5em 0.1em 0.5em;
 	}
+input[type="text"] { background-color: #FFFFFF; color: #000000; font-weight: normal; }
+.list_table{
+	color:#222222;
+	background-color: #E3EBEF;
+	border-spacing: 1px;
+}
+.list_table td{
+
+	background-color:#FFF;
+	color: #3B3B3B;
+	padding: 10px;
+	line-height: 18px;
+	text-align:left;
+}
+.list_table tbody td.td-0{
+	background: none repeat scroll 0 0 #FFFFFF/*#F8F8F8*/;
+}
+.list_table.cache_entries { width: 99.5%;}
+.list_table tr.tr-0 td { background: #FFFFFF; }
+.list_table tr.tr-1 td { background: #EEEEEE; }
+
 //-->
 </style>
 </head>
@@ -757,7 +772,7 @@ case OB_HOST_STATS:
 	$i=0;
 	echo <<< EOB
 		<div class="info div1"><h2>General Cache Information</h2>
-		<table cellspacing=0><tbody>
+		<table class="list_table"cellspacing=0><tbody>
 		<tr class=tr-0><td class=td-0>APCu Version</td><td>$apcversion</td></tr>
 		<tr class=tr-1><td class=td-0>PHP Version</td><td>$phpversion</td></tr>
 EOB;
@@ -780,7 +795,7 @@ EOB;
 		</div>
 
 		<div class="info div1"><h2>Cache Information</h2>
-		<table cellspacing=0>
+		<table class="list_table" cellspacing=0>
 		<tbody>
     		<tr class=tr-0><td class=td-0>Cached Variables</td><td>$number_vars ($size_vars)</td></tr>
 			<tr class=tr-1><td class=td-0>Hits</td><td>{$cache['nhits']}</td></tr>
@@ -794,7 +809,7 @@ EOB;
 		</table>
 		</div>
 
-		<div class="info div2"><h2>Runtime Settings</h2><table cellspacing=0><tbody>
+		<div class="info div2"><h2>Runtime Settings</h2><table class="list_table"cellspacing=0><tbody>
 EOB;
 
 	$j = 0;
@@ -813,7 +828,7 @@ EOB;
 		</div>
 
 		<div class="graph div3"><h2>Host Status Diagrams</h2>
-		<table cellspacing=0><tbody>
+		<table class="list_table" cellspacing=0><tbody>
 EOB;
 	$size='width='.(GRAPH_SIZE+50).' height='.(GRAPH_SIZE+10);
 echo <<<EOB
@@ -842,7 +857,7 @@ EOB;
 
 		<br/>
 		<h2>Detailed Memory Usage and Fragmentation</h2>
-		<table cellspacing=0><tbody>
+		<table class="list_table"cellspacing=0><tbody>
 		<tr>
 		<td class=td-0 colspan=2><br/>
 EOB;
@@ -961,7 +976,7 @@ EOB;
   }
 
   echo
-		'<div class="info"><table cellspacing=0><tbody>',
+		'<div class="info"><table class="list_table cache_entries" cellspacing=0><tbody>',
 		'<tr>',
 		'<th>',sortheader('S',$fieldheading,  "&OB=".$MYREQUEST['OB']),'</th>',
 		'<th>',sortheader('H','Hits',         "&OB=".$MYREQUEST['OB']),'</th>',
@@ -1042,7 +1057,7 @@ EOB;
         echo '</tr>';
 		if ($sh == $MYREQUEST["SH"]) {
 			echo '<tr>';
-			echo '<td colspan="7"><pre>'.print_r(apcu_fetch($entry['key']), 1).'</pre></td>';
+			echo '<td colspan="7" bgcolor="#DDDDDD" style="border-top: 1px solid #666699; border-bottom: 1px solid #666699;"><pre style="white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word;">'.print_r(apcu_fetch($entry['key']), 1).'</pre></td>';
 			echo '</tr>';
 		}
         $i++;
@@ -1073,10 +1088,8 @@ EOB;
 case OB_VERSION_CHECK:
 	echo <<<EOB
 		<div class="info"><h2>APCu Version Information</h2>
-		<table cellspacing=0><tbody>
-		<tr>
-		<th></th>
-		</tr>
+		<table class="list_table" cellspacing=0><tbody>
+
 EOB;
   if (defined('PROXY')) {
     $ctxt = stream_context_create( array( 'http' => array( 'proxy' => PROXY, 'request_fulluri' => True ) ) );
