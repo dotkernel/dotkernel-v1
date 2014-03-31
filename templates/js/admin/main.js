@@ -320,15 +320,15 @@ function lineChart(elementId, timeActivity, noDataMessage, colors){
  * Show/Hide div ID
  * @param {String} id
  */
-function ShowHideDiv (id)
+function ShowHideDiv (idv, classv)
 {
-	var current_status = document.getElementById(id).style.display;
-	if (current_status === 'none')
+	if ($('#' + idv).is(':visible'))
 	{
-		document.getElementById(id).style.display = '';
+		$('#' + idv).hide();
 	}
-	else 
+	else
 	{
-		document.getElementById(id).style.display = 'none';
+		$('.' + classv).hide();
+		$('#' + idv).show();
 	}
 }

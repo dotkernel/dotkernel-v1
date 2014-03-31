@@ -19,18 +19,20 @@
 	border: 0px;
 	margin: 0px;
 	font-size: 10px;
-	font-family: trebuchet ms,lucida sans unicode,sans-serif;
-	width:100%;
+	font-family:Consolas, monospace;
+	width:auto;
+	padding: 0px 15px;
 }
 .debuggertable{
 	border: 0px;
 	margin: 10px 0px 10px 0px;
 	font-size: 10px;
-	font-family: trebuchet ms,lucida sans unicode,sans-serif;
+	font-family:Consolas, monospace;
 	width:100%;
 	background-color: #E2E2E2;
 	width:100%;
 	border-spacing: 1px;
+	border-collapse: separate;
 }
 .index_debugger{
 	border: 0px;
@@ -41,7 +43,7 @@
 	padding: 0px 0px 0px 0px;
 }
 .index_debugger span{
-	color: #6B6B6B;
+	color: #4E4E4E;
 }
 .debugger_images{
 	float: left;
@@ -68,11 +70,15 @@
 
 .debugger_1 {
 	background-color: #FFFFFF;
+	color: #333333;
+	letter-spacing: 0.5px;
 }
 
 .debugger_2 {
 	background-color: #F7F7F7;
 	border: 1px solid #FFFFFF;
+	color: #333333;
+	letter-spacing: 0.5px;
 }
 
 .debugger_1_params {
@@ -114,3 +120,23 @@
 .db_debug_rows{
 	clear: both;
 }
+
+.details_debugger_opcache{
+	cursor: pointer;
+	float: left;
+	margin-right: 3px;
+	height: 21px;
+	line-height: 21px;
+}
+.debugger_opcache{
+	float: left;
+	margin-right: 3px;
+	width: 250px;
+	height: 21px;
+	line-height: 21px;
+}
+.opcache_debug_rows{
+	clear: both;
+	width: 1000px;
+}
+.opcache_debug_rows tr td.debugger_1 { width: 150px; }

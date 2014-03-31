@@ -13,17 +13,23 @@
 	<div class="total_time"><img src="{SITE_URL}/images/debugbar/time.png" class="debugger_images" alt="Page generated"><span>Page generated in:</span> {TOTAL_GENERAL_TIME} ms  </div>
 	<!-- END total_time -->
 	<!-- BEGIN memory_usage -->
-	<div class="memory_usage"><img src="{SITE_URL}/images/debugbar/memory.png" class="debugger_images" alt="Memory usage"><span>Memory usage:</span> {MEMORY_USAGE} MB </div>
+	<div class="memory_usage"><img src="{SITE_URL}/images/debugbar/memory.png" class="debugger_images" alt="Memory usage"><span>Memory usage:</span> {MEMORY_USAGE} </div>
 	<!-- END memory_usage -->
 	<!-- BEGIN details_db_debug -->
-	<div class="details_debugger_db" onclick="ShowHideDiv('db');"><img src="{SITE_URL}/images/debugbar/database.png" class="debugger_images" alt="Executed queries"><span>Executed queries:</span> {TOTAL_QUERIES}, in {TOTAL_TIME} ms. </div>
+	<div class="details_debugger_db" id="dbclick" onclick="ShowHideDiv('db', 'showhidediv')"><img src="{SITE_URL}/images/debugbar/database.png" class="debugger_images" alt="Executed queries"><span>Executed queries:</span> {TOTAL_QUERIES}, in {TOTAL_TIME} ms. </div>
 	<!-- END details_db_debug -->
 	<!-- BEGIN db_debug -->
 	<div class="debugger_db"><img src="{SITE_URL}/images/debugbar/database.png" class="debugger_images" alt="Executed queries"><span>Executed queries :</span> {TOTAL_QUERIES}, in {TOTAL_TIME} ms.</div>
 	<!-- END db_debug -->
+	<!-- BEGIN details_opcache_memory -->
+	<div class="details_debugger_opcache" id="opcacheclick" onclick="ShowHideDiv('opcache', 'showhidediv')"><img src="{SITE_URL}/images/debugbar/cache.png" class="debugger_images" alt="OpCache usage"><span>OpCache usage:</span> {OPCACHE_MEMORY}</div>
+	<!-- END details_opcache_memory -->
+	<!-- BEGIN opcache_memory -->
+	<div class="debugger_opcache"><img src="{SITE_URL}/images/debugbar/cache.png" class="debugger_images" alt="OpCache usage"><span>OpCache usage:</span> {OPCACHE_MEMORY}</div>
+	<!-- END opcache_memory -->
 
 	<!-- BEGIN if_show_debug -->
-	<div id="db" style="display: {INITIAL_DISPLAY};" class="db_debug_rows" >
+	<div id="db" style="display: {INITIAL_DISPLAY};" class="db_debug_rows showhidediv" >
 		<table class="debuggertable">
 			<tr>
 				<th width="70">Query #</th>
@@ -73,4 +79,55 @@
 		</table>
 	</div>
 	<!-- END if_show_debug -->
+	
+	<!-- BEGIN if_show_opcache -->
+	<div id="opcache" style="display: {OPCACHE_INITIAL_DISPLAY};" class="opcache_debug_rows showhidediv" >
+		<table class="debuggertable">
+			<tr>
+				<th colspan="8">OpCache Statistics</th>
+			</tr>
+			<tr>
+				<td class="debugger_1"><b>Used memory</b> : </td>
+				<td class="debugger_2">{USED_MEMORY}</td>
+				<td class="debugger_1"><b>Cached keys</b> : </td>
+				<td class="debugger_2">{CACHED_KEYS}</td>
+				<td class="debugger_1"><b>Blacklist misses</b> : </td>
+				<td class="debugger_2">{BLACKLIST_MISSES}</td>
+				<td class="debugger_1"><b>Last restart</b> : </td>
+				<td class="debugger_2">{LAST_RESTART}</td>
+			</tr>
+			<tr>
+				<td class="debugger_1"><b>Wasted memory</b> : </td>
+				<td class="debugger_2">{WASTED_MEMORY}</td>
+				<td class="debugger_1"><b>Max cached keys</b> : </td>
+				<td class="debugger_2">{MAX_CACHED_KEYS}</td>
+				<td class="debugger_1"><b>Miss ratio</b> : </td>
+				<td class="debugger_2">{MISS_RATIO}</td>
+				<td class="debugger_1"><b>Oom restart</b> : </td>
+				<td class="debugger_2">{OOM_RESTART}</td>	
+			</tr>
+			<tr>
+				<td class="debugger_1"><b>Currently wasted</b> : </td>
+				<td class="debugger_2">{CURRENTLY_WASTED}</td>
+				<td class="debugger_1"><b>Hits</b> : </td>
+				<td class="debugger_2">{HITS}</td>
+				<td class="debugger_1"><b>Opcache hit rate</b> : </td>
+				<td class="debugger_2">{OPCACHE_HIT_RATE}</td>
+				<td class="debugger_1"><b>Hash restarts</b> : </td>
+				<td class="debugger_2">{HASH_RESTARTS}</td>
+			</tr>
+			<tr>
+				<td class="debugger_1"><b>Cached scripts</b> : </td>
+				<td class="debugger_2">{CACHED_SCRIPTS}</td>
+				<td class="debugger_1"><b>Misses</b> : </td>
+				<td class="debugger_2">{MISSES}</td>
+				<td class="debugger_1"><b>Start time</b> : </td>
+				<td class="debugger_2">{START_TIME}</td>
+				<td class="debugger_1"><b>Manual restarts</b> : </td>
+				<td class="debugger_2">{MANUAL_RESTARTS}</td>
+			</tr>
+		</table>
+	</div>
+	<!-- END if_show_opcache -->
+	
 </div>

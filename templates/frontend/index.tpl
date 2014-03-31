@@ -42,9 +42,9 @@
 	<footer>
 		<div id="footer-content">
 			{MENU_FOOTER}
-			<div class="debugger">
-				{DEBUGGER}
-			</div>
+		</div>
+		<div class="debugger">
+			{DEBUGGER}
 		</div>
 	</footer>
 </body>
