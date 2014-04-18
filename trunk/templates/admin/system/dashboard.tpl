@@ -102,16 +102,35 @@
 	<!-- END warnings -->
 </fieldset>
 
-<div style="width: 500px;float: left;margin-right: 50px;">
-	<fieldset>
-		{WIDGET_USER_LOGINS}
-	</fieldset>
-	<fieldset>
-		{WIDGET_TOP_USERS}
-	</fieldset>
-</div>
-<div style="width: 500px;float: left;margin-right: 50px;">
-	<fieldset>
-		{WIDGET_TIME_ACTIVITY}
-	</fieldset>
+<div class="clearfix" style="width: 800px; float: left;">
+	<div style="width: 250px; float: left; margin-right: 25px;">
+		<fieldset>
+			{WIDGET_MEMORY}
+		</fieldset>
+	</div>
+	<div style="width: 250px; float: left; margin-right: 25px;">
+		<fieldset>
+			{WIDGET_KEYS}
+		</fieldset>
+	</div>
+	<div style="width: 250px; float: left;">
+		<fieldset>
+			{WIDGET_HITS}
+		</fieldset>
+	</div>
+	<div style="width: 800px; float: left; margin-right: 50px;">
+		<fieldset>
+			{WIDGET_TIME_ACTIVITY}
+		</fieldset>
+	</div>
+	<div style="width: 380px; float: left; margin-right: 40px;">
+		<fieldset>
+			{WIDGET_USER_LOGINS}
+		</fieldset>
+	</div>
+	<div style="width: 380px; float: left;">
+		<fieldset>
+			{WIDGET_TOP_USERS}
+		</fieldset>
+	</div>
 </div>

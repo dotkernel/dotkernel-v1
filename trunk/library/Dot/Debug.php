@@ -103,13 +103,6 @@ class Dot_Debug
 		$this->tpl = $tpl;
 		$this->__startTime = $registry['startTime'];
 		$this->__module = $registry->requestModule;
-		if (function_exists('opcache_get_status'))
-		{
-			$this->__opCache = opcache_get_status();
-		}else
-		{
-			$this->__opCache = NULL;
-		}
 	}
 	
 	/**
@@ -336,6 +329,8 @@ class Dot_Debug
 	 */
 	private function _showOpCacheMemoryUsage ()
 	{
+		$opCache = new Dot_OpCache($this->tpl);
+		$status = $opCache->status();
 		if ($this->opCacheDetails)
 		{
 			$this->tpl->setVar('OPCACHE_INITIAL_DISPLAY', 'block');
@@ -344,48 +339,48 @@ class Dot_Debug
 		{
 			$this->tpl->setVar('OPCACHE_INITIAL_DISPLAY', 'none');
 		}
-		if ( $this->__opCache !== NULL)
+		if ( $status !== NULL)
 		{
-			$memory_free = $this->bsize($this->__opCache['memory_usage']['free_memory']);
-			$memory_all = $this->bsize($this->__opCache['memory_usage']['free_memory'] + $this->__opCache['memory_usage']['used_memory'] + $this->__opCache['memory_usage']['wasted_memory']);
+			$memory_free = $this->bsize($status['memory_usage']['free_memory']);
+			$memory_all = $this->bsize($status['memory_usage']['free_memory'] + $status['memory_usage']['used_memory'] + $status['memory_usage']['wasted_memory']);
 			$memory = $memory_free . ' free of ' . $memory_all;
-			if (isset($this->__opCache['opcache_statistics']['start_time']))
+			if (isset($status['opcache_statistics']['start_time']))
 			{
-				$startTime = date("H:i:s d-m-Y", $this->__opCache['opcache_statistics']['start_time']);
+				$startTime = date("H:i:s d-m-Y", $status['opcache_statistics']['start_time']);
 			}
 			else
 			{
 				$startTime = NULL;
 			}
-			if (isset($this->__opCache['opcache_statistics']['last_restart_time']))
+			if (isset($status['opcache_statistics']['last_restart_time']))
 			{
-				$restartTime = date("H:i:s d-m-Y", $this->__opCache['opcache_statistics']['last_restart_time']);
+				$restartTime = date("H:i:s d-m-Y", $status['opcache_statistics']['last_restart_time']);
 			}
 			else
 			{
 				$restartTime = NULL;
 			}
-			$this->tpl->setVar('CACHED_SCRIPTS', $this->__opCache['opcache_statistics']['num_cached_scripts']);
-			$this->tpl->setVar('CACHED_KEYS', $this->__opCache['opcache_statistics']['num_cached_keys']);
-			$this->tpl->setVar('MAX_CACHED_KEYS', $this->__opCache['opcache_statistics']['max_cached_keys']);
-			$this->tpl->setVar('HITS', $this->__opCache['opcache_statistics']['hits']);
-			$this->tpl->setVar('MISSES', $this->__opCache['opcache_statistics']['misses']);
-			$this->tpl->setVar('BLACKLIST_MISSES', $this->__opCache['opcache_statistics']['blacklist_misses']);
-			$this->tpl->setVar('MISS_RATIO', round($this->__opCache['opcache_statistics']['blacklist_miss_ratio'], 2));
-			$this->tpl->setVar('OPCACHE_HIT_RATE', round($this->__opCache['opcache_statistics']['opcache_hit_rate'], 2) . '%');
-			$this->tpl->setVar('BLACKLIST_MISSES', $this->__opCache['opcache_statistics']['blacklist_misses']);
+			$this->tpl->setVar('CACHED_SCRIPTS', $status['opcache_statistics']['num_cached_scripts']);
+			$this->tpl->setVar('CACHED_KEYS', $status['opcache_statistics']['num_cached_keys']);
+			$this->tpl->setVar('MAX_CACHED_KEYS', $status['opcache_statistics']['max_cached_keys']);
+			$this->tpl->setVar('HITS', $status['opcache_statistics']['hits']);
+			$this->tpl->setVar('MISSES', $status['opcache_statistics']['misses']);
+			$this->tpl->setVar('BLACKLIST_MISSES', $status['opcache_statistics']['blacklist_misses']);
+			$this->tpl->setVar('MISS_RATIO', round($status['opcache_statistics']['blacklist_miss_ratio'], 2));
+			$this->tpl->setVar('OPCACHE_HIT_RATE', round($status['opcache_statistics']['opcache_hit_rate'], 2) . '%');
+			$this->tpl->setVar('BLACKLIST_MISSES', $status['opcache_statistics']['blacklist_misses']);
 			$this->tpl->setVar('START_TIME', $startTime);
 			$this->tpl->setVar('LAST_RESTART', $restartTime);
-			$this->tpl->setVar('OOM_RESTART', $this->__opCache['opcache_statistics']['oom_restarts']);
-			$this->tpl->setVar('HASH_RESTARTS', $this->__opCache['opcache_statistics']['hash_restarts']);
-			$this->tpl->setVar('MANUAL_RESTARTS', $this->__opCache['opcache_statistics']['manual_restarts']);
-			$this->tpl->setVar('USED_MEMORY', $this->bsize($this->__opCache['memory_usage']['used_memory']));
-			$this->tpl->setVar('WASTED_MEMORY', $this->bsize($this->__opCache['memory_usage']['wasted_memory']));
-			$this->tpl->setVar('CURRENTLY_WASTED', round($this->__opCache['memory_usage']['current_wasted_percentage'], 2) . '%');
+			$this->tpl->setVar('OOM_RESTART', $status['opcache_statistics']['oom_restarts']);
+			$this->tpl->setVar('HASH_RESTARTS', $status['opcache_statistics']['hash_restarts']);
+			$this->tpl->setVar('MANUAL_RESTARTS', $status['opcache_statistics']['manual_restarts']);
+			$this->tpl->setVar('USED_MEMORY', $this->bsize($status['memory_usage']['used_memory']));
+			$this->tpl->setVar('WASTED_MEMORY', $this->bsize($status['memory_usage']['wasted_memory']));
+			$this->tpl->setVar('CURRENTLY_WASTED', round($status['memory_usage']['current_wasted_percentage'], 2) . '%');
 		}
 		else
 		{
-			$memory = 'No Data!';
+			$memory = 'Not installed!';
 			$this->allowOpCacheDetails = false;
 		}
 		
@@ -434,103 +429,5 @@ class Dot_Debug
 	{
 		$this->tpl->setVar('DOT_VERSION', Dot_Kernel::VERSION);
 		$this->tpl->parse('dot_version_block', 'dot_version', true);
-	}
-	
-	/**
-	 * Display the widget: Memory Piechart
-	 * @access public
-	 * @param array $widgetOption
-	 * @return void
-	 */
-	public function generateMemoryPiechart($widgetOption)
-	{
-		$data = array();
-		// pie chart data
-		if ( $this->__opCache !== NULL)
-		{
-			$data[] = array('label' => 'Free ' . $this->bsize($this->__opCache['memory_usage']['free_memory']),
-							'data' => $this->__opCache['memory_usage']['free_memory']);
-			$data[] = array('label' => 'Wasted ' . $this->bsize($this->__opCache['memory_usage']['wasted_memory']),
-							'data' => $this->__opCache['memory_usage']['wasted_memory']);
-			$data[] = array('label' => 'Used ' . $this->bsize($this->__opCache['memory_usage']['used_memory']),
-							'data' => $this->__opCache['memory_usage']['used_memory']);
-		}
-		//parse countries
-		$jsonString = Zend_Json::encode($data);
-		$jsonString = preg_replace('/\{/', '{ ', $jsonString);
-		$this->tpl->setVar('PIECHART_DATA', $jsonString);
-		//parse colors
-		$jsonString = Zend_Json::encode($widgetOption['colorCharts']['color']);
-		$jsonString = preg_replace('/\{/', '{ ', $jsonString);
-		$this->tpl->setVar('PIECHART_COLOR', $jsonString);
-	}
-	
-	/**
-	 * Display the widget: Keys Piechart
-	 * @access public
-	 * @param array $widgetOption
-	 * @return void
-	 */
-	public function generateKeysPiechart($widgetOption)
-	{
-		// pie chart data
-		$data = array();	
-		if ( $this->__opCache !== NULL)
-		{
-			$data[] = array('label' => 'Free ' . ($this->__opCache['opcache_statistics']['max_cached_keys'] - $this->__opCache['opcache_statistics']['num_cached_keys']),
-							'data' => $this->__opCache['opcache_statistics']['max_cached_keys'] - $this->__opCache['opcache_statistics']['num_cached_keys']);
-			$data[] = array('label' => 'Wasted ' . ($this->__opCache['opcache_statistics']['num_cached_keys'] - $this->__opCache['opcache_statistics']['num_cached_scripts']),
-							'data' => $this->__opCache['opcache_statistics']['num_cached_keys'] - $this->__opCache['opcache_statistics']['num_cached_scripts']);
-			$data[] = array('label' => 'Used ' . $this->__opCache['opcache_statistics']['num_cached_scripts'],
-							'data' => $this->__opCache['opcache_statistics']['num_cached_scripts']);
-		}
-		//parse countries
-		$jsonString = Zend_Json::encode($data);
-		$jsonString = preg_replace('/\{/', '{ ', $jsonString);
-		$this->tpl->setVar('PIECHART_DATA', $jsonString);
-		//parse colors
-		$jsonString = Zend_Json::encode($widgetOption['colorCharts']['color']);
-		$jsonString = preg_replace('/\{/', '{ ', $jsonString);
-		$this->tpl->setVar('PIECHART_COLOR', $jsonString);
-	}
-	
-	/**
-	 * Display the widget: Hits Piechart
-	 * @access public
-	 * @param array $widgetOption
-	 * @return void
-	 */
-	public function generateHitsPiechart($widgetOption)
-	{
-		$data = array();
-		if ( $this->__opCache !== NULL)
-		{
-			$data[] = array('label' => 'Hits ' . $this->__opCache['opcache_statistics']['hits'],
-							'data' => $this->__opCache['opcache_statistics']['hits']);
-			$data[] = array('label' => 'Misses ' . $this->__opCache['opcache_statistics']['misses'],
-							'data' => $this->__opCache['opcache_statistics']['misses']);
-			$data[] = array('label' => 'Blacklist ' . $this->__opCache['opcache_statistics']['blacklist_misses'],
-							'data' => $this->__opCache['opcache_statistics']['blacklist_misses']);
-		}
-		//parse countries
-		$jsonString = Zend_Json::encode($data);
-		$jsonString = preg_replace('/\{/', '{ ', $jsonString);
-		$this->tpl->setVar('PIECHART_DATA', $jsonString);
-		//parse colors
-		$jsonString = Zend_Json::encode($widgetOption['colorCharts']['color']);
-		$jsonString = preg_replace('/\{/', '{ ', $jsonString);
-		$this->tpl->setVar('PIECHART_COLOR', $jsonString);
-	}
-	
-	/**
-	 * Get informations about memory
-	 * @param void
-	 * @access public
-	 * @return array
-	 */
-	public function getMemoryInfo()
-	{
-		
-		return $data;
 	}
 }

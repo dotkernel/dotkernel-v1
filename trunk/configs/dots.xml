@@ -18,6 +18,39 @@ current xml dots file. -->
 			</warningMessage>
 			<widgets>
 				<content>
+					<token>WIDGET_MEMORY</token>
+					<message>
+						<noMemory>No memory data!</noMemory>
+					</message>
+					<colorCharts>
+						<color>#BCE02E</color>
+						<color>#E0642E</color>
+						<color>#2E97E0</color>
+					</colorCharts>
+				</content>
+				<content>
+					<token>WIDGET_KEYS</token>
+					<message>
+						<noUserLogin>No keys data!</noUserLogin>
+					</message>					
+					<colorCharts>
+						<color>#BCE02E</color>
+						<color>#E0642E</color>
+						<color>#2E97E0</color>
+					</colorCharts>
+				</content>
+				<content>
+					<token>WIDGET_HITS</token>
+					<message>
+						<noHits>No hits data!</noHits>
+					</message>					
+					<colorCharts>
+						<color>#BCE02E</color>
+						<color>#E0642E</color>
+						<color>#2E97E0</color>
+					</colorCharts>
+				</content>
+				<content>
 					<token>WIDGET_USER_LOGINS</token>
 					<countCountryUserLogin>10</countCountryUserLogin>
 					<message>

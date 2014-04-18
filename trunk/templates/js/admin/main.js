@@ -153,9 +153,9 @@ function pieChart(elementId, userLogins, noDataMessage, colors){
 			}
 		},
 		legend: {
-			width: 170,
+			width: 120,
 			layout: "vertical",
-			align: "right",
+			align: "center",
 			verticalAlign: "top",
 			borderWidth: 0,
 			labelFormatter: function() {
