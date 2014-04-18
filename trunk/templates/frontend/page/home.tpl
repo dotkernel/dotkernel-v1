@@ -1,6 +1,5 @@
 	<style>
 		.info{
-			width:100%;
 			margin:20px auto;
 			background-color:#EEF2F5;
 			padding:15px;
@@ -14,10 +13,12 @@
 		#documentation{
 			float:left;
 			width:47%;
+			word-wrap: break-word;
 		}
 		#download{
 			float:right;
 			width:47%;
+			word-wrap: break-word;
 		}
 		</style>
 	<div class="info">

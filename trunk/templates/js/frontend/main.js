@@ -34,3 +34,23 @@ function ShowHideDiv (idv, classv)
 		$('#' + idv).show();
 	}
 }
+
+/**
+ * Show/Hide top menu
+ * @param void
+ */
+function ShowTopMenu ()
+{
+	if ($('#top_menu').is(':visible'))
+	{
+		$('#top_menu').slideUp("slow", function() {
+			
+		});
+	}
+	else
+	{
+		$('#top_menu').slideDown("slow", function() {
+			
+		});
+	}
+}
