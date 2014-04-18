@@ -403,12 +403,15 @@ class View extends Dot_Template
 	 */
 	public function displayWidgets($value)
 	{
+		$tpl = View::getInstance(TEMPLATES_PATH . '/' . $this->requestModule);
+		$tpl->init();
+		$opCache = new Dot_OpCache($tpl);
 		// if we have only one widget, Zend_Config_Xml return a simple array, not an array with key 0(zero)
 		if(is_null($value->{0}))
 		{
-			$value = new Zend_Config(array(0=>$value));						
+			$value = new Zend_Config(array(0=>$value));
 		}
-		$widgets = $value->toArray();		
+		$widgets = $value->toArray();
 		foreach ($widgets as $key =>$val)
 		{
 			if($this->varExists($val['token']))
@@ -417,8 +420,17 @@ class View extends Dot_Template
 				$this->setFile('tpl_widget', 'blocks/' . strtolower($val['token']) . '.tpl');
 				switch ($val['token']) 
 				{
-					case 'WIDGET_USER_LOGINS':						
-						$this->_displayUserLoginsPiechart($val);												
+					case 'WIDGET_MEMORY':
+						$opCache->generateMemoryPiechart($val);
+						break;
+					case 'WIDGET_KEYS':
+						$opCache->generateKeysPiechart($val);
+						break;
+					case 'WIDGET_HITS':
+						$opCache->generateHitsPiechart($val);
+						break;
+					case 'WIDGET_USER_LOGINS':
+						$this->_displayUserLoginsPiechart($val);
 					break;
 					case 'WIDGET_TOP_USERS':
 						$this->_displayTopUsersColumnchart($val);
