@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.1
+-- version 4.1.14
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2011 at 04:33 AM
--- Server version: 5.1.50
--- PHP Version: 5.3.5
+-- Generation Time: May 07, 2014 at 01:57 AM
+-- Server version: 5.5.23
+-- PHP Version: 5.5.12
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -21,17 +21,17 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 CREATE TABLE IF NOT EXISTS `admin` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) NOT NULL,
+  `username` varchar(150) NOT NULL,
   `password` varchar(64) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `firstName` varchar(255) NOT NULL,
-  `lastName` varchar(255) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `firstName` varchar(150) NOT NULL,
+  `lastName` varchar(150) NOT NULL,
   `dateCreated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `isActive` enum('0','1') NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `admin`
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `adminLogin` (
   KEY `adminId` (`adminId`),
   CONSTRAINT `fk_adminLogin_admin` FOREIGN KEY (`adminId`) REFERENCES `admin` (`id`)
     ON DELETE CASCADE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `emailTransporter` (
   `counter` int(11) NOT NULL DEFAULT '0',
   `isActive` enum('1','0') NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 -- --------------------------------------------------------
 
 --
@@ -87,9 +87,9 @@ CREATE TABLE IF NOT EXISTS `emailTransporter` (
 CREATE TABLE IF NOT EXISTS `statisticVisit` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `ip` varchar(16) NOT NULL,
-  `proxyIp` varchar(255) NOT NULL,
-  `carrier` varchar(255) NOT NULL,
-  `country` varchar(255) NOT NULL,
+  `proxyIp` varchar(150) NOT NULL,
+  `carrier` varchar(150) NOT NULL,
+  `country` varchar(150) NOT NULL,
   `accept` text NOT NULL,
   `acceptLanguage` text NOT NULL,
   `acceptEncoding` text NOT NULL,
@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `statisticVisit` (
   `referer` text NOT NULL,
   `dateHit` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -134,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `statisticVisitMobile` (
   `isWindowsMobile` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `visitId` (`visitId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -158,7 +158,7 @@ ALTER TABLE `statisticVisitMobile`
 
 CREATE TABLE IF NOT EXISTS `setting` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `key` varchar(255) NOT NULL,
+  `key` varchar(150) NOT NULL,
   `value` text NOT NULL,
   `title` text NOT NULL,
   `comment` text NOT NULL,
@@ -167,7 +167,7 @@ CREATE TABLE IF NOT EXISTS `setting` (
   `possibleValues` text NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `key` (`key`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `setting`
@@ -193,17 +193,17 @@ INSERT INTO `setting` (`id`, `key`, `value`, `title`, `comment`, `isEditable`, `
 
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) NOT NULL,
+  `username` varchar(150) NOT NULL,
   `password` varchar(64) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `firstName` varchar(255) NOT NULL,
-  `lastName` varchar(255) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `firstName` varchar(150) NOT NULL,
+  `lastName` varchar(150) NOT NULL,
   `dateCreated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `isActive` enum('0','1') NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -214,7 +214,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 CREATE TABLE IF NOT EXISTS `userLogin` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `ip` varchar(16) NOT NULL,
-  `country` varchar(255) NOT NULL,
+  `country` varchar(150) NOT NULL,
   `userId` int(11) unsigned NOT NULL,
   `referer` text NOT NULL,
   `userAgent` text NOT NULL,
@@ -223,4 +223,4 @@ CREATE TABLE IF NOT EXISTS `userLogin` (
   KEY `adminId` (`userId`),
   CONSTRAINT `fk_userLogin_user` FOREIGN KEY (`userId`) REFERENCES `user` (`id`)
   	ON DELETE CASCADE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
