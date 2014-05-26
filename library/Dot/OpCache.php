@@ -1,21 +1,21 @@
 <?php
 /**
-* DotBoost Technologies Inc.
-* DotKernel Application Framework
-*
-* @category   DotKernel
-* @package    DotLibrary
+ * DotBoost Technologies Inc.
+ * DotKernel Application Framework
+ *
+ * @category   DotKernel
+ * @package    DotLibrary
  * @copyright  Copyright (c) 2009-2014 DotBoost Technologies Inc. (http://www.dotboost.com)
-* @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
-* @version    $Id$
-*/
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version    $Id$
+ */
 
 /**
-* Extract all informations from OpCache
-* @category   DotKernel
-* @package    DotLibrary
-* @author     DotKernel Team <team@dotkernel.com>
-*/
+ * Extract all informations from OpCache
+ * @category   DotKernel
+ * @package    DotLibrary
+ * @author     DotKernel Team <team@dotkernel.com>
+ */
 
 class Dot_OpCache
 {
