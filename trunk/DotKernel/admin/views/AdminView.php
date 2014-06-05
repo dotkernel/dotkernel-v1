@@ -92,7 +92,7 @@ class Admin_View extends View
 				$this->tpl->setVar('ACTIVE_'.$v*(-1)+1, '');
 			}
 		}
-		//empty because password is encrypted with md5
+		//empty because we don't want to show the password 
 		$this->tpl->setVar('PASSWORD', '');
 	}
 	/**

@@ -26,8 +26,15 @@
 				</username>
 			</validate>	
 			<forgotPassword>
-				<subject>Forgot Password</subject>
-				<message>Dear %FIRSTNAME%, your password is %PASSWORD% !</message>
+				<subject>Reset your %SITENAME% password</subject>
+				<message>Dear %FIRSTNAME%,
+
+We received a request to reset the password for your account. 
+If you made this request, click the link below.
+
+%SITE_URL%/user/reset-password/id/%USERID%/token/%TOKEN%/
+
+If you didn't make this request, you can ignore this email.</message>
 			</forgotPassword> 	
 		</variable>
 		<variable option="admin">
@@ -53,18 +60,20 @@
 					<login>User Login</login>
 					<register>User Register</register>
 					<forgot-password>Forgot your password?</forgot-password>
+					<reset-password>Reset your password</reset-password>
 				</action>
 			</pageTitle>
 			<errorMessage>
 				<login>Wrong Log In Credentials</login>
 				<captcha>Incorrect. Try again.</captcha>	
 				<passwordTwice>You did not enter the same password twice. Please re-enter your password.</passwordTwice>	
-				<emailSent>Your password was sent to </emailSent>	
+				<emailSent>We sent a link to create a new password to </emailSent>	
 				<emailNotSent>Your password could not be sent to </emailNotSent>
 				<emailNotFound> was not found in our records !</emailNotFound>
 				<invalidUsername>Invalid Username !</invalidUsername>
 				<invalidPassword>Invalid Password !</invalidPassword>
 				<userExists> already exists! </userExists>
+				<wrongResetPasswordUrl> The Reset Password link you followed is expired. </wrongResetPasswordUrl>
 			</errorMessage>
 			<infoMessage>
 				<add>Your account was created !</add>

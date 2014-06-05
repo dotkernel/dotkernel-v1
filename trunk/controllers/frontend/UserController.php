@@ -1,19 +1,19 @@
 <?php
 /**
-* DotBoost Technologies Inc.
-* DotKernel Application Framework
-*
-* @category   DotKernel
-* @package    Frontend
+ * DotBoost Technologies Inc.
+ * DotKernel Application Framework
+ *
+ * @category   DotKernel
+ * @package    Frontend
  * @copyright  Copyright (c) 2009-2014 DotBoost Technologies Inc. (http://www.dotboost.com)
-* @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
-* @version    $Id$
-*/
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version    $Id$
+ */
 
 /**
-* User Controller
-* @author     DotKernel Team <team@dotkernel.com>
-*/
+ * User Controller
+ * @author     DotKernel Team <team@dotkernel.com>
+ */
 
 $session = Zend_Registry::get('session');
 
@@ -43,8 +43,8 @@ switch ($registry->requestAction)
 		{
 			// validate the authorization request parameters 
 			$values = array('username' => array('username' => $_POST['username']), 
-							'password' => array('password' => $_POST['password'])
-						  );
+											'password' => array('password' => $_POST['password'])
+											);
 			$dotValidateUser = new Dot_Validate_User(array('who' => 'user', 'action' => 'login', 'values' => $values));
 			if($dotValidateUser->isValid())
 			{
@@ -85,21 +85,25 @@ switch ($registry->requestAction)
 		{
 			Dot_Auth::checkUserToken('user');
 			// POST values that will be validated
-			$values = array('details' => 
-								array('firstName'=>(isset($_POST['firstName']) ? $_POST['firstName'] : ''),
-									  'lastName'=>(isset($_POST['lastName']) ? $_POST['lastName'] : '')
-									 ),
-							'email' => array('email' => (isset($_POST['email']) ? $_POST['email'] : '')),
-							'password' => array('password' => (isset($_POST['password']) ? $_POST['password'] : ''),
-												'password2' =>  (isset($_POST['password2']) ? $_POST['password'] : '')
-											   )
-						  );
+			$values = array('details' =>
+																	array('firstName'=>(isset($_POST['firstName']) ? $_POST['firstName'] : ''),
+																				'lastName'=>(isset($_POST['lastName']) ? $_POST['lastName'] : '')),
+																				'email' => array('email' => (isset($_POST['email']) ? $_POST['email'] : ''))
+											);
+			
+			// Only if a new password is provided we will update the password field
+			if($_POST['password'] != '' || $_POST['password2'] !='' )
+			{
+				$values['password'] = array('password' => $_POST['password'],
+								 										'password2' =>  $_POST['password2']);
+			}
+			
 			$dotValidateUser = new Dot_Validate_User(array(
-				'who' => 'user',
-				'action' => 'update',
-				'values' => $values,
-				'userId' => $registry->session->user->id
-			));
+																											'who' => 'user',
+																											'action' => 'update',
+																											'values' => $values,
+																											'userId' => $registry->session->user->id)
+																										);
 			if($dotValidateUser->isValid())
 			{
 				// no error - then update user
@@ -187,6 +191,64 @@ switch ($registry->requestAction)
 			}
 		}
 		$userView->details('forgot_password',$data);
+	break;
+	case 'reset-password':
+		// start by considering there are no errors, and we enable the form 
+		$disabled = FALSE;
+		
+		// not sure if the form was submitted or not yet , either from Request or from POST
+		$userId = array_key_exists('id', $registry->request) ? $registry->request['id'] : $_POST['userId'];
+		$userToken = array_key_exists('token', $registry->request) ? $registry->request['token'] : $_POST['userToken'];
+		
+		// get user info based on ID , and see if is valid
+		$userInfo = $userModel->getUserInfo($userId);
+		if(FALSE == $userInfo)
+		{
+			$disabled = TRUE;
+		}
+		else
+		{
+			// Check if the user's password  match the token 
+			$expectedToken = Dot_Auth::generateUserToken($userInfo['password']);
+			if($expectedToken != $userToken)
+			{
+				$disabled = TRUE;
+			}
+		}
+		// we have errors, display the message and disable the form
+		if(TRUE == $disabled)
+		{
+			$session->message['txt'] = $registry->option->errorMessage->wrongResetPasswordUrl;
+			$session->message['type'] = 'error';
+		}
+		// IF the form was submmited and there are NO errors 
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' && FALSE == $disabled)
+		{
+			// POST values that will be validated
+			$values['password'] =	array('password' => (isset($_POST['password']) ? $_POST['password'] : ''),
+																	'password2' =>  (isset($_POST['password2']) ? $_POST['password2'] : ''));
+			
+			$dotValidateUser = new Dot_Validate_User(array('who' => 'user',
+																										'action' => 'update',
+																										'values' => $values,
+																										'userId' => $userId));
+			if($dotValidateUser->isValid())
+			{
+				$data['password'] = $_POST['password'];
+				$data['id'] = $userId;
+				$data['username'] = $userInfo['username'];
+				$userModel->updateUser($data);
+				$userModel->authorizeLogin($data);
+			}
+			else
+			{
+				$data = $dotValidateUser->getData();
+				$session->message['txt'] = $dotValidateUser->getError();
+				$session->message['type'] = 'error';
+			}
+		}
+		// show the form, enabled or disabled 
+		$userView->resetPasswordForm('reset_password', $disabled, $userId, $userToken);
 	break;
 	case 'logout':
 		$dotAuth = Dot_Auth::getInstance();

@@ -1,25 +1,26 @@
 <?php
 /**
-* DotBoost Technologies Inc.
-* DotKernel Application Framework
-*
-* @category   DotKernel
-* @package    Frontend
+ * DotBoost Technologies Inc.
+ * DotKernel Application Framework
+ *
+ * @category   DotKernel
+ * @package    Frontend
  * @copyright  Copyright (c) 2009-2014 DotBoost Technologies Inc. (http://www.dotboost.com)
-* @license    http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
-* @version    $Id$
-*/
+ * @license    http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @version    $Id$
+ */
 
 /**
-* User Model
-* Here are all the actions related to the user
-* @category   DotKernel
-* @package    Frontend
-* @author     DotKernel Team <team@dotkernel.com>
-*/
+ * User Model
+ * Here are all the actions related to the user
+ * @category   DotKernel
+ * @package    Frontend
+ * @author     DotKernel Team <team@dotkernel.com>
+ */
 
 class User extends Dot_Model_User
 {
+	
 	/**
 	 * Constructor
 	 * @access public 
@@ -29,6 +30,7 @@ class User extends Dot_Model_User
 	{
 		parent::__construct();
 	}
+
 	/**
 	 * Get user info
 	 * @access public
@@ -41,7 +43,8 @@ class User extends Dot_Model_User
 					   ->from('user')
 					   ->where('id = ?', $id);
 		return $this->db->fetchRow($select);
-	}		
+	}
+
 	/**
 	 * Register logins data
 	 * @access public
@@ -52,8 +55,9 @@ class User extends Dot_Model_User
 	{
 		$this->db->insert('userLogin', $data);
 	}
+
 	/**
-	 * Send forgot password to user
+	 * Send a link to reset the  password to user's email
 	 * @access public
 	 * @param string $email
 	 * @return void
@@ -61,16 +65,22 @@ class User extends Dot_Model_User
 	public function forgotPassword($email)
 	{
 		$session = Zend_Registry::get('session');
+		$seo = Zend_Registry::get('seo');
 		$value = $this->getUserBy('email', $email);
+
 		if(!empty($value))
 		{
 			$dotEmail = new Dot_Email();
 			$dotEmail->addTo($email);
-			$dotEmail->setSubject($this->option->forgotPassword->subject);
-			$msg = str_replace(array('%FIRSTNAME%', '%PASSWORD%'), 
-							   array($value['firstName'], $value['password']), 
-				              $this->option->forgotPassword->message);
-			$dotEmail->setBodyText($msg);			
+			$subject = str_replace('%SITENAME%', $seo->siteName, $this->option->forgotPassword->subject);
+			$dotEmail->setSubject($subject);
+			
+			$userToken = Dot_Auth::generateUserToken($value['password']);
+			
+			$msg = str_replace(array('%FIRSTNAME%', '%SITE_URL%', '%USERID%', '%TOKEN%'), 
+													array($value['firstName'], $this->config->website->params->url, $value['id'], $userToken), 
+													$this->option->forgotPassword->message);
+			$dotEmail->setBodyText($msg);
 			$succeed = $dotEmail->send();
 			if($succeed)
 			{
@@ -89,6 +99,7 @@ class User extends Dot_Model_User
 			$session->message['type'] = 'error';
 		}
 	}
+
 	/**
 	 * Authorize user login
 	 * @access public

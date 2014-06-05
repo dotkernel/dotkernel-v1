@@ -21,6 +21,7 @@
 
 class Dot_Model_User extends Dot_Model
 {
+
 	/**
 	 * Constructor
 	 * @access public 
@@ -30,7 +31,9 @@ class Dot_Model_User extends Dot_Model
 	{
 		parent::__construct();
 		$this->option = Zend_Registry::get('option');
+		$this->passwordApi = new Dot_Password();
 	}
+
 	/**
 	 * Get user by field
 	 * @access public
@@ -47,6 +50,7 @@ class Dot_Model_User extends Dot_Model
 		$result = $this->db->fetchRow($select);
 		return $result;
 	}
+
 	/**
 	 * Update user
 	 * @access public
@@ -57,8 +61,16 @@ class Dot_Model_User extends Dot_Model
 	{
 		$id = $data['id'];
 		unset ($data['id']);
+		
+		//Update password only if is set a new password 
+		if(array_key_exists('password', $data))
+		{
+			$data['password'] = $this->passwordApi->hashPassword($data['password'], PASSWORD_DEFAULT);
+		}
+
 		$this->db->update('user', $data, 'id = '.$id);
 	}
+
 	/**
 	 * Add new user
 	 * @access public
@@ -66,9 +78,11 @@ class Dot_Model_User extends Dot_Model
 	 * @return void
 	 */
 	public function addUser($data)
-	{		
+	{
+		
 		// if you want to add an inactive user, un-comment the below line, default: isActive = 1
 		// $data['isActive'] = 0;
+		$data['password'] = $this->passwordApi->hashPassword($data['password'], PASSWORD_DEFAULT);
 		$this->db->insert('user',$data);
 	}
 }

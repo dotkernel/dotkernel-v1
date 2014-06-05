@@ -19,6 +19,7 @@
 
 class Dot_Auth
 {
+
 	/**
 	 * Singleton instance
 	 * @access protected
@@ -26,6 +27,7 @@ class Dot_Auth
 	 * @var Dot_Auth
 	 */
 	protected static $_instance = null;
+
 	/**
 	 * Singleton pattern implementation makes 'new' unavailable
 	 * @access protected
@@ -37,6 +39,7 @@ class Dot_Auth
 		$this->acl = new Dot_Acl();
 		$this->setRoles($this->acl->getRoles());
 	}
+
 	/**
 	 * Singleton pattern implementation makes 'clone' unavailable
 	 * @access protected
@@ -44,6 +47,7 @@ class Dot_Auth
 	 */
 	protected function __clone()
 	{}
+
 	/**
 	 * Returns an instance of Dot_Auth
 	 * Singleton pattern implementation
@@ -59,6 +63,7 @@ class Dot_Auth
 		}
 		return self::$_instance;
 	}
+
 	/**
 	 * Set the roles for authentification
 	 * @access public
@@ -70,6 +75,7 @@ class Dot_Auth
 		krsort($roles);
 		$this->_roles = $roles;
 	}
+
 	/**
 	 * Check permission based on the ACL roles
 	 * Set wanted url if user is not logged
@@ -128,6 +134,7 @@ class Dot_Auth
 		}
 		return TRUE;
 	}
+
 	/**
 	 * Check to see if identity exists - is log in
 	 * @access public
@@ -147,6 +154,7 @@ class Dot_Auth
 		}
 		return FALSE;
 	}
+
 	/**
 	 * Return identity
 	 * @access public
@@ -156,6 +164,7 @@ class Dot_Auth
 	{
 		return $this->_identity;
 	}
+
 	/**
 	 * Clear the identity - log out
 	 * @access public
@@ -173,56 +182,83 @@ class Dot_Auth
 			unset($session->wantUrl);
 		}
 	}
+
 	/**
-	 * Process the authentification with Zend_Auth.
+	 * Process the authentification with Zend_Auth. Unifying now the login procedure for both admin and user
 	 * Return TRUE or FALSE if succedded or not
 	 * @access public
-	 * @param string $who - who to authentificate
-	 * @param array $values - values to process
+	 * @param string $who - who to authentificate (admin, user)
+	 * @param array $values - username and password to process
 	 * @param bool $storeInSession - should the result be stored in the session?
-	 * @return bool
+	 * @return boolean
 	 */
 	public function process($who, $values, $storeInSession = true)
 	{
-		$adapter = $this->_getAuthAdapter($who);
-		$adapter->setIdentity($values['username']);
-		$adapter->setCredential($values['password']);
-		$adapter->getDbSelect()->where('isActive = ?','1');
-		// for admin, password is made with md5 and salt value
-		if('admin' == $who)
+		// Removing the old Zend_Auth object and use direct verification of passwords
+		//1. retrieve user information as an object , or FALSE if nothing
+		$userInfo = $this->_getUserInformation($who, $values['username']);
+		
+		//We have no such user? Hurry Up and return FALSE 
+		if(!$userInfo)
 		{
-			$config = Zend_Registry::get('configuration');
-			$password = md5($values['username'].$config->settings->admin->salt.$values['password']);
-			$adapter->setCredential($password);
+			return FALSE;
 		}
-		$auth = Zend_Auth::getInstance();
-		$result = $auth->authenticate($adapter);
-		if($result->isValid())
+		
+		$auth = $this->_authenticate($userInfo, $values['password']);
+		if(TRUE == $auth)
 		{
 			if ($storeInSession)
 			{
 				$session = Zend_Registry::get('session');
-				$session->$who = $adapter->getResultRowObject();
+				// will store in the session object $session->admin or $session->user
+				// all data from table row as stdClass Object
+				$session->$who = $userInfo;
 			}
 			return TRUE;
 		}
 		return FALSE;
 	}
+	
 	/**
-	 * Get the auth adapter
-	 * @access private
-	 * @param string $who
-	 * @return Zend_Auth_Adapter_DbTable
+	 * Private function to authenticate some user information against a provided password 
+	 * @param object $userInfo
+	 * @param string $password
+	 * @return boolean
 	 */
-	private function _getAuthAdapter($who)
+	private function _authenticate($userInfo, $password)
 	{
-		$dbAdapter = Zend_Registry::get('database');
-		$authAdapter = new Zend_Auth_Adapter_DbTable($dbAdapter);
-		$authAdapter->setTableName($who)
-			->setIdentityColumn('username')
-			->setCredentialColumn('password');
-		return $authAdapter;
+		$passwordApi = new Dot_Password();
+		return $passwordApi->verifyPassword($password, $userInfo->password);
 	}
+	
+	/**
+	 * Retrive all information about a user, using its userType and username
+	 * @param string $username
+	 * @param string $userType
+	 * @return object
+	 */
+	private function _getUserInformation($userType, $username)
+	{
+		$returnObject = new stdClass();
+		
+		$this->db = Zend_Registry::get('database');
+		$select = $this->db->select()->from($userType)->where('username = ?', $username)->where('isActive = ?','1');
+		$resultArray = $this->db->fetchRow($select);
+		
+		// No results, we don't have that username
+		if(!is_array($resultArray))
+		{
+			return FALSE;
+		}
+		
+		// Backward compatibility with Zend_Auth class, getResultRowObject method need to return an object instead of array
+		foreach($resultArray as $resultColumn => $resultValue)
+		{
+			$returnObject->{$resultColumn} = $resultValue;
+		}
+		return $returnObject;
+	}
+
 	/**
 	 * Generate a token for a user
 	 * @access public
@@ -236,6 +272,7 @@ class Dot_Auth
 		// use the user's password hash and the site database password
 		return sha1($config->database->params->password . $password);
 	}
+
 	/**
 	 * Check if a user's token is set and is correct
 	 * @access public
@@ -247,6 +284,11 @@ class Dot_Auth
 	{
 		$dotAuth = Dot_Auth::getInstance();
 		$user = $dotAuth->getIdentity($type);
+		/**
+		 *@todo remove the global variable POST from this method
+		 * refactor this method 
+		 */
+		
 		if (!isset($_POST['userToken']) || (Dot_Auth::generateUserToken($user->password) != $_POST['userToken']))
 		{
 			exit;

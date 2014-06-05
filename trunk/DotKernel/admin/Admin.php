@@ -1,25 +1,26 @@
 <?php
 /**
-* DotBoost Technologies Inc.
-* DotKernel Application Framework
-*
-* @category   DotKernel
-* @package    Admin
+ * DotBoost Technologies Inc.
+ * DotKernel Application Framework
+ *
+ * @category   DotKernel
+ * @package    Admin
  * @copyright  Copyright (c) 2009-2014 DotBoost Technologies Inc. (http://www.dotboost.com)
-* @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
-* @version    $Id$
-*/
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version    $Id$
+ */
 
 /**
-* Admin Model
-* Here are all the actions related to the user
-* @category   DotKernel
-* @package    Admin 
-* @author     DotKernel Team <team@dotkernel.com>
+ * Admin Model
+ * Here are all the actions related to the admin users
+ * @category   DotKernel
+ * @package    Admin 
+ * @author     DotKernel Team <team@dotkernel.com>
 */
 
 class Admin extends Dot_Model
-{	
+{
+
 	/**
 	 * Constructor
 	 * @access public
@@ -27,7 +28,8 @@ class Admin extends Dot_Model
 	public function __construct()
 	{
 		parent::__construct();
-	}		
+	}
+
 	/**
 	 * Get admin by field
 	 * @access public
@@ -44,6 +46,7 @@ class Admin extends Dot_Model
 		$result = $this->db->fetchRow($select);
 		return $result;
 	}
+
 	/**
 	 * Get user list
 	 * @access public 
@@ -57,6 +60,7 @@ class Admin extends Dot_Model
  		$dotPaginator = new Dot_Paginator($select, $page, $this->settings->resultsPerPage);
 		return $dotPaginator->getData();
 	}
+
 	/**
 	 * Add new user
 	 * @access public
@@ -67,9 +71,13 @@ class Admin extends Dot_Model
 	{		
 		// if you want to add an inactive user, un-comment the below line, default: isActive = 1
 		// $data['isActive'] = 0;
-		$data['password'] = md5($data['username'].$this->config->settings->admin->salt.$data['password']);
-		$this->db->insert('admin', $data);		
+		
+		// start the Password API object
+		$passwordApi = new Dot_Password();
+		$data['password'] = $passwordApi->hashPassword($data['password'], PASSWORD_DEFAULT);
+		$this->db->insert('admin', $data);
 	}	
+
 	/**
 	 * Update user
 	 * @access public
@@ -83,10 +91,13 @@ class Admin extends Dot_Model
 		if(array_key_exists('password', $data))
 		{
 			$user = $this->getUserBy('id', $id);
-			$data['password'] = md5($user['username'].$this->config->settings->admin->salt.$data['password']);
+			// start the Password API object
+			$passwordApi = new Dot_Password();
+			$data['password'] = $passwordApi->hashPassword($data['password'], PASSWORD_DEFAULT);
 		}
 		$this->db->update('admin', $data, 'id = ' . $id);
 	}	
+
 	/**
 	 * Delete admin user
 	 * @access public
@@ -97,6 +108,7 @@ class Admin extends Dot_Model
 	{
 		$this->db->delete('admin', 'id = ' . $id);
 	}
+
 	/**
 	 * Update active field for admin user
 	 * @access public 
@@ -108,6 +120,7 @@ class Admin extends Dot_Model
 	{		
 		$this->db->update('admin', array('isActive' => $isActive), 'id = '.$id);
 	}
+
 	/**
 	 * Register logins data
 	 * @access public 
@@ -118,6 +131,7 @@ class Admin extends Dot_Model
 	{
 		$this->db->insert('adminLogin', $data);
 	}
+
 	/**
 	 * Get admin users logins archive list
 	 * @access public
@@ -142,6 +156,7 @@ class Admin extends Dot_Model
  		$dotPaginator = new Dot_Paginator($select, $page, $this->settings->resultsPerPage);
 		return $dotPaginator->getData();
 	}	
+
 	/**
 	 * Authorize user login
 	 * @access public
@@ -177,6 +192,7 @@ class Admin extends Dot_Model
 			$session->message['type'] = 'error';
 		}		
 	}
+	
 	/**
 	 * Failed admin login - send email notice to valid admin account
 	 * @access private

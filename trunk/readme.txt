@@ -17,9 +17,9 @@ SYSTEM REQUIREMENTS
 
 DotKernel requires:
 - APACHE HTTP server
-- PHP 5.2.10 or later ( PHP 5.4.x recommended)
+- PHP 5.3.7 or later ( PHP 5.5.x recommended)
 - MySQL 5.0 or later (MySQL 5.5.x recommended )
-- Zend Framework 1.8.0 or later (Zend Framework 1.12.x recommended)
+- Zend Framework 1.8.0 or later (Zend Framework 1.12.6 recommended)
 For more details, please see: 
 	http://www.dotkernel.com/docs/system-requirements/
 
@@ -41,8 +41,7 @@ Note: It is important to follow the steps in the exact order below (especially s
       you created previously
    8. Test the installation by opening the URL you set as your website. If you see the Home page, your DotKernel installation is completed.
    9. Log In into admin module: http://www.yourdotkernelinstance.com/admin/ with username: admin and password: dot
-  10. Change settings.admin.salt value from application.ini to a random string
-  11. Change your admin password: http://www.yourdotkernelinstance.com/admin/admin/account/ 
+  10. Change your admin password: http://www.yourdotkernelinstance.com/admin/admin/account/ 
    
    
 DOCUMENTATION

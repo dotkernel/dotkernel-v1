@@ -1,25 +1,26 @@
 <?php
 /**
-* DotBoost Technologies Inc.
-* DotKernel Application Framework
-*
-* @category   DotKernel
-* @package    Frontend 
+ * DotBoost Technologies Inc.
+ * DotKernel Application Framework
+ *
+ * @category   DotKernel
+ * @package    Frontend 
  * @copyright  Copyright (c) 2009-2014 DotBoost Technologies Inc. (http://www.dotboost.com)
-* @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
-* @version    $Id$
-*/
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version    $Id$
+ */
 
 /**
-* User View Class
-* class that prepare output related to User controller 
-* @category   DotKernel
-* @package    Frontend
-* @author     DotKernel Team <team@dotkernel.com>
-*/
+ * User View Class
+ * class that prepare output related to User controller 
+ * @category   DotKernel
+ * @package    Frontend
+ * @author     DotKernel Team <team@dotkernel.com>
+ */
 
 class User_View extends View
 {
+
 	/**
 	 * Constructor
 	 * @access public
@@ -30,6 +31,7 @@ class User_View extends View
 		$this->tpl = $tpl;
 		$this->settings = Zend_Registry::get('settings');
 	}
+
 	/**
 	 * Display the login form
 	 * @access public
@@ -44,11 +46,36 @@ class User_View extends View
 		{
 			foreach ($session->validData as $k=>$v)
 			{
-				$this->tpl->setVar(strtoupper($k),$v);		
+				$this->tpl->setVar(strtoupper($k),$v);
 			}
 		}
-		unset($session->validData);			
+		unset($session->validData);
 	}
+
+	/**
+	 * Display the password reset form 
+	 * @access public
+	 * @param string $templateFile
+	 * @param bool $disabled
+	 * @param integer $userId
+	 * @param string $userToken
+	 * @return void
+	 */
+	public function resetPasswordForm($templateFile, $disabled = TRUE, $userId, $userToken)
+	{
+		$this->tpl->setFile('tpl_main', 'user/' . $templateFile . '.tpl');
+		if(FALSE == $disabled)
+		{
+			$this->tpl->setVar('USERTOKEN', $userToken);
+			$this->tpl->setVar('USERID', $userId);
+			$this->tpl->setVar('DISABLED', 'submit');
+		}
+		else 
+		{
+			$this->tpl->setVar('DISABLED', 'hidden');
+		}
+	}
+
 	/**
 	 * Display user's signup form
 	 * @access public
@@ -71,5 +98,8 @@ class User_View extends View
 		{
 			$this->tpl->addUserToken();
 		}
+		
+		//empty because we don't want to show the password
+		$this->tpl->setVar('PASSWORD', '');
 	}
 }
