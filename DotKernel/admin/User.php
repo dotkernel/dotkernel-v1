@@ -1,24 +1,26 @@
 <?php
 /**
-* DotBoost Technologies Inc.
-* DotKernel Application Framework
-*
-* @category   DotKernel
-* @package    Admin
+ * DotBoost Technologies Inc.
+ * DotKernel Application Framework
+ *
+ * @category   DotKernel
+ * @package    Admin
  * @copyright  Copyright (c) 2009-2014 DotBoost Technologies Inc. (http://www.dotboost.com)
-* @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
-* @version    $Id$
-*/
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version    $Id$
+ */
 
 /**
-* User Model
-* Here are all the actions related to the user
-* @category   DotKernel
-* @package    Admin
-* @author     DotKernel Team <team@dotkernel.com>
-*/
+ * User Model
+ * Here are all the actions related to the user
+ * @category   DotKernel
+ * @package    Admin
+ * @author     DotKernel Team <team@dotkernel.com>
+ */
+
 class User extends Dot_Model_User
 {
+
 	/**
 	 * Constructor
 	 * @access public
@@ -27,6 +29,7 @@ class User extends Dot_Model_User
 	{
 		parent::__construct();
 	}
+	
 	/**
 	 * Get user list
 	 * @access public
@@ -40,6 +43,7 @@ class User extends Dot_Model_User
  		$dotPaginator = new Dot_Paginator($select, $page, $this->settings->resultsPerPage);
 		return $dotPaginator->getData();
 	}
+	
 	/**
 	 * Delete user
 	 * @param int $id
@@ -49,8 +53,9 @@ class User extends Dot_Model_User
 	{
 		$this->db->delete('user', 'id = ' . $id);
 	}
+	
 	/**
-	 * Send forgot password to user
+	 * Send a link to reset the  password to user's email
 	 * @access public
 	 * @param int id
 	 * @return void
@@ -64,10 +69,15 @@ class User extends Dot_Model_User
 		{
 			$dotEmail = new Dot_Email();
 			$dotEmail->addTo($value['email']);
-			$dotEmail->setSubject($seoOption->siteName . ' - ' . $this->option->forgotPassword->subject);
-			$msg = str_replace(array('%FIRSTNAME%', '%PASSWORD%'),
-							   array($value['firstName'], $value['password']),
-				              $this->option->forgotPassword->message);
+			$subject = str_replace('%SITENAME%', $seoOption->siteName, $this->option->forgotPassword->subject);
+			$dotEmail->setSubject($subject);
+			
+			$userToken = Dot_Auth::generateUserToken($value['password']);
+			
+			$msg = str_replace(array('%FIRSTNAME%', '%SITE_URL%', '%USERID%', '%TOKEN%'),
+									array($value['firstName'], $this->config->website->params->url, $value['id'], $userToken),
+									$this->option->forgotPassword->message);
+			
 			$dotEmail->setBodyText($msg);
 			$succeed = $dotEmail->send();
 			if($succeed)
@@ -87,6 +97,7 @@ class User extends Dot_Model_User
 			$session->message['type'] = 'info';
 		}
 	}
+	
 	/**
 	 * Activate/Inactivate user account
 	 * @param int $id - user ID
@@ -97,6 +108,7 @@ class User extends Dot_Model_User
 	{
         $this->db->update('user', array('isActive' => $isActive), 'id = '.$id);
 	}
+	
 	/**
 	 * Get admin users logins archive list
 	 * @access public
@@ -137,6 +149,7 @@ class User extends Dot_Model_User
 		return $dotPaginator->getData();
 
 	}
+	
 	/**
 	 * Get top <topCount> logins by country
 	 * If there are more countries returned than <topCountry>, the sum of the remainder

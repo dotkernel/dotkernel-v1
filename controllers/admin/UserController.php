@@ -1,19 +1,19 @@
 <?php
 /**
-* DotBoost Technologies Inc.
-* DotKernel Application Framework
-*
-* @category   DotKernel
-* @package    Admin
+ * DotBoost Technologies Inc.
+ * DotKernel Application Framework
+ *
+ * @category   DotKernel
+ * @package    Admin
  * @copyright  Copyright (c) 2009-2014 DotBoost Technologies Inc. (http://www.dotboost.com)
-* @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
-* @version    $Id$
-*/
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version    $Id$
+ */
 
 /**
-* User Controller
-* @author     DotKernel Team <team@dotkernel.com>
-*/
+ * User Controller
+ * @author     DotKernel Team <team@dotkernel.com>
+ */
 
 // instantiate classes related to User module: model & view
 $userModel = new User();
@@ -76,17 +76,19 @@ switch ($registry->requestAction)
 			Dot_Auth::checkUserToken();
 			// POST values that will be validated
 			$values = array('details' =>
-								array('firstName'=>$_POST['firstName'],
-									  'lastName'=>$_POST['lastName']
-									 ),
-							'username' => array('username' => $_POST['username']),
-							'email' => array('email' => $_POST['email']),
-							'enum' => array('0' => '0,1',
-											'isActive' => $_POST['isActive']),
-							'password' => array('password' => $_POST['password'],
-												'password2' =>  $_POST['password2']
-											   )
-						  );
+																	array('firstName'=>$_POST['firstName'],
+																				'lastName'=>$_POST['lastName']),
+																				'username' => array('username' => $_POST['username']),
+																				'email' => array('email' => $_POST['email']),
+																				'enum' => array('0' => '0,1', 'isActive' => $_POST['isActive'])
+											);
+			
+			// Only if a new password is provided we will update the password field
+			if($_POST['password'] != '' || $_POST['password2'] !='' )
+			{
+				$values['password'] = array('password' => $_POST['password'], 'password2' =>  $_POST['password2']);
+			}
+			
 			$dotValidateUser = new Dot_Validate_User(array('who' => 'user', 'action' => 'update', 'values' => $values, 'userId' => $registry->request['id']));
 			if($dotValidateUser->isValid())
 			{

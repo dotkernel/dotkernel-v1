@@ -22,7 +22,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 CREATE TABLE IF NOT EXISTS `admin` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(150) NOT NULL,
-  `password` varchar(64) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `email` varchar(150) NOT NULL,
   `firstName` varchar(150) NOT NULL,
   `lastName` varchar(150) NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
 --
 
 INSERT INTO `admin` (`id`, `username`, `password`, `email`, `firstName`, `lastName`, `dateCreated`, `isActive`) VALUES
-(1, 'admin', '497fa091cb2c62a6b61e5d50f9079b71', 'team@dotkernel.com', 'Default', 'Account', '2010-03-15 03:05:43', '1');
+(1, 'admin', '$2y$10$kC0ztOWgfx4i6e/6NeLvOejOMFhdv4tWVuhwfqmnEB0qMRkpmSivC', 'team@dotkernel.com', 'Default', 'Account', '2010-03-15 03:05:43', '1');
 
 -- --------------------------------------------------------
 
@@ -194,7 +194,7 @@ INSERT INTO `setting` (`id`, `key`, `value`, `title`, `comment`, `isEditable`, `
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(150) NOT NULL,
-  `password` varchar(64) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `email` varchar(150) NOT NULL,
   `firstName` varchar(150) NOT NULL,
   `lastName` varchar(150) NOT NULL,

@@ -75,13 +75,16 @@ class User_View extends View
 		$this->tpl->addUserToken();
 		foreach ($data as $k=>$v)
 		{
-		    $this->tpl->setVar(strtoupper($k), $v);
+			$this->tpl->setVar(strtoupper($k), $v);
 			if('isActive' == $k)
 			{
 				$this->tpl->setVar('ACTIVE_'.$v, 'checked');
 				$this->tpl->setVar('ACTIVE_'.$v*(-1)+1, '');
 			}
 		}
+		
+		//empty because we don't want to show the password
+		$this->tpl->setVar('PASSWORD', '');
 	}
 	/**
 	 * Display user logins list
