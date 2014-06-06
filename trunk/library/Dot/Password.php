@@ -27,7 +27,7 @@ class Dot_Password
 		//Require the compatibility library with PHP 5.5's simplified password hashing API
 		if (version_compare(PHP_VERSION, '5.5.0', '<'))
 		{
-			require APPLICATION_PATH . '/library/Dot/Password/Compat.php';
+			require_once APPLICATION_PATH . '/library/Dot/Password/Compat.php';
 		}
 	}
 	
