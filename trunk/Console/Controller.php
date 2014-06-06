@@ -72,7 +72,7 @@ switch ($registry->action)
 		// No more records to update 
 		if(empty($userInfo))
 		{
-			echo "No more records to process";
+			echo "No more records to process. \n";
 			exit;
 		}
 		
@@ -88,7 +88,7 @@ switch ($registry->action)
 			}
 			$j++;
 		}
-		echo "Updated $j records.";
+		echo "Updated $j records.\n";
 		# 3. rename password to passwordOld
 		//ALTER TABLE `user` CHANGE `password` `passwordOld` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL;
 		
@@ -97,7 +97,7 @@ switch ($registry->action)
 	break;
 
 	case 'default':
-		echo "Action doesn't exist";
+		echo "Action doesn't exist.\n";
 		exit(1);
 	break;
 }
