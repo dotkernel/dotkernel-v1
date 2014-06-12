@@ -24,19 +24,22 @@
 	<script type="text/javascript" src="{TEMPLATES_URL}/js/mobile/main.js"></script>
 </head>
 <body>
-<div data-role="page" data-theme="e"> 
-	<div data-role="header" data-theme="b" data-nobackbtn="true"> 
+<div data-role="page"> 
+	<div data-role="header"> 
 		<p>&nbsp;</p>
 		<a data-role="button" data-inline="true" href="{SITE_URL}" rel="external" style="margin-top:0.3em;" >Web {SITE_NAME}</a>
-	</div><!-- /header -->	
-	<div data-role="content">	
-					<h1>{PAGE_CONTENT_TITLE}</h1>
-						<h2>{MESSAGE_BLOCK}</h2>
-					{MAIN_CONTENT}
-	</div><!-- /content -->
-	<div data-role="footer" data-theme="c">
+	</div>
+	<!-- /header -->	
+	<div data-role="content" class="ui-content">
+		<h1>{PAGE_CONTENT_TITLE}</h1>
+		<h2>{MESSAGE_BLOCK}</h2>
+		{MAIN_CONTENT}
+	</div>
+	<!-- /content -->
+	<div data-role="footer">
 		&copy; 2009 - 2013 DotBoost Technologies Inc.
-	</div><!-- /footer -->
+	</div>
+	<!-- /footer -->
 </div>
 </body>
 </html>
