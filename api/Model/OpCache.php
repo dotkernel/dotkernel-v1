@@ -14,8 +14,9 @@
 
 class Api_Model_OpCache extends Dot_Model
 {
+
 	/**
-	 * Email constructor
+	 * ?? constructor
 	 * @access public 
 	 * @return Dot_Model_User
 	 */

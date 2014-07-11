@@ -9,28 +9,19 @@
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @version    $Id$
  */
- 
- /**
- * Command line interface bootstrap
+
+/**
+ * API controller
  * example usage:
- *    /var/www/example.com/httpdocs/Api/index.php -e development -a action param1 param2
+ *    /var/www/example.com/api/index.php?action=opcache&key=XXXXXDKXXXXX
  * @author     DotKernel Team <team@dotkernel.com>
  */
 
-$startTime = microtime();
-
-// Define PATH's (absolute paths)  to configuration and DotKernel  directories
-$rootPath = realpath(dirname(__FILE__) . "/..");
-chdir($rootPath);
-set_include_path(implode(PATH_SEPARATOR, array($rootPath . '/library', get_include_path())));
-defined('CONFIGURATION_PATH') || define('CONFIGURATION_PATH', $rootPath.'/configs');
-defined('DOTKERNEL_PATH') || define('DOTKERNEL_PATH', $rootPath.'/DotKernel');
 
 // Load Zend Framework
 require_once 'Zend/Loader/Autoloader.php';
 $zendLoader = Zend_Loader_Autoloader::getInstance();
 $zendLoader->registerNamespace('Dot_');
-$zendLoader->registerNamespace('Api_');
 
 // Define application environment
 define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
@@ -56,6 +47,7 @@ $registry->option = array();
 // Set PHP configuration settings from application.ini file
 Dot_Settings::setPhpSettings($config->phpSettings->toArray());
 
+
 // Get the action and the other arguments
 $params = array();
 $params = $_GET;
@@ -63,10 +55,14 @@ $registry->action = $params['action'];
 unset($params['action']);
 $registry->arguments = $params;
 
+
+
+include('Controller.php');
+
+// move the below to controller
+
 if (!$registry->configuration->api->params->enable)
 {
 	header("HTTP/1.0 403 Forbidden");
 	exit;
 }
-
-include('Controller.php');
