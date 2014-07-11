@@ -4,7 +4,7 @@
  * DotKernel Application Framework
  *
  * @category   DotKernel
- * @package    CLI
+ * @package    Api
  * @subpackage OpCache
  * @copyright  Copyright (c) 2009-2014 DotBoost Technologies Inc. (http://www.dotboost.com)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
@@ -16,9 +16,9 @@ class Api_Model_OpCache extends Dot_Model
 {
 
 	/**
-	 * ?? constructor
+	 * Api constructor
 	 * @access public 
-	 * @return Dot_Model_User
+	 * @return Dot_Model_Api
 	 */
 	public function __construct()
 	{
@@ -27,6 +27,12 @@ class Api_Model_OpCache extends Dot_Model
 		$this->opCache = new Dot_OpCache($tpl);
 	}
 	
+	/**
+	 * Get OpCache configuration
+	 * @param void
+	 * @access public
+	 * @return json
+	 */
 	public function opCacheStatus()
 	{
 		$status = $this->opCache->status();
