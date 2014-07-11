@@ -4,12 +4,18 @@
  * DotKernel Application Framework
  *
  * @category   DotKernel
- * @package    CLI
+ * @package    Api
  * @copyright  Copyright (c) 2009-2014 DotBoost Technologies Inc. (http://www.dotboost.com)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @version    $Id$
  * @author     DotKernel Team <team@dotkernel.com>
  */
+
+if (!$registry->configuration->api->params->enable)
+{
+	header("HTTP/1.0 403 Forbidden");
+	exit;
+}
 
 switch ($registry->action)
 {
@@ -21,7 +27,7 @@ switch ($registry->action)
 		echo $jsonString;
 	break;
 	
-	case 'opCache':
+	case 'opcache':
 		if ($registry->configuration->api->params->key == $registry->arguments['key'])
 		{
 			$opCacheModel = new Api_Model_OpCache();

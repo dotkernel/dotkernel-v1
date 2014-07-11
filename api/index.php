@@ -17,11 +17,22 @@
  * @author     DotKernel Team <team@dotkernel.com>
  */
 
+// Define application path
+define('APPLICATION_PATH', realpath(dirname(__FILE__) . "/.."));
+
+chdir(APPLICATION_PATH);
+
+//Set include  path to library directory
+set_include_path(implode(PATH_SEPARATOR, array(APPLICATION_PATH . '/library', get_include_path())));
+
+// Define PATH to configuration
+define('CONFIGURATION_PATH', APPLICATION_PATH . '/configs');
 
 // Load Zend Framework
 require_once 'Zend/Loader/Autoloader.php';
 $zendLoader = Zend_Loader_Autoloader::getInstance();
 $zendLoader->registerNamespace('Dot_');
+$zendLoader->registerNamespace('Api_');
 
 // Define application environment
 define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
@@ -30,11 +41,10 @@ define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV')
 $registry = new Zend_Registry(array(), ArrayObject::ARRAY_AS_PROPS);
 Zend_Registry::setInstance($registry);
 
-$registry->startTime = $startTime;
-
 // Load configuration settings from application.ini file and store it in registry
 $config = new Zend_Config_Ini(CONFIGURATION_PATH.'/application.ini', APPLICATION_ENV);
 $registry->configuration = $config;
+
 // Create  connection to database, as singleton , and store it in registry
 $db = Zend_Db::factory('Pdo_Mysql', $config->database->params->toArray());
 $registry->database = $db;
@@ -47,7 +57,6 @@ $registry->option = array();
 // Set PHP configuration settings from application.ini file
 Dot_Settings::setPhpSettings($config->phpSettings->toArray());
 
-
 // Get the action and the other arguments
 $params = array();
 $params = $_GET;
@@ -55,14 +64,4 @@ $registry->action = $params['action'];
 unset($params['action']);
 $registry->arguments = $params;
 
-
-
 include('Controller.php');
-
-// move the below to controller
-
-if (!$registry->configuration->api->params->enable)
-{
-	header("HTTP/1.0 403 Forbidden");
-	exit;
-}
