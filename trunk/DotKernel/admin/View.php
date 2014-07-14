@@ -405,7 +405,7 @@ class View extends Dot_Template
 	{
 		$tpl = View::getInstance(TEMPLATES_PATH . '/' . $this->requestModule);
 		$tpl->init();
-		$opCache = new Dot_OpCache($tpl);
+		$debug = new Dot_Debug($tpl);
 		// if we have only one widget, Zend_Config_Xml return a simple array, not an array with key 0(zero)
 		if(is_null($value->{0}))
 		{
@@ -421,13 +421,13 @@ class View extends Dot_Template
 				switch ($val['token']) 
 				{
 					case 'WIDGET_MEMORY':
-						$opCache->generateMemoryPiechart($val);
+						$debug->generateMemoryPiechart($val);
 						break;
 					case 'WIDGET_KEYS':
-						$opCache->generateKeysPiechart($val);
+						$debug->generateKeysPiechart($val);
 						break;
 					case 'WIDGET_HITS':
-						$opCache->generateHitsPiechart($val);
+						$debug->generateHitsPiechart($val);
 						break;
 					case 'WIDGET_USER_LOGINS':
 						$this->_displayUserLoginsPiechart($val);
