@@ -22,9 +22,7 @@ class Api_Model_OpCache extends Dot_Model
 	 */
 	public function __construct()
 	{
-		parent::__construct();
-		$tpl = NULL;
-		$this->opCache = new Dot_OpCache($tpl);
+		$this->opCache = new Dot_OpCache();
 	}
 	
 	/**

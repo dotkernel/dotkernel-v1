@@ -103,6 +103,7 @@ class Dot_Debug
 		$this->tpl = $tpl;
 		$this->__startTime = $registry['startTime'];
 		$this->__module = $registry->requestModule;
+		$this->opCache = new Dot_OpCache();
 	}
 	
 	/**
@@ -321,7 +322,6 @@ class Dot_Debug
 		$this->tpl->parse('memory_usage_block', 'memory_usage', true);
 	}
 	
-	
 	/**
 	 * Display OpCache memory usage
 	 * @access public
@@ -429,5 +429,56 @@ class Dot_Debug
 	{
 		$this->tpl->setVar('DOT_VERSION', Dot_Kernel::VERSION);
 		$this->tpl->parse('dot_version_block', 'dot_version', true);
+	}
+	
+	/**
+	 * Display the widget: Memory Piechart
+	 * @access public
+	 * @param array $widgetOption
+	 * @return void
+	 */
+	public function generateMemoryPiechart($widgetOption)
+	{
+		$jsonString = $this->opCache->returnMemoryPiechart();
+		$jsonString = preg_replace('/\{/', '{ ', $jsonString);
+		$this->tpl->setVar('PIECHART_DATA', $jsonString);
+		//parse colors
+		$jsonString = Zend_Json::encode($widgetOption['colorCharts']['color']);
+		$jsonString = preg_replace('/\{/', '{ ', $jsonString);
+		$this->tpl->setVar('PIECHART_COLOR', $jsonString);
+	}
+	
+	/**
+	 * Display the widget: Keys Piechart
+	 * @access public
+	 * @param array $widgetOption
+	 * @return void
+	 */
+	public function generateKeysPiechart($widgetOption)
+	{
+		$jsonString = $this->opCache->returnKeysPiechart();
+		$jsonString = preg_replace('/\{/', '{ ', $jsonString);
+		$this->tpl->setVar('PIECHART_DATA', $jsonString);
+		//parse colors
+		$jsonString = Zend_Json::encode($widgetOption['colorCharts']['color']);
+		$jsonString = preg_replace('/\{/', '{ ', $jsonString);
+		$this->tpl->setVar('PIECHART_COLOR', $jsonString);
+	}
+	
+	/**
+	 * Display the widget: Hits Piechart
+	 * @access public
+	 * @param array $widgetOption
+	 * @return void
+	 */
+	public function generateHitsPiechart($widgetOption)
+	{
+		$jsonString = $this->opCache->returnHitsPiechart();
+		$jsonString = preg_replace('/\{/', '{ ', $jsonString);
+		$this->tpl->setVar('PIECHART_DATA', $jsonString);
+		//parse colors
+		$jsonString = Zend_Json::encode($widgetOption['colorCharts']['color']);
+		$jsonString = preg_replace('/\{/', '{ ', $jsonString);
+		$this->tpl->setVar('PIECHART_COLOR', $jsonString);
 	}
 }

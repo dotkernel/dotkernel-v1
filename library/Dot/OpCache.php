@@ -24,10 +24,9 @@ class Dot_OpCache
 	 * @access public
 	 * @return Dot_OpCache
 	*/
-	function __construct($tpl)
+	public function __construct()
 	{
 		$this->config = Zend_Registry::get('configuration');
-		$this->tpl = $tpl;
 	}
 	/**
 	 * Get OpCache configuration
@@ -67,21 +66,23 @@ class Dot_OpCache
 	 * @access public
 	 * @return array
 	 */
-	public function bsize($s) {
-		foreach (array('','K','M','G') as $i => $k) {
+	public function bsize($s)
+	{
+		foreach (array('','K','M','G') as $i => $k)
+		{
 			if ($s < 1024) break;
 			$s/=1024;
 		}
-		return sprintf("%5.1f %sB",$s,$k);
+		return sprintf("%5.1f %sB", $s, $k);
 	}
 	
 	/**
-	 * Display the widget: Memory Piechart
+	 * Return the widget data: Memory Piechart
 	 * @access public
-	 * @param array $widgetOption
-	 * @return void
+	 * @param void
+	 * @return json
 	 */
-	public function generateMemoryPiechart($widgetOption)
+	public function returnMemoryPiechart()
 	{
 		$data = array();
 		$status = $this->status();
@@ -95,23 +96,17 @@ class Dot_OpCache
 			$data[] = array('label' => 'Used ' . $this->bsize($status['memory_usage']['used_memory']),
 							'data' => $status['memory_usage']['used_memory']);
 		}
-		//parse countries
 		$jsonString = Zend_Json::encode($data);
-		$jsonString = preg_replace('/\{/', '{ ', $jsonString);
-		$this->tpl->setVar('PIECHART_DATA', $jsonString);
-		//parse colors
-		$jsonString = Zend_Json::encode($widgetOption['colorCharts']['color']);
-		$jsonString = preg_replace('/\{/', '{ ', $jsonString);
-		$this->tpl->setVar('PIECHART_COLOR', $jsonString);
+		return $jsonString;
 	}
 	
 	/**
-	 * Display the widget: Keys Piechart
+	 * Return the widget data: Keys Piechart
 	 * @access public
-	 * @param array $widgetOption
-	 * @return void
+	 * @param void
+	 * @return json
 	 */
-	public function generateKeysPiechart($widgetOption)
+	public function returnKeysPiechart()
 	{
 		// pie chart data
 		$data = array();
@@ -125,23 +120,17 @@ class Dot_OpCache
 			$data[] = array('label' => 'Used ' . $status['opcache_statistics']['num_cached_scripts'],
 							'data' => $status['opcache_statistics']['num_cached_scripts']);
 		}
-		//parse countries
 		$jsonString = Zend_Json::encode($data);
-		$jsonString = preg_replace('/\{/', '{ ', $jsonString);
-		$this->tpl->setVar('PIECHART_DATA', $jsonString);
-		//parse colors
-		$jsonString = Zend_Json::encode($widgetOption['colorCharts']['color']);
-		$jsonString = preg_replace('/\{/', '{ ', $jsonString);
-		$this->tpl->setVar('PIECHART_COLOR', $jsonString);
+		return $jsonString;
 	}
 	
 	/**
-	 * Display the widget: Hits Piechart
+	 * Return the widget data: Hits Piechart
 	 * @access public
-	 * @param array $widgetOption
-	 * @return void
+	 * @param void
+	 * @return json
 	 */
-	public function generateHitsPiechart($widgetOption)
+	public function returnHitsPiechart()
 	{
 		$data = array();
 		$status = $this->status();
@@ -154,14 +143,8 @@ class Dot_OpCache
 			$data[] = array('label' => 'Blacklist ' . $status['opcache_statistics']['blacklist_misses'],
 							'data' => $status['opcache_statistics']['blacklist_misses']);
 		}
-		//parse countries
 		$jsonString = Zend_Json::encode($data);
-		$jsonString = preg_replace('/\{/', '{ ', $jsonString);
-		$this->tpl->setVar('PIECHART_DATA', $jsonString);
-		//parse colors
-		$jsonString = Zend_Json::encode($widgetOption['colorCharts']['color']);
-		$jsonString = preg_replace('/\{/', '{ ', $jsonString);
-		$this->tpl->setVar('PIECHART_COLOR', $jsonString);
+		return $jsonString;
 	}
 
 }
