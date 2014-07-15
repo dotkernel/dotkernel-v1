@@ -60,6 +60,9 @@
 		<br/><br/>
 		<strong>and in the admin the URL's will be:</strong><br/>
 		<em>/admin/controller/action/var1/value-of-var1/var2/value-of-var2/</em>
+		<br/><br/>
+		<strong>and in Api the URL's will be:</strong><br/>
+		<em>/api/index.php?action=version&key=XXXXXDKXXXXX</em>
 	</p> 
  
 	<h2>3. Adding a new Controller</h2>
