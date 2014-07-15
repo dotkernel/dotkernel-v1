@@ -20,7 +20,8 @@
 // Define application path
 define('APPLICATION_PATH', realpath(dirname(__FILE__) . "/.."));
 
-chdir(APPLICATION_PATH);
+// Define API path
+define('API_PATH', realpath(dirname(__FILE__)));
 
 //Set include  path to library directory
 set_include_path(implode(PATH_SEPARATOR, array(APPLICATION_PATH . '/library', get_include_path())));
@@ -32,7 +33,6 @@ define('CONFIGURATION_PATH', APPLICATION_PATH . '/configs');
 require_once 'Zend/Loader/Autoloader.php';
 $zendLoader = Zend_Loader_Autoloader::getInstance();
 $zendLoader->registerNamespace('Dot_');
-$zendLoader->registerNamespace('Api_');
 
 // Define application environment
 define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
@@ -60,8 +60,12 @@ Dot_Settings::setPhpSettings($config->phpSettings->toArray());
 // Get the action and the other arguments
 $params = array();
 $params = $_GET;
-$registry->action = $params['action'];
-unset($params['action']);
-$registry->arguments = $params;
+if (!empty($params))
+{
+	$registry->action = $params['action'];
+	unset($params['action']);
+	$registry->arguments = $params;
+}
+
 
 include('Controller.php');

@@ -12,9 +12,8 @@
  * @author     DotKernel Team <team@dotkernel.com>
 */
 
-class Api_Model_OpCache extends Dot_Model
+class OpCache extends Dot_Model
 {
-
 	/**
 	 * Api constructor
 	 * @access public 

@@ -17,38 +17,51 @@ if (!$registry->configuration->api->params->enable)
 	exit;
 }
 
-switch ($registry->action)
+require(API_PATH . '/Model/OpCache.php');
+
+if (isset($registry->action))
 {
-	case 'version':
-		$data = array();
-		$data[] = array('result' => 'ok');
-		$data[] = array('response' => Dot_Kernel::VERSION);
-		$jsonString = Zend_Json::encode($data);
-		echo $jsonString;
-	break;
-	
-	case 'opcache':
-		if ($registry->configuration->api->params->key == $registry->arguments['key'])
-		{
-			$opCacheModel = new Api_Model_OpCache();
-			echo $opCacheModel->opCacheStatus();
-		}
-		else
-		{
-			header("HTTP/1.0 401 Unauthorized");
+	switch ($registry->action)
+	{
+		case 'version':
 			$data = array();
-			$data[] = array('result' => 'error');
-			$data[] = array('response' => "Invalid Key");
+			$data[] = array('result' => 'ok');
+			$data[] = array('response' => Dot_Kernel::VERSION);
 			$jsonString = Zend_Json::encode($data);
 			echo $jsonString;
-		}
-	break;
-
-	default:
-		$data = array();
-		$data[] = array('result' => 'error');
-		$data[] = array('response' => "Action doesn't exist");
-		$jsonString = Zend_Json::encode($data);
-		echo $jsonString;
-	break;
+		break;
+		
+		case 'opcache':
+			if ($registry->configuration->api->params->key == $registry->arguments['key'])
+			{
+				$opCacheModel = new OpCache();
+				echo $opCacheModel->opCacheStatus();
+			}
+			else
+			{
+				header("HTTP/1.0 401 Unauthorized");
+				$data = array();
+				$data[] = array('result' => 'error');
+				$data[] = array('response' => "Invalid Key");
+				$jsonString = Zend_Json::encode($data);
+				echo $jsonString;
+			}
+		break;
+	
+		default:
+			$data = array();
+			$data[] = array('result' => 'error');
+			$data[] = array('response' => "Action doesn't exist");
+			$jsonString = Zend_Json::encode($data);
+			echo $jsonString;
+		break;
+	}
+}
+else
+{
+	$data = array();
+	$data[] = array('result' => 'error');
+	$data[] = array('response' => "Action doesn't exist");
+	$jsonString = Zend_Json::encode($data);
+	echo $jsonString;
 }
