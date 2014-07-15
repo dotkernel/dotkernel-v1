@@ -17,8 +17,6 @@ if (!$registry->configuration->api->params->enable)
 	exit;
 }
 
-require(API_PATH . '/Model/OpCache.php');
-
 if (isset($registry->action))
 {
 	switch ($registry->action)
@@ -34,7 +32,7 @@ if (isset($registry->action))
 		case 'opcache':
 			if ($registry->configuration->api->params->key == $registry->arguments['key'])
 			{
-				$opCacheModel = new OpCache();
+				$opCacheModel = new Api_Model_OpCache();
 				echo $opCacheModel->opCacheStatus();
 			}
 			else
