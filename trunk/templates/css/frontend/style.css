@@ -127,6 +127,10 @@ input, select, textarea { font-family: "Lucida Sans Unicode", "Lucida Grande", G
 .message_error { background-color: #FFC4C4; border: 1px solid #CC0000; vertical-align: middle; text-align: left; font-weight: bold; font-size: 13px; padding: 5px 5px 5px 20px; }
 .message_warning { background-color: #FFFFB0; border: 1px solid #F19F56; vertical-align: middle; text-align: left; font-weight: bold; font-size: 13px; padding: 5px 5px 5px 20px; }
 
+/**** Home ****/
+ul.url_pattern { margin: 0px 0px 15px 10px; }
+ul.url_pattern li { list-style: disc; padding: 10px 0px; }
+
 /**** Recaptcha ****/
 .recaptchatable #recaptcha_response_field { height: 18px; }
 

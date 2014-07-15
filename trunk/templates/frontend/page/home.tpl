@@ -54,16 +54,20 @@
 	
 
 	<h2>2. URL Pattern</h2>
-	<p>
-		<strong>The default module is frontend, so the URL's will be in the form:</strong><br/> 
-		<em>/controller/action/var1/value-of-var1/var2/value-of-var2/</em>
-		<br/><br/>
-		<strong>and in the admin the URL's will be:</strong><br/>
-		<em>/admin/controller/action/var1/value-of-var1/var2/value-of-var2/</em>
-		<br/><br/>
-		<strong>and in Api the URL's will be:</strong><br/>
-		<em>/api/index.php?action=version&key=XXXXXDKXXXXX</em>
-	</p> 
+	<ul class="url_pattern">
+		<li>
+			<strong>The default module is frontend, so the URL's will be in the form:</strong><br/> 
+			<em>/controller/action/var1/value-of-var1/var2/value-of-var2/</em>
+		</li>
+		<li>
+			<strong>and in the admin the URL's will be:</strong><br/>
+			<em>/admin/controller/action/var1/value-of-var1/var2/value-of-var2/</em>
+		</li>
+		<li>
+			<strong>and in Api the URL's will be:</strong><br/>
+			<em>/api/index.php?action=version&key=XXXXXDKXXXXX</em>
+		</li>
+	</ul> 
  
 	<h2>3. Adding a new Controller</h2>
 	<p>
