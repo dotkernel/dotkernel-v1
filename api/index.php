@@ -32,10 +32,13 @@ set_include_path(implode(PATH_SEPARATOR, array(APPLICATION_PATH . '/library', ge
 // Define PATH to configuration
 define('CONFIGURATION_PATH', APPLICATION_PATH . '/configs');
 
+chdir(dirname(__DIR__));
+
 // Load Zend Framework
 require_once 'Zend/Loader/Autoloader.php';
 $zendLoader = Zend_Loader_Autoloader::getInstance();
 $zendLoader->registerNamespace('Dot_');
+$zendLoader->registerNamespace('Api_');
 
 // Create registry object, as read-only object to store there config, settings, and database
 $registry = new Zend_Registry(array(), ArrayObject::ARRAY_AS_PROPS);
