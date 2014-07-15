@@ -17,8 +17,11 @@
  * @author     DotKernel Team <team@dotkernel.com>
  */
 
+// Define application environment
+define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
+
 // Define application path
-define('APPLICATION_PATH', realpath(dirname(__FILE__) . "/.."));
+define('APPLICATION_PATH', realpath(dirname(__DIR__)));
 
 // Define API path
 define('API_PATH', realpath(dirname(__FILE__)));
@@ -33,9 +36,6 @@ define('CONFIGURATION_PATH', APPLICATION_PATH . '/configs');
 require_once 'Zend/Loader/Autoloader.php';
 $zendLoader = Zend_Loader_Autoloader::getInstance();
 $zendLoader->registerNamespace('Dot_');
-
-// Define application environment
-define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 
 // Create registry object, as read-only object to store there config, settings, and database
 $registry = new Zend_Registry(array(), ArrayObject::ARRAY_AS_PROPS);
