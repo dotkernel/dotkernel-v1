@@ -197,8 +197,8 @@ switch ($registry->requestAction)
 		$disabled = FALSE;
 		
 		// not sure if the form was submitted or not yet , either from Request or from POST
-		$userId = array_key_exists('id', $registry->request) ? $registry->request['id'] : $_POST['userId'];
-		$userToken = array_key_exists('token', $registry->request) ? $registry->request['token'] : $_POST['userToken'];
+		$userId = array_key_exists('id', $registry->request) ? $registry->request['id'] : ((isset($_POST['userId'])) ? $_POST['userId'] : '');
+		$userToken = array_key_exists('token', $registry->request) ? $registry->request['token'] : ((isset($_POST['userToken'])) ? $_POST['userToken'] : '');
 		
 		// get user info based on ID , and see if is valid
 		$userInfo = $userModel->getUserInfo($userId);
