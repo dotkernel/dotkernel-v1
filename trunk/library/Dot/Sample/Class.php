@@ -53,7 +53,7 @@ class Dot_Sample_Class  extends Dot_Other_Class
 	 * Description of Protected property. 
 	 * always start with underscore , followed by lowercase letter
 	 */
-	protected $_sampleProtectedproriety;
+	protected $_sampleProtectedPropriety;
 	
 	/**
 	* Function name should be verbose and descriptive and  must be written in camelCase
