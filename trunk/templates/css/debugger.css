@@ -21,16 +21,18 @@
 	font-size: 10px;
 	font-family:Consolas, monospace;
 	width:auto;
-	padding: 15px 15px;
+	padding: 15px 0px;
+	width: 95%;
+	margin-left: 2.5%;
 	background-color: #EEF2F5; 
 }
 .debuggertable{
 	border: 0px;
-	margin: 10px 0px 10px 0px;
+	margin: 20px 0px 5px 0px;
 	font-size: 10px;
 	font-family:Consolas, monospace;
 	width:100%;
-	background-color: #E2E2E2;
+	background-color: #D1D1D1;
 	width:100%;
 	border-spacing: 1px;
 	border-collapse: separate;
@@ -60,13 +62,13 @@
 }
 
 .debuggertable th{
-	background-color: #E2E2E2;
-	border: 1px solid #FFFFFF;
-	padding: 3px 0px 3px 3px;
+	background-color: #EDEDED;
+	padding: 8px 0px 8px 3px;
+	font-size: 12px;
 }
 
 .debuggertable td{
-	padding: 3px 0px 3px 3px;
+	padding: 5px 0px 5px 3px;
 }
 
 .debugger_1 {
@@ -76,7 +78,7 @@
 }
 
 .debugger_2 {
-	background-color: #F7F7F7;
+	background-color: #FFFFFF;
 	border: 1px solid #FFFFFF;
 	color: #333333;
 	letter-spacing: 0.5px;
@@ -118,7 +120,7 @@
 	line-height: 21px;
 }
 
-.db_debug_rows{
+.db_debug_rows {
 	clear: both;
 }
 
