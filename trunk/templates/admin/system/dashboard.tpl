@@ -142,22 +142,6 @@
 					</ul>
 				</div>
 				<!-- END warnings -->
-				<div class="message_warning">
-					<strong style="font-size: 12px; text-transform: uppercase;">{WARNING_TYPE}</strong>
-					<ul style="padding: 3px 15px;">
-						<!-- BEGIN warning_item -->
-						<li>{WARNING_DESCRIPTION}</li>
-						<!-- END warning_item -->
-					</ul>
-				</div>
-				<div class="message_info">
-					<strong style="font-size: 12px; text-transform: uppercase;">{WARNING_TYPE}</strong>
-					<ul style="padding: 3px 15px;">
-						<!-- BEGIN warning_item -->
-						<li>{WARNING_DESCRIPTION}</li>
-						<!-- END warning_item -->
-					</ul>
-				</div>
 			</div>
 		</td>
 	</tr>
