@@ -5,20 +5,21 @@
 		$(".icon[title]").tooltip();
 	});
 </script>
-<div id="adminList">
-	{PAGINATION}
-	<fieldset style="width: 100%">
-	<legend>List logins</legend>
-	<table class="big_table">
+{PAGINATION}
+<div id="adminList" class="box-shadow">
+	<div class="box_header">
+		List logins
+	</div>
+	<table class="big_table" frame="box" rules="all">
 		<thead>
 			<tr>
 				<th style="text-align: center; width: 20px;">#</th>
 				<th>Username</th>
 				<th>Referer</th>
 				<th style="width: 150px;">IP</th>
-				<th style="width: 50px;">Country</th>
-				<th style="width: 50px;">Browser</th>
-				<th style="width: 50px;">OS</th>
+				<th style="width: 50px; text-align: center;">Country</th>
+				<th style="width: 50px; text-align: center;">Browser</th>
+				<th style="width: 50px; text-align: center;">OS</th>
 				<th style="width: 150px;">Log In Date</th>
 			</tr>
 		</thead>
@@ -46,5 +47,4 @@
 		<!-- END list -->
 		</tbody>
 	</table>
-	</fieldset>
 </div>

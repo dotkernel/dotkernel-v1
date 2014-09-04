@@ -1,3 +1,2 @@
-<span>welcome {ADMIN_USERNAME} </span>|
-<a href="{SITE_URL}" target="_blank">home </a>|
-<a href="{SITE_URL}/admin/admin/logout">log out</a>
+<span>Welcome {ADMIN_USERNAME} </span>
+<a class="logout" href="{SITE_URL}/admin/admin/logout">&nbsp;</a>

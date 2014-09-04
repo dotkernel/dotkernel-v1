@@ -1,4 +1,4 @@
-<div class="message_{MESSAGE_TYPE}">
+<div class="message_{MESSAGE_TYPE} rounded-corners box-shadow">
 	{MESSAGE_STRING}
 	<ul>
 		<!-- BEGIN msg_array -->

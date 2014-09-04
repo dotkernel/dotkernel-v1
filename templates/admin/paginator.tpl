@@ -1,6 +1,8 @@
-<div class="pagination clearfix">
-	<span><b>{TOTAL_RECORDS}</b> records | 
-	<b>({TOTAL_PAGES})</b> pages</span>
+<div class="pagination box-shadow clearfix">
+	<span>
+		{TOTAL_RECORDS} record(s) | 
+		{TOTAL_PAGES} page(s)
+	</span>
 	<ul>
 		<!-- BEGIN first -->
 			<li>

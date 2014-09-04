@@ -1,9 +1,11 @@
 <!-- piechart for hits -->
-<legend>OpCache Hits</legend>
+<div class="opcache_title">
+	OpCache Hits
+</div>
 <table class="chartTable">
     <tr>
         <td>
-        	<div style="width:100%;height:275px" id="hitsChart"></div>
+        	<div style="width:100%; height:275px" id="hitsChart"></div>
 		</td>
     </tr>
 </table>

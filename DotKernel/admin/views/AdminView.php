@@ -39,7 +39,8 @@ class Admin_View extends View
 	 */
 	public function loginForm($templateFile)
 	{
-		$this->tpl->setFile('tpl_main', 'admin/' . $templateFile . '.tpl');	
+		$this->tpl->setFile('tpl_main', 'admin/' . $templateFile . '.tpl');
+		$this->tpl->setVar('LOGIN_CLASS', 'login_form');
 	}
 	/**
 	 * List the admin users

@@ -153,10 +153,10 @@ function pieChart(elementId, userLogins, noDataMessage, colors){
 			}
 		},
 		legend: {
-			width: 120,
+			width: 100,
 			layout: "vertical",
 			align: "center",
-			verticalAlign: "top",
+			verticalAlign: "bottom",
 			borderWidth: 0,
 			labelFormatter: function() {
 				return this.name;

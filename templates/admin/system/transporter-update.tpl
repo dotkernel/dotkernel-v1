@@ -1,6 +1,8 @@
 <form action="{SITE_URL}/admin/system/transporter-update/id/{ID}" method="post" >
-<fieldset style="width: 500px">
-<legend>Update Email Account</legend>
+<div class="rounded-corners box-shadow" style="width: 500px">
+	<div class="box_header round-left-right-top">
+		Update Email Account
+	</div>
 	<table class="medium_table">
 		<tr>
 			<td width="130px">User</td>
@@ -43,5 +45,5 @@
 			</td>
 		</tr>
 	</table>
-</fieldset>
+</div>
 </form>

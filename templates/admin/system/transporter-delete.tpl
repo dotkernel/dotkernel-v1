@@ -1,6 +1,8 @@
 <form action="{SITE_URL}/admin/system/transporter-delete/id/{ID}" method="post" >
-<fieldset style="width: 700px">
-<legend>Delete Transporter: {USER} / {SERVER}</legend>
+<div class="rounded-corners box-shadow" style="width: 700px">
+	<div class="box_header round-left-right-top">
+		Delete Transporter: {USER} / {SERVER}
+	</div>
 	<table class="medium_table">
 		<tr>
 			<td>
@@ -14,5 +16,5 @@
 			</td>
 		</tr>
 	</table>
-</fieldset>
+</div>
 </form>
