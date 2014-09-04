@@ -1,45 +1,45 @@
 <form action="{SITE_URL}/admin/user/add" method="post" >
-<input type="hidden" name="userToken" value="{USERTOKEN}">
-<fieldset style="width: 500px">
-<legend>Add New User</legend>
-	<table class="medium_table">
-		<tr>
-			<td width="140px"><b>Username</b><span class="required">*</span></td>
-			<td><input type="text" name="username" value="{USERNAME}"></td>
-		</tr>
-		<tr>
-			<td><b>Password</b><span class="required">*</span></td>
-			<td><input type="password" name="password" value="{PASSWORD}" ></td>
-		</tr>
-		<tr>
-			<td><b>Confirm Password</b><span class="required">*</span></td>
-			<td><input type="password" name="password2" value="{PASSWORD}" ></td>
-		</tr>
-		<tr>
-			<td><b>Email</b><span class="required">*</span></td>
-			<td><input type="text" name="email" value="{EMAIL}" ></td>
-		</tr>
-		<tr>
-			<td><b>First Name</b></td>
-			<td><input type="text" name="firstName" value="{FIRSTNAME}" ></td>
-		</tr>
-		<tr>
-			<td><b>Last Name</b></td>
-			<td><input type="text" name="lastName" value="{LASTNAME}" ></td>
-		</tr>
-		<tr>
-			<td><b>Active</b></td>
-			<td>
-				<label for="active1">Yes</label> <input type="radio" id="active1" name="isActive" value="1" style="height: auto;" {ACTIVE_1}>
-				<label for="active0">No</label>	<input type="radio" id="active0" name="isActive" value="0" style="height: auto;" {ACTIVE_0}>
-			</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td>
+	<input type="hidden" name="userToken" value="{USERTOKEN}">
+	<div class="box-shadow" style="width: 500px">
+		<div class="box_header">
+			Add New User
+		</div>
+		<ul class="form">
+			<li class="clearfix">
+				<label>Username<span class="required">*</span></label>
+				<input type="text" name="username" value="{USERNAME}">
+			</li>
+			<li class="clearfix">
+				<label>Password<span class="required">*</span></label>
+				<input type="password" name="password" value="{PASSWORD}" >
+			</li>
+			<li class="clearfix">
+				<label>Confirm Password<span class="required">*</span></label>
+				<input type="password" name="password2" value="{PASSWORD}" >
+			</li>
+			<li class="clearfix">
+				<label>Email<span class="required">*</span></label>
+				<input type="text" name="email" value="{EMAIL}" >
+			</li>
+			<li class="clearfix">
+				<label>First Name</label>
+				<input type="text" name="firstName" value="{FIRSTNAME}" >
+			</li>
+			<li class="clearfix">
+				<label>Last Name</label>
+				<input type="text" name="lastName" value="{LASTNAME}" >
+			</li>
+			<li class="clearfix">
+				<label>Active</label>
+				<div class="radios">
+					<label for="active1">Yes</label> <input type="radio" id="active1" name="isActive" value="1" style="height: auto;" {ACTIVE_1}>
+					<label for="active0">No</label>	<input type="radio" id="active0" name="isActive" value="0" style="height: auto;" {ACTIVE_0}>
+				</div>
+			</li>
+			<li class="clearfix">
+				<label>&nbsp;</label>
 				<input type="submit" class="button" value="add">
-			</td>
-		</tr>
-	</table>
-</fieldset>
+			</li>
+		</ul>
+	</div>
 </form>

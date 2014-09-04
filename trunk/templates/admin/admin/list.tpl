@@ -9,11 +9,12 @@
 		});
 	})
 </script>
-<div id="adminList">
-	{PAGINATION}
-	<fieldset>
-	<legend>List Admins</legend>
-	<table class="big_table">
+{PAGINATION}
+<div id="adminList" class="box-shadow">
+	<div class="box_header">
+		List Admins
+	</div>
+	<table class="big_table" frame="box" rules="all">
 		<thead>
 			<tr>
 				<th style="text-align: center; width: 20px;">#</th>
@@ -21,8 +22,8 @@
 				<th>Email</th>
 				<th><span>First name</span></th>
 				<th>Last name</th>
-				<th width="70px">Active</th>
 				<th>Creation Date</th>
+				<th style="text-align: center;" width="50px;">Status</th>
 				<th width="230px">Action</th>
 			</tr>
 		</thead>
@@ -34,22 +35,21 @@
 				<td>{EMAIL}</td>
 				<td>{FIRSTNAME}</td>
 				<td>{LASTNAME}</td>
+				<td>{DATE_CREATED}</td>
 				<td style="vertical-align: middle;">
 					 <a style="cursor: pointer;" title="Activate / Inactivate" class="{ACTIVE_IMG}_state activeButton"
 					 	id="row_{ID}" data-id="{ID}" data-active="{ISACTIVE}">&nbsp;</a> </td>
-				<td>{DATE_CREATED}</td>
 				<td>
-				<table  class="action_table">
-					<tr>
-						<td width="25%"><a href="{SITE_URL}/admin/admin/update/id/{ID}/" title="Edit/Update" class="edit_state">&nbsp;</a></td>
-						<td width="25%"><a href="{SITE_URL}/admin/admin/delete/id/{ID}/" title="Delete" class="delete_state">&nbsp;</a></td>
-						<td width="25%"><a href="{SITE_URL}/admin/admin/logins/id/{ID}/" title="User Logins" class="logins_state">&nbsp;</a></td>
-					</tr>
-				</table>
+					<table  class="action_table">
+						<tr>
+							<td width="25%"><a href="{SITE_URL}/admin/admin/update/id/{ID}/" title="Edit/Update" class="edit_state">Edit</a></td>
+							<td width="25%"><a href="{SITE_URL}/admin/admin/delete/id/{ID}/" title="Delete" class="delete_state">Delete</a></td>
+							<td width="25%"><a href="{SITE_URL}/admin/admin/logins/id/{ID}/" title="User Logins" class="logins_state">Logins</a></td>
+						</tr>
+					</table>
 				</td>
 			</tr>
 		<!-- END list -->
 		</tbody>
 	</table>
-	</fieldset>
 </div>

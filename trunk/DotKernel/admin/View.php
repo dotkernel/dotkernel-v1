@@ -126,6 +126,7 @@ class View extends Dot_Template
 				if(1 != $menu['id']) continue;
 
 				$this->setFile('tpl_menu', 'blocks/menu.tpl');
+				$this->setFile('tpl_breadcrumbs', 'blocks/breadcrumbs.tpl');
 
 				$items = $menu['item'];
 
@@ -201,6 +202,7 @@ class View extends Dot_Template
 			}
 		}
 		$this->parse('MENU', 'tpl_menu');
+		$this->parse('BREADCRUMBS', 'tpl_breadcrumbs');
 	}
 	/**
 	 * Display the info bar only if user is logged id

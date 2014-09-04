@@ -71,35 +71,37 @@
 </script>
 <div id="adminList">
 	{PAGINATION}
-	<fieldset style="width: 100%">
-	<legend>List Email Transporters</legend>
-	<table class="big_table">
-		<thead>
-			<tr>
-				<th style="text-align: center;">#</th>
-				<th>User</th>
-				<th>Server</th>
-				<th>Port</th>
-				<th>SSL</th>
-				<th>Date</th>
-				<th>Capacity</th>
-				<th>Counter</th>
-				<th>Active</th>
-				<th>Action</th>
-			</tr>
-		</thead>
-		<tbody id="transporterTable">
-				{TRANSPORTER_ROW}
-		</tbody>
-	</table>
-	</fieldset>
+	<div class="box-shadow">
+		<div class="box_header">
+			List Email Transporters
+		</div>
+		<table class="big_table" frame="box" rules="all">
+			<thead>
+				<tr>
+					<th style="text-align: center; width: 20px;">#</th>
+					<th>User</th>
+					<th>Server</th>
+					<th>Port</th>
+					<th>SSL</th>
+					<th>Date</th>
+					<th width="60px">Capacity</th>
+					<th width="60px">Counter</th>
+					<th width="50px">Status</th>
+					<th width="130px">Action</th>
+				</tr>
+			</thead>
+			<tbody id="transporterTable">
+					{TRANSPORTER_ROW}
+			</tbody>
+		</table>
+	</div>
 </div>
-
+<br>
 <a id="dialogButton" class="button">Add Transporter</a>
 
 <div id="form-dialog" title="Add Email Transporter">
 	<form id="transporterAdd">
-		<table class="medium_table" style="width:100%;height:100%">
+		<table class="medium_table round-left-right-bottom" style="width:100%; height:100%">
 			<tr>
 				<td colspan="2" style="padding:0">
 					<div id="messages"></div>

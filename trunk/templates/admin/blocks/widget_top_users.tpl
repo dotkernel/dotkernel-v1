@@ -1,9 +1,11 @@
 <!-- columnchart for top users-->
-<legend>Most active users</legend>
+<div class="user_title">
+	Most active users
+</div>
 <table class="chartTable">
     <tr>
         <td>
-        	<div style="width:100%;height:300px" id="topUsersChart"></div>
+        	<div style="width:100%; height:300px" id="topUsersChart"></div>
 		</td>
     </tr>
 </table>

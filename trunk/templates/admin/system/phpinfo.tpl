@@ -1,1 +1,3 @@
-{PHPINFO}
+<div class="phpinfo">
+	{PHPINFO}
+</div>

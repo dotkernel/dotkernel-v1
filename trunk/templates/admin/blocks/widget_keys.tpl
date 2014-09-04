@@ -1,5 +1,7 @@
 <!-- piechart for keys -->
-<legend>OpCache Keys</legend>
+<div class="opcache_title">
+	OpCache Keys
+</div>
 <table class="chartTable">
     <tr>
         <td>

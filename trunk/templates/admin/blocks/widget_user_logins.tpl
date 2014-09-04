@@ -1,5 +1,7 @@
 <!-- piechart for users logins-->
-<legend>Users Log In By Country</legend>
+<div class="user_title">
+	Users Log In By Country
+</div>
 <table class="chartTable">
     <tr>
         <td>

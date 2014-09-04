@@ -9,11 +9,12 @@
 		});
 	})
 </script>
-<div id="adminList">
-	{PAGINATION}
-	<fieldset style="width: 100%">
-	<legend>List Users</legend>
-	<table class="big_table">
+{PAGINATION}
+<div id="adminList" class="box-shadow">
+	<div class="box_header">
+		List Users
+	</div>
+	<table class="big_table" frame="box" rules="all">
 		<thead>
 			<tr>
 				<th style="text-align: center; width: 20px;"><span>#</span></th>
@@ -21,8 +22,8 @@
 				<th><span>Email</span></th>
 				<th><span>First name</span></th>
 				<th><span>Last name</span></th>
-				<th width="70px"><span>Active</span></th>
 				<th><span>Creation Date</span></th>
+				<th style="text-align: center;" width="50px"><span>Status</span></th>
 				<th width="300px"><span>Action</span></th>
 			</tr>
 		</thead>
@@ -34,17 +35,17 @@
 				<td>{EMAIL}</td>
 				<td>{FIRSTNAME}</td>
 				<td>{LASTNAME}</td>
-				<td style="vertical-align: middle;">
+				<td>{DATE_CREATED}</td>
+				<td style="vertical-align: middle; text-align: left;">
 					<a style="cursor: pointer;" title="Activate / Deactivate" class="{ACTIVE_IMG}_state activeButton" data-id="{ID}" data-active="{ISACTIVE}">&nbsp;</a>
 				</td>
-				<td>{DATE_CREATED}</td>
 				<td>
 					<table class="action_table">
 						<tr>
-							<td width="25%"><a href="{SITE_URL}/admin/user/update/id/{ID}/" title="Edit/Update" class="edit_state">&nbsp;</a></td>
-							<td width="25%"><a href="{SITE_URL}/admin/user/delete/id/{ID}/" title="Delete" class="delete_state">&nbsp;</a></td>
-							<td width="25%"><a href="{SITE_URL}/admin/user/logins/id/{ID}/" title="User Log In" class="logins_state">&nbsp;</a></td>
-							<td width="25%"><a href="{SITE_URL}/admin/user/send-password/id/{ID}/" title="Send User Password" class="pass_state">&nbsp;</a></td>
+							<td width="20%"><a href="{SITE_URL}/admin/user/update/id/{ID}/" title="Edit/Update" class="edit_state">Edit</a></td>
+							<td width="25%"><a href="{SITE_URL}/admin/user/delete/id/{ID}/" title="Delete" class="delete_state">Delete</a></td>
+							<td width="25%"><a href="{SITE_URL}/admin/user/logins/id/{ID}/" title="User Log In" class="logins_state">Logins</a></td>
+							<td width="30%"><a href="{SITE_URL}/admin/user/send-password/id/{ID}/" title="Send User Password" class="pass_state">Send Pass</a></td>
 							</tr>
 					</table>
 				</td>
@@ -52,5 +53,4 @@
 		<!-- END list -->
 		</tbody>
 	</table>
-	</fieldset>
 </div>

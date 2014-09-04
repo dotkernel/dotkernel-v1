@@ -1,5 +1,7 @@
 <!-- piechart for memory usage -->
-<legend>OpCache Memory</legend>
+<div class="opcache_title">
+	OpCache Memory
+</div>
 <table class="chartTable">
 	<tr>
 		<td>

@@ -1,9 +1,11 @@
 <!-- linechart for last months activity-->
-<legend>Last months admin's Logins</legend>
-<table class="chartTable">
+<div class="box_header">
+	Last months admin's Logins
+</div>
+<table class="chartTable no_border-top">
     <tr>
         <td>
-        	<div style="width:100%;height:300px" id="timeActivityChart"></div>
+        	<div style="width:100%; height:300px;" id="timeActivityChart"></div>
 		</td>
     </tr>
 </table>

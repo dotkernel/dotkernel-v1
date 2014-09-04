@@ -1,38 +1,38 @@
 <form action="{SITE_URL}/admin/admin/update/id/{ID}" method="post" >
-<input type="hidden" name="userToken" value="{USERTOKEN}">
-<fieldset style="width: 500px">
-<legend>Admin Acccount</legend>
-	<table class="medium_table">
-		<tr>
-			<td width="140px"><b>Username</b></td>
-			<td>{USERNAME}</td>
-		</tr>
-		<tr>
-			<td><b>Password</b><span class="required">*</span></td>
-			<td><input type="password" name="password" value="{PASSWORD}" ></td>
-		</tr>
-		<tr>
-			<td><b>Confirm Password</b><span class="required">*</span></td>
-			<td><input type="password" name="password2" value="{PASSWORD}" ></td>
-		</tr>		
-		<tr>
-			<td><b>Email</b><span class="required">*</span></td>
-			<td><input type="text" name="email" value="{EMAIL}" ></td>
-		</tr>			
-		<tr>
-			<td><b>First Name</b></td>
-			<td><input type="text" name="firstName" value="{FIRSTNAME}" ></td>
-		</tr>		
-		<tr>
-			<td><b>Last Name</b></td>
-			<td><input type="text" name="lastName" value="{LASTNAME}" ></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td>
-				<input type="submit" onclick="" class="button" value="update">
-			</td>
-		</tr>
-	</table>
-</fieldset>
+	<input type="hidden" name="userToken" value="{USERTOKEN}">
+	<div class="box-shadow" style="width: 500px">
+		<div class="box_header">
+			Admin Acccount
+		</div>
+		<ul class="form">
+			<li class="clearfix">
+				<label>Username<span class="required">*</span></label>
+				<p class="username">{USERNAME}</p>
+			</li>
+			<li class="clearfix">
+				<label>Password<span class="required">*</span></label>
+				<input type="password" name="password" value="{PASSWORD}" >
+			</li>
+			<li class="clearfix">
+				<label>Confirm Password<span class="required">*</span></label>
+				<input type="password" name="password2" value="{PASSWORD}" >
+			</li>
+			<li class="clearfix">
+				<label>Email<span class="required">*</span></label>
+				<input type="text" name="email" value="{EMAIL}" >
+			</li>
+			<li class="clearfix">
+				<label>First Name</label>
+				<input type="text" name="firstName" value="{FIRSTNAME}" >
+			</li>
+			<li class="clearfix">
+				<label>Last Name</label>
+				<input type="text" name="lastName" value="{LASTNAME}" >
+			</li>
+			<li class="clearfix">
+				<label>&nbsp;</label>
+				<input type="submit" class="button" value="update">
+			</li>
+		</ul>
+	</div>
 </form>
