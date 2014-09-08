@@ -4,6 +4,9 @@
 		{TOTAL_PAGES} page(s)
 	</span>
 	<ul>
+		<li class="pages">
+			Pages
+		</li>
 		<!-- BEGIN first -->
 			<li>
 			<a href="{FIRST_LINK}">First</a>

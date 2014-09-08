@@ -669,6 +669,14 @@ a.sort_down {
 /*** End Datepicker ***/
 
 /*** PHP INFO ***/
+
+.phpinfo table.list_table {
+	border-collapse: collapse;
+}
+.phpinfo table.list_table td {
+	padding: 10px !important;
+}
+
 .center {
 	text-align: center;
 }
@@ -710,6 +718,9 @@ input.bigger {
 .pagination ul {
 	width: auto;
 	float: left;
+}
+.pagination ul li.pages {
+	padding: 10px 15px 10px 15px;
 }
 .pagination li {
 	float: left;

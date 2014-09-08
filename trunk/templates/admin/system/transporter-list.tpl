@@ -72,9 +72,6 @@
 <div id="adminList">
 	{PAGINATION}
 	<div class="box-shadow">
-		<div class="box_header">
-			List Email Transporters
-		</div>
 		<table class="big_table" frame="box" rules="all">
 			<thead>
 				<tr>
