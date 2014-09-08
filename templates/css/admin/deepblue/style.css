@@ -227,6 +227,17 @@ form.login input.button {
 /* End Login Form */
 /*** End Forms ***/
 
+/*** PHP INFO ***/
+
+.phpinfo table.list_table {
+	background-color: #F6F6F6;
+}
+.phpinfo table.list_table td {
+	background-color: #FFFFFF;
+	border: 1px solid #AEB7C1;
+}
+
+/*** End PHP INFO ***/
 
 /*** Buttons ***/
 .button {
@@ -260,7 +271,7 @@ form.login input.button {
 	background-image: url('images/breadcrumbs_arrow.png');
 }
 #breadcrumbs li a {
-	color: #a9b0ba;
+	color: #99a0aa;
 }
 #breadcrumbs li a:hover {
 	color: #f26f06 !important;
@@ -291,7 +302,7 @@ form.login input.button {
 	background: #E2E6EF;
 }
 .pagination li a {
-	color: #48A1E5;
+	color: #146da8;
 	border-color: #BDC6CF;
 }
 .pagination li a:hover {
@@ -300,7 +311,7 @@ form.login input.button {
 }
 .pagination li p {
 	background-color: #FFFFFF;
-	color: #48a1e5;
+	color: #146da8;
 }
 /*** End Pagination ***/
 

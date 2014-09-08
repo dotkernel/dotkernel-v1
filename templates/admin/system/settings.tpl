@@ -1,7 +1,3 @@
-<div class="box_header">
-	List Settings Variables
-</div>
-
 <form method="post" name="configs" action="{SITE_URL}/admin/system/settings-update">
 	<input type="hidden" name="userToken" value="{USERTOKEN}">
 	<div class="rouded-corners box-shadow">

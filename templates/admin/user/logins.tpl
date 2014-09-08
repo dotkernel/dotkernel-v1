@@ -60,9 +60,6 @@
 	
 	{PAGINATION}
 	<div class="box-shadow">
-		<div class="box_header">
-			List Log In's
-		</div>
 		<table class="big_table" frame="box" rules="all">
 			<thead>
 				<tr>

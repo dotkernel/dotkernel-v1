@@ -7,9 +7,6 @@
 </script>
 {PAGINATION}
 <div id="adminList" class="box-shadow">
-	<div class="box_header">
-		List logins
-	</div>
 	<table class="big_table" frame="box" rules="all">
 		<thead>
 			<tr>
