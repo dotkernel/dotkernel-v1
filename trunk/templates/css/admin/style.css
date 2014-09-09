@@ -85,10 +85,10 @@ body {
 }
 h1 {
 	font-family: 'Montserrat', sans-serif;
-	font-size: 18px;
+	font-size: 22px;
 	font-weight: bold;
 	padding: 10px 0px 10px 0px;
-	margin: 10px 0px 5px 0px;
+	margin: 15px 0px 5px 0px;
 	text-transform: uppercase;
 }
 h2 {
@@ -137,6 +137,7 @@ input[type="checkbox"], input[type="radio"] {
 	font-family: 'Montserrat', sans-serif;
 	font-weight: bold;
 	font-size: 12px;
+	line-height: 18px;
 	text-transform: uppercase;
 }
 .box-shadow {
@@ -329,7 +330,7 @@ input[type="checkbox"], input[type="radio"] {
 /*** MESSAGES ERROR AND INFO ***/
 .message_info {
 	margin-bottom: 10px;
-	padding: 20px;
+	padding: 15px 20px;
 	background-color: #7CA956;
 	color: #FFFFFF;
 	vertical-align: middle;
@@ -338,7 +339,7 @@ input[type="checkbox"], input[type="radio"] {
 }
 .message_error {
 	margin-bottom: 10px;
-	padding: 20px;
+	padding: 15px 20px;
 	background-color: #E05453;
 	color: #FFFFFF;
 	vertical-align: middle;
@@ -347,7 +348,7 @@ input[type="checkbox"], input[type="radio"] {
 }
 .message_warning {
 	margin-bottom: 10px;
-	padding: 20px;
+	padding: 15px 20px;
 	background-color: #FC9258;
 	color: #FFFFFF;
 	vertical-align: middle;
@@ -374,7 +375,7 @@ thead tr {
 .big_table th {
 	padding: 15px 10px !important;
 	margin-top: 10px;
-	line-height: 24px;
+	line-height: 18px;
 	font-size: 11px;
 	font-weight: bold;
 	text-transform: uppercase;
@@ -423,7 +424,6 @@ thead tr {
 	width: 93%;
 }
 .medium_table td:first-child {
-	font-weight: bold;
 	font-size: 11px;
 	text-align: left !important;
 }
@@ -580,7 +580,6 @@ a.sort_down {
 	width: 120px;
 	margin-right: 10px;
 	line-height: 24px;
-	font-weight: bold;
 }
 .form li input {
 	display: block;
@@ -704,14 +703,13 @@ input.bigger {
 
 /*** Pagination ***/
 .pagination {
-	margin: 15px 0px 15px 0px;
+	margin: 5px 0px 25px 0px;
 	padding: 0px 0px 0px 0px;
 }
 .pagination span {
 	display: block;
-	float: right;
-	margin-left: 15px;
-	padding: 10px 15px 10px 15px;
+	float: left;
+	padding: 16px 15px 16px 15px;
 	text-align: left;
 	width: auto;
 }
@@ -720,7 +718,7 @@ input.bigger {
 	float: left;
 }
 .pagination ul li.pages {
-	padding: 10px 15px 10px 15px;
+	padding: 16px 15px 16px 15px;
 }
 .pagination li {
 	float: left;
@@ -729,15 +727,15 @@ input.bigger {
 .pagination li a {
 	float: left;
 	display: block;
-	padding: 10px 15px 10px 15px;
+	padding: 16px 18px 16px 18px;
 }
 .pagination li a:hover {
-	padding: 10px 15px 10px 15px;
+	padding: 16px 18px 16px 18px;
 	text-decoration: none;
 }
 .pagination li p {
 	float:left;
-	padding: 10px 15px 10px 15px;
+	padding: 16px 18px 16px 18px;
 }
 /*** End Pagination ***/
 
