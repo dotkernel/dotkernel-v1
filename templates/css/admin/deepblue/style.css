@@ -91,7 +91,7 @@ input, select, textarea {
 	background-color: #BDC6CF;
 }
 .big_table th{
-	background-color: #FA9F36;
+	background-color: #fcbe2b;
 	color: #FFFFFF !important;
 }
 .big_table td {
@@ -301,8 +301,12 @@ form.login input.button {
 .pagination {
 	background: #E2E6EF;
 }
+.pagination span {
+	color: #8c9aa5;
+	border-right: 1px solid #CBCFD8;
+}
 .pagination li a {
-	color: #146da8;
+	color: #2F97E0;
 	border-color: #BDC6CF;
 }
 .pagination li a:hover {
@@ -310,8 +314,8 @@ form.login input.button {
 	color: #FFFFFF;
 }
 .pagination li p {
-	background-color: #FFFFFF;
-	color: #146da8;
+	background-color: #D5DAE5;
+	color: #39526D;
 }
 /*** End Pagination ***/
 

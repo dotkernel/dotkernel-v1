@@ -134,7 +134,7 @@
 			<div class="messages">
 				<!-- BEGIN warnings -->
 				<div class="message_error">
-					<strong style="font-size: 12px; text-transform: uppercase;">{WARNING_TYPE}</strong>
+					<strong style="font-family: 'Montserrat',sans-serif; font-size: 12px; text-transform: uppercase;">{WARNING_TYPE}</strong>
 					<ul style="padding: 3px 15px;">
 						<!-- BEGIN warning_item -->
 						<li>{WARNING_DESCRIPTION}</li>
