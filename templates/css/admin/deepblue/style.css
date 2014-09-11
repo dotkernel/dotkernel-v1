@@ -21,7 +21,7 @@ input, select, textarea {
 	color: #64696D;
 }
 .box_header {
-	background-color: #FCBE2B;
+	background-color: #FA9F36/*#FCBE2B*/;
 	color: #FFFFFD;
 }
 .button, .button:hover {
@@ -91,7 +91,7 @@ input, select, textarea {
 	background-color: #BDC6CF;
 }
 .big_table th{
-	background-color: #fcbe2b;
+	background-color: #FA9F36/*#fcbe2b*/;
 	color: #FFFFFF !important;
 }
 .big_table td {
@@ -122,6 +122,7 @@ table.medium_table td{
 table.medium_table td:first-child, .medium_table td:first-child {
 	background-color: #FFFFFF;
 	color: #A6B2C0;
+	font-weight: bold;
 }
 /* End Medium table */
 
@@ -302,7 +303,7 @@ form.login input.button {
 	background: #E2E6EF;
 }
 .pagination span {
-	color: #8c9aa5;
+	color: #778590;
 	border-right: 1px solid #CBCFD8;
 }
 .pagination li a {

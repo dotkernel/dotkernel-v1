@@ -69,9 +69,10 @@
 		});
 	})
 </script>
-<div id="adminList">
+<div id="adminList" class="clearfix">
 	{PAGINATION}
-	<div class="box-shadow">
+	<a id="dialogButton" class="button">Add Transporter</a>
+	<div class="box-shadow" style="display: block; margin-top: 75px; ">
 		<table class="big_table" frame="box" rules="all">
 			<thead>
 				<tr>
@@ -93,8 +94,7 @@
 		</table>
 	</div>
 </div>
-<br>
-<a id="dialogButton" class="button">Add Transporter</a>
+
 
 <div id="form-dialog" title="Add Email Transporter">
 	<form id="transporterAdd">
