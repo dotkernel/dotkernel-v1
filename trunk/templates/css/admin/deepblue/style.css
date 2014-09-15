@@ -121,7 +121,6 @@ table.medium_table td{
 }
 table.medium_table td:first-child, .medium_table td:first-child {
 	background-color: #FFFFFF;
-	color: #A6B2C0;
 	font-weight: bold;
 }
 /* End Medium table */
@@ -134,6 +133,8 @@ table.medium_table td:first-child, .medium_table td:first-child {
 }
 .g_box td {
 	background: #E2E6EF;
+}
+.g_box td.g_box_head {
 	color: #919ba7 !important;
 }
 .g_box .emph {
@@ -296,7 +297,9 @@ form.login input.button {
 /*** End Datepicker ***/
 
 /*** jQuery***/
-#transporterAdd .medium_table tr td { color: #64696D; }
+#transporterAdd .medium_table tr td {
+	color: #64696D;
+}
 
 /*** Pagination ***/
 .pagination {
