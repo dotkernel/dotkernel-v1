@@ -8,6 +8,7 @@
 					<add>Add User Account</add>
 					<update>Update User Account</update>
 					<delete>Delete User Account</delete>
+					<send-password>Send password to:</send-password>
 					<logins>User Logins</logins>
 				</action>
 			</pageTitle>
@@ -51,6 +52,7 @@ If you didn't make this request, you can ignore this email.</message>
 				<noAccountDelete>No account was deleted ! </noAccountDelete>
 				<emailSent>Password was sent to user </emailSent>
 				<emailNotFound> was not found in our records !</emailNotFound>
+				<passwordNotSent>Password not sent !</passwordNotSent>
 			</infoMessage>
 		</variable>
 		<variable option="frontend">
