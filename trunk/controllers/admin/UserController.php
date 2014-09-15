@@ -174,18 +174,38 @@ switch ($registry->requestAction)
 		// send an email with the password to the selected user
 		$data = array();
 		$error = array();
-		if ($registry->request['id'] > 0)
+		if($_SERVER['REQUEST_METHOD'] === "POST")
 		{
-			// send user password
-			$userModel->sendPassword($registry->request['id']);
+			if ('on' == $_POST['confirm'])
+			{
+				if ($registry->request['id'] > 0)
+				{
+					// send user password
+					$userModel->sendPassword($registry->request['id']);
+				}
+				else
+				{
+					$registry->session->message['txt'] = $option->errorMessage->emailNotSent;
+					$registry->session->message['type'] = 'error';
+				}
+			}
+			else
+			{
+				$registry->session->message['txt'] = $option->infoMessage->passwordNotSent;
+				$registry->session->message['type'] = 'warning';
+			}
+			header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestModule . '/' . $registry->requestController. '/list/');
+			exit;
 		}
-		else
+		if (!$registry->request['id'])
 		{
-			$registry->session->message['txt'] = $option->errorMessage->emailNotSent;
-			$registry->session->message['type'] = 'error';
+			header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestModule . '/' . $registry->requestController. '/list/');
+			exit;
 		}
-		header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestModule . '/' . $registry->requestController. '/list/');
-		exit;
+		$data = $userModel->getUserBy('id', $registry->request['id']);
+		$userView->setExtraBreadcrumb($data['username']);
+		$pageTitle .= ' "' . $data['username'] . '"';
+		$userView->details('sendPassword', $data);
 	break;
 	case 'logins':
 		// list user logins
