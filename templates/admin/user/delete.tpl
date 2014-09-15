@@ -7,10 +7,9 @@
 		<ul class="form delete">
 			<li class="clearfix">
 				<p>Are you sure you want to delete this account ?</p>
-				<br/>
-				<input type="checkbox" name="confirm"><label>Confirm deletion</label>
 			</li>
 			<li class="clearfix">
+				<input type="checkbox" name="confirm"><label>Confirm deletion</label>
 				<input type="submit" class="button" value="YES" style="float: left; margin-right:10px;">
 				<input type="button" onclick="window.location = '{SITE_URL}/admin/user/list'" class="button" value="Cancel">
 			</li>
