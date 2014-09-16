@@ -150,7 +150,7 @@ a#dialogButton {
 	-webkit-box-shadow: 0 1px 2px #DEDEDE;
 	box-shadow: 0 1px 2px #DEDEDE;
 }
-.button{
+.button {
 	display:inline-block;
 	margin: 0px auto;
 	padding: 5px 15px;
@@ -609,6 +609,8 @@ a.sort_down {
 	font-weight: bold;
 }
 .form.delete input {
+	display: block;
+	float: left;
 	width: auto;
 	margin: 5px 5px 0px 0px;
 }
@@ -616,8 +618,10 @@ a.sort_down {
 	margin-top: 13px;
 }
 .form.delete label {
+	display: block;
+	float: left;
 	line-height: 40px;
-	width: 375px;
+	width: 370px;
 }
 
 .form.login input {
@@ -760,7 +764,7 @@ input.bigger {
 /*** End Pagination ***/
 
 /******* Login Page ********/
-.login_form .message_error.box-shadow, .login_form .message_warning.box-shadow, .login_form .message_info.box-shadow  {
+.login_form .message_error.box-shadow, .login_form .message_warning.box-shadow, .login_form .message_info.box-shadow {
 	box-shadow: none;
 }
 .login_box {
@@ -919,7 +923,7 @@ table.dashboard_table {
 
 @media screen and (max-width: 1300px)
 {
-	.wrapper{
+	.wrapper {
 		width: 1260px;
 	}
 	.header, #breadcrumbs, .content, .footer {
