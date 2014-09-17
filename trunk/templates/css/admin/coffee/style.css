@@ -1,81 +1,356 @@
-body{
-	background-image: url('images/body_bg.png');
+/*** General ***/
+body {
+	background-color: #F6F6F6;
+	color: #64696D;
+}
+h1, h2, h3 {
+	color: #8C9AA5;
+}
+a {
+	color: #52A9FF;
+}
+a:hover {
+	color: #1A7EB5;
+}
+input, select, textarea {
+	background-color: transparent;
+	border-bottom: 1px solid #bdc6cf;
+	border-left: 1px solid #bdc6cf;
+	border-right: 1px solid #bdc6cf;
+	border-top: 1px solid #bdc6cf;
+	color: #64696D;
+}
+.box_header {
+	background-color: #FA9F36/*#FCBE2B*/;
+	color: #FFFFFD;
+}
+.button, .button:hover {
+	color: #FFFFFF;
+}
+/*** End General ***/
+
+/*** Header ***/
+.header {
+	background-color: #2F97E0;
+}
+#logo {
+	color: #FFFFFF;
+}
+.top_user_menu {
+	color: #A6D1F3;
+}
+.top_user_menu a {
+	color: #A6D1F3;
+}
+.top_user_menu a.logout {
+	background: url('images/logout_icon.png') no-repeat 0px 0px;
+}
+.top_user_menu a.logout:hover {
+	background: url('images/logout_icon.png') no-repeat 0px -47px;
 }
 
-/*** breadcrumbs ***/
-#breadcrumbs li{
+/*** End Header ***/
+
+/*** Menu ***/
+#mainMenu {  }
+#mainMenu li a {
+	background-image: url('images/menu_dropdown_arrow_colored.png');
+	color: #FFFFFF;
+}
+#mainMenu li a.selected {
+	background-image: url('images/menu_dropdown_arrow_white.png');
+	background-color: #5CB9FC;
+	color: #FFFFFF;
+}
+#mainMenu li a.menuHover, #mainMenu li a.selected.menuHover {
+	background-image: url('images/menu_dropdown_arrow_white.png');
+	background-color: #5CB9FC;
+	color: #FFFFFF;
+}
+#mainMenu li a.menuHover, #mainMenu li a.selected.menuHover, #mainMenu li ul {
+	background-color: #5CB9FC;
+	border-color: #DBD9DA;
+}
+#mainMenu li ul li a {
+	color: #FFFFFF;
+}
+#mainMenu li ul li a.selected {
+	color: #1A2D42;
+}
+#mainMenu li ul li a:hover, #mainMenu li ul li a.selected:hover {
+	color: #1A2D42;
+}
+#mainMenu li ul li a:hover, #mainMenu li ul li a.selected:hover, #breadcrumbs li a:hover {
+	color: #1A2D42 !important;
+}
+/*** End Menu ***/
+
+/*** Tables ***/
+/* Big table */
+.big_table {
+	background-color: #BDC6CF;
+}
+.big_table th {
+	background-color: #FA9F36/*#fcbe2b*/;
+	color: #FFFFFF !important;
+}
+.big_table td {
+	background-color: #FFFFFF;
+	border-color: #E2E5EC;
+}
+/* End Big table */
+
+/* Medium table */
+.medium_table {
+	border-color: #F4F4F4;
+}
+.medium_table.warnings td:first-child {
+	background-color: #CC0000;
+	color:#fff !important;
+}
+.medium_table.warnings td:last-child {
+	background-color:#fff;
+}
+.medium_table th {
+	border-color: #BDC6CF;
+	background-color: #f4f9ff;
+	color: #819AB8 !important;
+}
+table.medium_table td {
+	background-color: #FFFFFF;
+}
+table.medium_table td:first-child, .medium_table td:first-child {
+	background-color: #FFFFFF;
+	font-weight: bold;
+}
+/* End Medium table */
+
+.chartTable {
+	border-color: #f4f4f4;
+}
+.chartTable tr td {
+	background-color: #FFFFFF;
+}
+.g_box td {
+	background: #E2E6EF;
+}
+.g_box td.g_box_head {
+	color: #919ba7 !important;
+}
+.g_box .emph {
+	color: #4A4A4A !important;
+}
+.g_box .emph span {
+	color: #3D5969 !important;
+}
+.g_box span {
+	color:#756859;
+}
+.g_box select {
+	border-color: #B7B7B7;
+}
+.g_box input, .g_box select {
+	background-color: #FFFFFF;
+}
+
+a.active_state {
+	background: url('images/status_icon.png') no-repeat 0px 0px;
+}
+a.inactive_state {
+	background: url('images/status_icon.png') no-repeat 0px -47px;
+}
+a.edit_state {
+	background: url('images/edit_icon.png') no-repeat 0px 0px;
+	color: #7B8CA8;
+}
+a.edit_state:hover {
+	background: url('images/edit_icon.png') no-repeat 0px -51px;
+}
+a.delete_state {
+	background: url('images/delete_icon.png') no-repeat 0px 0px;
+	color: #7B8CA8
+}
+a.delete_state:hover {
+	background: url('images/delete_icon.png') no-repeat 0px -51px;
+}
+a.logins_state {
+	background: url('images/logins_icon.png') no-repeat 0px 0px;
+	color: #7B8CA8
+}
+a.logins_state:hover {
+	background: url('images/logins_icon.png') no-repeat 0px -51px;
+}
+a.pass_state {
+	background: url('images/send_pass_icon.png') no-repeat 0px 0px;
+	color: #7B8CA8
+}
+a.pass_state:hover {
+	background: url('images/send_pass_icon.png') no-repeat 0px -51px;
+}
+a.sortable {
+	background: url('images/arrows.png') no-repeat 0px -80px;
+}
+a.sort_up {
+	background: url('images/arrows.png') no-repeat 0px 5px;
+}
+a.sort_down {
+	background: url('images/arrows.png') no-repeat 0px -37px;
+}
+a.sortable:hover, a.sort_up:hover, a.sort_down:hover {
+	color: #FFFFFF;
+}
+/*** End Tables ***/
+
+/*** Forms ***/
+.form {
+	background-color: #FFFFFF;
+}
+
+/* Login Form */
+.wrapper.login_form {
+	background-color: #2F97E0;
+}
+form.login {
+	background: none;
+}
+form.login input {
+	background-color: #10629C;
+}
+form.login input[type="text"], form.login input[type="password"] {
+	color: #FFFFFF;
+}
+form.login input.button {
+	background: #FFFFFF url('images/login_btn.png') no-repeat center 20px;
+	color: #2F97E0;
+}
+.login_box h2 {
+	color: #10629C;
+}
+/* End Login Form */
+/*** End Forms ***/
+
+/*** PHP INFO ***/
+
+.phpinfo table.list_table {
+	background-color: #F6F6F6;
+}
+.phpinfo table.list_table td {
+	background-color: #FFFFFF;
+	border: 1px solid #AEB7C1;
+}
+
+/*** End PHP INFO ***/
+
+/*** Buttons ***/
+.button {
+	background-color: #4EA5FF;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#50A7FF), to(#449AFF));
+	background-image: -webkit-linear-gradient(top, #50A7FF, #449AFF);
+	background-image:    -moz-linear-gradient(top, #50A7FF, #449AFF);
+	background-image:     -ms-linear-gradient(top, #50A7FF, #449AFF);
+	background-image:      -o-linear-gradient(top, #50A7FF, #449AFF);
+	background-image:         linear-gradient(top, #50A7FF, #449AFF);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#50A7FF', EndColorStr='#449AFF');
+}
+.button:hover {
+    background-color: #4B9CED;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#50A7FF), to(#3487E5));
+    background-image: -webkit-linear-gradient(top, #50A7FF, #3487E5);
+    background-image:    -moz-linear-gradient(top, #50A7FF, #3487E5);
+    background-image:     -ms-linear-gradient(top, #50A7FF, #3487E5);
+    background-image:      -o-linear-gradient(top, #50A7FF, #3487E5);
+    background-image:         linear-gradient(top, #50A7FF, #3487E5);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#50A7FF', EndColorStr='#3487E5');
+}
+/*** End Buttons ***/
+
+/*** Breadcrumbs ***/
+#breadcrumbs {
+	border-color: #E2E9F1;
+	color: #BFC6D0;
+}
+#breadcrumbs li {
 	background-image: url('images/breadcrumbs_arrow.png');
 }
-/*** end breadcrumbs ***/
+#breadcrumbs li a {
+	color: #99a0aa;
+}
+#breadcrumbs li a:hover {
+	color: #f26f06 !important;
+}
+#breadcrumbs li:last-child a:hover {
+	color: #7991ad !important;
+}
+/*** End Breadcrumbs ***/
 
-/*** menu ***/
-#mainMenu li a
-{
-	background-image: url('images/menu_arrows.png');
+/*** Datepicker ***/
+.ui-widget-header {
+	background: #4FA6FF;
+	color: #FFFFFF;
 }
+.ui-widget-header .ui-icon {
+	background-image: url("images/ui-icons_454545_256x240.png");
+}
+.ui-state-hover .ui-icon, .ui-state-focus .ui-icon {
+	background-image: url("images/ui-icons_222222_256x240.png");
+}
+.ui-widget-header a.ui-datepicker-prev.ui-state-hover {
+	background-color: #4FA6FF !important;
+}
+.ui-widget-header a.ui-datepicker-next.ui-state-hover {
+	background-color: #4FA6FF !important;
+}
+.ui-datepicker-calendar thead tr th {
+	background: #E7ECF2;
+}
+.ui-datepicker-calendar thead tr th span {
+	color: #98ABC0;
+}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+	background: #FFFFFF;
+	color: #7991AD;
+}
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+	background: #52A9FF !important;
+	color: #FFFFFF !important;
+}
+.ui-state-hover, ui-widget-content .ui-state-hover, ui-widget-header .ui-state-hover, .ui-state-focus, ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+	background: #E7ECF2 !important;
+	color: #52A9FF !important;
+}
+/*** End Datepicker ***/
 
-#mainMenu li a.selected{
-	background-image:url('images/menu_arrows.png');
-	background-color:#BD8353;
-	border-color: #D29C6E;
-}
-
-#mainMenu li ul{
-	/*** gradient for all browsers, generated by cssplease.com ***/
-	background-image: -moz-linear-gradient(top, #F3F3F3, #E0DFD3); /* FF3.6 */
-	background-image: -ms-linear-gradient(top, #F3F3F3, #E0DFD3); /* IE10 */
-	background-image: -o-linear-gradient(top, #F3F3F3, #E0DFD3); /* Opera 11.10+ */
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#F3F3F3), to(#E0DFD3)); /* Saf4+, Chrome */
-	background-image: -webkit-linear-gradient(top, #F3F3F3, #E0DFD3); /* Chrome 10+, Saf5.1+ */
-	background-image: linear-gradient(top, #F3F3F3, #E0DFD3);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#F3F3F3', EndColorStr='#E0DFD3'); /* IE6–IE9 */
-}
-
-/*** end menu ***/
-
-/*** fieldsets and legends ***/
-fieldset{
-	border-color: #3e8383;
-}
-legend{
-	color: #3e8383;
-}
-
-/*** tables ***/
-.medium_table{
-	border-color: #D9D4B8;
-}
-table.big_table tbody tr:nth-child(even) td,
-table.medium_table td:first-child,
-.medium_table td:first-child
-{
-	background-color: #F4F3ED;
-}
-
-/*** pagination ***/
-.pagination li p{
-	background-color: #BD8353;
-}
-
-/*** button ***/
-.button{
-	background-color: #3e8383;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#3e8383), to(#346E6E));
-	background-image: -webkit-linear-gradient(top, #3e8383, #346E6E);
-	background-image:    -moz-linear-gradient(top, #3e8383, #346E6E);
-	background-image:     -ms-linear-gradient(top, #3e8383, #346E6E);
-	background-image:      -o-linear-gradient(top, #3e8383, #346E6E);
-	background-image:         linear-gradient(top, #3e8383, #346E6E);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#3e8383', EndColorStr='#346E6E');
-}
-.button:hover{
-    background-color: #346E6E;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#346E6E), to(#3e8383));
-    background-image: -webkit-linear-gradient(top, #346E6E, #3e8383);
-    background-image:    -moz-linear-gradient(top, #346E6E, #3e8383);
-    background-image:     -ms-linear-gradient(top, #346E6E, #3e8383);
-    background-image:      -o-linear-gradient(top, #346E6E, #3e8383);
-    background-image:         linear-gradient(top, #346E6E, #3e8383);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#346E6E', EndColorStr='#3e8383');
+/*** jQuery***/
+#transporterAdd .medium_table tr td {
+	color: #64696D;
 }
 
+/*** Pagination ***/
+.pagination {
+	background: #E2E6EF;
+}
+.pagination span {
+	border-right: 1px solid #CBCFD8;
+}
+.pagination li a {
+	color: #2F97E0;
+	border-color: #BDC6CF;
+}
+.pagination li a:hover {
+	background-color: #52A9FF;
+	color: #FFFFFF;
+}
+.pagination li p {
+	background-color: #D5DAE5;
+	color: #39526D;
+}
+/*** End Pagination ***/
+
+/*** Dashboard ***/
+.system_overview .box_header {
+	background-color: #6F7082;
+}
+.opcache_insights .opcache_title, .user_insights .user_title {
+	background-color: #FFFFFF;
+	color: #A2A6A9;
+}
