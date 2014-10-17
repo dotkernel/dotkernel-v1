@@ -269,10 +269,10 @@ a#dialogButton {
 	background: right 31px no-repeat;
 }
 #mainMenu li a.selected {
-	background: right 31px no-repeat;
+	background: right -27px no-repeat;
 }
 #mainMenu li a.menuHover, #mainMenu li a.selected.menuHover {
-	background-position: right 31px no-repeat;
+	background: right -27px no-repeat;
 }
 #mainMenu li ul {
 	position: absolute;
@@ -336,8 +336,6 @@ a#dialogButton {
 .message_info {
 	margin-bottom: 10px;
 	padding: 15px 20px;
-	background-color: #7CA956;
-	color: #FFFFFF;
 	vertical-align: middle;
 	text-align: left;
 	font-size: 12px;
@@ -345,8 +343,6 @@ a#dialogButton {
 .message_error {
 	margin-bottom: 10px;
 	padding: 15px 20px;
-	background-color: #E05453;
-	color: #FFFFFF;
 	vertical-align: middle;
 	text-align: left;
 	font-size: 12px;
@@ -354,8 +350,6 @@ a#dialogButton {
 .message_warning {
 	margin-bottom: 10px;
 	padding: 15px 20px;
-	background-color: #FC9258;
-	color: #FFFFFF;
 	vertical-align: middle;
 	text-align: left;
 	font-size: 12px;
@@ -449,7 +443,7 @@ a.active_state {
 	display: block;
 	margin: 0px auto;
 	width: 37px;
-	height: 16px;
+	height: 17px;
 	content: '';
 }
 a.active_state:hover {
@@ -459,7 +453,7 @@ a.inactive_state {
 	display: block;
 	margin: 0px auto;
 	width: 37px;
-	height: 16px;
+	height: 17px;
 }
 a.inactive_state:hover {
 	text-decoration:none;
