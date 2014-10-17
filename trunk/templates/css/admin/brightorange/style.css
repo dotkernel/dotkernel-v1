@@ -4,7 +4,7 @@ body {
 	color: #64696D;
 }
 h1, h2, h3 {
-	color: #1A1A1A;
+	color: #8C9AA5;
 }
 a {
 	color: #448BCE;
@@ -21,7 +21,7 @@ input, select, textarea {
 	color: #64696D;
 }
 .box_header {
-	background-color: #A9A9A9;
+	background-color: #43496B;
 	color: #FFFFFD;
 }
 .button, .button:hover {
@@ -31,16 +31,16 @@ input, select, textarea {
 
 /*** Header ***/
 .header {
-	background-color: #1A1A1A;
+	background-color: #F87B45;
 }
 #logo {
 	color: #FFFFFF;
 }
 .top_user_menu {
-	color: #9DA1A5;
+	color: #EDEDED;
 }
 .top_user_menu a {
-	color: #9DA1A5;
+	color: #EDEDED;
 }
 .top_user_menu a.logout {
 	background: url('images/logout_icon.png') no-repeat 0px 0px;
@@ -59,39 +59,39 @@ input, select, textarea {
 }
 #mainMenu li a.selected {
 	background-image: url('images/menu_dropdown.png');
-	background-color: #2C2C2C;
+	background-color: #FD8853;
 	color: #FFFFFF;
 }
 #mainMenu li a.menuHover, #mainMenu li a.selected.menuHover {
 	background-image: url('images/menu_dropdown.png');
-	background-color: #2C2C2C;
+	background-color: #FD8853;
 	color: #FFFFFF;
 }
 #mainMenu li a.menuHover, #mainMenu li a.selected.menuHover, #mainMenu li ul {
-	background-color: #2C2C2C;
+	background-color: #FD8853;
 	border-color: #9DA1A5;
 }
 #mainMenu li ul li a {
 	color: #FFFFFF;
 }
 #mainMenu li ul li a.selected {
-	color: #9DA1A5;
+	color: #EDEDED;
 }
 #mainMenu li ul li a:hover, #mainMenu li ul li a.selected:hover {
-	color: #9DA1A5;
+	color: #EDEDED;
 }
 #mainMenu li ul li a:hover, #mainMenu li ul li a.selected:hover, #breadcrumbs li a:hover {
-	color: #9DA1A5 !important;
+	color: #EDEDED !important;
 }
 /*** End Menu ***/
 
 /*** Tables ***/
 /* Big table */
 .big_table {
-	background-color: #A9A9A9;
+	background-color: #BDC6CF;
 }
 .big_table th {
-	background-color: #A9A9A9/*#fcbe2b*/;
+	background-color: #43496B/*#fcbe2b*/;
 	color: #FFFFFF !important;
 }
 .big_table td {
@@ -132,7 +132,7 @@ table.medium_table td:first-child, .medium_table td:first-child {
 	background-color: #FFFFFF;
 }
 .g_box td {
-	background: #E6E6E6;
+	background: #E2E6EF;
 }
 .g_box td.g_box_head {
 	color: #919ba7 !important;
@@ -161,28 +161,28 @@ a.inactive_state {
 }
 a.edit_state {
 	background: url('images/edit_icon.png') no-repeat 0px 0px;
-	color: #151515;
+	color: #7B8CA8;
 }
 a.edit_state:hover {
 	background: url('images/edit_icon.png') no-repeat 0px -50px;
 }
 a.delete_state {
 	background: url('images/delete_icon.png') no-repeat 0px 0px;
-	color: #151515;
+	color: #7B8CA8
 }
 a.delete_state:hover {
 	background: url('images/delete_icon.png') no-repeat 0px -50px;
 }
 a.logins_state {
 	background: url('images/logins_icon.png') no-repeat 0px 0px;
-	color: #151515;
+	color: #7B8CA8
 }
 a.logins_state:hover {
 	background: url('images/logins_icon.png') no-repeat 0px -50px;
 }
 a.pass_state {
 	background: url('images/send_pass_icon.png') no-repeat 0px 0px;
-	color: #151515;
+	color: #7B8CA8
 }
 a.pass_state:hover {
 	background: url('images/send_pass_icon.png') no-repeat 0px -50px;
@@ -243,24 +243,24 @@ form.login input.button {
 
 /*** Buttons ***/
 .button {
-	background-color: #1A1A1A;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#1A1A1A), to(#1A1A1A));
-	background-image: -webkit-linear-gradient(top, #1A1A1A, #1A1A1A);
-	background-image:    -moz-linear-gradient(top, #1A1A1A, #1A1A1A);
-	background-image:     -ms-linear-gradient(top, #1A1A1A, #1A1A1A);
-	background-image:      -o-linear-gradient(top, #1A1A1A, #1A1A1A);
-	background-image:         linear-gradient(top, #1A1A1A, #1A1A1A);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#1A1A1A', EndColorStr='#1A1A1A');
+	background-color: #FE5A12;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#FE5A12), to(#FE5A12));
+	background-image: -webkit-linear-gradient(top, #FE5A12, #FE5A12);
+	background-image:    -moz-linear-gradient(top, #FE5A12, #FE5A12);
+	background-image:     -ms-linear-gradient(top, #FE5A12, #FE5A12);
+	background-image:      -o-linear-gradient(top, #FE5A12, #FE5A12);
+	background-image:         linear-gradient(top, #FE5A12, #FE5A12);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#FE5A12', EndColorStr='#FE5A12');
 }
 .button:hover {
-    background-color: #3E3E3E;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#3E3E3E), to(#3E3E3E));
-    background-image: -webkit-linear-gradient(top, #3E3E3E, #3E3E3E);
-    background-image:    -moz-linear-gradient(top, #3E3E3E, #3E3E3E);
-    background-image:     -ms-linear-gradient(top, #3E3E3E, #3E3E3E);
-    background-image:      -o-linear-gradient(top, #3E3E3E, #3E3E3E);
-    background-image:         linear-gradient(top, #3E3E3E, #3E3E3E);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#3E3E3E', EndColorStr='#3E3E3E');
+    background-color: #FD8853;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#FD8853), to(#FD8853));
+    background-image: -webkit-linear-gradient(top, #FD8853, #FD8853);
+    background-image:    -moz-linear-gradient(top, #FD8853, #FD8853);
+    background-image:     -ms-linear-gradient(top, #FD8853, #FD8853);
+    background-image:      -o-linear-gradient(top, #FD8853, #FD8853);
+    background-image:         linear-gradient(top, #FD8853, #FD8853);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#FD8853', EndColorStr='#FD8853');
 }
 /*** End Buttons ***/
 
@@ -276,7 +276,7 @@ form.login input.button {
 	color: #99a0aa;
 }
 #breadcrumbs li a:hover {
-	color: #1A1A1A !important;
+	color: #f26f06 !important;
 }
 #breadcrumbs li:last-child a:hover {
 	color: #7991ad !important;
@@ -285,14 +285,14 @@ form.login input.button {
 
 /*** Datepicker ***/
 .ui-widget-header {
-	background: #3E3E3E;
+	background: #38425D;
 	color: #FFFFFF;
 }
 .ui-widget-header .ui-icon {
 	background-image: url("images/ui-icons_888888_256x240.png");
 }
 .ui-state-hover .ui-icon, .ui-state-focus .ui-icon {
-	background-image: url("images/ui-icons_888888_256x240.png");
+	background-image: url("images/ui-icons_2e83ff_256x240.png");
 }
 .ui-widget-header a.ui-datepicker-prev.ui-state-hover {
 	background-color: #38425D !important;
@@ -301,22 +301,22 @@ form.login input.button {
 	background-color: #38425D !important;
 }
 .ui-datepicker-calendar thead tr th {
-	background: #E6E6E6;
+	background: #E7ECF2;
 }
 .ui-datepicker-calendar thead tr th span {
-	color: #444444;
+	color: #98ABC0;
 }
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
 	background: #FFFFFF;
 	color: #38425D;
 }
 .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
-	background: #A9A9A9 !important;
+	background: #38425D !important;
 	color: #FFFFFF !important;
 }
 .ui-state-hover, ui-widget-content .ui-state-hover, ui-widget-header .ui-state-hover, .ui-state-focus, ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
-	background: #E6E6E6 !important;
-	color: #444444 !important;
+	background: #E7ECF2 !important;
+	color: #52A9FF !important;
 }
 /*** End Datepicker ***/
 
@@ -327,7 +327,7 @@ form.login input.button {
 
 /*** Pagination ***/
 .pagination {
-	background: #E6E6E6;
+	background: #E2E6EF;
 }
 .pagination span {
 	border-right: 1px solid #CBCFD8;
@@ -337,18 +337,18 @@ form.login input.button {
 	border-color: #BDC6CF;
 }
 .pagination li a:hover {
-	background-color: #D1D1D1;
-	color: #38425D;
+	background-color: #38425D;
+	color: #FFFFFF;
 }
 .pagination li p {
-	background-color: #D1D1D1;
-	color: #38425D;
+	background-color: #D5DAE5;
+	color: #39526D;
 }
 /*** End Pagination ***/
 
 /*** Dashboard ***/
 .system_overview .box_header {
-	background-color: #A9A9A9;
+	background-color: #43496B;
 }
 .opcache_insights .opcache_title, .user_insights .user_title {
 	background-color: #FFFFFF;
@@ -361,7 +361,7 @@ form.login input.button {
 	color: #ffffff;
 }
 .message_error {
-	background-color: #E05453;
+	background-color: #EB4545;
 	color: #ffffff;
 }
 .message_warning {
@@ -369,3 +369,5 @@ form.login input.button {
 	color: #ffffff;
 }
 /*** END MESSAGES ***/
+
+
