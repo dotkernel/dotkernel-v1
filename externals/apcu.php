@@ -1,7 +1,7 @@
 <?php
 /**
- * Below lines are used in order to protect the file usage outside the admin panel 
- * Remove if you want to use the file standalone 
+ * Below lines are used in order to protect the file usage outside the admin panel
+ * Remove if you want to use the file standalone
  */
 session_start();
 if (@$_SESSION['admin']['admin']->role !== 'admin') exit();
@@ -34,10 +34,10 @@ $VERSION='$Id$';
 
 ////////// BEGIN OF DEFAULT CONFIG AREA ///////////////////////////////////////////////////////////
 
-defaults('USE_AUTHENTICATION',0);			// Use (internal) authentication - best choice if 
+defaults('USE_AUTHENTICATION',0);			// Use (internal) authentication - best choice if
 											// no other authentication is available
 											// If set to 0:
-											//  There will be no further authentication. You 
+											//  There will be no further authentication. You
 											//  will have to handle this by yourself!
 											// If set to 1:
 											//  You need to change ADMIN_PASSWORD to make
@@ -45,7 +45,7 @@ defaults('USE_AUTHENTICATION',0);			// Use (internal) authentication - best choi
 defaults('ADMIN_USERNAME','apc'); 			// Admin Username
 defaults('ADMIN_PASSWORD','password');  	// Admin Password - CHANGE THIS TO ENABLE!!!
 
-// (beckerr) I'm using a clear text password here, because I've no good idea how to let 
+// (beckerr) I'm using a clear text password here, because I've no good idea how to let
 //           users generate a md5 or crypt password in a easy way to fill it in above
 
 //defaults('DATE_FORMAT', "d.m.Y H:i:s");	// German
@@ -168,7 +168,7 @@ if (!USE_AUTHENTICATION) {
 				</body></html>
 EOB;
 			exit;
-			
+
 		} else {
 			$AUTHENTICATED=1;
 		}
@@ -189,7 +189,7 @@ if(!function_exists('apcu_cache_info')) {
   exit;
 }
 
-$cache = apcu_cache_info(); 
+$cache = apcu_cache_info();
 
 $mem=apcu_sma_info();
 
@@ -236,7 +236,7 @@ if (isset($MYREQUEST['IMG']))
 		$r=$diameter/2;
 		$w=deg2rad((360+$start+($end-$start)/2)%360);
 
-		
+
 		if (function_exists("imagefilledarc")) {
 			// exists only if GD 2.0.1 is avaliable
 			imagefilledarc($im, $centerX+1, $centerY+1, $diameter, $diameter, $start, $end, $color1, IMG_ARC_PIE);
@@ -253,13 +253,13 @@ if (isset($MYREQUEST['IMG']))
 		if ($text) {
 			if ($placeindex>0) {
 				imageline($im,$centerX + $r*cos($w)/2, $centerY + $r*sin($w)/2,$diameter, $placeindex*12,$color1);
-				imagestring($im,4,$diameter, $placeindex*12,$text,$color1);	
-				
+				imagestring($im,4,$diameter, $placeindex*12,$text,$color1);
+
 			} else {
 				imagestring($im,4,$centerX + $r*cos($w)/2, $centerY + $r*sin($w)/2,$text,$color1);
 			}
 		}
-	} 
+	}
 
 	function text_arc($im, $centerX, $centerY, $diameter, $start, $end, $color1,$text,$placeindex=0) {
 		$r=$diameter/2;
@@ -267,13 +267,13 @@ if (isset($MYREQUEST['IMG']))
 
 		if ($placeindex>0) {
 			imageline($im,$centerX + $r*cos($w)/2, $centerY + $r*sin($w)/2,$diameter, $placeindex*12,$color1);
-			imagestring($im,4,$diameter, $placeindex*12,$text,$color1);	
-				
+			imagestring($im,4,$diameter, $placeindex*12,$text,$color1);
+
 		} else {
 			imagestring($im,4,$centerX + $r*cos($w)/2, $centerY + $r*sin($w)/2,$text,$color1);
 		}
-	} 
-	
+	}
+
 	function fill_box($im, $x, $y, $w, $h, $color1, $color2,$text='',$placeindex='') {
 		global $col_black;
 		$x1=$x+$w-1;
@@ -285,15 +285,15 @@ if (isset($MYREQUEST['IMG']))
 		imagerectangle($im, $x, $y1, $x1, $y, $color1);
 		if ($text) {
 			if ($placeindex>0) {
-			
+
 				if ($placeindex<16)
 				{
 					$px=5;
 					$py=$placeindex*12+6;
 					imagefilledrectangle($im, $px+90, $py+3, $px+90-4, $py-3, $color2);
 					imageline($im,$x,$y+$h/2,$px+90,$py,$color2);
-					imagestring($im,2,$px,$py-6,$text,$color1);	
-					
+					imagestring($im,2,$px,$py-6,$text,$color1);
+
 				} else {
 					if ($placeindex<31) {
 						$px=$x+40*2;
@@ -304,7 +304,7 @@ if (isset($MYREQUEST['IMG']))
 					}
 					imagefilledrectangle($im, $px, $py+3, $px-4, $py-3, $color2);
 					imageline($im,$x+$w,$y+$h/2,$px,$py,$color2);
-					imagestring($im,2,$px+2,$py-6,$text,$color1);	
+					imagestring($im,2,$px+2,$py-6,$text,$color1);
 				}
 			} else {
 				imagestring($im,4,$x+5,$y1-16,$text,$color1);
@@ -320,15 +320,13 @@ if (isset($MYREQUEST['IMG']))
 		$image = imagecreate($size+50, $size+10);
 
 	$col_white = imagecolorallocate($image, 0xFF, 0xFF, 0xFF);
-	/*$col_red   = imagecolorallocate($image, 0xD0, 0x60,  0x30);*/
 	$col_red   = imagecolorallocate($image, 0xd9, 0x64,  0x4f);
-	/*$col_green = imagecolorallocate($image, 0x60, 0xF0, 0x60);*/
 	$col_green = imagecolorallocate($image, 0xBC, 0xE0, 0x2E);
 	$col_black = imagecolorallocate($image,   0,   0,   0);
 	imagecolortransparent($image,$col_white);
 
 	switch ($MYREQUEST['IMG']) {
-	
+
 	case 1:
 		$s=$mem['num_seg']*$mem['seg_size'];
 		$a=$mem['avail_mem'];
@@ -339,7 +337,7 @@ if (isset($MYREQUEST['IMG']))
 		// would expect because we try to visualize any memory fragmentation as well.
 		$angle_from = 0;
 		$string_placement=array();
-		for($i=0; $i<$mem['num_seg']; $i++) {	
+		for($i=0; $i<$mem['num_seg']; $i++) {
 			$ptr = 0;
 			$free = $mem['block_lists'][$i];
 			uasort($free, 'block_sort');
@@ -366,7 +364,7 @@ if (isset($MYREQUEST['IMG']))
 				$angle_from = $angle_to;
 				$ptr = $block['offset']+$block['size'];
 			}
-			if ($ptr < $mem['seg_size']) { // memory at the end 
+			if ($ptr < $mem['seg_size']) { // memory at the end
 				$angle_to = $angle_from + ($mem['seg_size'] - $ptr)/$s;
 				if(($angle_to+$fuzz)>1) $angle_to = 1;
 				fill_arc($image,$x,$y,$size,$angle_from*360,$angle_to*360,$col_black,$col_red);
@@ -380,14 +378,14 @@ if (isset($MYREQUEST['IMG']))
 		}
 		break;
 
-	case 2: 
-		$s=$cache['nhits']+$cache['nmisses'];
-		$a=$cache['nhits'];
-		
-		fill_box($image, 30,$size,50,$s ? (-$a*($size-21)/$s) : 0,$col_black,$col_green,sprintf("%.1f%%",$s ? $cache['nhits']*100/$s : 0));
-		fill_box($image,130,$size,50,$s ? -max(4,($s-$a)*($size-21)/$s) : 0,$col_black,$col_red,sprintf("%.1f%%",$s ? $cache['nmisses']*100/$s : 0));
+	case 2:
+		$s=$cache['num_hits']+$cache['num_misses'];
+		$a=$cache['num_hits'];
+
+		fill_box($image, 30,$size,50,$s ? (-$a*($size-21)/$s) : 0,$col_black,$col_green,sprintf("%.1f%%",$s ? $cache['num_hits']*100/$s : 0));
+		fill_box($image,130,$size,50,$s ? -max(4,($s-$a)*($size-21)/$s) : 0,$col_black,$col_red,sprintf("%.1f%%",$s ? $cache['num_misses']*100/$s : 0));
 		break;
-		
+
 	case 3:
 		$s=$mem['num_seg']*$mem['seg_size'];
 		$a=$mem['avail_mem'];
@@ -397,7 +395,7 @@ if (isset($MYREQUEST['IMG']))
 
 		// This block of code creates the bar chart.  It is a lot more complex than you
 		// would expect because we try to visualize any memory fragmentation as well.
-		for($i=0; $i<$mem['num_seg']; $i++) {	
+		for($i=0; $i<$mem['num_seg']; $i++) {
 			$ptr = 0;
 			$free = $mem['block_lists'][$i];
 			uasort($free, 'block_sort');
@@ -420,7 +418,7 @@ if (isset($MYREQUEST['IMG']))
 				$y+=$h;
 				$ptr = $block['offset']+$block['size'];
 			}
-			if ($ptr < $mem['seg_size']) { // memory at the end 
+			if ($ptr < $mem['seg_size']) { // memory at the end
 				$h = (GRAPH_SIZE-5) * ($mem['seg_size'] - $ptr) / $s;
 				if ($h > 0) {
 					fill_box($image,$x,$y,50,$h,$col_black,$col_red,bsize($mem['seg_size']-$ptr),$j++);
@@ -429,12 +427,12 @@ if (isset($MYREQUEST['IMG']))
 		}
 		break;
 
-		case 4: 
-			$s=$cache['nhits']+$cache['nmisses'];
-			$a=$cache['nhits'];
-    		    	
-			fill_box($image, 30,$size,50,$s ? -$a*($size-21)/$s : 0,$col_black,$col_green,sprintf("%.1f%%", $s ? $cache['nhits']*100/$s : 0));
-			fill_box($image,130,$size,50,$s ? -max(4,($s-$a)*($size-21)/$s) : 0,$col_black,$col_red,sprintf("%.1f%%", $s ? $cache['nmisses']*100/$s : 0));
+		case 4:
+			$s=$cache['num_hits']+$cache['num_misses'];
+			$a=$cache['num_hits'];
+
+			fill_box($image, 30,$size,50,$s ? -$a*($size-21)/$s : 0,$col_black,$col_green,sprintf("%.1f%%", $s ? $cache['num_hits']*100/$s : 0));
+			fill_box($image,130,$size,50,$s ? -max(4,($s-$a)*($size-21)/$s) : 0,$col_black,$col_red,sprintf("%.1f%%", $s ? $cache['num_misses']*100/$s : 0));
 		break;
 	}
 
@@ -456,7 +454,7 @@ function bsize($s) {
 // sortable table header in "scripts for this host" view
 function sortheader($key,$name,$extra='') {
 	global $MYREQUEST, $MY_SELF_WO_SORT;
-	
+
 	if ($MYREQUEST['SORT1']==$key) {
 		$MYREQUEST['SORT2'] = $MYREQUEST['SORT2']=='A' ? 'D' : 'A';
 	}
@@ -464,7 +462,7 @@ function sortheader($key,$name,$extra='') {
 
 }
 
-// create menu entry 
+// create menu entry
 function menu_entry($ob,$title) {
 	global $MYREQUEST,$MY_SELF;
 	if ($MYREQUEST['OB']!=$ob) {
@@ -472,7 +470,7 @@ function menu_entry($ob,$title) {
 	} else if (empty($MYREQUEST['SH'])) {
 		return "<li><span class=active>$title</span></li>";
 	} else {
-		return "<li><a class=\"child_active\" href=\"$MY_SELF&OB=$ob\">$title</a></li>";	
+		return "<li><a class=\"child_active\" href=\"$MY_SELF&OB=$ob\">$title</a></li>";
 	}
 }
 
@@ -513,9 +511,10 @@ function block_sort($array1, $array2)
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head><title>APCu INFO <?php echo $host ?></title>
+<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
 <style><!--
 body { background:#F9F9F9; font-size:100.01%; margin:0; padding:0; }
-body,p,td,th,input,submit { font-size:0.8em;font-family:arial,helvetica,sans-serif; }
+body,p,td,th,input,submit { font-size:0.8em; font-family: 'Ubuntu', sans-serif; font-size: 10px;}
 * html body   {font-size:0.8em}
 * html p      {font-size:0.8em}
 * html td     {font-size:0.8em}
@@ -599,7 +598,7 @@ ol.menu span.active {
 	font-weight:bold;
 	padding:0.8em 1.5em 0.8em 1.5em;
 	text-decoration:none;
-	}
+}
 ol.menu span.inactive {
 	background:rgb(193,193,244);
 	border:solid rgb(182,182,233) 2px;
@@ -615,11 +614,10 @@ ol.menu a:hover {
 	color: white;
 	text-decoration:none;
 	}
-	
-	
+
 div.info {
-	/*background:rgb(204,204,204);*/
-	/*border:solid rgb(204,204,204) 1px;*/
+	/*background:rgb(204,204,204); */
+	/* border:solid rgb(204,204,204) 1px; */
 	margin-bottom:1em;
 	}
 div.info h2 {
@@ -631,8 +629,6 @@ div.info h2 {
 	padding:0.5em 1em 0.5em 1em;
 	}
 div.info table {
-	/*border:solid rgb(204,204,204) 1px;
-	border-spacing:0;*/
 	width:100%;
 	}
 div.info table th {
@@ -658,6 +654,7 @@ div.graph h2 { background: #1A4863; color: #FFFFFF; font-size:1.2em; margin:0; p
 div.graph table { color:black; font-weight:normal; width:100%; }
 /*div.graph table td.td-0 { background:rgb(238,238,238); }
 div.graph table td.td-1 { background:rgb(221,221,221); }*/
+
 div.graph table td { padding:0.2em 1em 0.4em 1em; }
 
 div.div1,div.div2 { margin-bottom:1em; width:35em; }
@@ -690,7 +687,7 @@ div.authneeded {
 	padding:2em;
 	text-align:center;
 	}
-	
+
 input {
 	background: #1D4B66;
 	border:solid #1D4B66 1px;
@@ -724,6 +721,7 @@ input[type="text"] { background-color: #FFFFFF; color: #000000; font-weight: nor
 </style>
 </head>
 <body>
+
 <?php
 // Display main Menu
 echo <<<EOB
@@ -734,7 +732,7 @@ echo
 	menu_entry(OB_HOST_STATS,'View Host Stats'),
 	menu_entry(OB_USER_CACHE,'User Cache Entries'),
 	menu_entry(OB_VERSION_CHECK,'Version Check');
-	
+
 if ($AUTHENTICATED) {
 	echo <<<EOB
 		<li><a class="aright" href="$MY_SELF&CC=1&OB={$MYREQUEST['OB']}" onClick="javascript:return confirm('Are you sure?');">Clear Cache</a></li>
@@ -750,7 +748,7 @@ echo <<<EOB
 	<div class=content>
 EOB;
 
-// MAIN SWITCH STATEMENT 
+// MAIN SWITCH STATEMENT
 
 switch ($MYREQUEST['OB']) {
 // -----------------------------------------------
@@ -761,18 +759,18 @@ case OB_HOST_STATS:
 	$mem_avail= $mem['avail_mem'];
 	$mem_used = $mem_size-$mem_avail;
 	$seg_size = bsize($mem['seg_size']);
-	$req_rate_user = sprintf("%.2f", $cache['nhits'] ? (($cache['nhits']+$cache['nmisses'])/($time-$cache['stime'])) : 0);
-	$hit_rate_user = sprintf("%.2f", $cache['nhits'] ? (($cache['nhits'])/($time-$cache['stime'])) : 0);
-	$miss_rate_user = sprintf("%.2f", $cache['nmisses'] ? (($cache['nmisses'])/($time-$cache['stime'])) : 0);
-	$insert_rate_user = sprintf("%.2f", $cache['ninserts'] ? (($cache['ninserts'])/($time-$cache['stime'])) : 0);
+	$req_rate_user = sprintf("%.2f", $cache['num_hits'] ? (($cache['num_hits']+$cache['num_misses'])/($time-$cache['start_time'])) : 0);
+	$hit_rate_user = sprintf("%.2f", $cache['num_hits'] ? (($cache['num_hits'])/($time-$cache['start_time'])) : 0);
+	$miss_rate_user = sprintf("%.2f", $cache['num_misses'] ? (($cache['num_misses'])/($time-$cache['start_time'])) : 0);
+	$insert_rate_user = sprintf("%.2f", $cache['num_inserts'] ? (($cache['num_inserts'])/($time-$cache['start_time'])) : 0);
 	$apcversion = phpversion('apcu');
 	$phpversion = phpversion();
-	$number_vars = $cache['nentries'];
+	$number_vars = $cache['num_entries'];
     $size_vars = bsize($cache['mem_size']);
 	$i=0;
 	echo <<< EOB
 		<div class="info div1"><h2>General Cache Information</h2>
-		<table class="list_table"cellspacing=0><tbody>
+		<table class="list_table" cellspacing=0><tbody>
 		<tr class=tr-0><td class=td-0>APCu Version</td><td>$apcversion</td></tr>
 		<tr class=tr-1><td class=td-0>PHP Version</td><td>$phpversion</td></tr>
 EOB;
@@ -783,12 +781,12 @@ EOB;
 		echo "<tr class=tr-1><td class=td-0>Server Software</td><td>{$_SERVER['SERVER_SOFTWARE']}</td></tr>\n";
 
 	echo <<<EOB
-		<tr class=tr-0><td class=td-0>Shared Memory</td><td>{$mem['num_seg']} Segment(s) with $seg_size 
+		<tr class=tr-0><td class=td-0>Shared Memory</td><td>{$mem['num_seg']} Segment(s) with $seg_size
     <br/> ({$cache['memory_type']} memory)
     </td></tr>
 EOB;
-	echo   '<tr class=tr-1><td class=td-0>Start Time</td><td>',date(DATE_FORMAT,$cache['stime']),'</td></tr>';
-	echo   '<tr class=tr-0><td class=td-0>Uptime</td><td>',duration($cache['stime']),'</td></tr>';
+	echo   '<tr class=tr-1><td class=td-0>Start Time</td><td>',date(DATE_FORMAT,$cache['start_time']),'</td></tr>';
+	echo   '<tr class=tr-0><td class=td-0>Uptime</td><td>',duration($cache['start_time']),'</td></tr>';
 	echo   '<tr class=tr-1><td class=td-0>File Upload Support</td><td>',$cache['file_upload_progress'],'</td></tr>';
 	echo <<<EOB
 		</tbody></table>
@@ -798,18 +796,18 @@ EOB;
 		<table class="list_table" cellspacing=0>
 		<tbody>
     		<tr class=tr-0><td class=td-0>Cached Variables</td><td>$number_vars ($size_vars)</td></tr>
-			<tr class=tr-1><td class=td-0>Hits</td><td>{$cache['nhits']}</td></tr>
-			<tr class=tr-0><td class=td-0>Misses</td><td>{$cache['nmisses']}</td></tr>
+			<tr class=tr-1><td class=td-0>Hits</td><td>{$cache['num_hits']}</td></tr>
+			<tr class=tr-0><td class=td-0>Misses</td><td>{$cache['num_misses']}</td></tr>
 			<tr class=tr-1><td class=td-0>Request Rate (hits, misses)</td><td>$req_rate_user cache requests/second</td></tr>
 			<tr class=tr-0><td class=td-0>Hit Rate</td><td>$hit_rate_user cache requests/second</td></tr>
 			<tr class=tr-1><td class=td-0>Miss Rate</td><td>$miss_rate_user cache requests/second</td></tr>
 			<tr class=tr-0><td class=td-0>Insert Rate</td><td>$insert_rate_user cache requests/second</td></tr>
-			<tr class=tr-1><td class=td-0>Cache full count</td><td>{$cache['nexpunges']}</td></tr>
+			<tr class=tr-1><td class=td-0>Cache full count</td><td>{$cache['num_expunges']}</td></tr>
 		</tbody>
 		</table>
 		</div>
 
-		<div class="info div2"><h2>Runtime Settings</h2><table class="list_table"cellspacing=0><tbody>
+		<div class="info div2"><h2>Runtime Settings</h2><table class="list_table" cellspacing=0><tbody>
 EOB;
 
 	$j = 0;
@@ -839,25 +837,25 @@ echo <<<EOB
 EOB;
 
 	echo
-		graphics_avail() ? 
+		graphics_avail() ?
 			  '<tr>'.
 			  "<td class=td-0><img alt=\"\" $size src=\"$PHP_SELF?IMG=1&$time\"></td>".
 			  "<td class=td-1><img alt=\"\" $size src=\"$PHP_SELF?IMG=2&$time\"></td></tr>\n"
 			: "",
 		'<tr>',
 		'<td class=td-0><span class="green box">&nbsp;</span>Free: ',bsize($mem_avail).sprintf(" (%.1f%%)",$mem_avail*100/$mem_size),"</td>\n",
-		'<td class=td-1><span class="green box">&nbsp;</span>Hits: ',$cache['nhits'].@sprintf(" (%.1f%%)",$cache['nhits']*100/($cache['nhits']+$cache['nmisses'])),"</td>\n",
+		'<td class=td-1><span class="green box">&nbsp;</span>Hits: ',$cache['num_hits'].@sprintf(" (%.1f%%)",$cache['num_hits']*100/($cache['num_hits']+$cache['num_misses'])),"</td>\n",
 		'</tr>',
 		'<tr>',
-		'<td class=td-0><span class="red box">&nbsp;</span>Used: ',bsize($mem_used ).sprintf(" (%.1f%%)",$mem_used *100/$mem_size),"</td>\n",
-		'<td class=td-1><span class="red box">&nbsp;</span>Misses: ',$cache['nmisses'].@sprintf(" (%.1f%%)",$cache['nmisses']*100/($cache['nhits']+$cache['nmisses'])),"</td>\n";
+		'<td class=td-0><span class="red box">&nbsp;</span>Used: ',bsize($mem_used).sprintf(" (%.1f%%)",$mem_used *100/$mem_size),"</td>\n",
+		'<td class=td-1><span class="red box">&nbsp;</span>Misses: ',$cache['num_misses'].@sprintf(" (%.1f%%)",$cache['num_misses']*100/($cache['num_hits']+$cache['num_misses'])),"</td>\n";
 	echo <<< EOB
 		</tr>
 		</tbody></table>
 
 		<br/>
 		<h2>Detailed Memory Usage and Fragmentation</h2>
-		<table class="list_table"cellspacing=0><tbody>
+		<table class="list_table" cellspacing=0><tbody>
 		<tr>
 		<td class=td-0 colspan=2><br/>
 EOB;
@@ -877,7 +875,7 @@ EOB;
 		}
 		$freeseg += count($mem['block_lists'][$i]);
 	}
-	
+
 	if ($freeseg > 1) {
 		$frag = sprintf("%.2f%% (%s out of %s in %d fragments)", ($fragsize/$freetotal)*100,bsize($fragsize),bsize($freetotal),$freeseg);
 	} else {
@@ -907,7 +905,7 @@ EOB;
 		</tbody></table>
 		</div>
 EOB;
-		
+
 	break;
 
 
@@ -921,7 +919,7 @@ case OB_USER_CACHE:
 		echo '</div>';
 		break;
 	}
-	$fieldname='key';
+	$fieldname='info';
 	$fieldheading='User Entry Label';
 	$fieldkey='key';
 
@@ -931,7 +929,7 @@ case OB_USER_CACHE:
 		<input type=hidden name=OB value={$MYREQUEST['OB']}>
 		<select name=SCOPE>
 EOB;
-	echo 
+	echo
 		"<option value=A",$MYREQUEST['SCOPE']=='A' ? " selected":"",">Active</option>",
 		"<option value=D",$MYREQUEST['SCOPE']=='D' ? " selected":"",">Deleted</option>",
 		"</select>",
@@ -945,7 +943,7 @@ EOB;
 		"<option value=D",$MYREQUEST['SORT1']=='D' ? " selected":"",">Deleted at</option>";
 	if($fieldname=='info') echo
 		"<option value=D",$MYREQUEST['SORT1']=='T' ? " selected":"",">Timeout</option>";
-	echo 
+	echo
 		'</select>',
 		'<select name=SORT2>',
 		'<option value=D',$MYREQUEST['SORT2']=='D' ? ' selected':'','>DESC</option>',
@@ -994,17 +992,17 @@ EOB;
 	// builds list with alpha numeric sortable keys
 	//
 	$list = array();
-	
+
 	foreach($cache[$scope_list[$MYREQUEST['SCOPE']]] as $i => $entry) {
 		switch($MYREQUEST['SORT1']) {
-			case 'A': $k=sprintf('%015d-',$entry['atime']);  	    break;
-			case 'H': $k=sprintf('%015d-',$entry['nhits']); 		break;
-			case 'Z': $k=sprintf('%015d-',$entry['mem_size']); 		break;
-			case 'M': $k=sprintf('%015d-',$entry['mtime']);			break;
-			case 'C': $k=sprintf('%015d-',$entry['ctime']);	        break;
-			case 'T': $k=sprintf('%015d-',$entry['ttl']);			break;
-			case 'D': $k=sprintf('%015d-',$entry['dtime']);      	break;
-			case 'S': $k=$entry["key"];								break;
+			case 'A': $k=sprintf('%015d-',$entry['access_time']);  	     break;
+			case 'H': $k=sprintf('%015d-',$entry['num_hits']); 	     break;
+			case 'Z': $k=sprintf('%015d-',$entry['mem_size']); 	     break;
+			case 'M': $k=sprintf('%015d-',$entry['modification_time']);  break;
+			case 'C': $k=sprintf('%015d-',$entry['creation_time']);      break;
+			case 'T': $k=sprintf('%015d-',$entry['ttl']);		     break;
+			case 'D': $k=sprintf('%015d-',$entry['deletion_time']);      break;
+			case 'S': $k=$entry["info"];				     break;
 		}
 		if (!$AUTHENTICATED) {
 			// hide all path entries if not logged in
@@ -1021,21 +1019,21 @@ EOB;
 			case "A":	krsort($list);	break;
 			case "D":	ksort($list);	break;
 		}
-		
+
 		// output list
 		$i=0;
 		foreach($list as $k => $entry) {
       if(!$MYREQUEST['SEARCH'] || preg_match($MYREQUEST['SEARCH'], $entry[$fieldname]) != 0) {
-		$sh=md5($entry["key"]);  
+		$sh=md5($entry["info"]);
         $field_value = htmlentities(strip_tags($entry[$fieldname],''), ENT_QUOTES, 'UTF-8');
         echo
           '<tr class=tr-',$i%2,'>',
           "<td class=td-0><a href=\"$MY_SELF&OB=",$MYREQUEST['OB'],"&SH=",$sh,"\">",$field_value,'</a></td>',
-          '<td class="td-n center">',$entry['nhits'],'</td>',
+          '<td class="td-n center">',$entry['num_hits'],'</td>',
           '<td class="td-n right">',$entry['mem_size'],'</td>',
-          '<td class="td-n center">',date(DATE_FORMAT,$entry['atime']),'</td>',
-          '<td class="td-n center">',date(DATE_FORMAT,$entry['mtime']),'</td>',
-          '<td class="td-n center">',date(DATE_FORMAT,$entry['ctime']),'</td>';
+          '<td class="td-n center">',date(DATE_FORMAT,$entry['access_time']),'</td>',
+          '<td class="td-n center">',date(DATE_FORMAT,$entry['modification_time']),'</td>',
+          '<td class="td-n center">',date(DATE_FORMAT,$entry['creation_time']),'</td>';
 
         if($fieldname=='info') {
           if($entry['ttl'])
@@ -1043,9 +1041,9 @@ EOB;
           else
             echo '<td class="td-n center">None</td>';
         }
-        if ($entry['dtime']) {
+        if ($entry['deletion_time']) {
 
-          echo '<td class="td-last center">', date(DATE_FORMAT,$entry['dtime']), '</td>';
+          echo '<td class="td-last center">', date(DATE_FORMAT,$entry['deletion_time']), '</td>';
         } else if ($MYREQUEST['OB'] == OB_USER_CACHE) {
 
           echo '<td class="td-last center">';
@@ -1057,7 +1055,7 @@ EOB;
         echo '</tr>';
 		if ($sh == $MYREQUEST["SH"]) {
 			echo '<tr>';
-			echo '<td colspan="7" bgcolor="#DDDDDD" style="border-top: 1px solid #666699; border-bottom: 1px solid #666699;"><pre style="white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word;">'.print_r(apcu_fetch($entry['key']), 1).'</pre></td>';
+	echo '<td colspan="8" bgcolor="#DDDDDD" style="border-top: 1px solid #666699; border-bottom: 1px solid #666699;"><pre style="white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word;">'.htmlentities(print_r(apcu_fetch($entry['info']), 1)).'</pre></td>';
 			echo '</tr>';
 		}
         $i++;
@@ -1065,7 +1063,7 @@ EOB;
           break;
       }
 		}
-		
+
 	} else {
 		echo '<tr class=tr-0><td class="center" colspan="7"><i>No data</i></td></tr>';
 	}
@@ -1108,7 +1106,7 @@ EOB;
 			echo '<div class="ok">You are running the latest version of APCu ('.$apcversion.')</div>';
 			$i = 3;
 		} else {
-			echo '<div class="failed">You are running an older version of APCu ('.$apcversion.'), 
+			echo '<div class="failed">You are running an older version of APCu ('.$apcversion.'),
 				newer version '.$match[1].' is available at <a href="http://pecl.php.net/package/APCu/'.$match[1].'">
 				http://pecl.php.net/package/APCu/'.$match[1].'</a>
 				</div>';
