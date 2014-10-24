@@ -250,7 +250,7 @@ class System extends Dot_Model
 				}
 				if ($isException)
 				{
-					if (!is_writable($path))
+					if (!is_writable($path) && $path === $exception )
 					{
 						$warnings["Make Writable"][] = $path;
 					}
