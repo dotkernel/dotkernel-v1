@@ -116,6 +116,20 @@
 					<osName>Windows 8</osName>
 					<uaString>Windows NT 6.2</uaString>
 				</identify>
+				
+				<identify>
+					<osName>Windows 8.1</osName>
+					<uaString>Windows NT 6.3</uaString>
+				</identify>
+				<!--  
+					Based on Windows Technical Preview 
+					the Windows 10 UserAgent must contain
+					"Windows NT 6.4" 
+				-->
+				<identify>
+					<osName>Windows 10</osName>
+					<uaString>Windows NT 6.4 </uaString>
+				</identify>
 				<identify>
 					<osName>Windows NT</osName>
 					<uaString>Windows NT 4|WinNT4.0|WinNT</uaString>
