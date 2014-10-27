@@ -128,7 +128,7 @@
 				-->
 				<identify>
 					<osName>Windows 10</osName>
-					<uaString>Windows NT 6.4 </uaString>
+					<uaString>Windows NT 6.4</uaString>
 				</identify>
 				<identify>
 					<osName>Windows NT</osName>
