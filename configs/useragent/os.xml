@@ -23,10 +23,10 @@
 				</identify>
 			</name>
 			<name type="mobile">
-				<os>iOS</os>
+				<os>Apple</os>
 				<identify>
 					<osName>iOS</osName>
-					<uaString>iPhone|iPad</uaString>
+					<uaString>iPhone|iPad|iPod</uaString>
 				</identify>
 			</name>
 			<name type="mobile">
