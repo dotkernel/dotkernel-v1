@@ -75,23 +75,25 @@ class Dot_Route
 			//take the default action from router.xml
 			$requestAction = $registry->router->routes->action->{$requestModule}->{ucfirst($requestController)};
 		}
-
 		// we have extra variables, so we load all in the global array $request
 		$request = array();
-		while (list($key, $val) = each($requestRaw))
+		$requestCount = count($requestRaw);
+		for($i=0; $i<$requestCount; $i++)
 		{
-			$request[urldecode($val)] = urldecode(current($requestRaw));
-			next($requestRaw);
+			$key = urldecode($requestRaw[$i]);
+			if($key == '')
+			{
+				continue; // "just ignore it"
+			}  
+			$request[$key] = ($i+1<$requestCount) ? urldecode($requestRaw[++$i]) : '';
 		}
 		
 		// remove first element of the request array, is module and action in it
 		array_shift($request);
-
 		$registry->request = $request;
 		$registry->requestModule = $requestModule;
 		$registry->requestController = $requestController;
 		$registry->requestAction = $requestAction;
-		
 		Dot_Route::__setDefaultRoutes();
 	}
 
@@ -110,13 +112,13 @@ class Dot_Route
 		$requestAction = Zend_Registry::get('requestAction');
 		
 		$defaultController = isset($router->routes->controller->$requestModule) ?
-		                           $router->routes->controller->$requestModule : '';
+									$router->routes->controller->$requestModule : '';
 		
 		$requestController = isset($requestController) && $requestController !='Index' ? 
-		                           $requestController : $defaultController;
+									$requestController : $defaultController;
 		
 		$defaultAction = isset($router->routes->action->$requestModule->$requestController) ? 
-		                           $router->routes->action->$requestModule->$requestController: '';
+								$router->routes->action->$requestModule->$requestController: '';
 		
 		$requestAction = isset($requestAction) && $requestAction !='' ? $requestAction : $defaultAction;
 
@@ -125,7 +127,7 @@ class Dot_Route
 		
 		Zend_Registry::set('requestControllerProcessed', $requestControllerProcessed);
 		Zend_Registry::set('requestController', $requestController);
-		Zend_Registry::set('requestAction', $requestAction);
+		Zend_Registry::set('requestAction', $requestAction); 
 	}
 	/**
 	 * Create canonical URL
@@ -146,6 +148,8 @@ class Dot_Route
 		$route = ($link == '') ? $route : $link;
 
 		$url = Zend_Registry::get('configuration')->website->params->url;
+		// if the url does not contain a tailing slash we will put it
+		// http://dotkernel.com ->http://dotkernel.com/ 
 		if( '/' != substr($url, -1, 1))
 		{
 			$url .= '/';
@@ -163,7 +167,7 @@ class Dot_Route
 			$url .= urlencode(strtolower($route['action'])) . '/';
 		}
 		foreach (Zend_Registry::get('request') as $k => $v)
-		{
+		{	
 			if ($k !== "page")
 				$url .= urlencode($k) . '/' . urlencode($v) . '/';
 		}
