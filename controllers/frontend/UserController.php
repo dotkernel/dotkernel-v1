@@ -85,11 +85,13 @@ switch ($registry->requestAction)
 		{
 			Dot_Auth::checkUserToken('user');
 			// POST values that will be validated
-			$values = array('details' =>
-																	array('firstName'=>(isset($_POST['firstName']) ? $_POST['firstName'] : ''),
-																				'lastName'=>(isset($_POST['lastName']) ? $_POST['lastName'] : '')),
-																				'email' => array('email' => (isset($_POST['email']) ? $_POST['email'] : ''))
-											);
+			$values = array('details' => 
+							array(
+								'firstName'=>(isset($_POST['firstName']) ? $_POST['firstName'] : ''),
+								'lastName'=>(isset($_POST['lastName']) ? $_POST['lastName'] : '')),
+								'email' => array('email' => (isset($_POST['email']) ? $_POST['email'] : '')
+							)
+					);
 			
 			// Only if a new password is provided we will update the password field
 			if($_POST['password'] != '' || $_POST['password2'] !='' )
@@ -98,12 +100,13 @@ switch ($registry->requestAction)
 								 										'password2' =>  $_POST['password2']);
 			}
 			
-			$dotValidateUser = new Dot_Validate_User(array(
-																											'who' => 'user',
-																											'action' => 'update',
-																											'values' => $values,
-																											'userId' => $registry->session->user->id)
-																										);
+			$dotValidateUser = new Dot_Validate_User(
+									array(
+										'who' => 'user',
+										'action' => 'update',
+										'values' => $values,
+										'userId' => $registry->session->user->id
+									));
 			if($dotValidateUser->isValid())
 			{
 				// no error - then update user
@@ -227,11 +230,12 @@ switch ($registry->requestAction)
 			// POST values that will be validated
 			$values['password'] =	array('password' => (isset($_POST['password']) ? $_POST['password'] : ''),
 																	'password2' =>  (isset($_POST['password2']) ? $_POST['password2'] : ''));
-			
-			$dotValidateUser = new Dot_Validate_User(array('who' => 'user',
-																										'action' => 'update',
-																										'values' => $values,
-																										'userId' => $userId));
+			$dotValidateUser = new Dot_Validate_User(array(
+										'who' => 'user',
+										'action' => 'update', 
+										'values' => $values, 
+										'userId' => $userId
+									));
 			if($dotValidateUser->isValid())
 			{
 				$data['password'] = $_POST['password'];
