@@ -1,4 +1,5 @@
 <?php
+
 /**
  * DotBoost Technologies Inc.
  * DotKernel Application Framework
@@ -20,14 +21,18 @@
 
 class Admin extends Dot_Model
 {
+	private $_referer;
+	private $_userAgent;
 
 	/**
 	 * Constructor
 	 * @access public
 	 */
-	public function __construct()
+	public function __construct($userAgent = null, $referer = null)
 	{
 		parent::__construct();
+		$this->_userAgent = ($userAgent !== null) ? $userAgent : 'robot';
+		$this->_referer = ($referer !== null) ? $referer : 'robot';
 	}
 
 	/**
@@ -38,7 +43,7 @@ class Admin extends Dot_Model
 	 * @return array
 	 */
 	public function getUserBy($field = '', $value = '')
-	{		
+	{
 		$select = $this->db->select()
 					   ->from('admin')
 					   ->where($field.' = ?', $value)
@@ -55,9 +60,8 @@ class Admin extends Dot_Model
 	 */
 	public function getUserList($page = 1)
 	{
-		$select = $this->db->select()
-						   ->from('admin');	
- 		$dotPaginator = new Dot_Paginator($select, $page, $this->settings->resultsPerPage);
+		$select = $this->db->select()->from('admin');
+		$dotPaginator = new Dot_Paginator($select, $page, $this->settings->resultsPerPage);
 		return $dotPaginator->getData();
 	}
 
@@ -68,15 +72,16 @@ class Admin extends Dot_Model
 	 * @return void
 	 */
 	public function addUser($data)
-	{		
+	{
 		// if you want to add an inactive user, un-comment the below line, default: isActive = 1
 		// $data['isActive'] = 0;
 		
+
 		// start the Password API object
 		$passwordApi = new Dot_Password();
 		$data['password'] = $passwordApi->hashPassword($data['password'], PASSWORD_DEFAULT);
 		$this->db->insert('admin', $data);
-	}	
+	}
 
 	/**
 	 * Update user
@@ -87,7 +92,7 @@ class Admin extends Dot_Model
 	public function updateUser($data)
 	{
 		$id = $data['id'];
-		unset ($data['id']);
+		unset($data['id']);
 		if(array_key_exists('password', $data))
 		{
 			$user = $this->getUserBy('id', $id);
@@ -96,7 +101,7 @@ class Admin extends Dot_Model
 			$data['password'] = $passwordApi->hashPassword($data['password'], PASSWORD_DEFAULT);
 		}
 		$this->db->update('admin', $data, 'id = ' . $id);
-	}	
+	}
 
 	/**
 	 * Delete admin user
@@ -117,8 +122,8 @@ class Admin extends Dot_Model
 	 * @return void
 	 */
 	public function activateUser($id, $isActive)
-	{		
-		$this->db->update('admin', array('isActive' => $isActive), 'id = '.$id);
+	{
+		$this->db->update('admin', array('isActive' => $isActive), 'id = ' . $id);
 	}
 
 	/**
@@ -148,14 +153,14 @@ class Admin extends Dot_Model
 							'adminLogin.adminId=admin.id',
 							'username'
 						);
-		if ($id > 0) 
+		if($id > 0)
 		{
 			$select->where('adminId = ?', $id);
 		}
 		$select->order('dateLogin DESC');
- 		$dotPaginator = new Dot_Paginator($select, $page, $this->settings->resultsPerPage);
+		$dotPaginator = new Dot_Paginator($select, $page, $this->settings->resultsPerPage);
 		return $dotPaginator->getData();
-	}	
+	}
 
 	/**
 	 * Authorize user login
@@ -164,35 +169,35 @@ class Admin extends Dot_Model
 	 * @return void
 	 */
 	public function authorizeLogin($validData)
-	{		
+	{
 		$session = Zend_Registry::get('session');
-		unset($session->admin);		
+		unset($session->admin);
 		// login info are VALID, we can see if is a valid user now	
 		$dotAuth = Dot_Auth::getInstance();
 		$validAuth = $dotAuth->process('admin', $validData);
 		if($validAuth)
 		{
-			//prepare data for register the login
+				//prepare data for register the login
 			$dataLogin = array('ip' => Dot_Kernel::getUserIp(), 
 							   'adminId' => $session->admin->id,
 							   'referer' => isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '',
 							   'userAgent' => $_SERVER["HTTP_USER_AGENT"]);
 			$this->registerLogin($dataLogin);
-			header('Location: '.$this->config->website->params->url.'/' .  Zend_Registry::get('requestModule') );
-			exit;
-		}			
-		else
-		{	// failed admin login - send email to valid admin account
-			$this->sendEmailFailedLogin($validData);		
+			header('Location: ' . $this->config->website->params->url . '/' . Zend_Registry::get('requestModule'));
+			exit();
+		}
+		
+		{ // failed admin login - send email to valid admin account
+			$this->sendEmailFailedLogin($validData);
 			// check if account is inactive
-			$adminTmp = $this->getUserBy('username',$validData['username']);
+			$adminTmp = $this->getUserBy('username', $validData['username']);
 			(1 == $adminTmp['isActive']) ?
 				$session->message['txt'] = $this->option->errorMessage->wrongCredentials:
 				$session->message['txt'] = $this->option->errorMessage->inactiveAcount;
 			$session->message['type'] = 'error';
-		}		
+		}
 	}
-	
+
 	/**
 	 * Failed admin login - send email notice to valid admin account
 	 * @access private
@@ -200,29 +205,35 @@ class Admin extends Dot_Model
 	 * @return void
 	 */
 	private function sendEmailFailedLogin($values)
-	{			
-		$this->seo = Zend_Registry::get('seo');		
+	{
+		$this->seo = Zend_Registry::get('seo');
 		//get the email of the oldest valid admin account
-		$select = $this->db->select()->from('admin', 'email')->where('isActive = ?', '1')->order('dateCreated asc')->limit(1);
+		$select = $this->db->select()
+			->from('admin', 'email')
+			->where('isActive = ?', '1')
+			->order('dateCreated asc')
+			->limit(1);
 		$emailAdmin = $this->db->fetchOne($select);
 		$dotEmail = new Dot_Email();
 		$dotEmail->addTo($emailAdmin);
 		$dotEmail->setSubject($this->seo->siteName . ' - ' . $this->option->failedLogin->subject);
 		$dotGeoip = new Dot_Geoip();
 		$country = $dotGeoip->getCountryByIp(Dot_Kernel::getUserIp());
-		$msg = str_replace(array('%LINK%','%USERNAME%','%PASSWORD%','%DATE%', '%COUNTRY%', '%IP%', '%USERAGENT%'), 
-						   array($this->config->website->params->url.'/' .  Zend_Registry::get('requestModule'), 
-						   		 $values['username'], 
+		$msg = str_replace(array('%LINK%', '%USERNAME%', '%PASSWORD%', '%DATE%', '%COUNTRY%', '%IP%', '%USERAGENT%'), 
+						   array(
+								$this->config->website->params->url.'/' .  Zend_Registry::get('requestModule'), 
+								 $values['username'], 
 								 $values['password'], 
 								 Dot_Kernel::timeFormat('now', 'long'), 
 								 $country[1], 
 								 Dot_Kernel::getUserIp(), 
 								 $_SERVER['HTTP_USER_AGENT']), 
-			              $this->option->failedLogin->message);
-		$dotEmail->setBodyText($msg);		
-		$succeed = $dotEmail->send();			
+								 $this->option->failedLogin->message
+							);
+		$dotEmail->setBodyText($msg);
+		$succeed = $dotEmail->send();
 	}
-	
+
 	/**
 	 * Get last months admin's logins
 	 * @access public
@@ -230,40 +241,40 @@ class Admin extends Dot_Model
 	 */
 	public function getAdminsTimeActivity($monthsBefore)
 	{
-		$fromDate = mktime(0, 0, 0, date('n')-($monthsBefore-1), date('j'),   date('Y'));
+		$fromDate = mktime(0, 0, 0, date('n') - ($monthsBefore - 1), date('j'), date('Y'));
 		$fromDate = date('Y-m-01', $fromDate);
 		$select = $this->db->select()
-		->from(array('a' => 'adminLogin'), array('dateLogin'))
-		->where('dateLogin >= ?', $fromDate);
+			->from(array('a' => 'adminLogin'), array('dateLogin'))
+			->where('dateLogin >= ?', $fromDate);
 		$resultLogins = $this->db->fetchAll($select);
-	
+		
 		$daySec = 86400; // Day in seconds
 		$fTime = strtotime($fromDate);
 		$nTime = strtotime(date('Y-m-d'));
 		$result = array();
 		$series = array();
-	
+		
 		for($i = $fTime; $i <= $nTime; $i += $daySec)
 		{
 			$month = date('F', $i);
 			$day = date('j', $i);
 			$result[$month][$day] = 0;
 		}
-	
+		
 		foreach($resultLogins as $login)
 		{
 			$login = explode(' ', $login['dateLogin']);
 			$login = strtotime($login[0]);
-	
+			
 			$month = date('F', $login);
 			$day = date('j', $login);
-			if(!isset($result[$month][$day]))
+			if(! isset($result[$month][$day]))
 			{
 				$result[$month][$day] = 1;
 			}
 			else
 			{
-				$result[$month][$day]++;
+				$result[$month][$day] ++;
 			}
 		}
 		$i = 0;
@@ -272,7 +283,7 @@ class Admin extends Dot_Model
 			$series[$i] = new stdClass();
 			$series[$i]->name = $month;
 			$series[$i]->data = array_merge($days, array());
-			$i++;
+			$i ++;
 		}
 		return $series;
 	}
