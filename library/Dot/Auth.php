@@ -277,21 +277,22 @@ class Dot_Auth
 	 * Check if a user's token is set and is correct
 	 * @access public
 	 * @static
+	 * @param string $userToken
 	 * @param string $type - the identity that is checked (i.e. admin)
 	 * @return void
 	 */
-	public static function checkUserToken($type='admin')
+	public static function checkUserToken($userToken, $type='admin')
 	{
+		if(is_null($userToken) || $userToken == '' )
+		{
+			return null;
+		}
 		$dotAuth = Dot_Auth::getInstance();
 		$user = $dotAuth->getIdentity($type);
-		/**
-		 *@todo remove the global variable POST from this method
-		 * refactor this method 
-		 */
-		
-		if (!isset($_POST['userToken']) || (Dot_Auth::generateUserToken($user->password) != $_POST['userToken']))
+		if ((Dot_Auth::generateUserToken($user->password) != $userToken))
 		{
-			exit;
+			return null;
 		}
+		return true;
 	}
 }

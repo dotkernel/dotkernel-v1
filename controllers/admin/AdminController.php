@@ -94,7 +94,10 @@ switch ($registry->requestAction)
 		$error = array();
 		if($_SERVER['REQUEST_METHOD'] === "POST")
 		{
-			Dot_Auth::checkUserToken();
+			// changes were made to checkUserToken
+			// see: Dot_Auth::checkUserToken($userToken, $userType='admin')
+			// see: IndexController.php : $userToken
+			Dot_Auth::checkUserToken($userToken);
 			// POST values that will be validated
 			$values = array('details' => 
 								array('firstName'=>$_POST['firstName'],
@@ -149,7 +152,10 @@ switch ($registry->requestAction)
 		$error = array();
 		if($_SERVER['REQUEST_METHOD'] === "POST")
 		{
-			Dot_Auth::checkUserToken();
+			// changes were made to checkUserToken
+			// see: Dot_Auth::checkUserToken($userToken, $userType='admin')
+			// see: IndexController.php : $userToken
+			Dot_Auth::checkUserToken($userToken);
 			// POST values that will be validated
 			$values = array('details' => 
 								array('firstName'=>$_POST['firstName'],
@@ -193,7 +199,12 @@ switch ($registry->requestAction)
 	case 'activate':
 		// activate/deactivate admin user
 		// this action is called via Ajax
-		Dot_Auth::checkUserToken();
+		
+		// changes were made to checkUserToken
+		// see: Dot_Auth::checkUserToken($userToken, $userType='admin')
+		// see: IndexController.php : $userToken
+		Dot_Auth::checkUserToken($userToken);
+		
 		$id = (isset($_POST['id'])) ? (int)$_POST['id'] : 0;
 		$isActive = (isset($_POST['isActive'])) ? $_POST['isActive'] : 0;
 		$values = array('enum' => array('0' => '0,1', 'isActive' => $isActive));		
@@ -221,7 +232,10 @@ switch ($registry->requestAction)
 		// display confirmation form and delete admin user
 		if($_SERVER['REQUEST_METHOD'] === "POST")
 		{
-			Dot_Auth::checkUserToken();
+			// changes were made to checkUserToken
+			// see: Dot_Auth::checkUserToken($userToken, $userType='admin')
+			// see: IndexController.php : $userToken
+			Dot_Auth::checkUserToken($userToken);
 			if ('on' == $_POST['confirm'])
 			{
 				// delete admin user

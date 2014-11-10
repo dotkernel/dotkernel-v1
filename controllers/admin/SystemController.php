@@ -45,7 +45,14 @@ switch ($registry->requestAction)
 		$error = array();
 		if($_SERVER['REQUEST_METHOD'] === "POST")
 		{
-			Dot_Auth::checkUserToken();
+			// changes were made to checkUserToken
+			// see: Dot_Auth::checkUserToken($userToken, $userType='admin')
+			// see: IndexController.php : $userToken
+			
+			// changes were made to checkUserToken
+			// see: Dot_Auth::checkUserToken($userToken, $userType='admin')
+			// see: IndexController.php : $userToken
+			Dot_Auth::checkUserToken($userToken, 'user');
 			$systemModel->updateSettings($_POST);
 			header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestModule 
 			       . '/' . $registry->requestController. '/settings/update/done');
