@@ -86,6 +86,24 @@ $registry->option = $option;
  */
 $pageTitle = 'Overwrite Me Please !';
 
+
+/**
+ * From rev 833
+ * DotAuth::checkUserToken() will be given at least one parameter
+ * $userToken - mandatory
+ * $userType - optional - by default 'admin'
+ *
+ * To simplify it, we will put the variable $userToken
+ * If we do not have the token, it will be marked with NULL
+ *
+ * NULL - user does not have a token
+ * ''   - user have an empty token
+ * Any other (string) value - the token
+ *
+ * See Dot_Auth::checkUserToken()
+ */
+$userToken = (isset($_POST['userToken'])) ? $_POST['userToken'] : NULL;
+
 /**
  * From this point , the control is taken by the Action specific controller
  * call the Action specific file, but check first if exists 

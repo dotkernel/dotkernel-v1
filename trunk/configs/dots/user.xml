@@ -83,6 +83,7 @@ If you didn't make this request, you can ignore this email.</message>
 			</infoMessage>
 			<warningMessage>
 				<userPermission>You don't have enough credentials to access this url.</userPermission>
+				<tokenExpired>The security token expired ! Please log in again </tokenExpired>
 			</warningMessage>
 			<captchaOptions>
 				<recaptchaPublicKey>6Lfpob0SAAAAAHX4n7XbKmsuH9GMV28ooKWUxJzK </recaptchaPublicKey>

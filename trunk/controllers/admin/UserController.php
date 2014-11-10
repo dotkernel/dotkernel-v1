@@ -33,7 +33,10 @@ switch ($registry->requestAction)
 		$data = $_POST;
 		if($_SERVER['REQUEST_METHOD'] === "POST")
 		{
-			Dot_Auth::checkUserToken();
+			// changes were made to checkUserToken
+			// see: Dot_Auth::checkUserToken($userToken, $userType='admin')
+			// see: IndexController.php : $userToken
+			Dot_Auth::checkUserToken($userToken);
 			// POST values that will be validated
 			$values = array('details' =>
 								array('firstName'=>$_POST['firstName'],

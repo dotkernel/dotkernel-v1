@@ -43,8 +43,8 @@ switch ($registry->requestAction)
 		{
 			// validate the authorization request parameters 
 			$values = array('username' => array('username' => $_POST['username']), 
-											'password' => array('password' => $_POST['password'])
-											);
+							'password' => array('password' => $_POST['password'])
+			);
 			$dotValidateUser = new Dot_Validate_User(array('who' => 'user', 'action' => 'login', 'values' => $values));
 			if($dotValidateUser->isValid())
 			{
@@ -83,7 +83,18 @@ switch ($registry->requestAction)
 		$error = array();
 		if($_SERVER['REQUEST_METHOD'] === "POST")
 		{
-			Dot_Auth::checkUserToken('user');
+			if( !Dot_Auth::checkUserToken($userToken, 'user') )
+			{
+				// remove the identity
+				$dotAuth = Dot_Auth::getInstance();
+				$dotAuth->clearIdentity('user');
+				// warn the user
+				$session->message['txt'] = $option->warningMessage->tokenExpired; 
+				$session->message['type'] = 'warning';
+				// log in 
+				header('Location'. header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestController. '/login'));
+				exit;
+			}
 			// POST values that will be validated
 			$values = array('details' => 
 							array(
