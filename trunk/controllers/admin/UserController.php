@@ -36,7 +36,19 @@ switch ($registry->requestAction)
 			// changes were made to checkUserToken
 			// see: Dot_Auth::checkUserToken($userToken, $userType='admin')
 			// see: IndexController.php : $userToken
-			Dot_Auth::checkUserToken($userToken);
+			if( !Dot_Auth::checkUserToken($userToken) ) // if the admin is not logged redir to 
+			{
+				// remove the identity
+				$dotAuth = Dot_Auth::getInstance();
+				$dotAuth->clearIdentity('admin');
+				// warn the user
+				$session->message['txt'] = $option->warningMessage->tokenExpired; 
+				$session->message['type'] = 'warning';
+				// log in 
+				header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestController. '/login');
+				exit;
+			}
+			
 			// POST values that will be validated
 			$values = array('details' =>
 								array('firstName'=>$_POST['firstName'],
@@ -76,7 +88,21 @@ switch ($registry->requestAction)
 		$error = array();
 		if($_SERVER['REQUEST_METHOD'] === "POST")
 		{
-			Dot_Auth::checkUserToken();
+			// changes were made to checkUserToken
+			// see: Dot_Auth::checkUserToken($userToken, $userType='admin')
+			// see: IndexController.php : $userToken
+			if( !Dot_Auth::checkUserToken($userToken) ) // if the admin is not logged redir to 
+			{
+				// remove the identity
+				$dotAuth = Dot_Auth::getInstance();
+				$dotAuth->clearIdentity('admin');
+				// warn the user
+				$session->message['txt'] = $option->warningMessage->tokenExpired; 
+				$session->message['type'] = 'warning';
+				// log in 
+				header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestController. '/login');
+				exit;
+			}
 			// POST values that will be validated
 			$values = array('details' =>
 																	array('firstName'=>$_POST['firstName'],
@@ -118,7 +144,11 @@ switch ($registry->requestAction)
 	case 'activate':
 		// activate/deactivate user account
 		// this action is called via Ajax
-		Dot_Auth::checkUserToken();
+		if(!Dot_Auth::checkUserToken($userToken)) // Don't do anything unless token is valid
+		{
+			echo Zend_Json::encode(array("success" => false, "message" => "An error occured, please try again."));
+			exit;
+		}
 		$id = (isset($_POST['id'])) ? (int)$_POST['id'] : 0;
 		$isActive = (isset($_POST['isActive'])) ? $_POST['isActive'] : 0;
 		$values = array('enum' => array('0' => '0,1', 'isActive' => $isActive));
@@ -146,7 +176,22 @@ switch ($registry->requestAction)
 		// display confirmation form and delete user account
 		if($_SERVER['REQUEST_METHOD'] === "POST")
 		{
-			Dot_Auth::checkUserToken();
+			// changes were made to checkUserToken
+			// see: Dot_Auth::checkUserToken($userToken, $userType='admin')
+			// see: IndexController.php : $userToken
+			if( !Dot_Auth::checkUserToken($userToken) ) // if the admin is not logged redir to 
+			{
+				// remove the identity
+				$dotAuth = Dot_Auth::getInstance();
+				$dotAuth->clearIdentity('admin');
+				// warn the user
+				$session->message['txt'] = $option->warningMessage->tokenExpired; 
+				$session->message['type'] = 'warning';
+				// log in 
+				header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestController. '/login');
+				exit;
+			}
+			
 			if ('on' == $_POST['confirm'])
 			{
 				// delete user

@@ -83,6 +83,9 @@ switch ($registry->requestAction)
 		$error = array();
 		if($_SERVER['REQUEST_METHOD'] === "POST")
 		{
+			// changes were made to checkUserToken
+			// see: Dot_Auth::checkUserToken($userToken, $userType='admin')
+			// see: IndexController.php : $userToken
 			if( !Dot_Auth::checkUserToken($userToken, 'user') )
 			{
 				// remove the identity
@@ -92,7 +95,7 @@ switch ($registry->requestAction)
 				$session->message['txt'] = $option->warningMessage->tokenExpired; 
 				$session->message['type'] = 'warning';
 				// log in 
-				header('Location'. header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestController. '/login'));
+				header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestController. '/login');
 				exit;
 			}
 			// POST values that will be validated

@@ -97,7 +97,18 @@ switch ($registry->requestAction)
 			// changes were made to checkUserToken
 			// see: Dot_Auth::checkUserToken($userToken, $userType='admin')
 			// see: IndexController.php : $userToken
-			Dot_Auth::checkUserToken($userToken);
+			if( !Dot_Auth::checkUserToken($userToken) ) // if the admin is not logged redir to 
+			{
+				// remove the identity
+				$dotAuth = Dot_Auth::getInstance();
+				$dotAuth->clearIdentity('admin');
+				// warn the user
+				$session->message['txt'] = $option->warningMessage->tokenExpired; 
+				$session->message['type'] = 'warning';
+				// log in 
+				header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestController. '/login');
+				exit;
+			}
 			// POST values that will be validated
 			$values = array('details' => 
 								array('firstName'=>$_POST['firstName'],
@@ -155,7 +166,18 @@ switch ($registry->requestAction)
 			// changes were made to checkUserToken
 			// see: Dot_Auth::checkUserToken($userToken, $userType='admin')
 			// see: IndexController.php : $userToken
-			Dot_Auth::checkUserToken($userToken);
+			if( !Dot_Auth::checkUserToken($userToken) ) // if the admin is not logged redir to 
+			{
+				// remove the identity
+				$dotAuth = Dot_Auth::getInstance();
+				$dotAuth->clearIdentity('admin');
+				// warn the user
+				$session->message['txt'] = $option->warningMessage->tokenExpired; 
+				$session->message['type'] = 'warning';
+				// log in 
+				header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestController. '/login');
+				exit;
+			}
 			// POST values that will be validated
 			$values = array('details' => 
 								array('firstName'=>$_POST['firstName'],
@@ -203,7 +225,18 @@ switch ($registry->requestAction)
 		// changes were made to checkUserToken
 		// see: Dot_Auth::checkUserToken($userToken, $userType='admin')
 		// see: IndexController.php : $userToken
-		Dot_Auth::checkUserToken($userToken);
+		if( !Dot_Auth::checkUserToken($userToken) ) // if the admin is not logged redir to 
+		{
+			// remove the identity
+			$dotAuth = Dot_Auth::getInstance();
+			$dotAuth->clearIdentity('admin');
+			// warn the user
+			$session->message['txt'] = $option->warningMessage->tokenExpired; 
+			$session->message['type'] = 'warning';
+			// log in 
+			header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestController. '/login');
+			exit;
+		}
 		
 		$id = (isset($_POST['id'])) ? (int)$_POST['id'] : 0;
 		$isActive = (isset($_POST['isActive'])) ? $_POST['isActive'] : 0;
@@ -235,7 +268,19 @@ switch ($registry->requestAction)
 			// changes were made to checkUserToken
 			// see: Dot_Auth::checkUserToken($userToken, $userType='admin')
 			// see: IndexController.php : $userToken
-			Dot_Auth::checkUserToken($userToken);
+			if( !Dot_Auth::checkUserToken($userToken) ) // if the admin is not logged redir to 
+			{
+				// remove the identity
+				$dotAuth = Dot_Auth::getInstance();
+				$dotAuth->clearIdentity('admin');
+				// warn the user
+				$session->message['txt'] = $option->warningMessage->tokenExpired; 
+				$session->message['type'] = 'warning';
+				// log in 
+				header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestController. '/login');
+				exit;
+			}
+			
 			if ('on' == $_POST['confirm'])
 			{
 				// delete admin user
