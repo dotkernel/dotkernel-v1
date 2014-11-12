@@ -21,14 +21,21 @@
 class User extends Dot_Model_User
 {
 	
+	private $_userAgent;
+	private $_httpReferer;
+	
 	/**
 	 * Constructor
-	 * @access public 
-	 * @return User
+	 * @access public
 	 */
-	public function __construct()
+	public function __construct($userAgent = NULL, $httpReferer=NULL)
 	{
 		parent::__construct();
+		// if no userAgent is given on function call mark it as empty - if the userAgent is empty keep it empty
+		// if the userAgent stays empty it can be used for robot detecting or devices with blank UA (usually bots)
+		// HTTP Reffer is optional so mark it empty if there is no HTTP Reffer
+		$this->_userAgent = (!is_null($userAgent)) ? $userAgent : '';
+		$this->_httpReferer = (!is_null($httpReferer)) ? $httpReferer : '';
 	}
 
 	/**
@@ -40,8 +47,8 @@ class User extends Dot_Model_User
 	public function getUserInfo($id)
 	{
 		$select = $this->db->select()
-					   ->from('user')
-					   ->where('id = ?', $id);
+						->from('user')
+						->where('id = ?', $id);
 		return $this->db->fetchRow($select);
 	}
 
@@ -74,7 +81,6 @@ class User extends Dot_Model_User
 			$dotEmail->addTo($email);
 			$subject = str_replace('%SITENAME%', $seo->siteName, $this->option->forgotPassword->subject);
 			$dotEmail->setSubject($subject);
-			
 			$userToken = Dot_Auth::generateUserToken($value['password']);
 			
 			$msg = str_replace(array('%FIRSTNAME%', '%SITE_URL%', '%USERID%', '%TOKEN%'), 
@@ -84,18 +90,18 @@ class User extends Dot_Model_User
 			$succeed = $dotEmail->send();
 			if($succeed)
 			{
-				$session->message['txt'] = $this->option->errorMessage->emailSent.$email;
+				$session->message['txt'] = $this->option->errorMessage->emailSent . $email;
 				$session->message['type'] = 'info';
 			}
 			else
 			{
-				$session->message['txt'] = $this->option->errorMessage->emailNotSent.$email;
+				$session->message['txt'] = $this->option->errorMessage->emailNotSent . $email;
 				$session->message['type'] = 'error';
 			}
 		}
 		else
 		{
-			$session->message['txt'] = $email.$this->option->errorMessage->emailNotFound;
+			$session->message['txt'] = $email . $this->option->errorMessage->emailNotFound;
 			$session->message['type'] = 'error';
 		}
 	}
@@ -121,8 +127,8 @@ class User extends Dot_Model_User
 			$userCountry = $dotGeoip->getCountryByIp($userIp);
 			$dataLogin = array( 'ip' => $userIp, 
 								'userId' => $session->user->id, 
-								'referer' => isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '',
-								'userAgent' => $_SERVER["HTTP_USER_AGENT"],
+								'referer' => $this->_httpReferer,
+								'userAgent' => $this->_userAgent,
 								'country' => $userCountry[1]
 								);
 			$this->registerLogin($dataLogin);
