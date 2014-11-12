@@ -205,10 +205,9 @@ class System extends Dot_Model
 			$warnings["Debug Email"][] = "Please change the email of the default admin user or deactivate him.";
 		}
 		
-		//if the devEmails is the default one : team@dotkernel.com 
-		$select = $this->db->select()->from('setting')->where('`key`=?', 'devEmails')->where('`value` LIKE ?', '%team@dotkernel.com%');
-		$devEmails = $this->db->fetchOne($select);
-		if ($defaultAdminValid)
+		//if the devEmails is the default one : team@dotkernel.com
+		// why query db when we have it in the Dot_Model  
+		if ('team@dotkernel.com' == $this->settings->devEmails )
 		{
 			$warnings["Debug Email"][] = "Update the setting.devEmails value to reflect your debug email.";
 		}
@@ -275,13 +274,18 @@ class System extends Dot_Model
 		
 		// test wurfl cloud api key
 		$wurflCloud = Dot_UserAgent_WurflCloud::getInstance();
+		#echo '<pre/>';
+		#var_dump($this);
 		$wurflCloud->getDeviceCapabilities($_SERVER);
 		if(!empty($wurflCloud->lastError) && $this->config->resources->useragent->wurflcloud->active)
 		{
 			$warnings['Wurfl Cloud'][] = $wurflCloud->lastError;
 			$warnings['Wurfl Cloud'][] = 'resources.useragent.wurflcloud.api_key does not match the Site URL';
 		}
-							
+		if($this->_checkDevEmails('contact@gabisuciu.ro'))
+		{
+			#$warnings['De'];
+		}
 		// add any other warnings to $warnings here
 		return $warnings;
 	}
@@ -412,5 +416,15 @@ class System extends Dot_Model
 	{
 		$this->db->insert('emailTransporter', $data);
 		return $this->db->lastInsertId();
+	}
+	/**
+	 * Check if the developer e-mail is team@dotkernel.com (or the one provided)
+	 * @access private
+	 * @param $invalidEmailList [optional] / "team@dotkernel.com"
+	 * @return bool
+	 */
+	private function _checkDevEmails($invalidDevEmails = 'team@dotkernel.com')
+	{
+		return ($this->settings->devEmails == $invalidDevEmails);
 	}
 }
