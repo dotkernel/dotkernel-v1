@@ -1,5 +1,4 @@
 <?php
-
 /**
  * DotBoost Technologies Inc.
  * DotKernel Application Framework
@@ -21,18 +20,21 @@
 
 class Admin extends Dot_Model
 {
-	private $_referer;
 	private $_userAgent;
-
+	private $_httpReferer;
+	
 	/**
 	 * Constructor
 	 * @access public
 	 */
-	public function __construct($userAgent = null, $referer = null)
+	public function __construct($userAgent = NULL, $httpReferer=NULL)
 	{
 		parent::__construct();
-		$this->_userAgent = ($userAgent !== null) ? $userAgent : 'robot';
-		$this->_referer = ($referer !== null) ? $referer : 'robot';
+		// if no userAgent is given on function call mark it as empty - if the userAgent is empty keep it empty
+		// if the userAgent stays empty it can be used for robot detecting or devices with blank UA (usually bots)
+		// HTTP Reffer is optional so mark it empty if there is no HTTP Reffer
+		$this->_userAgent = (!is_null($userAgent)) ? $userAgent : '';
+		$this->_httpReferer = (!is_null($httpReferer)) ? $httpReferer : '';
 	}
 
 	/**
@@ -45,9 +47,9 @@ class Admin extends Dot_Model
 	public function getUserBy($field = '', $value = '')
 	{
 		$select = $this->db->select()
-					   ->from('admin')
-					   ->where($field.' = ?', $value)
-					   ->limit(1);					   
+							->from('admin')
+							->where($field . ' = ?', $value)
+							->limit(1);
 		$result = $this->db->fetchRow($select);
 		return $result;
 	}
@@ -177,16 +179,16 @@ class Admin extends Dot_Model
 		$validAuth = $dotAuth->process('admin', $validData);
 		if($validAuth)
 		{
-				//prepare data for register the login
+			//prepare data for register the login
 			$dataLogin = array('ip' => Dot_Kernel::getUserIp(), 
-							   'adminId' => $session->admin->id,
-							   'referer' => isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '',
-							   'userAgent' => $_SERVER["HTTP_USER_AGENT"]);
+								'adminId' => $session->admin->id,
+								'referer' => $this->_httpReferer,
+								'userAgent' => $this->_userAgent);
 			$this->registerLogin($dataLogin);
 			header('Location: ' . $this->config->website->params->url . '/' . Zend_Registry::get('requestModule'));
 			exit();
 		}
-		
+		else
 		{ // failed admin login - send email to valid admin account
 			$this->sendEmailFailedLogin($validData);
 			// check if account is inactive
@@ -197,7 +199,7 @@ class Admin extends Dot_Model
 			$session->message['type'] = 'error';
 		}
 	}
-
+	
 	/**
 	 * Failed admin login - send email notice to valid admin account
 	 * @access private
@@ -220,16 +222,14 @@ class Admin extends Dot_Model
 		$dotGeoip = new Dot_Geoip();
 		$country = $dotGeoip->getCountryByIp(Dot_Kernel::getUserIp());
 		$msg = str_replace(array('%LINK%', '%USERNAME%', '%PASSWORD%', '%DATE%', '%COUNTRY%', '%IP%', '%USERAGENT%'), 
-						   array(
-								$this->config->website->params->url.'/' .  Zend_Registry::get('requestModule'), 
+							array($this->config->website->params->url.'/' .  Zend_Registry::get('requestModule'), 
 								 $values['username'], 
 								 $values['password'], 
 								 Dot_Kernel::timeFormat('now', 'long'), 
 								 $country[1], 
 								 Dot_Kernel::getUserIp(), 
-								 $_SERVER['HTTP_USER_AGENT']), 
-								 $this->option->failedLogin->message
-							);
+								 $this->_userAgent),
+								$this->option->failedLogin->message);
 		$dotEmail->setBodyText($msg);
 		$succeed = $dotEmail->send();
 	}

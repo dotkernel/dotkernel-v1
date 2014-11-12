@@ -16,7 +16,9 @@
 */
 
 $adminView = new Admin_View($tpl);
-$adminModel = new Admin();
+$userAgent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '' ;
+$httpReferer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '' ;
+$adminModel = new Admin($userAgent, $httpReferer);
 // switch based on the action, NO default action here
 $pageTitle = $option->pageTitle->action->{$registry->requestAction};
 switch ($registry->requestAction)
