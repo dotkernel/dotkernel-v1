@@ -207,7 +207,7 @@ class System extends Dot_Model
 		
 		//if the devEmails is the default one : team@dotkernel.com
 		// why query db when we have it in the Dot_Model  
-		if ('team@dotkernel.com' == $this->settings->devEmails )
+		if (stripos($this->settings->devEmails,'team@dotkernel.com') !== false )
 		{
 			$warnings["Debug Email"][] = "Update the setting.devEmails value to reflect your debug email.";
 		}
