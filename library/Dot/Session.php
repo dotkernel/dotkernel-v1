@@ -18,15 +18,17 @@
 */
 
 class Dot_Session
-{	
+{
+
 	/**
 	 * Constructor is private, because this class is static, can't be instantiated
 	 * @access private
 	 * @return Dot_Session
 	 */
-	private function __construct ()
-	{		
+	private function __construct()
+	{
 	}
+
 	/**
 	 * Start the session, using the session settings from application.ini and dots.xml
 	 * @access public
@@ -44,23 +46,23 @@ class Dot_Session
 			$namespaceName = $option->session->name;
 			
 			//if session is not registered, create it
-			if(!(Zend_Registry::isRegistered('session')))
+			if(! (Zend_Registry::isRegistered('session')))
 			{
 				$session = new Zend_Session_Namespace($namespaceName);
 				// set session options 
-				Zend_Session::setOptions($config->resources->session->toArray());				 
-				if(!isset($session->initialized))
+				Zend_Session::setOptions($config->resources->session->toArray());
+				if(! isset($session->initialized))
 				{
-					$session->initialized = TRUE;					
+					$session->initialized = TRUE;
 					// use only session cookie and regenerate session in the same time 
 					Zend_Session::rememberMe($config->resources->session->remember_me_seconds);
 				}
-				Zend_Registry::set('session',$session);
+				Zend_Registry::set('session', $session);
 			}
 		}
 		else
 		{
-			Zend_Registry::set('session',NULL);
-		}		
+			Zend_Registry::set('session', NULL);
+		}
 	}
 }
