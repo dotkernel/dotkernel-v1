@@ -165,8 +165,8 @@ class User_View extends View
 			$this->tpl->setVar('REFERER', $v['referer']);
 			$this->tpl->setVar('WHOISURL', $this->settings->whoisUrl);
 			$this->tpl->setVar('USERAGENT', $v['userAgent']);
-			$this->tpl->setVar('BROWSERIMAGE', Dot_UserAgent::getBrowserIcon($v['userAgent']));
-			$os = Dot_UserAgent::getOsIcon($v['userAgent']);
+			$this->tpl->setVar('BROWSERIMAGE', Dot_UserAgentUtilities::getBrowserIcon($v['userAgent']));
+			$os = Dot_UserAgentUtilities::getOsIcon($v['userAgent']);
 			$this->tpl->setVar('OSIMAGE', $os['icon']);
 			$this->tpl->setVar('OSMAJOR', $os['major']);
 			$this->tpl->setVar('OSMINOR', $os['minor']);
