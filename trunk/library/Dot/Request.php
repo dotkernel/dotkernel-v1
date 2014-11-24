@@ -17,19 +17,23 @@
  * @subpackage DotRequest
  * @author     DotKernel Team <team@dotkernel.com>
  */
+
 class Dot_Request
 {
 	protected static $_server;
 	protected static $_get; 
 	protected static $_post;
 	private static $_isDataSet = false ;
+	
 	/**
+	 * Singleton
+	 * @todo test it with upload of some 20 mb file  
+	 * @todo add constructor ?
 	 * Sets the Server Request Parameters
-	 * CAUTION !!! Use this only once
-	 * Teoretically it shouldn't change if the  
 	 * @param array $server $_SERVER
 	 * @param array $get $_GET
 	 * @param array $post $_POST
+	 * @return void
 	 */
 	public static function setRequestData($server, $get = array(), $post = array())
 	{
@@ -40,12 +44,13 @@ class Dot_Request
 			self::$_post = $post;
 			self::$_isDataSet = true;
 		}
-		else // prevent calling second time 
-		{
-			trigger_error('Request Data is already set', E_USER_NOTICE );
-		}
 	}
 	
+	/*
+	 * add comment here
+	 * @param
+	 * @return
+	 */
 	public static function getRequestData()
 	{
 		return array(
@@ -54,9 +59,7 @@ class Dot_Request
 			'post' => self::$_post,
 		);
 	}
-	
-	/******* Frequently Called Functions ********/
-	
+
 	/**
 	 * Get the Request User Agent
 	 * 
