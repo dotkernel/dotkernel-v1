@@ -18,7 +18,7 @@
 $session = Zend_Registry::get('session');
 
 // instantiate classes related to User module: model & view
-$userModel = new User($userAgent, $httpReferer); 
+$userModel = new User(Dot_Request::getUserAgent(), Dot_Request::getHttpReffer()); 
 $userView = new User_View($tpl);
 // all actions MUST set  the variable  $pageTitle
 $pageTitle = $option->pageTitle->action->{$registry->requestAction};
