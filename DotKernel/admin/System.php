@@ -155,7 +155,10 @@ class System extends Dot_Model
 	public function getWurflInfo()
 	{
 		$result = array('api' => array(), 'cloud' => array());
+		return $result;
+		//todo fix this
 		// first test the api
+		/*
 		if(Dot_UserAgent::checkWurflApi() === TRUE)
 		{
 			// get wurfl api info
@@ -170,7 +173,7 @@ class System extends Dot_Model
 		$result['cloud']['clientVersion'] = $wurfl->getClientVersion();
 		$result['cloud']['apiVersion'] = $wurfl->getAPIVersion();
 		$result['cloud']['cloudServer'] = $wurfl->getCloudServer();
-		
+		*/
 		return $result;
 	}
 	/**
@@ -270,7 +273,9 @@ class System extends Dot_Model
 										as folders.permission[] exception in application.ini</em>';
 			}
 		}
-		
+		return $warnings;
+		// todo fix this
+		/*
 		// test wurfl cloud api key
 		$wurflCloud = Dot_UserAgent_WurflCloud::getInstance();
 		#echo '<pre/>';
@@ -283,6 +288,7 @@ class System extends Dot_Model
 		}
 		// add any other warnings to $warnings here
 		return $warnings;
+		*/
 	}
 	/**
 	 * Get a list of files in a directory
