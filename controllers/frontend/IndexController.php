@@ -20,41 +20,24 @@
 // if you don't use the session object in this module, feel free to remove this line
 Dot_Session::start();
 
-/**
- *  Example of usage for WURFL API integration. If wurfl  module is active, you can redirect to /mobile controller 
- */
-$wurflConf = $registry->configuration->resources->useragent->wurflcloud;
-if(isset($registry->configuration->resources->useragent->wurflapi->active) 
-					&& $registry->configuration->resources->useragent->wurflcloud->active === FALSE)
+if(Dot_UserAgentUtilities::isMobile(Dot_Request::getUserAgent()))
 {
-	$wurflConf = $registry->configuration->resources->useragent->wurflapi;
-}
-if($wurflConf->active)
-{
-	$deviceInfo = Dot_UserAgent :: getDeviceInfo($_SERVER);
-	if( (0 < count((array)$deviceInfo)) && $deviceInfo->isMobile)
+	if(!$registry->session->visitId)
 	{
-		/**
- 		* Example of usage of Statistic class. We may want to record every site visits, in order to find new mobile device
- 		* that are not listed in WURFL xml file. Record in session the visitId for later usage.
- 		*/
-		if(!$registry->session->visitId)
-		{
-			$registry->session->visitId = Dot_Statistic::registerVisit();
-		}
+		$registry->session->visitId = Dot_Statistic::registerVisit();
+	}
+	
+	// if the Statistic module is integrate, record the deviceInfo too, and record TRUE in $session->mobile 
+	if(!$registry->session->mobile)
+	{
+		$registry->session->mobile = Dot_Statistic::registerMobileDetails($registry->session->visitId, array());
 		
-		// if the Statistic module is integrate, record the deviceInfo too, and record TRUE in $session->mobile 
-		if(!$registry->session->mobile)
+		//redirect to mobile controller , only if the session is not set. 
+		//Otherwise will trap the user in mobile controller
+		if( 1 || $wurflConf->redirect)
 		{
-			$registry->session->mobile = Dot_Statistic::registerMobileDetails($registry->session->visitId, $deviceInfo);
-			
-			//redirect to mobile controller , only if the session is not set. 
-			//Otherwise will trap the user in mobile controller
-			if($wurflConf->redirect)
-			{
-				header('location: '.$registry->configuration->website->params->url.'/mobile');
-				exit;
-			}
+			header('location: '.$registry->configuration->website->params->url.'/mobile');
+			exit;
 		}
 	}
 }

@@ -48,12 +48,10 @@ $zendLoader = Zend_Loader_Autoloader::getInstance();
 //includes all classes in library folder. That class names must start with Dot_
 $zendLoader->registerNamespace('Dot_');
 
+// getting the request related params
+Dot_Request::setRequestData($_SERVER, $_GET, $_POST);
 // initialize the DotKernel Enviromnment
 Dot_Kernel::initialize($startTime);
-
-// getting the request related params 
-$userAgent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '' ;
-$httpReferer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '' ;
 
 /** Pass control to the controller
                 .''
