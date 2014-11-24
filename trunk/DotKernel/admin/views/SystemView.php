@@ -69,13 +69,6 @@ class System_View extends View
 			$this->tpl->setVar('WURFLAPIVERSION', $wurflInfo['api']['apiVersion']);
 			$this->tpl->parse('wurfl_api', 'wurfl_api_info');
 		}
-		if(!empty($wurflInfo['cloud']))
-		{
-			$this->tpl->setVar('WURFL_CLIENT_VERSION', $wurflInfo['cloud']['clientVersion']);
-			$this->tpl->setVar('WURFL_API_VERSION', $wurflInfo['cloud']['apiVersion']);
-			$this->tpl->setVar('WURFL_CLOUD_SERVER', $wurflInfo['cloud']['cloudServer']);
-			$this->tpl->parse('wurfl_cloud', 'wurfl_cloud_info');
-		}
 
 		// show warnigns
 		$this->tpl->setBlock('tpl_main', 'warning_item', 'warning_item_block');
