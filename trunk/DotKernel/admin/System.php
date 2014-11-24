@@ -33,10 +33,10 @@ class System extends Dot_Model
 	 * @return string
 	 */
 	public function getMysqlVersion()
-	{		
+	{
 		$select = $this->db->select()
 							->from('', array('ve' => new Zend_Db_Expr('version()')));
-		return $this->db->fetchOne($select);		
+		return $this->db->fetchOne($select);
 	}
 	/**
 	 * Get settings that are by default editable
@@ -47,8 +47,8 @@ class System extends Dot_Model
 	public function getSettings($isEditable='1')
 	{
 		$select = $this->db->select()
-						   ->from('setting')
-						   ->where('isEditable = ? ', $isEditable);
+							->from('setting')
+							->where('isEditable = ? ', $isEditable);
 		return $this->db->fetchAll($select);
 	}
 	/**
@@ -58,11 +58,11 @@ class System extends Dot_Model
 	 * @return void
 	 */
 	public function updateSettings($data)
-	{		
+	{
 		foreach ($data as $k => $v)
-		{			
+		{
 			$this->db->update('setting', array('value' => $v), $this->db->quoteIdentifier('key').' = '.$this->db->quote($k));
-		}		
+		}
 	}
 	/**
 	 * Get GeoIp Version release
@@ -81,7 +81,7 @@ class System extends Dot_Model
 	
 		// do we have geoIP server-wide ? 
 		if(function_exists('geoip_database_info'))
-		{			
+		{
 			if(geoip_db_avail(GEOIP_COUNTRY_EDITION))
 			{
 				$info = explode(" ",geoip_database_info(GEOIP_COUNTRY_EDITION));
@@ -184,10 +184,10 @@ class System extends Dot_Model
 		// warning "categories"
 		$warnings = array('Security Warning'=>array(),
 												'Debug Email' => array(),
-													'Delete Files'=>array(),
-														'Make Writable'=>array(), 
-															'Make Unwritable'=>array(),
-																	'Wurfl Cloud' => array());
+												'Delete Files'=>array(),
+												'Make Writable'=>array(), 
+												'Make Unwritable'=>array(),
+												'Wurfl Cloud' => array());
 		
 		// check that the default admin user isn't enabled
 		$dotAuth = Dot_Auth::getInstance();
@@ -204,72 +204,71 @@ class System extends Dot_Model
 		{
 			$warnings["Debug Email"][] = "Please change the email of the default admin user or deactivate him.";
 		}
-		
+			
 		//if the devEmails is the default one : team@dotkernel.com
 		// why query db when we have it in the Dot_Model  
-		if (stripos($this->settings->devEmails,'team@dotkernel.com') !== false )
+		if(stripos($this->settings->devEmails, 'team@dotkernel.com') !== false)
 		{
 			$warnings["Debug Email"][] = "Update the setting.devEmails value to reflect your debug email.";
 		}
 		
 		// check for files that should be deleted
-		$filesToDelete = array( "dot_kernel.sql", "readme.txt", "dk.php");
-		foreach ($filesToDelete as $file)
+		$filesToDelete = array("dot_kernel.sql", "readme.txt", "dk.php");
+		foreach($filesToDelete as $file)
 		{
-			if (file_exists(APPLICATION_PATH."/".$file))
+			if(file_exists(APPLICATION_PATH . "/" . $file))
 			{
 				$warnings['Delete Files'][] = $file;
 			}
 		}
-
+			
 		//ignore permission warning if OS is Windows
-		if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') 
+		if(strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN')
 		{
 			// warning if application.ini is writable
-			if (is_writable(APPLICATION_PATH."/configs/application.ini"))
+			if(is_writable(APPLICATION_PATH . "/configs/application.ini"))
 			{
 				$warnings["Make Unwritable"][] = 'configs/application.ini';
 			}
-			
+				
 			// only the folders set in application.ini (folders.permission[]) should be writable 	
 			$folderException = $this->config->folders->permission->toArray();
 			// go through all folders in the tree
 			$folders = $this->_listDirectory(APPLICATION_PATH);
-			foreach ($folders as $path)
+			foreach($folders as $path)
 			{
 				// exceptions are configured in application.ini. they should be writable
 				$isException = false;
 				foreach($folderException as $exception)
 				{
-					if (strpos($path, $exception) !== false)
+					if(strpos($path, $exception) !== false)
 					{
 						$isException = true;
 						break;
 					}
 				}
-				if ($isException)
+				if($isException)
 				{
-					if (!is_writable($path) && $path === $exception )
+					if(! is_writable($path) && $path === $exception)
 					{
 						$warnings["Make Writable"][] = $path;
 					}
 				}
 				else
 				{
-					if (is_writable($path))
+					if(is_writable($path))
 					{
 						
 						$warnings["Make Unwritable"][] = $path;
 					}
 				}
 			}
-			// info about how to add exception
+				// info about how to add exception
 			if(count($warnings["Make Unwritable"]))
 			{
-				$warnings["Make Unwritable"][] = '**  <em>It is possible to add your writable folders to the exclude list by adding it
-														as folders.permission[] exception in application.ini</em>';
+				$warnings["Make Unwritable"][] = '**  <em>It is possible to add your writable folders to the exclude list by adding it 
+										as folders.permission[] exception in application.ini</em>';
 			}
-			
 		}
 		
 		// test wurfl cloud api key
@@ -281,10 +280,6 @@ class System extends Dot_Model
 		{
 			$warnings['Wurfl Cloud'][] = $wurflCloud->lastError;
 			$warnings['Wurfl Cloud'][] = 'resources.useragent.wurflcloud.api_key does not match the Site URL';
-		}
-		if($this->_checkDevEmails('team@dotkernel.net'))
-		{
-			#$warnings['De'];
 		}
 		// add any other warnings to $warnings here
 		return $warnings;
@@ -300,20 +295,20 @@ class System extends Dot_Model
 		$result = array();
 		if ($handle = opendir($directory))
 		{
-		   while (false !== ($file = readdir($handle))) 
-		   {
-		       if ($file != "." && $file != ".." && $file != ".svn") 
-			   {	
-			   		$dir = $directory.'/'.$file;
-			   		if(is_dir($dir))
-					{									
+			while (false !== ($file = readdir($handle))) 
+			{
+				if ($file != "." && $file != ".." && $file != ".svn") 
+				{
+					$dir = $directory.'/'.$file;
+					if(is_dir($dir))
+					{
 						$result[] = $dir;
 						$list = $this->_listDirectory($dir);
 						$result = array_merge($result, $list);
 					}
-		       }
-		   }
-		   closedir($handle);
+				}
+			}
+			closedir($handle);
 		}
 		return $result;
 	}
@@ -327,9 +322,9 @@ class System extends Dot_Model
 	public function getEmailTransporterBy($field, $value)
 	{ 
 		$select = $this->db->select()
-		         ->from('emailTransporter')
-		         ->where($field.' = ?', $value)
-		         ->limit(1);
+				->from('emailTransporter')
+				->where($field.' = ?', $value)
+				->limit(1);
 		$result = $this->db->fetchRow($select);
 		return $result;
 	}	
@@ -342,11 +337,12 @@ class System extends Dot_Model
 	public function getEmailTransporterList($page = 1)
 	{
 		$select = $this->db->select()
-		           ->from('emailTransporter')
-		           ->order('id');
+					->from('emailTransporter')
+					->order('id');
 		$dotPaginator = new Dot_Paginator($select, $page, $this->settings->resultsPerPage);
 		return $dotPaginator->getData();
 	}
+
 	/**
 	 * Activate/Inactivate email transporter
 	 * @access public
@@ -355,9 +351,10 @@ class System extends Dot_Model
 	 * @return void
 	 */
 	public function activateEmailTransporter($id, $isActive)
-	{   
-		$this->db->update('emailTransporter', array('isActive' => $isActive), 'id = '.$id);
+	{
+		$this->db->update('emailTransporter', array('isActive' => $isActive), 'id = ' . $id);
 	}
+
 	/**
 	 * Delete email transporter
 	 * @access public
@@ -368,6 +365,7 @@ class System extends Dot_Model
 	{
 		$this->db->delete('emailTransporter', 'id = ' . $id);
 	}
+
 	/**
 	 * Update email transporter
 	 * @access public
@@ -377,9 +375,10 @@ class System extends Dot_Model
 	public function updateEmailTransporter($data)
 	{
 		$id = $data['id'];
-		unset ($data['id']);
-		$this->db->update('emailTransporter', $data, 'id = '.$id);
-	}  
+		unset($data['id']);
+		$this->db->update('emailTransporter', $data, 'id = ' . $id);
+	}
+
 	/**
 	 * Validate transporter
 	 * @access public
@@ -389,23 +388,24 @@ class System extends Dot_Model
 	public function validateEmailTransporter($data)
 	{
 		$integerValidator = new Zend_Validate_Int();
-		$errors=array();
-		if (!$integerValidator->isValid($data['port']))
+		$errors = array();
+		if(! $integerValidator->isValid($data['port']))
 		{
 			array_push($errors, $this->option->errorMessage->invalidPort);
 		}
-		if (!$integerValidator->isValid($data['capacity']))
+		if(! $integerValidator->isValid($data['capacity']))
 		{
 			array_push($errors, $this->option->errorMessage->invalidCapacity);
 		}
 		
-		if (empty($data['user']) || empty($data['pass']) || empty($data['server']))
+		if(empty($data['user']) || empty($data['pass']) || empty($data['server']))
 		{
 			array_push($errors, $this->option->errorMessage->emptyFields);
 		}
 		
 		return $errors;
 	}
+
 	/**
 	 * Add email transporter
 	 * @access public
@@ -417,6 +417,7 @@ class System extends Dot_Model
 		$this->db->insert('emailTransporter', $data);
 		return $this->db->lastInsertId();
 	}
+
 	/**
 	 * Check if the developer e-mail is team@dotkernel.com (or the one provided)
 	 * @access private
