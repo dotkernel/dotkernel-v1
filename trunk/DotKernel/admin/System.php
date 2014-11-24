@@ -282,7 +282,7 @@ class System extends Dot_Model
 			$warnings['Wurfl Cloud'][] = $wurflCloud->lastError;
 			$warnings['Wurfl Cloud'][] = 'resources.useragent.wurflcloud.api_key does not match the Site URL';
 		}
-		if($this->_checkDevEmails('contact@gabisuciu.ro'))
+		if($this->_checkDevEmails('team@dotkernel.net'))
 		{
 			#$warnings['De'];
 		}
