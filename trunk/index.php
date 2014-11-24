@@ -51,6 +51,10 @@ $zendLoader->registerNamespace('Dot_');
 // initialize the DotKernel Enviromnment
 Dot_Kernel::initialize($startTime);
 
+// getting the request related params 
+$userAgent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '' ;
+$httpReferer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '' ;
+
 /** Pass control to the controller
                 .''
       ._.-.___.' (`\
