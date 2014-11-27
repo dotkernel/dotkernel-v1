@@ -20,7 +20,7 @@
 // if you don't use the session object in this module, feel free to remove this line
 Dot_Session::start();
 
-if(Dot_UserAgentUtilities::isMobile(Dot_Request::getUserAgent()))
+if(Dot_UserAgent_Utilities::isMobile(Dot_Request::getUserAgent()))
 {
 	if(!$registry->session->visitId)
 	{

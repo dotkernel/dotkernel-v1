@@ -19,7 +19,7 @@
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
-class Dot_UserAgentUtilities
+class Dot_UserAgent_Utilities
 {
 
 	/**
@@ -38,6 +38,28 @@ class Dot_UserAgentUtilities
 					'fennec', // Firefox for mobile (codenamed Fennec)
 					'htc', // htc devices
 	);
+	
+	/**
+	 * Check if the Device is Mobile
+	 *
+	 * This function was implemented to replace the WURFL Cloud integration
+	 *
+	 *
+	 * @param unknown $userAgent
+	 * @return boolean
+	 */
+	public static function isMobile($userAgent)
+	{
+		$userAgent = strtolower($userAgent);
+		foreach(self::$_mobileKeywords as $key)
+		{
+			if(strpos($userAgent, $key) !== false)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	/**
 	 * Return the name of the browser icon based on User Agent
@@ -132,28 +154,6 @@ class Dot_UserAgentUtilities
 				}
 			}
 		}
-		return array('icon'=>'unknown', 'major'=>'', 'minor'=>'');
-	}
-	
-	/**
-	 * Check if the Device is Mobile
-	 *
-	 * This function was implemented to replace the WURFL Cloud integration
-	 *
-	 *
-	 * @param unknown $userAgent
-	 * @return boolean
-	*/
-	public static function isMobile($userAgent)
-	{
-		$userAgent = strtolower($userAgent);
-		foreach(self::$_mobileKeywords as $key)
-		{
-			if(strpos($userAgent, $key) !== false)
-			{
-				return true;
-			}
-		}
-		return false;
+		return array('icon' => 'unknown', 'major' => '', 'minor' => '');
 	}
 }
