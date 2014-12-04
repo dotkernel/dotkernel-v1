@@ -52,39 +52,6 @@
 						</tr>
 						<!-- END is_geoip -->
 					</table>
-					<!-- BEGIN wurfl_api_info -->
-					<table class="medium_table no_border-top">
-						<tr>
-							<td>WURFL API VERSION</td>
-							<td>{WURFLAPIVERSION}</td>
-						</tr>
-						<tr>
-							<td width="150px">WURFL Cache DATE</td>
-							<td>{WURFLCACHEBUILT}     [ <a href="{SITE_URL}/admin/system/build-wurfl-cache">rebuild</a> ]
-									[ <a href="{SITE_URL}/admin/system/empty-wurfl-cache">empty</a> ]</td>
-						</tr>
-						<tr>
-							<td>WURFL XML FILE</td>
-							<td>{WURFLDATE}</td>
-						</tr>
-					</table>
-					<!-- END wurfl_api_info -->
-					<!-- BEGIN wurfl_cloud_info -->
-					<table class="medium_table no_border-top">
-						<tr>
-							<td>WURFL CLIENT VERSION</td>
-							<td>{WURFL_CLIENT_VERSION}</td>
-						</tr>
-						<tr>
-							<td width="150px">WURFL API VERSION</td>
-							<td>{WURFL_API_VERSION}</td>
-						</tr>
-						<tr>
-							<td>WURFL CLOUD SERVER</td>
-							<td>{WURFL_CLOUD_SERVER}</td>
-						</tr>
-					</table>
-					<!-- END wurfl_cloud_info -->
 					<table class="medium_table no_border-top round-left-right-bottom">
 						<tr>
 							<td width="150px">jQuery Version</td>
