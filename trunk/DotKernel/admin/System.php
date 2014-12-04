@@ -143,40 +143,6 @@ class System extends Dot_Model
 		return $result;
 	}
 	/**
-	 * Get information about the Wurfl library installed
-	 * Returns an array with the following elements:
-	 *    cacheBuilt: the date the last time the cache was manually built,
-	 *                stored in the setting table
-	 *    date: the last modified date of the wurfl xml file
-	 * 
-	 * @access public
-	 * @return array
-	 */
-	public function getWurflInfo()
-	{
-		$result = array('api' => array(), 'cloud' => array());
-		return $result;
-		//todo fix this
-		// first test the api
-		/*
-		if(Dot_UserAgent::checkWurflApi() === TRUE)
-		{
-			// get wurfl api info
-			$wurfl = Dot_UserAgent_Wurfl::getInstance();
-			$wurflInfo = $wurfl->getWurflVersion();
-			$result['api']['xmlFileDate']    = $wurflInfo['xmlFileDate'];
-			$result['api']['cacheDate']      = $wurflInfo['cacheDate'];
-			$result['api']['apiVersion']     = $this->config->resources->useragent->wurflapi->api_version;
-		}
-		// get wurfl cloud info
-		$wurfl = Dot_UserAgent_WurflCloud::getInstance();
-		$result['cloud']['clientVersion'] = $wurfl->getClientVersion();
-		$result['cloud']['apiVersion'] = $wurfl->getAPIVersion();
-		$result['cloud']['cloudServer'] = $wurfl->getCloudServer();
-		*/
-		return $result;
-	}
-	/**
 	 * Get any warnings to display in the dashboard
 	 * Each array element returned is an array with two strings: type and description
 	 * @access public
@@ -189,8 +155,8 @@ class System extends Dot_Model
 												'Debug Email' => array(),
 												'Delete Files'=>array(),
 												'Make Writable'=>array(), 
-												'Make Unwritable'=>array(),
-												'Wurfl Cloud' => array());
+												'Make Unwritable'=>array()
+		);
 		
 		// check that the default admin user isn't enabled
 		$dotAuth = Dot_Auth::getInstance();
@@ -274,21 +240,6 @@ class System extends Dot_Model
 			}
 		}
 		return $warnings;
-		// todo fix this
-		/*
-		// test wurfl cloud api key
-		$wurflCloud = Dot_UserAgent_WurflCloud::getInstance();
-		#echo '<pre/>';
-		#var_dump($this);
-		$wurflCloud->getDeviceCapabilities($_SERVER);
-		if(!empty($wurflCloud->lastError) && $this->config->resources->useragent->wurflcloud->active)
-		{
-			$warnings['Wurfl Cloud'][] = $wurflCloud->lastError;
-			$warnings['Wurfl Cloud'][] = 'resources.useragent.wurflcloud.api_key does not match the Site URL';
-		}
-		// add any other warnings to $warnings here
-		return $warnings;
-		*/
 	}
 	/**
 	 * Get a list of files in a directory

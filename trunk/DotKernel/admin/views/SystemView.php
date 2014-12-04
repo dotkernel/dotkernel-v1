@@ -36,15 +36,11 @@ class System_View extends View
 	 * @param string $mysqlVersion
 	 * @param string $apcInfo
 	 * @param array $geoIpVersion
-	 * @param array $wurflInfo
 	 * @param array $warnings
 	 * @return void
 	 */
-	public function dashboard($templateFile, $mysqlVersion, $apcInfo, $geoIpVersion, $wurflInfo, $warnings)
+	public function dashboard($templateFile, $mysqlVersion, $apcInfo, $geoIpVersion, $warnings)
 	{
-		$this->tpl->setFile('tpl_main', 'system/' . $templateFile . '.tpl');
-		$this->tpl->setBlock('tpl_main', 'wurfl_api_info', 'wurfl_api');
-		$this->tpl->setBlock('tpl_main', 'wurfl_cloud_info', 'wurfl_cloud');
 		// system overview
 		$this->tpl->setVar('HOSTNAME' , System::getSystemHostname());
 		$this->tpl->setVar('MYSQL',$mysqlVersion);
@@ -62,14 +58,6 @@ class System_View extends View
 		$this->tpl->setVar('PHPAPI',php_sapi_name());
 		$this->tpl->setVar('ZFVERSION', Zend_Version::VERSION);
 		
-		if(!empty($wurflInfo['api']))
-		{
-			$this->tpl->setVar('WURFLCACHEBUILT', $wurflInfo['api']['cacheDate']);
-			$this->tpl->setVar('WURFLDATE', $wurflInfo['api']['xmlFileDate']);
-			$this->tpl->setVar('WURFLAPIVERSION', $wurflInfo['api']['apiVersion']);
-			$this->tpl->parse('wurfl_api', 'wurfl_api_info');
-		}
-
 		// show warnigns
 		$this->tpl->setBlock('tpl_main', 'warning_item', 'warning_item_block');
 		$this->tpl->setBlock('tpl_main', 'warnings', 'warnings_block');

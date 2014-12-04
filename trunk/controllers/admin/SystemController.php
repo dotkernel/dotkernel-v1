@@ -24,10 +24,9 @@ switch ($registry->requestAction)
 	case 'dashboard':
 		$mysqlVersion = $systemModel->getMysqlVersion();
 		$geoIpVersion = $systemModel->getGeoIpVersion();
-		$wurflInfo = $systemModel->getWurflInfo();
-		$warnings = $systemModel->getWarnings($wurflInfo);
+		$warnings = $systemModel->getWarnings(array());
 		$apcInfo = $systemModel->getAPCInfo();
-		$systemView->dashboard('dashboard', $mysqlVersion, $apcInfo, $geoIpVersion, $wurflInfo, $warnings);
+		$systemView->dashboard('dashboard', $mysqlVersion, $apcInfo, $geoIpVersion, $warnings);
 	break;
 	case 'settings':
 		// list settings values
@@ -65,26 +64,6 @@ switch ($registry->requestAction)
 			       . '/' . $registry->requestController. '/settings/update/done');
 			exit;
 		}
-	break;
-	case 'build-wurfl-cache':
-		if(Dot_UserAgent::checkWurflApi() === TRUE)
-		{
-			set_time_limit(0);
-			$wurfl = Dot_UserAgent_Wurfl::getInstance();
-			$wurfl->createWurflFactory();
-		}
-		header('Location: '.$registry->configuration->website->params->url. '/admin');
-		exit();
-	break;
-	case 'empty-wurfl-cache':
-		if(Dot_UserAgent::checkWurflApi() === TRUE)
-		{
-			set_time_limit(0);
-			$wurfl = Dot_UserAgent_Wurfl::getInstance();
-			$wurfl->removeWurflFactory();
-		}
-		header('Location: '.$registry->configuration->website->params->url. '/admin');
-		exit();
 	break;
 	case 'phpinfo':
 		// display phpinfo()
