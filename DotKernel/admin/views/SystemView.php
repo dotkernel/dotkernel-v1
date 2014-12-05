@@ -41,6 +41,7 @@ class System_View extends View
 	 */
 	public function dashboard($templateFile, $mysqlVersion, $apcInfo, $geoIpVersion, $warnings)
 	{
+		$this->tpl->setFile('tpl_main', 'system/' . $templateFile . '.tpl');
 		// system overview
 		$this->tpl->setVar('HOSTNAME' , System::getSystemHostname());
 		$this->tpl->setVar('MYSQL',$mysqlVersion);
