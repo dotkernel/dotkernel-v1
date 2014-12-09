@@ -8,7 +8,7 @@
 *
 * @category   DotKernel
 * @package    DotLibrary 
- * @copyright  Copyright (c) 2009-2014 DotBoost Technologies Inc. (http://www.dotboost.com)
+* @copyright  Copyright (c) 2009-2014 DotBoost Technologies Inc. (http://www.dotboost.com)
 * @license    http://www.gnu.org/copyleft/lesser.html  LGPL License 2.1
 * @version    $Id$
 */
@@ -122,7 +122,7 @@ class Dot_Template
 	 * @static
 	 * @var Dot_Template
 	 */
-	protected static $_instance = null;	
+	protected static $_instance = null;
 	/**
 	 * Singleton pattern implementation makes 'new' unavailable
 	 * @access protected
@@ -158,7 +158,7 @@ class Dot_Template
 	{
 		if (null === self::$_instance) 
 		{
-			self::$_instance = new self($root, $unknowns, $fallback);			
+			self::$_instance = new self($root, $unknowns, $fallback);
 		}
 		return self::$_instance;
 	}	
@@ -233,11 +233,12 @@ class Dot_Template
 	{
 		if (is_array($var)) 
 		{
-				$isset = true;
-				foreach ($var as $varname) {
-						$isset = $isset & isset($this->_varvals[$varname]);
-				}
-				return $isset > 0;
+			$isset = true;
+			foreach ($var as $varname) 
+			{
+				$isset = $isset & isset($this->_varvals[$varname]);
+			}
+			return $isset > 0;
 		} 
 		else 
 		{
@@ -269,7 +270,8 @@ class Dot_Template
 				return false;
 			}
 			$this->_file[$varname] = $this->_filename($filename);
-			if ($this->_file[$varname] === false) {
+			if ($this->_file[$varname] === false)
+			{
 					return false;
 			}
 		}
@@ -320,17 +322,17 @@ class Dot_Template
 
 		$str = $this->getVar($parent);
 		$reg = '/[ \t]*<!--\s+BEGIN '.$varname.'\s+-->\s*?\n?(\s*.*?\n?)'
-             . '\s*<!--\s+END '.$varname.'\s+-->\s*?\n?/sm';
-		preg_match_all($reg, $str, $m);
-		if (!isset($m[1][0]))
+			. '\s*<!--\s+END '.$varname.'\s+-->\s*?\n?/sm';
+		preg_match_all($reg, $str, $matches);
+		if (!isset($matches[1][0]))
 		{
 			$this->_halt('setBlock: unable to set block '.$varname);
 			return false;
 		}
 		$str = preg_replace($reg, '{' . $name . '}', $str);
-		if (isset($m[1][0])) 
+		if (isset($matches[1][0])) 
 		{
-			$this->setVar($varname, $m[1][0]);
+			$this->setVar($varname, $matches[1][0]);
 		}
 		$this->setVar($parent, $str);
 		return true;
@@ -906,7 +908,7 @@ class Dot_Template
 			while(list($k, $v) = each($varname))
 			{
 				if(is_int($k))
-				{					
+				{
 					$this->setVar($v, $value, $append);
 				}
 				elseif(is_string($k))
