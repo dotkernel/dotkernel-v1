@@ -23,7 +23,6 @@ class System extends Dot_Model
 	/**
 	 * Array with the recommended php.ini security related values
 	 *
-	 *
 	 * @var array
 	 */
 	private $_recommendedIniValues =  array(
@@ -65,6 +64,7 @@ class System extends Dot_Model
 	{
 		parent::__construct();
 	}
+	
 	/**
 	 * Get MySQL Version
 	 * @access public
@@ -76,6 +76,7 @@ class System extends Dot_Model
 							->from('', array('ve' => new Zend_Db_Expr('version()')));
 		return $this->db->fetchOne($select);
 	}
+	
 	/**
 	 * Get settings that are by default editable
 	 * @access public
@@ -89,6 +90,7 @@ class System extends Dot_Model
 							->where('isEditable = ? ', $isEditable);
 		return $this->db->fetchAll($select);
 	}
+	
 	/**
 	 * Update settings
 	 * @access public
@@ -102,6 +104,7 @@ class System extends Dot_Model
 			$this->db->update('setting', array('value' => $v), $this->db->quoteIdentifier('key').' = '.$this->db->quote($k));
 		}
 	}
+	
 	/**
 	 * Get GeoIp Version release
 	 * Return an array with keys "country" & "city"
@@ -134,6 +137,7 @@ class System extends Dot_Model
 
 		return $return;
 	}
+	
 	/**
 	 * Get Hostname
 	 * Return a string
@@ -142,16 +146,17 @@ class System extends Dot_Model
 	 */
 	public static function getSystemHostname()
 	{
-			if(version_compare(PHP_VERSION, '5.3.0', '>='))
-			{
-				$hostName = gethostname();
-			}
-			else
-			{
-				$hostName = php_uname('n');
-			}
-			return $hostName;
+		if(version_compare(PHP_VERSION, '5.3.0', '>='))
+		{
+			$hostName = gethostname();
+		}
+		else
+		{
+			$hostName = php_uname('n');
+		}
+		return $hostName;
 	}
+	
 	/**
 	 * Get information about APC
 	 * Returns an array with the following elements:
@@ -180,6 +185,7 @@ class System extends Dot_Model
 		$result["enabled"] = (function_exists('apc_cache_info') && (@apc_cache_info() !== FALSE));
 		return $result;
 	}
+	
 	/**
 	 * Get any warnings to display in the dashboard
 	 * Each array element returned is an array with two strings: type and description
@@ -190,10 +196,10 @@ class System extends Dot_Model
 	{
 		// warning "categories"
 		$warnings = array('Security Warning'=>array(),
-												'Debug Email' => array(),
-												'Delete Files'=>array(),
-												'Make Writable'=>array(), 
-												'Make Unwritable'=>array()
+							'Debug Email' => array(),
+							'Delete Files'=>array(),
+							'Make Writable'=>array(), 
+							'Make Unwritable'=>array()
 		);
 		
 		// check that the default admin user isn't enabled
@@ -279,6 +285,7 @@ class System extends Dot_Model
 		}
 		return $warnings;
 	}
+	
 	/**
 	 * Get a list of files in a directory
 	 * @access public
@@ -307,6 +314,7 @@ class System extends Dot_Model
 		}
 		return $result;
 	}
+	
 	/**
 	 * Get email transporter by field
 	 * @access public
@@ -323,6 +331,7 @@ class System extends Dot_Model
 		$result = $this->db->fetchRow($select);
 		return $result;
 	}	
+	
 	/**
 	 * Get email transporter list
 	 * @access public 
@@ -337,7 +346,7 @@ class System extends Dot_Model
 		$dotPaginator = new Dot_Paginator($select, $page, $this->settings->resultsPerPage);
 		return $dotPaginator->getData();
 	}
-
+	
 	/**
 	 * Activate/Inactivate email transporter
 	 * @access public
@@ -349,7 +358,7 @@ class System extends Dot_Model
 	{
 		$this->db->update('emailTransporter', array('isActive' => $isActive), 'id = ' . $id);
 	}
-
+	
 	/**
 	 * Delete email transporter
 	 * @access public
@@ -384,10 +393,12 @@ class System extends Dot_Model
 	{
 		$integerValidator = new Zend_Validate_Int();
 		$errors = array();
+		
 		if(! $integerValidator->isValid($data['port']))
 		{
 			array_push($errors, $this->option->errorMessage->invalidPort);
 		}
+		
 		if(! $integerValidator->isValid($data['capacity']))
 		{
 			array_push($errors, $this->option->errorMessage->invalidCapacity);
@@ -428,6 +439,7 @@ class System extends Dot_Model
 	 * Get current php ini values
 	 * 
 	 * This function is an alias to ini_get_all()
+	 * 
 	 * @param $environment [optional] - global by default
 	 * @return boolean|array()
 	 */
@@ -442,6 +454,7 @@ class System extends Dot_Model
 			default:
 				return FALSE;
 			// If called from within a function, the return() statement immediately ends execution of the current function
+			// so no breaks -- only returns
 			case 'local':
 			case 'global':
 				foreach($ini as $key => $value)
@@ -468,8 +481,9 @@ class System extends Dot_Model
 		$recommendedIniValues = $this->_recommendedIniValues;
 		// Current Values
 		$allIniValues = $this->_getPhpIniValues($scope);
-		// removing correct values
+		// removing correct values from current ini values
 		$currentIniValues = array_intersect_key($allIniValues, $recommendedIniValues);
+		// making sure we only have the needed values, not all of them
 		$recommendedIniValues = array_intersect_key($recommendedIniValues, $currentIniValues);
 		
 		foreach($currentIniValues as $key => $value)

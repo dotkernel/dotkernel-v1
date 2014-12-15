@@ -41,7 +41,6 @@ switch ($registry->requestAction)
 		$systemView->displaySettings('settings', $data);
 	break;
 	case 'settings-update':
-		// update settings value
 		$data = array();
 		$error = array();
 		if($_SERVER['REQUEST_METHOD'] === "POST")
@@ -49,7 +48,7 @@ switch ($registry->requestAction)
 			// changes were made to checkUserToken
 			// see: Dot_Auth::checkUserToken($userToken, $userType='admin')
 			// see: IndexController.php : $userToken
-			if( !Dot_Auth::checkUserToken($userToken) ) // if the admin is not logged redir to 
+			if( !Dot_Auth::checkUserToken($userToken) )
 			{
 				// remove the identity
 				$dotAuth = Dot_Auth::getInstance();
@@ -57,7 +56,7 @@ switch ($registry->requestAction)
 				// warn the user
 				$session->message['txt'] = $option->warningMessage->tokenExpired; 
 				$session->message['type'] = 'warning';
-				// log in 
+				// go to log in 
 				header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestController. '/login');
 				exit;
 			}
