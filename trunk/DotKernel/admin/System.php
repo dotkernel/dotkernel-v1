@@ -19,6 +19,44 @@
 */
 class System extends Dot_Model
 {
+	
+	/**
+	 * Array with the recommended php.ini security related values
+	 *
+	 *
+	 * @var array
+	 */
+	private $_recommendedIniValues =  array(
+					'allow_url_fopen' => 0,
+					'allow_url_include' => 0,
+					
+					'session.use_cookies' => 1,
+					'session.use_only_cookies' => 1,
+					'session.cookie_httponly' => 1,
+					'session.bug_compat_42' => 0,
+					'session.bug_compat_warn' => 0,
+					'session.use_trans_sid' => 0,
+					'session.cookie_secure' => 1,
+					'session.use_strict_mode' => 1,
+					
+					'display_errors' => 0,
+					'log_errors' => 1,
+					'expose_php' => 1,
+					'register_globals' => 1,
+					'magic_quotes_gpc' => 0,
+					'magic_quotes_runtime' => 0,
+					'safe_mode' => 0,
+					'register_long_arrays' => 0,
+					'display_startup_errors' => 0,
+					'error_reporting' => 0,
+					'upload_max_filesize' => '2M',
+					'post_max_size' => '8M',
+					'memory_limit' => '128M',
+					'asp_tags' => 0,
+					'xdebug.default_enable' => 0,
+					'xdebug.remote_enable' => 0
+	);
+	
 	/**
 	 * Constructor
 	 * @access public
@@ -384,5 +422,65 @@ class System extends Dot_Model
 	private function _checkDevEmails($invalidDevEmails = 'team@dotkernel.com')
 	{
 		return ($this->settings->devEmails == $invalidDevEmails);
+	}
+	
+	/**
+	 * Get current php ini values
+	 * 
+	 * This function is an alias to ini_get_all()
+	 * @param $environment [optional] - global by default
+	 * @return boolean|array()
+	 */
+	private function _getPhpIniValues($scope = 'global')
+	{
+		// global means the values from the php.ini file
+		// local means locally declared values (the ones set with ini_set($key,$val) ) 
+		$ini = ini_get_all();
+		$newArray = array();
+		switch($scope)
+		{
+			default:
+				return FALSE;
+			// If called from within a function, the return() statement immediately ends execution of the current function
+			case 'local':
+			case 'global':
+				foreach($ini as $key => $value)
+				{
+					$newArray[$key] = $value[$scope.'_value'];
+				}
+				return $newArray;
+		}
+	}
+	
+	/**
+	 * Get the Ini files with recommended correction
+	 * 
+	 * The default scope is local because DotKernel changes some of the 
+	 * ini vars, see /configs/application.ini
+	 * 
+	 * @param string $scope
+	 * @return multitype:|Ambigous array
+	 */
+	public function getIniValuesWithCorrection($scope = 'local')
+	{
+		$iniValues = array();
+		// Recommended Values
+		$recommendedIniValues = $this->_recommendedIniValues;
+		// Current Values
+		$allIniValues = $this->_getPhpIniValues($scope);
+		// removing correct values
+		$currentIniValues = array_intersect_key($allIniValues, $recommendedIniValues);
+		$recommendedIniValues = array_intersect_key($recommendedIniValues, $currentIniValues);
+		
+		foreach($currentIniValues as $key => $value)
+		{
+			// $value <=> $currentIniValues[$key]
+			if($recommendedIniValues[$key] != $currentIniValues[$key] )
+			{
+				$iniValues[$key]['recommended'] = $recommendedIniValues[$key];
+				$iniValues[$key]['current'] = $value ;
+			}
+		}
+		return $iniValues;
 	}
 }

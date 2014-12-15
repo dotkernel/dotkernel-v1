@@ -62,6 +62,28 @@
 							<td id="jqueryUiVersion"></td>
 						</tr>
 					</table>
+					<!-- BEGIN ini_value_list -->
+					<table class="medium_table no_border-top">
+						<tr>
+							<td width="250px" class="box_header" style="color:#555555;"> PHP Security Recommendations </td>
+							<td></td>
+						</tr>
+					</table>
+					<table class="medium_table no_border-top">
+						<tr>
+							<th width="150px"> Key </th>
+							<th> Value </th>
+							<th> Recommended Value</th>
+						</tr>
+						<!-- BEGIN ini_value  -->
+						<tr>
+							<td width="150px">{INI_KEY}</td>
+							<td>{CURRENT_VALUE}</td>
+							<td>{RECOMMENDED_VALUE}</td>
+						</tr>
+						<!-- END ini_value  -->
+					</table>
+					<!-- END ini_value_list -->
 				</div>
 			</div>
 		</td>
