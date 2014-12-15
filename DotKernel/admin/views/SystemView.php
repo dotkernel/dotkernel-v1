@@ -39,7 +39,7 @@ class System_View extends View
 	 * @param array $warnings
 	 * @return void
 	 */
-	public function dashboard($templateFile, $mysqlVersion, $apcInfo, $geoIpVersion, $warnings)
+	public function dashboard($templateFile, $mysqlVersion, $apcInfo, $geoIpVersion, $warnings, $iniValues)
 	{
 		$this->tpl->setFile('tpl_main', 'system/' . $templateFile . '.tpl');
 		// system overview
@@ -80,7 +80,23 @@ class System_View extends View
 				$this->tpl->parse('warning_item_block', '');
 			}
 		}
-
+		
+		// php.ini Values
+		$this->tpl->setBlock('tpl_main', 'ini_value_list', 'ini_value_list_block');
+		$this->tpl->setBlock('ini_value_list', 'ini_value', 'ini_value_block');
+		if(count($iniValues) >0 )
+		{
+			
+			foreach($iniValues as $key => $value)
+			{
+				$this->tpl->setVar('INI_KEY', $key);
+				$this->tpl->setVar('CURRENT_VALUE', $value['current']);
+				$this->tpl->setVar('RECOMMENDED_VALUE', $value['recommended']);
+				$this->tpl->parse('ini_value_block', 'ini_value', true);
+			}
+			$this->tpl->parse('ini_value_list_block', 'ini_value_list', false);
+		}
+		
 		
 		// GeoIP section
 		$this->tpl->setVar('GEOIP_COUNTRY_LOCAL', $geoIpVersion['local']);

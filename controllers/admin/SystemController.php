@@ -26,7 +26,9 @@ switch ($registry->requestAction)
 		$geoIpVersion = $systemModel->getGeoIpVersion();
 		$warnings = $systemModel->getWarnings(array());
 		$apcInfo = $systemModel->getAPCInfo();
-		$systemView->dashboard('dashboard', $mysqlVersion, $apcInfo, $geoIpVersion, $warnings);
+		//	Ini Values
+		$iniValues = $systemModel->getIniValuesWithCorrection();
+		$systemView->dashboard('dashboard', $mysqlVersion, $apcInfo, $geoIpVersion, $warnings, $iniValues);
 	break;
 	case 'settings':
 		// list settings values
@@ -61,7 +63,7 @@ switch ($registry->requestAction)
 			}
 			$systemModel->updateSettings($_POST);
 			header('Location: '.$registry->configuration->website->params->url. '/' . $registry->requestModule 
-			       . '/' . $registry->requestController. '/settings/update/done');
+				. '/' . $registry->requestController. '/settings/update/done');
 			exit;
 		}
 	break;
