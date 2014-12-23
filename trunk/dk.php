@@ -229,14 +229,14 @@ else
 	$test = false;
 }
 // check session
-if(extension_loaded('session'))
+if(extension_loaded('mcrypt'))
 {
-	$check['php_session'] = array('name' => 'session', 'status' => 'pass', 'value' => 'OK');
+	$check['php_mcrypt'] = array('name' => 'Mcrypt', 'status' => 'pass', 'value' => 'OK');
 }
 else
 {
-	$check['php_session'] = array('name' => 'session', 'status' => 'failed', 
-					'value' => 'DotKernel requires <a href="http://www.php.net/manual/en/book.session.php"> Session Handling</a>. ');
+	$check['php_mcrypt'] = array('name' => 'Mcrypt', 'status' => 'failed', 
+					'value' => 'DotKernel requires <a href="http://php.net/manual/en/book.mcrypt.php"> Mcrypt</a>. ');
 	$test = false;
 }
 // check SPL
