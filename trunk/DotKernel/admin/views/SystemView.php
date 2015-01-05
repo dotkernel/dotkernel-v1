@@ -84,15 +84,21 @@ class System_View extends View
 		// php.ini Values
 		$this->tpl->setBlock('tpl_main', 'ini_value_list', 'ini_value_list_block');
 		$this->tpl->setBlock('ini_value_list', 'ini_value', 'ini_value_block');
-		if(count($iniValues) >0 )
+		if(count($iniValues) > 0)
 		{
-			
 			foreach($iniValues as $key => $value)
 			{
 				$this->tpl->setVar('INI_KEY', $key);
 				$this->tpl->setVar('CURRENT_VALUE', $value['current']);
-				$this->tpl->setVar('RECOMMENDED_VALUE', $value['recommended']);
-				$this->tpl->setVar('EDITABLE', ($value['access']==6||$value['access']==7) ? 'checked' : '' );
+				$this->tpl->setVar('RECOMMENDED_VALUE', $value['recommended']); 
+				// 1 - PHP_INI_USER		Entry can be set in user scripts (like with ini_set()) or in the Windows registry. 
+				//						Since PHP 5.3, entry can be set in .user.ini
+				// 2 - PHP_INI_PERDIR	Entry can be set in php.ini, .htaccess, httpd.conf or .user.ini (since PHP 5.3)
+				// 4 - PHP_INI_SYSTEM	Entry can be set in php.ini or httpd.conf
+				// 6 - PHP_INI_PERDIR	PHP_INI_PERDIR may not be set using ini_set()
+				// 7 - PHP_INI_ALL		Entry can be set anywhere
+				// List with all directives: http://php.net/manual/en/ini.list.php
+				$this->tpl->setVar('EDITABLE', (in_array($value['access'], [1, 7]) ) ? 'checked' : '' );
 				$this->tpl->parse('ini_value_block', 'ini_value', true);
 			}
 			$this->tpl->parse('ini_value_list_block', 'ini_value_list', false);
