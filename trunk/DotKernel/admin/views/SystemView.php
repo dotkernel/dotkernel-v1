@@ -98,7 +98,7 @@ class System_View extends View
 				// 6 - PHP_INI_PERDIR	PHP_INI_PERDIR may not be set using ini_set()
 				// 7 - PHP_INI_ALL		Entry can be set anywhere
 				// List with all directives: http://php.net/manual/en/ini.list.php
-				$this->tpl->setVar('EDITABLE', (in_array($value['access'], [1, 7]) ) ? 'checked' : '' );
+				$this->tpl->setVar('EDITABLE', (in_array($value['access'], arrau(1, 7)) ) ? 'checked' : '' );
 				$this->tpl->parse('ini_value_block', 'ini_value', true);
 			}
 			$this->tpl->parse('ini_value_list_block', 'ini_value_list', false);
