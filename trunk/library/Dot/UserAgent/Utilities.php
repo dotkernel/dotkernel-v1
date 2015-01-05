@@ -74,7 +74,7 @@ class Dot_UserAgent_Utilities
 		$browser = $xml->name->type->toArray();
 		foreach ($browser as $key => $val)
 		{
-			if (stripos($userAgent,$val['uaBrowser']) !== FALSE)
+			if (stripos($userAgent,$val['uaBrowser']) !== false)
 			{
 				if('browser' == $return)
 				{
@@ -116,7 +116,7 @@ class Dot_UserAgent_Utilities
 					foreach ($osIdentify as $minor)
 					{
 						//check if there are different strings for detecting an operating system
-						if(strstr($minor['uaString'],'|') !== FALSE)
+						if(strstr($minor['uaString'],'|') !== false)
 						{
 							$uaStringArray = explode('|',$minor['uaString']);
 							foreach ($uaStringArray as $uaString)

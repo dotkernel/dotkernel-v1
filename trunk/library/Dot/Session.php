@@ -53,7 +53,7 @@ class Dot_Session
 				Zend_Session::setOptions($config->resources->session->toArray());
 				if(! isset($session->initialized))
 				{
-					$session->initialized = TRUE;
+					$session->initialized = true;
 					// use only session cookie and regenerate session in the same time 
 					Zend_Session::rememberMe($config->resources->session->remember_me_seconds);
 				}
@@ -62,7 +62,7 @@ class Dot_Session
 		}
 		else
 		{
-			Zend_Registry::set('session', NULL);
+			Zend_Registry::set('session', null);
 		}
 	}
 }

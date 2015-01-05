@@ -154,7 +154,7 @@ class Dot_Debug
 	 */
 	public function show ()
 	{
-		if ($this->config->settings->{$this->__module}->debugbar != TRUE)
+		if ($this->config->settings->{$this->__module}->debugbar != true)
 		{
 			// if we don't have to show the debugbar for this module, stop here
 			return;
@@ -317,7 +317,7 @@ class Dot_Debug
 	 */
 	public function showMemoryUsage ()
 	{
-		$memory_limit = $this->bsize(memory_get_usage(TRUE));
+		$memory_limit = $this->bsize(memory_get_usage(true));
 		$this->tpl->setVar('MEMORY_USAGE', $memory_limit);
 		$this->tpl->parse('memory_usage_block', 'memory_usage', true);
 	}
@@ -339,7 +339,7 @@ class Dot_Debug
 		{
 			$this->tpl->setVar('OPCACHE_INITIAL_DISPLAY', 'none');
 		}
-		if ( $status !== NULL)
+		if ( $status !== null)
 		{
 			$memory_free = $this->bsize($status['memory_usage']['free_memory']);
 			$memory_all = $this->bsize($status['memory_usage']['free_memory'] + $status['memory_usage']['used_memory'] + $status['memory_usage']['wasted_memory']);
@@ -350,7 +350,7 @@ class Dot_Debug
 			}
 			else
 			{
-				$startTime = NULL;
+				$startTime = null;
 			}
 			if (isset($status['opcache_statistics']['last_restart_time']))
 			{
@@ -358,7 +358,7 @@ class Dot_Debug
 			}
 			else
 			{
-				$restartTime = NULL;
+				$restartTime = null;
 			}
 			$this->tpl->setVar('CACHED_SCRIPTS', $status['opcache_statistics']['num_cached_scripts']);
 			$this->tpl->setVar('CACHED_KEYS', $status['opcache_statistics']['num_cached_keys']);

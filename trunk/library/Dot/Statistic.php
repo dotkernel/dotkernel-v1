@@ -48,6 +48,6 @@ class Dot_Statistic
 	public static function registerMobileDetails($visitId, $device)
 	{
 		Dot_Statistic_Visit::recordMobileVisit($visitId, $device);
-		return TRUE;
+		return true;
 	}
 }

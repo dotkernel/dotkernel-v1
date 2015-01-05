@@ -85,7 +85,7 @@ $pageTitle = 'Overwrite Me Please !';
  *
  * See Dot_Auth::checkUserToken()
  */
-$userToken = (isset($_POST['userToken'])) ? $_POST['userToken'] : NULL;
+$userToken = (isset($_POST['userToken'])) ? $_POST['userToken'] : null;
 
 /**
  * From this point , the control is taken by the Action specific controller

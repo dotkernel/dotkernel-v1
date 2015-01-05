@@ -560,7 +560,7 @@ class Dot_Template
 	 * @param string $target
 	 * @param mixed $varname
 	 * @param bool $append
-	 * @return bool FALSE
+	 * @return bool
 	 */
 	public function pparse($target, $varname, $append = false)
 	{
@@ -975,11 +975,11 @@ class Dot_Template
 		foreach ($this->getVars() as $var)
 		{
 			$a = strpos($var, '{'.strtoupper($token).'}');
-			if($a!== FALSE)
+			if($a!== false)
 			{
-				return TRUE;
+				return true;
 			}
 		}
-		return FALSE;
+		return false;
 	} 
 }

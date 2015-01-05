@@ -114,7 +114,7 @@ class Dot_Validate_Phone extends Dot_Validate
 		{
 			$this->_error = "'".$this->phone."'".' length is not between '.$this->_options['phoneLengthMin'].' and '.
 			$this->_options['phoneLengthMax'].' characters like in '.$this->_countryCode.' country';
-			return FALSE;
+			return false;
 		}
 		// internationalPrefix length is compared
 		$intPrefixLength = strlen($this->_options['internationalPrefix']);
@@ -123,7 +123,7 @@ class Dot_Validate_Phone extends Dot_Validate
 		{
 			$this->_error =  "'" . $this->phone . "'" . ' length is not correct like in ' . $this->_countryCode .
 			' country. Tip: check the international prefix !';
-			return FALSE;
+			return false;
 		}
 		$this->_area = substr($this->phone, $this->_options['areaPositionStart'] + $phoneLength - $this->_options['phoneLengthMin'],
 													 $this->_options['areaLength']);
@@ -145,13 +145,13 @@ class Dot_Validate_Phone extends Dot_Validate
 		}
 		if($conditionArea && $conditionPrefix)
 		{
-			return TRUE;
+			return true;
 		}
 		else
 		{
 			$this->_error =  "'" . $this->phone . "'" . ' area and prefix does not match for  like in ' .
 											 $this->_countryCode . ' country';
-			return FALSE;
+			return false;
 		}
 	}
 	/**

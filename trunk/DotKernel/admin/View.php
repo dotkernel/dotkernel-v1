@@ -250,7 +250,7 @@ class View extends Dot_Template
 		if ($page->current != 1)
 		{
 			$this->setVar('FIRST_LINK',$link."1");
-			$this->parse('first_row', 'first', TRUE);
+			$this->parse('first_row', 'first', true);
 		}
 		else
 		{
@@ -259,7 +259,7 @@ class View extends Dot_Template
 		if ($page->current != $page->last && $page->last > $page->current)
 		{
 			$this->setVar('LAST_LINK',$link.$page->last);
-			$this->parse('last_row', 'last', TRUE);
+			$this->parse('last_row', 'last', true);
 		}
 		else
 		{
@@ -272,14 +272,14 @@ class View extends Dot_Template
 			$this->parse('current_row','');
 			if($val == $page->current)
 			{
-				$this->parse('current_row','current_page', TRUE);
+				$this->parse('current_row','current_page', true);
 			}
 			else
 			{
 				$this->setVar('PAGE_LINK', $link.$val);
-				$this->parse('other_row','other_page', TRUE);
+				$this->parse('other_row','other_page', true);
 			}
-			$this->parse('pages_row', 'pages', TRUE);
+			$this->parse('pages_row', 'pages', true);
 		}
 		$this->parse('PAGINATION', 'page_file');
 	}
@@ -289,7 +289,7 @@ class View extends Dot_Template
 	 * @param bool $ajax [optional] - Using ajax, parse only the list content
 	 * @return void
 	 */
-	public function displayMessage($ajax = FALSE)
+	public function displayMessage($ajax = false)
 	{
 		$session = Zend_Registry::get('session');
 		if(isset($session->message))
@@ -310,11 +310,11 @@ class View extends Dot_Template
 				$this->parse('msg_array_row', '');
 				$this->setVar('MESSAGE_STRING', $session->message['txt']);
 			}
-			$ajax == TRUE ? 
+			$ajax == true ? 
 			$this->parse('AJAX_MESSAGE_BLOCK', 'tpl_msg'):
 			$this->parse('MESSAGE_BLOCK', 'tpl_msg');
 			unset($session->message);
-		}		
+		}
 	}
 	/**
 	 * Reset the Template root - from where the tpl files should be taken

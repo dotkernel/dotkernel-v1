@@ -211,7 +211,7 @@ switch ($registry->requestAction)
 	break;
 	case 'reset-password':
 		// start by considering there are no errors, and we enable the form 
-		$disabled = FALSE;
+		$disabled = false;
 		
 		// not sure if the form was submitted or not yet , either from Request or from POST
 		$userId = array_key_exists('id', $registry->request) ? $registry->request['id'] : ((isset($_POST['userId'])) ? $_POST['userId'] : '');
@@ -219,9 +219,9 @@ switch ($registry->requestAction)
 		
 		// get user info based on ID , and see if is valid
 		$userInfo = $userModel->getUserInfo($userId);
-		if(FALSE == $userInfo)
+		if(false == $userInfo)
 		{
-			$disabled = TRUE;
+			$disabled = true;
 		}
 		else
 		{
@@ -229,17 +229,17 @@ switch ($registry->requestAction)
 			$expectedToken = Dot_Auth::generateUserToken($userInfo['password']);
 			if($expectedToken != $userToken)
 			{
-				$disabled = TRUE;
+				$disabled = true;
 			}
 		}
 		// we have errors, display the message and disable the form
-		if(TRUE == $disabled)
+		if(true == $disabled)
 		{
 			$session->message['txt'] = $registry->option->errorMessage->wrongResetPasswordUrl;
 			$session->message['type'] = 'error';
 		}
 		// IF the form was submmited and there are NO errors 
-		if ($_SERVER['REQUEST_METHOD'] === 'POST' && FALSE == $disabled)
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' && false == $disabled)
 		{
 			// POST values that will be validated
 			$values['password'] =	array('password' => (isset($_POST['password']) ? $_POST['password'] : ''),

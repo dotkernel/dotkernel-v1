@@ -187,8 +187,8 @@ class System extends Dot_Model
 			$apcVersion = phpversion('apc');
 			$result["name"] = 'APC';
 		}		
-		$result["version"] = ($apcVersion===FALSE) ? "" : $apcVersion;
-		$result["enabled"] = (function_exists('apc_cache_info') && (@apc_cache_info() !== FALSE));
+		$result["version"] = ($apcVersion===false) ? "" : $apcVersion;
+		$result["enabled"] = (function_exists('apc_cache_info') && (@apc_cache_info() !== false));
 		return $result;
 	}
 	
@@ -458,7 +458,7 @@ class System extends Dot_Model
 		switch($scope)
 		{
 			default:
-				return FALSE;
+				return false;
 			// If called from within a function, the return() statement immediately ends execution of the current function
 			// so no breaks -- only returns
 			case 'local':

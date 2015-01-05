@@ -61,10 +61,10 @@ class User_View extends View
 	 * @param string $userToken
 	 * @return void
 	 */
-	public function resetPasswordForm($templateFile, $disabled = TRUE, $userId, $userToken)
+	public function resetPasswordForm($templateFile, $disabled = true, $userId, $userToken)
 	{
 		$this->tpl->setFile('tpl_main', 'user/' . $templateFile . '.tpl');
-		if(FALSE == $disabled)
+		if(false == $disabled)
 		{
 			$this->tpl->setVar('USERTOKEN', $userToken);
 			$this->tpl->setVar('USERID', $userId);

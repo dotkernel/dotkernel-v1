@@ -36,7 +36,7 @@ class Dot_OpCache
 	 */
 	public function configuration()
 	{
-		$config = NULL;
+		$config = null;
 		if (function_exists('opcache_get_configuration'))
 		{
 			$config = opcache_get_configuration();
@@ -52,7 +52,7 @@ class Dot_OpCache
 	 */
 	public function status()
 	{
-		$status = NULL;
+		$status = null;
 		if (function_exists('opcache_get_status'))
 		{
 			$status = opcache_get_status();
@@ -87,7 +87,7 @@ class Dot_OpCache
 		$data = array();
 		$status = $this->status();
 		// pie chart data
-		if ( $status !== NULL)
+		if ( $status !== null)
 		{
 			$data[] = array('label' => 'Free ' . $this->bsize($status['memory_usage']['free_memory']),
 							'data' => $status['memory_usage']['free_memory']);
@@ -111,7 +111,7 @@ class Dot_OpCache
 		// pie chart data
 		$data = array();
 		$status = $this->status();
-		if ( $status !== NULL)
+		if ( $status !== null)
 		{
 			$data[] = array('label' => 'Free ' . ($status['opcache_statistics']['max_cached_keys'] - $status['opcache_statistics']['num_cached_keys']),
 							'data' => $status['opcache_statistics']['max_cached_keys'] - $status['opcache_statistics']['num_cached_keys']);
@@ -134,7 +134,7 @@ class Dot_OpCache
 	{
 		$data = array();
 		$status = $this->status();
-		if ( $status !== NULL)
+		if ( $status !== null)
 		{
 			$data[] = array('label' => 'Hits ' . $status['opcache_statistics']['hits'],
 							'data' => $status['opcache_statistics']['hits']);

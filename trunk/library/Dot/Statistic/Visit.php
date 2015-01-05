@@ -109,6 +109,6 @@ class Dot_Statistic_Visit extends Dot_Statistic
 								'isWindowsMobile' => isset($device->isWindowsMobile) ? (int)$device->isWindowsMobile : 0
 							);
 		$db->insert('statisticVisitMobile', $visitMobile);
-		return TRUE;
+		return true;
 	}
 }

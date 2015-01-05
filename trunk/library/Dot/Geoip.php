@@ -44,7 +44,7 @@ class Dot_Geoip
 		{
 			return $country;
 		}
-		if(extension_loaded('geoip') == FALSE)
+		if(extension_loaded('geoip') == false)
 		{
 			// GeoIp extension is not active
 			$api = new Dot_Geoip_Country();
@@ -63,8 +63,8 @@ class Dot_Geoip
 			//if GeoIP.dat file exists
 			$countryCode= geoip_country_code_by_name($ip);
 			$countryName = geoip_country_name_by_name($ip);
-			$country[0] = $countryCode != FALSE  ? $countryCode : 'unknown';
-			$country[1] = $countryName != FALSE  ? $countryName : 'NA';
+			$country[0] = $countryCode != false  ? $countryCode : 'unknown';
+			$country[1] = $countryName != false  ? $countryName : 'NA';
 		}
 		if(function_exists('geoip_db_avail') && geoip_db_avail(GEOIP_CITY_EDITION_REV0) && 'unknown' == $country[0])
 		{
@@ -74,8 +74,8 @@ class Dot_Geoip
 			{
 				$countryCode = $record['country_code'];
 				$countryName = $record['country_name'];
-				$country[0] = $countryCode != FALSE  ? $countryCode : 'unknown';
-				$country[1] = $countryName != FALSE  ? $countryName : 'NA';
+				$country[0] = $countryCode != false  ? $countryCode : 'unknown';
+				$country[1] = $countryName != false  ? $countryName : 'NA';
 			}
 		}
 		if('unknown' == $country[0])
