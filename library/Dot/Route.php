@@ -137,7 +137,7 @@ class Dot_Route
 	 * @param array $link [optional]
 	 * @return string 
 	 */
-	public static function createCanonicalUrl($link = NULL)
+	public static function createCanonicalUrl($link = null)
 	{
 		$registry = Zend_Registry::getInstance();
 		$route = array(

@@ -33,7 +33,7 @@ class Api_Model_OpCache extends Dot_Model
 	public function opCacheStatus()
 	{
 		$status = $this->opCache->status();
-		if ($status !== NULL)
+		if ($status !== null)
 		{
 			if (isset($status['opcache_statistics']['start_time']))
 			{
@@ -41,7 +41,7 @@ class Api_Model_OpCache extends Dot_Model
 			}
 			else
 			{
-				$startTime = NULL;
+				$startTime = null;
 			}
 			if (isset($status['opcache_statistics']['last_restart_time']))
 			{
@@ -49,7 +49,7 @@ class Api_Model_OpCache extends Dot_Model
 			}
 			else
 			{
-				$restartTime = NULL;
+				$restartTime = null;
 			}
 			
 			$data = array();

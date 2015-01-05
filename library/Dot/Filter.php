@@ -84,11 +84,11 @@ class Dot_Filter
 		}
 		if(empty($this->_error))
 		{
-			return TRUE;
+			return true;
 		}
 		else
 		{
-			return FALSE;
+			return false;
 		}
 	}
 	/**

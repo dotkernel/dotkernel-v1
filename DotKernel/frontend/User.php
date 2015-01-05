@@ -28,7 +28,7 @@ class User extends Dot_Model_User
 	 * Constructor
 	 * @access public
 	 */
-	public function __construct($userAgent = NULL, $httpReferer=NULL)
+	public function __construct($userAgent = null, $httpReferer=null)
 	{
 		parent::__construct();
 		// if no userAgent is given on function call mark it as empty - if the userAgent is empty keep it empty

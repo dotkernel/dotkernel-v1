@@ -23,7 +23,7 @@ switch ($registry->requestAction)
 {
 	case 'login':
 		$session = Zend_Registry::get("session");
-		if ($session->admin !== NULL)
+		if ($session->admin !== null)
 		{
 			header('location: '.$registry->configuration->website->params->url.'/admin');
 			exit();

@@ -72,7 +72,7 @@ switch ($registry->requestAction)
 	break;
 	case 'apc-info':
 		// display APC or APCu
-		$apcu = NULL;
+		$apcu = null;
 		if(phpversion('apcu')) 
 		{
 			$apcu = 'u';

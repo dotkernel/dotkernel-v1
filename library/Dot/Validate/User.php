@@ -180,11 +180,11 @@ class Dot_Validate_User extends Dot_Validate
 		}
 		if(empty($this->_error))
 		{
-			return TRUE;
+			return true;
 		}
 		else
 		{
-			return FALSE;
+			return false;
 		}
 	}
 	/**
@@ -224,7 +224,7 @@ class Dot_Validate_User extends Dot_Validate
 		}
 		else
 		{
-			$uniqueCondition = (FALSE != $exists);
+			$uniqueCondition = (false != $exists);
 		}
 		if($uniqueCondition)
 		{

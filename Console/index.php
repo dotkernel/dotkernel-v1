@@ -54,7 +54,7 @@ catch (Zend_Console_Getopt_Exception $e)
 	exit;
 }
 
-if ($opts->getOption('environment') === NULL)
+if ($opts->getOption('environment') === null)
 {
 	// environment variable not set, falling back to production
 	define('APPLICATION_ENV', 'production');
@@ -91,7 +91,7 @@ Dot_Settings::setPhpSettings($config->phpSettings->toArray());
 $registry->action = $opts->getOption('action');
 $registry->arguments = $opts->getRemainingArgs();
 
-if ($registry->action === NULL)
+if ($registry->action === null)
 {
 	echo $opts->getUsageMessage();
 	exit;

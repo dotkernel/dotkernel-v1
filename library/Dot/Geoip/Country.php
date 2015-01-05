@@ -561,7 +561,7 @@ class Dot_Geoip_Country extends Dot_Geoip
 		$seekOrg = $this->_geoipSeekCountry($ipnum);
 		if ($seekOrg == $this->_databaseSegments)
 		{
-			return NULL;
+			return null;
 		}
 		$recordPointer = $seekOrg + (2 * $this->_recordLength - 1) * $this->_databaseSegments;
 		if ($this->_flags & GEOIP_SHARED_MEMORY) {
@@ -586,7 +586,7 @@ class Dot_Geoip_Country extends Dot_Geoip
 	 */
 	public function geoipOrgByAddr ($addr)
 	{
-	  if ($addr == NULL)
+	  if ($addr == null)
 	  {
 	    return 0;
 	  }
@@ -652,7 +652,7 @@ class Dot_Geoip_Country extends Dot_Geoip
 	 */
 	public function geoipRegionByAddr ($addr)
 	{
-		if ($addr == NULL)
+		if ($addr == null)
 		{
 			return 0;
 		}

@@ -98,7 +98,7 @@ else
 }
 // check if Zend Framework is installed, if is in include_path and its version
 // get open_basedir and include path locations. If open basedir is not set, then
-$openBasedirArray = (ini_get('open_basedir')) ? explode(PATH_SEPARATOR, ini_get('open_basedir')) : NULL;
+$openBasedirArray = (ini_get('open_basedir')) ? explode(PATH_SEPARATOR, ini_get('open_basedir')) : null;
 $includePathArray = explode(PATH_SEPARATOR, get_include_path());
 
 // if open_basedir is not set, we do not need to calculate the intersection

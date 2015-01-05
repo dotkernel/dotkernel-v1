@@ -175,7 +175,7 @@ class Dot_Acl
 		$privillege = $this->requestAction;
 		if(!$this->acl->has($resource))
 		{
-			return FALSE;
+			return false;
 		}
 		else
 		{

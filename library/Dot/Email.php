@@ -74,22 +74,22 @@ class Dot_Email extends Zend_Mail
 		if('1' == $this->settings->smtpActive)
 		{
 			$partial = @explode('@', $this->_to[0]);
-			if(stristr($this->settings->smtpAddresses, $partial['1']) !== FALSE)
+			if(stristr($this->settings->smtpAddresses, $partial['1']) !== false)
 			{
 				$tr = new Dot_Email_Smtp();
 				if(empty($tr->smtpData))
 				{
 					// we can't use SMTP in this case 
-					$tr = new Dot_Email_Sendmail($this->_from);	
+					$tr = new Dot_Email_Sendmail($this->_from);
 				}
 			}
 		}
-		$this->setDefaultTransport($tr->getTransport());		
+		$this->setDefaultTransport($tr->getTransport());
 		//try to send the email
 		try
 		{
 			parent::send();
-			return TRUE;
+			return true;
 		}
 		catch (Zend_Exception $e)
 		{
@@ -114,7 +114,7 @@ class Dot_Email extends Zend_Mail
 			{
 				mail($mailTo, $mailSubject, $mailContent, $mailHeader);
 			}
-			return FALSE;
+			return false;
 		}
 	}
 }

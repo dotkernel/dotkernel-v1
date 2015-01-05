@@ -35,7 +35,7 @@ class Dot_Auth
 	 */
 	protected function __construct()
 	{
-		$this->_identity = NULL;
+		$this->_identity = null;
 		$this->acl = new Dot_Acl();
 		$this->setRoles($this->acl->getRoles());
 	}
@@ -132,7 +132,7 @@ class Dot_Auth
 			header('Location: ' . $wantUrl);
 			exit;
 		}
-		return TRUE;
+		return true;
 	}
 
 	/**
@@ -149,10 +149,10 @@ class Dot_Auth
 			{
 				$session->$who->role = $who;
 				$this->_identity = $session->$who;
-				return TRUE;
+				return true;
 			}
 		}
-		return FALSE;
+		return false;
 	}
 
 	/**
@@ -178,7 +178,7 @@ class Dot_Auth
 		if(isset($session->$who) && !empty($session->$who))
 		{
 			unset($session->$who);
-			$this->_identity = NULL;
+			$this->_identity = null;
 			unset($session->wantUrl);
 		}
 	}
@@ -201,11 +201,11 @@ class Dot_Auth
 		//We have no such user? Hurry Up and return FALSE 
 		if(!$userInfo)
 		{
-			return FALSE;
+			return false;
 		}
 		
 		$auth = $this->_authenticate($userInfo, $values['password']);
-		if(TRUE == $auth)
+		if(true == $auth)
 		{
 			if ($storeInSession)
 			{
@@ -214,9 +214,9 @@ class Dot_Auth
 				// all data from table row as stdClass Object
 				$session->$who = $userInfo;
 			}
-			return TRUE;
+			return true;
 		}
-		return FALSE;
+		return false;
 	}
 	
 	/**
@@ -248,7 +248,7 @@ class Dot_Auth
 		// No results, we don't have that username
 		if(!is_array($resultArray))
 		{
-			return FALSE;
+			return false;
 		}
 		
 		// Backward compatibility with Zend_Auth class, getResultRowObject method need to return an object instead of array
