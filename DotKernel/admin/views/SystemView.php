@@ -92,6 +92,7 @@ class System_View extends View
 				$this->tpl->setVar('INI_KEY', $key);
 				$this->tpl->setVar('CURRENT_VALUE', $value['current']);
 				$this->tpl->setVar('RECOMMENDED_VALUE', $value['recommended']);
+				$this->tpl->setVar('EDITABLE', ($value['access']==6||$value['access']==7) ? 'checked' : '' );
 				$this->tpl->parse('ini_value_block', 'ini_value', true);
 			}
 			$this->tpl->parse('ini_value_list_block', 'ini_value_list', false);

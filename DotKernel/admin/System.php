@@ -57,6 +57,12 @@ class System extends Dot_Model
 	);
 	
 	/**
+	 * Ini Values
+	 * @var array
+	 */
+	private $_ini;
+	
+	/**
 	 * Constructor
 	 * @access public
 	 */
@@ -447,7 +453,7 @@ class System extends Dot_Model
 	{
 		// global means the values from the php.ini file
 		// local means locally declared values (the ones set with ini_set($key,$val) ) 
-		$ini = ini_get_all();
+		$this->_ini = ini_get_all();
 		$newArray = array();
 		switch($scope)
 		{
@@ -457,7 +463,7 @@ class System extends Dot_Model
 			// so no breaks -- only returns
 			case 'local':
 			case 'global':
-				foreach($ini as $key => $value)
+				foreach($this->_ini as $key => $value)
 				{
 					$newArray[$key] = $value[$scope.'_value'];
 				}
@@ -485,7 +491,6 @@ class System extends Dot_Model
 		$currentIniValues = array_intersect_key($allIniValues, $recommendedIniValues);
 		// making sure we only have the needed values, not all of them
 		$recommendedIniValues = array_intersect_key($recommendedIniValues, $currentIniValues);
-		
 		foreach($currentIniValues as $key => $value)
 		{
 			// $value <=> $currentIniValues[$key]
@@ -493,6 +498,7 @@ class System extends Dot_Model
 			{
 				$iniValues[$key]['recommended'] = $recommendedIniValues[$key];
 				$iniValues[$key]['current'] = $value ;
+				$iniValues[$key]['access'] = $this->_ini[$key]['access'];
 			}
 		}
 		return $iniValues;

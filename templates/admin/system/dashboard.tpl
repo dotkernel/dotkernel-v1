@@ -5,7 +5,11 @@
 		$("#jqueryUiVersion").text($.ui.version);
 	});
 </script>
-
+<style>
+.security_check a, .security_check a:hover{
+	text-decoration: none;
+}
+</style>
 <table class="dashboard_table">
 	<tr>
 		<td class="sys_td">
@@ -69,17 +73,19 @@
 							<td></td>
 						</tr>
 					</table>
-					<table class="medium_table no_border-top">
+					<table class="medium_table no_border-top security_check">
 						<tr>
-							<th width="150px"> Key </th>
-							<th> Value </th>
-							<th> Recommended Value</th>
+							<th width="150px"><a title="Key as in php.ini">Key</a></th>
+							<th><a title="Current Value">Value</a></th>
+							<th><a title="Recommended Value">Recommended Value</a></th>
+							<th><a title="Editable from application.ini file">Editable</a></th>
 						</tr>
 						<!-- BEGIN ini_value  -->
 						<tr>
 							<td width="150px">{INI_KEY}</td>
 							<td>{CURRENT_VALUE}</td>
 							<td>{RECOMMENDED_VALUE}</td>
+							<td><input type="checkbox" {EDITABLE} disabled/></td>
 						</tr>
 						<!-- END ini_value  -->
 					</table>
