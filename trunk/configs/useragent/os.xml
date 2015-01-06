@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
  <os>
- 	<type> 		
+ 	<type>
 			<name type="mobile">
 				<os>Android</os>
 				<identify>
@@ -116,7 +116,6 @@
 					<osName>Windows 8</osName>
 					<uaString>Windows NT 6.2</uaString>
 				</identify>
-				
 				<identify>
 					<osName>Windows 8.1</osName>
 					<uaString>Windows NT 6.3</uaString>
