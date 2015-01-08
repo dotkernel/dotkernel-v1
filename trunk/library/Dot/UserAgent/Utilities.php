@@ -70,8 +70,20 @@ class Dot_UserAgent_Utilities
 	 */
 	public static function getBrowserIcon($userAgent, $return = 'icon')
 	{
-		$xml = new Zend_Config_Xml(CONFIGURATION_PATH.'/useragent/browser.xml');
-		$browser = $xml->name->type->toArray();
+		$registry = Zend_Registry::getInstance();
+		$cache = $registry->cache;
+		$cacheKey = 'browser_xml';
+		$value = $cache->load($cacheKey);
+		if(false !== $value )
+		{
+			$browser = json_decode($value, true);
+		}
+		else 
+		{
+			$xml = new Zend_Config_Xml(CONFIGURATION_PATH.'/useragent/browser.xml');
+			$browser = $xml->name->type->toArray();
+			$cache->save(json_encode($browser), $cacheKey);
+		}
 		foreach ($browser as $key => $val)
 		{
 			if (stripos($userAgent,$val['uaBrowser']) !== false)
@@ -95,8 +107,21 @@ class Dot_UserAgent_Utilities
 	 */
 	public static function getOsIcon($userAgent)
 	{
-		$xml = new Zend_Config_Xml(CONFIGURATION_PATH.'/useragent/os.xml');
-		$os = $xml->type->toArray();
+		$registry = Zend_Registry::getInstance();
+		$cache = $registry->cache;
+		$cacheKey = 'os_xml';
+		$value = $cache->load($cacheKey);
+		if(false != $value )
+		{
+			$os = json_decode($value, true);
+		}
+		else 
+		{
+			$xml = new Zend_Config_Xml(CONFIGURATION_PATH.'/useragent/os.xml');
+			$os = $xml->type->toArray();
+			$cache->save(json_encode($os), $cacheKey);
+		}
+		
 		foreach ($os as $major)
 		{
 			foreach ($major as $osArray)
