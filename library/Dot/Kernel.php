@@ -58,11 +58,30 @@ class Dot_Kernel
 		//Load configuration settings from application.ini file and store it in registry
 		$config = new Zend_Config_Ini(CONFIGURATION_PATH.'/application.ini', APPLICATION_ENV);
 		$registry->configuration = $config;
-
+		
+		// Preparing the cache options
+		$frontendOptions = array(
+						'lifetime' => $registry->configuration->cache->lifetime
+		);
+		// making sure it's lowercase
+		$backendName = strtolower($registry->configuration->cache->factory);
+		$backendOptions = array();
+		//
+		if(null !== $registry->configuration->cache->$backendName)
+		{
+			foreach($registry->configuration->cache->$backendName as $key => $value)
+			{
+				$backendOptions[$key] = $value;
+			}
+		}
+		// Load the cache into the registry
+		$cache = Zend_Cache::factory('Core', $backendName, $frontendOptions, $backendOptions);
+		$registry->cache = $cache;
+		
 		//Load routes(modules, controllers, actions) settings from router.xml file and store it in registry
 		$router = new Zend_Config_Xml(CONFIGURATION_PATH.'/router.xml');
-		$registry->router = $router;
 		
+		$registry->router = $router;
 		// Create  connection to database, as singleton , and store it in registry
 		$db = Zend_Db::factory('Pdo_Mysql', $config->database->params->toArray());
 		$registry->database = $db;
@@ -70,7 +89,7 @@ class Dot_Kernel
 		//Load specific configuration settings from database, and store it in registry
 		$settings = Dot_Settings::getSettings();
 		$registry->settings = $settings;
-
+		
 		//Set PHP configuration settings from application.ini file
 		Dot_Settings::setPhpSettings($config->phpSettings->toArray());
 
