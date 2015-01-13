@@ -430,6 +430,17 @@ thead tr {
 	/*padding-bottom: 13px !important;*/
 }
 
+.security_recommendations { margin-top: 30px; }
+.security_check td a, .security_check td p { word-wrap: break-word; }
+.security_check a, .security_check a:hover{
+	text-decoration: none;
+	font-weight: bold;
+	cursor: pointer;
+}
+.system_overview .medium_table.security_check tr td { padding-top: 5px; }
+.system_overview .medium_table.security_check tr:first-child td { padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #f4f4f4; }
+.security_check tr td.rightalign { text-align: right; }
+
 .no_padding td {
 	padding: 0px;
 }

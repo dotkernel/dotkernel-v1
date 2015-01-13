@@ -123,6 +123,10 @@ table.medium_table td:first-child, .medium_table td:first-child {
 	background-color: #FFFFFF;
 	font-weight: bold;
 }
+.security_check a, .security_check a:hover {
+	color: #52A9FF;
+}
+
 /* End Medium table */
 
 .chartTable {

@@ -83,6 +83,9 @@ input, select, textarea {
 #mainMenu li ul li a:hover, #mainMenu li ul li a.selected:hover, #breadcrumbs li a:hover {
 	color: #9DA1A5 !important;
 }
+.security_check a, .security_check a:hover {
+	color: #448BCE;
+}
 /*** End Menu ***/
 
 /*** Tables ***/

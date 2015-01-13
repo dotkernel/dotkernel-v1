@@ -5,11 +5,6 @@
 		$("#jqueryUiVersion").text($.ui.version);
 	});
 </script>
-<style>
-.security_check a, .security_check a:hover{
-	text-decoration: none;
-}
-</style>
 <table class="dashboard_table">
 	<tr>
 		<td class="sys_td">
@@ -66,26 +61,27 @@
 							<td id="jqueryUiVersion"></td>
 						</tr>
 					</table>
+				</div>
+			</div>
+			<div class="system_overview security_recommendations">
+				<div class="box-shadow">
+					<div class="box_header">
+						PHP Security Recommendations
+					</div>
 					<!-- BEGIN ini_value_list -->
-					<table class="medium_table no_border-top">
+					<table class="medium_table security_check">
 						<tr>
-							<td width="250px" class="box_header" style="color:#555555;"> PHP Security Recommendations </td>
-							<td></td>
-						</tr>
-					</table>
-					<table class="medium_table no_border-top security_check">
-						<tr>
-							<th width="150px"><a title="Key as in php.ini">Key</a></th>
-							<th><a title="Current Value">Value</a></th>
-							<th><a title="Recommended Value">Recommended Value</a></th>
-							<th><a title="Editable from application.ini file">Editable</a></th>
+							<td><a title="Key as in php.ini">Key</a></td>
+							<td class="rightalign"><a title="Current Value">Value</a></td>
+							<td class="rightalign"><a title="Recommended Value">Rcmd val</a></td>
+							<td class="rightalign" width="60px"><a title="Editable from application.ini file">Editable</a></td>
 						</tr>
 						<!-- BEGIN ini_value  -->
 						<tr>
-							<td width="150px">{INI_KEY}</td>
-							<td>{CURRENT_VALUE}</td>
-							<td>{RECOMMENDED_VALUE}</td>
-							<td><input type="checkbox" {EDITABLE} disabled/></td>
+							<td><p>{INI_KEY}</p></td>
+							<td class="rightalign"><p>{CURRENT_VALUE}</p></td>
+							<td class="rightalign"><p>{RECOMMENDED_VALUE}</p></td>
+							<td class="rightalign" width="60px"><p>{EDITABLE}</p></td>
 						</tr>
 						<!-- END ini_value  -->
 					</table>
