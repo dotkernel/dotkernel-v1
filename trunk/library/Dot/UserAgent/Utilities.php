@@ -76,13 +76,13 @@ class Dot_UserAgent_Utilities
 		$value = $cache->load($cacheKey);
 		if(false !== $value )
 		{
-			$browser = json_decode($value, true);
+			$browser = $value;
 		}
 		else 
 		{
 			$xml = new Zend_Config_Xml(CONFIGURATION_PATH.'/useragent/browser.xml');
 			$browser = $xml->name->type->toArray();
-			$cache->save(json_encode($browser), $cacheKey);
+			$cache->save($value, $cacheKey);
 		}
 		foreach ($browser as $key => $val)
 		{
@@ -113,13 +113,13 @@ class Dot_UserAgent_Utilities
 		$value = $cache->load($cacheKey);
 		if(false != $value )
 		{
-			$os = json_decode($value, true);
+			$os = $value;
 		}
 		else 
 		{
 			$xml = new Zend_Config_Xml(CONFIGURATION_PATH.'/useragent/os.xml');
 			$os = $xml->type->toArray();
-			$cache->save(json_encode($os), $cacheKey);
+			$cache->save($os, $cacheKey);
 		}
 		
 		foreach ($os as $major)

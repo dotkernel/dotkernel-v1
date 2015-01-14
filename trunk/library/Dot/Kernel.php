@@ -60,8 +60,14 @@ class Dot_Kernel
 		$registry->configuration = $config;
 		
 		// Preparing the cache options
+		// we will use Zend's automatic serialization because it's faster
+		//  normal serialization		zend serialization
+		// float(0.006709098815918)		float(0.002418041229248)
 		$frontendOptions = array(
-						'lifetime' => $registry->configuration->cache->lifetime
+			'lifetime' => $registry->configuration->cache->lifetime,
+			'caching' => $registry->configuration->cache->enable,
+			'cache_id_prefix' => $registry->configuration->cache->namespace,
+			'automatic_serialization' => true 
 		);
 		// making sure it's lowercase
 		$backendName = strtolower($registry->configuration->cache->factory);
@@ -79,9 +85,18 @@ class Dot_Kernel
 		$registry->cache = $cache;
 		
 		//Load routes(modules, controllers, actions) settings from router.xml file and store it in registry
-		$router = new Zend_Config_Xml(CONFIGURATION_PATH.'/router.xml');
-		
+		$value = $cache->load('router');
+		if($value != false)
+		{
+			$router = $value;
+		}
+		else
+		{
+			$router = new Zend_Config_Xml(CONFIGURATION_PATH.'/router.xml');
+			$cache->save($router, 'router');
+		}
 		$registry->router = $router;
+		
 		// Create  connection to database, as singleton , and store it in registry
 		$db = Zend_Db::factory('Pdo_Mysql', $config->database->params->toArray());
 		$registry->database = $db;
