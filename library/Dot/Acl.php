@@ -29,8 +29,19 @@ class Dot_Acl
 	 */
 	public function __construct()
 	{
-		$router = new Zend_Config_Xml(CONFIGURATION_PATH.'/router.xml');
-		$role = new Zend_Config_Xml(CONFIGURATION_PATH.'/acl/role.xml');
+		
+		$router = Zend_Registry::get('router');
+		$cache = Zend_Registry::get('cache');
+		$value = $cache->load('acl_role');
+		if($value != false)
+		{
+			$role = $value;
+		}
+		else 
+		{
+			$role = new Zend_Config_Xml(CONFIGURATION_PATH.'/acl/role.xml');
+			$cache->save($role, 'acl_role');
+		}
 
 		$this->requestModule = Zend_Registry::get('requestModule');
 		$this->requestController = Zend_Registry::get('requestController');
@@ -114,8 +125,8 @@ class Dot_Acl
 		{
 			if(!$this->acl->has($resource))
 			{
-            	$this->acl->add(new Zend_Acl_Resource($resource));
-        	}
+				$this->acl->add(new Zend_Acl_Resource($resource));
+			}
 		}
 		// prepare permission and add them to ACL
 		foreach ($this->_permission->toArray() as $permission => $value)
@@ -139,8 +150,8 @@ class Dot_Acl
 					{
 						if('all' == $action)
 						{
-	                        $action = null;
-	                    }
+							$action = null;
+						}
 						if('allow' == $permission)
 						{
 							 $this->acl->allow($role, $controller, $action);
