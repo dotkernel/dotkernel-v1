@@ -71,10 +71,10 @@
 					<!-- BEGIN ini_value_list -->
 					<table class="medium_table security_check">
 						<tr>
-							<td><a title="Key as in php.ini">Key</a></td>
-							<td class="rightalign"><a title="Current Value">Value</a></td>
-							<td class="rightalign"><a title="Recommended Value">Rcmd val</a></td>
-							<td class="rightalign" width="60px"><a title="Editable from application.ini file">Editable</a></td>
+							<td><p title="Key as in php.ini">Key</p></td>
+							<td class="rightalign"><p title="Current Value"><strong>Value</strong></p></td>
+							<td width="60px" class="rightalign"><p title="Recommended Value"><strong>Recommended</strong></p></td>
+							<td class="rightalign" width="60px"><p title="Editable from application.ini file"><strong>Editable</strong></p></td>
 						</tr>
 						<!-- BEGIN ini_value  -->
 						<tr>
