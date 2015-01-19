@@ -205,7 +205,8 @@ class System extends Dot_Model
 							'Debug Email' => array(),
 							'Delete Files'=>array(),
 							'Make Writable'=>array(), 
-							'Make Unwritable'=>array()
+							'Make Unwritable'=>array(),
+							'Cache Test Failed'=>array()
 		);
 		
 		// check that the default admin user isn't enabled
@@ -289,6 +290,15 @@ class System extends Dot_Model
 										as folders.permission[] exception in application.ini</em>';
 			}
 		}
+		$cache = Zend_Registry::get('cache');
+		$cache->save('test', 'test');
+		$value = $cache->load('test');
+		if($value !== 'test')
+		{
+			$warnings['Cache Test Failed'][] = 'Cache is not working or disabled';
+			$warnings['Cache Test Failed'][] = 'Check cache settings or if cache module is supported';
+		}
+		
 		return $warnings;
 	}
 	
