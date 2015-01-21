@@ -127,33 +127,46 @@ class Dot_Settings
 	 * @return Zend_Config
 	 */
 	public static function getOptionVariables($requestModule,$requestController)
-	{	$option = array();
-		if('default' == $requestController)
-		{ 
-			$dirOption = CONFIGURATION_PATH .'/';
-			$fileOption = 'dots.xml';
-		}
-		else
-		{			
-			$dirOption = CONFIGURATION_PATH.'/dots/';
-			$fileOption = strtolower($requestController).'.xml';
-		}
-		$validFile = new Zend_Validate_File_Exists();
-		$validFile->setDirectory($dirOption);		
-		if($validFile->isValid($fileOption))
+	{
+		$option = array();
+		$cache = Zend_Registry::get('cache');
+		$value = $cache->load('option_'.$requestModule.'_'.$requestController);
+		if($value != false)
 		{
-			$xml = new Zend_Config_Xml($dirOption.$fileOption, 'dots');
-			$arrayOption = $xml->variable->toArray();
-			foreach ($arrayOption as $v)
+			$option = $value;
+		}
+		else 
+		{
+			if('default' == $requestController)
+			{ 
+				$dirOption = CONFIGURATION_PATH .'/';
+				$fileOption = 'dots.xml';
+			}
+			else
+			{			
+				$dirOption = CONFIGURATION_PATH.'/dots/';
+				$fileOption = strtolower($requestController).'.xml';
+			}
+			$validFile = new Zend_Validate_File_Exists();
+			$validFile->setDirectory($dirOption);
+			if($validFile->isValid($fileOption))
 			{
-				if(in_array($v['option'], array('global', $requestModule)))
-				{			
-					$option = array_merge_recursive($option,$v);
+				$xml = new Zend_Config_Xml($dirOption.$fileOption, 'dots');
+				$arrayOption = $xml->variable->toArray();
+				foreach ($arrayOption as $v)
+				{
+					if(in_array($v['option'], array('global', $requestModule)))
+					{			
+						$option = array_merge_recursive($option,$v);
+					}
 				}
+				$value = $cache->save($option, 'option_'.$requestModule.'_'.$requestController);
 			}
 		}
+
 		// overwritte the default options from dots.xml with the one of the current dots
 		$option = new Zend_Config($option, true);
+		
 		if (Zend_Registry::isRegistered('option')) 
 		{
 			$optionRegistered = Zend_Registry::get('option');
