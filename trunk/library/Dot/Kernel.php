@@ -66,7 +66,7 @@ class Dot_Kernel
 		$frontendOptions = array(
 			'lifetime' => $registry->configuration->cache->lifetime,
 			'caching' => $registry->configuration->cache->enable,
-			'cache_id_prefix' => $registry->configuration->cache->namespace,
+			'cache_id_prefix' => $registry->configuration->cache->namespace.'_',
 			'automatic_serialization' => true 
 		);
 		// making sure it's lowercase
@@ -110,8 +110,6 @@ class Dot_Kernel
 
 		// Extract the route from the URI
 		Dot_Route::setRoute();
-
-		$seo = new Zend_Config_Xml(CONFIGURATION_PATH.'/dots/seo.xml');
 		
 		// initialize seo options
 		$registry->seo = Dot_Route::getOption();
