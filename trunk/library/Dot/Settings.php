@@ -130,7 +130,8 @@ class Dot_Settings
 	{
 		$option = array();
 		$cache = Zend_Registry::get('cache');
-		$value = $cache->load('option_'.$requestModule.'_'.$requestController);
+		$cacheKey = 'option_'.$requestModule.'_'.$requestController;
+		$value = $cache->load($cache);
 		if($value != false)
 		{
 			$option = $value;
@@ -160,7 +161,7 @@ class Dot_Settings
 						$option = array_merge_recursive($option,$v);
 					}
 				}
-				$value = $cache->save($option, 'option_'.$requestModule.'_'.$requestController);
+				$value = $cache->save($option, $cacheKey);
 			}
 		}
 
@@ -173,6 +174,6 @@ class Dot_Settings
 			$optionRegistered->merge($option);
 			return $optionRegistered;
 		}
-		return $option;		
+		return $option;
 	} 
 }
