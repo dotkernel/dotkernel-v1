@@ -131,7 +131,7 @@ class Dot_Settings
 		$option = array();
 		$cache = Zend_Registry::get('cache');
 		$cacheKey = 'option_'.$requestModule.'_'.$requestController;
-		$value = $cache->load($cache);
+		$value = $cache->load($cacheKey);
 		if($value != false)
 		{
 			$option = $value;
