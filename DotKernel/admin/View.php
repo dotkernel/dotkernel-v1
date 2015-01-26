@@ -106,17 +106,33 @@ class View extends Dot_Template
 	public function setViewMenu()
 	{
 		$dotAuth = Dot_Auth::getInstance();
+		$cache = Zend_Registry::get('cache');
 		if($dotAuth->hasIdentity('admin'))
 		{
-			$menu_xml = new Zend_Config_Xml(CONFIGURATION_PATH . '/' . $this->requestModule . '/' . 'menu.xml', 'config');
-			$menus = $menu_xml->menu;
-			// if we have only one menu, Zend_Config_Xml return a simple array, not an array with key 0(zero)
-			if(is_null($menus->{0}))
+			// cached menu 
+			$value = $cache->load($this->requestModule.'_menu');
+			if($value != false)
 			{
-				$menus = new Zend_Config(array(0=>$menu_xml->menu));						
+				$menus = $value;
 			}
-			$menus = $menus->toArray();
-
+			else 
+			{
+				$menu_xml = new Zend_Config_Xml(CONFIGURATION_PATH . '/' . $this->requestModule . '/' . 'menu.xml', 'config');
+				$menus = $menu_xml->menu;
+				// if we have only one menu, Zend_Config_Xml return a simple array, not an array with key 0(zero)
+				if(is_null($menus->{0}))
+				{
+					$menus = new Zend_Config(array(0=>$menu_xml->menu));
+				}
+				
+				$menus = $menus->toArray();
+				// only cache menu if it's not empty
+				if(count($menus)>0)
+				{
+					$cache->save($menus,$this->requestModule.'_menu') ;
+				}
+			}
+			
 			foreach ($menus as $menu)
 			{
 				// check wether the text following the ">" in the breadcrumb has been set
