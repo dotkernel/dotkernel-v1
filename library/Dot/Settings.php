@@ -113,7 +113,7 @@ class Dot_Settings
 			// VIEW class
 			if(file_exists(DOTKERNEL_PATH . '/' . $modulePath . 'views/' . $value . 'View.php'))
 			{
-				require_once(DOTKERNEL_PATH . '/' . $modulePath . 'views/' . $value . 'View.php');		
+				require_once(DOTKERNEL_PATH . '/' . $modulePath . 'views/' . $value . 'View.php');
 			} 
 			else die ('The file: ' . DOTKERNEL_PATH . '/' . $modulePath . 'views/' . $value . 'View.php' . ' does NOT exist');  
 		}
@@ -157,23 +157,27 @@ class Dot_Settings
 				foreach ($arrayOption as $v)
 				{
 					if(in_array($v['option'], array('global', $requestModule)))
-					{			
-						$option = array_merge_recursive($option,$v);
+					{
+						// first write global, then replace the values with the ones from $requestModule
+						$option = array_replace_recursive($option,$v);
 					}
 				}
-				$value = $cache->save($option, $cacheKey);
+				
 			}
+			// overwritte the default options from dots.xml with the one of the current dots
+			$option = new Zend_Config($option, true);
+			
+			if (Zend_Registry::isRegistered('option'))
+			{
+				$optionRegistered = Zend_Registry::get('option');
+				$optionRegistered->merge($option);
+				$value = $cache->save($option, $cacheKey);
+				return $optionRegistered;
+			}
+			$value = $cache->save($option, $cacheKey);
+			return $option;
 		}
 
-		// overwritte the default options from dots.xml with the one of the current dots
-		$option = new Zend_Config($option, true);
-		
-		if (Zend_Registry::isRegistered('option')) 
-		{
-			$optionRegistered = Zend_Registry::get('option');
-			$optionRegistered->merge($option);
-			return $optionRegistered;
-		}
-		return $option;
+
 	} 
 }
