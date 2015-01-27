@@ -127,7 +127,7 @@ class Dot_Kernel
 	 * @access public
 	 * @static
 	 * @param string $ip
-	 * @return mixt [FALSE | 'private' | 'public']
+	 * @return mixt [false | 'private' | 'public']
 	 */
 	public static function validIp($ip)
 	{
