@@ -101,7 +101,7 @@ class User_View extends View
 	public function loginsUser($templateFile, $list, $page, $browser, $loginDate, $sortField, $orderBy)
 	{
 		$dotGeoip = new Dot_Geoip();
-		$geoIpWorking = TRUE;
+		$geoIpWorking = true;
 		$this->tpl->setFile('tpl_main', 'user/' . $templateFile . '.tpl');
 		$this->tpl->setBlock('tpl_main', 'browser', 'browser_row');
 		
@@ -150,9 +150,9 @@ class User_View extends View
 		foreach ($list['data'] as $k => $v)
 		{
 			$country = $dotGeoip->getCountryByIp($v['ip']);
-			if($country['response'] != 'OK' && $geoIpWorking === TRUE)
+			if($country['response'] != 'OK' && $geoIpWorking === true)
 			{
-				$geoIpWorking = FALSE;
+				$geoIpWorking = false;
 				$this->session->message['txt'] = $country['response'];
 				$this->session->message['type'] = 'warning';
 			}

@@ -107,7 +107,7 @@ class Admin_View extends View
 	public function loginsUser($templateFile, $list, $page)
 	{
 		$dotGeoip = new Dot_Geoip();
-		$geoIpWorking = TRUE;
+		$geoIpWorking = true;
 		$this->tpl->setFile('tpl_main', 'admin/' . $templateFile . '.tpl');
 		$this->tpl->setBlock('tpl_main', 'list', 'list_block');
 		$this->tpl->paginator($list['pages']);
@@ -115,9 +115,9 @@ class Admin_View extends View
 		foreach ($list['data'] as $k => $v)
 		{
 			$country = $dotGeoip->getCountryByIp($v['ip']);
-			if($country['response'] != 'OK' && $geoIpWorking === TRUE)
+			if($country['response'] != 'OK' && $geoIpWorking === true)
 			{
-				$geoIpWorking = FALSE;
+				$geoIpWorking = false;
 				$this->session->message['txt'] = $country['response'];
 				$this->session->message['type'] = 'warning';
 			}
