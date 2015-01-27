@@ -104,8 +104,8 @@ class User_View extends View
 		$geoIpWorking = TRUE;
 		$this->tpl->setFile('tpl_main', 'user/' . $templateFile . '.tpl');
 		$this->tpl->setBlock('tpl_main', 'browser', 'browser_row');
-		$xml = new Zend_Config_Xml(CONFIGURATION_PATH.'/useragent/browser.xml');
-		$browserArray = $xml->name->type->toArray();
+		
+		$browserArray = Dot_UserAgent_Utilities::getBrowserArray();
 		foreach ($browserArray as $key => $val)
 		{
 			$this->tpl->setVar('BROWSERNAME', ucfirst($val['uaBrowser']));
