@@ -73,7 +73,7 @@ class Dot_Settings
 	public static function loadControllerFiles($requestModule)
 	{
 		$router = Zend_Registry::get('router');
-		$modules = $router->controllers->toArray();		
+		$modules = $router->controllers->toArray();
 		/**
 		 *  if we are in frontend , we have an empty variable for $requestModule
 		 *  Also, fix with $modulePath for modules path other then frontend
@@ -132,9 +132,11 @@ class Dot_Settings
 		$cache = Zend_Registry::get('cache');
 		$cacheKey = 'option_'.$requestModule.'_'.$requestController;
 		$value = $cache->load($cacheKey);
+
 		if($value != false)
 		{
 			$option = $value;
+			return $option;
 		}
 		else 
 		{
@@ -164,9 +166,9 @@ class Dot_Settings
 				}
 				
 			}
+
 			// overwritte the default options from dots.xml with the one of the current dots
 			$option = new Zend_Config($option, true);
-			
 			if (Zend_Registry::isRegistered('option'))
 			{
 				$optionRegistered = Zend_Registry::get('option');
@@ -177,7 +179,5 @@ class Dot_Settings
 			$value = $cache->save($option, $cacheKey);
 			return $option;
 		}
-
-
-	} 
+	}
 }
