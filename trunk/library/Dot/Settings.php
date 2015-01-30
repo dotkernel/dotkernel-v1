@@ -161,7 +161,7 @@ class Dot_Settings
 					if(in_array($v['option'], array('global', $requestModule)))
 					{
 						// first write global, then replace the values with the ones from $requestModule
-						$option = array_merge_recursive($option,$v);
+						$option = array_replace_recursive($option,$v);
 					}
 				}
 				
