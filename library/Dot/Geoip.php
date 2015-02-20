@@ -66,18 +66,7 @@ class Dot_Geoip
 			$country[0] = $countryCode != false  ? $countryCode : 'unknown';
 			$country[1] = $countryName != false  ? $countryName : 'NA';
 		}
-		if(function_exists('geoip_db_avail') && geoip_db_avail(GEOIP_CITY_EDITION_REV0) && 'unknown' == $country[0])
-		{
-			//if GeoIPCity.dat file exists
-			$record = geoip_record_by_name($ip);
-			if(!empty($record))
-			{
-				$countryCode = $record['country_code'];
-				$countryName = $record['country_name'];
-				$country[0] = $countryCode != false  ? $countryCode : 'unknown';
-				$country[1] = $countryName != false  ? $countryName : 'NA';
-			}
-		}
+
 		if('unknown' == $country[0])
 		{
 			// GeoIp extension is active, but .dat files are missing

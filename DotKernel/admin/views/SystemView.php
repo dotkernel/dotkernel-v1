@@ -111,7 +111,6 @@ class System_View extends View
 		$this->tpl->setBlock('tpl_main', 'is_geoip', 'is_geoip_row');
 		if(function_exists('geoip_database_info'))
 		{
-			$this->tpl->setVar('GEOIP_CITY_VERSION', $geoIpVersion['city']);
 			$this->tpl->setVar('GEOIP_COUNTRY_VERSION', $geoIpVersion['country']);
 			$this->tpl->parse('is_geoip_row', 'is_geoip', true);
 		}

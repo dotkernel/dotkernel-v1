@@ -42,10 +42,6 @@
 						</tr>
 						<!-- BEGIN is_geoip -->
 						<tr>
-							<td>GEOIP CITY</td>
-							<td>{GEOIP_CITY_VERSION}</td>
-						</tr>
-						<tr>
 							<td>GEOIP COUNTRY</td>
 							<td>{GEOIP_COUNTRY_VERSION}</td>
 						</tr>

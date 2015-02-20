@@ -160,11 +160,6 @@ class System extends Dot_Model
 				$info = explode(" ",geoip_database_info(GEOIP_COUNTRY_EDITION));
 				$return['country']  = $info[0].' '.Dot_Kernel::TimeFormat($info[1]);
 			}
-			if(geoip_db_avail(GEOIP_CITY_EDITION_REV0))
-			{
-				$info = explode(" ",geoip_database_info(GEOIP_CITY_EDITION_REV0));
-				$return['city'] = $info[0].' '.Dot_Kernel::TimeFormat($info[1]);
-			}
 		}
 
 		return $return;
