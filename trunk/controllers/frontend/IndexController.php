@@ -34,8 +34,9 @@ if(Dot_UserAgent_Utilities::isMobile(Dot_Request::getUserAgent()))
 		
 		//redirect to mobile controller , only if the session is not set. 
 		//Otherwise will trap the user in mobile controller
-		if( 1 || $wurflConf->redirect)
+		if( isset($registry->configuration->settings->mobile->redirect) && $registry->configuration->settings->mobile->redirect == true )
 		{
+			
 			header('location: '.$registry->configuration->website->params->url.'/mobile');
 			exit;
 		}
