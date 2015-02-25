@@ -59,33 +59,11 @@ class Dot_Kernel
 		$config = new Zend_Config_Ini(CONFIGURATION_PATH.'/application.ini', APPLICATION_ENV);
 		$registry->configuration = $config;
 		
-		// Preparing the cache options
-		// we will use Zend's automatic serialization because it's faster
-		//  normal serialization		zend serialization
-		// float(0.006709098815918)		float(0.002418041229248)
-		$frontendOptions = array(
-			'lifetime' => $registry->configuration->cache->lifetime,
-			'caching' => $registry->configuration->cache->enable,
-			'cache_id_prefix' => $registry->configuration->cache->namespace.'_',
-			'automatic_serialization' => true 
-		);
-		// making sure it's lowercase
-		$backendName = strtolower($registry->configuration->cache->factory);
-		$backendOptions = array();
-		//
-		if(null !== $registry->configuration->cache->$backendName)
-		{
-			foreach($registry->configuration->cache->$backendName as $key => $value)
-			{
-				$backendOptions[$key] = $value;
-			}
-		}
-		// Load the cache into the registry
-		$cache = Zend_Cache::factory('Core', $backendName, $frontendOptions, $backendOptions);
-		$registry->cache = $cache;
+		//start the cache
+		Dot_Cache::loadCache();
 		
 		//Load routes(modules, controllers, actions) settings from router.xml file and store it in registry
-		$value = $cache->load('router');
+		$value = Dot_Cache::load('router');
 		if($value != false)
 		{
 			$router = $value;
@@ -93,7 +71,7 @@ class Dot_Kernel
 		else
 		{
 			$router = new Zend_Config_Xml(CONFIGURATION_PATH.'/router.xml');
-			$cache->save($router, 'router');
+			Dot_Cache::save($router, 'router');
 		}
 		$registry->router = $router;
 		
