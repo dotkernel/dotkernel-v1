@@ -129,9 +129,8 @@ class Dot_Settings
 	public static function getOptionVariables($requestModule,$requestController)
 	{
 		$option = array();
-		$cache = Zend_Registry::get('cache');
 		$cacheKey = 'option_'.$requestModule.'_'.$requestController;
-		$value = $cache->load($cacheKey);
+		$value = Dot_Cache::load($cacheKey);
 
 		if($value != false)
 		{
@@ -173,10 +172,10 @@ class Dot_Settings
 			{
 				$optionRegistered = Zend_Registry::get('option');
 				$optionRegistered->merge($option);
-				$value = $cache->save($optionRegistered, $cacheKey);
+				$value = Dot_Cache::save($optionRegistered, $cacheKey);
 				return $optionRegistered;
 			}
-			$value = $cache->save($option, $cacheKey);
+			$value = Dot_Cache::save($option, $cacheKey);
 			return $option;
 		}
 	}

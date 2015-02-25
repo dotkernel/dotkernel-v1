@@ -84,9 +84,9 @@ class Dot_UserAgent_Utilities
 			return self::$_browserList;
 		}
 		$registry = Zend_Registry::getInstance();
-		$cache = $registry->cache;
+		
 		$cacheKey = 'browser_xml';
-		$value = $cache->load($cacheKey);
+		$value = Dot_Cache::load($cacheKey);
 		if(false !== $value)
 		{
 			$browser = $value;
@@ -96,7 +96,7 @@ class Dot_UserAgent_Utilities
 		{
 			$xml = new Zend_Config_Xml(CONFIGURATION_PATH . '/useragent/browser.xml');
 			$browser = $xml->name->type->toArray();
-			$cache->save($value, $cacheKey);
+			Dot_Cache::save($value, $cacheKey);
 			self::$_browserList = $browser;
 		}
 		return $browser;
@@ -114,9 +114,9 @@ class Dot_UserAgent_Utilities
 			return self::$_osList;
 		}
 		$registry = Zend_Registry::getInstance();
-		$cache = $registry->cache;
+		
 		$cacheKey = 'os_xml';
-		$value = $cache->load($cacheKey);
+		$value = Dot_Cache::load($cacheKey);
 		if(false != $value )
 		{
 			$os = $value;
@@ -126,7 +126,7 @@ class Dot_UserAgent_Utilities
 			$xml = new Zend_Config_Xml(CONFIGURATION_PATH.'/useragent/os.xml');
 			$os = $xml->type->toArray();
 			self::$_osList = $os;
-			$cache->save($os, $cacheKey);
+			Dot_Cache::save($os, $cacheKey);
 		}
 		return $os;
 	}

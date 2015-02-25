@@ -106,11 +106,10 @@ class View extends Dot_Template
 	public function setViewMenu()
 	{
 		$dotAuth = Dot_Auth::getInstance();
-		$cache = Zend_Registry::get('cache');
 		if($dotAuth->hasIdentity('admin'))
 		{
 			// cached menu 
-			$value = $cache->load($this->requestModule.'_menu');
+			$value = Dot_Cache::load($this->requestModule.'_menu');
 			if($value != false)
 			{
 				$menus = $value;
@@ -129,7 +128,7 @@ class View extends Dot_Template
 				// only cache menu if it's not empty
 				if(count($menus)>0)
 				{
-					$cache->save($menus,$this->requestModule.'_menu') ;
+					Dot_Cache::save($menus,$this->requestModule.'_menu') ;
 				}
 			}
 			

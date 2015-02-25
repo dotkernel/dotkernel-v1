@@ -31,8 +31,7 @@ class Dot_Acl
 	{
 		
 		$router = Zend_Registry::get('router');
-		$cache = Zend_Registry::get('cache');
-		$value = $cache->load('acl_role');
+		$value = Dot_Cache::load('acl_role');
 		if($value != false)
 		{
 			$role = $value;
@@ -40,7 +39,7 @@ class Dot_Acl
 		else 
 		{
 			$role = new Zend_Config_Xml(CONFIGURATION_PATH.'/acl/role.xml');
-			$cache->save($role, 'acl_role');
+			Dot_Cache::save($role, 'acl_role');
 		}
 
 		$this->requestModule = Zend_Registry::get('requestModule');

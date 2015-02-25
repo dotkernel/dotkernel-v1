@@ -311,13 +311,13 @@ class System extends Dot_Model
 										as folders.permission[] exception in application.ini</em>';
 			}
 		}
-		$cache = Zend_Registry::get('cache');
-		$cache->save('test', 'test');
-		$value = $cache->load('test');
-		if($value !== 'test')
+		
+		if(Dot_Cache::testCache() == false )
 		{
 			$warnings['Cache Test Failed'][] = 'Cache is not working or disabled';
 			$warnings['Cache Test Failed'][] = 'Check cache settings or if cache module is supported';
+			$warnings['Cache Test Failed'][] = ''.
+				'More info: <a href="http://www.dotkernel.com/dotkernel/caching-in-dotkernel-using-zend-framework/"> Caching in DotKernel</a>';
 		}
 		
 		return $warnings;
