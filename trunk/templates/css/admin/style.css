@@ -354,6 +354,16 @@ a#dialogButton {
 	text-align: left;
 	font-size: 12px;
 }
+.message_info a, 
+.message_error a, 
+.message_warning a {
+	color: #561010;
+}
+.message_info a:hover, 
+.message_error a:hover, 
+.message_warning a:hover {
+	color: #FFFFFF;
+}
 /*** END MESSAGES ***/
 
 /*** Tables ***/
