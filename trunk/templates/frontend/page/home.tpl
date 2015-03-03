@@ -45,7 +45,7 @@
 	<strong>Mobile: </strong><a href="{SITE_URL}/mobile/ ">Mobile</a><br/> 
 	<strong>Backend: </strong><a href="{SITE_URL}/admin/ ">Admin </a><br/> 
 	<strong>RSS: </strong><a href="{SITE_URL}/rss/ ">RSS </a><br/>
-	<strong>Api: </strong>Example: <a href="{SITE_URL}/api/index.php?action=version&key=XXXXXDKXXXXX ">Return DotKernel version</a><br/> 
+	<strong>Api: </strong>Example: <a href="{SITE_URL}/Api/index.php?action=version&key=XXXXXDKXXXXX ">Return DotKernel version</a><br/> 
 	<strong>Console: </strong>Call this only from command line<br/> 
 	<p>
 		Also the above controllers are <strong>reserved words</strong> so you cannot have an action called
