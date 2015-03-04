@@ -11,17 +11,6 @@
  * @author     DotKernel Team <team@dotkernel.com>
  */
 
-if (!isset($registry->action))
-{
-	header('501 Not Implemented',true, 501);
-	$data = array();
-	$data[] = array('result' => 'error');
-	$data[] = array('response' => "Action doesn't exist");
-	$jsonString = Zend_Json::encode($data);
-	echo $jsonString;
-	exit;
-}
-
 switch ($registry->action)
 {
 	case 'version':
@@ -38,10 +27,12 @@ switch ($registry->action)
 	break;
 
 	default:
+		header('501 Not Implemented',true, 501);
 		$data = array();
 		$data[] = array('result' => 'error');
 		$data[] = array('response' => "Action doesn't exist");
 		$jsonString = Zend_Json::encode($data);
 		echo $jsonString;
+		exit;
 	break;
 }
