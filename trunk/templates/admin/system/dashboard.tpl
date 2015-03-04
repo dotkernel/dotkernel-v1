@@ -37,12 +37,12 @@
 					</table>
 					<table class="medium_table no_border-top">
 						<tr>
-							<td width="150px">GEOIP COUNTRY LOCAL</td>
+							<td width="150px">GEOIP 1 COUNTRY LOCAL</td>
 							<td>{GEOIP_COUNTRY_LOCAL}</td>
 						</tr>
 						<!-- BEGIN is_geoip -->
 						<tr>
-							<td>GEOIP COUNTRY</td>
+							<td>GEOIP 1 COUNTRY SERVER</td>
 							<td>{GEOIP_COUNTRY_VERSION}</td>
 						</tr>
 						<!-- END is_geoip -->
