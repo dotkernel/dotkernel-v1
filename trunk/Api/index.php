@@ -90,7 +90,9 @@ else
 	$ttl = 3600;
 }
 
-$cacheRateKey = $registry->configuration->cache->namespace. '_'. $registry->configuration->api->params->prefix .'_' .$timeKey ; 
+$cacheRateKey = $registry->configuration->cache->namespace. '_'. $registry->configuration->api->params->prefix 
+				.'_'.$registry->arguments['key'] .$timeKey ; 
+
 // using apcu directly
 // for more info about the caching layer see    http://www.dotkernel.com/tag/dotkernel-caching/
 $rate = (int)(apc_fetch($cacheRateKey));
@@ -101,8 +103,6 @@ if($rate > $rateLimit)
 	exit;
 }
 apc_store($cacheRateKey,1+$rate, $ttl);
-
-#if(apc_fetch($registry->configuration->cache->namespace))
 
 // Create  connection to database, as singleton , and store it in registry
 $db = Zend_Db::factory('Pdo_Mysql', $config->database->params->toArray());
