@@ -91,7 +91,7 @@ else
 }
 
 $cacheRateKey = $registry->configuration->cache->namespace. '_'. $registry->configuration->api->params->prefix 
-				.'_'.$registry->arguments['key'] .$timeKey ; 
+				.'_'.$registry->arguments['key'] .'_'.$timeKey ; 
 
 // using apcu directly
 // for more info about the caching layer see    http://www.dotkernel.com/tag/dotkernel-caching/
