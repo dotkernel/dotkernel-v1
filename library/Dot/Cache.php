@@ -71,7 +71,6 @@ class Dot_Cache
 	 */
 	public static function loadCache()
 	{
-		
 		if(!self::$_isLoaded)
 		{
 			self::_loadCache();
@@ -96,7 +95,7 @@ class Dot_Cache
 	{
 		if(self::$_isLoaded)
 		{
-			self::$_cache->save($data, $key);
+			self::$_cache->save($data, self::processKey($key));
 			return true;
 		}
 		return false;
@@ -111,7 +110,7 @@ class Dot_Cache
 	{
 		if(self::$_isLoaded)
 		{
-			return self::$_cache->load($key);
+			return self::$_cache->load(self::processKey($key));
 		}
 		return false;
 	}
@@ -138,7 +137,7 @@ class Dot_Cache
 		{
 			return false;
 		}
-		self::$_cache->remove($key);
+		self::$_cache->remove(self::processKey($key));
 		return true;
 	}
 	
@@ -156,7 +155,8 @@ class Dot_Cache
 		{
 			return false;
 		}
-		self::$_cache->save($testValue, $testKey);
+		$testKey =  self::processKey($testKey);
+		self::$_cache->save($testValue,$testKey);
 		if(self::$_cache->load($testKey) == $testValue)
 		{
 			return true;
