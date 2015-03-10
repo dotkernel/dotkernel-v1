@@ -75,6 +75,28 @@ class Dot_Kernel
 		}
 		$registry->router = $router;
 		
+		
+		$value = Dot_Cache::load('plugin_configuration');
+		if($value != false)
+		{
+			$pluginConfig = $value;
+		}
+		else
+		{
+			$pluginConfig = new Zend_Config_Ini(CONFIGURATION_PATH.'/plugins.ini', APPLICATION_ENV);
+			// only save the settings if plugin_config caching is enabled
+			if($config->cache->cache_plugin_config)
+			{
+				Dot_Cache::save($pluginConfig, 'plugin_configuration');
+			}
+		}
+		$registry->pluginConfiguration = $pluginConfig;
+		
+		//Load configuration settings from application.ini file and store it in registry
+		$config = new Zend_Config_Ini(CONFIGURATION_PATH.'/application.ini', APPLICATION_ENV);
+		$registry->configuration = $config;
+		
+		
 		// Create  connection to database, as singleton , and store it in registry
 		$db = Zend_Db::factory('Pdo_Mysql', $config->database->params->toArray());
 		$registry->database = $db;
