@@ -710,10 +710,17 @@ a.sort_down {
 /*** PHP INFO ***/
 
 .phpinfo table.list_table {
+	margin-top: 10px;
 	border-collapse: collapse;
 }
 .phpinfo table.list_table td {
 	padding: 10px !important;
+}
+.phpinfo table.list_table td img {
+	float: right;
+}
+.phpinfo table.list_table td h1 {
+	margin-top: 10px;
 }
 
 .center {
