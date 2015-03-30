@@ -158,7 +158,7 @@ class System extends Dot_Model
 			if(geoip_db_avail(GEOIP_COUNTRY_EDITION))
 			{
 				$info = explode(" ",geoip_database_info(GEOIP_COUNTRY_EDITION));
-				$return['country']  = $info[0] . ' ' . Dot_Kernel::TimeFormat($info[1]);
+				$return['country']  = $info[0].' '.Dot_Kernel::TimeFormat($info[1]);
 			}
 		}
 
@@ -227,7 +227,8 @@ class System extends Dot_Model
 							'Delete Files'=>array(),
 							'Make Writable'=>array(), 
 							'Make Unwritable'=>array(),
-							'Cache Test Failed'=>array()
+							'Cache Test Failed'=>array(),
+							'Plugin Check' => array()
 		);
 		
 		// check that the default admin user isn't enabled
@@ -316,8 +317,25 @@ class System extends Dot_Model
 		{
 			$warnings['Cache Test Failed'][] = 'Cache is not working or disabled';
 			$warnings['Cache Test Failed'][] = 'Check cache settings or if cache module is supported';
-			$warnings['Cache Test Failed'][] = 'More info: <a href="http://www.dotkernel.com/dotkernel/caching-in-dotkernel-using-zend-framework/" target="_blank">
-																						 Caching in DotKernel</a>';
+			$warnings['Cache Test Failed'][] = ''.
+				'More info: <a href="http://www.dotkernel.com/dotkernel/caching-in-dotkernel-using-zend-framework/"> Caching in DotKernel</a>';
+		}
+		
+		// plugin check
+		$pluginHandler = Plugin_Loader::getInstance();
+		$pluginData = $pluginHandler->getAllPlugins();
+		foreach($pluginData as $plugin)
+		{
+			// check if the class is missing
+			if( ! $pluginHandler->pluginExists($plugin['vendor'], $plugin['pluginName']))
+			{
+				$warnings['Plugin Check'][] = 'Plugin '. $plugin['pluginName'] . ' (by ' .$plugin['vendor']. ') is missing';
+			}
+			// check if the plugin is enabled
+			if( ! $plugin['enabled'])
+			{
+				$warnings['Plugin Check'][] = 'Plugin '. $plugin['pluginName'] . ' (by ' .$plugin['vendor']. ') is not enabled';
+			}
 		}
 		
 		return $warnings;
