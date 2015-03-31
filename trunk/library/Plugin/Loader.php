@@ -55,8 +55,12 @@
 	public function isPluginEnabled($vendor, $pluginName)
 	{
 		// don't even look for it if it's not enabled from plugins.ini 
-		if( true == ($this->_pluginConfiguration->plugin->$vendor->$pluginName->enable))
+		if( isset( $this->_pluginConfiguration->plugin->$vendor->$pluginName->enable))
 		{
+			if(true != $this->_pluginConfiguration->plugin->$vendor->$pluginName->enable) 
+			{
+				return false;
+			}
 			// checking if it exists as a class 
 			if(!$this->pluginExists($vendor, $pluginName))
 			{
