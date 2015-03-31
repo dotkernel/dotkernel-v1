@@ -231,7 +231,8 @@ class Admin extends Dot_Model
 								 $this->_userAgent),
 								$this->option->failedLogin->message);
 		$dotEmail->setBodyText($msg);
-		$succeed = $dotEmail->send();
+		$success = $dotEmail->send();
+		return $success ;
 	}
 
 	/**

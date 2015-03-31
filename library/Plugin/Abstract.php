@@ -35,13 +35,20 @@ abstract class Plugin_Abstract implements Plugin_Interface
 	{
 		// main config might be needed
 		$this->config = Zend_Registry::get('configuration');
-		$this->db = Zend_Registry::get('database');
-		$this->settings = Zend_Registry::get('settings');
-		// xml option
-		$this->option = Zend_Registry::get('option');
 		
-		// plugin
-		$this->pluginConfiguration = Zend_Registry::get('pluginConfiguration');
+		// db handler
+		$this->db = Zend_Registry::get('database');
+		
+		// settings from db
+		$this->settings = Zend_Registry::get('settings');
+		
+		// xml option - settings from configs/dots
+		$this->xmlOption = Zend_Registry::get('option');
+		
+		// uncomment the line below if you need the plugin config for all the plugins
+		// $this->pluginConfiguration = Zend_Registry::get('pluginConfiguration');
+		
+		// plugin options (passed through constructor)
 		$this->_options = $options;
 	}
 
@@ -61,5 +68,4 @@ abstract class Plugin_Abstract implements Plugin_Interface
 	{
 		return new self($options);
 	}
-	
 } 

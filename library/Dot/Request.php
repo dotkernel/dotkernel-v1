@@ -46,10 +46,10 @@ class Dot_Request
 		}
 	}
 	
-	/*
-	 * add comment here
-	 * @param
-	 * @return
+	/**
+	 * Get Request Data
+	 * @static
+	 * @return array
 	 */
 	public static function getRequestData()
 	{
