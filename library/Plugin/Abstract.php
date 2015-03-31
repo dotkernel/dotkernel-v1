@@ -54,9 +54,12 @@ abstract class Plugin_Abstract implements Plugin_Interface
 
 	/**
 	 * Load plugin instance with given settings 
-	 * @abstract
 	 * @static
 	 * @return object $plugin - the plugin handler
 	 */
-	abstract public static function load($options);
+	public static function load($options)
+	{
+		return new self($options);
+	}
+	
 } 
