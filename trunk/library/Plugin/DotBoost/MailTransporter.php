@@ -41,6 +41,16 @@ class Plugin_DotBoost_MailTransporter extends Plugin_Abstract
 	}
 	
 	/**
+	 * Load plugin instance with given settings
+	 * @static
+	 * @return object $plugin - the plugin handler
+	 */
+	public static function load($options)
+	{
+		return new self($options);
+	}
+	
+	/**
 	 * Gets a transporter from the factory
 	 * 
 	 * This function also sets the from & reply-to values
