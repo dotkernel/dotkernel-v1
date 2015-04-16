@@ -19,7 +19,6 @@
 
 class Dot_Session
 {
-
 	/**
 	 * Constructor is private, because this class is static, can't be instantiated
 	 * @access private

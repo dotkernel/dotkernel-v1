@@ -29,42 +29,49 @@ class Dot_Template
 	 * @var bool
 	 */
 	private $_debug = false;
+	
 	/**
 	 * If set, echo blocks time parse
 	 * @access private
 	 * @var bool
 	 */
 	private $_debugBlock = false;
+	
 	/**
 	 * Relative filenames are relative to this pathname
 	 * @access private
 	 * @var string
 	 */
 	private $_root = '..';
+	
 	/**
 	 * $file[handle] = 'filename';
 	 * @access private
 	 * @var array
 	 */
 	private $_file = array();
+	
 	/**
 	 * fallback paths that should be defined in a child class
 	 * @access private
 	 * @var array
 	 */
 	private $_fileFallbacks = array();
+	
 	/**
 	 * $varkeys[key] = 'key'
 	 * @access private
 	 * @var array
 	 */
 	private $_varkeys = array();
+	
 	/**
 	 * $varvals[key] = 'value';
 	 * @access private
 	 * @var array
 	 */
 	private $_varvals = array();
+	
 	/**
 	 * 'remove'  => remove undefined variables
 	 * 'comment' => replace undefined variables with comments
@@ -73,6 +80,7 @@ class Dot_Template
 	 * @var string
 	 */
 	private $_unknowns = 'remove';
+	
 	/**
 	 * 'yes' => halt,
 	 * 'report' => report error, continue,
@@ -81,6 +89,7 @@ class Dot_Template
 	 * @var string
 	 */
 	private $_haltOnError = 'yes';
+	
 	/**
 	 * The last error message is retained here
 	 * @access private
@@ -88,6 +97,7 @@ class Dot_Template
 	 * @see _halt
 	 */
 	private $_lastError = '';
+	
 	/**
 	 * Determines whether Template outputs filename comments.
 	 * false = no filename outputs
@@ -96,6 +106,7 @@ class Dot_Template
 	 * @var string
 	 */
 	private $_filenameComments = false;
+	
 	/**
 	 * Determines the regular expression used to find unknown variable tags.
 	 * 'loose'  = traditional match all curly braces with no whitespace between
@@ -104,18 +115,21 @@ class Dot_Template
 	 * @var bool
 	 */
 	private $_unknownRegexp = 'loose';
+	
 	/**
 	 * Start time 
 	 * @access private
 	 * @var array
 	 */
 	private $_startTime = array();
+	
 	/**
 	 * End time 
 	 * @access private
 	 * @var array
 	 */
 	private $_endTime = array();
+	
 	/**
 	 * Singleton instance
 	 * @access protected
@@ -123,6 +137,7 @@ class Dot_Template
 	 * @var Dot_Template
 	 */
 	protected static $_instance = null;
+	
 	/**
 	 * Singleton pattern implementation makes 'new' unavailable
 	 * @access protected
@@ -137,6 +152,7 @@ class Dot_Template
 		$this->setUnknowns($unknowns);
 		if (is_array($fallback)) $this->_fileFallbacks = $fallback;
 	}
+	
 	/**
 	 * Singleton pattern implementation makes 'clone' unavailable
 	 * @access protected
@@ -144,6 +160,7 @@ class Dot_Template
 	 */
 	protected function __clone()
 	{}
+	
 	/**
 	 * Returns an instance of Dot_View
 	 * Singleton pattern implementation
@@ -162,6 +179,7 @@ class Dot_Template
 		}
 		return self::$_instance;
 	}	
+	
 	/**
 	 * Checks that $root is a valid directory and if so sets this directory as the
 	 * base directory from which templates are loaded by storing the value in
@@ -184,6 +202,7 @@ class Dot_Template
 		$this->_root = $root;
 		return true;
 	}
+	
 	/**
 	 * Start the time to measure something
 	 * @access private
@@ -196,6 +215,7 @@ class Dot_Template
 		$mtime = $mtime[1] + $mtime[0];
 		return $mtime;
 	}
+	
 	/**
 	 * Return the end time
 	 * @access private
@@ -211,6 +231,7 @@ class Dot_Template
 		$totaltime = round(($endtime - $this->_startTime[$varname]),2);
 		return $totaltime;
 	}
+	
 	/**
 	 * Sets the policy for dealing with unresolved variable names.
 	 * @access public
@@ -221,6 +242,7 @@ class Dot_Template
 	{
 		$this->_unknowns = $unknowns;
 	}
+	
 	/**
 	 * Inspired From PEAR HTML_Template_PHPLIB 1.4.0
 	 * Checks if the given variable exists.
@@ -245,6 +267,7 @@ class Dot_Template
 				return isset($this->_varvals[$var]);
 		}
 	}
+	
 	/**
 	 * Defines a filename for the initial value of a variable.
 	 * It may be passed either a varname and a file name as two strings or
@@ -290,6 +313,7 @@ class Dot_Template
 		}
 		return true;
 	}
+	
 	/**
 	 * A variable $parent may contain a variable block defined by:
 	 * &lt;!-- BEGIN $varname --&gt; content &lt;!-- END $varname --&gt;. 
@@ -337,6 +361,7 @@ class Dot_Template
 		$this->setVar($parent, $str);
 		return true;
 	}
+	
 	/**
 	 * Sets the value of a variable.
 	 * It may be called with either a varname and a value as two strings or an
@@ -400,6 +425,7 @@ class Dot_Template
 			}
 		}
 	}
+	
 	/** 
 	 * Unsets a variable completely.
 	 * It may be called with either a varname as a string or an array with the
@@ -445,6 +471,7 @@ class Dot_Template
 			}
 		}
 	}
+	
 	/**
 	 * Fills in all the variables contained within the variable named
 	 * $varname. The resulting value is returned as the public function result and the
@@ -474,6 +501,7 @@ class Dot_Template
 		$str = preg_replace($this->_varkeys, $varvals_quoted, $str);
 		return $str;
 	}
+	
 	/**
 	 * This is shorthand for print $this->subst($varname). See subst for further	 details.
 	 * USAGE: psubst(string $varname)
@@ -486,6 +514,7 @@ class Dot_Template
 		print $this->subst($varname);
 		return false;
 	}
+	
 	/**
 	 * Substitutes the values of all defined variables in the variable
 	 * named $varname and stores or appends the result in the variable named $target.
@@ -551,6 +580,7 @@ class Dot_Template
 		}
 		return $this->getVar($target);
 	}
+	
 	/**
 	 * This is shorthand for print $this->parse(...) and is public functionally identical.
 	 * USAGE: pparse(string $target, string $varname, [boolean $append])
@@ -577,6 +607,7 @@ class Dot_Template
 		print $this->finish($this->parse($target, $varname, $append));
 		return false;
 	}
+	
 	/**
 	 * Returns an associative array of all defined variables with the
 	 * name as the key and the value of the variable as the value.
@@ -595,6 +626,7 @@ class Dot_Template
 		}
 		return $result;
 	}
+	
 	/**
 	 * Returns the value of the variable named by $varname.
 	 * If $varname references a file and that file has not been loaded yet, the
@@ -634,6 +666,7 @@ class Dot_Template
 			return $result;
 		}
 	}
+	
 	/**
 	 * Returns a hash of unresolved variable names in $varname, keyed
 	 * by their names (that is, the hash has the form $a[$name] = $name).
@@ -673,6 +706,7 @@ class Dot_Template
 			return false;
 		}
 	}
+	
 	/**
 	 * Returns the finished version of $str.
 	 * USAGE: finish(string $str)
@@ -703,6 +737,7 @@ class Dot_Template
 		}
 		return $str;
 	}
+	
 	/**
 	 * Prints the finished version of the value of the variable named by $varname.
 	 * USAGE: p(string $varname)
@@ -714,6 +749,7 @@ class Dot_Template
 	{
 		print $this->finish($this->getVar($varname));
 	}
+	
 	/**
 	 * Returns the finished version of the value of the variable named  by $varname.
 	 * USAGE: get(string $varname)
@@ -725,6 +761,7 @@ class Dot_Template
 	{
 		return $this->finish($this->getVar($varname));
 	}
+	
 	/**
 	 * When called with a relative pathname, this function will return the pathname
 	 * with $this->_root prepended. Absolute pathnames are returned unchanged.
@@ -764,6 +801,7 @@ class Dot_Template
 		}
 		return $filename;
 	}
+	
 	/**
 	 * Will construct a regexp for a given variable name with any  special
 	 * chars quoted.
@@ -775,6 +813,7 @@ class Dot_Template
 	{
 		return preg_quote('{'.$varname.'}');
 	}
+	
 	/**
 	 * If a variable's value is undefined and the variable has a filename stored in
 	 * $this->_file[$varname] then the backing file will be loaded and the file's
@@ -812,6 +851,7 @@ class Dot_Template
 		$this->setVar($varname, $str);
 		return true;
 	}
+	
 	/**
 	 * Is called whenever an error occurs and will handle the error according
 	 * to the  policy defined in $this->_haltOnError. Additionally the	error message will be saved
@@ -834,6 +874,7 @@ class Dot_Template
 		}
 		return false;
 	}
+	
 	/**
 	 * Prints an error message.
 	 * It can be overridden by your subclass of Template. It will be called with an
@@ -857,6 +898,7 @@ class Dot_Template
 		if(APPLICATION_ENV != 'production') print $out;
 		exit();
 	}
+	
 	/**
 	 * Returns the last error message if any
 	 * @access public
@@ -870,6 +912,7 @@ class Dot_Template
 		}
 		return $this->_lastError;
 	}
+	
 	/**
 	 * Initialize the value of a variable.
 	 * It may be called with either a varname and a value as two strings or an
@@ -922,6 +965,7 @@ class Dot_Template
 			}
 		}
 	}
+	
 	/**
 	 * Initialize a block
 	 * A variable $parent may contain a variable block defined by:
@@ -962,6 +1006,7 @@ class Dot_Template
 			}
 		}
 	}
+	
 	/**
 	 * Checks if the given variable exists as token 
 	 * inside the declared variables or files content.

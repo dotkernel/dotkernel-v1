@@ -25,23 +25,27 @@ class Dot_Paginator
 	 * @access private
 	 */
 	private $_paginator;
+	
 	/**
 	 * Curent Page
 	 * @access private 
 	 * @var int
 	 */
 	private $_currentPage = 0;
+	
 	/**
 	 * Items per page 
 	 * @access private 
 	 * @var int
 	 */
 	private $_itemCountPerPage = 0;
+	
 	/**
 	 * @access private 
 	 * @var object ArrayIterator
 	 */
 	private $_currentItems = null;
+	
 	/**
 	 * Dot_Paginator constructor that sets the main parameters
 	 * If $page is 0 (zero), Zend_Paginator will not be called
@@ -67,6 +71,7 @@ class Dot_Paginator
 			$this->_paginator->setPageRange($settings->paginationStep * 2 + 1);
 		}
 	}
+	
 	/**
 	 * Get current items to display on current page
 	 * @access public 
@@ -82,6 +87,7 @@ class Dot_Paginator
 		}		
 		return $this->_currentItems;		
 	}
+	
 	/**
 	 * Create the page object used in View - paginator method
 	 * @access public
@@ -149,6 +155,7 @@ class Dot_Paginator
 
 		return $pages;
 	}
+	
 	/**
 	 * Return a multiple array with data and pages
 	 * @access public

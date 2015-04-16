@@ -26,6 +26,7 @@ class Dot_Validate
 	 * @var array
 	 */
 	private $_options = array();
+	
 	/**
 	 * Constructor
 	 * @access public

@@ -58,6 +58,7 @@ class Dot_Acl
 		$this->_addRoles();
 		$this->_addResources();
 	}
+	
 	/**
 	 * Add roles to ACL
 	 * @access private
@@ -100,14 +101,15 @@ class Dot_Acl
 		{
 			if(!$this->acl->hasRole($name))
 			{
-                if(empty($parents))
+				if(empty($parents))
 				{
-                    $parents = array();
+					$parents = array();
 				}
-                $this->acl->addRole(new Zend_Acl_Role($name), $parents);
-            }
+				$this->acl->addRole(new Zend_Acl_Role($name), $parents);
+			}
 		}
 	}
+	
 	/**
 	 * Add resources and permissions to ACL
 	 * @access private
@@ -164,6 +166,7 @@ class Dot_Acl
 			}
 		}
 	}
+	
 	/**
 	 * Get ACL roles
 	 * @access public
@@ -173,6 +176,7 @@ class Dot_Acl
 	{
 		return $this->acl->getRoles();
 	}
+	
 	/**
 	 * Check if role is allowed to a resource(controller, action)
 	 * @access public

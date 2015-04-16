@@ -30,7 +30,7 @@ class Dot_Model
 		$this->config    = Zend_Registry::get('configuration');
 		$this->settings  = Zend_Registry::get('settings');
 		$this->option    = Zend_Registry::get('option');
-		// plugin 
+		// plugin configuration
 		$this->pluginConfiguration  = Zend_Registry::get('pluginConfiguration');
 	}
 }
