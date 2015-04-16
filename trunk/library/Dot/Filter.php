@@ -26,18 +26,21 @@ class Dot_Filter
 	 * @var array
 	 */
 	protected $_options = array();
+	
 	/**
 	 * Filtered data
 	 * @var array
 	 * @access private
 	 */
 	private $_data = array();
+	
 	/**
 	 * Errors found on filter
 	 * @var array
 	 * @access private
 	 */
 	private $_error = array();
+	
 	/**
 	 * Constructor
 	 * @access public
@@ -51,6 +54,7 @@ class Dot_Filter
 			$this->_options[$key] = $value;
 		}
 	}
+	
 	/**
 	 * Filter data that was previously validated (input data)
 	 * If data was not valid, filter the error message that will
@@ -91,6 +95,7 @@ class Dot_Filter
 			return false;
 		}
 	}
+	
 	/**
 	 * Get filtered data
 	 * @access public
@@ -100,6 +105,7 @@ class Dot_Filter
 	{
 		return $this->_data;
 	}
+	
 	/**
 	 * Get errors encounter on filtration
 	 * @access public

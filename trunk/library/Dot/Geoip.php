@@ -30,6 +30,7 @@ class Dot_Geoip
 		$this->option = Zend_Registry::get('option');
 		$this->config = Zend_Registry::get('configuration');
 	}
+	
 	/**
 	 * Get the country by IP
 	 * Return an array with : short name, like 'us', long name, like 'United States and response like 'OK' or <error_message> '

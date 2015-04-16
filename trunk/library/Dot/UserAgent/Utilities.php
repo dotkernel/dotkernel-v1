@@ -66,6 +66,7 @@ class Dot_UserAgent_Utilities
 	 * @var array
 	 */
 	private static $_browserList = null;
+	
 	/**
 	 * OS List Array
 	 * @var array
@@ -130,7 +131,6 @@ class Dot_UserAgent_Utilities
 		}
 		return $os;
 	}
-	
 	
 	
 	/**

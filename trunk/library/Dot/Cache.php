@@ -16,6 +16,7 @@
  * @package    DotLibrary
  * @author     DotKernel Team <team@dotkernel.com>
  */
+
 class Dot_Cache
 {
 	private static $_isLoaded = false ;
@@ -117,15 +118,23 @@ class Dot_Cache
 	
 	/**
 	 * Process the key, triggering a notice is optional
+	 * 
+	 * The use of this method is to ensure that 
+	 * load, save and delete methods processes keys in the same way
+	 * 
 	 * @param string $key
 	 * @return string 
 	 */
 	public static function processKey($key)
 	{
-		// $message = 'The key must match the following RegEx pattern: [A-Za-z0-9_]*    More info here: http://www.dotkernel.com/dotkernel/caching-in-dotkernel-using-zend-framework/';
-		// trigger_error($message, E_NOTICE);
+		/*
+		$message = 'The key must match the following RegEx pattern: [A-Za-z0-9_]*   
+		  More info here: http://www.dotkernel.com/dotkernel/caching-in-dotkernel-using-zend-framework/';
+		 trigger_error($message, E_NOTICE);
+		 //*/
 		return strtolower(preg_replace("/[^A-Za-z0-9 ]/", '_', $key));
 	}
+	
 	/**
 	 * Remove from cache
 	 * @param string $key
@@ -155,7 +164,9 @@ class Dot_Cache
 		{
 			return false;
 		}
+		// only process the key once, use it twice
 		$testKey =  self::processKey($testKey);
+		
 		self::$_cache->save($testValue,$testKey);
 		if(self::$_cache->load($testKey) == $testValue)
 		{
@@ -166,7 +177,11 @@ class Dot_Cache
 	
 	/**
 	 * Check if needed extension is existing
-	 * @param stromg $module
+	 * 
+	 * Other caching extensions may be added
+	 * Make sure they have a Zend_Cache Backend
+	 * 
+	 * @param string $module
 	 * @return boolean
 	 */
 	private static function _isExtensionLoaded($module)

@@ -45,6 +45,7 @@ class Dot_Email extends Zend_Mail
 		$this->db = Zend_Registry::get('database');
 		$this->addHeader('X-Mailer', $this->xmailer);
 		$this->seoOption = Zend_Registry::get('seo');
+		// transport 
 		$this->_transport = $this->_getTransport();
 		if(!$this->_transport)
 		{
@@ -80,12 +81,15 @@ class Dot_Email extends Zend_Mail
 	protected function _getTransport()
 	{
 		$pluginLoader = Plugin_Loader::getInstance();
+		// check if the plugin exists
 		if($pluginLoader->isPluginEnabled('DotBoost', 'MailTransporter'))
 		{
+			// use the plugin if exists
 			$plugin = $pluginLoader->loadPlugin('DotBoost', 'MailTransporter');
 			$transport = $plugin->getTransporter();
 			return $transport;
 		}
+		// get fallback transport if not
 		return false;
 	}
 	

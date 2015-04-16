@@ -28,6 +28,7 @@ class Dot_OpCache
 	{
 		$this->config = Zend_Registry::get('configuration');
 	}
+	
 	/**
 	 * Get OpCache configuration
 	 * @param void
@@ -146,5 +147,4 @@ class Dot_OpCache
 		$jsonString = Zend_Json::encode($data);
 		return $jsonString;
 	}
-
 }

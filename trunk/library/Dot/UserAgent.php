@@ -14,7 +14,7 @@
 * Extract all informations from User Agent, including interaction with Luca Passani's WURFL library
 * 
 * This is an empty class 
-* The new Dot_UserAgent class will be implemented in DotKernel 1.9.0 (LTS)
+* The new Dot_UserAgent will be a plugin for DotKernel (LTS)
 * 
 * @category   DotKernel
 * @package    DotLibrary
@@ -23,5 +23,5 @@
 
 class Dot_UserAgent
 {
-
+	
 }

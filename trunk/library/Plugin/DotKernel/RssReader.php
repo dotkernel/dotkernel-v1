@@ -11,18 +11,18 @@
 */
 
 /**
- * Alternate SMTP and default server mail() class
+ * DotKernel RSS Reader Model
 * @category   DotKernel
 * @package    DotPlugin
-* @subpackage Smtp_Mailer 
+* @subpackage RSS_Reader 
 * @author     DotKernel Team <team@dotkernel.com>
 */
 
-class Plugin_DotBoost_MailTransporter extends Plugin_Abstract
+class Plugin_DotKernel_RssReader extends Plugin_Abstract
 {
 	
-	const PLUGIN_VENDOR = 'DotBoost';
-	const PLUGIN_NAME = 'Mailer';
+	const PLUGIN_VENDOR = 'DotKernel';
+	const PLUGIN_NAME = 'RssReader';
 	const PLUGIN_VERSION = '1.0.0';
 	
 	/**
@@ -51,25 +51,10 @@ class Plugin_DotBoost_MailTransporter extends Plugin_Abstract
 		{
 			return new self($options);
 		}
-		// if the plugin is disabled return what the plugin replaces
-		return new Dot_Email();
+		return false;
 	}
 	
-	/**
-	 * Gets a transporter from the factory
-	 * 
-	 * This function also sets the from & reply-to values
-	 * Theese values can be changed using Dot_Email -> setFrom setReplyTo
-	 * 
-	 * @return Zend_Mail_Transport_Abstract
-	 */
-	public function getTransporter()
-	{
-		// Here is a sample of how we link with the actual plugin
-		// This is only a Plugin Handler Class
-		$transporter = Plugin_DotBoost_MailTransporter_Factory::createTransporter($this->_options['smtpActive'], $this->_options['siteEmail']);
-		Zend_Mail::setDefaultFrom($this->_options['siteEmail'], $this->_options['fromName']);
-		Zend_Mail::setDefaultReplyTo($this->_options['siteEmail'], $this->_options['fromName']);
-		return $transporter;
+	public static function getFeed(){
+		;
 	}
 }
