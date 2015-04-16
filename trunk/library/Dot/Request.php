@@ -20,34 +20,71 @@
 
 class Dot_Request
 {
-	protected static $_server;
-	protected static $_get; 
-	protected static $_post;
-	private static $_isDataSet = false ;
+	// server get & post will be set to false
+	// so that we know if they were set
+	/**
+	 * $_SERVER placeholder
+	 * @access protected
+	 * @static
+	 * @var array|bool $_server
+	 */
+	protected static $_server  = false;
 	
 	/**
-	 * Singleton
-	 * @todo test it with upload of some 20 mb file  
-	 * @todo add constructor ?
-	 * Sets the Server Request Parameters
-	 * @param array $server $_SERVER
-	 * @param array $get $_GET
-	 * @param array $post $_POST
-	 * @return void
+	 * $_POST placeholder
+	 * @access protected
+	 * @static
+	 * @var array|bool $_post
 	 */
-	public static function setRequestData($server, $get = array(), $post = array())
+	protected static $_post    = false;
+	
+	/**
+	 * $_GET placeholder
+	 * @access protected
+	 * @static
+	 * @var array|bool $_get
+	 */
+	protected static $_get     = false;
+	
+	/**
+	 * Used to prevent multiple writing of request data
+	 * @access protected
+	 * @static
+	 * @var bool
+	 */
+	private static $_isDataSet = false;
+	
+	/**
+	 * Sets the Server Request Parameters
+	 * 
+	 * Singleton-ish implementation
+	 * We should only write theese values once
+	 * 
+	 * @param array $server - $_SERVER
+	 * @param array $get    - $_GET
+	 * @param array $post   - $_POST
+	 * @return bool $succes - if the data was set
+	 */
+	public static function setRequestData($server, $get, $post)
 	{
+		// this could also have an exception thrown
+		// but calling a function that only checks a value and returns false is harmless (and costless) 
 		if(self::$_isDataSet != true )
 		{
 			self::$_server = $server;
 			self::$_get  = $get;
 			self::$_post = $post;
 			self::$_isDataSet = true;
+			return true;
 		}
+		return false;
 	}
 	
 	/**
-	 * Get Request Data
+	 * Get Request Data ( $_SERVER, $_GET, $_POST ) 
+	 *
+	 * Use with caution, the $_SERVER array is big
+	 * 
 	 * @static
 	 * @return array
 	 */
@@ -63,17 +100,23 @@ class Dot_Request
 	/**
 	 * Get the Request User Agent
 	 * 
+	 * Returns the User Agent found in $_SERVER
+	 * Returns bool false if value was not found 
+	 * 
 	 * This function was implemented because
 	 * it is called frequently 
 	 * 
+	 * 
 	 * @access public 
-	 * @return string $userAgent
+	 * @return string|bool $userAgent
 	 */
 	public static function getUserAgent()
 	{
 		if(isset(self::$_server['HTTP_USER_AGENT']))
+		{
 			return self::$_server['HTTP_USER_AGENT'];
-		return '';
+		}
+		return false;
 	}
 	
 	/**
@@ -83,12 +126,14 @@ class Dot_Request
 	 * it is called frequently
 	 *
 	 * @access public
-	 * @return string $userAgent
+	 * @return string|bool $userAgent
 	 */
 	public static function getHttpReffer()
 	{
 		if(isset(self::$_server['HTTP_REFERER']))
+		{
 			return self::$_server['HTTP_REFERER'];
-		return '';
+		}
+		return false;
 	}
 }
