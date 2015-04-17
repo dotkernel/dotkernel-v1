@@ -336,7 +336,8 @@ class Dot_Template
 		$this->_startTime[$varname] = $this->_startTimer();
 		if (!$this->_loadFile($parent))
 		{
-			$this->_halt('setBlock: unable to load '.$parent);
+			$this->_halt('setBlock: unable to load '.$parent . PHP_EOL .
+				' The parent block was not found, make sure the parent block is initialized first');
 			return false;
 		}
 		if ($name == '')
@@ -350,7 +351,8 @@ class Dot_Template
 		preg_match_all($reg, $str, $matches);
 		if (!isset($matches[1][0]))
 		{
-			$this->_halt('setBlock: unable to set block '.$varname);
+			$this->_halt('setBlock: unable to set block '.$varname . PHP_EOL . 
+				' Block definition might be wrong or missing from the tpl file ');
 			return false;
 		}
 		$str = preg_replace($reg, '{' . $name . '}', $str);
