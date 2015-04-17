@@ -139,7 +139,16 @@
 	{
 		$i = 0 ;
 		$plugins = array();
-		$allPluginSettings = $this->_pluginConfiguration->plugin->toArray();
+		$allPluginSettings = $this->_pluginConfiguration->plugin;
+		if( ! $allPluginSettings)
+		{
+			$allPluginSettings = array();
+		}
+		else
+		{
+			$allPluginSettings = $allPluginSettings->toArray();
+		}
+		
 		foreach($allPluginSettings as $vendor => $pluginList)
 		{
 			foreach($pluginList as $pluginName => $pluginSettings)
