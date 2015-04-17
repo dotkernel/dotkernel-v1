@@ -21,8 +21,12 @@
 class Dot_Route
 {
 	/**
-	 * Constructor
-	 * @access public
+	 * Constructor - private
+	 * 
+	 * This class only contains static methods
+	 * therefore we don't need any instances of it
+	 * 
+	 * @access private
 	 * @return Dot_Route
 	 */
 	private function __construct ()
@@ -129,6 +133,7 @@ class Dot_Route
 		Zend_Registry::set('requestController', $requestController);
 		Zend_Registry::set('requestAction', $requestAction); 
 	}
+	
 	/**
 	 * Create canonical URL
 	 * This method will be changed when will add URL ReWrite alternative
@@ -173,6 +178,7 @@ class Dot_Route
 		}
 		return $url;
 	}
+	
 	/**
 	 * Get SEO options
 	 * @access public
@@ -191,6 +197,7 @@ class Dot_Route
 
 		return $option;
 	}
+	
 	/**
 	 * Process controller
 	 * Formats a controller name (eg: admin -> Admin, store-product > StoreProduct
@@ -250,5 +257,17 @@ class Dot_Route
 					- right now.
 					 -->';
 		exit;
+	}
+	
+	/**
+	 * Returns a list with all Controllers defined for a module
+	 * @access public
+	 * @abstract
+	 * @return array
+	 */
+	public static function getControllersForModule($module)
+	{
+		$router = Zend_Registry::get('router');
+		return $router->controllers->$module->toArray();
 	}
 }
