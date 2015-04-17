@@ -47,10 +47,12 @@ $zendLoader = Zend_Loader_Autoloader::getInstance();
 
 //includes all classes in library folder. That class names must start with Dot_
 $zendLoader->registerNamespace('Dot_');
+// also load plugin classes
 $zendLoader->registerNamespace('Plugin_');
 
 // getting the request related params
 Dot_Request::setRequestData($_SERVER, $_GET, $_POST);
+
 // initialize the DotKernel Enviromnment
 Dot_Kernel::initialize($startTime);
 
