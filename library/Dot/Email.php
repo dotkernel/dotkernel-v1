@@ -45,8 +45,10 @@ class Dot_Email extends Zend_Mail
 		$this->db = Zend_Registry::get('database');
 		$this->addHeader('X-Mailer', $this->xmailer);
 		$this->seoOption = Zend_Registry::get('seo');
+		
+		// plugin call here
+		
 		// transport 
-		$this->_transport = $this->_getTransport();
 		if(!$this->_transport)
 		{
 			$this->_transport = $this->_getFallBackTransport();
@@ -76,21 +78,12 @@ class Dot_Email extends Zend_Mail
 	 * Get Transport From Plugin
 	 * If no Transport was found, false returned 
 	 * @access protected
+	 * @param $plugin
 	 * @return Zend_Mail_Transport_Abstract|bool
 	 */
-	protected function _getTransport()
+	protected function _getTransportFromPlugin(Plugin_Interface $plugin)
 	{
-		$pluginLoader = Plugin_Loader::getInstance();
-		// check if the plugin exists
-		if($pluginLoader->isPluginEnabled('DotBoost', 'MailTransporter'))
-		{
-			// use the plugin if exists
-			$plugin = $pluginLoader->loadPlugin('DotBoost', 'MailTransporter');
-			$transport = $plugin->getTransporter();
-			return $transport;
-		}
-		// get fallback transport if not
-		return false;
+		return $plugin->getTransporter();
 	}
 	
 	/**
