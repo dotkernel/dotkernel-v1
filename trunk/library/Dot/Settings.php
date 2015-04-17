@@ -27,6 +27,7 @@ class Dot_Settings
 	public function __construct ()
 	{
 	}
+	
 	/**
 	 * Get settings from database, table, and load into registry $settings
 	 * @access public
@@ -46,6 +47,7 @@ class Dot_Settings
 		}	
 		return (object)$settings;
 	}
+	
 	/**
 	 * Set PHP configuration settings
 	 * @access public 
@@ -62,7 +64,8 @@ class Dot_Settings
 			if (is_scalar($value)) ini_set($key, $value);
 			elseif (is_array($value))  self::setPhpSettings($value, $key . '.');
 		}		
-	} 
+	}
+	
 	/**
 	 * Require the files according to MVC pattern, and the modules there are in application.ini file
 	 * @access public
@@ -118,10 +121,15 @@ class Dot_Settings
 			else die ('The file: ' . DOTKERNEL_PATH . '/' . $modulePath . 'views/' . $value . 'View.php' . ' does NOT exist');  
 		}
 	}
+	
 	/**
 	 * Get the option variables from an xml file for the current dots
+	 * 
 	 * Used recursively, first take default.xml values. This values are 
 	 * overwritten by the xml of the current dots
+	 * 
+	 * This method also stores the options in the cache, for faster access
+	 * 
 	 * @param string $requestModule
 	 * @param string $requestController
 	 * @return Zend_Config
@@ -129,9 +137,14 @@ class Dot_Settings
 	public static function getOptionVariables($requestModule,$requestController)
 	{
 		$option = array();
-		$cacheKey = 'option_'.$requestModule.'_'.$requestController;
+		
+		// get the actual controller
+		// fixes the  any_inexistent_controller caching
+		// eg: localhost/DotKernel/module/inexistent_controller/
+		$actualController = in_array($requestController, Dot_Route::getControllersForModule($requestModule)) ? $requestController : 'default';
+		$cacheKey = 'option_' . $requestModule . '_' . $actualController ;
 		$value = Dot_Cache::load($cacheKey);
-
+		
 		if($value != false)
 		{
 			$option = $value;
