@@ -25,6 +25,7 @@ class Dot_Kernel
 	 * @var string
 	 */
 	const VERSION = '1.8.0 DEV';
+	
 	/**
  	 * Start DotKernel
 	 * Pass controll to the Front Controller if it exists,
@@ -45,14 +46,89 @@ class Dot_Kernel
 		} 
 	}
 	/**
+	 * Initializes the Zend_Registry
+	 * 
+	 * Was Part of main initialize method
+	 * 
+	 * @access private
+	 * @static
+	 * @return boolean
+	 */
+	private static function _initializeRegistry()
+	{
+		$registry = new Zend_Registry(array(), ArrayObject::ARRAY_AS_PROPS);
+		Zend_Registry::setInstance($registry);
+		return $registry;
+	}
+	
+	/**
+	 * Load Router from Cache
+	 * 
+	 * Was Part of main initialize method
+	 * Returns Router Configuration from Cache
+	 * If cache is not available, it will be loaded from file
+	 * 
+	 * @access private
+	 * @static
+	 * @return mixed|Zend_Config_Xml
+	 */
+	private static function _loadRouter()
+	{
+		$router = Dot_Cache::load('router');
+		if($router != false)
+		{
+			return $router;
+		}
+		$router = new Zend_Config_Xml(CONFIGURATION_PATH.'/router.xml');
+		Dot_Cache::save($router, 'router');
+		return $router;
+	}
+	
+	/**
+	 * Load Plugin Configuration from Cache
+	 *
+	 * Was Part of main initialize method
+	 * Returns Plugin Configuration from Cache
+	 * If cache is not available, it will be loaded from file
+	 *
+	 * @access private
+	 * @static
+	 * @return Zend_Config_Xml
+	 */
+	private static function _loadPluginConfiguration()
+	{
+		$pluginConfig = Dot_Cache::load('plugin_configuration');
+		if($pluginConfig != false)
+		{
+			// no time to waste 
+			return $pluginConfig;
+		}
+		// config needed
+		$config = Zend_Registry::get('configuration');
+		
+		$pluginConfig = new Zend_Config_Ini(CONFIGURATION_PATH.'/plugins.ini', APPLICATION_ENV);
+		
+		// only save the settings if plugin_config caching is enabled
+		if($config->cache->cache_plugin_config)
+		{
+			Dot_Cache::save($pluginConfig, 'plugin_configuration');
+		}
+		return $pluginConfig;
+	}
+	
+	/**
 	 * Initialize the global variables 
+	 * @access public 
+	 * @static
+	 * @param int $startTime
+	 * @return bool $success
 	 */
 	public static function initialize($startTime)
 	{
 		// Create registry object, as read-only object to store there config, settings, and database
-		$registry = new Zend_Registry(array(), ArrayObject::ARRAY_AS_PROPS);
-		Zend_Registry::setInstance($registry);
+		$registry = self::_initializeRegistry();
 
+		// mark the start time
 		$registry->startTime = $startTime;
 
 		//Load configuration settings from application.ini file and store it in registry
@@ -63,34 +139,10 @@ class Dot_Kernel
 		Dot_Cache::loadCache();
 		
 		//Load routes(modules, controllers, actions) settings from router.xml file and store it in registry
-		$value = Dot_Cache::load('router');
-		if($value != false)
-		{
-			$router = $value;
-		}
-		else
-		{
-			$router = new Zend_Config_Xml(CONFIGURATION_PATH.'/router.xml');
-			Dot_Cache::save($router, 'router');
-		}
-		$registry->router = $router;
-		
-		
-		$value = Dot_Cache::load('plugin_configuration');
-		if($value != false)
-		{
-			$pluginConfig = $value;
-		}
-		else
-		{
-			$pluginConfig = new Zend_Config_Ini(CONFIGURATION_PATH.'/plugins.ini', APPLICATION_ENV);
-			// only save the settings if plugin_config caching is enabled
-			if($config->cache->cache_plugin_config)
-			{
-				Dot_Cache::save($pluginConfig, 'plugin_configuration');
-			}
-		}
-		$registry->pluginConfiguration = $pluginConfig;
+		$registry->router = self::_loadRouter();
+
+		// load the plugin configuration
+		$registry->pluginConfiguration = self::_loadPluginConfiguration();
 		
 		//Load configuration settings from application.ini file and store it in registry
 		$config = new Zend_Config_Ini(CONFIGURATION_PATH.'/application.ini', APPLICATION_ENV);
@@ -117,6 +169,7 @@ class Dot_Kernel
 		// initialize default options for dots that may be overwritten
 		$option = Dot_Settings::getOptionVariables($registry->requestModule, 'default');
 		$registry->option = $option;
+		return true;
 	}
 	
 	/**
