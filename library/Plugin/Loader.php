@@ -118,8 +118,14 @@
 		
 		if($this->isPluginEnabled($vendor, $pluginName))
 		{
+			$pluginClass = 'Plugin_'.$vendor.'_'.$pluginName;
+			// Check if Plugin exists 
+			if(!class_exists($pluginClass))
+			{
+				return false;
+			}
+			
 			$options = $this->_getPluginOptions($vendor, $pluginName);
-			$pluginClass = 'Plugin_'.$vendor.'_'.$pluginName ; 
 			$plugin = $pluginClass::load($options);
 			if($plugin != false)
 			{
