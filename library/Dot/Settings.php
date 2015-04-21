@@ -141,7 +141,12 @@ class Dot_Settings
 		// get the actual controller
 		// fixes the  any_inexistent_controller caching
 		// eg: localhost/DotKernel/module/inexistent_controller/
-		$actualController = in_array($requestController, Dot_Route::getControllersForModule($requestModule)) ? $requestController : 'default';
+		$actualController = 'default';
+		if($requestController == 'seo' || in_array($requestController, Dot_Route::getControllersForModule($requestModule)) )
+		{
+			$actualController = $requestController;
+		}
+		
 		$cacheKey = 'option_' . $requestModule . '_' . $actualController ;
 		$value = Dot_Cache::load($cacheKey);
 		
