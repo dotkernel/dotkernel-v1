@@ -80,7 +80,7 @@ class Dot_Settings
 		/**
 		 *  if we are in frontend , we have an empty variable for $requestModule
 		 *  Also, fix with $modulePath for modules path other then frontend
-		 */		
+		 */
 		if( $requestModule != '' )
 		{
 			$modulePath = $requestModule . '/';
