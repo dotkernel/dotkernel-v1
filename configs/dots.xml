@@ -5,6 +5,18 @@ current xml dots file. -->
 <config>
 	<dots>
 		<variable option="global">
+			<alertMessages>
+<email>SMTP Error on {SITE_NAME}
+We were unable to send SMTP email
+---------------------------------
+Caught exception: {E_CLASS} 
+Message:  {E_MESSAGE}
+To Email: {TO_EMAIL}
+From Email: {FROM_EMAIL}
+Date: {DATE_NOW}
+---------------------------------
+</email>
+			</alertMessages>
 		</variable>
 		<variable option="admin">
 			<session>
