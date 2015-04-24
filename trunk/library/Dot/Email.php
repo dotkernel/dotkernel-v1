@@ -45,6 +45,7 @@ class Dot_Email extends Zend_Mail
 		$this->db = Zend_Registry::get('database');
 		$this->addHeader('X-Mailer', $this->xmailer);
 		$this->seoOption = Zend_Registry::get('seo');
+		$this->option = Zend_Registry::get('option');
 		
 		// plugin call here
 		
@@ -111,27 +112,32 @@ class Dot_Email extends Zend_Mail
 		}
 		catch (Zend_Exception $e)
 		{
-			/**
-			 * @todo definitely we want to create an exception class, Other code to recover from the error
-			 */
+			$message = $this->option->alertMessages->email;
 			$devEmails = @explode(',', $this->settings->devEmails);
-			$dateNow = date('F dS, Y h:i:s A');
-			$mailSubject  = "SMTP Error on ". $this->seoOption->siteName;
-			$mailContent  = "We were unable to send SMTP email."."\n";
-			$mailContent .= "---------------------------------"."\n";
-			$mailContent .="Caught exception: ". get_class($e)."\n";
-			$mailContent .="Message:  ".$e->getMessage()."\n";
-			$mailContent .= "---------------------------------"."\n\n";
-			$to = $this->getRecipients();
-			$mailContent .="To Email: ".$to[0]."\n";
-			$mailContent .="From Email: ".$this->getFrom()."\n";
-			$mailContent .="Date: ".$dateNow ."\n";
-			$mailHeader   = "From: ".$this->settings->siteEmail."\r\n";
-			$mailHeader  .= "Reply-To:".$this->settings->siteEmail."\r\n"."X-Mailer: PHP/".phpversion();
-			foreach($devEmails as $mailTo)
-			{
-				mail($mailTo, $mailSubject, $mailContent, $mailHeader);
-			}
+			
+			// preparing the message details
+			$details = array(
+				'e_class' => get_class($e),
+				'site_name' => $this->seoOption->siteName,
+				'e_message' => $e->getMessage(),
+				'to_email' => implode(',', $this->_to),
+				'from_email' => $this->getFrom(),
+				'date_now' => date('F dS, Y h:i:s A'),
+			);
+			
+			// creating the alert
+			$alert = new Dot_Alert();
+			// send it to devs
+			$alert->setTo($devEmails);
+			$alert->setSubject("SMTP Error on " . $this->seoOption->siteName);
+			// add the headers
+			$alert->addHeader( "From: " . $this->settings->siteEmail);
+			$alert->addHeader( "Reply-To:" . $this->settings->siteEmail );
+			$alert->addHeader( "X-Mailer: PHP/" . phpversion() ) ;
+			// prepare the message
+			$alert->setContent($message);
+			$alert->setDetails($details);
+			$alert->send();
 			return false;
 		}
 	}
