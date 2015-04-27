@@ -262,16 +262,15 @@ class Dot_Route
 	/**
 	 * Returns a list with all Controllers defined for a module
 	 * @access public
-	 * @abstract
 	 * @return array
 	 */
 	public static function getControllersForModule($module)
 	{
 		$router = Zend_Registry::get('router');
-		if( is_string ($router->controllers->mobile))
+		if( is_string ($router->controllers->$module))
 		{
-			return array($router->controllers->mobile);
+			return array($router->controllers->$module);
 		}
-		return $router->controllers->mobile->toArray();
+		return $router->controllers->$module->toArray();
 	}
 }
