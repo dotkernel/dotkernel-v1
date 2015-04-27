@@ -12,11 +12,11 @@
 	<!-- for PHP redirect to work properly, add this code here 
 	set ajaxFormsEnabled to false -->
 	<script type="text/javascript">
-            $(document).bind("mobileinit", function(){
-                $.extend(  $.mobile , {
-                    ajaxFormsEnabled: false
-                });
-            });
+		$(document).bind("mobileinit", function(){
+		$.extend(  $.mobile , {
+				ajaxFormsEnabled: false
+			});
+		});
 
         </script>
 	<!-- end PHP redirect-->
@@ -37,7 +37,7 @@
 	</div>
 	<!-- /content -->
 	<div data-role="footer">
-		&copy; 2009 - 2013 DotBoost Technologies Inc.
+		&copy; 2009 - 2015 DotBoost Technologies Inc.
 	</div>
 	<!-- /footer -->
 </div>
