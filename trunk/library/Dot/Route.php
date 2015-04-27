@@ -268,6 +268,10 @@ class Dot_Route
 	public static function getControllersForModule($module)
 	{
 		$router = Zend_Registry::get('router');
-		return $router->controllers->$module->toArray();
+		if( is_string ($router->controllers->mobile))
+		{
+			return array($router->controllers->mobile);
+		}
+		return $router->controllers->mobile->toArray();
 	}
 }
