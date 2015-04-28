@@ -93,6 +93,8 @@ class Dot_Email extends Zend_Mail
 	 */
 	protected function _getFallBackTransport($parameters = null)
 	{
+		Zend_Mail::setDefaultFrom($this->settings->siteEmail);
+		Zend_Mail::setDefaultReplyTo($this->settings->siteEmail, $this->seoOption->siteName);
 		return new Zend_Mail_Transport_Sendmail($parameters);
 	}
 	
