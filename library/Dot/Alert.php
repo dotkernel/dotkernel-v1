@@ -1,8 +1,25 @@
 <?php
 /**
- * 
- * @author Gabi
+ * DotBoost Technologies Inc.
+ * DotKernel Application Framework
  *
+ * @category   DotKernel
+ * @package    DotLibrary
+ * @copyright  Copyright (c) 2009-2015 DotBoost Technologies Inc. (http://www.dotboost.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version    $Id$
+ */
+
+/**
+ * DotKernel Alert
+ * 
+ * Alerts are e-mail notifications to all the site developers
+ * @see $settings->devEmails - and also see db table settings
+ *
+ * @category   DotKernel
+ * @package    DotLibrary
+ * @subpackage DotAlert
+ * @author     DotKernel Team <team@dotkernel.com>
  */
 class Dot_Alert
 {
