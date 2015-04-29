@@ -162,6 +162,7 @@ class Dot_Alert
 		foreach($details as $key => $detail)
 		{
 			$this->_content = str_replace('{'.strtoupper($key).'}', $detail, $this->_content );
+			$this->_subject = str_replace('{'.strtoupper($key).'}', $detail, $this->_subject );
 		}
 	}
 	

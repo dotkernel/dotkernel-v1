@@ -114,7 +114,8 @@ class Dot_Email extends Zend_Mail
 		}
 		catch (Zend_Exception $e)
 		{
-			$message = $this->option->alertMessages->email;
+			$subject = $this->option->alertMessages->email->subject;
+			$message = $this->option->alertMessages->email->message;
 			$devEmails = @explode(',', $this->settings->devEmails);
 			
 			// preparing the message details
@@ -131,7 +132,7 @@ class Dot_Email extends Zend_Mail
 			$alert = new Dot_Alert();
 			// send it to devs
 			$alert->setTo($devEmails);
-			$alert->setSubject("SMTP Error on " . $this->seoOption->siteName);
+			$alert->setSubject($subject);
 			// add the headers
 			$alert->addHeader( "From: " . $this->settings->siteEmail);
 			$alert->addHeader( "Reply-To:" . $this->settings->siteEmail );
