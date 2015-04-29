@@ -116,7 +116,7 @@ class Dot_Email extends Zend_Mail
 		{
 			$subject = $this->option->alertMessages->email->subject;
 			$message = $this->option->alertMessages->email->message;
-			$devEmails = @explode(',', $this->settings->devEmails);
+			$devEmails = explode(',', $this->settings->devEmails);
 			
 			// preparing the message details
 			$details = array(
