@@ -117,11 +117,13 @@ class Dot_Email extends Zend_Mail
 			$subject = $this->option->alertMessages->email->subject;
 			$message = $this->option->alertMessages->email->message;
 			$devEmails = explode(',', $this->settings->devEmails);
+			$registry = Zend_Registry::getInstance();
 			
 			// preparing the message details
 			$details = array(
 				'e_class' => get_class($e),
 				'site_name' => $this->seoOption->siteName,
+				'site_url' => $registry->configuration->website->params->url, 
 				'e_message' => $e->getMessage(),
 				'to_email' => implode(',', $this->_to),
 				'from_email' => $this->getFrom(),
@@ -130,13 +132,16 @@ class Dot_Email extends Zend_Mail
 			
 			// creating the alert
 			$alert = new Dot_Alert();
+			
 			// send it to devs
 			$alert->setTo($devEmails);
 			$alert->setSubject($subject);
+			
 			// add the headers
 			$alert->addHeader( "From: " . $this->settings->siteEmail);
 			$alert->addHeader( "Reply-To:" . $this->settings->siteEmail );
 			$alert->addHeader( "X-Mailer: PHP/" . phpversion() ) ;
+			
 			// prepare the message
 			$alert->setContent($message);
 			$alert->setDetails($details);

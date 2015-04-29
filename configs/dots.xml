@@ -7,9 +7,9 @@ current xml dots file. -->
 		<variable option="global">
 			<alertMessages>
 				<email>
-					<subject> SMTP Error on {SITE_NAME} </subject>
+					<subject> SMTP Error on {SITE_URL} </subject>
 					<message>
-SMTP Error on {SITE_NAME}
+SMTP Error on {SITE_NAME} - {SITE_URL}
 We were unable to send SMTP email
 ---------------------------------
 Caught exception: {E_CLASS} 
