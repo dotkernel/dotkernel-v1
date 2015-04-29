@@ -1,8 +1,27 @@
 <?php
+/**
+ * DotBoost Technologies Inc.
+ * DotKernel Application Framework
+ *
+ * @category   DotKernel
+ * @package    DotLibrary
+ * @copyright  Copyright (c) 2009-2015 DotBoost Technologies Inc. (http://www.dotboost.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version    $Id$
+ */
 
-class Api_Model_Constants
+/**
+ * DotKernel API Header
+ *
+ * This class contains all the header messages and a useful method 
+ *
+ * @category   DotKernel
+ * @package    DotApi
+ * @author     DotKernel Team <team@dotkernel.com>
+ */
+class Api_Model_Header
 {
-	// YOUR CONSTANTS HERE
+	
 	
 	
 	// HTTP STATUS CODES
@@ -99,4 +118,14 @@ class Api_Model_Constants
 	const HTTP_598 = 'HTTP/1.0 598 Network read timeout error (Unknown)';
 	const HTTP_599 = 'HTTP/1.0 599 Network connect timeout error (Unknown)';
 
+	public static function setHeaderByCode($code, $replace = true)
+	{
+		if(defined('HTTP_'.$code))
+		{
+			header ( constant('HTTP_'.$code), $replace, $code);
+			return true;
+		}
+		return false;
+	}
+	
 }
