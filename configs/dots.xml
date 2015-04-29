@@ -6,9 +6,9 @@ current xml dots file. -->
 	<dots>
 		<variable option="global">
 			<alertMessages>
-<email>
-<subject> SMTP Error on {SITE_NAME} </subject>
-<message>
+				<email>
+					<subject> SMTP Error on {SITE_NAME} </subject>
+					<message>
 SMTP Error on {SITE_NAME}
 We were unable to send SMTP email
 ---------------------------------
@@ -18,8 +18,8 @@ To Email: {TO_EMAIL}
 From Email: {FROM_EMAIL}
 Date: {DATE_NOW}
 ---------------------------------
-</message>
-</email>
+					</message>
+				</email>
 			</alertMessages>
 		</variable>
 		<variable option="admin">
