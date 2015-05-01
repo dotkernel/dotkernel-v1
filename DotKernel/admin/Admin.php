@@ -35,6 +35,8 @@ class Admin extends Dot_Model
 		// HTTP Reffer is optional so mark it empty if there is no HTTP Reffer
 		$this->_userAgent = (!is_null($userAgent)) ? $userAgent : '';
 		$this->_httpReferer = (!is_null($httpReferer)) ? $httpReferer : '';
+		
+		$this->seo = Zend_Registry::get('seo');
 	}
 
 	/**
@@ -208,10 +210,12 @@ class Admin extends Dot_Model
 	 */
 	private function sendEmailFailedLogin($values)
 	{
-		$this->seo = Zend_Registry::get('seo');
-		//get the email of the oldest valid admin account
+		// get all  admin list
 		$emailAdminList = explode(',', $this->settings->devEmails);
+		
 		$dotEmail = new Dot_Email();
+		
+		// Add each admin 
 		foreach($emailAdminList as $emailAdmin)
 		{
 			$dotEmail->addTo($emailAdmin);
