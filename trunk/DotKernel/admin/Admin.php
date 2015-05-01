@@ -210,14 +210,12 @@ class Admin extends Dot_Model
 	{
 		$this->seo = Zend_Registry::get('seo');
 		//get the email of the oldest valid admin account
-		$select = $this->db->select()
-			->from('admin', 'email')
-			->where('isActive = ?', '1')
-			->order('dateCreated asc')
-			->limit(1);
-		$emailAdmin = $this->db->fetchOne($select);
+		$emailAdminList = explode(',', $this->settings->devEmails);
 		$dotEmail = new Dot_Email();
-		$dotEmail->addTo($emailAdmin);
+		foreach($emailAdminList as $emailAdmin)
+		{
+			$dotEmail->addTo($emailAdmin);
+		}
 		$dotEmail->setSubject($this->seo->siteName . ' - ' . $this->option->failedLogin->subject);
 		$dotGeoip = new Dot_Geoip();
 		$country = $dotGeoip->getCountryByIp(Dot_Kernel::getUserIp());
