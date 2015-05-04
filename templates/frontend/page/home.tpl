@@ -65,8 +65,16 @@
 		</li>
 		<li>
 			<strong>and in Api the URL's will be:</strong><br/>
-			<em>/api/index.php?action=version&key=XXXXXDKXXXXX</em>
+			<em>/Api/index.php?action=version&key=XXXXXDKXXXXX</em>
 		</li>
+		
+		<li>
+			<strong>URL's like:</strong><br/>
+			<em>/admin/controller/action//var1/value-of-var1/var2/value-of-var2/</em>
+			<strong>will be automatically corrected to</strong>
+			<em> /admin/controller/action/var1/value-of-var1/var2/value-of-var2/</em>
+		</li>
+		
 	</ul> 
  
 	<h2>3. Adding a new Controller</h2>
@@ -74,14 +82,20 @@
 		To add a controller called Articles in the frontend, you need to add 3 files:
 	</p>
 	<ul>
-		<li><strong>CONTROLLER</strong>: <em>controllers/frontend/articlesController.php</em> , which contains the switch</li>
+		<li><strong>CONTROLLER</strong>: <em>controllers/frontend/ArticlesController.php</em> , which contains the switch</li>
 		<li><strong>MODEL</strong>: <em>DotKernel/frontend/Articles.php</em>, which contains the class Articles</li>
-		<li><strong>VIEW</strong>: <em>DotKernel/frontend/views/articlesView.php</em>, which contains the class Articles_View</li>
+		<li><strong>VIEW</strong>: <em>DotKernel/frontend/views/ArticlesView.php</em>, which contains the class Articles_View</li>
 	</ul>
 	<p>
 		As well as the folder <em>templates/frontend/articles/</em> with the necessary template files.<br/>
 		In config/router.xml, inside the &lt;controller&gt; tag, add: <strong>&lt;frontend&gt;Articles&lt;frontend&gt;</strong>
 	</p>
+	<p> Here are some articles that will help you when adding a new controller:</p>
+	<ul>
+		<li><a href="http://www.dotkernel.com/docs/dots/" target="_blank">What dots are?</a></li>
+		<li><a href="http://www.dotkernel.com/docs/create-a-dots/" target="_blank">Creating a dot</a></li>
+	</ul>
+	<p></p>
 		 
 	<h2>Admin Panel Log In</h2>
 	<strong>www.your-site.com/admin</strong><br/> 
