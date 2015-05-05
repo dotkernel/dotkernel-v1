@@ -68,7 +68,7 @@ class Dot_Request
 	 * @param array $server - $_SERVER
 	 * @param array $get    - $_GET
 	 * @param array $post   - $_POST
-	 * @return bool $succes - if the data was set
+	 * @return bool
 	 */
 	public static function setRequestData($server, $get, $post)
 	{

@@ -151,7 +151,7 @@ class Dot_Alert
 	 *
 	 * @access public
 	 * @param string $content
-	 * @return boolean $succes
+	 * @return boolean
 	 */
 	public function setContent($content)
 	{
@@ -187,7 +187,7 @@ class Dot_Alert
 	 * Returns true if succeeded, throws exception on fail 
 	 * 
 	 * @access public
-	 * @return boolean $success
+	 * @return boolean
 	 */
 	public function send()
 	{
