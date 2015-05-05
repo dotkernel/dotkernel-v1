@@ -25,34 +25,36 @@ class Dot_Alert
 {
 	/**
 	 * The Alert Subject
-	 * @var string $subject
+	 * @var string
 	 */
 	protected $_subject = '';
 	
 	/**
 	* The Alert Destination
-	* @var array $to
+	* @var array
 	*/
 	protected $_to = array();
 	
 	/**
 	 * The Alert Message
-	 * @var string $_content
+	 * @var string
 	 */
 	protected $_content = '';
 	
 	/**
 	* The Alert Mail Header
-	* @var string $_header
+	* @var string
 	 */
 	protected $_header = '';
 	
 	/**
 	 * Sets the Alert Subject
 	 * 
+	 * Returns true if succeeded, false if failed
+	 * 
 	 * @access public
 	 * @param string $subject
-	 * @return boolean $succes
+	 * @return boolean
 	 */
 	public function setSubject($subject)
 	{
@@ -66,10 +68,12 @@ class Dot_Alert
 	
 	/**
 	 * Set the Alert Destination
+	 * 
+	 * Returns true if succeeded, false if failed
 	 *
 	 * @access public
 	 * @param mixed(array|string) $recipients
-	 * @return boolean $succes
+	 * @return boolean
 	 */
 	public function setTo($recipients)
 	{
@@ -81,10 +85,12 @@ class Dot_Alert
 	
 	/**
 	 * Append the Alert Destination
+	 * 
+	 * Returns true if succeeded, false if failed
 	 *
 	 * @access public
 	 * @param mixed(array|string) $recipients
-	 * @return boolean $succes
+	 * @return boolean
 	 */
 	public function addTo($recipients)
 	{
@@ -107,9 +113,11 @@ class Dot_Alert
 	/**
 	 * Set Header
 	 * 
+	 * Returns true if succeeded, false if failed
+	 * 
 	 * @access public
 	 * @param string $header
-	 * @return boolean $succes
+	 * @return boolean
 	 */
 	public function setHeader($header)
 	{
@@ -120,9 +128,11 @@ class Dot_Alert
 	/**
 	 * Adds a new line in the header
 	 * 
+	 * Returns true if succeeded, false if failed
+	 *
 	 * @access public
 	 * @param string $header
-	 * @return boolean $succes
+	 * @return boolean
 	 */
 	public function addHeader($header)
 	{
@@ -136,6 +146,8 @@ class Dot_Alert
 	
 	/**
 	 * Set Header
+	 * 
+	 * Returns true if succeeded, false if failed
 	 *
 	 * @access public
 	 * @param string $content
@@ -153,6 +165,7 @@ class Dot_Alert
 	
 	/**
 	 * Set Details
+	 *
 	 * @access public
 	 * @param array $details
 	 * @return void 
@@ -164,13 +177,14 @@ class Dot_Alert
 			$this->_content = str_replace('{'.strtoupper($key).'}', $detail, $this->_content );
 			$this->_subject = str_replace('{'.strtoupper($key).'}', $detail, $this->_subject );
 		}
+		return;
 	}
 	
 	/**
 	 * Send the Alert
 	 * 
-	 * It might throw an exception
 	 * Windows usually doesn't have a Mail Server installed
+	 * Returns true if succeeded, throws exception on fail 
 	 * 
 	 * @access public
 	 * @return boolean $success
