@@ -79,9 +79,12 @@ class Dot_OpCache
 	
 	/**
 	 * Return the widget data: Memory Piechart
+	 * 
+	 * Returns string with the JSON encoded opcache memory usage piechart array
+	 * 
 	 * @access public
 	 * @param void
-	 * @return json
+	 * @return string
 	 */
 	public function returnMemoryPiechart()
 	{
@@ -103,9 +106,12 @@ class Dot_OpCache
 	
 	/**
 	 * Return the widget data: Keys Piechart
+	 * 
+	 * Returns string with the JSON encoded opcache keys piechart array
+	 * 
 	 * @access public
 	 * @param void
-	 * @return json
+	 * @return string
 	 */
 	public function returnKeysPiechart()
 	{
@@ -127,6 +133,9 @@ class Dot_OpCache
 	
 	/**
 	 * Return the widget data: Hits Piechart
+	 * 
+	 * Returns string with the JSON encoded with cache hits piechart array
+	 * 
 	 * @access public
 	 * @param void
 	 * @return json

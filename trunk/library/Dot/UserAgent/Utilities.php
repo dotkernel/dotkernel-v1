@@ -16,6 +16,7 @@
 * the use of UserAgent Detector is not intended or needed 
 * @category   DotKernel
 * @package    DotLibrary
+* @subpackage DotUserAgent
 * @author     DotKernel Team <team@dotkernel.com>
 */
 

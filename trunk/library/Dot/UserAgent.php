@@ -18,6 +18,7 @@
 * 
 * @category   DotKernel
 * @package    DotLibrary
+* @subpackage DotUserAgent
 * @author     DotKernel Team <team@dotkernel.com>
 */
 

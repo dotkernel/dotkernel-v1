@@ -35,8 +35,13 @@ class Dot_Route
 
 	/**
 	 * Parses the request URI and sets the route
+	 * 
 	 * Gets the module, action, controller and request parameters
 	 * from the request URI
+	 * 
+	 * @static
+	 * @access public
+	 * @return void
 	 */
 	public static function setRoute()
 	{
@@ -88,7 +93,7 @@ class Dot_Route
 			if($key == '')
 			{
 				continue; // "just ignore it"
-			}  
+			}
 			$request[$key] = ($i+1<$requestCount) ? urldecode($requestRaw[++$i]) : '';
 		}
 		
@@ -153,6 +158,7 @@ class Dot_Route
 		$route = ($link == '') ? $route : $link;
 
 		$url = Zend_Registry::get('configuration')->website->params->url;
+		
 		// if the url does not contain a tailing slash we will put it
 		// http://dotkernel.com ->http://dotkernel.com/ 
 		if( '/' != substr($url, -1, 1))
@@ -181,6 +187,8 @@ class Dot_Route
 	
 	/**
 	 * Get SEO options
+	 * 
+	 * @static
 	 * @access public
 	 * @return array
 	 */
@@ -190,18 +198,19 @@ class Dot_Route
 		$option = Dot_Settings::getOptionVariables($registry->requestModule, 'seo');
 
 		//remove the 'option' xml atribute
-
 		$option->__unset('option');
-
+		
 		$option->__set('canonicalUrl',Dot_Route::createCanonicalUrl());
-
 		return $option;
 	}
 	
 	/**
 	 * Process controller
+	 * 
 	 * Formats a controller name (eg: admin -> Admin, store-product > StoreProduct
 	 * Should be moved to Dot_Route
+	 * 
+	 * @static
 	 * @access pubic
 	 * @param $controllerName - string
 	 * @return string
@@ -221,6 +230,7 @@ class Dot_Route
 	/**
 	 * End the execution of the application,
 	 * by sending an 404 header and redirecting to home page
+	 * @static
 	 * @access public
 	 * @param string $who [optional]
 	 * @return bool
@@ -261,6 +271,7 @@ class Dot_Route
 	
 	/**
 	 * Returns a list with all Controllers defined for a module
+	 * @static
 	 * @access public
 	 * @return array
 	 */
