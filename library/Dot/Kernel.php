@@ -70,7 +70,7 @@ class Dot_Kernel
 	 * 
 	 * @access private
 	 * @static
-	 * @return mixed|Zend_Config_Xml
+	 * @return Zend_Config_Xml
 	 */
 	private static function _loadRouter()
 	{

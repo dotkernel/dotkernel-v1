@@ -78,14 +78,14 @@ class Dot_Paginator
 	 * @return object ArrayIterator
 	 */
 	public function getCurrentItems()
-	{			
+	{
 		$this->_paginator->setItemCountPerPage($this->_itemCountPerPage);
 		$this->_paginator->setCurrentPageNumber($this->_currentPage);
-		if ($this->_currentItems === null) 
+		if ($this->_currentItems === null)
 		{
-        	$this->_currentItems = $this->_paginator->getCurrentItems();
-		}		
-		return $this->_currentItems;		
+			$this->_currentItems = $this->_paginator->getCurrentItems();
+		}
+		return $this->_currentItems;
 	}
 	
 	/**

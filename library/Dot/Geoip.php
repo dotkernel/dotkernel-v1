@@ -23,7 +23,7 @@ class Dot_Geoip
 	/**
 	 * Constructor
 	 * @access public
-	 * @return dot_Geoip
+	 * @return Dot_Geoip
 	 */
 	public function __construct()
 	{

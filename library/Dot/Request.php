@@ -11,7 +11,12 @@
  */
 
 /**
- * Process the Request Data
+ * Dot_Request
+ * 
+ * Used in order to process the Request Data
+ * The Dot_Request also allows access to the Request Data from Models or Views 
+ * (note: you should NOT use $_SERVER, $_GET, $_POST in Model, View Classes or in Library)
+ * 
  * @category   DotKernel
  * @package    DotLibrary
  * @subpackage DotRequest
@@ -26,7 +31,7 @@ class Dot_Request
 	 * $_SERVER placeholder
 	 * @access protected
 	 * @static
-	 * @var array|bool $_server
+	 * @var array|bool
 	 */
 	protected static $_server  = false;
 	
@@ -34,7 +39,7 @@ class Dot_Request
 	 * $_POST placeholder
 	 * @access protected
 	 * @static
-	 * @var array|bool $_post
+	 * @var array|bool
 	 */
 	protected static $_post    = false;
 	
@@ -42,7 +47,7 @@ class Dot_Request
 	 * $_GET placeholder
 	 * @access protected
 	 * @static
-	 * @var array|bool $_get
+	 * @var array|bool
 	 */
 	protected static $_get     = false;
 	
@@ -86,6 +91,7 @@ class Dot_Request
 	 * Use with caution, the $_SERVER array is big
 	 * 
 	 * @static
+	 * @access public
 	 * @return array
 	 */
 	public static function getRequestData()
@@ -104,8 +110,9 @@ class Dot_Request
 	 * Returns bool false if value was not found 
 	 * 
 	 * This function was implemented because
-	 * it is called frequently 
-	 * 
+	 * it is called frequently
+	 * Returns the HTTP_USER_AGENT and
+	 * false if it doesn't exist
 	 * 
 	 * @access public 
 	 * @return string|bool $userAgent
@@ -124,9 +131,11 @@ class Dot_Request
 	 *
 	 * This function was implemented because
 	 * it is called frequently
+	 * Returns the HTTP_REFFER and
+	 * false if it doesn't exist
 	 *
 	 * @access public
-	 * @return string|bool $userAgent
+	 * @return string|bool
 	 */
 	public static function getHttpReffer()
 	{

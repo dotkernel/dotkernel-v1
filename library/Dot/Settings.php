@@ -50,11 +50,13 @@ class Dot_Settings
 	
 	/**
 	 * Set PHP configuration settings
+	 * copied from Zend_Application class
+	 * 
 	 * @access public 
 	 * @static
 	 * @param  array $phpSettings 
 	 * @param  string $prefix Key prefix to prepend to array values (used to map . separated INI values)
-	 * @return copied from Zend_Application class
+	 * @return void
  	 */
 	public static function setPhpSettings(array $phpSettings, $prefix = '')
 	{
@@ -63,7 +65,7 @@ class Dot_Settings
 			$key = empty($prefix) ? $key : $prefix . $key;
 			if (is_scalar($value)) ini_set($key, $value);
 			elseif (is_array($value))  self::setPhpSettings($value, $key . '.');
-		}		
+		}
 	}
 	
 	/**
