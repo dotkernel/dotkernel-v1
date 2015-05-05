@@ -11,7 +11,7 @@
  */
 
 /**
- * Use Model Class 
+ * User Model Class 
  * @category   DotKernel
  * @package    DotLibrary
  * @subpackage DotModel
