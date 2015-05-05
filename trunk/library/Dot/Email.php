@@ -47,9 +47,19 @@ class Dot_Email extends Zend_Mail
 		$this->seoOption = Zend_Registry::get('seo');
 		$this->option = Zend_Registry::get('option');
 		
-		// plugin call here
+		// you will add the plugin call here
+		// sample below:
 		
-		// transport 
+		/* 
+		$pluginLoader = Plugin_Loader::getInstance();
+		$plugin = $pluginLoader->loadPlugin('PluginVendor', 'PluginName');
+		if($plugin instanceof Plugin_Interface)
+		{
+			$this->_transport = $this->_getTransportFromPlugin($plugin);
+		}
+		*/
+		
+		// getting transport if none received from plugin 
 		if(!$this->_transport)
 		{
 			$this->_transport = $this->_getFallBackTransport();
@@ -84,7 +94,12 @@ class Dot_Email extends Zend_Mail
 	 */
 	protected function _getTransportFromPlugin(Plugin_Interface $plugin)
 	{
-		return $plugin->getTransporter();
+		$transporter = $plugin->getTransporter();
+		if($transporter instanceof Zend_Mail_Transport_Abstract )
+		{
+			return $transporter;
+		}
+		return false;
 	}
 	
 	/**
