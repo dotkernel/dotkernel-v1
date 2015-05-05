@@ -380,8 +380,8 @@ class Dot_Template
 	 * USAGE: setVar(array $varname = (string $varname => string $value), 
 	 * [mixed $dummy_var], [boolean $append = false])
 	 * @access public
-	 * @param mixed $varname
-	 * @param mixed $value
+	 * @param string|array $varname
+	 * @param string|array $value
 	 * @param bool $append
 	 * @return bool
 	 */
@@ -483,7 +483,7 @@ class Dot_Template
 	 * USAGE: subst(string $varname)
 	 * @access public
 	 * @param mixed $varname
-	 * @return mixed
+	 * @return string
 	 */
 	public function subst($varname)
 	{
@@ -544,7 +544,7 @@ class Dot_Template
 	 * @param string $target
 	 * @param mixed $varname
 	 * @param bool $append
-	 * @return mixed
+	 * @return string
 	 */
 	public function parse($target, $varname, $append = false)
 	{
@@ -640,7 +640,7 @@ class Dot_Template
 	 * USAGE: getVar(array $varname)
 	 * @access public
 	 * @param mixed $varname
-	 * @return mixed
+	 * @return string
 	 */
 	public function getVar($varname)
 	{
