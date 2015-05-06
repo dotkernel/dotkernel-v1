@@ -10,6 +10,12 @@
  * @version    $Id$
  * @author     DotKernel Team <team@dotkernel.com>
  */
+ 
+if(!isset($registry))
+{
+	header('HTTP/1.0 403 Forbidden');
+	exit;
+}
 
 switch ($registry->action)
 {
