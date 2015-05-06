@@ -27,7 +27,7 @@ switch ($registry->action)
 	break;
 
 	default:
-		header('501 Not Implemented',true, 501);
+		Api_Model_Header::setHeaderByCode(501);
 		$data = array();
 		$data[] = array('result' => 'error');
 		$data[] = array('response' => "Action doesn't exist");
