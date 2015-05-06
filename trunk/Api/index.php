@@ -59,30 +59,19 @@ if($registry->configuration->api->params->enable != true)
 }
 
 // Get the action and the other arguments
-$params = array();
-$params = $_GET;
+$arguments = array();
+$arguments = $_GET;
 
-// if the action is missing, we'll assume
-// an empty action / the default action was provided
+$arguments['key'] = (isset($arguments['key'])) ? $arguments['key'] : '';
+
 $action = '';
-if(isset($params['action']))
+if(isset($arguments['action']))
 {
-	$action = $params['action'];
-	unset($params['action']);
+	$action = $arguments['action'];
+	unset($arguments['action']);
 }
 $registry->action = $action;
-
-if (!empty($params))
-{
-	$registry->arguments = $params;
-}
-
-// if the key is missing, we'll assume
-// an empty key was provided
-if(!isset($registry->arguments['key']))
-{
-	$registry->arguments['key'] = '';
-}
+$registry->arguments = $arguments;
 
 // check the API key
 if($registry->configuration->api->params->key != $registry->arguments['key'])
