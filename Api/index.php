@@ -48,27 +48,47 @@ Zend_Registry::setInstance($registry);
 $config = new Zend_Config_Ini(CONFIGURATION_PATH.'/application.ini', APPLICATION_ENV);
 $registry->configuration = $config;
 
+// Set PHP configuration settings from application.ini file
+Dot_Settings::setPhpSettings($config->phpSettings->toArray());
+
 // check if api enabled from application.ini 
 if($registry->configuration->api->params->enable != true)
 {
-	header('HTTP/1.0 403 Forbidden');
+	Api_Model_Header::setHeaderByCode(403);
 	exit;
 }
 
 // Get the action and the other arguments
 $params = array();
 $params = $_GET;
+
+// if the action is missing, we'll assume
+// an empty action / the default action was provided
+$action = '';
+if(isset($params['action']))
+{
+	$action = $params['action'];
+	unset($params['action']);
+}
+$registry->action = $action;
+
 if (!empty($params))
 {
-	$registry->action = $params['action'];
-	unset($params['action']);
 	$registry->arguments = $params;
+}
+
+// if the key is missing, we'll assume
+// an empty key was provided
+if(!isset($registry->arguments['key']))
+{
+	$registry->arguments['key'] = '';
 }
 
 // check the API key
 if($registry->configuration->api->params->key != $registry->arguments['key'])
 {
-	header("HTTP/1.0 401 Unauthorized");
+	Api_Model_Header::setHeaderByCode(403);
+	
 	$data = array();
 	$data[] = array('result' => 'error');
 	$data[] = array('response' => "Invalid Key");
@@ -99,7 +119,7 @@ $rate = (int)(apc_fetch($cacheRateKey));
 $rateLimit = $registry->configuration->api->params->rate_limit ;
 if($rate > $rateLimit)
 {
-	header('HTTP/1.0 403 Forbidden');
+	Api_Model_Header::setHeaderByCode(403);
 	exit;
 }
 apc_store($cacheRateKey,1+$rate, $ttl);
@@ -112,8 +132,5 @@ $registry->database = $db;
 $settings = Dot_Settings::getSettings();
 $registry->settings = $settings;
 $registry->option = array();
-
-// Set PHP configuration settings from application.ini file
-Dot_Settings::setPhpSettings($config->phpSettings->toArray());
 
 include('Controller.php');
