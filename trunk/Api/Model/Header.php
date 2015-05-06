@@ -21,9 +21,6 @@
  */
 class Api_Model_Header
 {
-	
-	
-	
 	// HTTP STATUS CODES
 	
 	// 1xx Informational
@@ -120,9 +117,9 @@ class Api_Model_Header
 
 	public static function setHeaderByCode($code, $replace = true)
 	{
-		if(defined('HTTP_'.$code))
+		if(defined('self::HTTP_'.$code))
 		{
-			header ( constant('HTTP_'.$code), $replace, $code);
+			header ( constant('self::HTTP_'.$code), $replace, $code);
 			return true;
 		}
 		return false;
