@@ -17,9 +17,9 @@ SYSTEM REQUIREMENTS
 
 DotKernel requires:
 - APACHE HTTP server
-- PHP 5.3.7 or later ( PHP 5.6.x recommended)
+- PHP 5.4.0 or later ( PHP 5.6.x recommended)
 - MySQL 5.5 or later (MySQL 5.6.x recommended )
-- Zend Framework 1.8.0 or later (Zend Framework 1.12.11 recommended)
+- Zend Framework 1.11.0 or later (Zend Framework 1.12.6 recommended)
 For more details, please see: 
 	http://www.dotkernel.com/docs/system-requirements/
 
@@ -37,11 +37,16 @@ Note: It is important to follow the steps in the exact order below (especially s
    5. Create a MySQL database and import dot_kernel.sql file into it
    6. Set your environment (production, staging or development) in .htaccess by using the APPLICATION_ENV variable. In DotKernel, the development 
       environment is set by default.
+      NOTE: You might want to disable the caching till you edit all the xml's you need, otherwise the changes will be ignored as the old xml data is still cached
    7. Depending on your environment, edit the configuration file configs/application.ini to reflect the website url and the connection to the database 
       you created previously
-   8. Test the installation by opening the URL you set as your website. If you see the Home page, your DotKernel installation is completed.
-   9. Log In into admin module: http://www.yourdotkernelinstance.com/admin/ with username: admin and password: dot
-  10. Change your admin password: http://www.yourdotkernelinstance.com/admin/admin/account/ 
+      NOTE: Make sure the database and the application.ini have the same collation set
+   8. Edit the seo.xml file (found in /configs/dots/) to reflect the website title, description and other seo information
+   9. Test the installation by opening the URL you set as your website. If you see the Home page, your DotKernel installation is completed.
+  10. Log In into admin module: http://www.yourdotkernelinstance.com/admin/ with these credentials
+      username: admin
+      password: dot
+  11. Change your admin password: http://www.yourdotkernelinstance.com/admin/admin/account/ 
    
    
 DOCUMENTATION
@@ -77,7 +82,7 @@ LICENSE
 -------
 
 DotKernel is Open Source, and released under Open Software License (OSL 3.0)
-See http://v1.dotkernel.net/license.txt
+See http://opensource.org/licenses/osl-3.0
 
 This product includes GeoLite data created by MaxMind, available from
   <a href="http://www.maxmind.com">http://www.maxmind.com</a>.
