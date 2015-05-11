@@ -16,6 +16,9 @@
  * @author DotKernel Team <team@dotkernel.com>
  */
 $test = true;
+// prevent date warnings
+date_default_timezone_set('America/New_York');
+
 // //kill the SAFE MODE
 if(ini_get('safe_mode'))
 {
@@ -24,6 +27,7 @@ if(ini_get('safe_mode'))
 																		'value' => 'This feature has been <b>DEPRECATED</b> as of PHP 5.3.0.');
 	$test = false;
 }
+
 // get HostName
 $hostName = php_uname('n');
 $checkServer['host'] = array('name' => 'Host Name', 'status' => 'pass', 'value' => $hostName);
