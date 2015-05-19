@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menus>	
-<config>	
+<menus>
+<config>
 	<menu>
 		<id>1</id>
 		<type>horizontal</type>
@@ -15,7 +15,7 @@
 					<link>system/dashboard/</link>
 					<description>Dashboard admin</description>
 					<highlight>
-				        <link>system/phpinfo/</link>
+						<link>system/phpinfo/</link>
 					</highlight>
 				</subItem>
 				<subItem>
@@ -34,16 +34,16 @@
 			<title>Admin</title>
 			<link>admin/list/</link>
 			<description>Admin user details</description>
-			<subItems>			
+			<subItems>
 				<subItem>
 					<title>List</title>
 					<link>admin/list/</link>
 					<description>List admin users</description>
 					<highlight>
-				        <link>admin/update/</link>
-				        <link>admin/delete/</link>
+						<link>admin/update/</link>
+						<link>admin/delete/</link>
 					</highlight>
-				</subItem>						
+				</subItem>
 				<subItem>
 					<title>Add new</title>
 					<link>admin/add/</link>
@@ -53,7 +53,7 @@
 					<title>My Account</title>
 					<link>admin/account/</link>
 					<description>Admin user account</description>
-				</subItem>			
+				</subItem>
 				<subItem>
 					<title>Logins</title>
 					<link>admin/logins/</link>
@@ -65,21 +65,21 @@
 			<title>User</title>
 			<link>user/list/</link>
 			<description>User details</description>
-			<subItems>			
+			<subItems>
 				<subItem>
 					<title>List</title>
 					<link>user/list/</link>
 					<description>List admin users</description>
 					<highlight>
-				        <link>user/update/</link>
-				        <link>user/delete/</link>
+						<link>user/update/</link>
+						<link>user/delete/</link>
 					</highlight>
-				</subItem>						
+				</subItem>
 				<subItem>
 					<title>Add new</title>
 					<link>user/add/</link>
 					<description>Add admin user</description>
-				</subItem>			
+				</subItem>
 				<subItem>
 					<title>Logins</title>
 					<link>user/logins/</link>
