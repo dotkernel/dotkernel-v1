@@ -28,15 +28,6 @@
 					<link>system/apc-info/</link>
 					<description>APC Control Panel</description>
 				</subItem>
-				<subItem>
-					<title>Email Transporter</title>
-					<link>system/transporter-list/</link>
-					<description>Admin settings</description>
-					<highlight>
-				        <link>system/transporter-update/</link>
-				        <link>system/transporter-delete/</link>
-					</highlight>
-				</subItem>
 			</subItems>
 		</item>
 		<item>

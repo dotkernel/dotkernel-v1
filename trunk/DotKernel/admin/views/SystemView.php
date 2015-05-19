@@ -218,66 +218,7 @@ class System_View extends View
 		$this->tpl->setFile('tpl_main', 'system/apcinfo.tpl');
 		$this->tpl->setVar('APC_FILE', 'apc' . $apcu);
 	}
-	/**
-	 * List the email transporter
-	 * @param string $templateFile
-	 * @param array $list
-	 * @param int $page
-	 * @param bool $ajax [optional] - Using ajax, parse only the list content
-	 * @return void
-	 */
-	public function listEmailTransporter($templateFile, $list, $page)
-	{
-		$this->tpl->setFile('tpl_main', 'system/' . $templateFile . '.tpl');
-		$this->tpl->setFile('tpl_row', 'system/transporter-row-block.tpl');
-		$this->tpl->setBlock('tpl_row', 'list', 'list_block');
-		$this->tpl->paginator($list['pages']);
-		$this->tpl->setVar('PAGE', $page);
-		$this->tpl->setVar('ACTIVE_URL', '/admin/system/transporter-activate');
-		$this->tpl->setVar('ACTIVE_1', 'checked');
-		$this->tpl->setVar('SSL_TLS', 'checked');
-		
-		foreach ($list["data"] as $k => $v)
-		{
-			$this->tpl->setVar('ID', $v["id"]);
-			$this->tpl->setVar('USER', $v['user']);
-			$this->tpl->setVar('SERVER', $v['server']);
-			$this->tpl->setVar('PORT', $v['port']);
-			$this->tpl->setVar('SSL', $v['ssl']);
-			$this->tpl->setVar('CAPACITY', $v['capacity']);
-			$this->tpl->setVar('COUNTER', $v['counter']);
-			$this->tpl->setVar('DATE_CREATED', Dot_Kernel::timeFormat($v['date']));
-			$this->tpl->setVar('ACTIVE_IMG', $v['isActive'] == 1 ? 'active' : 'inactive');
-			$this->tpl->setVar('ISACTIVE', $v['isActive']);
-			$this->tpl->parse('list_block', 'list', true);
-		}
-		$this->tpl->parse('TRANSPORTER_ROW', 'tpl_row');
-	}
-	/**
-	 * Parse a transporter row block and return it
-	 * @param array $data
-	 * @return string
-	 */
-	public function getTransporterRow($data)
-	{
-		$this->tpl->setFile('tpl_row', 'system/transporter-row-block.tpl');
-		$this->tpl->setBlock('tpl_row', 'list', 'list_block');
-		
-		$this->tpl->setVar('ID', $data["id"]);
-		$this->tpl->setVar('USER', $data['user']);
-		$this->tpl->setVar('SERVER', $data['server']);
-		$this->tpl->setVar('PORT', $data['port']);
-		$this->tpl->setVar('SSL', $data['ssl']);
-		$this->tpl->setVar('CAPACITY', $data['capacity']);
-		$this->tpl->setVar('COUNTER', $data['counter']);
-		$this->tpl->setVar('DATE_CREATED', Dot_Kernel::timeFormat($data['date']));
-		$this->tpl->setVar('ACTIVE_IMG', $data['isActive'] == 1 ? 'active' : 'inactive');
-		$this->tpl->setVar('ISACTIVE', $data['isActive']);
-		$this->tpl->parse('list_block', 'list', true);
 
-		$this->tpl->parse('TRANSPORTER_ROW', 'tpl_row');
-		return $this->tpl->get('TRANSPORTER_ROW');
-	}
 	/**
 	 * Display email transporter details. It is used for update actions
 	 * @param object $templateFile
