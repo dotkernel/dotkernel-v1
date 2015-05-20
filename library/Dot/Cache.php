@@ -58,7 +58,7 @@ class Dot_Cache
 				$backendOptions[$key] = $value;
 			}
 		}
-		self::$_cache = $cache = Zend_Cache::factory('Core', $backendName, $frontendOptions, $backendOptions);
+		self::$_cache = Zend_Cache::factory('Core', $backendName, $frontendOptions, $backendOptions);
 		self::$_isLoaded = true;
 		return true;
 	}
@@ -88,11 +88,11 @@ class Dot_Cache
 	 * @param string $key
 	 * @return boolean
 	 */
-	public static function save($data, $key)
+	public static function save($data, $key, $lifetime = false, $tags = array() )
 	{
 		if(self::$_isLoaded)
 		{
-			self::$_cache->save($data, self::processKey($key));
+			self::$_cache->save($data, self::processKey($key), $tags, $lifetime);
 			return true;
 		}
 		return false;
@@ -107,7 +107,7 @@ class Dot_Cache
 	{
 		if(self::$_isLoaded)
 		{
-			return self::$_cache->load(self::processKey($key));
+			return self::$_cache->load(self::processKey($key), $doNotTestCacheValidity = false, $doNotUnserialize = false);
 		}
 		return false;
 	}
@@ -145,32 +145,288 @@ class Dot_Cache
 		self::$_cache->remove(self::processKey($key));
 		return true;
 	}
+
+	/**
+	 * Return an array of stored cache keys
+	 *
+	 * @return array array of stored cache keys (string)
+	 */
+	public static function getKeys()
+	{
+		if(! self::$_isLoaded)
+		{
+			return false;
+		}
+		return self::$_cache->getIds();
+	}
+
+	/**
+	 * Return the filling percentage of the backend storage
+	 *
+	 * @see Zend_Cache_Core
+	 * @see http://framework.zend.com/manual/1.12/en/zend.cache.frontends.html#zend.cache.frontends.core
+	 *
+	 * @static
+	 * @return int integer between 0 and 100
+	 */
+	public static function getFillingPercentage()
+	{
+		if(!self::$_isLoaded)
+		{
+			return false;
+		}
+		return self::$_cache->getFillingPercentage();
+	}
+
+	/**
+	 * Return an array of metadatas for the given cache id
+	 *
+	 * The array will include these keys :
+	 * - expire : the expire timestamp
+	 * - tags : a string array of tags
+	 * - mtime : timestamp of last modification time
+	 *
+	 * @see Zend_Cache_Core
+	 * @see http://framework.zend.com/manual/1.12/en/zend.cache.frontends.html#zend.cache.frontends.core
+	 * 
+	 * @static
+	 * @param string $cacheKey cache key
+	 * @return array array of metadatas (false if the cache id is not found)
+	 */
+	public static function getMetadatas($cacheKey)
+	{
+		if(!self::$_isLoaded)
+		{
+			return false;
+		}
+		return self::$_cache->getMetadatas($cacheKey);
+	}
+
+	/**
+	 * Give (if possible) an extra lifetime to the given cache id
+	 *
+	 * @static
+	 * @param string $id cache id
+	 * @param int $extraLifetime
+	 * @return boolean true if ok
+	 */
+	public static function touch($id, $extraLifetime)
+	{
+		if(!self::$_isLoaded)
+		{
+			return false;
+		}
+		return self::$_cache->touch($id, $extraLifetime);
+	}
+	
+	
+	/**
+	 * Return an array of stored cache Keys which match given tags
+	 *
+	 * In case of multiple tags, a logical AND is made between tags
+	 *
+	 * @param array $tags array of tags
+	 * @return array array of matching cache Keys (string)
+	 */
+	public static function getKeysMatchingTags($tags = array())
+	{
+		if(!self::$_isLoaded)
+		{
+			return false;
+		}
+		return self::$_cache->getIdsMatchingTags($tags);
+	}
+	
+	/**
+	 * Return an array of stored cache Keys which don't match given tags
+	 *
+	 * In case of multiple tags, a logical OR is made between tags
+	 *
+	 * @see Zend_Cache_Core
+	 * @see http://framework.zend.com/manual/1.12/en/zend.cache.frontends.html#zend.cache.frontends.core
+	 * 
+	 * @static
+	 * @param array $tags array of tags
+	 * @return array array of not matching cache Keys (string)
+	 */
+	public static function getKeysNotMatchingTags($tags = array())
+	{
+		if(!self::$_isLoaded)
+		{
+			return false;
+		}
+		return self::$_cache->getIdsNotMatchingTags($tags);
+	}
+	
+	/**
+	 * Return an array of stored tags
+	 *
+	 * @see Zend_Cache_Core
+	 * @see http://framework.zend.com/manual/1.12/en/zend.cache.frontends.html#zend.cache.frontends.core
+	 * 
+	 * @static
+	 * @return array array of stored tags (string)
+	 */
+	public static function getTags()
+	{
+		if(! self::$_isLoaded)
+		{
+			return false;
+		}
+		return self::$_cache->getTags();
+	}
+	
+	
+	/**
+	 * Clean cache entries
+	 *
+	 * Available modes are :
+	 * 'all' (default)  => remove all cache entries ($tags is not used)
+	 * 'old'            => remove too old cache entries ($tags is not used)
+	 * 'matchingTag'    => remove cache entries matching all given tags
+	 *                     ($tags can be an array of strings or a single string)
+	 * 'notMatchingTag' => remove cache entries not matching one of the given tags
+	 *                     ($tags can be an array of strings or a single string)
+	 * 'matchingAnyTag' => remove cache entries matching any given tags
+	 *                     ($tags can be an array of strings or a single string)
+	 *
+	 * @see Zend_Cache_Core
+	 * @see http://framework.zend.com/manual/1.12/en/zend.cache.frontends.html#zend.cache.frontends.core
+	 *
+	 * @static
+	 * @param  string       $mode
+	 * @param  array|string $tags
+	 * @throws Zend_Cache_Exception
+	 * @return boolean True if ok
+	 */
+	public static function clean($mode = 'all', $tags = array())
+	{
+		if(!self::$_isLoaded)
+		{
+			return false;
+		}
+		return self::$_cache->clean($mode, $tags);
+	}
+	
+	/**
+	 * Returns ALL Cache details in one array
+	 * 
+	 * Array contains:
+	 *   KEY               DESCRIPTION
+	 *   isLoaded          bool  - if cache is loaded
+	 *   isSupportingTags  bool  - if cache backend/provider supports tags 
+	 *   keyCount          int   - stored keys count 
+	 *   keys              array - 2-level Array with all stored keys in cache and their metadata
+	 *   tagsCount         int   - stored tags count - 0 if tags not supported
+	 *   tags              array - 2-level Array with all stored tags, and keys within each tag - empty if tags not supported
+	 *   fill              int   - Integer representing the cache filling percent 
+	 */
+	public static function getCacheInfo()
+	{
+		$info = array('isLoaded' => false, 'isSupportingTags' => false, 'keyCount' => 0, 'tags' => array(), 'fill' => 0);
+		if(!self::$_isLoaded)
+		{
+			return $info;
+		}
+		// the cache is loaded if we reached this point
+		$info['isLoaded'] = true;
+
+		// keys 
+		$keys = self::getKeys();
+		$info['keyCount'] = count($keys);
+		foreach($keys as $key)
+		{
+			$info['keys'][$key] = self::getMetadatas($key);
+		}
+		
+		// test tags capability
+		$info['isSupportingTags'] = self::testTags();
+		
+		// parse tags info 
+		$tags = array();
+		if($info['isSupportingTags'])
+		{
+			$tags = self::getTags();
+		}
+		$info['tags'] = array();
+		
+		foreach($tags as $tag)
+		{
+			$info['tags'][$tag] = self::getKeysMatchingTags(array($tag));
+		}
+		
+		$info['fill'] = self::getFillingPercentage();
+		return $info;
+	}
 	
 	/**
 	 * Test Cache
-	 * 
+	 *
 	 * Returns true if the cache works
 	 * Returns false in other cases (cache isn't loaded, cache doesn't work correctly)
-	 * 
+	 *
 	 * @static
 	 * @access public
 	 * @param string $testKey [optional] - cache key to write into
 	 * @param mixed  $testValue [optional] - the value to compair
 	 * @return boolean
 	 */
-	public static function testCache($testKey = 'test', $testValue ='test')
+	public static function testCache($testKey = 'test', $testValue = 'test')
 	{
 		if(!self::$_isLoaded)
 		{
 			return false;
 		}
 		// only process the key once, use it twice
-		$testKey =  self::processKey($testKey);
-		
-		self::$_cache->save($testValue,$testKey);
-		if(self::$_cache->load($testKey) == $testValue)
+		$testKey = self::processKey($testKey);
+	
+		self::save($testValue, $testKey);
+		if(self::load($testKey) == $testValue)
 		{
+			self::remove($testKey);
 			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Test the tags capability in cache
+	 * 
+	 * This will test:
+	 *  If the tag defined will exist in tag list 
+	 *  If the cache key matches with the id's in given tag
+	 *  If the value of cache key is the same with the one given
+	 * 
+	 * This test should be executed only once
+	 * 
+	 * @param string $testKey [optional]
+	 * @param string $testValue [optional]
+	 * @param string $testTag [optional]
+	 * @return boolean
+	 */
+	
+	public static function testTags($testKey = 'test', $testValue = 'test', $testTag = 'test')
+	{
+		if(! self::$_isLoaded)
+		{
+			return false;
+		}
+		$testKey = self::processKey($testKey);
+		$testTag = array(self::processKey($testTag));
+		try
+		{
+			self::$_cache->save($testValue, $testKey, $testTag);
+			if( in_array($testTag[0], self::getTags())
+				&& in_array($testKey, self::getKeysMatchingTags())
+				&& self::load($testKey) == $testValue )
+			{
+				self::remove($testKey);
+				return true;
+			}
+		}
+		catch(Exception $e)
+		{
+			return false;
 		}
 		return false;
 	}
