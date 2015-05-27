@@ -321,6 +321,14 @@ class System extends Dot_Model
 				'More info: <a href="http://www.dotkernel.com/dotkernel/caching-in-dotkernel-using-zend-framework/"> Caching in DotKernel</a>';
 		}
 		
+		if(Dot_Cache::testTags() == false )
+		{
+			$warnings['Cache Test Failed'][] = 'Cache does not support tags';
+			$warnings['Cache Test Failed'][] = 'Check cache provider in application.ini';
+			$warnings['Cache Test Failed'][] = ''.
+				'More info: <a href="http://framework.zend.com/manual/1.12/en/zend.cache.backends.html"> ZF Cache Backends </a>';
+		}
+		
 		// plugin check
 		$pluginHandler = Plugin_Loader::getInstance();
 		$pluginData = $pluginHandler->getAllPlugins();
