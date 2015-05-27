@@ -134,7 +134,7 @@
 							<td><p>Clear Cache</p></td>
 							<td class="rightalign"><p title="Global Cache TTL">{CACHE_TTL}</p></td>
 							<td class="rightalign"><p></p></td>
-							<td class="rightalign" width="60px"><p><a class="cache_key_regenerate" id="cache_key_{CACHE_KEY_NAME}" onclick="clearCache()">Delete All</a></p></td>
+							<td class="rightalign" width="60px"><p><a class="cache_clear" id="cache_key_{CACHE_KEY_NAME}" onclick="clearCache()">Delete All</a></p></td>
 						</tr>
 						
 						<!-- BEGIN cache_key  -->
