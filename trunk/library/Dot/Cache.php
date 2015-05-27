@@ -313,17 +313,20 @@ class Dot_Cache
 	 * 
 	 * Array contains:
 	 *   KEY               DESCRIPTION
-	 *   isLoaded          bool  - if cache is loaded
-	 *   isSupportingTags  bool  - if cache backend/provider supports tags 
-	 *   keyCount          int   - stored keys count 
-	 *   keys              array - 2-level Array with all stored keys in cache and their metadata
-	 *   tagsCount         int   - stored tags count - 0 if tags not supported
-	 *   tags              array - 2-level Array with all stored tags, and keys within each tag - empty if tags not supported
-	 *   fill              int   - Integer representing the cache filling percent 
+	 *   isLoaded          bool   - if cache is loaded
+	 *   isSupportingTags  bool   - if cache backend/provider supports tags 
+	 *   keyCount          int    - stored keys count 
+	 *   keys              array  - 2-level Array with all stored keys in cache and their metadata
+	 *   importantKeys     array  - 2-level Array with important keys in cache and their metadata, theese keys can be added in application.ini
+	 *   tagsCount         int    - stored tags count - 0 if tags not supported
+	 *   tags              array  - 2-level Array with all stored tags, and keys within each tag - empty if tags not supported
+	 *   fill              int    - Integer representing the cache filling percent 
+	 *   lifetime          int    - Integer representing the GLOBAL cache lifetime settings (lifetime can be set individually on keys)
+	 *   cache_id_prefix   string - The prefix (or namespace) to save in eg. dotkernel_
 	 */
 	public static function getCacheInfo()
 	{
-		$info = array('isLoaded' => false, 'isSupportingTags' => false, 'keyCount' => 0, 'tags' => array(), 'fill' => 0);
+		$info = array('isLoaded' => false, 'isSupportingTags' => false, 'keyCount' => 0, 'tags' => array(), 'fill' => 0, 'lifetime'=>0);
 		if(!self::$_isLoaded)
 		{
 			return $info;
@@ -356,6 +359,11 @@ class Dot_Cache
 		}
 		
 		$info['fill'] = self::getFillingPercentage();
+		
+		$configuration = Zend_Registry::get('configuration');
+		$info['lifetime'] = $configuration->cache->lifetime;
+		$info['cache_id_prefix'] = $configuration->cache->namespace.'_';
+		$info['importantKeys'] = self::_getImportantCacheKeys($info['keys']);
 		return $info;
 	}
 	
@@ -453,5 +461,75 @@ class Dot_Cache
 			default: 
 				return false;
 		}
+	}
+	
+	/**
+	 * Get Important Cache Keys
+	 *
+	 * Selects the main cache keys from given cache key list
+	 * Useful when you want to change an xml or plugins.ini
+	 * 
+	 * Returns empty array if cache is not loaded, or if no cache keys loaded
+	 *
+	 * @static 
+	 * @access private
+	 * @param array
+	 * @return array $importantKeys
+	 */
+	private static function _getImportantCacheKeys($cacheKeys = array())
+	{
+		if(empty($cacheKeys) || !self::$_isLoaded)
+		{
+			return array();
+		}
+		$globalKeys = array('acl_role', 'router');
+		$importantKeys = array();
+		$routerArray = Zend_Registry::get('router')->toArray();
+		$customKeyList = self::_getCustomKeyList();
+		$keysToCheck = array();
+		foreach($routerArray['controllers'] as $module => $controllerList)
+		{
+			// if there is only one element treat as array, not as string
+			if(is_string($controllerList))
+			{
+				$controllerList = array($routerArray['controllers'][$module]);
+			}
+			array_push($controllerList, 'seo', 'default');
+			foreach($controllerList as $controller)
+			{
+				$keysToCheck[] = 'option_'.strtolower($module.'_'.$controller);
+			}
+		}
+		
+		$keysToCheck = array_merge($keysToCheck, $customKeyList, $globalKeys);
+
+		foreach($keysToCheck as $cacheKey)
+		{
+			if(isset($cacheKeys[$cacheKey]))
+			{
+				$importantKeys[$cacheKey] = $cacheKeys[$cacheKey];
+			}
+		}
+		return $importantKeys;
+	}
+	
+	/**
+	 * Get Custom Important Keys
+	 * 
+	 * Gets the cache keys from application.ini
+	 * 
+	 * @static 
+	 * @access private
+	 * @param array
+	 * @return array $importantKeys
+	 */
+	private static function _getCustomKeyList()
+	{
+		$customKeyList = Zend_Registry::get('configuration')->cache->important_key_list;
+		if(null == $customKeyList)
+		{
+			return array();
+		}
+		return $customKeyList->toArray();
 	}
 }
