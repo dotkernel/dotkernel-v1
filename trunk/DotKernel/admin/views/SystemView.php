@@ -115,9 +115,11 @@ class System_View extends View
 		}
 		foreach($cacheInfo['importantKeys'] as $keyName => $key)
 		{
+			$ttl = (9999999999 == $key['expire'] || 0 == $key['expire'] ) ? -1 : $key['expire'] - $key['mtime'];
+			$timeLeft = (0 == $key['expire']) ? -1 : (int)($key['expire'] - microtime(true));
 			$this->tpl->setVar('CACHE_KEY_NAME', $keyName );
-			$this->tpl->setVar('CACHE_KEY_TTL', $key['expire'] - $key['mtime'] );
-			$this->tpl->setVar('CACHE_KEY_TIME_LEFT', (int)($key['expire'] - microtime(true)) );
+			$this->tpl->setVar('CACHE_KEY_TTL', ($ttl>0) ? $ttl : '-' );
+			$this->tpl->setVar('CACHE_KEY_TIME_LEFT', ($timeLeft>0)? $timeLeft : '-' );
 			$this->tpl->setVar('CACHE_KEY_TTL', $key['expire'] - $key['mtime'] );
 			$this->tpl->parse('cache_key_block', 'cache_key', true);
 		}
@@ -159,7 +161,7 @@ class System_View extends View
 			$this->tpl->setVar('EXPLANATION', $v['comment']);
 			switch ($v['type']) 
 			{
-				case 'textarea':	
+				case 'textarea':
 					$this->tpl->setVar('CURRENT_VALUE', $v['value']);
 					$this->tpl->parse('textarea_row', 'textarea', true);
 				break;
