@@ -1,5 +1,35 @@
 <script>
-	$(document).ready(function(){
+	function deleteFromCache(key)
+	{
+		var data = {'key':key, 'userToken':'{USERTOKEN}'};
+		$.ajax({
+			type : "POST",
+			url : "{SITE_URL}/admin/system/clear-cache/",
+			data : data,
+			success : function(){
+					$("#cache_key_"+key).remove();
+				}
+			,
+			dataType : "json"
+		});
+	}
+	
+	function clearCache()
+	{
+		var data = { 'userToken':'{USERTOKEN}' };
+		$.ajax({
+			type : "POST",
+			url : "{SITE_URL}/admin/system/clear-cache/",
+			data : data,
+			success : function(){
+					$(".cache_key").remove();
+				}
+			,
+			dataType : "json"
+		});
+	}
+	$(document).ready(function() {
+
 		// update jQuery and jQuery UI versions
 		$("#jqueryVersion").text($().jquery);
 		$("#jqueryUiVersion").text($.ui.version);
@@ -84,7 +114,42 @@
 					<!-- END ini_value_list -->
 				</div>
 			</div>
-		</td>
+	
+		<!-- BEGIN cache_management -->
+			<div class="system_overview security_recommendations cache_management">
+				<div class="box-shadow">
+					<div class="box_header">
+						Dot Cache Management
+					</div>
+
+					<table class="medium_table security_check cache_key_list">
+						<tr>
+							<td><p title="Cache Key">Key</p></td>
+							<td width="60px" class="rightalign"><p title="Time To Live"><strong>TTL</strong></p></td>
+							<td width="60px" class="rightalign"><p title="Time left till expiration"><strong>Time left</strong></p></td>
+							<td class="rightalign" width="60px"><p title="Delete From Cache"><strong>Delete</strong></p></td>
+						</tr>
+						<!-- Full Cache Clear  -->
+						<tr>
+							<td><p>Clear Cache</p></td>
+							<td class="rightalign"><p title="Global Cache TTL">{CACHE_TTL}</p></td>
+							<td class="rightalign"><p></p></td>
+							<td class="rightalign" width="60px"><p><a class="cache_key_regenerate" id="cache_key_{CACHE_KEY_NAME}" onclick="clearCache()">Delete All</a></p></td>
+						</tr>
+						
+						<!-- BEGIN cache_key  -->
+						<tr id="cache_key_{CACHE_KEY_NAME}" class="cache_key">
+							<td><p>{CACHE_KEY_NAME}</p></td>
+							<td class="rightalign"><p title="TTL For Key: {CACHE_KEY_NAME}">{CACHE_KEY_TTL}</p></td>
+							<td class="rightalign"><p title="Time left for Key: {CACHE_KEY_NAME}">{CACHE_KEY_TIME_LEFT}</p></td>
+							<td class="rightalign" width="60px"><p><a class="cache_key_delete" id="cache_key_{CACHE_KEY_NAME}_delete" onclick="deleteFromCache('{CACHE_KEY_NAME}')">Delete</a></p></td>
+						</tr>
+						<!-- END cache_key  -->
+					</table>
+				</div>
+			</div>
+		<!-- END cache_management -->
+	</td>
 		<td class="charts_td">
 			<div class="charts clearfix">
 				<div class="time_activity box-shadow">

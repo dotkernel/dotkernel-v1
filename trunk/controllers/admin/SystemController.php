@@ -28,7 +28,8 @@ switch ($registry->requestAction)
 		$apcInfo = $systemModel->getAPCInfo();
 		//	Ini Values
 		$iniValues = $systemModel->getIniValuesWithCorrection();
-		$systemView->dashboard('dashboard', $mysqlVersion, $apcInfo, $geoIpVersion, $warnings, $iniValues);
+		$cacheInfo = Dot_Cache::getCacheInfo();
+		$systemView->dashboard('dashboard', $mysqlVersion, $apcInfo, $geoIpVersion, $warnings, $iniValues, $cacheInfo);
 	break;
 	case 'settings':
 		// list settings values
@@ -79,4 +80,27 @@ switch ($registry->requestAction)
 		}
 		$systemView->showAPCInfo($apcu);
 	break;
+	case 'delete-key':
+		$result = array("success" => false, "message" => "An error occured, please try again.");
+		if(!isset($_POST['key']) || !isset($_POST['userToken']) || !Dot_Auth::checkUserToken($_POST['userToken']))
+		{
+			echo Zend_Json::encode($result);
+			exit;
+		}
+		Dot_Cache::remove($_POST['key']);
+		$result = array('succes'=>'true');
+		echo Zend_Json::encode($result);
+		exit;
+		
+	case 'clear-cache':
+		$result = array("success" => false, "message" => "An error occured, please try again.");
+		if(!isset($_POST['userToken']) || !Dot_Auth::checkUserToken($_POST['userToken']))
+		{
+			echo Zend_Json::encode($result);
+			exit;
+		}
+		Dot_Cache::clean('all');
+		$result = array('succes'=>'true');
+		echo Zend_Json::encode($result);
+		exit;
 }

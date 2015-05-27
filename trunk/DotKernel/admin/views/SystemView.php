@@ -39,8 +39,9 @@ class System_View extends View
 	 * @param array $warnings
 	 * @return void
 	 */
-	public function dashboard($templateFile, $mysqlVersion, $apcInfo, $geoIpVersion, $warnings, $iniValues)
+	public function dashboard($templateFile, $mysqlVersion, $apcInfo, $geoIpVersion, $warnings, $iniValues, $cacheInfo)
 	{
+		// @todo: break this method in more pieces, there are too much arguments
 		$this->tpl->setFile('tpl_main', 'system/' . $templateFile . '.tpl');
 		// system overview
 		$this->tpl->setVar('HOSTNAME' , System::getSystemHostname());
@@ -104,6 +105,22 @@ class System_View extends View
 			$this->tpl->parse('ini_value_list_block', 'ini_value_list', false);
 		}
 		
+		// Caching info
+		$this->tpl->setBlock('tpl_main', 'cache_management', 'cache_management_block');
+		$this->tpl->setBlock('cache_management', 'cache_key', 'cache_key_block');
+		if($cacheInfo['isLoaded'])
+		{
+			$this->tpl->parse('cache_management_block', 'cache_management');
+			$this->tpl->setVar('CACHE_TTL', $cacheInfo['lifetime']);
+		}
+		foreach($cacheInfo['importantKeys'] as $keyName => $key)
+		{
+			$this->tpl->setVar('CACHE_KEY_NAME', $keyName );
+			$this->tpl->setVar('CACHE_KEY_TTL', $key['expire'] - $key['mtime'] );
+			$this->tpl->setVar('CACHE_KEY_TIME_LEFT', (int)($key['expire'] - microtime(true)) );
+			$this->tpl->setVar('CACHE_KEY_TTL', $key['expire'] - $key['mtime'] );
+			$this->tpl->parse('cache_key_block', 'cache_key', true);
+		}
 		
 		// GeoIP section
 		$this->tpl->setVar('GEOIP_COUNTRY_LOCAL', $geoIpVersion['local']);
@@ -114,6 +131,8 @@ class System_View extends View
 			$this->tpl->setVar('GEOIP_COUNTRY_VERSION', $geoIpVersion['country']);
 			$this->tpl->parse('is_geoip_row', 'is_geoip', true);
 		}
+		
+		$this->tpl->addUserToken();
 	
 	}
 	/**
