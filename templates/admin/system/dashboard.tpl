@@ -4,7 +4,7 @@
 		var data = {'key':key, 'userToken':'{USERTOKEN}'};
 		$.ajax({
 			type : "POST",
-			url : "{SITE_URL}/admin/system/clear-cache/",
+			url : "{SITE_URL}/admin/system/delete-key/",
 			data : data,
 			success : function(){
 					$("#cache_key_"+key).remove();
