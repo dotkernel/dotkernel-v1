@@ -171,21 +171,37 @@ a.edit_state:hover {
 }
 a.delete_state {
 	background: url('images/delete_icon.png') no-repeat 0px 0px;
-	color: #7B8CA8
+	color: #7B8CA8;
 }
 a.delete_state:hover {
 	background: url('images/delete_icon.png') no-repeat 0px -50px;
 }
+a.cache_key_delete {
+	background: url('images/remove.png') no-repeat 0px 0px;
+	color: #7B8CA8;
+}
+a.cache_key_delete:hover {
+	background: url('images/remove.png') no-repeat 0px -49px;
+	color: #7B8CA8;
+}
+a.cache_clear {
+	background: #F6F6F6 url('images/remove.png') no-repeat 15px 11px;
+	color: #7B8CA8;
+}
+a.cache_clear:hover {
+	background: #F6F6F6 url('images/remove.png') no-repeat 15px -38px;
+	color: #7B8CA8;
+}
 a.logins_state {
 	background: url('images/logins_icon.png') no-repeat 0px 0px;
-	color: #7B8CA8
+	color: #7B8CA8;
 }
 a.logins_state:hover {
 	background: url('images/logins_icon.png') no-repeat 0px -50px;
 }
 a.pass_state {
 	background: url('images/send_pass_icon.png') no-repeat 0px 0px;
-	color: #7B8CA8
+	color: #7B8CA8;
 }
 a.pass_state:hover {
 	background: url('images/send_pass_icon.png') no-repeat 0px -50px;

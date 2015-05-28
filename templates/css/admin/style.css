@@ -498,6 +498,33 @@ a.delete_state {
 a.delete_state:hover {
 	text-decoration:none;
 }
+a.cache_key_delete {
+	display: block;
+	padding-left: 15px;
+	height: 17px;
+	line-height: 18px;
+	font-weight: normal;
+	width: 58px;
+	float: right;
+}
+a.cache_key_delete:hover {
+	text-decoration:none;
+	font-weight: normal;
+}
+
+a.cache_clear {
+	display: block;
+	padding: 10px 15px;
+	line-height: 18px;
+	font-weight: normal;
+	width: 85px;
+	float: right;
+}
+a.cache_clear:hover {
+	text-decoration:none;
+	font-weight: normal;
+}
+
 a.logins_state {
 	display: block;
 	padding-left: 20px;
@@ -544,6 +571,10 @@ a.sort_down {
 .no_border-top {
 	border-top: none;
 }
+
+/*** Cache ***/
+tr.cache_clear_all td { padding-top: 15px !important; border-top: 1px solid #f4f4f4; }
+tr.cache_clear_all td p { padding-top: 10px; font-weight: bold; }
 
 /*** G_box ***/
 .g_box {
