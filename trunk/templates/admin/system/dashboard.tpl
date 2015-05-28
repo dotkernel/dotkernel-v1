@@ -125,16 +125,9 @@
 					<table class="medium_table security_check cache_key_list">
 						<tr>
 							<td><p title="Cache Key">Key</p></td>
-							<td width="60px" class="rightalign"><p title="Time To Live"><strong>TTL</strong></p></td>
+							<td width="30px" class="rightalign"><p title="Time To Live"><strong>TTL</strong></p></td>
 							<td width="60px" class="rightalign"><p title="Time left till expiration"><strong>Time left</strong></p></td>
-							<td class="rightalign" width="60px"><p title="Delete From Cache"><strong>Delete</strong></p></td>
-						</tr>
-						<!-- Full Cache Clear  -->
-						<tr>
-							<td><p>Clear Cache</p></td>
-							<td class="rightalign"><p title="Global Cache TTL">{CACHE_TTL}</p></td>
-							<td class="rightalign"><p></p></td>
-							<td class="rightalign" width="60px"><p><a class="cache_clear" id="cache_key_{CACHE_KEY_NAME}" onclick="clearCache()">Delete All</a></p></td>
+							<td class="rightalign" width="70px"><p title="Delete From Cache"><strong>Action</strong></p></td>
 						</tr>
 						
 						<!-- BEGIN cache_key  -->
@@ -142,9 +135,20 @@
 							<td><p>{CACHE_KEY_NAME}</p></td>
 							<td class="rightalign"><p title="TTL For Key: {CACHE_KEY_NAME}">{CACHE_KEY_TTL}</p></td>
 							<td class="rightalign"><p title="Time left for Key: {CACHE_KEY_NAME}">{CACHE_KEY_TIME_LEFT}</p></td>
-							<td class="rightalign" width="60px"><p><a class="cache_key_delete" id="cache_key_{CACHE_KEY_NAME}_delete" onclick="deleteFromCache('{CACHE_KEY_NAME}')">Delete</a></p></td>
+							<td class="rightalign" width="70px"><p><a class="cache_key_delete" title="Clear '{CACHE_KEY_NAME}' cache"id="cache_key_{CACHE_KEY_NAME}_delete" onclick="deleteFromCache('{CACHE_KEY_NAME}')">Clear Key</a></p></td>
 						</tr>
 						<!-- END cache_key  -->
+						
+						<!-- Full Cache Clear  -->
+						<tr>
+							<td colspan="4"></td>
+						</tr>
+						<tr class="cache_clear_all">
+							<td><p>Cache</p></td>
+							<td class="rightalign"><!-- <p title="Global Cache TTL">{CACHE_TTL}</p> --></td>
+							<td class="rightalign"><p></p></td>
+							<td class="rightalign" width="70px"><a class="cache_clear" title="Clear Cache" id="cache_key_{CACHE_KEY_NAME}" onclick="clearCache()">Clear Cache</a></td>
+						</tr>
 					</table>
 				</div>
 			</div>
