@@ -4,7 +4,6 @@
  * DotKernel Application Framework
  *
  * @category   DotKernel
- * @package    DotLibrary
  * @copyright  Copyright (c) 2009-2015 DotBoost Technologies Inc. (http://www.dotboost.com)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @version    $Id$
@@ -34,9 +33,10 @@ class Dot_Cache
 	private static function _loadCache()
 	{
 		$configuration = Zend_Registry::get('configuration');
+		$lifetime = $configuration->cache->lifetime;
 		// only disable automatic serialization if you know what you're doing
 		$frontendOptions = array(
-			'lifetime' => $configuration->cache->lifetime,
+			'lifetime' => ($lifetime) ? $lifetime : 0,
 			'caching' => $configuration->cache->enable,
 			'cache_id_prefix' => $configuration->cache->namespace.'_',
 			'automatic_serialization' => true 
