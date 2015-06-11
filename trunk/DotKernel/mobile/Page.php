@@ -4,8 +4,7 @@
 * DotKernel Application Framework
 *
 * @category   DotKernel
-* @package    Mobile
- * @copyright  Copyright (c) 2009-2015 DotBoost Technologies Inc. (http://www.dotboost.com)
+* @copyright  Copyright (c) 2009-2015 DotBoost Technologies Inc. (http://www.dotboost.com)
 * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 * @version    $Id$
 */
@@ -14,7 +13,7 @@
 * Page Model
 * Dummy class, doesn't do anything yet
 * @category   Mobile
-* @package    Frontend 
+* @package    Mobile
 * @author     DotKernel Team <team@dotkernel.com>
 */
 

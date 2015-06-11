@@ -4,11 +4,18 @@
  * DotKernel Application Framework
  *
  * @category   DotKernel
- * @package    Api
- * @subpackage OpCache
  * @copyright  Copyright (c) 2009-2015 DotBoost Technologies Inc. (http://www.dotboost.com)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @version    $Id$
+ * @author     DotKernel Team <team@dotkernel.com>
+ */
+ 
+/**
+ * OpCache Model for API
+ *
+ * @category   DotKernel
+ * @package    Api
+ * @subpackage OpCache
  * @author     DotKernel Team <team@dotkernel.com>
 */
 
