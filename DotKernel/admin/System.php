@@ -18,69 +18,6 @@
 */
 class System extends Dot_Model
 {
-	
-	/**
-	 * Array with the recommended php.ini security related values
-	 *
-	 * @var array
-	 */
-	private $_recommendedIniValues =  array(
-					'production' => array(
-						'allow_url_fopen' => 0,
-						'allow_url_include' => 0,
-						
-						'session.use_cookies' => 1,
-						'session.use_only_cookies' => 1,
-						'session.cookie_httponly' => 1,
-						'session.bug_compat_42' => 0,
-						'session.bug_compat_warn' => 0,
-						'session.use_trans_sid' => 0,
-						'session.cookie_secure' => 1,
-						'session.use_strict_mode' => 1,
-						
-						'display_errors' => 0,
-						'log_errors' => 1,
-						'expose_php' => 1,
-						'register_globals' => 1,
-						'magic_quotes_gpc' => 0,
-						'magic_quotes_runtime' => 0,
-						'safe_mode' => 0,
-						'register_long_arrays' => 0,
-						'display_startup_errors' => 0,
-						'error_reporting' => E_ALL,
-						'upload_max_filesize' => '2M',
-						'post_max_size' => '8M',
-						'memory_limit' => '128M',
-						'asp_tags' => 0,
-						'xdebug.default_enable' => 0,
-						'xdebug.remote_enable' => 0),
-					
-					'staging' => array(
-						'display_errors' => 1,
-						'log_errors' => 1,
-						'display_startup_errors' => 1,
-						'error_reporting' => E_ALL,
-						'upload_max_filesize' => '128M',
-						'post_max_size' => '128M',
-						'memory_limit' => '128M',
-//						'xdebug.default_enable' => 0,
-//						'xdebug.remote_enable' => 0
-					),
-					
-					'development' => array(
-						'display_errors' => 1,
-						'log_errors' => 1,
-						'display_startup_errors' => 1,
-						'error_reporting' => -1,
-						'upload_max_filesize' => '128M',
-						'post_max_size' => '128M',
-						'memory_limit' => '128M',
-//						'xdebug.default_enable' => 1,
-//						'xdebug.remote_enable' => 0
-					),
-							
-	);
-	
 	/**
 	 * Ini Values
 	 * @var array
@@ -431,7 +368,8 @@ class System extends Dot_Model
 	{
 		$iniValues = array();
 		// Recommended Values - multi-env
-		$recommendedIniValues = array_replace($this->_recommendedIniValues['production'], $this->_recommendedIniValues[APPLICATION_ENV]);
+		$goodIniValues = $this->option->recommendedPhpIniValues->toArray();
+		$recommendedIniValues = array_replace($goodIniValues['production'], $goodIniValues[APPLICATION_ENV]);
 		
 		// Current Values
 		$allIniValues = $this->_getPhpIniValues($scope);
