@@ -40,27 +40,18 @@ Date: {DATE_NOW}
 					<session.use_cookies>1</session.use_cookies>
 					<session.use_only_cookies>1</session.use_only_cookies>
 					<session.cookie_httponly>1</session.cookie_httponly>
-					<session.bug_compat_42>0</session.bug_compat_42>
 					<session.bug_compat_warn>0</session.bug_compat_warn>
 					<session.use_trans_sid>0</session.use_trans_sid>
 					<session.cookie_secure>1</session.cookie_secure>
 					<session.use_strict_mode>1</session.use_strict_mode>
 					<display_errors>0</display_errors>
 					<log_errors>1</log_errors>
-					<expose_php>1</expose_php>
-					<register_globals>1</register_globals>
-					<magic_quotes_gpc>0</magic_quotes_gpc>
-					<magic_quotes_runtime>0</magic_quotes_runtime>
 					<safe_mode>0</safe_mode>
-					<register_long_arrays>0</register_long_arrays>
 					<display_startup_errors>0</display_startup_errors>
 					<error_reporting>32767</error_reporting>
 					<upload_max_filesize>2M</upload_max_filesize>
 					<post_max_size>8M</post_max_size>
 					<memory_limit>128M</memory_limit>
-					<asp_tags>0</asp_tags>
-					<xdebug.default_enable>0</xdebug.default_enable>
-					<xdebug.remote_enable>0</xdebug.remote_enable>
 				</production>
 				<staging>
 					<display_errors>1</display_errors>
