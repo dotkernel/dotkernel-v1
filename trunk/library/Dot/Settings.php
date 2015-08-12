@@ -43,7 +43,7 @@ class Dot_Settings
 		foreach ($results as $key => $val)
 		{
 			$settings[$val['key']] = $val['value'];
-		}	
+		}
 		return (object)$settings;
 	}
 	
