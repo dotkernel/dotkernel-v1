@@ -323,6 +323,10 @@ class Dot_Cache
 	 *   fill              int    - Integer representing the cache filling percent 
 	 *   lifetime          int    - Integer representing the GLOBAL cache lifetime settings (lifetime can be set individually on keys)
 	 *   cache_id_prefix   string - The prefix (or namespace) to save in eg. dotkernel_
+	 * 
+	 * @static
+	 * @access public
+	 * @return array $info
 	 */
 	public static function getCacheInfo()
 	{
