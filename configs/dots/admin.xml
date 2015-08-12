@@ -15,14 +15,14 @@
 					<logins>Admin User Logins</logins>
 				</action>
 			</pageTitle>
-			<errorMessage>			
+			<errorMessage>
 				<passwordTwice>You didn't enter the same password twice. Please re-enter your it again</passwordTwice>
 				<invalidUsername>Invalid Username !</invalidUsername>
 				<invalidPassword>Invalid Password !</invalidPassword>
 				<wrongCredentials>Wrong Login Credentials !</wrongCredentials>
 				<inactiveAcount>This account is inactive !</inactiveAcount>
-				<userExists> already exists ! </userExists>	
-				<trickUserError>Why are you so smart ? &lt;/br&gt; Don't play with the fire !</trickUserError>		
+				<userExists> already exists ! </userExists>
+				<trickUserError>Why are you so smart ? &lt;/br&gt; Don't play with the fire !</trickUserError>
 			</errorMessage>
 			<infoMessage>
 				<accountAdd>Account created ! </accountAdd>
@@ -31,7 +31,8 @@
 				<noAccountDelete>No account was deleted ! </noAccountDelete>
 			</infoMessage>
 			<warningMessage>
-				<userPermission>You don't have enough credentials to access this url.</userPermission>
+				<userPermission>You don't have enough credentials to access this
+					url.</userPermission>
 			</warningMessage>
 			<validate>
 				<details>
@@ -46,7 +47,7 @@
 					<lengthMin>3</lengthMin>
 					<lengthMax>255</lengthMax>
 				</username>
-			</validate>					
+			</validate>
 			<failedLogin>
 				<subject>Admin Failed Log In !</subject>
 				<message>Dear admin, 
@@ -60,9 +61,9 @@ Country: %COUNTRY%
 IP: %IP%
 User Agent: %USERAGENT%
 				</message>
-			</failedLogin> 
+			</failedLogin>
 		</variable>
 		<variable option="frontend">
-		</variable>		
+		</variable>
 	</dots>
 </config>
