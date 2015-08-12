@@ -336,7 +336,10 @@ class Dot_Cache
 
 		// keys 
 		$keys = self::getKeys();
+		
 		$info['keyCount'] = count($keys);
+		
+		$info['keys'] = array();
 		foreach($keys as $key)
 		{
 			$info['keys'][$key] = self::getMetadatas($key);
@@ -346,13 +349,14 @@ class Dot_Cache
 		$info['isSupportingTags'] = self::testTags();
 		
 		// parse tags info 
+		
 		$tags = array();
 		if($info['isSupportingTags'])
 		{
 			$tags = self::getTags();
 		}
-		$info['tags'] = array();
 		
+		$info['tags'] = array();
 		foreach($tags as $tag)
 		{
 			$info['tags'][$tag] = self::getKeysMatchingTags(array($tag));
