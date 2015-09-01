@@ -99,19 +99,26 @@ else
 	$ttl = 3600;
 }
 
-$cacheRateKey = $registry->configuration->cache->namespace. '_'. $registry->configuration->api->params->prefix 
+$cacheRateKey = 'api_'. $registry->configuration->cache->namespace. '_'. $registry->configuration->api->params->prefix 
 				.'_'.$registry->arguments['key'] .'_'.$timeKey ; 
-
 // using apcu directly
+Dot_Cache::loadCache();
+if(!Dot_Cache::testCache('api_text', 'api_test'))
+{
+	Api_Model_Header::setHeaderByCode(503);
+	exit;
+}
+
 // for more info about the caching layer see    http://www.dotkernel.com/tag/dotkernel-caching/
-$rate = (int)(apc_fetch($cacheRateKey));
+$rate = (int)(Dot_Cache::load($cacheRateKey));
 $rateLimit = $registry->configuration->api->params->rate_limit ;
 if($rate > $rateLimit)
 {
 	Api_Model_Header::setHeaderByCode(403);
 	exit;
 }
-apc_store($cacheRateKey,1+$rate, $ttl);
+
+Dot_Cache::save(1+$rate, $cacheRateKey, $ttl);
 
 // Create  connection to database, as singleton , and store it in registry
 $db = Zend_Db::factory('Pdo_Mysql', $config->database->params->toArray());
@@ -122,4 +129,27 @@ $settings = Dot_Settings::getSettings();
 $registry->settings = $settings;
 $registry->option = array();
 
+
+// initialize plugin configuration
+$pluginConfig = Dot_Cache::load('plugin_configuration');
+if($pluginConfig != false)
+{
+	$registry->pluginConfiguration = $pluginConfig;
+}
+// config needed
+else
+{
+	$config = Zend_Registry::get('configuration');
+	
+	$pluginConfig = new Zend_Config_Ini(CONFIGURATION_PATH.'/plugins.ini', APPLICATION_ENV);
+	
+	// only save the settings if plugin_config caching is enabled
+	if($config->cache->cache_plugin_config)
+	{
+		Dot_Cache::save($pluginConfig, 'plugin_configuration');
+	}
+	$registry->pluginConfiguration = $pluginConfig;
+}
+
+// 
 include('Controller.php');
