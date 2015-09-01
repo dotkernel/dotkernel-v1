@@ -99,7 +99,7 @@ else
 	$ttl = 3600;
 }
 
-$cacheRateKey = 'api_'. $registry->configuration->cache->namespace. '_'. $registry->configuration->api->params->prefix 
+$cacheRateKey =  $registry->configuration->api->params->prefix 
 				.'_'.$registry->arguments['key'] .'_'.$timeKey ; 
 // using apcu directly
 Dot_Cache::loadCache();
