@@ -40,9 +40,9 @@ class Dot_Settings
 		$select = $db->select()
 					 ->from('setting');
 		$results = $db->fetchAll($select);
-		foreach ($results as $key => $val)
+		foreach ($results as  $setting)
 		{
-			$settings[$val['key']] = $val['value'];
+			$settings[$setting['key']] = $setting['value'];
 		}
 		return (object)$settings;
 	}
