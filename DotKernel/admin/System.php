@@ -262,7 +262,7 @@ class System extends Dot_Model
 			$warnings['Cache Test Failed'][] = 'Cache does not support tags';
 			$warnings['Cache Test Failed'][] = 'Check cache provider in application.ini';
 			$warnings['Cache Test Failed'][] = ''.
-				'More info: <a href="http://framework.zend.com/manual/1.12/en/zend.cache.backends.html"> ZF Cache Backends </a>';
+				'More info: <a href="http://framework.zend.com/manual/1.12/en/zend.cache.backends.html" target="_blank"> ZF Cache Backends </a>';
 		}
 		
 		// plugin check
