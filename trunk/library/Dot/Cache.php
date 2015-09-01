@@ -492,7 +492,12 @@ class Dot_Cache
 		}
 		$globalKeys = array('acl_role', 'router');
 		$importantKeys = array();
-		$routerArray = Zend_Registry::get('router')->toArray();
+		$registry = Zend_Registry::getInstance();
+		$routerArray = array('controllers'=>array());
+		if(isset($registry->router))
+		{
+			$routerArray = $registry->router->toArray();
+		}
 		$customKeyList = self::_getCustomKeyList();
 		$keysToCheck = array();
 		foreach($routerArray['controllers'] as $module => $controllerList)
