@@ -42,7 +42,7 @@ class Dot_Kernel
 		else
 		{
 			Dot_Route::pageNotFound();
-		} 
+		}
 	}
 	/**
 	 * Initializes the Zend_Registry
@@ -142,11 +142,6 @@ class Dot_Kernel
 
 		// load the plugin configuration
 		$registry->pluginConfiguration = self::_loadPluginConfiguration();
-		
-		//Load configuration settings from application.ini file and store it in registry
-		$config = new Zend_Config_Ini(CONFIGURATION_PATH.'/application.ini', APPLICATION_ENV);
-		$registry->configuration = $config;
-		
 		
 		// Create  connection to database, as singleton , and store it in registry
 		$db = Zend_Db::factory('Pdo_Mysql', $config->database->params->toArray());
