@@ -9,6 +9,12 @@
 			<uaBrowser>MSIE</uaBrowser>
 			<uaIcon>msie</uaIcon>
 		</type>
+		<!--  Edge also contains Chrome/XX.xxxx in UserAgent -->
+		<!--  Edge will be before Chrome -->
+		<type>
+			<uaBrowser>Edge</uaBrowser>
+			<uaIcon>edge</uaIcon>
+		</type>
 		<type>
 			<uaBrowser>Chromium</uaBrowser>
 			<uaIcon>chromium</uaIcon>
