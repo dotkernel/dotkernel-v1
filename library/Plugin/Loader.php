@@ -89,9 +89,18 @@
 	 * @param unknown $pluginName
 	 * @return multitype:
 	 */
-	private function _getPluginOptions($vendor, $pluginName)
+	protected function _getPluginOptions($vendor, $pluginName)
 	{
-		return $this->_pluginConfiguration->plugin->$vendor->$pluginName->toArray();
+		$cacheKey = 'plugin_'.strtolower($vendor.'_'.$pluginName).'_options';
+		$config = Dot_Cache::load($cacheKey);
+		if($config != false)
+		{
+			return $config;
+		}
+		
+		$config = $this->_pluginConfiguration->plugin->$vendor->$pluginName->toArray();
+		Dot_Cache::save($config, $cacheKey);
+		return $config;
 	}
 	
 	/**
