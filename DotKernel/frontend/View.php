@@ -207,4 +207,68 @@ class View extends Dot_Template
 		$recaptcha->setOptions($option->captchaOptions->toArray());
 		return $recaptcha;
 	}
+	
+	/**
+	 * Create the pagination, based on how many data
+	 * @access public
+	 * @param array $page
+	 * @return string
+	 */
+	protected function paginator($page)
+	{
+		// get route again here, because ajax may have change it
+		//$route = Zend_Registry::get('route');
+		$request = Zend_Registry::get('request');
+		$this->setFile('page_file', 'paginator.tpl');
+		$this->setVar('TOTAL_RECORDS', $page->totalItemCount);
+		$this->setVar('TOTAL_PAGES', $page->pageCount );
+		$this->setBlock('page_file', 'first', 'first_row');
+		$this->setBlock('page_file', 'last', 'last_row');
+		$this->setBlock('page_file', 'current_page', 'current_row');
+		$this->setBlock('page_file', 'other_page', 'other_row');
+		$this->setBlock('page_file', 'pages', 'pages_row');
+	
+		if(array_key_exists('page', $request))
+		{
+			unset($request['page']);
+		}
+	
+		$link = Dot_Route::createCanonicalUrl() .'page/';
+	
+		if ($page->current != 1)
+		{
+			$this->setVar('FIRST_LINK',$link."1");
+			$this->parse('first_row', 'first', true);
+		}
+		else
+		{
+			$this->parse('first_row', '');
+		}
+		if ($page->current != $page->last && $page->last > $page->current)
+		{
+			$this->setVar('LAST_LINK',$link.$page->last);
+			$this->parse('last_row', 'last', true);
+		}
+		else
+		{
+			$this->parse('last_row', '');
+		}
+		foreach ($page->pagesInRange as $val)
+		{
+			$this->setVar('PAGE_NUMBER', $val);
+			$this->parse('other_row','');
+			$this->parse('current_row','');
+			if($val == $page->current)
+			{
+				$this->parse('current_row','current_page', true);
+			}
+			else
+			{
+				$this->setVar('PAGE_LINK', $link.$val);
+				$this->parse('other_row','other_page', true);
+			}
+			$this->parse('pages_row', 'pages', true);
+		}
+		$this->parse('PAGINATION', 'page_file');
+	}
 }
