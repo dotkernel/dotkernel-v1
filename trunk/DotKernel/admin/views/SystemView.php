@@ -107,7 +107,9 @@ class System_View extends View
 		// Caching info
 		$this->tpl->setBlock('tpl_main', 'cache_management', 'cache_management_block');
 		$this->tpl->setBlock('cache_management', 'cache_key', 'cache_key_block');
-		if($cacheInfo['isLoaded'])
+		
+		// if there are no cache keys hide the panel 
+		if(count($cacheInfo['keys'])>0)
 		{
 			$this->tpl->parse('cache_management_block', 'cache_management');
 			$this->tpl->setVar('CACHE_TTL', $cacheInfo['lifetime']);
