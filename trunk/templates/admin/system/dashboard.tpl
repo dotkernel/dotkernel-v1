@@ -1,3 +1,8 @@
+<script>
+	// tpl trick, use the JS var as a TPL var
+	var SITE_URL = "{SITE_URL}";
+</script>
+
 <table class="dashboard_table">
 	<tr>
 		<td class="sys_td">
