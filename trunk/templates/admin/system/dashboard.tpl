@@ -1,7 +1,3 @@
-<script>
-
-</script>
-</style>
 <table class="dashboard_table">
 	<tr>
 		<td class="sys_td">
