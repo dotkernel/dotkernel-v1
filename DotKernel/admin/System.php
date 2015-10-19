@@ -150,21 +150,33 @@ class System extends Dot_Model
 	}
 	
 	/**
-	 * Get any warnings to display in the dashboard
+	 * Get any messages to display in the dashboard
 	 * Each array element returned is an array with two strings: type and description
 	 * @access public
 	 * @return array
 	 */
-	public function getWarnings()
+	public function getNotifications()
 	{
+		// error "categories"
+		$errors = array('Security Warning'=>array(),
+						'Debug Email' => array(),
+						'Delete Files'=>array(),
+						'Make Writable'=>array(),
+						'Make Unwritable'=>array(),
+						'Cache Test Failed'=>array(),
+						'Plugin Check' => array()
+		);
+		
 		// warning "categories"
 		$warnings = array('Security Warning'=>array(),
 							'Debug Email' => array(),
 							'Delete Files'=>array(),
-							'Make Writable'=>array(), 
-							'Make Unwritable'=>array(),
 							'Cache Test Failed'=>array(),
 							'Plugin Check' => array()
+		);
+		#$infos = array();
+		// sample messages
+		$infos = array(
 		);
 		
 		// check that the default admin user isn't enabled
@@ -172,7 +184,7 @@ class System extends Dot_Model
 		$defaultAdminValid = $dotAuth->process('admin', array("username"=>"admin", "password"=>"dot"), $storeInSession = false);
 		if ($defaultAdminValid)
 		{
-			$warnings["Security Warning"][] = "Please change the password of the oldest admin user or deactivate him";
+			$errors["Security Warning"][] = "Please change the password of the oldest admin user or deactivate him";
 		}
 		
 		// if the oldest admin have the same email team@dotkernel.com
@@ -180,14 +192,14 @@ class System extends Dot_Model
 		$emailAdmin = $this->db->fetchOne($select);
 		if('team@dotkernel.com' == $emailAdmin)
 		{
-			$warnings["Debug Email"][] = "Please change the email of the default admin user or deactivate him.";
+			$errors["Debug Email"][] = "Please change the email of the default admin user or deactivate him.";
 		}
 			
 		//if the devEmails is the default one : team@dotkernel.com
 		// why query db when we have it in the Dot_Model  
 		if(stripos($this->settings->devEmails, 'team@dotkernel.com') !== false)
 		{
-			$warnings["Debug Email"][] = "Update the setting.devEmails value to reflect your debug email.";
+			$errors["Debug Email"][] = "Update the setting.devEmails value to reflect your debug email.";
 		}
 		
 		// check for files that should be deleted
@@ -249,7 +261,28 @@ class System extends Dot_Model
 			}
 		}
 		
-		if(Dot_Cache::testCache() == false )
+		$cacheSimpleTest = Dot_Cache::testCache();
+		$cacheTagsTest = Dot_Cache::testTags();
+		if($cacheSimpleTest == true)
+		{
+			$cacheInfo = Dot_Cache::getCacheInfo();
+			foreach($cacheInfo['config'] as $key => $value)
+			{
+				$infos['Cache Info'][] = $key . ' : ' . $value;
+			}
+			if($cacheTagsTest == true )
+			{
+				$infos['Cache Info'][] = 'tags are supported';
+			}
+			else
+			{
+				$warnings['Cache Test Failed'][] = 'Cache does not support tags';
+				$warnings['Cache Test Failed'][] = 'Check cache provider in application.ini';
+				$warnings['Cache Test Failed'][] = ''.
+					'More info: <a href="http://framework.zend.com/manual/1.12/en/zend.cache.backends.html" target="_blank"> ZF Cache Backends </a>';
+			}
+		}
+		else
 		{
 			$warnings['Cache Test Failed'][] = 'Cache is not working or disabled';
 			$warnings['Cache Test Failed'][] = 'Check cache settings or if cache module is supported';
@@ -257,13 +290,8 @@ class System extends Dot_Model
 				'More info: <a href="http://www.dotkernel.com/dotkernel/caching-in-dotkernel-using-zend-framework/"> Caching in DotKernel</a>';
 		}
 		
-		if(Dot_Cache::testTags() == false )
-		{
-			$warnings['Cache Test Failed'][] = 'Cache does not support tags';
-			$warnings['Cache Test Failed'][] = 'Check cache provider in application.ini';
-			$warnings['Cache Test Failed'][] = ''.
-				'More info: <a href="http://framework.zend.com/manual/1.12/en/zend.cache.backends.html" target="_blank"> ZF Cache Backends </a>';
-		}
+
+
 		
 		// plugin check
 		$pluginHandler = Plugin_Loader::getInstance();
@@ -282,7 +310,7 @@ class System extends Dot_Model
 			}
 		}
 		
-		return $warnings;
+		return array('error'=>$errors,'warning'=>$warnings,'info'=>$infos);
 	}
 	
 	/**
