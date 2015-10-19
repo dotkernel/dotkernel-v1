@@ -332,3 +332,66 @@ function ShowHideDiv (idv, classv)
 		$('#' + idv).show();
 	}
 }
+
+/** DASHBOARD **/
+$(document).ready(function() {
+
+	// update jQuery and jQuery UI versions
+	$("#jqueryVersion").text($().jquery);
+	$("#jqueryUiVersion").text($.ui.version);
+	
+	
+	// Hi ya there, uncomment the line below for fancy notification style
+	
+	var i=0;
+	
+	// calculate the max possible width 
+	var maxWidth = Math.max.apply( null, $( '.notification_title' ).map( function () {
+	    return $(this).parent().width();
+	}).get() );
+	
+	// hide the notifications
+	$(".message_text").hide();
+	
+	// put the old width back - otherwise width will change closer to min-width
+	$( '.notification_title' ).map( function () {
+	    return $(this).parent().width(maxWidth);
+	});
+	
+	$(".notification_title").click(function(){
+		//$(this).parent().width(maxWidth);
+		$(this).parent().children(".message_text").toggle()
+	});
+	
+});
+
+function deleteFromCache(key)
+{
+	var data = {'key':key, 'userToken':'{USERTOKEN}'};
+	$.ajax({
+		type : "POST",
+		url : "{SITE_URL}/admin/system/delete-key/",
+		data : data,
+		success : function(){
+				$("#cache_key_"+key).remove();
+			}
+		,
+		dataType : "json"
+	});
+}
+
+function clearCache()
+{
+	var data = { 'userToken':'{USERTOKEN}' };
+	$.ajax({
+		type : "POST",
+		url : "{SITE_URL}/admin/system/clear-cache/",
+		data : data,
+		success : function(){
+				$(".cache_key").remove();
+			}
+		,
+		dataType : "json"
+	});
+}
+

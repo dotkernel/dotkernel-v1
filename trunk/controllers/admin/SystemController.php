@@ -24,12 +24,12 @@ switch ($registry->requestAction)
 	case 'dashboard':
 		$mysqlVersion = $systemModel->getMysqlVersion();
 		$geoIpVersion = $systemModel->getGeoIpVersion();
-		$warnings = $systemModel->getWarnings(array());
+		$notifications = $systemModel->getNotifications();
 		$apcInfo = $systemModel->getAPCInfo();
 		//	Ini Values
 		$iniValues = $systemModel->getIniValuesWithCorrection();
 		$cacheInfo = Dot_Cache::getCacheInfo();
-		$systemView->dashboard('dashboard', $mysqlVersion, $apcInfo, $geoIpVersion, $warnings, $iniValues, $cacheInfo);
+		$systemView->dashboard('dashboard', $mysqlVersion, $apcInfo, $geoIpVersion, $notifications, $iniValues, $cacheInfo);
 	break;
 	case 'settings':
 		// list settings values

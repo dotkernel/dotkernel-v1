@@ -59,6 +59,7 @@ class Dot_Cache
 			}
 		}
 		self::$_cache = Zend_Cache::factory('Core', $backendName, $frontendOptions, $backendOptions);
+		
 		self::$_isLoaded = true;
 		return true;
 	}
@@ -330,7 +331,10 @@ class Dot_Cache
 	 */
 	public static function getCacheInfo()
 	{
-		$info = array('isLoaded' => false, 'isSupportingTags' => false, 'keyCount' => 0, 'tags' => array(), 'fill' => 0, 'lifetime'=>0);
+		$configuration = Zend_Registry::get('configuration');
+		$cacheConfig = $configuration->cache->toArray();
+		$info = array('isLoaded' => false, 'isSupportingTags' => false, 'keyCount' => 0, 'tags' => array(), 'fill' => 0, 'lifetime'=>0, 'keys'=>array(), 'tags'=>array(), 'importantKeys'=>array());
+		$info['config'] = array('factory' => $cacheConfig['factory'], 'lifetime'=> $cacheConfig['lifetime'], 'namespace'=>$cacheConfig['namespace']);
 		if(!self::$_isLoaded)
 		{
 			return $info;
@@ -360,7 +364,6 @@ class Dot_Cache
 			$tags = self::getTags();
 		}
 		
-		$info['tags'] = array();
 		foreach($tags as $tag)
 		{
 			$info['tags'][$tag] = self::getKeysMatchingTags(array($tag));

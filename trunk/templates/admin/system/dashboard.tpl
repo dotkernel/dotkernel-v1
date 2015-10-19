@@ -1,40 +1,7 @@
 <script>
-	function deleteFromCache(key)
-	{
-		var data = {'key':key, 'userToken':'{USERTOKEN}'};
-		$.ajax({
-			type : "POST",
-			url : "{SITE_URL}/admin/system/delete-key/",
-			data : data,
-			success : function(){
-					$("#cache_key_"+key).remove();
-				}
-			,
-			dataType : "json"
-		});
-	}
-	
-	function clearCache()
-	{
-		var data = { 'userToken':'{USERTOKEN}' };
-		$.ajax({
-			type : "POST",
-			url : "{SITE_URL}/admin/system/clear-cache/",
-			data : data,
-			success : function(){
-					$(".cache_key").remove();
-				}
-			,
-			dataType : "json"
-		});
-	}
-	$(document).ready(function() {
 
-		// update jQuery and jQuery UI versions
-		$("#jqueryVersion").text($().jquery);
-		$("#jqueryUiVersion").text($.ui.version);
-	});
 </script>
+</style>
 <table class="dashboard_table">
 	<tr>
 		<td class="sys_td">
@@ -188,16 +155,16 @@
 		</td>
 		<td class="messages_td">
 			<div class="messages">
-				<!-- BEGIN warnings -->
-				<div class="message_error">
-					<strong style="font-family: 'Montserrat',sans-serif; font-size: 12px; text-transform: uppercase;">{WARNING_TYPE}</strong>
-					<ul style="padding: 3px 15px;">
-						<!-- BEGIN warning_item -->
-						<li>{WARNING_DESCRIPTION}</li>
-						<!-- END warning_item -->
+				<!-- BEGIN messages -->
+				<div class="message_{NOTIFICATION_TYPE}">
+					<strong style="font-family: 'Montserrat',sans-serif; font-size: 12px; text-transform: uppercase;" class="notification_title">{MESSAGE_TITLE}</strong>
+					<ul style="padding: 3px 15px;" class="message_text">
+						<!-- BEGIN message_item -->
+						<li>{MESSAGE_DESCRIPTION}</li>
+						<!-- END message_item -->
 					</ul>
 				</div>
-				<!-- END warnings -->
+				<!-- END messages -->
 			</div>
 		</td>
 	</tr>

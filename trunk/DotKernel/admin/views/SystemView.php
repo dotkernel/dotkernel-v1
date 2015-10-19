@@ -35,10 +35,12 @@ class System_View extends View
 	 * @param string $mysqlVersion
 	 * @param string $apcInfo
 	 * @param array $geoIpVersion
-	 * @param array $warnings
+	 * @param array $notifications
+	 * @param array $iniValues 
+	 * @param array $cacheInfo
 	 * @return void
 	 */
-	public function dashboard($templateFile, $mysqlVersion, $apcInfo, $geoIpVersion, $warnings, $iniValues, $cacheInfo)
+	public function dashboard($templateFile, $mysqlVersion, $apcInfo, $geoIpVersion, $notifications, $iniValues, $cacheInfo)
 	{
 		// @todo: break this method in more pieces, there are too much arguments
 		$this->tpl->setFile('tpl_main', 'system/' . $templateFile . '.tpl');
@@ -58,26 +60,33 @@ class System_View extends View
 		}
 		$this->tpl->setVar('PHPAPI',php_sapi_name());
 		$this->tpl->setVar('ZFVERSION', Zend_Version::VERSION);
+
+		$this->tpl->setBlock('tpl_main', 'messages',  'messages_block');
+		$this->tpl->setBlock('messages', 'message_item', 'message_item_block');
 		
-		// show warnigns
-		$this->tpl->setBlock('tpl_main', 'warning_item', 'warning_item_block');
-		$this->tpl->setBlock('tpl_main', 'warnings', 'warnings_block');
-		foreach($warnings as $warningType => $warningItems)
+		// show messages
+		foreach($notifications as $notificationType => $notification)
 		{
-			if (empty($warningItems))
+			$this->tpl->setVar('NOTIFICATION_TYPE', $notificationType);
+			foreach($notification as $messageTitle => $messageList)
 			{
-				$this->tpl->parse('warnings_block', '', true);
-			}
-			else
-			{
-				$this->tpl->setVar('WARNING_TYPE', $warningType);
-				foreach($warningItems as $warningItem)
+				if (empty($messageList))
 				{
-					$this->tpl->setVar('WARNING_DESCRIPTION', $warningItem);
-					$this->tpl->parse('warning_item_block', 'warning_item', true);
+					$this->tpl->parse('messages_block', '', true);
 				}
-				$this->tpl->parse('warnings_block', 'warnings', true);
-				$this->tpl->parse('warning_item_block', '');
+				else
+				{
+					$this->tpl->setVar('MESSAGE_TITLE', $messageTitle);
+					
+					
+					foreach($messageList as $message)
+					{
+						$this->tpl->setVar('MESSAGE_DESCRIPTION', $message);
+						$this->tpl->parse('message_item_block', 'message_item', true);
+					}
+					$this->tpl->parse('messages_block', 'messages', true);
+					$this->tpl->parse('message_item_block', '');
+				}
 			}
 		}
 		
