@@ -1,6 +1,9 @@
+
+
 <script>
 	// tpl trick, use the JS var as a TPL var
 	var SITE_URL = "{SITE_URL}";
+	var USERTOKEN = "{USERTOKEN}";
 </script>
 
 <table class="dashboard_table">
