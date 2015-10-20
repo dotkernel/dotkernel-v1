@@ -367,10 +367,10 @@ $(document).ready(function() {
 
 function deleteFromCache(key)
 {
-	var data = {'key':key, 'userToken':'{USERTOKEN}'};
+	var data = {'key':key, 'userToken': USERTOKEN };
 	$.ajax({
 		type : "POST",
-		url : "{SITE_URL}/admin/system/delete-key/",
+		url : SITE_URL + "/admin/system/delete-key/",
 		data : data,
 		success : function(){
 				$("#cache_key_"+key).remove();
@@ -382,10 +382,10 @@ function deleteFromCache(key)
 
 function clearCache()
 {
-	var data = { 'userToken':'{USERTOKEN}' };
+	var data = {  'userToken': USERTOKEN };
 	$.ajax({
 		type : "POST",
-		url : "{SITE_URL}/admin/system/clear-cache/",
+		url : SITE_URL + "/admin/system/clear-cache/",
 		data : data,
 		success : function(){
 				$(".cache_key").remove();
