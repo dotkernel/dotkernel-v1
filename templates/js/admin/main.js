@@ -363,6 +363,12 @@ $(document).ready(function() {
 		$(this).parent().children(".message_text").toggle()
 	});
 	
+
+	
+	$(".notification_box").on('click', function(){
+		$(this).children(".message_text").toggle();
+	});
+	
 });
 
 function deleteFromCache(key)
