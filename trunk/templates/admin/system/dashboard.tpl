@@ -160,7 +160,7 @@
 		<td class="messages_td">
 			<div class="messages">
 				<!-- BEGIN messages -->
-				<div class="message_{NOTIFICATION_TYPE}">
+				<div class="message_{NOTIFICATION_TYPE} notification_box">
 					<strong style="font-family: 'Montserrat',sans-serif; font-size: 12px; text-transform: uppercase;" class="notification_title">{MESSAGE_TITLE}</strong>
 					<ul style="padding: 3px 15px;" class="message_text">
 						<!-- BEGIN message_item -->
