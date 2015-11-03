@@ -169,10 +169,9 @@ class System extends Dot_Model
 		
 		// warning "categories"
 		$warnings = array('Security Warning'=>array(),
-							'Debug Email' => array(),
-							'Delete Files'=>array(),
-							'Cache Test Failed'=>array(),
-							'Plugin Check' => array()
+						'Delete Files'=>array(),
+						'Cache Test Failed'=>array(),
+						'Plugin Check' => array()
 		);
 		#$infos = array();
 		// sample messages
@@ -208,7 +207,7 @@ class System extends Dot_Model
 		{
 			if(file_exists(APPLICATION_PATH . "/" . $file))
 			{
-				$warnings['Delete Files'][] = $file;
+				$errors['Delete Files'][] = $file;
 			}
 		}
 			
@@ -218,7 +217,7 @@ class System extends Dot_Model
 			// warning if application.ini is writable
 			if(is_writable(APPLICATION_PATH . "/configs/application.ini"))
 			{
-				$warnings["Make Unwritable"][] = 'configs/application.ini';
+				$errors["Make Unwritable"][] = 'configs/application.ini';
 			}
 				
 			// only the folders set in application.ini (folders.permission[]) should be writable 	
@@ -241,7 +240,7 @@ class System extends Dot_Model
 				{
 					if(! is_writable($path) && $path === $exception)
 					{
-						$warnings["Make Writable"][] = $path;
+						$errors["Make Writable"][] = $path;
 					}
 				}
 				else
@@ -249,14 +248,14 @@ class System extends Dot_Model
 					if(is_writable($path))
 					{
 						
-						$warnings["Make Unwritable"][] = $path;
+						$errors["Make Unwritable"][] = $path;
 					}
 				}
 			}
 				// info about how to add exception
-			if(count($warnings["Make Unwritable"]))
+			if(count($errors["Make Unwritable"]))
 			{
-				$warnings["Make Unwritable"][] = '**  <em>It is possible to add your writable folders to the exclude list by adding it 
+				$errors["Make Unwritable"][] = '**  <em>It is possible to add your writable folders to the exclude list by adding it 
 										as folders.permission[] exception in application.ini</em>';
 			}
 		}
@@ -284,9 +283,9 @@ class System extends Dot_Model
 		}
 		else
 		{
-			$warnings['Cache Test Failed'][] = 'Cache is not working or disabled';
-			$warnings['Cache Test Failed'][] = 'Check cache settings or if cache module is supported';
-			$warnings['Cache Test Failed'][] = ''.
+			$errors['Cache Test Failed'][] = 'Cache is not working or disabled';
+			$errors['Cache Test Failed'][] = 'Check cache settings or if cache module is supported';
+			$errors['Cache Test Failed'][] = ''.
 				'More info: <a href="http://www.dotkernel.com/dotkernel/caching-in-dotkernel-using-zend-framework/"> Caching in DotKernel</a>';
 		}
 		
@@ -301,10 +300,10 @@ class System extends Dot_Model
 			// check if the class is missing
 			if( ! $pluginHandler->pluginExists($plugin['vendor'], $plugin['pluginName']))
 			{
-				$warnings['Plugin Check'][] = 'Plugin '. $plugin['pluginName'] . ' (by ' .$plugin['vendor']. ') is missing';
+				$errors['Plugin Check'][] = 'Plugin '. $plugin['pluginName'] . ' (by ' .$plugin['vendor']. ') is missing';
 			}
 			// check if the plugin is enabled
-			if( ! $plugin['enabled'])
+			elseif( ! $plugin['enabled'])
 			{
 				$warnings['Plugin Check'][] = 'Plugin '. $plugin['pluginName'] . ' (by ' .$plugin['vendor']. ') is not enabled';
 			}
