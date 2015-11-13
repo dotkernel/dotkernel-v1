@@ -245,6 +245,9 @@ class System extends Dot_Model
 	{
 		$errors = $warnings = $infos= array();
 		
+		$errors['Make Writable'] = array();
+		$errors['Make Unwritable'] = array(); 
+		
 		//ignore permission warning if OS is Windows
 		if(strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN')
 		{
