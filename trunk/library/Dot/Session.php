@@ -41,8 +41,13 @@ class Dot_Session
 		//check is a session exists for the current module
 		if(isset($option->session))
 		{
-			$namespaceName = $option->session->name;
+			$namespacePrefix = 'dotkernel';
+			if(isset($config->session->namespace_prefix) && is_string($config->session->namespace_prefix))
+			{
+				$namespacePrefix = $config->session->namespace_prefix;
+			}
 			
+			$namespaceName = $option->session->name;
 			//if session is not registered, create it
 			if(! (Zend_Registry::isRegistered('session')))
 			{

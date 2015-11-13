@@ -150,67 +150,101 @@ class System extends Dot_Model
 	}
 	
 	/**
-	 * Get any messages to display in the dashboard
-	 * Each array element returned is an array with two strings: type and description
-	 * @access public
+	 * Checks session-related configuration
+	 * @access private
+	 * @return array - empty if no errors were found
+	 */
+	private function _getSessionNotifications()
+	{
+		$errors = $warnings = $infos= array();
+		
+		$config = Zend_Registry::get('configuration');
+		$namespacePrefix = 'default';
+		if(isset($config->session->namespace_prefix) && is_string($config->session->namespace_prefix))
+		{
+			$namespacePrefix = $config->session->namespace_prefix;
+		}
+		
+		$messageKey = 'session namespace prefix'; 
+		if($namespacePrefix == 'default')
+		{
+			$messages[$messageKey][] = 'Session prefix is not defined in application.ini ';
+			$messages[$messageKey][] = 'This might lead to undesired results when working with multiple DotKernel instances on the same server';
+			$messages[$messageKey][] = 'Please add <b>resources.session.namespace_prefix = "your_session_prefix"</b> in the application.ini file';
+			$messages[$messageKey]['namespacePrefix'] = 'Current namespace prefix is: ' . $namespacePrefix;
+		}
+		
+		if($namespacePrefix == 'dotkernel')
+		{
+			$messages[$messageKey][] = 'Session prefix was not changed from its default ';
+			$messages[$messageKey][] = 'This might lead to undesired results when working with multiple DotKernel instances on the same server';
+			$messages[$messageKey][] = 'Please change <b>resources.session.namespace_prefix = "dot_kernel"</b> to <b>resources.session.namespace_prefix = "your_session_prefix"</b> in the application.ini file';
+			$messages[$messageKey]['namespacePrefix'] = 'Current namespace prefix is: ' . $namespacePrefix;
+		}
+		
+		if(!isset($config->resources->session->save_path))
+		{
+			$warnings['session save_path'][] = 'Session prefix was not defined or changed from its default';
+			$warnings['session save_path'][] = 'This might lead to undesired results when working with multiple DotKernel instances on the same server';
+			$errors = $messages;
+		}
+
+		return array('error'=>$errors,'warning'=>$warnings,'info'=>$infos);
+	}
+	
+	/**
+	 * Get Cache Notifications
+	 * @access private
 	 * @return array
 	 */
-	public function getNotifications()
+	private function _getCacheNotifications()
 	{
-		// error "categories"
-		$errors = array('Security Warning'=>array(),
-						'Debug Email' => array(),
-						'Delete Files'=>array(),
-						'Make Writable'=>array(),
-						'Make Unwritable'=>array(),
-						'Cache Test Failed'=>array(),
-						'Plugin Check' => array()
-		);
+		$errors = $warnings = $infos= array();
 		
-		// warning "categories"
-		$warnings = array('Security Warning'=>array(),
-						'Delete Files'=>array(),
-						'Cache Test Failed'=>array(),
-						'Plugin Check' => array()
-		);
-		#$infos = array();
-		// sample messages
-		$infos = array(
-		);
-		
-		// check that the default admin user isn't enabled
-		$dotAuth = Dot_Auth::getInstance();
-		$defaultAdminValid = $dotAuth->process('admin', array("username"=>"admin", "password"=>"dot"), $storeInSession = false);
-		if ($defaultAdminValid)
+		$cacheSimpleTest = Dot_Cache::testCache();
+		$cacheTagsTest = Dot_Cache::testTags();
+		if($cacheSimpleTest == true)
 		{
-			$errors["Security Warning"][] = "Please change the password of the oldest admin user or deactivate him";
-		}
-		
-		// if the oldest admin have the same email team@dotkernel.com
-		$select = $this->db->select()->from('admin', 'email')->where('isActive = ?', '1')->order('dateCreated asc')->limit(1);
-		$emailAdmin = $this->db->fetchOne($select);
-		if('team@dotkernel.com' == $emailAdmin)
-		{
-			$errors["Debug Email"][] = "Please change the email of the default admin user or deactivate him.";
-		}
-			
-		//if the devEmails is the default one : team@dotkernel.com
-		// why query db when we have it in the Dot_Model  
-		if(stripos($this->settings->devEmails, 'team@dotkernel.com') !== false)
-		{
-			$errors["Debug Email"][] = "Update the setting.devEmails value to reflect your debug email.";
-		}
-		
-		// check for files that should be deleted
-		$filesToDelete = array("dot_kernel.sql", "readme.txt", "dk.php");
-		foreach($filesToDelete as $file)
-		{
-			if(file_exists(APPLICATION_PATH . "/" . $file))
+			$cacheInfo = Dot_Cache::getCacheInfo();
+			foreach($cacheInfo['config'] as $key => $value)
 			{
-				$errors['Delete Files'][] = $file;
+				$infos['Cache Info'][] = $key . ' : ' . $value;
+			}
+			if($cacheTagsTest == true )
+			{
+				$infos['Cache Info'][] = 'tags are supported';
+			}
+			else
+			{
+				$warnings['Cache Test Failed'][] = 'Cache does not support tags';
+				$warnings['Cache Test Failed'][] = 'Check cache provider in application.ini';
+				$warnings['Cache Test Failed'][] = ''.
+										'More info: <a href="http://framework.zend.com/manual/1.12/en/zend.cache.backends.html" target="_blank"> ZF Cache Backends </a>';
 			}
 		}
-			
+		else
+		{
+			$errors['Cache Test Failed'][] = 'Cache is not working or disabled';
+			$errors['Cache Test Failed'][] = 'Check cache settings or if cache module is supported';
+			$errors['Cache Test Failed'][] = ''.
+									'More info: <a href="http://www.dotkernel.com/dotkernel/caching-in-dotkernel-using-zend-framework/"> Caching in DotKernel</a>';
+		}
+		return array('error'=>$errors,'warning'=>$warnings,'info'=>$infos);
+	}
+	
+	/**
+	 * Get File-related Notifications
+	 * 
+	 * Checks file permissions and files that should be deleted
+	 * This will return "Make Writable", "Make Unwritable" & "Delete Files" warnings
+	 *  
+	 * @access private
+	 * @return array
+	 */
+	private function _getFileNotifications()
+	{
+		$errors = $warnings = $infos= array();
+		
 		//ignore permission warning if OS is Windows
 		if(strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN')
 		{
@@ -219,8 +253,8 @@ class System extends Dot_Model
 			{
 				$errors["Make Unwritable"][] = 'configs/application.ini';
 			}
-				
-			// only the folders set in application.ini (folders.permission[]) should be writable 	
+		
+			// only the folders set in application.ini (folders.permission[]) should be writable
 			$folderException = $this->config->folders->permission->toArray();
 			// go through all folders in the tree
 			$folders = $this->_listDirectory(APPLICATION_PATH);
@@ -247,50 +281,34 @@ class System extends Dot_Model
 				{
 					if(is_writable($path))
 					{
-						
+		
 						$errors["Make Unwritable"][] = $path;
 					}
 				}
 			}
-				// info about how to add exception
+			// info about how to add exception
 			if(count($errors["Make Unwritable"]))
 			{
-				$errors["Make Unwritable"][] = '**  <em>It is possible to add your writable folders to the exclude list by adding it 
+				$errors["Make Unwritable"][] = '**  <em>It is possible to add your writable folders to the exclude list by adding it
 										as folders.permission[] exception in application.ini</em>';
 			}
 		}
 		
-		$cacheSimpleTest = Dot_Cache::testCache();
-		$cacheTagsTest = Dot_Cache::testTags();
-		if($cacheSimpleTest == true)
+		// check for files that should be deleted
+		$filesToDelete = array("dot_kernel.sql", "readme.txt", "dk.php");
+		foreach($filesToDelete as $file)
 		{
-			$cacheInfo = Dot_Cache::getCacheInfo();
-			foreach($cacheInfo['config'] as $key => $value)
+			if(file_exists(APPLICATION_PATH . "/" . $file))
 			{
-				$infos['Cache Info'][] = $key . ' : ' . $value;
-			}
-			if($cacheTagsTest == true )
-			{
-				$infos['Cache Info'][] = 'tags are supported';
-			}
-			else
-			{
-				$warnings['Cache Test Failed'][] = 'Cache does not support tags';
-				$warnings['Cache Test Failed'][] = 'Check cache provider in application.ini';
-				$warnings['Cache Test Failed'][] = ''.
-					'More info: <a href="http://framework.zend.com/manual/1.12/en/zend.cache.backends.html" target="_blank"> ZF Cache Backends </a>';
+				$errors['Delete Files'][] = $file;
 			}
 		}
-		else
-		{
-			$errors['Cache Test Failed'][] = 'Cache is not working or disabled';
-			$errors['Cache Test Failed'][] = 'Check cache settings or if cache module is supported';
-			$errors['Cache Test Failed'][] = ''.
-				'More info: <a href="http://www.dotkernel.com/dotkernel/caching-in-dotkernel-using-zend-framework/"> Caching in DotKernel</a>';
-		}
-		
-
-
+		return array('error'=>$errors,'warning'=>$warnings,'info'=>$infos);
+	}
+	
+	private function _getPluginNotifications()
+	{
+		$errors = $warnings = $infos= array();
 		
 		// plugin check
 		$pluginHandler = Plugin_Loader::getInstance();
@@ -308,8 +326,66 @@ class System extends Dot_Model
 				$warnings['Plugin Check'][] = 'Plugin '. $plugin['pluginName'] . ' (by ' .$plugin['vendor']. ') is not enabled';
 			}
 		}
+		return array('error'=>$errors,'warning'=>$warnings,'info'=>$infos);
+	}
+	
+	/**
+	 * Checks the admin credentials and if his email or devEmails contain team@dotkernel.com
+	 * 
+	 * Checks if the devEmails setting and admin account contain team@dotkernel.com
+	 * Also checks if the password for "admin" is "dot"
+	 * 
+	 * @access private
+	 * @return array
+	 */
+	private function _getAdminNotifications()
+	{
+		$errors = $warnings = $infos= array();
+		
+		// check that the default admin user isn't enabled
+		$dotAuth = Dot_Auth::getInstance();
+		$defaultAdminValid = $dotAuth->process('admin', array("username"=>"admin", "password"=>"dot"), $storeInSession = false);
+		if ($defaultAdminValid)
+		{
+			$errors["Security Warning"][] = "Please change the password of the oldest admin user or deactivate him";
+		}
+		
+		// if the oldest admin have the same email team@dotkernel.com
+		$select = $this->db->select()->from('admin', 'email')->where('isActive = ?', '1')->order('dateCreated asc')->limit(1);
+		$emailAdmin = $this->db->fetchOne($select);
+		if('team@dotkernel.com' == $emailAdmin)
+		{
+			$errors["Debug Email"][] = "Please change the email of the default admin user or deactivate him.";
+		}
+			
+		//if the devEmails is the default one : team@dotkernel.com
+		// why query db when we have it in the Dot_Model
+		if(stripos($this->settings->devEmails, 'team@dotkernel.com') !== false)
+		{
+			$errors["Debug Email"][] = "Update the setting.devEmails value to reflect your debug email.";
+		}
 		
 		return array('error'=>$errors,'warning'=>$warnings,'info'=>$infos);
+	}
+	/**
+	 * Get any messages to display in the dashboard
+	 * Each array element returned is an array with two strings: type and description
+	 * @access public
+	 * @return array
+	 */
+	public function getNotifications()
+	{
+		$messages = array();
+		
+		$adminMessages = $this->_getAdminNotifications();
+		$fileMessages = $this->_getFileNotifications();
+		$cacheMessages = $this->_getCacheNotifications();
+		$sessionMessages = $this->_getSessionNotifications();
+		$pluginMessages = $this->_getPluginNotifications();
+		
+		$messages = array_merge_recursive($messages, $adminMessages, $fileMessages, $cacheMessages, $sessionMessages, $pluginMessages);
+		
+		return $messages;
 	}
 	
 	/**
@@ -349,6 +425,11 @@ class System extends Dot_Model
 	 */
 	private function _checkDevEmails($invalidDevEmails = 'team@dotkernel.com')
 	{
+		if(is_string($invalidDevEmails))
+		{
+			// @todo: check if an array 
+			// @todo: write in the flight log
+		}
 		return ($this->settings->devEmails == $invalidDevEmails);
 	}
 	
