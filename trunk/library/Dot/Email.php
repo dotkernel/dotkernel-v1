@@ -46,10 +46,10 @@ class Dot_Email extends Zend_Mail
 		$this->seoOption = Zend_Registry::get('seo');
 		$this->option = Zend_Registry::get('option');
 		
-		// you will add the plugin call here
-		// sample below:
+		// Plugin Call for DotKernel MailTransporter
 		$pluginLoader = Plugin_Loader::getInstance();
 		$plugin = $pluginLoader->loadPlugin('DotKernel', 'MailTransporter');
+		// if no enabled plugin was found go ahead without it
 		if($plugin instanceof Plugin_Interface)
 		{
 			$this->_transport = $this->_getTransportFromPlugin($plugin);
@@ -162,9 +162,8 @@ class Dot_Email extends Zend_Mail
 			$alert->setContent($message);
 			$alert->setDetails($details);
 			
-			@$alert->send();
-			error_log($e->getMessage(),E_WARNING);
-			
+			// this will trigger a notice
+			$alert->send();
 			return false;
 		}
 	}
