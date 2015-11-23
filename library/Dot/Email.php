@@ -48,21 +48,18 @@ class Dot_Email extends Zend_Mail
 		
 		// you will add the plugin call here
 		// sample below:
-		
-		/* 
 		$pluginLoader = Plugin_Loader::getInstance();
-		$plugin = $pluginLoader->loadPlugin('PluginVendor', 'PluginName');
+		$plugin = $pluginLoader->loadPlugin('DotKernel', 'MailTransporter');
 		if($plugin instanceof Plugin_Interface)
 		{
 			$this->_transport = $this->_getTransportFromPlugin($plugin);
 		}
-		*/
-		
 		// getting transport if none received from plugin 
 		if(!$this->_transport)
 		{
 			$this->_transport = $this->_getFallBackTransport();
 		}
+		
 	}
 	
 	/**
@@ -121,6 +118,11 @@ class Dot_Email extends Zend_Mail
 	public function send($transport = null)
 	{
 		parent::setDefaultTransport($this->_transport);
+		if($transport != null)
+		{
+			parent::setDefaultTransport($transport);
+		}
+
 		try
 		{
 			parent::send();
@@ -159,7 +161,10 @@ class Dot_Email extends Zend_Mail
 			// prepare the message
 			$alert->setContent($message);
 			$alert->setDetails($details);
-			$alert->send();
+			
+			@$alert->send();
+			error_log($e->getMessage(),E_WARNING);
+			
 			return false;
 		}
 	}
