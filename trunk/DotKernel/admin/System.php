@@ -157,6 +157,7 @@ class System extends Dot_Model
 	private function _getSessionNotifications()
 	{
 		$errors = $warnings = $infos= array();
+		$messages = array(); 
 		
 		$config = Zend_Registry::get('configuration');
 		$namespacePrefix = 'default';
@@ -203,9 +204,18 @@ class System extends Dot_Model
 		
 		$cacheSimpleTest = Dot_Cache::testCache();
 		$cacheTagsTest = Dot_Cache::testTags();
+
+		$cacheInfo = Dot_Cache::getCacheInfo();
+		if($cacheInfo['config']['namespace'] == 'dotkernel' || $cacheInfo['config']['namespace'] == 'default')
+		{
+			$errors['Cache Namespace Warning'][] = 'Please change the cache namespace';
+			$errors['Cache Namespace Warning'][] = 'Cache might not work correctly if the namespace is dotkernel';
+			$errors['Cache Namespace Warning'][] = 'You can change it from the cache.namespace setting in application.ini';
+		}
+
 		if($cacheSimpleTest == true)
 		{
-			$cacheInfo = Dot_Cache::getCacheInfo();
+
 			foreach($cacheInfo['config'] as $key => $value)
 			{
 				$infos['Cache Info'][] = $key . ' : ' . $value;
@@ -219,7 +229,7 @@ class System extends Dot_Model
 				$warnings['Cache Test Failed'][] = 'Cache does not support tags';
 				$warnings['Cache Test Failed'][] = 'Check cache provider in application.ini';
 				$warnings['Cache Test Failed'][] = ''.
-										'More info: <a href="http://framework.zend.com/manual/1.12/en/zend.cache.backends.html" target="_blank"> ZF Cache Backends </a>';
+				'More info: <a href="http://framework.zend.com/manual/1.12/en/zend.cache.backends.html" target="_blank"> ZF Cache Backends </a>';
 			}
 		}
 		else
@@ -227,7 +237,7 @@ class System extends Dot_Model
 			$errors['Cache Test Failed'][] = 'Cache is not working or disabled';
 			$errors['Cache Test Failed'][] = 'Check cache settings or if cache module is supported';
 			$errors['Cache Test Failed'][] = ''.
-									'More info: <a href="http://www.dotkernel.com/dotkernel/caching-in-dotkernel-using-zend-framework/"> Caching in DotKernel</a>';
+									'More info: <a href="http://www.dotkernel.com/dotkernel/caching-in-dotkernel-using-zend-framework/"  target="_blank"> Caching in DotKernel</a>';
 		}
 		return array('error'=>$errors,'warning'=>$warnings,'info'=>$infos);
 	}
