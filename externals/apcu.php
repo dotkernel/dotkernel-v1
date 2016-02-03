@@ -921,7 +921,7 @@ case OB_USER_CACHE:
 	}
 	$fieldname='info';
 	$fieldheading='User Entry Label';
-	$fieldkey='key';
+	$fieldkey='info';
 
 	$cols=6;
 	echo <<<EOB
