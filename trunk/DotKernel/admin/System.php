@@ -500,7 +500,6 @@ class System extends Dot_Model
 		$recommendedIniValues = array_intersect_key($recommendedIniValues, $currentIniValues);
 		foreach($currentIniValues as $key => $value)
 		{
-			// $value <=> $currentIniValues[$key]
 			if($recommendedIniValues[$key] != $currentIniValues[$key] )
 			{
 				$iniValues[$key]['recommended'] = $recommendedIniValues[$key];
