@@ -4,7 +4,7 @@
  * DotKernel Application Framework
  *
  * @category   DotKernel
- * @copyright  Copyright (c) 2009-2015 DotBoost Technologies Inc. (http://www.dotboost.com)
+ * @copyright  Copyright (c) 2009-2016 DotBoost Technologies Inc. (http://www.dotboost.com)
  * @license    http://www.gnu.org/licenses/lgpl.html
  * @version    $Id$
  */

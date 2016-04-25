@@ -37,7 +37,7 @@
 	</div>
 	<!-- /content -->
 	<div data-role="footer">
-		&copy; 2009 - 2015 DotBoost Technologies Inc.
+		&copy; 2009 - 2016 DotBoost Technologies Inc.
 	</div>
 	<!-- /footer -->
 </div>
