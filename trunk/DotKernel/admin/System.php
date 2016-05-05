@@ -523,12 +523,18 @@ class System extends Dot_Model
 		}
 		else
 		{
+			$collationList = $this->getTableColumnCollations();
 			$errors['DB Charset Conflict'][] = 'Connection charset: '. $charset;
-			$errors['DB Charset Conflict'][] =  'Detected charsets: '  ;
+			$errors['DB Charset Conflict'][] =  'Detected charsets/collations on table.column: '  ;
 			foreach($collationList as $collation)
 			{
-				$errors['DB Charset Conflict'][] =  $collation['charset'];
+				if($collation['charset'] != $charset)
+				{
+					$errors['DB Charset Conflict'][] =  '<strong>'.$collation['charset'] .'/'.$collation['collation'].'</strong> on <strong>'.$collation['table'].'.'.$collation['column'].'</strong>';
+				}
 			}
+			// spacing 
+			$errors['DB Charset Conflict'][] =  '<br/>'  ;
 			$errors['DB Charset Conflict'][] =  'Using multiple charsets for the same DB connection are not recommended'  ;
 			$errors['DB Charset Conflict'][] =  'The database charset should reflect the connection charset '  ;
 			$errors['DB Charset Conflict'][] =  'Connection charset can be changed in application.ini '  ;
