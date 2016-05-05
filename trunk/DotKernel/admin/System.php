@@ -396,9 +396,142 @@ class System extends Dot_Model
 		$sessionMessages = $this->_getSessionNotifications();
 		$pluginMessages = $this->_getPluginNotifications();
 		
-		$messages = array_merge_recursive($messages, $adminMessages, $fileMessages, $cacheMessages, $sessionMessages, $pluginMessages);
+		// @todo: get proper data for collations 
+		$collationMessages = $this->getCollationMessages();
+		$messages = array_merge_recursive($messages, $adminMessages, $fileMessages, $cacheMessages, $sessionMessages, $pluginMessages, $collationMessages );
 		
 		return $messages;
+	}
+	
+	/**
+	 * Get collation for all text tables and columns
+	 * @access public
+	 * @param $databaseName [optional] database name, if not given, the main db 
+	 * @return array $collations - array with collations and charset for each table & column
+	 */
+	public function getTableColumnCollations($databaseName = null)
+	{
+		if($databaseName == null)
+		{
+			$databaseName = $this->config->database->params->dbname;
+		}
+		
+		$properties =  array(
+			'database'  =>'TABLE_SCHEMA' ,
+			'table'     =>'TABLE_NAME' ,
+			'column'    =>'COLUMN_NAME' ,
+			'charset'   =>'CHARACTER_SET_NAME', 
+			'collation' =>'COLLATION_NAME'
+		);
+		
+		$select = $this->db->select()
+			->from('INFORMATION_SCHEMA.COLUMNS', $properties)
+			->where('TABLE_SCHEMA =?', $databaseName)
+			// ignore numeric values they have no collation
+			->where('COLLATION_NAME IS NOT NULL');
+		return $this->db->fetchAll($select);
+	}
+	
+	/**
+	 * Get all used collations
+	 * @access public
+	 * @param $databaseName [optional] database name, if not given, the main db 
+	 * @return array $collations - array with collations and charset for each table & column
+	 */
+	public function getCollations($databaseName = null)
+	{
+		if($databaseName == null)
+		{
+			$databaseName = $this->config->database->params->dbname;
+		}
+		
+		$properties =  array(
+			'database'  =>'TABLE_SCHEMA' ,
+			'charset'   =>'CHARACTER_SET_NAME', 
+			'collation' =>'COLLATION_NAME'
+		);
+		
+		$select = $this->db->select()
+			->from('INFORMATION_SCHEMA.COLUMNS', $properties)
+			->where('TABLE_SCHEMA =?', $databaseName)
+			// ignore numeric values they have no collation
+			->where('COLLATION_NAME IS NOT NULL')
+			->group('COLLATION_NAME');
+		return $this->db->fetchAll($select);
+	}
+	
+	/**
+	 * Organize collations in $v[db][table][column] structure 
+	 * 
+	 * @param array $collationList
+	 * @return array $organizedCollations
+	 */
+	public function organizeCollations($collationList)
+	{
+		foreach($collationList as $c)
+		{
+			// used $c instead of $colation for the sake of code understandability and look 
+			$organizedCollations[$c['database']][$c['table']][$c['column']] = $c;
+			
+			unset(
+				$organizedCollations[$c['database']][$c['table']][$c['column']]['database'],
+				$organizedCollations[$c['database']][$c['table']][$c['column']]['table'],
+				$organizedCollations[$c['database']][$c['table']][$c['column']]['column']
+			);
+		}
+		return $organizedCollations;
+	}
+	
+	/**
+	 * Check Database Collation
+	 * 
+	 * @access private
+	 * @return bool $isCollationValid
+	 */
+	private function _isDbCollationValid()
+	{
+		$charset = $this->config->database->params->charset;
+		$databaseName = $this->config->database->params->dbname;
+		$collations = $this->getCollations();
+
+		if(count($collations) == 1)
+		{
+			if(stripos($collations[0]['charset'], $charset) !== FALSE && strtolower($collations[0]['charset']) == strtolower($charset))
+			{
+				// everything looks ok
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * Get Collation Related Messages 
+	 * @access public
+	 * @return array
+	 */
+	public function getCollationMessages()
+	{
+		$errors = $warnings = $infos= array();
+		$collationList = $this->getCollations();
+		if($this->_isDbCollationValid())
+		{
+			$infos['Connection Charset OK'][] = 'Detected charset: '  . $collationList[0]['charset'];
+			$infos['Connection Charset OK'][] = 'Detected collation: '. $collationList[0]['collation'];
+		}
+		else
+		{
+			$charset = $this->config->database->params->charset;
+			$presentCollations = $this->getCollations();
+			$errors['DB Charset Conflict'][] = 'Connection charset: '. $charset;
+			$errors['DB Charset Conflict'][] =  'Detected charsets: '  ;
+			foreach($collationList as $collation)
+			{
+				$errors['DB Charset Conflict'][] =  $collation['charset'];
+			}
+			$errors['DB Charset Conflict'][] =  'Using multiple charsets for the same DB connection are not recommended'  ;
+		}
+		return array('error'=>$errors,'warning'=>$warnings,'info'=>$infos);
 	}
 	
 	/**
@@ -500,6 +633,7 @@ class System extends Dot_Model
 		$recommendedIniValues = array_intersect_key($recommendedIniValues, $currentIniValues);
 		foreach($currentIniValues as $key => $value)
 		{
+			// $value <=> $currentIniValues[$key]
 			if($recommendedIniValues[$key] != $currentIniValues[$key] )
 			{
 				$iniValues[$key]['recommended'] = $recommendedIniValues[$key];
