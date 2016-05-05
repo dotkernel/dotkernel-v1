@@ -23,7 +23,7 @@ class Dot_Kernel
 	 * Dot Kernel version identification
 	 * @var string
 	 */
-	const VERSION = '1.8.1 DEV';
+	const VERSION = '1.8.2 DEV';
 	
 	/**
  	 * Start DotKernel
