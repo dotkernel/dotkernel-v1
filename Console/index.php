@@ -6,7 +6,7 @@
  *
  * @category   DotKernel
  * @package    CLI
- * @copyright  Copyright (c) 2009-2016 DotBoost Technologies Inc. (http://www.dotboost.com)
+ * @copyright  Copyright (c) 2009-2015 DotBoost Technologies Inc. (http://www.dotboost.com)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @version    $Id$
  */
@@ -38,6 +38,7 @@ require_once 'Zend/Loader/Autoloader.php';
 $zendLoader = Zend_Loader_Autoloader::getInstance();
 $zendLoader->registerNamespace('Dot_');
 $zendLoader->registerNamespace('Console_');
+$zendLoader->registerNamespace('Plugin_');
 
 // Parse the command line arguments
 try
@@ -65,14 +66,16 @@ else
 }
 
 // Create registry object, as read-only object to store there config, settings, and database
-$registry = new Zend_Registry(array(), ArrayObject::ARRAY_AS_PROPS);
-Zend_Registry::setInstance($registry);
+$registry = Dot_Kernel::initializeRegistry();
 
 $registry->startTime = $startTime;
 
 // Load configuration settings from application.ini file and store it in registry
 $config = new Zend_Config_Ini(CONFIGURATION_PATH.'/application.ini', APPLICATION_ENV);
 $registry->configuration = $config;
+
+// load the plugin configuration
+$registry->pluginConfiguration = Dot_Kernel::loadPluginConfiguration();
 
 // Create  connection to database, as singleton , and store it in registry
 $db = Zend_Db::factory('Pdo_Mysql', $config->database->params->toArray());

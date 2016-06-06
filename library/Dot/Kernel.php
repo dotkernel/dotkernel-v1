@@ -49,11 +49,11 @@ class Dot_Kernel
 	 * 
 	 * Was Part of main initialize method
 	 * 
-	 * @access private
+	 * @access public
 	 * @static
 	 * @return boolean
 	 */
-	private static function _initializeRegistry()
+	public static function initializeRegistry()
 	{
 		$registry = new Zend_Registry(array(), ArrayObject::ARRAY_AS_PROPS);
 		Zend_Registry::setInstance($registry);
@@ -90,11 +90,11 @@ class Dot_Kernel
 	 * Returns Plugin Configuration from Cache
 	 * If cache is not available, it will be loaded from file
 	 *
-	 * @access private
+	 * @access public
 	 * @static
 	 * @return Zend_Config_Xml
 	 */
-	private static function _loadPluginConfiguration()
+	public static function loadPluginConfiguration()
 	{
 		$pluginConfig = Dot_Cache::load('plugin_configuration');
 		if($pluginConfig != false)
@@ -125,7 +125,7 @@ class Dot_Kernel
 	public static function initialize($startTime)
 	{
 		// Create registry object, as read-only object to store there config, settings, and database
-		$registry = self::_initializeRegistry();
+		$registry = self::initializeRegistry();
 
 		// mark the start time
 		$registry->startTime = $startTime;
@@ -141,7 +141,7 @@ class Dot_Kernel
 		$registry->router = self::_loadRouter();
 
 		// load the plugin configuration
-		$registry->pluginConfiguration = self::_loadPluginConfiguration();
+		$registry->pluginConfiguration = self::loadPluginConfiguration();
 		
 		// Create  connection to database, as singleton , and store it in registry
 		$db = Zend_Db::factory('Pdo_Mysql', $config->database->params->toArray());

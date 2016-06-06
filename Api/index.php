@@ -5,7 +5,7 @@
  *
  * @category   DotKernel
  * @package    Api
- * @copyright  Copyright (c) 2009-2016 DotBoost Technologies Inc. (http://www.dotboost.com)
+ * @copyright  Copyright (c) 2009-2015 DotBoost Technologies Inc. (http://www.dotboost.com)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @version    $Id$
  */
@@ -39,14 +39,18 @@ require_once 'Zend/Loader/Autoloader.php';
 $zendLoader = Zend_Loader_Autoloader::getInstance();
 $zendLoader->registerNamespace('Dot_');
 $zendLoader->registerNamespace('Api_');
+$zendLoader->registerNamespace('Plugin_');
 
 // Create registry object, as read-only object to store there config, settings, and database
-$registry = new Zend_Registry(array(), ArrayObject::ARRAY_AS_PROPS);
-Zend_Registry::setInstance($registry);
+$registry = Dot_Kernel::initializeRegistry();
 
 // Load configuration settings from application.ini file and store it in registry
 $config = new Zend_Config_Ini(CONFIGURATION_PATH.'/application.ini', APPLICATION_ENV);
 $registry->configuration = $config;
+
+// load the plugin configuration
+$registry->pluginConfiguration = Dot_Kernel::loadPluginConfiguration();
+
 
 // Set PHP configuration settings from application.ini file
 Dot_Settings::setPhpSettings($config->phpSettings->toArray());
@@ -129,27 +133,6 @@ $settings = Dot_Settings::getSettings();
 $registry->settings = $settings;
 $registry->option = array();
 
-
-// initialize plugin configuration
-$pluginConfig = Dot_Cache::load('plugin_configuration');
-if($pluginConfig != false)
-{
-	$registry->pluginConfiguration = $pluginConfig;
-}
-// config needed
-else
-{
-	$config = Zend_Registry::get('configuration');
-	
-	$pluginConfig = new Zend_Config_Ini(CONFIGURATION_PATH.'/plugins.ini', APPLICATION_ENV);
-	
-	// only save the settings if plugin_config caching is enabled
-	if($config->cache->cache_plugin_config)
-	{
-		Dot_Cache::save($pluginConfig, 'plugin_configuration');
-	}
-	$registry->pluginConfiguration = $pluginConfig;
-}
 
 // 
 include('Controller.php');
