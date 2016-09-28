@@ -58,6 +58,10 @@ class Admin_View extends View
 		$this->tpl->addUserToken();
 		$this->tpl->setVar('PAGE', $page);
 		$this->tpl->setVar('ACTIVE_URL', '/admin/admin/activate/');
+		
+		// sanitize before showing
+		$list['data'] = Dot_Filter_UserInput::sanitizeArray($list['data']);
+		
 		foreach ($list['data'] as $k => $v)
 		{
 			$this->tpl->setVar('ID', $v['id']);
@@ -111,6 +115,9 @@ class Admin_View extends View
 		$this->tpl->setBlock('tpl_main', 'list', 'list_block');
 		$this->tpl->paginator($list['pages']);
 		$this->tpl->setVar('PAGE', $page);
+		// sanitize before showing
+		$list['data'] = Dot_Filter_UserInput::sanitizeArray($list['data']);
+		
 		foreach ($list['data'] as $k => $v)
 		{
 			$country = $dotGeoip->getCountryByIp($v['ip']);
