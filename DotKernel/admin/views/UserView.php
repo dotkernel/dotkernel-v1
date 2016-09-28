@@ -47,6 +47,9 @@ class User_View extends View
 		$this->tpl->addUserToken();
 		$this->tpl->setVar('PAGE', $page);
 		$this->tpl->setVar('ACTIVE_URL', '/admin/user/activate/');
+		// sanitize before showing 
+		$list['data'] = Dot_Filter_UserInput::sanitizeArray($list['data']);
+		
 		foreach ($list['data'] as $k => $v)
 		{
 			$this->tpl->setVar('ID', $v['id']);
@@ -145,7 +148,9 @@ class User_View extends View
 			}
 			$this->tpl->setVar('CLASS_SORT_'.strtoupper($field), $sortClass);
 		}
-
+		
+		// sanitize before showing
+		$list['data'] = Dot_Filter_UserInput::sanitizeArray($list['data']);
 		foreach ($list['data'] as $k => $v)
 		{
 			$country = $dotGeoip->getCountryByIp($v['ip']);

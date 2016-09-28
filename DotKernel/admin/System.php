@@ -239,6 +239,10 @@ class System extends Dot_Model
 			$errors['Cache Test Failed'][] = ''.
 									'More info: <a href="http://www.dotkernel.com/dotkernel/caching-in-dotkernel-using-zend-framework/"  target="_blank"> Caching in DotKernel</a>';
 		}
+		
+		// to get the possible cache errors uncomment below - there is a try catch statement in Dot_Cache
+		// @see: /library/Dot/Cache.php - Dot_Cache::_loadCache
+		$errors['Cache Errors'] = Dot_Cache::getNotifications();
 		return array('error'=>$errors,'warning'=>$warnings,'info'=>$infos);
 	}
 	

@@ -20,6 +20,12 @@ class Dot_Cache
 {
 	private static $_isLoaded = false ;
 	private static $_cache = null;
+	private static $_notifications = array(); 
+	
+	public static function getNotifications()
+	{
+		return self::$_notifications;
+	}
 	
 	/**
 	 * Load the Cache with the parameters found in application.ini
@@ -34,6 +40,12 @@ class Dot_Cache
 	{
 		$configuration = Zend_Registry::get('configuration');
 		$lifetime = $configuration->cache->lifetime;
+		
+		if(!$configuration->cache->enable)
+		{
+			return false;
+		}
+		
 		// only disable automatic serialization if you know what you're doing
 		$frontendOptions = array(
 			'lifetime' => ($lifetime) ? $lifetime : 0,
@@ -41,7 +53,7 @@ class Dot_Cache
 			'cache_id_prefix' => $configuration->cache->namespace.'_',
 			'automatic_serialization' => true 
 		);
-
+		
 		// making sure it's lowercase
 		$backendName = strtolower($configuration->cache->factory);
 		$backendOptions = array();
@@ -50,7 +62,7 @@ class Dot_Cache
 			self::$_isLoaded = false;
 			return false;
 		}
-		//
+		
 		if(null !== $configuration->cache->$backendName)
 		{
 			foreach($configuration->cache->$backendName as $key => $value)
@@ -58,10 +70,18 @@ class Dot_Cache
 				$backendOptions[$key] = $value;
 			}
 		}
-		self::$_cache = Zend_Cache::factory('Core', $backendName, $frontendOptions, $backendOptions);
 		
-		self::$_isLoaded = true;
-		return true;
+		try
+		{
+			self::$_cache = Zend_Cache::factory('Core', $backendName, $frontendOptions, $backendOptions);
+			self::$_isLoaded = true;
+			return true;
+		}
+		catch(Exception $e)
+		{
+			self::$_notifications[] = $e->getMessage();
+			return false;
+		}
 	}
 	
 	/**
