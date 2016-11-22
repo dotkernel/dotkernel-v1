@@ -71,6 +71,33 @@ $userToken = (isset($_POST['userToken'])) ? $_POST['userToken'] : null;
  */
 $actionControllerPath = CONTROLLERS_PATH . '/' . $registry->requestModule . '/' . $registry->requestControllerProcessed . 'Controller.php';
 
+// block system module until admin is changed from default
+if(	isset($registry->session->admin->username) 
+	&& $registry->session->admin->username == 'admin'
+	&& $registry->requestController != 'admin')
+{
+	$passwordApi = new Dot_Password();
+	$error = array();
+	if($passwordApi->verifyPassword('dot', $registry->session->admin->password))
+	{
+		$error['Change Password'] = 'Password for \'admin\' must not be the default one';
+	}
+	if('team@dotkernel.com' == $registry->session->admin->email)
+	{
+		$error['Change E-mail'] = 'Email Address for \'admin\' must not be the default one';
+	}
+
+	if(!empty($error))
+	{
+		$error['Notice'] = 'Dashboard will be unlocked at your <b>next login</b>';
+		$registry->session->message['txt'] = $error;
+		$registry->session->message['type'] = 'error';
+		// go to log in
+		header('Location: '.$registry->configuration->website->params->url. '/admin/admin/account');
+		exit;
+	}
+}
+
 if(file_exists($actionControllerPath))
 {
 	$dotAuth = Dot_Auth::getInstance();
