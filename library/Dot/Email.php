@@ -65,11 +65,18 @@ class Dot_Email extends Zend_Mail
 	/**
 	 * Returns the sender of the mail
 	 *
+	 * @throws Exception
 	 * @return string
 	 */
 	public function getFrom()
 	{
-		return $this->_from;
+		$from = $this->_from;
+		// Zend Mail - ZF2016-04 vulnerability
+		// Sanitize the From header
+		if (preg_match('/\\\"/', $from)) {
+			throw new Exception('Potential code injection in From header');
+		}
+		return $from;
 	}
 	
 	/**
@@ -147,11 +154,6 @@ class Dot_Email extends Zend_Mail
 			$registry = Zend_Registry::getInstance();
 			
 			$from = $this->getFrom();
-			// Zend Mail - ZF2016-04 vulnerability
-			// Sanitize the From header
-			if (preg_match('/\\\"/', $from)) {
-				throw new Exception('Potential code injection in From header');
-			}
 			
 			// preparing the message details
 			$details = array(
