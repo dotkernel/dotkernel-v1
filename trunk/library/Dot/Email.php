@@ -63,6 +63,16 @@ class Dot_Email extends Zend_Mail
 	}
 	
 	/**
+	 * Returns the sender of the mail
+	 *
+	 * @return string
+	 */
+	public function getFrom()
+	{
+		return $this->_from;
+	}
+	
+	/**
 	 * Set content
 	 * @access public 
 	 * @param string $content
@@ -133,7 +143,15 @@ class Dot_Email extends Zend_Mail
 			$subject = $this->option->alertMessages->email->subject;
 			$message = $this->option->alertMessages->email->message;
 			$devEmails = explode(',', $this->settings->devEmails);
+			$details = array();
 			$registry = Zend_Registry::getInstance();
+			
+			$from = $this->getFrom();
+			// Zend Mail - ZF2016-04 vulnerability
+			// Sanitize the From header
+			if (preg_match('/\\\"/', $from)) {
+				throw new Exception('Potential code injection in From header');
+			}
 			
 			// preparing the message details
 			$details = array(
@@ -142,7 +160,7 @@ class Dot_Email extends Zend_Mail
 				'site_url' => $registry->configuration->website->params->url, 
 				'e_message' => $e->getMessage(),
 				'to_email' => implode(',', $this->_to),
-				'from_email' => $this->getFrom(),
+				'from_email' => $from,
 				'date_now' => date('F dS, Y h:i:s A'),
 			);
 			
