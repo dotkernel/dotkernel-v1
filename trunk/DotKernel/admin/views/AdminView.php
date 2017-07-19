@@ -16,7 +16,6 @@
 * @package    Admin 
 * @author     DotKernel Team <team@dotkernel.com>
 */
-
 class Admin_View extends View
 {
 	/**
@@ -93,7 +92,7 @@ class Admin_View extends View
 			if('isActive' == $k)
 			{
 				$this->tpl->setVar('ACTIVE_'.$v, 'checked');
-				$this->tpl->setVar('ACTIVE_'.$v*(-1)+1, '');
+				$this->tpl->setVar('ACTIVE_'. ($v*(-1)+1), '');
 			}
 		}
 		//empty because we don't want to show the password 
