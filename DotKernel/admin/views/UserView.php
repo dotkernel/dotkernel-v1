@@ -81,7 +81,7 @@ class User_View extends View
 			if('isActive' == $k)
 			{
 				$this->tpl->setVar('ACTIVE_'.$v, 'checked');
-				$this->tpl->setVar('ACTIVE_'.$v*(-1)+1, '');
+				$this->tpl->setVar('ACTIVE_'.($v*(-1)+1), '');
 			}
 		}
 		
