@@ -51,14 +51,19 @@ class Dot_Session
 			//if session is not registered, create it
 			if(! (Zend_Registry::isRegistered('session')))
 			{
-				$session = new Zend_Session_Namespace($namespaceName);
 				// set session options 
 				Zend_Session::setOptions($config->resources->session->toArray());
+				
+				// use only session cookie and regenerate session in the same time
+				Zend_Session::rememberMe($config->resources->session->remember_me_seconds);
+				
+				//Until PHP 7.2 , this warning was silently ignore. First you need to set the parameters
+				// and only after that, we can start the session
+				$session = new Zend_Session_Namespace($namespaceName);
+				
 				if(! isset($session->initialized))
 				{
 					$session->initialized = true;
-					// use only session cookie and regenerate session in the same time 
-					Zend_Session::rememberMe($config->resources->session->remember_me_seconds);
 				}
 				Zend_Registry::set('session', $session);
 			}
