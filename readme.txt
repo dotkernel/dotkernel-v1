@@ -1,6 +1,7 @@
 Welcome to the DotKernel @VERSION@ release
 
-DotKernel is a PHP Application Framework, built on top of Zend Framework (ZF)
+DotKernel is a PHP Application Framework, built on top of Zend Framework 1 (ZF)
+[ https://github.com/zendframework/zf1 ]
 	
 	http://www.dotkernel.com/
 
@@ -16,10 +17,10 @@ SYSTEM REQUIREMENTS
 -------------------
 
 DotKernel requires:
-- APACHE HTTP server
-- PHP 5.4.0 or later ( PHP 5.6.x recommended)
+- APACHE or Nginx HTTP server
+- PHP 7.2.0 or later 
 - MySQL 5.5 or later (MySQL 5.6.x recommended)
-- Zend Framework 1.11.0 or later (Zend Framework 1.12.13 recommended)
+- Zend Framework 1.12.20 
 For more details, please see: 
 	http://www.dotkernel.com/docs/system-requirements/
 
@@ -30,7 +31,7 @@ INSTALLATION
 To install DotKernel, follow the steps below.
 Note: It is important to follow the steps in the exact order below (especially steps 9, 10, 11).
 
-   1. Download dk.php file to test that your environment meets DotKernel system requirements
+   1. Download dk7.php file to test that your environment meets DotKernel system requirements
    2. Download a copy of DotKernel
    3. Unzip the downloaded package. You should have a DotKernel-@VERSION@ directory
    4. Upload the folder content to your web server
@@ -53,20 +54,20 @@ DOCUMENTATION
 ---------
 
 Online documentation can be found at 
-	http://www.dotkernel.com/phpdocs/
+	https://www.dotkernel.com/phpdocs/
      
 QUESTIONS
 ---------
 
 If you have any questions about DotKernel, visit our website:
-	http://www.dotkernel.com/
+	https://www.dotkernel.com/
 	
 FEEDBACK
 --------
 
 If you encounter any unexpected behavior of the application, please report the 
 issue in the DotKernel bug tracker:
-	http://www.dotkernel.net/
+	https://www.dotkernel.net/
 	
 
 SUBVERSION REPOSITORY
